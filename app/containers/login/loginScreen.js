@@ -25,7 +25,6 @@ export default class LoginScreen extends Component {
             access_token: null,
             device_token: 'erwerwegdfgdfgdfg' //need to replace this with real device token
           };
-          console.log(this.props);
   }
 
   forgotPassword = () => {
@@ -37,6 +36,7 @@ export default class LoginScreen extends Component {
   }
 
   _loginEmail = () => {
+    console.log('here');
     if (this.props.errorMessage) {
       Alert.alert(
         'Error',
@@ -106,12 +106,10 @@ export default class LoginScreen extends Component {
 
   render() {
     const { isLoading } = this.props;
-
     return (
-      
       <View style={styles.container}>
         <Loader
-            loading={false} 
+            loading={isLoading} 
         />
         {this.props.showAlert && this.renderAlert(this.props.errorMessage)}
         <Header headerText={''} navigation={this.props.navigation} />

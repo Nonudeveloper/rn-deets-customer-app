@@ -3,16 +3,25 @@ import SuperFetch from '../superFetch';
 
 class AuthHelper {
   login = async userInfo => {
+    
     if(userInfo.flag == 3){
        if (!userInfo.email || !userInfo.password) {
          return { error: 'please fill in the input' };
       }
     }
-    return await SuperFetch.post('user_login', userInfo).then(response => {
-       const result = this.checkExpirity(response.access_token);
-       
-        result.user = response.user;
-        return result;
+    return await SuperFetch.post('customer/user_login', userInfo).then(response => {
+      const result = this.checkExpirity(response.access_token);
+      result.user = response.user;
+      return response;
+    });
+  };
+
+  sendMail = async userInfo => {
+    if (!userInfo.email) {
+      return { error: 'please fill in the input' };
+    }
+    return await SuperFetch.post('/technician/forgot_password_from_user_email', userInfo).then(response => {
+      return response;
     });
   };
 
@@ -35,7 +44,7 @@ class AuthHelper {
       const profile = jwtDecode(token);
       const expiredAt = profile.expiredAt || profile.exp * 1000;
 
-      if (expiredAt > new Date().getTime()) 
+      if (expiredAt > new Date().getTime())
         return {
           ...profile,
           token,

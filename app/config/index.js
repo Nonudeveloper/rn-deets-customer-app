@@ -1,5 +1,5 @@
 const apiConfig = {
-  url: 'http://deetsapiphp/',
+  url: 'http://localhost:8000/',
 };
 
 export {

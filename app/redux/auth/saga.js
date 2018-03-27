@@ -10,13 +10,16 @@ function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
+      console.log(data);
       if (data.status === 200) {
+        console.log('in 200 from saga');
         resolve(data);
       } else {
          const error = JSON.parse(data._bodyText).error;
          reject({ status: error });
       } 
-    });
+    })
+    .catch(err => console.log(err));
   });
 }
 
