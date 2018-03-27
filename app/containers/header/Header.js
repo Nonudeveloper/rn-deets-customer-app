@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
 
 //Make header component
 
+const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 
 const Header = (props) => {
     const { 
@@ -14,8 +14,6 @@ const Header = (props) => {
         headerDetailStyle, 
     } = styles;
 
-    const myIcon = (<Icon name="arrow-circle-left" size={30} color="#66cc00" />);
-
     const goBack = () => {
         props.navigation.goBack();
     };
@@ -25,7 +23,7 @@ const Header = (props) => {
                 <View style={viewStyle}>
                     <View style={menuIconStyle}>
                         <TouchableOpacity onPress={() => goBack()}>
-                            {myIcon}
+                            <Image source={backButton} style={styles.backButton} />
                         </TouchableOpacity>
                     </View>
                     <View style={headerDetailStyle}>
@@ -39,7 +37,8 @@ const Header = (props) => {
 const styles = {
     menuIconStyle: {
         flex: 1,
-        marginLeft: 7
+        marginLeft: 7,
+        position: 'absolute'
     },
     viewStyle: {
         alignItems: 'center',
@@ -48,20 +47,25 @@ const styles = {
         justifyContent: 'flex-start',
     },
     outerViewStyle: {
-        height: 80,
+        height: 47,
         justifyContent: 'center',
         marginTop:Platform.OS == "ios" ? 20 : 0
     },
     textStyle: {
-        fontSize: 18,
-        color: '#1a1a1a',
+        fontSize: 20,
+        color: '#8ac10b',
         fontWeight: 'bold'
 
     },
     headerDetailStyle: {
-       flex: 2,
-       alignItems: 'flex-start',
-       marginLeft: 36
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    backButton: {
+        resizeMode: 'contain', 
+        width: 30, 
+        height: 30 
     }
 };
 

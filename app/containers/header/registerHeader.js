@@ -1,46 +1,21 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
-import StepIndicator from 'react-native-step-indicator';
 
 //Make header component
 
 
-const Header = (props) => {
+const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 
-  const labels = ["Cart","Delivery Address","Order Summary","Payment Method","Track"];
-  const customStyles = {
-  stepIndicatorSize: 20,
-  currentStepIndicatorSize:20,
-  separatorStrokeWidth: 2,
-  currentStepStrokeWidth: 3,
-  separatorFinishedColor: '#4aae4f',
-  separatorUnFinishedColor: '#a4d4a5',
-  stepIndicatorFinishedColor: '#4aae4f',
-  stepIndicatorUnFinishedColor: '#a4d4a5',
-  stepIndicatorCurrentColor: '#ffffff',
-  stepIndicatorLabelFontSize: 15,
-  currentStepIndicatorLabelFontSize: 15,
-  stepIndicatorLabelCurrentColor: '#000000',
-  stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
-  labelColor: '#666666',
-  labelSize: 12,
-  currentStepLabelColor: '#4aae4f'
-}
+const Header = (props) => {
     const { 
         textStyle, 
         viewStyle, 
         outerViewStyle, 
         menuIconStyle, 
         headerDetailStyle, 
-        indicatorStyle, 
     } = styles;
-
-    const myIcon = (<Icon name="arrow-circle-left" size={30} color="#f8f8f8" />);
-    console.log('props under');
-    console.log(props.navigation);
 
     const goBack = () => {
         props.navigation.goBack();
@@ -50,67 +25,65 @@ const Header = (props) => {
             <View style={outerViewStyle}>
                 <View style={viewStyle}>
                     <View style={menuIconStyle}>
-                        <TouchableOpacity onPress={() => goBack()}>
-                            {myIcon}
+                        <TouchableOpacity onPress={() => goBack()} >
+                            <Image source={backButton} style={styles.backButton} />
+                            {/* {myIcon} */}
                         </TouchableOpacity>
                     </View>
                     <View style={headerDetailStyle}>
-                        <Text style={textStyle}>{props.headerText}</Text>
-                               <StepIndicator
-                                    customStyles={customStyles}
-                                    currentPosition={props.curre}
-                                    stepCount={3}
-                                />
+                        <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
+                        <View style={styles.activityIndicatorWrapper}>
+                            <Image source={props.process} style={styles.indicatorStyle} />
+                        </View>
                     </View>
-                    {/* <View >
-                        <TouchableOpacity onPress={() => goBack()}>
-                            {myIcon}
-                        </TouchableOpacity>
-                    </View> */}
+
                 </View>
-          
             </View>
     );
 };
 
 const styles = {
     menuIconStyle: {
+        flex: 1,
         marginLeft: 7
     },
     viewStyle: {
-        backgroundColor: '#666666',
         height: 48,
         alignItems: 'center',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        borderRadius: 50,
-        margin: 3,
+        justifyContent: 'center',
         // width: 300
     },
     outerViewStyle: {
         height: 55,
-        marginRight: 25,
-        marginLeft: 25,
-        marginTop: 1,
         justifyContent: 'center',
-        borderRadius: 50,
-        borderWidth: 1.5,
-        borderColor: 'grey',
+        marginTop:Platform.OS == "ios" ? 20 : 0,
+        marginBottom: 8
     },
     textStyle: {
-        fontSize: 17,
-        color: '#fff',
-    },
-    indicatorStyle: {
-        fontSize: 10,
-        color: '#66cc00',
+        flex: 1,
+        fontSize: 20,
+        color: '#8ac10b',
+        fontWeight: 'bold'
     },
     headerDetailStyle: {
-       marginLeft: 80,
-       // alignItems: 'center',
-
-         position: 'absolute',
+       flex: 1,
+       position: 'absolute',
+    },
+    indicatorStyle: { 
+        resizeMode: 'contain', 
+        width: 80, 
+        height: 20 
+    },
+    activityIndicatorWrapper: { 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    backButton: {
+        resizeMode: 'contain', 
+        width: 30, 
+        height: 30 
     }
 };
 

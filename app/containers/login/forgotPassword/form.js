@@ -22,7 +22,6 @@ class FormArea extends React.Component {
                 placeholderTextColor='grey'
                 underlineColorAndroid="transparent"
                 type="email"
-                borderBotmWidth={{borderBottomWidth: 2}}
             />   
         </View>
     );
@@ -50,7 +49,7 @@ export default reduxForm({
 
 const styles = StyleSheet.create({
     formArea: {
-        backgroundColor: '#1a1a1a',
+        backgroundColor: '#333333',
     },
     textStyle: {
         color: '#fff'

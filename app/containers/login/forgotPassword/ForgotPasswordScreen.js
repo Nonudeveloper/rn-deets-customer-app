@@ -72,12 +72,12 @@ export default class ForgotPasswordScreen extends Component {
         const { isLoading } = this.props;
         return (
             <View>
-                <Loader
-                    loading={isLoading}
-                />
+                {/* <Loader
+                    loading={false}
+                /> */}
                 {this.props.showResetAlert && this.props.resetErrorLog && this.renderAlert(this.props.resetErrorLog)}
                 {this.props.showResetAlert && this.props.resetSuccessLog && this.renderAlert(this.props.resetSuccessLog)}
-                <Header headerText={''} navigation={this.props.navigation} />
+                <Header headerText={'Forgot Password'} navigation={this.props.navigation} />
                 <Form style={styles.forgetForm} />
                 <View style={styles.nextButtonContainer}>
                     <View style={{ marginHorizontal: 25 }}>
@@ -91,7 +91,7 @@ export default class ForgotPasswordScreen extends Component {
                                     fontSize: 18,
                                     fontWeight: 'bold'
                                 }}
-                            >Send Password reset link</Text>
+                            >Send password reset link</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
