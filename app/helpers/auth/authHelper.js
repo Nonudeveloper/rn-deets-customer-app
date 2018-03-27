@@ -20,7 +20,7 @@ class AuthHelper {
     if (!userInfo.email) {
       return { error: 'please fill in the input' };
     }
-    return await SuperFetch.post('/technician/forgot_password_from_user_email', userInfo).then(response => {
+    return await SuperFetch.post('/customer/forgot_password_from_user_email', userInfo).then(response => {
       return response;
     });
   };

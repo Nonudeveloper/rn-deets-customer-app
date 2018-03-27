@@ -5,6 +5,7 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 // import LoginNav from './LoginNavigation';
 // import PersonalInformation from '../containers/register/personalInformation/index';
 // import VehicleInformation from '../containers/register/vehicleInformation/index';
+import ForgotPasswordScreen from '../containers/login/forgotPassword/index';
 import LoginScreen from '../containers/login/index';
 import StartScreen from '../containers/start/index';
 // import ServiceAddress from '../containers/register/personalInformation/serviceAddress/index';
@@ -94,6 +95,7 @@ const LoginStack = StackNavigator({
   
   startScreen: { screen: StartScreen },
   loginScreen: { screen: LoginScreen },
+  forgotPasswordScreen: { screen: ForgotPasswordScreen }
   // personalInformation: { screen: PersonalInformation },
   // vehicleInformation: { screen: VehicleInformation },
   // availability: { screen: Availability },
