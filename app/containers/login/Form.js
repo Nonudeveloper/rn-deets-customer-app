@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { reduxForm, Field } from 'redux-form';
-import CommonTextInput from './CommonTextInput';
+import CommonTextInput from '../../components/form/input';
 
 class FormArea extends React.Component {
 
@@ -26,6 +26,8 @@ class FormArea extends React.Component {
                 placeholder={'Email'}
                 placeholderTextColor='grey'
                 underlineColorAndroid="transparent"
+                type="email"
+                borderBotmWidth={{borderBottomWidth: 2}}
             />
 
             <Field
@@ -35,6 +37,7 @@ class FormArea extends React.Component {
                 placeholder={'Password'}
                 placeholderTextColor='grey'
                 underlineColorAndroid="transparent"
+                type="password"
             />
             
         </View>
@@ -69,7 +72,7 @@ export default reduxForm({
 
 const styles = StyleSheet.create({
     formArea: {
-        backgroundColor: '#1a1a1a',
+        backgroundColor: '#333333',
     },
     textStyle: {
         color: '#fff'

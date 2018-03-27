@@ -1,39 +1,37 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { loginSuccess, loginFailure } from './actions';
-import { LOGIN_REQUEST } from './constants';
+import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure } from './actions';
+import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
-import { setToken, clearToken, getToken } from '../../helpers/utility';
-
-// const loginData = {
-//   token: 'my secret token',
-//   user: {
-//     name: 'feitico',
-//     email: 'user@gmail.com',
-//   },
-// };
-
+import { setUser } from '../../helpers/utility';
+import { NavigationActions } from 'react-navigation';
 
 function loginCall({ state }) {
-
   return new Promise((resolve, reject) => {
-    const result = AuthHelper.login(state);
-    if (result.token) {
-      resolve(result);
-    } else {
-       reject({ status: 'wrong email or password' });
-    }
+    AuthHelper.login(state)
+    .then((data) => {
+      if (data.status === 200) {
+        resolve(data);
+      } else {
+         const error = JSON.parse(data._bodyText).error;
+         reject({ status: error });
+      } 
+    });
   });
+}
 
-  //  return new Promise((resolve, reject) => {
-  //   AuthHelper.login(state)
-  //     .then(res => {
-  //       console.log(res);
-  //       if (res.token) {
-  //         resolve(res);
-  //       } 
-  //     });
-  // });
+function forgotPasswordCall({ state }) {
+  return new Promise((resolve, reject) => {
+    AuthHelper.sendMail(state)
+    .then((data) => {
+      if (data.flag === 22) {
+        resolve(data);
+      } else {
+         const error = JSON.parse(data._bodyText).error;
+         reject({ error: error });
+      } 
+    });
+  });
 }
 
 function* watchLoginRequest() {
@@ -45,10 +43,10 @@ function* watchLoginRequest() {
         state
       };
       const response = yield call(loginCall, payload);
-
       yield put(loginSuccess(response));
-      yield setToken(response.token);
-      console.log('SAGA LOGIN SUCCESS: ', response);
+      // yield setUser(response.user);
+      yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
+      //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {
       console.log('SAGA LOGIN ERR: ', err);
       yield put(loginFailure(err.status));
@@ -56,7 +54,26 @@ function* watchLoginRequest() {
   }
 }
 
+function* watchForgotPasswordRequest() {
+  while (true) {
+    const { state } = yield take(FORGOT_PASSWORD_REQUEST);
+    try {
+      const payload = {
+        state
+      };
+      const response = yield call(forgotPasswordCall, payload);
+      yield put(sendMailSuccess(response));
+      console.log('SAGA RESET PASSWORD Mail SENT: ', response);
+    } catch (err) {
+
+      console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
+      yield put(sendMailFailure(err));
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(watchLoginRequest);
+  yield fork(watchForgotPasswordRequest);
 }
