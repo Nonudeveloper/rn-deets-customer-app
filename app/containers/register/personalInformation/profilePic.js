@@ -9,8 +9,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 
-const avatar = (<Icon name="user-circle" size={55} color="#333333" />);
-
+const userAvatar = require('../../../assets/icons/3_user_img.png');
+const editBtn = require('../../../assets/icons/edit_btn.png');
 
 export default class ProfilePic extends React.Component {
     
@@ -27,7 +27,6 @@ export default class ProfilePic extends React.Component {
                 skipBackup: true
             }
         };
-
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
             if (response.didCancel) {
@@ -50,17 +49,18 @@ export default class ProfilePic extends React.Component {
     render() {
         return (
             <View style={styles.profilePic}>
-            
-                <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-                    {/* {avatar} */}
-                    { this.state.ImageSource === null ? avatar :
-                    <Image style={styles.proImageStyle} source={this.state.ImageSource} />
+                <View style={styles.editButtonWrapper}>
+                    <Image source={editBtn} style={styles.editIcon} />
+                </View>
+                <TouchableOpacity style={{ position: 'absolute' }} onPress={this.selectPhotoTapped.bind(this)}>
+                    { 
+                        this.state.ImageSource === null ? 
+                        <Image style={styles.proImageStyle} source={userAvatar} /> :
+                        <Image style={styles.proImageStyle} source={this.state.ImageSource} />
                     }
                 </TouchableOpacity>
                 
             </View>
         );
     }
-
-    
 }

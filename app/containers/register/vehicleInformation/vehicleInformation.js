@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import Header from '../../header/registerHeader';
+import Header from '../../header/RegisterHeader';
 import VehicleForm from './vehicleForm';
 import CarPicture from './carPicture';
 import styles from './styles';
@@ -10,7 +10,6 @@ export default class VehicleInformation extends React.Component {
 
   constructor(props) {
       super(props);
-      console.log(props);
   }
 
   goToNext() {
@@ -26,8 +25,6 @@ export default class VehicleInformation extends React.Component {
               <View style={styles.t1}>
                 <CarPicture />
               </View> 
-              
-              {/* <Text style={styles.t2}>Your love lifts me up like Helium !</Text> */}
               <VehicleForm style={styles.t2} />
               <View style={[styles.nextButtonContainer, styles.t3]}>
                 <View >
@@ -36,7 +33,6 @@ export default class VehicleInformation extends React.Component {
                   >
                     <Text style={{ color: '#fff' }}>Next</Text>
                   </TouchableOpacity>
-                  {/* <Button /> */}
                 </View>
               </View>
           </View>

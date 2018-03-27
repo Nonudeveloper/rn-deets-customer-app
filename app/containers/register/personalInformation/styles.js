@@ -7,31 +7,28 @@ export const IMAGE_HEIGHT_SMALL = window.width / 7;
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'column',
-    // alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#fff'
   },
-  nextButtonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  nextButtonStyle: {
-    borderRadius: 100,
-    height: 55,
-    backgroundColor: '#66cc00',
-    borderWidth: 4,
-    borderColor: '#bfff80',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-   profilePic: {
+    nextButtonContainer: {
+        flex: 1,
+    },
+    nextButtonStyle: {
+        borderRadius: 100,
+        height: 55,
+        backgroundColor: '#8ac10b',
+        borderWidth: 4,
+        borderColor: '#bfff80',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    profilePic: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff'
-       
+        marginBottom: 7
     },
     circle: {
         borderRadius: 50,
@@ -49,11 +46,30 @@ export default StyleSheet.create({
         borderRadius: 100
     },
     formArea: {
-        flex: 4,
-        backgroundColor: '#1a1a1a',
+        flex: 5,
+        backgroundColor: '#333333',
     },
     textStyle: {
         color: '#fff'
+    },
+    crossButtonContainer: { 
+        flex: 1, 
+        borderBottomWidth: 2, 
+        borderColor: '#ccc', 
+        flexDirection: 'row', 
+        paddingTop: 20 
+    },
+    editButtonWrapper: { 
+        zIndex: 999, 
+        justifyContent: 'flex-end', 
+        marginLeft: 48, 
+        marginBottom: 43 
+    },
+    editIcon: {
+        resizeMode: 'contain', 
+        width: 25, 
+        height: 25,
+        zIndex: 999,
     }
 
 });

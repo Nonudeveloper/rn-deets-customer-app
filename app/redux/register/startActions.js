@@ -4,27 +4,11 @@ import {
     FETCH_VEHICLES_SUCCESS,
     FETCH_VEHICLES_FALIURE,
     RECIEVE_VEHICLES_DATA,
-    FETCH_DEFAULT_AVAILABILITY,
-    FETCH_DEFAULT_AVAILABILITY_SUCCESS,
-    FETCH_DEFAULT_AVAILABILITY_FALIURE,
-    FETCH_VEHICLES_FROM_ASYNC_STORAGE,
-    FETCH_DEFAULT_AVAILABILITY_FROM_ASYNC_STORAGE,
-    RECIEVE_DEFAULT_AVAILABILITY_DATA
 } from './constants';
   
     const saveVehiclesData = async (vehicles) => {
         try {
             await AsyncStorage.setItem('vehicles', JSON.stringify(vehicles));
-            console.log('data stored');
-        } catch (error) {
-            // Error saving data
-            console.log('AsyncStorage save error: ' + error.message);
-        }
-    };
-
-    const saveDefaultAvailabilityData = async (defaultAvailability) => {
-        try {
-            await AsyncStorage.setItem('defaultAvailability', JSON.stringify(defaultAvailability));
             console.log('data stored');
         } catch (error) {
             // Error saving data
@@ -53,29 +37,7 @@ import {
             err,
         };
     }
-
-    export function fetchDefaultAvailability(state) {
-        return {
-            type: FETCH_DEFAULT_AVAILABILITY,
-            state,
-        };
-    }
   
-    export function fetchDefaultAvailabilitySuccess(defaultAvailability) {
-        saveDefaultAvailabilityData(defaultAvailability);
-        return {
-            type: FETCH_DEFAULT_AVAILABILITY_SUCCESS,
-            defaultAvailability
-        };
-    }
-  
-    export function fetchDefaultAvailabilityFaliure(err) {
-        return {
-            type: FETCH_DEFAULT_AVAILABILITY_FALIURE,
-            err,
-        };
-    }
-
     export function recieveVehiclesData(vehicles) {
         return {
             type: RECIEVE_VEHICLES_DATA,
@@ -89,22 +51,3 @@ import {
         };
     }
 
-    export function fetchDefaultAvailabilityFromAsyncStorage() {
-        return {
-            type: FETCH_DEFAULT_AVAILABILITY_FROM_ASYNC_STORAGE,
-        };
-    }
-
-     export function recieveDefaultAvailabilitysData(payload) {
-        return {
-            type: RECIEVE_DEFAULT_AVAILABILITY_DATA,
-            payload
-        };
-    }
-
-    // return dispatch => {
-    //     return AsyncStorage.getItem('vehicles')
-    //       .then((vehicles) => {
-    //         dispatch(recieveVehiclesData(JSON.parse(vehicles)));
-    //       });
-    // };

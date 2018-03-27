@@ -1,13 +1,11 @@
 import { Animated, Easing } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-// import PersonalInformation from '../containers/register/personalInformation/index';
-// import VehicleInformation from '../containers/register/vehicleInformation/index';
+import PersonalInformation from '../containers/register/personalInformation/index';
+import VehicleInformation from '../containers/register/vehicleInformation/index';
 import LoginScreen from '../containers/login/index';
 import ForgotPasswordScreen from '../containers/login/forgotPassword/index';
 import StartScreen from '../containers/start/index';
-// import ServiceAddress from '../containers/register/personalInformation/serviceAddress/index';
-// import Availability from '../containers/register/availability/index';
-// import SelectRegisteration from '../containers/start/SelectRegisteration';
+import SelectRegisteration from '../containers/start/SelectRegisteration';
 
 /**Cunstom Transitions */
 const MyTransition = (toIndex, thisSceneIndex, height, width, scenes, position) => {
@@ -74,11 +72,9 @@ const LoginStack = StackNavigator({
   startScreen: { screen: StartScreen },
   loginScreen: { screen: LoginScreen },
   forgotPasswordScreen: { screen: ForgotPasswordScreen },
-//   personalInformation: { screen: PersonalInformation },
-//   vehicleInformation: { screen: VehicleInformation },
-//   availability: { screen: Availability },
-//   selectRegisteration: { screen: SelectRegisteration },
-//   serviceAddress: { screen: ServiceAddress },
+  personalInformation: { screen: PersonalInformation },
+  vehicleInformation: { screen: VehicleInformation },
+  selectRegisteration: { screen: SelectRegisteration },
   
 }, {
   headerMode: 'none',

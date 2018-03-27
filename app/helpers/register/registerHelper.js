@@ -31,19 +31,9 @@ class RegisterHelper {
       .catch(error => ({ error }));
   }
 
-  async fetchDefaultAvailability() {
-    return await SuperFetch.post('technician/get_technician_default_availability', {
-      date: '05-03-2018'
-    })
-    .then(response => {
-      return response;
-    })
-    .catch(error => ({ error: JSON.stringify(error) }));
-  }
-
   verifyEmail = async email => {
     let registration_type = 1;
-    return await SuperFetch.post('technician/verify_email', { email, registration_type }).then(response => {
+    return await SuperFetch.post('customer/verify_email', { email, registration_type }).then(response => {
         return response;
     })
     .catch(error => ({ error: JSON.stringify(error) }));
