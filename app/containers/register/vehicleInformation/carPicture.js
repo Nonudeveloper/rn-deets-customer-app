@@ -5,13 +5,12 @@ import {
     TouchableOpacity,
     Image,
  } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 
 
-const avatar = (<Icon name="car" size={55} color="#333333" />);
-
+const carIcon = require('../../../assets/icons/3_car_img.png');
+const editBtn = require('../../../assets/icons/edit_btn.png');
 
 export default class CarPicture extends React.Component {
     
@@ -50,11 +49,13 @@ export default class CarPicture extends React.Component {
 
     render() {
         return (
-            <View style={styles.profilePic}>
-            
-                <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-                    {/* {avatar} */}
-                    { this.state.ImageSource === null ? avatar :
+            <View style={styles.carPic}>
+                <View style={styles.editButtonWrapper}>
+                    <Image source={editBtn} style={styles.editIcon} />
+                </View>
+                <TouchableOpacity style={{ position: 'absolute' }} onPress={this.selectPhotoTapped.bind(this)}>
+                    
+                    { this.state.ImageSource === null ? <Image style={styles.proImageStyle} source={carIcon} /> :
                     <Image style={styles.proImageStyle} source={this.state.ImageSource} />
                     }
                 </TouchableOpacity>

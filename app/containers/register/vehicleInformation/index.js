@@ -1,21 +1,35 @@
 // @flow
-// Container for Login Component
+// Container for Register Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import VehicleInformation from './vehicleInformation';
-
-// import * as loginActions from '../../redux/auth/actions';
+import VehicleInformation from './VehicleInformation';
+import * as registerActions from '../../../redux/register/actions';
+import { fetchVehiclesFromAsyncStorage } from '../../../redux/register/startActions';
+import { fetchMakeModel, updateModels } from '../../../redux/register/vehicleInformation/vehicleActions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // actions: bindActionCreators(loginActions, dispatch),
+        actions: bindActionCreators(registerActions, dispatch),
+        fetchVehiclesFromAsyncStorage: () => {
+            dispatch(fetchVehiclesFromAsyncStorage());
+        },
+        fetchMakeModel: (year) => {
+            dispatch(fetchMakeModel(year));
+        },
+        updateModels: (models) => {
+            dispatch(updateModels(models));
+        }
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        // user: state.Auth.user
+         vehicleData: state.Start.vehicles,
+         isFetching: state.Vehicle.isFetching,
+         makeModel: state.Vehicle.makeModelData,
+         models: state.Vehicle.models,
+         form: state.form.vehicleForm
     };
 };
 

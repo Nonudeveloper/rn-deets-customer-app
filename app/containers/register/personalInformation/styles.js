@@ -12,7 +12,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
     nextButtonContainer: {
-        flex: 1,
+        marginTop: 40
     },
     nextButtonStyle: {
         borderRadius: 100,
@@ -25,7 +25,6 @@ export default StyleSheet.create({
         marginTop: 10
     },
     profilePic: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 7
@@ -46,7 +45,7 @@ export default StyleSheet.create({
         borderRadius: 100
     },
     formArea: {
-        flex: 5,
+        marginTop: 20,
         backgroundColor: '#333333',
     },
     textStyle: {

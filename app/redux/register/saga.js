@@ -10,12 +10,10 @@ import {
   VERIFY_EMAIL_REQUEST,
   FETCH_VEHICLES_FROM_ASYNC_STORAGE, 
   FETCH_MAKE_MODEL,
-  FETCH_NEARBY_PLACES
 } from './constants';
 import { verifyEmailSuccess } from './actions';
 import RegisterHelper from '../../helpers/register/registerHelper';
 import { fetchMakeModelSuccess } from './vehicleInformation/vehicleActions';
-import { fetchNearByPlacesSuccess, fetchNearByPlacesFaliure } from './serviceAddress/serviceAddressActions';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -99,6 +97,7 @@ function verifyEmailCall({ email }) {
 }
 
 function fetchMakeModelCall(year) {
+  console.log(year);
   return new Promise((resolve, reject) => {
       RegisterHelper.fetchMakeModel({ year })
         .then(res => {
@@ -109,36 +108,10 @@ function fetchMakeModelCall(year) {
 }
 
 
-function fetchNearByPlacesCall(payload) {
-  return new Promise((resolve, reject) => {
-    RegisterHelper.fetchNearByPlaces({ payload })
-      .then(res => {
-          resolve(res);
-      })
-      .catch(err => reject(err));
-  });
-}
-
-//**Generator */
-function* watchFetchNearByPlaces() {
-  while (true) {
-    const { payload } = yield take(FETCH_NEARBY_PLACES);
-    try {
-      const response = yield call(fetchNearByPlacesCall, payload);
-      yield put(fetchNearByPlacesSuccess(response));
-      console.log('SAGA FETCH SUCCESS: ', response);
-    } catch (err) {
-      yield put(fetchNearByPlacesFaliure(err));
-      console.log('SAGA FETCH ERR: ', err);
-    }
-  }
-}
-
 export default function* root() {
   yield fork(fetchVehiclesRequest);
   yield fork(watchFetchVehiclesFromAsyncStorage);
   yield fork(watchVeriftEmailRequest);
   yield fork(watchFetchMakeModel);
-  yield fork(watchFetchNearByPlaces);
 }
 
