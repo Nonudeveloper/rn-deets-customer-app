@@ -3,7 +3,9 @@ import {
     REGISTER_SUCCESS, 
     REGISTER_FAILURE,
     VERIFY_EMAIL_REQUEST,
-    VERIFY_EMAIL_SUCCESS
+    VERIFY_EMAIL_SUCCESS,
+    STORE_IMAGE,
+    HIDE_ALERT
 } from './constants';
 
 const initialState = {
@@ -13,7 +15,8 @@ const initialState = {
       user: {},
       errorMessage: '',
       vehicles: {},
-      emailAvailability: {}
+      emailAvailability: {},
+      image: {}
 };
 
 export default function registerReducer(state = initialState, action) {
@@ -47,6 +50,14 @@ export default function registerReducer(state = initialState, action) {
             isFetching: false,
             emailAvailability: action.payload
           });
+      case STORE_IMAGE:
+        return Object.assign({}, state, {
+          image: action.image
+        });
+      case HIDE_ALERT:
+        return Object.assign({}, state, {
+          emailAvailability: {}
+        });
       default:
         return state;
     }

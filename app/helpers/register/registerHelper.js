@@ -32,7 +32,7 @@ class RegisterHelper {
   }
 
   verifyEmail = async email => {
-    let registration_type = 1;
+    let registration_type = 2;
     return await SuperFetch.post('customer/verify_email', { email, registration_type }).then(response => {
         return response;
     })

@@ -37,6 +37,10 @@ export default class VehicleInformation extends React.Component {
       this.props.navigation.navigate('paymentInformation');
     }
   }
+
+  getVehicleImage(image) {
+    this.props.storeVehicleImage(image);
+  }
   
   render() {
     const { container } = styles;
@@ -54,7 +58,7 @@ export default class VehicleInformation extends React.Component {
           />
           <View style={container}>
               <View style={styles.t1}>
-                <CarPicture />
+                <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} />
               </View>
                 { Platform.OS === 'android' ? ( 
                   <VehicleForm 
