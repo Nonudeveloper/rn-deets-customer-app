@@ -4,7 +4,7 @@ import { View, Text, Picker, TextInput } from 'react-native';
 import styles from './styles';
 import MyPicker from '../../../components/form/MyPicker';
 import RadioButton from 'radio-button-react-native';
-import CommonTextInput from '../../../components/form/input';
+import CommonTextInput from '../../../components/form/Input';
 
 class VehicleForm extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class VehicleForm extends React.Component {
         //now dispath an action to fetch make and model
         this.setState(() => {
             return {
-            year
+                year
             };
         }, () => {
             this.props.fetchMakeModel(year);

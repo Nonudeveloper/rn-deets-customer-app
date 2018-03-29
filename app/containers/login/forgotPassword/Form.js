@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { reduxForm, Field } from 'redux-form';
-import CommonTextInput from '../../../components/form/input';
+import CommonTextInput from '../../../components/form/Input';
 
 class FormArea extends React.Component {
 
