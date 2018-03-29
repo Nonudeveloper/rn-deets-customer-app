@@ -8,23 +8,44 @@ import {
 import Header from '../header/Header';
 import Form from '../login/Form';
 import styles from './loginScreen.style';
-import FBLoginView from './fbLoginView';
+import DeetsFacebook from '../../components/facebook';
 import Hr from '../../components/hr';
+import Loader from '../../components/Loader';
+
 
 export default class LoginScreen extends Component {
+
   constructor(props) {
           super(props);
-          
           this.state = {
             email: '',
             password: '',
             flag: null,
             fb_id: null,
             access_token: null,
+            device_token: 'erwerwegdfgdfgdfg' //need to replace this with real device token
           };
   }
 
+  forgotPassword = () => {
+      this.props.navigation.navigate('forgotPasswordScreen');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate ');
+  }
+
   _loginEmail = () => {
+    console.log('here');
+    if (this.props.errorMessage) {
+      Alert.alert(
+        'Error',
+        'Invalid Credentials',
+        [
+         { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+      );
+    }
     const errors = this.props.form.signIn.syncErrors;
     let errorCount = 0;
     for (const error in errors) {
@@ -44,9 +65,9 @@ export default class LoginScreen extends Component {
     if (errorCount === 0) {
       this.setState(() => {
           return {
-            email: 'Aishwarya.garg@yopmail.com',
-            password: 'admin123',
-            flag: 3
+            email: this.props.form.signIn.values.email,
+            password: this.props.form.signIn.values.password,
+            flag: 3,
           };
       }, () => {
           this.props.actions.loginRequest(this.state);
@@ -54,33 +75,49 @@ export default class LoginScreen extends Component {
     }
   }
 
-  _fbAuth = (e) => {
+  fbLogin = (e) => {
     this.setState(() => {
       return {
         flag: 1,
         fb_id: e.credentials.userId,
         access_token: e.credentials.token,
-        //  fb_id: e.credentials.userId,
-        // access_token: e.credentials.token,
       };
     }, () => {
       this.props.actions.loginRequest(this.state);
     });
   };
 
-  render() {
-    const { email, password } = this.state;
-    const { user } = this.props;
-    console.log(this.state);
+  renderAlert(error) {
+    Alert.alert(
+      'Error',
+      error,
+      [
+        { 
+          text: 'OK', 
+          onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
+          } 
+        },
+      ],
+      { cancelable: false }
+    );
+  }
 
+  render() {
+    const { isLoading } = this.props;
     return (
       <View style={styles.container}>
+        <Loader
+            loading={isLoading} 
+        />
+        {this.props.showAlert && this.renderAlert(this.props.errorMessage)}
         <Header headerText={''} navigation={this.props.navigation} />
         
-        <FBLoginView />
+        <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin}/>
        
         <Hr color="black" width={2} marginleft={25} marginright={25}>
-          <Text style={styles.textWithDivider}>OR</Text>
+          <Text style={styles.textWithDivider}>OR{this.props.isAuthenticated}</Text>
         </Hr>
 
         <Form />
@@ -91,13 +128,25 @@ export default class LoginScreen extends Component {
                 style={styles.nextButtonStyle}
                 onPress={this._loginEmail}
             >
-              <Text 
+            <Text 
                 style={{ 
                   color: '#fff',
-                  fontSize: 16
-                }}>Login</Text>
+                  fontSize: 18,
+                  fontWeight: 'bold'
+                }}
+            >Login</Text>
             </TouchableOpacity>
-            {/* <Button /> */}
+            </View>
+            <View
+                style={styles.forgotPasswordView}
+            >
+            <TouchableOpacity
+                onPress={this.forgotPassword}
+            >
+            <Text 
+                style={styles.forgotPasswordText}
+            >Forgot Password?</Text>
+            </TouchableOpacity>
             </View>
         </View>
         

@@ -14,9 +14,16 @@ const base = (method, url, data = {}) => {
   return fetch(`${apiConfig.url}${url}`, {
     method,
     headers: customHeader(),
-    body: body
+    body
   })
-    .then(response => response.json())
+    .then(response => {
+      switch (response.status) {
+        case 200:
+          return response.json();
+        default:
+          return response;
+      } 
+    })
     .then(res => res)
     .catch(error => ({ error: 'Server Error' }));
 };
