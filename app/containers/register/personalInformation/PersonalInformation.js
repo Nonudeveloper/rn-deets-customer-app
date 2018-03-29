@@ -36,7 +36,7 @@ export default class PersonalInformation extends Component {
   }
   
   render() {
-    
+    console.log(this.props);
     return (
         <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -52,7 +52,7 @@ export default class PersonalInformation extends Component {
             process={processOne}
           />
           <ProfilePic />
-          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} emailAvailability={this.props.emailAvailability} />
+          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
           <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
               <TouchableOpacity

@@ -45,7 +45,7 @@ class FormArea extends React.Component {
 
 
     render() {
-        console.log(this.state);
+        console.log(this.props);
         const normalizePhone = value => {
                 if (!value) {
                     this.setState({ clearmobilefield: false });
@@ -67,13 +67,6 @@ class FormArea extends React.Component {
                 {/* <Text style={styles.textStyle}>form component</Text> */}
                 {/* <FormLabel>Name</FormLabel> */}
 
-                {this.props.emailAvailability.flag === 6 && Alert.alert(
-                    'Error',
-                    'Email already exists!',
-                    [
-                      { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ],
-                )}
                 <Field
                     name={'fname'}
                     component={CommonTextInput}

@@ -21,7 +21,11 @@ class FBLoginView extends Component {
       FBLoginManager.loginWithPermissions(['email', 'user_friends'], function (error, data) {
         if (!error) {
           console.log("Login data: ", data);
-          props.fbLogin(data);
+          if (props.title === 'Login with Facebook') {
+              props.fbLogin(data);
+          } else {
+             props.navigation.navigate('personalInformation', data);
+          }
         } else {
           console.log("Error: ", error);
         }

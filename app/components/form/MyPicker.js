@@ -2,15 +2,13 @@ import React from 'react';
 import { Picker, View } from 'react-native';
 
 export default function MyPicker(props) {
-  const { input, value, children, ...pickerProps } = props;
-  console.log(props);
-   
+  const { input, children, ...pickerProps } = props;
   return (
     <View>
     <Picker
-      selectedValue={value}
-      onValueChange={input.onChange(props.selectedValue)}
-      {...input}
+     {...input}
+      selectedValue={input.value}
+      onValueChange={input.onChange}
       {...pickerProps}
       style={{ color: 'grey' }}
       itemStyle={{ backgroundColor: 'lightgrey' }}
