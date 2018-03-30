@@ -114,7 +114,7 @@ export default class LoginScreen extends Component {
         {this.props.showAlert && this.renderAlert(this.props.errorMessage)}
         <Header headerText={''} navigation={this.props.navigation} />
         
-        <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin}/>
+        <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin} />
        
         <Hr color="black" width={2} marginleft={25} marginright={25}>
           <Text style={styles.textWithDivider}>OR{this.props.isAuthenticated}</Text>
