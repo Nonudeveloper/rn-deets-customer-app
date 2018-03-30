@@ -65,7 +65,8 @@ export default StyleSheet.create({
     colContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 15
+        marginHorizontal: 15,
+        paddingLeft: 6
     },
     colOne: {
         flex: 1,
@@ -82,7 +83,7 @@ export default StyleSheet.create({
     },
     inputStyle: {
         borderBottomColor: 'grey',
-        marginHorizontal: 15
+        marginHorizontal: 20,
     },
     licenseInnerContainerStyle: {
         flex: 1,
@@ -100,7 +101,7 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     licenseTextStyle: {
-        paddingLeft: 10,
+        // paddingLeft: 10,
     },
     editIcon: {
         resizeMode: 'contain', 

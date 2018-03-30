@@ -119,7 +119,7 @@ class VehicleForm extends React.Component {
                         }
                     </Field>
                 </View>
-                <View style={[inputStyle]}>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
                 <Field name="model" selectedValue={this.state.model} component={MyPicker} onChange={(model) => this.setState(() => { return { model }; })}>
                         <Picker.Item label={'Model'} />
                         { 
@@ -134,6 +134,18 @@ class VehicleForm extends React.Component {
                     </Field>
                 </View>
             </View>
+            <View style={styles.licenseTextStyle}>
+                <Field
+                    name={'type'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    placeholder={'Type'}
+                    placeholderTextColor='grey'
+                    underlineColorAndroid="transparent"
+                    type="text"
+                    borderBotmWidth={{ borderBottomWidth: 2 }}
+                />
+                </View>
             <View style={styles.licenseStyle}>
                 <View style={styles.licenseInnerContainerStyle}>
                     <View style={styles.radio1ContainerStyle}>
@@ -183,7 +195,7 @@ class VehicleForm extends React.Component {
                     //     placeholderTextColor='grey'
                     //     underlineColorAndroid="transparent"
                     // />
-                    <Field
+                <Field
                     name={'license'}
                     component={CommonTextInput}
                     props={this.props}
@@ -207,7 +219,7 @@ class VehicleForm extends React.Component {
                     //     placeholderTextColor='grey'
                     //     underlineColorAndroid="transparent"
                     // />
-                    <Field
+                <Field
                     name={'vin'}
                     component={CommonTextInput}
                     props={this.props}
@@ -218,6 +230,16 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 2 }}
                 />
                 }
+
+                <Field
+                    name={'notes'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    placeholder={'Notes'}
+                    placeholderTextColor='grey'
+                    underlineColorAndroid="transparent"
+                    type="text"
+                />
             </View>
         </View>
     );

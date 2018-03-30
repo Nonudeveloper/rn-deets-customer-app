@@ -6,6 +6,7 @@ import VehicleFormIos from './VehicleFormIos';
 import CarPicture from './CarPicture';
 import styles from './styles';
 import Loader from '../../../components/Loader';
+import Picker from 'react-native-picker';
 
 const processTwo = require('../../../assets/icons/process_selection_02.png');
 
@@ -41,7 +42,31 @@ export default class VehicleInformation extends React.Component {
   getVehicleImage(image) {
     this.props.storeVehicleImage(image);
   }
-  
+  showPicker(){
+    let data = [
+      {
+          a: ['apple', 2, 3, 4]
+      },
+      {
+          b: [5, 6, 7, 8]
+      },
+  ];
+    Picker.init({
+      pickerData: data,
+      selectedValue: [59],
+      onPickerConfirm: data => {
+          console.log(data);
+      },
+      onPickerCancel: data => {
+          console.log(data);
+      },
+      onPickerSelect: data => {
+          console.log(data);
+      }
+  });
+  Picker.show();
+  }
+ 
   render() {
     const { container } = styles;
     const { isFetching } = this.props;
@@ -88,6 +113,12 @@ export default class VehicleInformation extends React.Component {
                   <TouchableOpacity
                     style={styles.nextButtonStyle}
                     onPress={this.goToNext.bind(this)}
+                  >
+                    <Text style={{ color: '#fff' }}>Next</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.nextButtonStyle}
+                    onPress={this.showPicker.bind(this)}
                   >
                     <Text style={{ color: '#fff' }}>Next</Text>
                   </TouchableOpacity>

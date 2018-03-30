@@ -19,6 +19,7 @@
     "react-native-facebook-login": "^1.6.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-keyboard-aware-scroll-view": "^0.4.4",
+    "react-native-picker": "^4.3.5",
     "react-native-step-indicator": "0.0.7",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.2.1",
