@@ -77,8 +77,7 @@ const LoginStack = StackNavigator({
   personalInformation: { screen: PersonalInformation },
   vehicleInformation: { screen: VehicleInformation },
   selectRegisteration: { screen: SelectRegisteration },
-  creditCardForm: { screen: CreditCardForm }
-  
+  creditCardForm: { screen: CreditCardForm },
   
 }, {
   headerMode: 'none',

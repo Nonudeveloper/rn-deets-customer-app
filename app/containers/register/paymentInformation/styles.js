@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -70,6 +71,22 @@ export default StyleSheet.create({
         width: 100, 
         height: 100 
       },
-
+      switch: {
+        alignSelf: 'center',
+        marginTop: 20,
+        marginBottom: 20,
+      },
+      container2: {
+        backgroundColor: '#333333',
+        marginTop: 60,
+      },
+      label: {
+        color: 'black',
+        fontSize: 12,
+      },
+      input: {
+        fontSize: 16,
+        color: 'grey',
+      },
 
 });

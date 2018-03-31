@@ -15,25 +15,24 @@ export default class PersonalInformation extends Component {
   }
 
   goToNext() {
-    //   const errors = this.props.form.signUp.syncErrors;
-    //   let errorCount = 0;
-    //   for (const error in errors) {
-    //     if (errors[error] !== undefined && errorCount === 0) {
-    //       Alert.alert(
-    //         'Error',
-    //         errors[error],
-    //         [
-    //           { text: 'OK', onPress: () => console.log('OK Pressed') },
-    //         ],
-    //         { cancelable: false }
-    //       );
-    //       errorCount++;
-    //     }
-    //  }
-    //  if (errorCount === 0) {
-    //   this.props.navigation.navigate('vehicleInformation');
-    //  }
-    this.props.navigation.navigate('vehicleInformation');
+      const errors = this.props.form.signUp.syncErrors;
+      let errorCount = 0;
+      for (const error in errors) {
+        if (errors[error] !== undefined && errorCount === 0) {
+          Alert.alert(
+            'Error',
+            errors[error],
+            [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+          );
+          errorCount++;
+        }
+     }
+     if (errorCount === 0) {
+      this.props.navigation.navigate('vehicleInformation');
+     }
   }
 
   getImage(image) {
