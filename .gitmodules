@@ -1,0 +1,3 @@
+[submodule "app/deetscomponents"]
+	path = app/deetscomponents
+	url = https://github.com/DeetsMobile/deetscomponents
