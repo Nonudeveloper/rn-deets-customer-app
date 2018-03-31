@@ -18,24 +18,25 @@ export default class VehicleInformation extends React.Component {
   }
 
   async goToNext() {
-    const errors = this.props.form.syncErrors;
-    let errorCount = 0;
-    for (const error in errors) {
-      if (errors[error] !== undefined && errorCount === 0) {
-        Alert.alert(
-          'Error',
-          errors[error],
-          [
-            { text: 'OK', onPress: () => console.log('OK Pressed') },
-          ],
-          { cancelable: false }
-        );
-        errorCount++;
-      }
-    }
-    if (errorCount === 0) {
-      this.props.navigation.navigate('paymentInformation');
-    }
+    // const errors = this.props.form.syncErrors;
+    // let errorCount = 0;
+    // for (const error in errors) {
+    //   if (errors[error] !== undefined && errorCount === 0) {
+    //     Alert.alert(
+    //       'Error',
+    //       errors[error],
+    //       [
+    //         { text: 'OK', onPress: () => console.log('OK Pressed') },
+    //       ],
+    //       { cancelable: false }
+    //     );
+    //     errorCount++;
+    //   }
+    // }
+    // if (errorCount === 0) {
+    //   this.props.navigation.navigate('paymentInformation');
+    // }
+    this.props.navigation.navigate('paymentInformation');
   }
 
   getVehicleImage(image) {
