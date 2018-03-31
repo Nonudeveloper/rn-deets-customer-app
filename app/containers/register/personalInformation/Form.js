@@ -66,7 +66,6 @@ class FormArea extends React.Component {
 
 
     render() {
-        console.log(this.props);
         const normalizePhone = value => {
                 if (!value) {
                     this.setState({ clearmobilefield: false });
@@ -83,6 +82,7 @@ class FormArea extends React.Component {
                 return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
         };
         const phoneParser = (number) => number ? number.replace(/[^\d]/g, '') : '';
+        
         return (
             <View style={styles.formArea}>
                 {/* <Text style={styles.textStyle}>form component</Text> */}

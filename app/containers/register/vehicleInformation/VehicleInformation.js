@@ -18,7 +18,7 @@ export default class VehicleInformation extends React.Component {
       //props.fetchVehiclesFromAsyncStorage();      
   }
 
-  async goToNext() {
+  goToNext() {
     const errors = this.props.form.syncErrors;
     let errorCount = 0;
     for (const error in errors) {

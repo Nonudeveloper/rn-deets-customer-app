@@ -6,7 +6,8 @@ import LoginScreen from '../containers/login/index';
 import ForgotPasswordScreen from '../containers/login/forgotPassword/index';
 import StartScreen from '../containers/start/index';
 import SelectRegisteration from '../containers/start/SelectRegisteration';
-// import PaymentInformation from '../containers/register/paymentInformation/index';
+import PaymentInformation from '../containers/register/paymentInformation/PaymentInformation';
+import CreditCardForm from '../containers/register/paymentInformation/CreditCardForm';
 
 /**Cunstom Transitions */
 const MyTransition = (toIndex, thisSceneIndex, height, width, scenes, position) => {
@@ -69,13 +70,14 @@ const TransitionConfiguration = () => {
 
 // login stack
 const LoginStack = StackNavigator({
+  paymentInformation: { screen: PaymentInformation },
   startScreen: { screen: StartScreen },
   loginScreen: { screen: LoginScreen },
   forgotPasswordScreen: { screen: ForgotPasswordScreen },
   personalInformation: { screen: PersonalInformation },
   vehicleInformation: { screen: VehicleInformation },
   selectRegisteration: { screen: SelectRegisteration },
-//   paymentInformation: { screen: PaymentInformation }
+  creditCardForm: { screen: CreditCardForm },
   
 }, {
   headerMode: 'none',
