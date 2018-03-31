@@ -42,7 +42,7 @@ class RegisterHelper {
     data.append('vehicle_type_segment_id', 5);
     data.append('notes', userInfo.form2.notes);
     data.append('license_type', 2);
-    data.append('nonce', 2);
+    data.append('nonce', userInfo.nonce);
 
     return await fetch('http://127.0.0.1:8000/customer/register_new_user', {
       method: 'post',
