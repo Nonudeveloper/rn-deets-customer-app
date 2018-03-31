@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
-import { reduxForm, Field, formValues, change, untouch } from 'redux-form';
+import { reduxForm, Field, formValues, change, untouch, initialize } from 'redux-form';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import CommonTextInput from '../../../components/form/Input';
@@ -43,6 +43,27 @@ class FormArea extends React.Component {
         }
     }
 
+    componentWillMount() {
+        if (this.props.fbData !== null) {
+            const fbUserData = JSON.parse(this.props.fbData.profile);
+            const initialFormData = {
+                fname: fbUserData.first_name,
+                lname: fbUserData.last_name,
+                flag: 1,
+                fb_access_token: this.props.fbData.credentials.token,
+                fb_id: fbUserData.id
+                
+        };
+    
+        this.props.dispatch(initialize('signUp', initialFormData));
+        } else {
+            const initialFormData = {
+                flag: 3
+            };
+            this.props.dispatch(initialize('signUp', initialFormData));
+        }
+    }
+
 
     render() {
         const normalizePhone = value => {
@@ -67,13 +88,24 @@ class FormArea extends React.Component {
                 {/* <Text style={styles.textStyle}>form component</Text> */}
                 {/* <FormLabel>Name</FormLabel> */}
 
-                {this.props.emailAvailability.flag === 6 && Alert.alert(
-                    'Error',
-                    'Email already exists!',
-                    [
-                      { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ],
-                )}
+                <Field
+                    name={'flag'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'fb_id'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'fb_access_token'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
                 <Field
                     name={'fname'}
                     component={CommonTextInput}

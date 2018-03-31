@@ -7,6 +7,8 @@ import {
   FETCH_VEHICLE_SUCCESS,
   VERIFY_EMAIL_REQUEST,
   VERIFY_EMAIL_SUCCESS,
+  STORE_IMAGE,
+  HIDE_ALERT
 } from './constants';
 
 export function registerRequest(state) {
@@ -52,19 +54,21 @@ export function verifyEmailRequest({email}) {
 }
 
 export function verifyEmailSuccess(payload) {
-  saveEmailSuccess(payload);
   return {
     type: VERIFY_EMAIL_SUCCESS,
     payload,
   };
 }
 
-const saveEmailSuccess = async (payload) => {
-   try {
-        await AsyncStorage.setItem('emailAvailability', JSON.stringify(payload));
-            console.log('data stored');
-      } catch (error) {
-            // Error saving data
-            console.log('AsyncStorage save error: ' + error.message);
-      }
+export function storeImage(image) {
+  return {
+    type: STORE_IMAGE,
+    image,
+  };
+}
+
+export function hideAlert() {
+  return {
+    type: HIDE_ALERT
+  };
 }

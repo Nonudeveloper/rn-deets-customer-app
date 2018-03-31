@@ -2,7 +2,8 @@ import {
   FETCH_MAKE_MODEL, 
   FETCH_MAKE_MODEL_SUCCESS, 
   FETCH_MAKE_MODEL_FALIURE,
-  UPDATE_MODELS 
+  UPDATE_MODELS,
+  STORE_VEHICLE_IMAGE 
 } from '../constants';
   
   export function fetchMakeModel(year) {
@@ -29,6 +30,13 @@ import {
     return {
       type: UPDATE_MODELS,
       models
+    };
+  }
+
+  export function storeVehicleImage(image) {
+    return {
+      type: STORE_VEHICLE_IMAGE,
+      image,
     };
   }
 

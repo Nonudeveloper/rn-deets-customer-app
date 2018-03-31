@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import VehicleInformation from './VehicleInformation';
 import * as registerActions from '../../../redux/register/actions';
 import { fetchVehiclesFromAsyncStorage } from '../../../redux/register/startActions';
-import { fetchMakeModel, updateModels } from '../../../redux/register/vehicleInformation/vehicleActions';
+import { fetchMakeModel, updateModels, storeVehicleImage } from '../../../redux/register/vehicleInformation/vehicleActions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateModels: (models) => {
             dispatch(updateModels(models));
+        },
+        storeVehicleImage: (image) => {
+            dispatch(storeVehicleImage(image));
         }
     };
 };

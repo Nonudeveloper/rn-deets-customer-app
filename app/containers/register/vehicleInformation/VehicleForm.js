@@ -68,7 +68,7 @@ class VehicleForm extends React.Component {
         <View style={styles.formArea}>
             <View style={styles.colContainer}>
                 <View style={styles.colOne}>
-                    <Field name="year" selectedValue={this.state.year} component={MyPicker} onValueChange={(year, index) => this._fetchMakeModel(year, index)}>
+                    <Field name="year" selectedValue={this.state.year} component={MyPicker} onChange={(year, index) => this._fetchMakeModel(year, index)}>
                         <Picker.Item label={'Year'} />
                         { 
                             this.props.vehicleData.year ? 
@@ -86,7 +86,7 @@ class VehicleForm extends React.Component {
                         name="color" 
                         component={MyPicker} 
                         selectedValue={this.state.color}
-                        onValueChange={(color) => this.setState(() => {
+                        onChange={(color) => this.setState(() => {
                             return { color };
                         })}
                     >
@@ -105,7 +105,7 @@ class VehicleForm extends React.Component {
             </View>
             <View >
                 <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-                    <Field name="make" selectedValue={this.state.make} component={MyPicker} onValueChange={(make, index) => this._populateModel(make, index)} >
+                    <Field name="make" selectedValue={this.state.make} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
                         { 
                             this.props.makeModel.length > 0 ? 
@@ -120,7 +120,7 @@ class VehicleForm extends React.Component {
                     </Field>
                 </View>
                 <View style={[inputStyle]}>
-                <Field name="model" selectedValue={this.state.model} component={MyPicker} onValueChange={(model) => this.setState(() => { return { model }; })}>
+                <Field name="model" selectedValue={this.state.model} component={MyPicker} onChange={(model) => this.setState(() => { return { model }; })}>
                         <Picker.Item label={'Model'} />
                         { 
                             this.props.models ? 

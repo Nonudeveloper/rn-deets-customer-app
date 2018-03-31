@@ -22,7 +22,7 @@ const SelectRegisteration = (props) => {
         
             <Header headerText={'Registration'} navigation={props.navigation} />
             
-            <DeetsFacebook title="Register with Facebook"/>
+            <DeetsFacebook title="Register with Facebook" navigation={props.navigation} />
 
             <Hr color="black" width={2} marginleft={25} marginright={25}>
                 <Text style={styles.textWithDivider}>OR</Text>

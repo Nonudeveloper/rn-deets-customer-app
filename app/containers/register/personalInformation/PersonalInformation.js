@@ -35,9 +35,30 @@ export default class PersonalInformation extends Component {
     //  }
     this.props.navigation.navigate('vehicleInformation');
   }
+
+  getImage(image) {
+    this.props.actions.storeImage(image);
+  }
+
+  renderAlert(error) {
+    Alert.alert(
+      'Error',
+      error,
+      [
+        { 
+          text: 'OK', 
+          onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
+          } 
+        },
+      ],
+      { cancelable: false }
+    );
+  }
   
   render() {
-    
+    console.log(this.props);
     return (
         <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -46,14 +67,15 @@ export default class PersonalInformation extends Component {
           bounces={false}
           keyboardShouldPersistTaps='always'
         >
+        {this.props.emailAvailability.flag === 6 && this.renderAlert(this.props.emailAvailability.error)}
           <Header 
             headerText={'Personal Information'} 
             curre={0}
             navigation={this.props.navigation} 
             process={processOne}
           />
-          <ProfilePic />
-          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} emailAvailability={this.props.emailAvailability} />
+          <ProfilePic getImage={this.getImage.bind(this)} fbData={this.props.navigation.state.params ? JSON.parse(this.props.navigation.state.params.profile) : null} />
+          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
           <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
               <TouchableOpacity

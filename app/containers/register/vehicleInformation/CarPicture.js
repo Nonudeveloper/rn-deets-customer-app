@@ -43,6 +43,7 @@ export default class CarPicture extends React.Component {
               this.setState({
                 ImageSource: source
               });
+              this.props.getVehicleImage(response);
             }
         });
     }
