@@ -4,7 +4,10 @@ import App from './App';
 if (process.env.NODE_ENV === 'development') {
 	const _XHR = GLOBAL.originalXMLHttpRequest ?  
     GLOBAL.originalXMLHttpRequest :           
-    GLOBAL.XMLHttpRequest;                     
+    GLOBAL.XMLHttpRequest;   
+    global.FormData = global.originalFormData ?
+    global.originalFormData :
+    global.FormData;                  
 	XMLHttpRequest = _XHR;
 }
 

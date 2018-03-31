@@ -6,7 +6,7 @@ import VehicleFormIos from './VehicleFormIos';
 import CarPicture from './CarPicture';
 import styles from './styles';
 import Loader from '../../../components/Loader';
-import Picker from 'react-native-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const processTwo = require('../../../assets/icons/process_selection_02.png');
 
@@ -35,43 +35,36 @@ export default class VehicleInformation extends React.Component {
       }
     }
     if (errorCount === 0) {
-      this.props.navigation.navigate('paymentInformation');
+      const user_image = this.props.image;
+      const vehicle_image = this.props.vehicleImage;
+      const form1 = this.props.form.signUp.values;
+      const form2 = this.props.form.vehicleForm.values;
+      this.props.actions.registerRequest(user_image, vehicle_image, form1, form2);
+      // this.props.navigation.navigate('paymentInformation');
     }
   }
 
   getVehicleImage(image) {
     this.props.storeVehicleImage(image);
   }
-  showPicker(){
-    let data = [
-      {
-          a: ['apple', 2, 3, 4]
-      },
-      {
-          b: [5, 6, 7, 8]
-      },
-  ];
-    Picker.init({
-      pickerData: data,
-      selectedValue: [59],
-      onPickerConfirm: data => {
-          console.log(data);
-      },
-      onPickerCancel: data => {
-          console.log(data);
-      },
-      onPickerSelect: data => {
-          console.log(data);
-      }
-  });
-  Picker.show();
-  }
+
  
   render() {
     const { container } = styles;
     const { isFetching } = this.props;
     return (
+      <KeyboardAwareScrollView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={ {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+          automaticallyAdjustContentInsets={false}
+          bounces={false}
+          keyboardShouldPersistTaps='always'
+        >
        <View style={{ flex: 1 }}>
+       
           <Loader
                 loading={isFetching} 
           />
@@ -116,15 +109,11 @@ export default class VehicleInformation extends React.Component {
                   >
                     <Text style={{ color: '#fff' }}>Next</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.nextButtonStyle}
-                    onPress={this.showPicker.bind(this)}
-                  >
-                    <Text style={{ color: '#fff' }}>Next</Text>
-                  </TouchableOpacity>
               </View>
           </View>
+          
        </View>
+       </KeyboardAwareScrollView>
     );
   }
 }

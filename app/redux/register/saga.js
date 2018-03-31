@@ -10,10 +10,12 @@ import {
   VERIFY_EMAIL_REQUEST,
   FETCH_VEHICLES_FROM_ASYNC_STORAGE, 
   FETCH_MAKE_MODEL,
+  REGISTER_REQUEST
 } from './constants';
-import { verifyEmailSuccess } from './actions';
+import { verifyEmailSuccess, registerSuccess, registerFailure } from './actions';
 import RegisterHelper from '../../helpers/register/registerHelper';
 import { fetchMakeModelSuccess } from './vehicleInformation/vehicleActions';
+import { setUser } from '../../helpers/utility';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -107,11 +109,38 @@ function fetchMakeModelCall(year) {
   });
 }
 
+function registerCall(payload) {
+  return new Promise((resolve, reject) => {
+    RegisterHelper.register(payload)
+      .then(response => {
+          resolve(response);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+function* watchRegisterRequest() {
+  while (true) {
+    const payload = yield take(REGISTER_REQUEST);
+    try {
+      console.log(payload)
+      const response = yield call(registerCall, payload);
+        yield put(registerSuccess(response.user.access_token, response));
+       yield setUser(response.user);
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(registerFailure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(fetchVehiclesRequest);
   yield fork(watchFetchVehiclesFromAsyncStorage);
   yield fork(watchVeriftEmailRequest);
   yield fork(watchFetchMakeModel);
+  yield fork(watchRegisterRequest);
 }
 

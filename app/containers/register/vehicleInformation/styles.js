@@ -61,6 +61,8 @@ export default StyleSheet.create({
         height: 45,
         backgroundColor: '#fff',
         justifyContent: 'center',
+        paddingLeft: 23,
+        paddingRight: 23
     },
     colContainer: {
         flexDirection: 'row',

@@ -32,7 +32,10 @@ const mapStateToProps = (state) => {
          isFetching: state.Vehicle.isFetching,
          makeModel: state.Vehicle.makeModelData,
          models: state.Vehicle.models,
-         form: state.form.vehicleForm
+        //  form: state.form.vehicleForm,
+         form: state.form,
+         vehicleImage: state.Vehicle.vehicleImage,
+         image: state.Register.image
     };
 };
 

@@ -11,14 +11,17 @@ import {
   HIDE_ALERT
 } from './constants';
 
-export function registerRequest(state) {
+export function registerRequest(user_image, vehicle_image, form1, form2) {
   return {
     type: REGISTER_REQUEST,
-    state,
+    user_image,
+    vehicle_image,
+    form1,
+    form2,
   };
 }
 
-export function registerSuccess({ token, user }) {
+export function registerSuccess(token, user) {
   return {
     type: REGISTER_SUCCESS,
     token,

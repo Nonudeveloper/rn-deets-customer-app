@@ -1,10 +1,11 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { View, Text, Picker, TextInput } from 'react-native';
+import { reduxForm, Field, initialize, change } from 'redux-form';
+import { View, Text, Picker, TextInput, Keyboard } from 'react-native';
 import styles from './styles';
 import MyPicker from '../../../components/form/MyPicker';
 import RadioButton from 'radio-button-react-native';
 import CommonTextInput from '../../../components/form/Input';
+import ModelPicker from 'react-native-picker';
 
 class VehicleForm extends React.Component {
     constructor(props) {
@@ -42,25 +43,65 @@ class VehicleForm extends React.Component {
         });
     }
 
-  _populateModel = (makeID, makeIndex) => {
-    
-    this.setState(() => {
-        return {
-          make: makeID
-        };
-    }, () => {
-        this.props.makeModel.map((make, i) => {
-            if (make.make_id === makeID) {
-                //dispatch an action here and update props
-                this.props.updateModels(make.model);
-            }
+    _populateModel = (makeID, makeIndex) => {
+        
+        this.setState(() => {
+            return {
+            make: makeID
+            };
+        }, () => {
+            this.props.makeModel.map((make, i) => {
+                if (make.make_id === makeID) {
+                    //dispatch an action here and update props
+                    this.props.updateModels(make.model);
+                }
+            });
         });
-    });
-  }
+    }
 
-  handleOnPress(value) {
-    this.setState({ value: value });
-  }
+    handleOnPress(value) {
+        this.setState({ value: value });
+    }
+
+    _createTypeData() {
+        const data = [];
+        if (this.props.vehicleData.type) {
+            this.props.vehicleData.type.map((type, i) => {
+            const segments = [];
+            type.segment.map((segment, j) => {
+                segments.push(segment.vehicle_segment);
+            });
+            let _data = {}
+            _data[type.vehicle_type_name] = segments;
+            data.push(_data);
+        });
+        return data;
+        }
+    }
+
+    _showPicker() {
+        Keyboard.dismiss();
+        ModelPicker.init({
+        pickerData: this._createTypeData(),
+        pickerTitleText: 'Select Type..',
+        pickerRowHeight: 30,
+        pickerFontSize: 18,
+        selectedValue: [59],
+        onPickerConfirm: data => {
+            const initialFormData = {
+                type: data[0] + ', ' + data[1]  
+        };
+            this.props.dispatch(initialize('vehicleForm', initialFormData, 'type'));
+        },
+        onPickerCancel: data => {
+            console.log(data);
+        },
+        onPickerSelect: data => {
+            console.log(data);
+        }
+    });
+    ModelPicker.show();
+    }
     
   render() {
     const { pickerStyle, inputStyle } = styles;
@@ -144,6 +185,7 @@ class VehicleForm extends React.Component {
                     underlineColorAndroid="transparent"
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
+                    onFocus={this._showPicker.bind(this)}
                 />
                 </View>
             <View style={styles.licenseStyle}>
@@ -164,6 +206,7 @@ class VehicleForm extends React.Component {
                         <View style={{ flex: 10 }}><Text>License #</Text></View>
                     </View>
                     <View style={styles.radio2ContainerStyle}>
+                    <View style={{ flex: 2 }}><Text>VIN #</Text></View>
                         <View style={{ flex: 1 }}>
                             <RadioButton
                                 currentValue={this.state.value}
@@ -176,7 +219,7 @@ class VehicleForm extends React.Component {
                                 innerCircleSize={18}
                             />
                         </View>
-                        <View style={{ flex: 2 }}><Text>VIN #</Text></View>
+                       
                     </View>
                 </View>
             </View>
@@ -189,11 +232,13 @@ class VehicleForm extends React.Component {
                     //         color: 'grey',
                     //         marginHorizontal: 10 
                     //     }}
-                    //     onChangeText={(license) => this.setState({ license })}
+                    //     onClick={ console.log('df')}
                     //     value={this.state.license}
                     //     placeholder={'License #'}
                     //     placeholderTextColor='grey'
                     //     underlineColorAndroid="transparent"
+                    //     editable={this.state.editable}
+                    //     onFocus={Keyboard.dismiss}
                     // />
                 <Field
                     name={'license'}
@@ -249,6 +294,9 @@ class VehicleForm extends React.Component {
 
 export default reduxForm({ 
     form: 'vehicleForm',
+    destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true,
+    enableReinitialize: true,
     validate: (values) => {
         const errors = {};
         errors.year = !values.year
@@ -266,11 +314,19 @@ export default reduxForm({
         errors.model = !values.model
           ? 'Model field is required'
           : undefined;
+
+        errors.type = !values.type
+          ? 'Type field is required'
+          : undefined;
         
         errors.license = !values.license
           ? 'license or Vin field is required'
           : undefined;
         
+        errors.notes = !values.notes
+          ? 'Notes field is required'
+          : undefined;
+
         return errors;
     },
 })(VehicleForm);
