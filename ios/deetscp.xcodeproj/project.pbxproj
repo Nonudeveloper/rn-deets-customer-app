@@ -1484,7 +1484,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../node_modules/instabug-reactnative/ios",
-					"$(PROJECT_DIR)",
 					"$(LOCAL_LIBRARY_DIR)/WebServer/Documents/deetscp/node_modules/react-native-facebook-login/FacebookSDK/**",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1516,7 +1515,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../node_modules/instabug-reactnative/ios",
-					"$(PROJECT_DIR)",
 					"$(LOCAL_LIBRARY_DIR)/WebServer/Documents/deetscp/node_modules/react-native-facebook-login/FacebookSDK/**",
 				);
 				HEADER_SEARCH_PATHS = (
