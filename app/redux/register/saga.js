@@ -3,23 +3,19 @@ import { AsyncStorage } from 'react-native';
 import { take, put, call, fork } from 'redux-saga/effects';
 import { 
   fetchVehiclesSuccess, 
-  fetchDefaultAvailabilitySuccess, 
   recieveVehiclesData,
-  recieveDefaultAvailabilitysData
 } from './startActions';
 import { 
   FETCH_VEHICLES, 
-  FETCH_DEFAULT_AVAILABILITY,
   VERIFY_EMAIL_REQUEST,
   FETCH_VEHICLES_FROM_ASYNC_STORAGE, 
   FETCH_MAKE_MODEL,
-  FETCH_DEFAULT_AVAILABILITY_FROM_ASYNC_STORAGE,
-  FETCH_NEARBY_PLACES
+  REGISTER_REQUEST
 } from './constants';
-import { verifyEmailSuccess } from './actions';
+import { verifyEmailSuccess, registerSuccess, registerFailure } from './actions';
 import RegisterHelper from '../../helpers/register/registerHelper';
 import { fetchMakeModelSuccess } from './vehicleInformation/vehicleActions';
-import { fetchNearByPlacesSuccess, fetchNearByPlacesFaliure } from './serviceAddress/serviceAddressActions';
+import { setUser } from '../../helpers/utility';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -31,15 +27,6 @@ function fetchVehiclesCall() {
   });
 }
 
-function fetchDefaultAvailabilityCall() {
-  return new Promise((resolve, reject) => {
-      RegisterHelper.fetchDefaultAvailability()
-        .then(res => {
-            resolve(res);
-        })
-        .catch(err => reject(err));
-  });
-}
 //**Generator */
 function* fetchVehiclesRequest() {
   while (true) {
@@ -47,19 +34,6 @@ function* fetchVehiclesRequest() {
     try {
       const response = yield call(fetchVehiclesCall);
       yield put(fetchVehiclesSuccess(response));
-      console.log('SAGA FETCH SUCCESS: ', response);
-    } catch (err) {
-      console.log('SAGA FETCH ERR: ', err);
-    }
-  }
-}
-//**Generator */
-function* fetchDefaultAvailability() {
-  while (true) {
-    yield take(FETCH_DEFAULT_AVAILABILITY);
-    try {
-      const response = yield call(fetchDefaultAvailabilityCall);
-      yield put(fetchDefaultAvailabilitySuccess(response));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       console.log('SAGA FETCH ERR: ', err);
@@ -105,9 +79,7 @@ function* watchVeriftEmailRequest() {
       const payload = {
         email
       };
-      console.log(email);
       const response = yield call(verifyEmailCall, payload);
-      console.log(response);
       yield put(verifyEmailSuccess(response));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
@@ -127,6 +99,7 @@ function verifyEmailCall({ email }) {
 }
 
 function fetchMakeModelCall(year) {
+  console.log(year);
   return new Promise((resolve, reject) => {
       RegisterHelper.fetchMakeModel({ year })
         .then(res => {
@@ -136,52 +109,38 @@ function fetchMakeModelCall(year) {
   });
 }
 
-//**Generator */
-function* watchDefaultAvailabilityFromAsyncStorage() {
-  while (true) {
-    yield take(FETCH_DEFAULT_AVAILABILITY_FROM_ASYNC_STORAGE);
-    try {
-      const response = yield AsyncStorage.getItem('defaultAvailability');
-      yield put(recieveDefaultAvailabilitysData(response));
-      console.log('SAGA FETCH SUCCESS: ', response);
-    } catch (err) {
-      console.log('SAGA FETCH ERR: ', err);
-    }
-  }
-}
-
-function fetchNearByPlacesCall(payload) {
+function registerCall(payload) {
   return new Promise((resolve, reject) => {
-    RegisterHelper.fetchNearByPlaces({ payload })
-      .then(res => {
-          resolve(res);
+    RegisterHelper.register(payload)
+      .then(response => {
+          resolve(response);
       })
       .catch(err => reject(err));
   });
 }
 
-//**Generator */
-function* watchFetchNearByPlaces() {
+function* watchRegisterRequest() {
   while (true) {
-    const { payload } = yield take(FETCH_NEARBY_PLACES);
+    const payload = yield take(REGISTER_REQUEST);
     try {
-      const response = yield call(fetchNearByPlacesCall, payload);
-      yield put(fetchNearByPlacesSuccess(response));
+      console.log(payload)
+      const response = yield call(registerCall, payload);
+        yield put(registerSuccess(response.user.access_token, response));
+       yield setUser(response.user);
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
-      yield put(fetchNearByPlacesFaliure(err));
+      yield put(registerFailure(err));
       console.log('SAGA FETCH ERR: ', err);
     }
   }
 }
 
+
 export default function* root() {
   yield fork(fetchVehiclesRequest);
-  yield fork(fetchDefaultAvailability);
   yield fork(watchFetchVehiclesFromAsyncStorage);
   yield fork(watchVeriftEmailRequest);
   yield fork(watchFetchMakeModel);
-  yield fork(watchDefaultAvailabilityFromAsyncStorage);
-  yield fork(watchFetchNearByPlaces);
+  yield fork(watchRegisterRequest);
 }
 

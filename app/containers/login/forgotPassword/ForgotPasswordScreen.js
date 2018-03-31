@@ -6,7 +6,7 @@ import {
     Alert
 } from 'react-native';
 import Header from '../../header/Header';
-import Form from '../../login/forgotPassword/form';
+import Form from '../../login/forgotPassword/Form';
 import styles from './styles.js';
 import Loader from '../../../components/Loader';
 

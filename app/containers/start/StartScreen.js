@@ -24,9 +24,7 @@ export default class StartScreen extends Component {
 
   goToNext() {
     //initiate loading and fetch vehicles
-    console.log(this.props);
     this.props.getVehicles();
-    this.props.getDefaultAvailability();
     this.props.navigation.navigate('selectRegisteration');
   }
 

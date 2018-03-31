@@ -12,19 +12,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 **/
 
 class FBLoginView extends Component {
-
-    
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
 
     onPress() {
-      const porps = this.props;
+      const props = this.props;
       FBLoginManager.loginWithPermissions(['email', 'user_friends'], function (error, data) {
         if (!error) {
           console.log("Login data: ", data);
-          porps.fbLogin(data);
+          if (props.title === 'Login with Facebook') {
+              props.fbLogin(data);
+          } else {
+             props.navigation.navigate('personalInformation', data);
+          }
         } else {
           console.log("Error: ", error);
         }

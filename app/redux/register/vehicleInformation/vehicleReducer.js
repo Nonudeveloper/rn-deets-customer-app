@@ -3,12 +3,14 @@ import {
     FETCH_MAKE_MODEL_SUCCESS, 
     FETCH_MAKE_MODEL_FALIURE, 
     UPDATE_MODELS,
+    STORE_VEHICLE_IMAGE
 } from '../constants';
 
 const initialState = {
       isFetching: false,
       makeModelData: [],
-      models: []
+      models: [],
+      vehicleImage: {}
 };
 
 export default function vehicleReducer(state = initialState, action) {
@@ -31,6 +33,10 @@ export default function vehicleReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 models: action.models
             });
+        case STORE_VEHICLE_IMAGE:
+            return Object.assign({}, state, {
+              vehicleImage: action.image
+            }); 
         default:
             return state;
     }

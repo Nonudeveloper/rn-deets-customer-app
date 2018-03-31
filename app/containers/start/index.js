@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import StartScreen from './StartScreen';
-import { fetchVehicles, fetchDefaultAvailability } from '../../redux/register/startActions';
+import { fetchVehicles } from '../../redux/register/startActions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -11,9 +11,6 @@ const mapDispatchToProps = (dispatch) => {
         // actions: bindActionCreators(registerActions, dispatch),
         getVehicles: () => {
             dispatch(fetchVehicles());
-        },
-        getDefaultAvailability: () => {
-            dispatch(fetchDefaultAvailability());
         }
     };
 };
