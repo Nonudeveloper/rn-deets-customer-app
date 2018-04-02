@@ -12,7 +12,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
     nextButtonContainer: {
-        marginTop: 40
+        paddingTop: 60
     },
     nextButtonStyle: {
         borderRadius: 100,
@@ -21,8 +21,7 @@ export default StyleSheet.create({
         borderWidth: 4,
         borderColor: '#bfff80',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10
+        alignItems: 'center'
     },
     profilePic: {
         alignItems: 'center',
