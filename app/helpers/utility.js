@@ -1,6 +1,6 @@
-import { AsyncStorage } from "react-native";
+import { AsyncStorage } from 'react-native';
 
-export const AUTH_TOKEN = "id_token";
+export const AUTH_TOKEN = 'id_token';
 export const USER = 'user';
 
 
@@ -61,10 +61,45 @@ export function dataURItoBlob(dataURI) {
 }
 
 export function dataURLtoFile(dataurl, filename) {
-  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-  while(n--){
+  var arr = dataurl.split(','), 
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), 
+      n = bstr.length, 
+      u8arr = new Uint8Array(n);
+
+  while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
   }
-  return new File([u8arr], filename, {type:mime});
+  return new File([u8arr], filename, { type: mime });
 }
+
+export const getBase64ImageFromUrl = async (imageUrl) => {
+  const res = await fetch(imageUrl);
+  const blob = await res.blob();
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+        resolve(reader.result);
+    }, false);
+
+    reader.onerror = () => {
+      return reject(this);
+    };
+    reader.readAsDataURL(blob);
+  });
+};
+
+export const toDataUrl = (url, callback) => {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = () => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          callback(reader.result);
+      };
+      reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+};
