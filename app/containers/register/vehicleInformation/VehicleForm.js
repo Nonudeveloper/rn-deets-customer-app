@@ -52,8 +52,10 @@ class VehicleForm extends React.Component {
         }, () => {
             this.props.makeModel.map((make, i) => {
                 if (make.make_id === makeID) {
+                    console.log(make);
                     //dispatch an action here and update props
                     this.props.updateModels(make.model);
+                    this.props.dispatch(change('vehicleForm', 'make', make.make_name));
                 }
             });
         });
@@ -92,6 +94,17 @@ class VehicleForm extends React.Component {
                 type: data[0] + ', ' + data[1]  
         };
             this.props.dispatch(initialize('vehicleForm', initialFormData, 'type'));
+
+            this.props.vehicleData.type.map((type, i) => {
+                if (type.vehicle_type_name === data[0]) {
+                    this.props.dispatch(change('vehicleForm', 'vehicle_type', type.vehicle_type));
+                }
+                type.segment.map((segment, j) => {
+                    if (segment.vehicle_segment === data[1]) {
+                        this.props.dispatch(change('vehicleForm', 'vehicle_type_segment_id', segment.id));
+                    }
+                });
+            });
         },
         onPickerCancel: data => {
             console.log(data);
@@ -101,6 +114,36 @@ class VehicleForm extends React.Component {
         }
     });
     ModelPicker.show();
+    }
+
+    _colorChanged(colorId) {
+        this.setState(() => {
+            return {
+            color: colorId
+            };
+        }, () => {
+            this.props.vehicleData.color.map((color, i) => {
+                if (color.id === colorId) {
+                    //dispatch an action here and update props
+                    this.props.dispatch(change('vehicleForm', 'color', color.color));
+                }
+            });
+        });
+    }
+
+    _modelChanged(modelId) {
+        this.setState(() => {
+            return {
+            model: modelId
+            };
+        }, () => {
+            this.props.models.map((models, i) => {
+                if (models.model_id === modelId) {
+                    //dispatch an action here and update props
+                    this.props.dispatch(change('vehicleForm', 'model', models.model_name));
+                }
+            });
+        });
     }
     
   render() {
@@ -124,12 +167,10 @@ class VehicleForm extends React.Component {
                 </View>
                 <View style={styles.colTwo}>
                     <Field 
-                        name="color" 
+                        name="color_id" 
                         component={MyPicker} 
                         selectedValue={this.state.color}
-                        onChange={(color) => this.setState(() => {
-                            return { color };
-                        })}
+                        onChange={(color) => this._colorChanged(color)}
                     >
                         <Picker.Item label={'Color'} value={1} />
                         { 
@@ -146,7 +187,7 @@ class VehicleForm extends React.Component {
             </View>
             <View >
                 <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-                    <Field name="make" selectedValue={this.state.make} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
+                    <Field name="make_id" selectedValue={this.state.make} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
                         { 
                             this.props.makeModel.length > 0 ? 
@@ -161,7 +202,7 @@ class VehicleForm extends React.Component {
                     </Field>
                 </View>
                 <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-                <Field name="model" selectedValue={this.state.model} component={MyPicker} onChange={(model) => this.setState(() => { return { model }; })}>
+                <Field name="model_id" selectedValue={this.state.model} component={MyPicker} onChange={(model) => this._modelChanged(model)}>
                         <Picker.Item label={'Model'} />
                         { 
                             this.props.models ? 
@@ -184,7 +225,7 @@ class VehicleForm extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
-                    borderBotmWidth={{ borderBottomWidth: 2 }}
+                    borderBotmWidth={{ borderBottomWidth: 0 }}
                     onFocus={this._showPicker.bind(this)}
                 />
                 </View>
@@ -248,7 +289,7 @@ class VehicleForm extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
-                    borderBotmWidth={{ borderBottomWidth: 2 }}
+                    borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                     : 
                     // <TextInput
@@ -272,7 +313,7 @@ class VehicleForm extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
-                    borderBotmWidth={{ borderBottomWidth: 2 }}
+                    borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                 }
 
@@ -284,6 +325,36 @@ class VehicleForm extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
+                />
+                <Field
+                    name={'color'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'make'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'model'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'vehicle_type'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'vehicle_type_segment_id'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
                 />
             </View>
         </View>

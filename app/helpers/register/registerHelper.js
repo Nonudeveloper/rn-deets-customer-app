@@ -8,15 +8,17 @@ class RegisterHelper {
     const type = userInfo.form2.type;
     const typeData = type.split(', ');
     const data = new FormData();
+
     const base64String = 'data:image/jpeg;base64,' + userInfo.userImage.data;
     // fs.writeFile('my_image.jpg', base64String, { encoding: 'base64' }, function(err) {
     //     console.log('File created');
     // });
     const file = dataURLtoFile(base64String, 'my_photo.jpg');
     data.append('userImage', file);
+
     if (userInfo.form1.flag === 1) {
-      data.append('fb_access_token', userInfo.form1.fb_access_token);
-      data.append('fb_id', userInfo.form1.fb_id);
+        data.append('fb_access_token', userInfo.form1.fb_access_token);
+        data.append('fb_id', userInfo.form1.fb_id);
     }
     data.append('first_name', userInfo.form1.fname);
     data.append('last_name', userInfo.form1.lname);
@@ -26,19 +28,19 @@ class RegisterHelper {
     data.append('user_type', 2);
     data.append('device_token', 78);
     data.append('flag', userInfo.form1.flag);
-    data.append('vehicle_model_id', userInfo.form2.model);
-    data.append('vehicle_make_id', userInfo.form2.make);
-    data.append('vehicle_color_id', userInfo.form2.color);
+    data.append('vehicle_model_id', userInfo.form2.model_id);
+    data.append('vehicle_make_id', userInfo.form2.make_id);
+    data.append('vehicle_color_id', userInfo.form2.color_id);
     data.append('vehicle_year_id', userInfo.form2.year);
     data.append('license', userInfo.form2.license);
-    data.append('vehicle_make', 34);
-    data.append('vehicle_model', '34');
-    data.append('vehicle_color', '34');
-    data.append('vehicle_year', '34');
-    data.append('vehicle_type', 1);
+    data.append('vehicle_make', userInfo.form2.make_id);
+    data.append('vehicle_model', userInfo.form2.model);
+    data.append('vehicle_color', userInfo.form2.color);
+    data.append('vehicle_year', userInfo.form2.year);
+    data.append('vehicle_type', userInfo.form2.vehicle_type);
     data.append('vehicle_type_name', typeData[0]);
     data.append('vehicle_type_segment', typeData[1]);
-    data.append('vehicle_type_segment_id', 5);
+    data.append('vehicle_type_segment_id', userInfo.form2.vehicle_type_segment_id);
     data.append('notes', userInfo.form2.notes);
     data.append('license_type', 2);
     data.append('nonce', userInfo.nonce);
