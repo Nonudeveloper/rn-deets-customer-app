@@ -5,6 +5,8 @@ import Header from '../../header/RegisterHeader';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
+import Button from '../../../components/Button';
+import StyleConstants from '../../../config/StyleConstants';
 
 const processOne = require('../../../assets/icons/process_selection_01.png');
 
@@ -57,7 +59,6 @@ export default class PersonalInformation extends Component {
   }
   
   render() {
-    console.log(this.props);
     return (
         <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -77,12 +78,12 @@ export default class PersonalInformation extends Component {
           <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
           <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
-              <TouchableOpacity
-                style={styles.nextButtonStyle}
+              <Button 
+                style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
                 onPress={this.goToNext.bind(this)}
               >
-                <Text style={{ color: '#fff' }}>Next</Text>
-              </TouchableOpacity>
+                Next
+              </Button>
             </View>
           </View>
         </KeyboardAwareScrollView>

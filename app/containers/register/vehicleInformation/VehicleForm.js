@@ -52,7 +52,6 @@ class VehicleForm extends React.Component {
         }, () => {
             this.props.makeModel.map((make, i) => {
                 if (make.make_id === makeID) {
-                    console.log(make);
                     //dispatch an action here and update props
                     this.props.updateModels(make.model);
                     this.props.dispatch(change('vehicleForm', 'make', make.make_name));
@@ -62,7 +61,13 @@ class VehicleForm extends React.Component {
     }
 
     handleOnPress(value) {
-        this.setState({ value: value });
+        this.setState(() => {
+            return {
+            value
+            };
+        }, () => {
+            this.props.dispatch(change('vehicleForm', 'radio_button_type', value));     
+        });
     }
 
     _createTypeData() {
@@ -356,6 +361,12 @@ class VehicleForm extends React.Component {
                     props={this.props}
                     type="hidden"
                 />
+                <Field
+                    name={'radio_button_type'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
             </View>
         </View>
     );
@@ -390,9 +401,15 @@ export default reduxForm({
           ? 'Type field is required'
           : undefined;
         
-        errors.license = !values.license
-          ? 'license or Vin field is required'
-          : undefined;
+        if (values.radio_button_type === 1) {
+            errors.vin = !values.vin
+                ? 'Vin field is required'
+                : undefined;
+        } else {
+            errors.license = !values.license
+                ? 'License field is required'
+                : undefined;
+        }
         
         errors.notes = !values.notes
           ? 'Notes field is required'

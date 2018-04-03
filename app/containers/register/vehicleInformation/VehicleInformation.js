@@ -7,6 +7,8 @@ import CarPicture from './CarPicture';
 import styles from './styles';
 import Loader from '../../../components/Loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Button from '../../../components/Button';
+import StyleConstants from '../../../config/StyleConstants';
 
 const processTwo = require('../../../assets/icons/process_selection_02.png');
 
@@ -98,12 +100,12 @@ export default class VehicleInformation extends React.Component {
                   /> )
                 } 
               <View style={[styles.nextButtonContainer, styles.t3]}>
-                  <TouchableOpacity
-                    style={styles.nextButtonStyle}
-                    onPress={this.goToNext.bind(this)}
-                  >
-                    <Text style={{ color: '#fff' }}>Next</Text>
-                  </TouchableOpacity>
+                <Button 
+                  style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
+                  onPress={this.goToNext.bind(this)}
+                >
+                  Next
+                </Button>
               </View>
           </View>
           
