@@ -31,26 +31,26 @@ class CreditCardForm extends React.Component {
   getNonceAndSubmit = (card) => {
     if (this.state.nowCanSubmit) {
         BTClient.getCardNonce(card).then((nonce) => {
-            const user_image = this.props.image;
-            const vehicle_image = this.props.vehicleImage;
+            const userImage = this.props.image;
+            const vehicleImage = this.props.vehicleImage;
             const form1 = this.props.form.signUp.values;
             const form2 = this.props.form.vehicleForm.values;
-            this.props.actions.registerRequest(user_image, vehicle_image, form1, form2, nonce);
+            this.props.actions.registerRequest(userImage, vehicleImage, form1, form2, nonce);
         })
         .catch((err) => {
             //error handling
             console.log(err);
         });
-    }
-    
-    Alert.alert(
-        'Error',
-        'All Fields are required!',
-        [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: false }
-    );
+    } else {
+        Alert.alert(
+            'Error',
+            'All Fields are required!',
+            [
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+        );
+    } 
   }
 
   _onChange = (formData) => {

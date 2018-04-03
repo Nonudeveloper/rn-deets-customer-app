@@ -1,20 +1,21 @@
 import SuperFetch from '../superFetch';
+import { dataURLtoFile } from '../utility';
+
 
 class RegisterHelper {
   
-
- 
   register = async userInfo => {
     const type = userInfo.form2.type;
     const typeData = type.split(', ');
     const data = new FormData();
-    data.append('user_image', {
-      uri: userInfo.userImage.uri,
-      name: 'my_photo.jpg',
-      type: 'image/jpg'
-      // name: userInfo.user_image.fileName,
-      // type: userInfo.user_image.type
-    });
+
+    const base64String = 'data:image/jpeg;base64,' + userInfo.userImage.data;
+    // fs.writeFile('my_image.jpg', base64String, { encoding: 'base64' }, function(err) {
+    //     console.log('File created');
+    // });
+    const file = dataURLtoFile(base64String, 'my_photo.jpg');
+    data.append('userImage', file);
+
     if (userInfo.form1.flag === 1) {
         data.append('fb_access_token', userInfo.form1.fb_access_token);
         data.append('fb_id', userInfo.form1.fb_id);
@@ -44,9 +45,9 @@ class RegisterHelper {
     data.append('license_type', 2);
     data.append('nonce', userInfo.nonce);
 
-    return await fetch('http://127.0.0.1:8000/customer/register_new_user', {
-      method: 'post',
-      body: data
+    return await fetch('https://postman-echo.com/post', {
+      method: 'POST',
+      body: data,
     }).then(response => {
        return JSON.parse(response._bodyText).result;
     })
