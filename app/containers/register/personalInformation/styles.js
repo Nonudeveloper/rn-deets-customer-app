@@ -17,7 +17,7 @@ export default StyleSheet.create({
     nextButtonStyle: {
         borderRadius: 100,
         height: 55,
-        backgroundColor: '#8ac10b',
+        // backgroundColor: '#8ac10b',
         borderWidth: 4,
         borderColor: '#bfff80',
         justifyContent: 'center',

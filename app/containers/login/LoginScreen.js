@@ -11,6 +11,8 @@ import styles from './loginScreen.style';
 import DeetsFacebook from '../../components/facebook';
 import Hr from '../../components/hr';
 import Loader from '../../components/Loader';
+import Button from '../../components/Button';
+
 
 
 export default class LoginScreen extends Component {
@@ -36,7 +38,6 @@ export default class LoginScreen extends Component {
   }
 
   _loginEmail = () => {
-    console.log('here');
     if (this.props.errorMessage) {
       Alert.alert(
         'Error',
@@ -124,18 +125,13 @@ export default class LoginScreen extends Component {
         
         <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
-            <TouchableOpacity
+            <Button 
                 style={styles.nextButtonStyle}
+                buttonTextStyle={styles.buttonStyle}
                 onPress={this._loginEmail}
             >
-            <Text 
-                style={{ 
-                  color: '#fff',
-                  fontSize: 18,
-                  fontWeight: 'bold'
-                }}
-            >Login</Text>
-            </TouchableOpacity>
+                Login
+            </Button>
             </View>
             <View
                 style={styles.forgotPasswordView}

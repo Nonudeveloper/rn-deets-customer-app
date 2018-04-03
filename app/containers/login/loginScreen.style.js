@@ -34,6 +34,11 @@ export default StyleSheet.create({
       flexDirection: 'row',
       padding: 20,
       justifyContent: 'center' 
+  },
+  buttonStyle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
   }
 });
 

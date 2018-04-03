@@ -17,6 +17,7 @@ class RegisterHelper {
     if (userInfo.form1.flag === 1) {
         data.append('fb_access_token', userInfo.form1.fb_access_token);
         data.append('fb_id', userInfo.form1.fb_id);
+        data.append('gender', userInfo.form1.gender);
     }
     data.append('first_name', userInfo.form1.fname);
     data.append('last_name', userInfo.form1.lname);

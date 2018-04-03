@@ -3,6 +3,10 @@ import { View, Text, TouchableHighlight , Image } from 'react-native';
 import styles from './style.js';
 import { FBLoginManager } from 'react-native-facebook-login';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Button from '../Button';
+
+
+const buttonIcon = require('../../assets/icons/facebook_icon.png');
 
 /**
   Example FBLoginView class
@@ -34,25 +38,14 @@ class FBLoginView extends Component {
 
     render() {
         return ( 
-            <TouchableHighlight
+            <Button 
               style={styles.fbButtonStyle}
+              buttonTextStyle={styles.buttonStyle}
+              source={buttonIcon}
               onPress={this.onPress.bind(this)}
-            > 
-              <View style={styles.fbButtonContentContainer}>
-                <View style={styles.fbIcon}>
-                  <View>
-                    <Image style={{width: 30, height: 30}}
-                      source={require('../../assets/icons/facebook_icon.png')}
-                    />
-                  </View>
-                </View>
-                <View style={styles.fbTitle}>
-                  <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
-                    {this.props.title}
-                  </Text>
-                </View>
-              </View>
-            </TouchableHighlight>
+            >
+              {this.props.title}
+            </Button>
       );
     }
 }
