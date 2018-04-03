@@ -10,7 +10,7 @@ export default function MyPicker(props) {
       selectedValue={input.value}
       onValueChange={input.onChange}
       {...pickerProps}
-      style={{ color: 'grey' }}
+      style={{ color: '#ccc' }}
       itemStyle={{ backgroundColor: 'lightgrey' }}
       itemTextStyle={{ fontSize: 18, color: 'white' }}
       textStyle={{ color: 'red' }}

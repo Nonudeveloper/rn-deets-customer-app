@@ -36,9 +36,9 @@ export default class ProfilePic extends React.Component {
             } else if (response.customButton) {
               console.log('User tapped custom button: ', response.customButton);
             } else {
-              const source = { uri: response.uri };
+            //   const source = { uri: response.uri };
               // You can also display the image using data:
-              // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+              const source = { uri: 'data:image/jpeg;base64,' + response.data };
               this.setState({
                 ImageSource: source
               });

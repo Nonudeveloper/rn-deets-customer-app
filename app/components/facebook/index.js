@@ -18,7 +18,7 @@ class FBLoginView extends Component {
 
     onPress() {
       const props = this.props;
-      FBLoginManager.loginWithPermissions(['email', 'user_friends'], function (error, data) {
+      FBLoginManager.loginWithPermissions(['email', 'user_friends'], (error, data) => {
         if (!error) {
           console.log("Login data: ", data);
           if (props.title === 'Login with Facebook') {

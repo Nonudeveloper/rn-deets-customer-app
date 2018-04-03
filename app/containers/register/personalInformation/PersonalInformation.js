@@ -12,6 +12,13 @@ export default class PersonalInformation extends Component {
 
   constructor(props) {
       super(props);
+        // toDataUrl('https://lookaside.facebook.com/platform/profilepic/?asid=10210663114564932&height=50&width=50&ext=1523007763&hash=AeSavHT5oXVEMq4w', (myBase64) => {
+        //   console.log(myBase64); // myBase64 is the base64 string
+        // });
+  }
+
+  getImage(image) {
+    this.props.actions.storeImage(image);
   }
 
   goToNext() {
@@ -33,10 +40,6 @@ export default class PersonalInformation extends Component {
      if (errorCount === 0) {
       this.props.navigation.navigate('vehicleInformation');
      }
-  }
-
-  getImage(image) {
-    this.props.actions.storeImage(image);
   }
 
   renderAlert(error) {

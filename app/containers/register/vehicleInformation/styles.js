@@ -40,12 +40,13 @@ export default StyleSheet.create({
         flex: 1
     },
     nextButtonContainer: {
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        paddingTop: 23
     },
     nextButtonStyle: {
         borderRadius: 100,
-        height: 60,
-        backgroundColor: '#66cc00',
+        height: 55,
+        backgroundColor: '#8ac10b',
         borderWidth: 4,
         borderColor: '#bfff80',
         justifyContent: 'center',
@@ -104,6 +105,7 @@ export default StyleSheet.create({
     },
     licenseTextStyle: {
         // paddingLeft: 10,
+        // color: '#bfff80',
     },
     editIcon: {
         resizeMode: 'contain', 
