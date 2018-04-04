@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { TextInput, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 /**
@@ -65,6 +65,22 @@ export default function CommonTextInput(props) {
           keyboardType="phone-pad"
         />
       }
+      {type === 'type' &&
+      <TouchableOpacity onPress={props.onPress}>
+        <TextInput
+          {...inputProps}
+          onChangeText={input.onChange}
+          onBlur={input.onBlur}
+          onFocus={input.onFocus}
+          value={input.value}
+          style={[styles.input, props.borderBotmWidth]}
+          placeholderTextColor="#ccc"
+          keyboardType="default"
+          editable={false}
+        />
+      </TouchableOpacity>
+    }
+      
     </View>
   );
 }

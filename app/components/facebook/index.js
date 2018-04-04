@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight , Image } from 'react-native';
 import styles from './style.js';
 import { FBLoginManager } from 'react-native-facebook-login';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../Button';
 
 
@@ -24,14 +22,14 @@ class FBLoginView extends Component {
       const props = this.props;
       FBLoginManager.loginWithPermissions(['email', 'user_friends'], (error, data) => {
         if (!error) {
-          console.log("Login data: ", data);
+          console.log('Login data: ', data);
           if (props.title === 'Login with Facebook') {
               props.fbLogin(data);
           } else {
              props.navigation.navigate('personalInformation', data);
           }
         } else {
-          console.log("Error: ", error);
+          console.log('Error: ', error);
         }
       });
     }

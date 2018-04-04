@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Modal, TouchableHighlight, Image } from 'react-native';
 import Header from '../../header/RegisterHeader';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import styles from './styles';
 
 const BTClient = require('react-native-braintree-xplat');

@@ -5,9 +5,9 @@ import VehicleForm from './VehicleForm';
 import VehicleFormIos from './VehicleFormIos';
 import CarPicture from './CarPicture';
 import styles from './styles';
-import Loader from '../../../components/Loader';
+import Loader from '../../../deetscomponents/Loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
 
 const processTwo = require('../../../assets/icons/process_selection_02.png');

@@ -5,7 +5,7 @@ import Header from '../../header/RegisterHeader';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
 
 const processOne = require('../../../assets/icons/process_selection_01.png');
@@ -24,24 +24,24 @@ export default class PersonalInformation extends Component {
   }
 
   goToNext() {
-      const errors = this.props.form.signUp.syncErrors;
-      let errorCount = 0;
-      for (const error in errors) {
-        if (errors[error] !== undefined && errorCount === 0) {
-          Alert.alert(
-            'Error',
-            errors[error],
-            [
-              { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ],
-            { cancelable: false }
-          );
-          errorCount++;
-        }
-     }
-     if (errorCount === 0) {
+    //   const errors = this.props.form.signUp.syncErrors;
+    //   let errorCount = 0;
+    //   for (const error in errors) {
+    //     if (errors[error] !== undefined && errorCount === 0) {
+    //       Alert.alert(
+    //         'Error',
+    //         errors[error],
+    //         [
+    //           { text: 'OK', onPress: () => console.log('OK Pressed') },
+    //         ],
+    //         { cancelable: false }
+    //       );
+    //       errorCount++;
+    //     }
+    //  }
+    //  if (errorCount === 0) {
       this.props.navigation.navigate('vehicleInformation');
-     }
+    //  }
   }
 
   renderAlert(error) {

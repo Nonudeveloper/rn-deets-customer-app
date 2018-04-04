@@ -8,10 +8,10 @@ import {
 import Header from '../header/Header';
 import Form from '../login/Form';
 import styles from './loginScreen.style';
-import DeetsFacebook from '../../components/facebook';
-import Hr from '../../components/hr';
-import Loader from '../../components/Loader';
-import Button from '../../components/Button';
+import DeetsFacebook from '../../deetscomponents/facebook';
+import Hr from '../../deetscomponents/hr';
+import Loader from '../../deetscomponents/Loader';
+import Button from '../../deetscomponents/Button';
 
 
 

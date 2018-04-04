@@ -3,7 +3,7 @@ import { Text, View, Alert } from 'react-native';
 import { LiteCreditCardInput } from 'react-native-credit-card-input'; // 0.4.1
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../../header/RegisterHeader';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import styles from './styles';
 import StyleConstants from '../../../config/StyleConstants';
 
