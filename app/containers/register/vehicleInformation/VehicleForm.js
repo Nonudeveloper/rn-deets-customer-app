@@ -229,7 +229,6 @@ class VehicleForm extends React.Component {
                     placeholder={'Type'}
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
-                    type="type"
                     borderBotmWidth={{ borderBottomWidth: 0 }}
                     onPress={this._showPicker.bind(this)}
                 />
