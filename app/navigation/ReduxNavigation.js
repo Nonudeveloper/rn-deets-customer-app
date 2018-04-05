@@ -40,16 +40,16 @@ class ReduxNavigation extends React.Component {
       addListener,
     });
     
-    // if (!this.state.checkedSignIn) {
-    //   return null;
-    // }
-    // if (this.state.loggedInStatus) {
-    //   return <DrawerNavigation navigation={this.navigation} />;
-    // } 
+    if (!this.state.checkedSignIn) {
+      return null;
+    }
+    if (this.state.loggedInStatus) {
+      return <DrawerNavigation navigation={this.navigation} />;
+    } 
 
-    return (
-        <AppNavigation navigation={navigation} />
-    );
+    // return (
+    //     <AppNavigation navigation={navigation} />
+    // );
   }
 }
 

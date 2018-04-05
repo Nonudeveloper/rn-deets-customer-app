@@ -12,7 +12,7 @@ const DrawerStack = DrawerNavigator({
 const DrawerNav = StackNavigator({
   drawerStack: { screen: DrawerStack }
 }, {
-  headerMode: 'float',
+  headerMode: 'none',
   navigationOptions: ({ navigation }) => ({
     headerStyle: { backgroundColor: 'green' },
     title: 'Logged In to your app!',
