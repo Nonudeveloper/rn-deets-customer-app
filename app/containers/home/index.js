@@ -4,23 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import HomeScreen from './HomeScreen';
 
-import * as loginActions from '../../redux/auth/actions';
+import * as homeActions from '../../redux/home/homeActions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(loginActions, dispatch),
+        actions: bindActionCreators(homeActions, dispatch),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        user: state.Auth.user,
-        form: state.form,
-        errorMessage: state.Auth.errorMessage,
-        showAlert: state.Auth.showAlert,
-        isLoading: state.Auth.isLoading,
-        isAuthenticated: state.Auth.isAuthenticated
+        
     };
 };
 

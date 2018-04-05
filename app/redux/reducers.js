@@ -4,6 +4,7 @@ import Auth from './auth/reducer';
 import Register from './register/reducer';
 import Start from './register/startReducer';
 import Vehicle from '../redux/register/vehicleInformation/vehicleReducer';
+import HomeReducer from '../redux/home/homeReducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   Start,
   Vehicle,
   form,
+  home: HomeReducer
 });
 
 export default rootReducer;

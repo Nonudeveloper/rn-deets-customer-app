@@ -1,6 +1,6 @@
 import { 
     FETCH_NEARBY_PLACES, FETCH_NEARBY_PLACES_SUCCESS, FETCH_NEARBY_PLACES_FALIURE, 
-} from '../constants';
+} from './constants';
     
 export function fetchNearByPlaces(payload) {
     return {
