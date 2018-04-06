@@ -10,7 +10,6 @@ export function fetchNearByPlaces(payload) {
 }
 
 export function fetchNearByPlacesSuccess(nearByPlaces) {
-    console.log(nearByPlaces.data);
     return {
         type: FETCH_NEARBY_PLACES_SUCCESS,
         nearByPlaces: nearByPlaces.data

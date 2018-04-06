@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity } from 'react-native';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
-// import GeoCodeSearch from '../../../../components/geoSearch/GeoCodeSearch';
+import GeoCodeSearch from '../../components/geoSearch/index';
 // import polyGeoJSON from '../../../../assets/polygon.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import customMarker from '../../assets/pink_marker.png';
+import customMarker from '../../assets/icons/icon_location_pin_green.png';
 // import gridPattern from '../../../../assets/grid_pattern.png';
 import Header from '../header/Header';
 
@@ -65,13 +65,11 @@ export default class HomeScreen extends Component {
   
   onRegionWillChange = () => {
     this.setState({ loading: true });
-    console.log('region will change is working is it?...');
   }
 
   async onRegionDidChange() { 
     this.breakIt = 0; 
     const center = await this._map.getCenter();
-    console.log(center);
     await this.setState({ loading: false, center });
   }
 
@@ -97,7 +95,6 @@ export default class HomeScreen extends Component {
     //dispatch an action and get data for GeoJSON polygon
     this.props.actions.fetchNearByPlaces(center);
     await this.setState({ renderPolygon: true, loading: false });
-    console.log(await this._map.getCenter());
   }
   
 
@@ -169,27 +166,32 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={5}
+              zoomLevel={13}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
             > 
+              
               <Mapbox.VectorSource>
                 <Mapbox.BackgroundLayer id='background' />
               </Mapbox.VectorSource>
               {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
             </Mapbox.MapView>
-          <Header headerText={'Deets'} navigation={this.props.navigation} />
-          
-          <View style={styles.calloutWraper}>
-            <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>
-          </View>
-          <View style={styles.customMarker}>
-            <Image
-              source={customMarker}
-              style={{ width: 32, height: 40 }}
+            <Header headerText={'Deets'} navigation={this.props.navigation} buttonType={'burger'} titleType={'logo'} />
+            <GeoCodeSearch 
+              onAddressGet={(address) => { 
+                this.setState({ coordinates: address.geometry.coordinates });
+              }} 
             />
-          </View>
+            <View style={styles.calloutWraper}>
+              <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>
+            </View>
+            <View style={styles.customMarker}>
+              <Image
+                source={customMarker}
+                style={{ width: 32, height: 40 }}
+              />
+            </View>
         </View>
     );
   }
