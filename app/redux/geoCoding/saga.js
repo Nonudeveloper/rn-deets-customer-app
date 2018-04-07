@@ -6,7 +6,6 @@ import HomeHelper from '../../helpers/home/homeHelper';
 
 
 function searchAddressCall(payload) {
-    console.log(payload);
     return new Promise((resolve, reject) => {
         HomeHelper.hitMapboxPlacesApi(payload)
         .then(res => {
@@ -23,7 +22,7 @@ function* watchSearchAddress() {
       const { payload } = yield take(SEARCH_ADDRESS);
       try {
         const response = yield call(searchAddressCall, payload);
-        yield put(searchAddressSuccess(response.json()));
+        yield put(searchAddressSuccess(response));
         console.log('SAGA FETCH SUCCESS: ', response);
       } catch (err) {
         yield put(searchAddressFaliure(err));

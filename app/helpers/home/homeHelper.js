@@ -12,13 +12,22 @@ class HomeHelper {
   }
 
   hitMapboxPlacesApi = async (data) => {
-    return await SuperFetch.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${data.payload.query}.json?access_token=${
-      data.payload.MAPBOX_API_KEY
-    }&autocomplete=true`)
-    .then(response => {
-      return response;
+    // return await SuperFetch.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${data.query}.json?access_token=${
+    //   data.MAPBOX_API_KEY
+    // }&autocomplete=true`)
+    // .then(response => {
+    //   return response;
+    // })
+    // .catch(error => ({ error }));
+    const path = `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.query}.json?access_token=${
+      data.MAPBOX_API_KEY
+    }&autocomplete=true`;
+
+    return await fetch(path, {
+      method: 'get',
     })
-    .catch(error => ({ error }));
+      .then(res => res)
+      .catch(error => ({ error }));
   }
 
 }

@@ -1,5 +1,5 @@
 import { 
-    SEARCH_ADDRESS, SEARCH_ADDRESS_SUCCESS, SEARCH_ADDRESS_FALIURE
+    SEARCH_ADDRESS, SEARCH_ADDRESS_SUCCESS, SEARCH_ADDRESS_FALIURE, EMPTY_FEATURES
 } from './constants';
 
 const initialState = {
@@ -22,6 +22,10 @@ export default function addressReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isFetching: false,
                 err: action.err
+            });
+        case EMPTY_FEATURES:
+            return Object.assign({}, state, {
+                features: action.features
             });
         default:
             return state;

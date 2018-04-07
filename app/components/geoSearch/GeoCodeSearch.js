@@ -19,7 +19,7 @@ export default class GeoCodeSearch extends React.Component {
         super(props);
 
         this.state = {
-            searchedAdresses: [],
+            searchedAdresses: this.props.features,
             inputVal: ''
         };
         this.searchLocation = this.searchLocation.bind(this);
@@ -34,8 +34,7 @@ export default class GeoCodeSearch extends React.Component {
         });
     }
 
-    async searchLocation(query) {
-      
+    searchLocation(query) {
       const data = {
           query,
           MAPBOX_API_KEY
@@ -44,10 +43,14 @@ export default class GeoCodeSearch extends React.Component {
       if (query !== '') {
         //dispatch an action here SEARCH_ADDRESS
         this.props.actions.searchAddress(data); 
+        this.setState({
+          inputVal: query
+        });
       } else {
+        //dispath an action here to empty features
+        this.props.actions.emptyFeatures();
         this.setState({
           // isLoading: false,
-          searchedAdresses: [],
           inputVal: query
         });
       }
@@ -87,7 +90,7 @@ export default class GeoCodeSearch extends React.Component {
                   </View>
                   <View style={styles.listViewContainer}>
                     <ListView
-                        dataSource={ds.cloneWithRows(this.state.searchedAdresses)}
+                        dataSource={ds.cloneWithRows(this.props.features)}
                         renderRow={this.renderAdress} 
                         style={styles.listView}
                         renderSeparator={this.renderSeparator}
