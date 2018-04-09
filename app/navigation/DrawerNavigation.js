@@ -3,12 +3,14 @@ import { Text, Image,TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import TestComponent from '../containers/home/TestComponent';
 import DrawerContainer from '../containers/home/DrawerContainer';
+import Profile from '../containers/home/Profile';
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
 const DrawerStack = DrawerNavigator({
   testComponent: { screen: TestComponent },
+  test: { screen: Profile },
 }, {
   gesturesEnabled: false,
   contentComponent: DrawerContainer

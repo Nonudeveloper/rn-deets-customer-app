@@ -152,6 +152,7 @@ dependencies {
     compile project(':react-native-picker')
     compile project(':react-native-braintree-xplat')
     compile project(':react-native-linear-gradient')
+    compile project(':react-native-push-notification')
 
 }
 

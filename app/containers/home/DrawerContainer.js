@@ -6,7 +6,7 @@ import { onSignOut } from '../../helpers/utility';
 import LinearGradient from 'react-native-linear-gradient'
 
 const userPic = require('../../assets/icons/3_user_img.png');
-let SideMenuWidth = 300;
+// let SideMenuWidth = 300;
 const colors = {
   txtMain: '#214559',
   txtMainRed: '#FE6165',
@@ -47,20 +47,29 @@ export default class DrawerContainer extends React.Component {
     const { navigation } = this.props;
     return (
       // <View style={styles.container}>
-      <LinearGradient start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-  locations={[0.1, 0.75, 1]}
-  colors={['#5cb85c', '#94c194', '#5cb85c']} style={styles.container}>
+      <LinearGradient 
+        start={{ x: 0.0, y: 0.25 }} 
+        end={{ x: 0.5, y: 1.0 }}
+        locations={[0.1, 0.75, 1]}
+        colors={['#5cb85c', '#94c194', '#5cb85c']} style={styles.container}
+      >
 {/* </LinearGradient> */}
         <View style={{ alignSelf: 'center' }}>
           <Image source={userPic} style={styles.imageStyle} />
         </View>
         <View style={styles.sideMenu}>
           <View style={{ paddingHorizontal: 30}}>
-            <TouchableOpacity style={[ styles.menu, { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5} ]}>
+            <TouchableOpacity 
+              style={[styles.menu, this.props.activeItemKey === 'testComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('testComponent')} 
+            >
                   <Icon name='home' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={ styles.menu }>
+            <TouchableOpacity 
+              style={[styles.menu, this.props.activeItemKey === 'test' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('test')} 
+            >
                   <Icon name='user-o' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
@@ -139,7 +148,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    width: SideMenuWidth,
+    // width: SideMenuWidth,
     backgroundColor: 'transparent'
 },
 sideMenuTitle: {
