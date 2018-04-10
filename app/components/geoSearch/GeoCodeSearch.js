@@ -28,6 +28,7 @@ export default class GeoCodeSearch extends React.Component {
     onListItemClicked= (address) => {
         Keyboard.dismiss();
         this.props.onAddressGet(address);
+        this.props.actions.emptyFeatures();
         this.setState({
           searchedAdresses: [],
           inputVal: address.place_name

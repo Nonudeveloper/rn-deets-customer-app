@@ -11,9 +11,10 @@ const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
 const DrawerStack = DrawerNavigator({
+  HomeComponent: { screen: HomeScreen },
   testComponent: { screen: TestComponent },
   test: { screen: Profile },
-  HomeComponent: { screen: HomeScreen }
+  
 }, {
   gesturesEnabled: false,
   contentComponent: DrawerContainer

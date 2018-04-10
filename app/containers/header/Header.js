@@ -29,6 +29,15 @@ const Header = (props) => {
     ) : (
         <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
     );
+
+    const rightIcon = props.rightIconType === 'image' ? (
+        <Image 
+            source={props.rightImageSource} 
+            style={styles.backButton} 
+        />
+    ) : (
+        <Text style={textStyle}>{props.rightText}</Text>
+    );
     
     return (
             <View style={outerViewStyle}>
@@ -43,6 +52,12 @@ const Header = (props) => {
                     </View>
                     <View style={headerDetailStyle}>
                         {title}
+                    </View>
+                    
+                    <View style={styles.rightIconContainer}>
+                        <TouchableOpacity onPress={props.onPress}>
+                            {props.showRightIcon && rightIcon}
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -85,6 +100,11 @@ const styles = {
         resizeMode: 'contain',
         width: 100,
         height: 30,
+    },
+    rightIconContainer: { 
+        flex: 1, 
+        position: 'absolute', 
+        right: 7 
     }
 };
 

@@ -29,6 +29,6 @@ export function searchAddressFaliure(err) {
 export function emptyFeatures() {
     return {
         type: EMPTY_FEATURES,
-        festures: []
+        features: []
     };
 }
