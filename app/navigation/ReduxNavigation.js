@@ -5,6 +5,7 @@ import DrawerNavigation from './DrawerNavigation';
 import AppNavigation from './AppNavigation';
 import { isSignedIn } from '../helpers/utility';
 import { addListener } from '../helpers/utils/redux';
+import { NavigationActions } from 'react-navigation'
 
 class ReduxNavigation extends React.Component {
   constructor(props) {
@@ -20,13 +21,27 @@ class ReduxNavigation extends React.Component {
   componentWillMount() {
     isSignedIn()
       .then(res => {
-        if (res !== null) {
-          this.setState({
-            loggedInStatus: true,
-            checkedSignIn: true
+        console.log(res);
+        if (res !== false) {
+          this.setState(() => {
+            return {
+              loggedInStatus: true,
+              checkedSignIn: true
+            };
+        }, () => {
+          const actionToDispatch = NavigationActions.reset({
+            index: 0,
+            key: null,  // black magic
+            actions: [NavigationActions.navigate({ routeName: 'drawerStack' })]
           });
+          this.props.dispatch(actionToDispatch);
+        });
+
         } else {
-          console.log(res);
+          // this.setState({
+          //   loggedInStatus: false,
+          //   checkedSignIn: false
+          // });
         }
       })
       .catch(err => console.log(err));
@@ -39,13 +54,22 @@ class ReduxNavigation extends React.Component {
       state: nav,
       addListener,
     });
+    // if (!this.state.checkedSignIn) {
+    //   return null;
+    // }
+    // if (this.state.loggedInStatus) {
+    //   // return <DrawerNavigation navigation={this.navigation} />;
+    //   return <AppNavigation navigation={navigation}  />;
+    // } else {
+      return <AppNavigation navigation={navigation} />;
+    // }
     
-    if (!this.state.checkedSignIn) {
-      return null;
-    }
-    if (this.state.loggedInStatus) {
-      return <DrawerNavigation navigation={this.navigation} />;
-    } 
+//     if (!this.state.checkedSignIn) {
+//       return null;
+//     }
+//     if (this.state.loggedInStatus) {
+//       return <DrawerNavigation navigation={this.navigation} />;
+//     } 
 
     // return (
     //     <AppNavigation navigation={navigation} />

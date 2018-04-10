@@ -10,15 +10,16 @@ function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
-      console.log(data);
       if (data.status === 200) {
         resolve(data);
+      } else if (data.status === 401) {
+        reject({ status: data.error });
       } else {
          const error = JSON.parse(data._bodyText).error;
          reject({ status: error });
       } 
     })
-    .catch(err => console.log(err));
+    // .catch(err => console.log(err));
   });
 }
 
@@ -46,7 +47,7 @@ function* watchLoginRequest() {
       };
       const response = yield call(loginCall, payload);
       yield put(loginSuccess(response));
-      // yield setUser(response.user);
+      yield setUser(response.user);
       yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {
