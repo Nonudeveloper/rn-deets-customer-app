@@ -11,7 +11,6 @@ function loginCall({ state }) {
     AuthHelper.login(state)
     .then((data) => {
       if (data.status === 200) {
-        console.log('in 200 from saga');
         resolve(data);
       } else if (data.status === 401) {
         reject({ status: data.error });

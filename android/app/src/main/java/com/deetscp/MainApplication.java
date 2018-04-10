@@ -15,6 +15,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.pw.droplet.braintree.BraintreePackage; 
 import android.content.Intent; 
+import com.mapbox.rctmgl.RCTMGLPackage;
 
 
 import java.util.Arrays;
@@ -43,7 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
 							.setFloatingEdge("left")
 							.setFloatingButtonOffsetFromTop(250)
 							.build(),
-            new BraintreePackage()
+            new BraintreePackage(),
+            new RCTMGLPackage()
       );
     }
 
