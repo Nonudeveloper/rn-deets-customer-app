@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import Loader from '../../components/Loader';
+import Loader from '../../deetscomponents/Loader';
 
 const { width, height } = Dimensions.get('window');
 

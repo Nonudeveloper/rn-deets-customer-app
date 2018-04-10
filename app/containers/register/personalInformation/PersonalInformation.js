@@ -5,7 +5,7 @@ import Header from '../../header/RegisterHeader';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
 
 const processOne = require('../../../assets/icons/process_selection_01.png');

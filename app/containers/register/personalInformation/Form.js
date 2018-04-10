@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-na
 import { reduxForm, Field, formValues, change, untouch, initialize } from 'redux-form';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
-import CommonTextInput from '../../../components/form/Input';
+import CommonTextInput from '../../../deetscomponents/form/Input';
 import asyncValidate from './asyncValidate';
 
 const info = (<Icon name="info-circle" size={18} color="#fff" />);

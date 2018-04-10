@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { View, Text, Picker, TextInput, PickerIOS } from 'react-native';
 import styles from './styles';
-import IosPicker from '../../../components/form/IosPicker';
+import IosPicker from '../../../deetscomponents/form/IosPicker';
 import RadioButton from 'radio-button-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 

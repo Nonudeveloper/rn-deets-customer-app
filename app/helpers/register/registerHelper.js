@@ -8,17 +8,24 @@ class RegisterHelper {
     const type = userInfo.form2.type;
     const typeData = type.split(', ');
     const data = new FormData();
-    const userBase64String = 'data:image/jpeg;base64,' + userInfo.userImage.data;
-    const vehicleBase64String = 'data:image/jpeg;base64,' + userInfo.vehicleImage.data;
-    const userImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-    const vehicleImageFile = dataURLtoFile(vehicleBase64String, 'my_car.jpg');
-    data.append('user_image', userImageFile);
-    data.append('vehicle_image', vehicleImageFile);
+    if (Object.keys(userInfo.userImage).length > 0) {
+        const userBase64String = 'data:image/jpeg;base64,' + userInfo.userImage.data;
+        const userImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
+        data.append('user_image', userImageFile);
+    } 
+    
+    if (Object.keys(userInfo.vehicleImage).length > 0) {
+        const vehicleBase64String = 'data:image/jpeg;base64,' + userInfo.vehicleImage.data;
+        const vehicleImageFile = dataURLtoFile(vehicleBase64String, 'my_car.jpg');
+        data.append('vehicle_image', vehicleImageFile);
+    }
+
     if (userInfo.form1.flag === 1) {
         data.append('fb_access_token', userInfo.form1.fb_access_token);
         data.append('fb_id', userInfo.form1.fb_id);
         data.append('gender', userInfo.form1.gender);
     }
+
     data.append('first_name', userInfo.form1.fname);
     data.append('last_name', userInfo.form1.lname);
     data.append('email', userInfo.form1.email);

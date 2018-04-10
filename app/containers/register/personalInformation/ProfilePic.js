@@ -56,7 +56,7 @@ export default class ProfilePic extends React.Component {
                     }
                 };
             }, () => {
-                this.props.getImage(this.state.ImageSource);
+                // this.props.getImage(this.state.ImageSource);
             });
         }
     }
