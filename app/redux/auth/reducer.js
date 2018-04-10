@@ -25,7 +25,8 @@ const initialState = {
     resetSuccessLog: false,
     showResetAlert: false,
     resetErrorLog: false,
-    deviceToken: {}
+    deviceToken: {},
+    vehicle: {}
 };
 
 export default function user(state = initialState, action) {
@@ -50,7 +51,8 @@ export default function user(state = initialState, action) {
           token: action.token,
           failure: false,
           user: action.user,
-          isLoading: false
+          isLoading: false,
+          vehicle: action.vehicle
         });
       case LOGIN_FAILURE:
         return Object.assign({}, state, {
