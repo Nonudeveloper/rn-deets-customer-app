@@ -5,16 +5,17 @@ import TestComponent from '../containers/home/TestComponent';
 import DrawerContainer from '../containers/home/DrawerContainer';
 import Profile from '../containers/home/Profile';
 import HomeScreen from '../containers/home/index';
+import ServiceScreen from '../containers/services/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
 const DrawerStack = DrawerNavigator({
+  serviceScreen: { screen: ServiceScreen },
   HomeComponent: { screen: HomeScreen },
   testComponent: { screen: TestComponent },
   test: { screen: Profile },
-  
 }, {
   gesturesEnabled: false,
   contentComponent: DrawerContainer

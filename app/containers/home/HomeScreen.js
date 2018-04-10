@@ -180,7 +180,7 @@ export default class HomeScreen extends Component {
     };
     return (
         <View style={styles.container}>
-            {/* <Mapbox.MapView
+            <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={[-68.13734351262877, 45.137451890638886]}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
@@ -200,7 +200,7 @@ export default class HomeScreen extends Component {
                 <Mapbox.BackgroundLayer id='background' />
               </Mapbox.VectorSource>
               {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
-            </Mapbox.MapView> */}
+            </Mapbox.MapView>
             <Header 
               headerText={'Deets'} 
               navigation={this.props.navigation} 
