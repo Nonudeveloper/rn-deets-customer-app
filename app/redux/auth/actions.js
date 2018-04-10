@@ -7,7 +7,8 @@ import {
   RESET_PASSWORD_MAIL_SENT,
   RESET_PASSWORD_MAIL_ERROR,
   HIDE_ALERT,
-  HIDE_RESET_ALERT
+  HIDE_RESET_ALERT,
+  SAVE_DEVICE_TOKEN
 } from './constants';
 
 export function loginRequest(state) {
@@ -69,6 +70,13 @@ export function hideAlert() {
 export function hideResetAlert() {
   return {
     type: HIDE_RESET_ALERT
+  };
+}
+
+export function saveDeviceToken(token) {
+  return {
+    type: SAVE_DEVICE_TOKEN,
+    token,
   };
 }
 
