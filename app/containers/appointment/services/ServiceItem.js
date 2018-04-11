@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import styles from './styles';
 
-const carImage = require('../../assets/icons/3_car_img.png');
-const downArrow = require('../../assets/icons/down_arrow.png');
+const carImage = require('../../../assets/icons/3_car_img.png');
+const downArrow = require('../../../assets/icons/down_arrow.png');
 
 export default class ServiceItem extends React.Component {
 

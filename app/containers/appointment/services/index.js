@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ServiceScreen from './ServiceScreen';
 
-import * as serviceActions from '../../redux/service/serviceActions';
+import * as serviceActions from '../../../redux/service/serviceActions';
 
 
 const mapDispatchToProps = (dispatch) => {

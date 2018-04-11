@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Header from '../header/Header';
-import ServicesList from '../services/ServicesList';
+import Header from '../../header/Header';
+import ServicesList from './ServicesList';
 
-const indicatorOne = require('../../assets/icons/process1.png');
-const backButton = require('../../assets/icons/2_back_btn_onclick.png');
+const indicatorOne = require('../../../assets/icons/process1.png');
+const backButton = require('../../../assets/icons/2_back_btn_onclick.png');
 
 export default class ServiceScreen extends React.Component {
 
