@@ -48,7 +48,7 @@ export default function user(state = initialState, action) {
         return Object.assign({}, state, {
           isFetching: false,
           isAuthenticated: true,
-          token: action.token,
+          token: action.access_token,
           failure: false,
           user: action.user,
           isLoading: false,

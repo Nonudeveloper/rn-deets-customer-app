@@ -20,36 +20,35 @@ class ReduxNavigation extends React.Component {
   }
 
   componentWillMount() {
-    isSignedIn()
-      .then(res => {
-        console.log(res);
-        if (res !== false) {
-          this.setState(() => {
-            return {
-              loggedInStatus: true,
-              checkedSignIn: true
-            };
-        }, () => {
-          const actionToDispatch = ReactNavigation.NavigationActions.reset({
-            index: 0,
-            key: null,  // black magic
-            actions: [ReactNavigation.NavigationActions.navigate({ routeName: 'drawerStack' })]
-          });
-          this.props.dispatch(actionToDispatch);
-        });
+    // isSignedIn()
+    //   .then(res => {
+    //     console.log(res);
+    //     if (res !== false) {
+    //       this.setState(() => {
+    //         return {
+    //           loggedInStatus: true,
+    //           checkedSignIn: true
+    //         };
+    //     }, () => {
+    //       const actionToDispatch = ReactNavigation.NavigationActions.reset({
+    //         index: 0,
+    //         key: null,  // black magic
+    //         actions: [ReactNavigation.NavigationActions.navigate({ routeName: 'drawerStack' })]
+    //       });
+    //       this.props.dispatch(actionToDispatch);
+    //     });
 
-        } else {
-          // this.setState({
-          //   loggedInStatus: false,
-          //   checkedSignIn: false
-          // });
-        }
-      })
-      .catch(err => console.log(err));
+    //     } else {
+    //       // this.setState({
+    //       //   loggedInStatus: false,
+    //       //   checkedSignIn: false
+    //       // });
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   componentDidMount() {
-    console.log('Did mount');
     PushNotification.configure({
       
       // (optional) Called when Token is generated (iOS and Android)

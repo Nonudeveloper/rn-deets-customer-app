@@ -6,7 +6,8 @@ import DrawerContainer from '../containers/home/DrawerContainer';
 import Profile from '../containers/home/Profile';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
-import ServiceScreen from '../containers/services/index';
+import ServiceScreen from '../containers/appointment/services/index';
+import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -14,6 +15,7 @@ const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 
 const DrawerStack = DrawerNavigator({
   serviceScreen: { screen: ServiceScreen },
+  serviceDetailScreen: { screen: ServiceDetailScreen },
   HomeComponent: { screen: HomeScreen },
   testComponent: { screen: TestComponent },
   test: { screen: Profile },

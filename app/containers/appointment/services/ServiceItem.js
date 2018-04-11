@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 const carImage = require('../../../assets/icons/3_car_img.png');
@@ -11,9 +11,14 @@ export default class ServiceItem extends React.Component {
         super(props);
     }
 
+    singleService = () => {
+        this.props.navigation.navigate('serviceDetailScreen');
+    }
+
     render() {
         const { item } = this.props;
         return (
+            <TouchableOpacity onPress={this.singleService}>
             <View style={styles.serviceItemContainer}>
                 <View style={styles.serviceContainer}>
                     <View>
@@ -32,7 +37,6 @@ export default class ServiceItem extends React.Component {
                             <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.time}</Text>
                             <Text style={[styles.descText, { color: 'grey' }]}>{item.desc}</Text>
                         </View>
-                        
                     </View>
                 </View>
                 <View style={styles.detailInfoContainer}>
@@ -46,6 +50,7 @@ export default class ServiceItem extends React.Component {
                     </View>
                 </View>
             </View>
+            </TouchableOpacity>
         );
     }
 }

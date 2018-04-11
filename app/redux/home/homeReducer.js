@@ -7,7 +7,7 @@ const initialState = {
       nearByPlaces: [],
 };
 
-export default function serviceAddressReducer(state = initialState, action) {
+export default function homeReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_NEARBY_PLACES:
             return Object.assign({}, state, {

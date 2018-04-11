@@ -3,7 +3,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure } from './actions';
 import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
-import { setUser } from '../../helpers/utility';
+import { setUser, setToken } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 
 function loginCall({ state }) {
@@ -48,6 +48,7 @@ function* watchLoginRequest() {
       const response = yield call(loginCall, payload);
       yield put(loginSuccess(response));
       yield setUser(response.user);
+      yield setToken(response.access_token);
       yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {

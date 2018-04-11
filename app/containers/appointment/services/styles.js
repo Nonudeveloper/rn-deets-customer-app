@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
         height: 58, 
         backgroundColor: '#fff', 
         justifyContent: 'center', 
-        marginHorizontal: 5 
     },
     descText: {
         fontSize: 12

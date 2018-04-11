@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-export const AUTH_TOKEN = 'id_token';
+export const AUTH_TOKEN = 'token';
 export const USER = 'user';
 
 
@@ -40,7 +40,6 @@ export function getToken() {
 
 export function setUser(user) {
   setLoginUser(user);
-  // console.log(user)
   // AsyncStorage.setItem(USER, JSON.stringify(user));
 }
 
@@ -52,7 +51,7 @@ const setLoginUser = async (user) => {
             // Error saving data
             console.log('AsyncStorage save error: ' + error.message);
         }
-    };
+};
 
 export function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string

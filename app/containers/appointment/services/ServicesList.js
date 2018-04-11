@@ -17,7 +17,7 @@ class ServicesList extends Component {
   }
 
   componentDidMount() {
-    this.makeRemoteRequest();
+    // this.makeRemoteRequest();
   }
 
   getItem(item) {
@@ -69,7 +69,7 @@ class ServicesList extends Component {
                 //     style={styles.item} 
                 //     onPress={this.getItem.bind(this, item.key)} 
                 // > {item.key} </Text>
-                <ServiceItem item={item} />
+                <ServiceItem navigation={this.props.navigation} item={item} />
             }
         />
       </View>
