@@ -60,8 +60,8 @@ export default class DrawerContainer extends React.Component {
         <View style={styles.sideMenu}>
           <View style={{ paddingHorizontal: 30}}>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'testComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('testComponent')} 
+              style={[styles.menu, this.props.activeItemKey === 'SelectVehileScreen' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('SelectVehileScreen')} 
             >
                   <Icon name='home' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Home</Text>

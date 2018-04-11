@@ -115,3 +115,15 @@ export const toDataUrl = (url, callback) => {
   xhr.responseType = 'blob';
   xhr.send();
 };
+
+
+export const saveAuthVehiclesData = async (vehicle) => {
+  try {
+      AsyncStorage.removeItem('authVehicles');
+      await AsyncStorage.setItem('authVehicles', JSON.stringify(vehicle));
+      console.log('data stored');
+  } catch (error) {
+      // Error saving data
+      console.log('AsyncStorage save error: ' + error.message);
+  }
+};

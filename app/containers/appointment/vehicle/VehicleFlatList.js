@@ -37,7 +37,7 @@ export default class VehicleFlatList extends React.Component {
                   </View>
                   <View style={styles.vehicleInnerContainer}>
                     <View style={{ flex: 1 }}>
-                      <Image source={vehicleIcon} style={{ width: 85, height: 85,borderRadius:20 }} />
+                      <Image source={vehicleIcon} style={{ width: 85, height: 85, borderRadius: 20 }} />
                     </View>
                     <View style={{ flex: 2, paddingTop: 10, paddingLeft: 10 }}>
                       <Text style={{ fontSize: 16, color: '#586069' }}>{item.vehicle_make}</Text>
@@ -46,7 +46,7 @@ export default class VehicleFlatList extends React.Component {
                     </View>
                   </View>
                   <View style={{ paddingRight: 20 }}>
-                    <TouchableOpacity onPress={() => this.serviceAddress()} >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', item)} >
                         <Image 
                         source={editButton} 
                         style={{ width: 40, height: 40 }}

@@ -2,19 +2,28 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Header from '../../header/Header';
 import VehicleFlatList from './VehicleFlatList';
+import Loader from '../../../deetscomponents/Loader';
 
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
 
 export default class SelectVehicleScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {}
   }
 
- 
+ componentWillMount() {
+  this.props.fetchAuthVehicles();
+ }
 
   render() {
+    console.log(this.props);
+    const { isFetching } = this.props;
     return (
       <View style={styles.container}>
+      <Loader
+                loading={isFetching} 
+      />
         <Header 
             headerText={'Select Vehicle'} 
             navigation={this.props.navigation} 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Image,TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import TestComponent from '../containers/appointment/vehicle/index';
+import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/home/DrawerContainer';
 import Profile from '../containers/home/Profile';
 import HomeScreen from '../containers/home/index';
@@ -15,7 +15,7 @@ const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 const DrawerStack = DrawerNavigator({
   serviceScreen: { screen: ServiceScreen },
   HomeComponent: { screen: HomeScreen },
-  testComponent: { screen: TestComponent },
+  SelectVehileScreen: { screen: SelectVehileScreen },
   test: { screen: Profile },
   AddEditVehicle: { screen: AddVehicle }
 }, {
