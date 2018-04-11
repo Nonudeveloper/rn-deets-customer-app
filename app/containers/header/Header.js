@@ -52,6 +52,7 @@ const Header = (props) => {
                     </View>
                     <View style={headerDetailStyle}>
                         {title}
+                        <Image style={styles.indicatorStyle} source={props.indicatorSource} />
                     </View>
                     
                     <View style={styles.rightIconContainer}>
@@ -79,7 +80,8 @@ const styles = {
     outerViewStyle: {
         height: 47,
         justifyContent: 'center',
-        marginTop:Platform.OS == "ios" ? 20 : 0
+        marginTop:Platform.OS == "ios" ? 20 : 0,
+        backgroundColor: 'grey'
     },
     textStyle: {
         fontSize: 20,
@@ -104,7 +106,13 @@ const styles = {
     rightIconContainer: { 
         flex: 1, 
         position: 'absolute', 
-        right: 7 
+        right: 7,
+      
+    },
+    indicatorStyle: {
+        resizeMode: 'contain',
+        width: 100,
+        height: 20
     }
 };
 
