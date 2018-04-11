@@ -18,11 +18,12 @@ export function loginRequest(state) {
   };
 }
 
-export function loginSuccess({ token, user }) {
+export function loginSuccess({ token, user, vehicle }) {
   return {
     type: LOGIN_SUCCESS,
     token,
     user,
+    vehicle,
   };
 }
 
