@@ -32,7 +32,8 @@ const mapStateToProps = (state) => {
         form: state.form.addEditVehicleForm,
         vehicleFetching: state.Start.isFetching,
         authUser: state.Auth.user,
-        vehicleImage: state.AuthVehicle.vehicleImage
+        vehicleImage: state.AuthVehicle.vehicleImage,
+        errorMessage: state.AuthVehicle.errorMessage
     };
 };
 

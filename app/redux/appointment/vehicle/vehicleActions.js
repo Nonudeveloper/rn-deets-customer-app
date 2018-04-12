@@ -5,7 +5,8 @@ import {
     STORE_VEHICLE_IMAGE,
     ADD_UPDATE_AUTH_VEHICLE,
     ADD_UPDATE_VEHICLE_SUCCESS,
-    ADD_UPDATE_VEHICLE_FAILURE
+    ADD_UPDATE_VEHICLE_FAILURE,
+    HIDE_ALERT
 } from './constants';
 
     
@@ -57,3 +58,10 @@ export function addUpdateVehicleFailure(err) {
       err,
     };
 }
+
+export function hideAlert() {
+    return {
+      type: HIDE_ALERT
+    };
+}
+

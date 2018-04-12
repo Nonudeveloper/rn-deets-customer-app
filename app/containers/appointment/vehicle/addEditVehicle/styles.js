@@ -18,8 +18,8 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 55,
-        height: 55,
+        width: 65,
+        height: 65,
         borderRadius: 100
     },
     container: {
@@ -28,7 +28,9 @@ export default StyleSheet.create({
     },
     t1: {
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
+        paddingTop: 20,
+        paddingBottom: 20
     },
     t2: {
         flexDirection: 'column',

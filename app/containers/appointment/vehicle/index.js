@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthVehicleInformation from './SelectVehicleScreen';
 import { fetchAuthVehicles } from '../../../redux/appointment/vehicle/vehicleActions';
-
+import { setBackToInitialState } from '../../../redux/register/vehicleInformation/vehicleActions';
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchAuthVehicles: () => {
             dispatch(fetchAuthVehicles());
+        },
+        setBackToInitialState: () => {
+            dispatch(setBackToInitialState());
         },
     };
 };

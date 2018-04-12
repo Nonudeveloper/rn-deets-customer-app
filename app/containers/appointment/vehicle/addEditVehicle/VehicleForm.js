@@ -18,7 +18,8 @@ class VehicleForm extends React.Component {
               make: '',
               model: '',
               license: '',
-              value: 0
+              value: 0,
+              initialValue: 0
           };
     }
     
@@ -45,7 +46,8 @@ class VehicleForm extends React.Component {
     }
 
     _populateModel = (makeID, makeIndex) => {
-        
+        console.log(makeID);
+        console.log(this.props.makeModel);
         this.setState(() => {
             return {
             make: makeID
@@ -54,7 +56,9 @@ class VehicleForm extends React.Component {
             this.props.makeModel.map((make, i) => {
                 if (make.make_id === makeID) {
                     //dispatch an action here and update props
+                    console.log(make.model)
                     this.props.updateModels(make.model);
+                    console.log('ff')
                     this.props.dispatch(change('addEditVehicleForm', 'make', make.make_name));
                 }
             });
@@ -155,7 +159,6 @@ class VehicleForm extends React.Component {
     
     componentWillMount() {
         if (this.props.authVehicleData !== null) {
-            console.log('fff')
             const authVehicleData = this.props.authVehicleData;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
             const initialFormData = {
@@ -177,6 +180,7 @@ class VehicleForm extends React.Component {
                 vehicle_id: authVehicleData.vehicle_id
                 
         };
+            this._fetchMakeModel(initialFormData.year, initialFormData.year);
             this.setState({
                 year: authVehicleData.vehicle_year_id,
                 color: authVehicleData.vehicle_color_id,
@@ -185,7 +189,6 @@ class VehicleForm extends React.Component {
             });
             this.props.dispatch(initialize('addEditVehicleForm', initialFormData));
         } else {
-            console.log('ffffff')
             const initialFormData = {
                 flag: 1,
                 // access_token: this.props.accessToken
@@ -194,9 +197,20 @@ class VehicleForm extends React.Component {
             this.props.dispatch(change('addEditVehicleForm', 'access_token', this.props.authUser.access_token));
         }
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.makeModel.length > 0) {
+            if (this.state.initialValue === 0) {
+             this._populateModel(this.state.make, this.state.make);
+             this.setState({
+                initialValue: 1,
+             });
+             return true;
+            }
+        }
+        return true;
+    }
 
   render() {
-      console.log(this.props)
     const { pickerStyle, inputStyle } = styles;
     return (
         <View style={styles.formArea}>

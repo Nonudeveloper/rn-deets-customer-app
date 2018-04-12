@@ -96,6 +96,14 @@ FlatListItemSeparator = () => {
                   </View>
                 </View>}
             />
+            <View style={{ paddingRight: 20 }}>
+                    <TouchableOpacity onPress={() => this.serviceAddress()} >
+                        <Image 
+                        source={editButton} 
+                        style={{ width: 40, height: 40 }}
+                        />
+                    </TouchableOpacity>
+                  </View>
       </View>
     );
   }

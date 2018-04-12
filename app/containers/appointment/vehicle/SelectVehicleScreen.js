@@ -1,23 +1,37 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import Header from '../../header/Header';
 import VehicleFlatList from './VehicleFlatList';
 import Loader from '../../../deetscomponents/Loader';
+import styles from './styles';
+import Button from '../../../deetscomponents/Button';
+import StyleConstants from '../../../config/StyleConstants';
+
 
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
 
-export default class SelectVehicleScreen extends React.Component {
+
+class SelectVehicleScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    selectedArrayRef = new SelectedArray(); 
   }
 
- componentWillMount() {
-  this.props.fetchAuthVehicles();
- }
+  componentWillMount() {
+    this.props.fetchAuthVehicles();
+    this.props.setBackToInitialState();
+  }
+
+  getSelectedItems = () => {
+    if (selectedArrayRef.getArray().length === 0) {
+      alert('No Item(s) Selected!');
+    } else {
+      console.log(selectedArrayRef.getArray());
+      // this.props.navigation.navigate('serviceScreen');
+    }    
+  }
 
   render() {
-    console.log(this.props);
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
@@ -31,48 +45,40 @@ export default class SelectVehicleScreen extends React.Component {
             // titleType={'logo'}
             showRightIcon
             rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('AddEditVehicle')}
+            onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}
             rightImageSource={backButton}
             rightIconType={'image'}
         />
-        <VehicleFlatList userVehicles={this.props.userVehicle} navigation={this.props.navigation} />
-      </View>
+        <VehicleFlatList userVehicles={this.props.userVehicle} navigation={this.props.navigation} selectedArrayRef={selectedArrayRef}/>
+        <View style={styles.nextButtonContainer}>
+            <View style={{ marginHorizontal: 25 }}>
+              <Button 
+                style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
+                onPress={this.getSelectedItems}
+              >
+                Next
+              </Button>
+            </View>
+          </View>
+          </View>
+     
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    shadowColor: '#000000',
-    shadowOpacity: 0.4,
-    shadowOffset: { height: -5, width: -5 },
-    shadowRadius: 10,
-    backgroundColor: '#f9f9f9',
-},
-navBar: {
-    height: 50,
-    justifyContent: 'center',
-    paddingHorizontal: 15
-},
-vehicleContainer: {
-  height: 100, 
-  backgroundColor: 'white',
-  borderBottomWidth: 2, 
-  borderBottomColor: '#e0e0e0', 
-  borderTopWidth: 2, 
-  borderTopColor: '#e0e0e0',
-  flexDirection: 'row',
-  alignItems: 'center',
-  // top: 10
-},
-radioButtonContainer: {
-  paddingLeft: 30, 
-  paddingRight: 30
-},
-vehicleInnerContainer: {
-  flex: 1, 
-  width: 300, 
-  flexDirection: 'row',
+class SelectedArray {
+  constructor() {
+      selectedItemsArray = [];
+  }
+
+  setItem(option) {
+      selectedItemsArray.push(option);
+  }
+
+  getArray() {
+      return selectedItemsArray;
+  }
 }
-});
+
+
+export default SelectVehicleScreen;

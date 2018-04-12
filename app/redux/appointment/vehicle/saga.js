@@ -25,7 +25,7 @@ function* watchAuthVehicleFromAsyncStorage() {
         const payload = yield take(ADD_UPDATE_AUTH_VEHICLE);
         try {
           const response = yield call(addUpdateVehicleCall, payload);
-          yield saveAuthVehiclesData(response.vehicle);
+          yield saveAuthVehiclesData(response);
           yield put(NavigationActions.navigate({ routeName: 'SelectVehileScreen' }));
           console.log('SAGA RESET PASSWORD Mail SENT: ', response);
         } catch (err) {
@@ -39,13 +39,12 @@ function* watchAuthVehicleFromAsyncStorage() {
     return new Promise((resolve, reject) => {
         AppointmetHelper.addUpdateVehicle(payload)
       .then((data) => {
-          console.log(data);
-        // if (data.flag === 22) {
-        //   resolve(data);
-        // } else {
-        //    const error = JSON.parse(data._bodyText).error;
-        //    reject({ error: error });
-        // } 
+        if (data.vehicle) {
+          resolve(data.vehicle);
+        } else {
+           const error = data.error;
+           reject({ error: error });
+        } 
       });
     });
   }

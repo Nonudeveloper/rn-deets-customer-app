@@ -14,10 +14,18 @@ const backButton = require('../../../../assets/icons/add_car_icon_onclick.png');
 export default class TestComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: 'Add Vehicle'
+    };
   }
 
   componentWillMount() {
     // this.props.getVehicles();
+    if (this.props.navigation.state.params.items !== '') {
+      this.setState({
+        title: 'Update Vehicle'
+      });
+    }
   }
 
   saveData() {
@@ -46,9 +54,25 @@ export default class TestComponent extends React.Component {
     this.props.actions.storeVehicleImage(image);
   }
 
+  renderAlert(error) {
+    Alert.alert(
+      'Error',
+      error,
+      [
+        { 
+          text: 'OK', 
+          onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
+          } 
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
   render() {
-    console.log(this.props)
-    const { vehicleFetching } = this.props;
+    const { isFetching } = this.props;
     return (
       <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -62,10 +86,10 @@ export default class TestComponent extends React.Component {
       >
           <View style={{ flex: 1 }}>
             <Loader
-              loading={vehicleFetching} 
+              loading={isFetching} 
             />
             <Header 
-                headerText={'Add Vehicle'} 
+                headerText={this.state.title} 
                 navigation={this.props.navigation} 
                 buttonType={'back'} 
                 // titleType={'logo'}
@@ -75,9 +99,10 @@ export default class TestComponent extends React.Component {
                 // rightImageSource={backButton}
                 // rightIconType={'image'}
             />
+             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             <View style={styles.container}>
               <View style={styles.t1}>
-                <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} vehicleImage={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
+                <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} vehicleImage={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null} />
               </View>
               <VehicleForm 
                 style={styles.t2} 
@@ -88,7 +113,7 @@ export default class TestComponent extends React.Component {
                 models={this.props.models}
                 updateModels={this.props.updateModels}
                 onRef={ref => (this.child = ref)}
-                authVehicleData={this.props.navigation.state.params ? this.props.navigation.state.params : null}
+                authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
                 authUser={this.props.authUser}
               /> 
               <View style={[styles.nextButtonContainer, styles.t3]}>

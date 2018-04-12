@@ -10,7 +10,9 @@ class AppointmetHelper {
             const userBase64String = 'data:image/jpeg;base64,' + authData.vehicleImage.data;
             const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
             data.append('vehicle_image', userVehicleImageFile);
-        } 
+        } else {
+            data.append('vehicle_image', '');
+        }
         data.append('access_token', authData.form.access_token);
         data.append('flag', authData.form.flag);
         data.append('vehicle_model_id', authData.form.model_id);
@@ -35,10 +37,9 @@ class AppointmetHelper {
             method: 'POST',
             body: data,
             }).then(response => {
-                console.log(response);
-                 return JSON.parse(response._bodyText).result;
+                 return JSON.parse(response._bodyText);
             })
-            .catch(error => ({ error: JSON.stringify(error) }));
+            .catch(error => console.log(error));
   };
 }
 
