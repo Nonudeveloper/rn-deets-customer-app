@@ -9,13 +9,22 @@ export default class ServiceDetailHeader extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { FlatListItems: [
-        { key: 'Exterior Wash (only)' },
-        { key: 'Silver Wash' },
-        { key: 'Gold Wash' },
-        { key: 'Four' },
-        { key: 'Five' },
-    ] };
+    this.state = { 
+      ServicesList: [
+          { key: 'Exterior Wash (only)' },
+          { key: 'Silver Wash' },
+          { key: 'Gold Wash' },
+          { key: 'Four' },
+          { key: 'Five' },
+      ],
+      AddonsList: [
+        { key: 'Add on 1' },
+        { key: 'Add on 2' },
+        { key: 'Add on 3' },
+        { key: 'Add on 4' },
+        { key: 'Add on 5' },
+      ],
+    };
   }
   
   componentWillMount() {
@@ -41,9 +50,10 @@ export default class ServiceDetailHeader extends React.Component {
   render() {
     // const { item } = this.props;
     return (
+      
         <View style={{ backgroundColor: '#fff' }}>
             <FlatList
-                data={this.state.FlatListItems}
+                data={this.props.showServices ? this.state.ServicesList : this.state.AddonsList}
                 ItemSeparatorComponent={this.flatListItemSeparator}
                 renderItem={
                     ({ item }) => 

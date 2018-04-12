@@ -15,7 +15,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.Auth.token
+        token: state.Auth.token,
+        services: state.Service.services,
+        isFetching: state.Service.isFetching
     };
 };
 

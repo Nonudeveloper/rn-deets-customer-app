@@ -14,7 +14,6 @@ export default class ServiceItem extends React.Component {
     singleService = () => {
         this.props.navigation.navigate('serviceDetailScreen');
     }
-
     render() {
         const { item } = this.props;
         return (
@@ -27,15 +26,15 @@ export default class ServiceItem extends React.Component {
                     <View style={styles.serviceInfoContainer}>
                         <View style={styles.serviceNameContainer}>
                             <View style={styles.serviceName}>
-                                <Text style={styles.serviceNameText}>{item.key}</Text>
+                                <Text style={styles.serviceNameText}>{item.service_name}</Text>
                             </View>
                             <View style={styles.servicePrice}>
-                                <Text style={styles.servicePriceText}>$24</Text>
+                                <Text style={styles.servicePriceText}>${item.cost}</Text>
                             </View>
                         </View>
                         <View style={styles.descContainer}>
-                            <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.time}</Text>
-                            <Text style={[styles.descText, { color: 'grey' }]}>{item.desc}</Text>
+                            <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
+                            <Text style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
                         </View>
                     </View>
                 </View>

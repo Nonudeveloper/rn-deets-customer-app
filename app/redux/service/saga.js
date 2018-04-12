@@ -22,7 +22,7 @@ function* watchFetchServices() {
       const { payload } = yield take(FETCH_SERVICES);
       try {
         const response = yield call(fetchServicesCall, payload);
-        yield put(fetchServicesSuccess(response));
+        yield put(fetchServicesSuccess(response.data));
         console.log('SAGA FETCH SUCCESS: ', response);
       } catch (err) {
         yield put(fetchServicesFaliure(err));

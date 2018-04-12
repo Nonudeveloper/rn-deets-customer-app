@@ -6,18 +6,6 @@ import styles from './styles';
 class ServicesList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { FlatListItems: [
-        { key: 'Exterior Wash (only)', time: '25 Mins', desc: 'Great if you wish just to clean the exterior surface of your...' },
-        { key: 'Silver Wash', time: '35 Mins', desc: 'Great if you wish just to clean the exterior surface of your...' },
-        { key: 'Gold Wash', time: '45 Mins', desc: 'Great if you wish just to clean the exterior surface of your...' },
-        { key: 'Four', time: '45 Mins', desc: 'Great if you wish just to clean the exterior surface of your...' },
-        { key: 'Five', time: '45 Mins', desc: 'Great if you wish just to clean the exterior surface of your...' },
-    ] };
-  }
-
-  componentDidMount() {
-    // this.makeRemoteRequest();
   }
 
   getItem(item) {
@@ -37,30 +25,30 @@ class ServicesList extends Component {
   }
 
   
-  makeRemoteRequest = () => {
-    const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-    this.setState({ loading: true });
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          data: page === 1 ? res.results : [...this.state.data, ...res.results],
-          error: res.error || null,
-          loading: false,
-          refreshing: false
-        });
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
-  };
+  // makeRemoteRequest = () => {
+  //   const { page, seed } = this.state;
+  //   const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+  //   this.setState({ loading: true });
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.setState({
+  //         data: page === 1 ? res.results : [...this.state.data, ...res.results],
+  //         error: res.error || null,
+  //         loading: false,
+  //         refreshing: false
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ error, loading: false });
+  //     });
+  // };
 
   render() {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-            data={this.state.FlatListItems}
+            data={this.props.services}
             // ItemSeparatorComponent={this.flatListItemSeparator}
             renderItem={
                 ({ item }) => 
@@ -71,6 +59,7 @@ class ServicesList extends Component {
                 // > {item.key} </Text>
                 <ServiceItem navigation={this.props.navigation} item={item} />
             }
+            keyExtractor={() => Math.random().toString(36).substr(2, 9)}
         />
       </View>
     );
