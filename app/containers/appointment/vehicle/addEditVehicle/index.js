@@ -2,15 +2,15 @@
 // Container for Register Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as registerActions from '../../../../redux/register/actions';
+// import * as registerActions from '../../../../redux/register/actions';
 import AddEditVehicleInformation from './AddEditVehicle';
-import { fetchMakeModel, updateModels } from '../../../../redux/register/vehicleInformation/vehicleActions';
+import { fetchMakeModel, updateModels  } from '../../../../redux/register/vehicleInformation/vehicleActions';
 import { fetchVehicles } from '../../../../redux/register/startActions';
-
+import * as authVehicleActions from '../../../../redux/appointment/vehicle/vehicleActions';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(registerActions, dispatch),
+        actions: bindActionCreators(authVehicleActions, dispatch),
         fetchMakeModel: (year) => {
             dispatch(fetchMakeModel(year));
         },
@@ -29,8 +29,11 @@ const mapStateToProps = (state) => {
         isFetching: state.Vehicle.isFetching,
         makeModel: state.Vehicle.makeModelData,
         models: state.Vehicle.models,
-        form: state.form.vehicleForm,
-        vehicleFetching: state.Start.isFetching
+        form: state.form.addEditVehicleForm,
+        vehicleFetching: state.Start.isFetching,
+        authUser: state.Auth.user,
+        vehicleImage: state.AuthVehicle.vehicleImage,
+        errorMessage: state.AuthVehicle.errorMessage
     };
 };
 

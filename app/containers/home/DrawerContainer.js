@@ -58,20 +58,13 @@ export default class DrawerContainer extends React.Component {
           <Image source={userPic} style={styles.imageStyle} />
         </View>
         <View style={styles.sideMenu}>
-          <View style={{ paddingHorizontal: 30}}>
+          <View style={{ paddingHorizontal: 30 }}>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'testComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('testComponent')} 
+              style={[styles.menu, this.props.activeItemKey === 'SelectVehileScreen' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('SelectVehileScreen')} 
             >
                   <Icon name='home' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Home</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'test' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('test')} 
-            >
-                  <Icon name='user-o' color={colors.txtWhite} size={24} />
-                  <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.menu, this.props.activeItemKey === 'HomeComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}

@@ -46,25 +46,27 @@ class FormArea extends React.Component {
     componentWillMount() {
         if (this.props.fbData !== null) {
             const fbUserData = JSON.parse(this.props.fbData.profile);
-            var userEmail = '';
-            if (fbUserData.email){
-                var userEmail = fbUserData.email;
-            }
+            // var userEmail = '';
+            // if (fbUserData.email){
+            //     var userEmail = fbUserData.email;
+            // }
             const initialFormData = {
                 fname: fbUserData.first_name,
                 lname: fbUserData.last_name,
                 flag: 1,
                 fb_access_token: this.props.fbData.credentials.token,
                 fb_id: fbUserData.id,
-                email: userEmail,
+                email: fbUserData.email,
                 gender: fbUserData.gender,
+                device_token: this.props.deviceToken
                 
         };
     
         this.props.dispatch(initialize('signUp', initialFormData));
         } else {
             const initialFormData = {
-                flag: 3
+                flag: 3,
+                device_token: this.props.deviceToken
             };
             this.props.dispatch(initialize('signUp', initialFormData));
         }
@@ -114,6 +116,12 @@ class FormArea extends React.Component {
                 />
                 <Field
                     name={'gender'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'device_token'}
                     component={CommonTextInput}
                     props={this.props}
                     type="hidden"
