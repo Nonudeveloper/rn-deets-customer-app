@@ -20,7 +20,7 @@ export default class TestComponent extends React.Component {
   }
 
   componentWillMount() {
-    // this.props.getVehicles();
+    this.props.getVehicles();
     if (this.props.navigation.state.params.items !== '') {
       this.setState({
         title: 'Update Vehicle'

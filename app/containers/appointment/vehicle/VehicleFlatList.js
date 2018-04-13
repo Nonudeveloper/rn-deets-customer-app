@@ -51,6 +51,7 @@ export default class VehicleFlatList extends React.Component {
                     </TouchableOpacity>
                   </View>
                 </View>}
+            keyExtractor={(item, index) => index.toString()}
         />
        
     );

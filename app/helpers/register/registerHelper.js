@@ -26,13 +26,17 @@ class RegisterHelper {
         data.append('gender', userInfo.form1.gender);
     }
 
+    if (userInfo.form1.device_token.os === 'android') {
+      data.append('user_type', 2);
+    } else {
+      data.append('user_type', 1);
+    }
     data.append('first_name', userInfo.form1.fname);
     data.append('last_name', userInfo.form1.lname);
     data.append('email', userInfo.form1.email);
     data.append('mobile', userInfo.form1.mobile);
     data.append('password', userInfo.form1.password);
-    data.append('user_type', 2);
-    data.append('device_token', 78);
+    data.append('device_token', userInfo.form1.device_token.token);
     data.append('flag', userInfo.form1.flag);
     data.append('vehicle_model_id', userInfo.form2.model_id);
     data.append('vehicle_make_id', userInfo.form2.make_id);
@@ -90,7 +94,7 @@ class RegisterHelper {
   };
 
   async fetchMakeModel(year) {
-    return await SuperFetch.post('technician/get_vehicle_data_for_year', year)
+    return await SuperFetch.post('customer/get_vehicle_data_for_year', year)
     .then(response => {
       return response;
     })

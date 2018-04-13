@@ -3,7 +3,6 @@ import { Text, Image,TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/home/DrawerContainer';
-import Profile from '../containers/home/Profile';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/services/index';
@@ -16,7 +15,6 @@ const DrawerStack = DrawerNavigator({
   serviceScreen: { screen: ServiceScreen },
   HomeComponent: { screen: HomeScreen },
   SelectVehileScreen: { screen: SelectVehileScreen },
-  test: { screen: Profile },
   AddEditVehicle: { screen: AddVehicle }
 }, {
   gesturesEnabled: false,

@@ -78,7 +78,7 @@ export default class PersonalInformation extends Component {
             process={processOne}
           />
           <ProfilePic getImage={this.getImage.bind(this)} fbData={this.props.navigation.state.params ? JSON.parse(this.props.navigation.state.params.profile) : null} />
-          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
+          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} deviceToken={this.props.deviceToken} />
           <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
               <Button 
