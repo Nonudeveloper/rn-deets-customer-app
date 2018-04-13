@@ -27,7 +27,7 @@ class SelectVehicleScreen extends React.Component {
       alert('No Item(s) Selected!');
     } else {
       console.log(selectedArrayRef.getArray());
-      // this.props.navigation.navigate('serviceScreen');
+      this.props.navigation.navigate('serviceScreen');
     }    
   }
 
@@ -49,7 +49,11 @@ class SelectVehicleScreen extends React.Component {
             rightImageSource={backButton}
             rightIconType={'image'}
         />
-        <VehicleFlatList userVehicles={this.props.userVehicle} navigation={this.props.navigation} selectedArrayRef={selectedArrayRef}/>
+        <VehicleFlatList 
+          userVehicles={this.props.userVehicle} 
+          navigation={this.props.navigation} 
+          selectedArrayRef={selectedArrayRef}
+        />
         <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
               <Button 

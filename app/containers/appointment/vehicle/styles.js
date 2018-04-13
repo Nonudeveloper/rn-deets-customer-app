@@ -23,8 +23,7 @@ export default StyleSheet.create({
       // top: 10
     },
     radioButtonContainer: {
-      paddingLeft: 30, 
-      paddingRight: 30
+        paddingHorizontal: 17
     },
     vehicleInnerContainer: {
       flex: 1, 
@@ -50,5 +49,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    vehicleFont: { 
+      fontSize: 16, 
+      color: '#586069' 
+    },
+    licenceFont: { 
+      fontSize: 18, 
+      color: 'black', 
+      fontWeight: 'bold' 
+    }
 });
 

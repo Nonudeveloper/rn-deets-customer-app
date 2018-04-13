@@ -208,7 +208,7 @@ export default class HomeScreen extends Component {
               titleType={'logo'}
               showRightIcon
               rightText={'Next'}
-              onPress={() => this.props.navigation.navigate('selectVehicle')}
+              onPress={() => this.props.navigation.navigate('SelectVehicleScreen')}
             />
             <GeoCodeSearch 
               onAddressGet={(address) => { 

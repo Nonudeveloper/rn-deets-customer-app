@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image,TouchableOpacity } from 'react-native';
+import { Text, Image, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/home/DrawerContainer';
@@ -12,11 +12,24 @@ import ServiceDetailScreen from '../containers/appointment/services/serviceDetai
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
-const DrawerStack = DrawerNavigator({
+const drawer1 = StackNavigator({
+  HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
+  SelectVehicleScreen: { screen: SelectVehileScreen },
+  AddEditVehicle: { screen: AddVehicle }
+}, {
+  headerMode: 'none'
+});
+
+const DrawerStack = DrawerNavigator({
+  drawer1: {
+    screen: drawer1
+  },
   HomeComponent: { screen: HomeScreen },
-  SelectVehileScreen: { screen: SelectVehileScreen },
+  serviceScreen: { screen: ServiceScreen },
+  serviceDetailScreen: { screen: ServiceDetailScreen },
+  SelectVehicleScreen: { screen: SelectVehileScreen },
   AddEditVehicle: { screen: AddVehicle }
 }, {
   gesturesEnabled: false,
@@ -30,17 +43,19 @@ const DrawerNav = StackNavigator({
   headerMode: 'none',
   navigationOptions: ({ navigation }) => ({
     headerStyle: { backgroundColor: 'gray' },
+    backBehavior: 'none',
     // title: 'Logged In to your app!',
-    headerLeft: <TouchableOpacity style={{ paddingLeft: 5 }}
+    headerLeft: <TouchableOpacity
+                  style={{ paddingLeft: 5 }}
                   onPress={() => {
-                    console.log(navigation)
+                    console.log(navigation);
                       if (navigation.state.index === 0) {
                           navigation.navigate('DrawerOpen');
                       } else {
                           navigation.navigate('DrawerClose');
                       }
                   }}
-                >
+    >
                   <Image source={processOne} style={{ width: 30, height: 30 }} />
                 </TouchableOpacity>
   })
