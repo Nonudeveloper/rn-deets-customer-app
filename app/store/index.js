@@ -27,7 +27,7 @@ export default function configureStore(onComplete) {
     compose(
       applyMiddleware(
         sagaMiddleware,
-        storeMiddleware,
+        // storeMiddleware,
         logger,
       ),
       devTools(),
@@ -38,10 +38,10 @@ export default function configureStore(onComplete) {
     window.store = store;
   }
 
-  const load = storage.createLoader(engine);
-  load(store)
-    .then(onComplete)
-    .catch(() => console.log('Failed to load previous state'));
+  // const load = storage.createLoader(engine);
+  // load(store)
+  //   .then(onComplete)
+  //   .catch(() => console.log('Failed to load previous state'));
 
   sagaMiddleware.run(sagas);
 

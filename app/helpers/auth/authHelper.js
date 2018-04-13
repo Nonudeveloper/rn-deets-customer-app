@@ -3,8 +3,7 @@ import SuperFetch from '../superFetch';
 
 class AuthHelper {
   login = async userInfo => {
-    
-    if(userInfo.flag == 3){
+    if (userInfo.flag === 3) {
        if (!userInfo.email || !userInfo.password) {
          return { error: 'please fill in the input' };
       }
@@ -20,9 +19,8 @@ class AuthHelper {
     if (!userInfo.email) {
       return { error: 'please fill in the input' };
     }
-    return await SuperFetch.post('customer/forgot_password_from_user_email', userInfo).then(response => {
-      return response;
-    });
+    return await SuperFetch.post('customer/forgot_password_from_user_email', userInfo)
+        .then(response => response);
   };
 
   async checkDemoPage(token) {
@@ -50,9 +48,7 @@ class AuthHelper {
           token,
           expiredAt: new Date(expiredAt)
         };
-      else {
-        return { error: 'Token expired' };
-      }
+      return { error: 'Token expired' };
     } catch (e) {
       return { error: 'Server Error' };
     }

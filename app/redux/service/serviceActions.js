@@ -1,11 +1,11 @@
 import { 
     FETCH_SERVICES, FETCH_SERVICES_SUCCESS, FETCH_SERVICES_FALIURE
+
 } from './constants';
     
-export function fetchServices(payload) {
+export function fetchServices() {
     return {
         type: FETCH_SERVICES,
-        payload
     };
 }
 

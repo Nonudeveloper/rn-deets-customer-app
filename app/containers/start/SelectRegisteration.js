@@ -58,7 +58,7 @@ const styles = {
         marginHorizontal: 25
     },
     textWithDivider: {
-        color: "black",
+        color: 'black',
         marginVertical: 10,
         paddingHorizontal: 10
     },

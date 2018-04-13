@@ -2,9 +2,9 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ServiceScreen from './ServiceScreen';
+import ServiceScreen from './ServiceDetailScreen';
 
-import * as serviceActions from '../../redux/service/serviceActions';
+import * as serviceActions from '../../../../redux/service/serviceActions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        
+        token: state.Auth.token
+
     };
 };
 

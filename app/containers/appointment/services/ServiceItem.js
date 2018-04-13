@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
-const carImage = require('../../assets/icons/3_car_img.png');
-const downArrow = require('../../assets/icons/down_arrow.png');
+const carImage = require('../../../assets/icons/3_car_img.png');
+const downArrow = require('../../../assets/icons/down_arrow.png');
 
 export default class ServiceItem extends React.Component {
 
@@ -11,9 +11,14 @@ export default class ServiceItem extends React.Component {
         super(props);
     }
 
+    singleService = (item) => {
+        this.props.navigation.navigate('serviceDetailScreen', { item });
+    }
+    
     render() {
         const { item } = this.props;
         return (
+            <TouchableOpacity onPress={() => this.singleService(item)}>
             <View style={styles.serviceItemContainer}>
                 <View style={styles.serviceContainer}>
                     <View>
@@ -22,17 +27,16 @@ export default class ServiceItem extends React.Component {
                     <View style={styles.serviceInfoContainer}>
                         <View style={styles.serviceNameContainer}>
                             <View style={styles.serviceName}>
-                                <Text style={styles.serviceNameText}>{item.key}</Text>
+                                <Text style={styles.serviceNameText}>{item.service_name}</Text>
                             </View>
                             <View style={styles.servicePrice}>
-                                <Text style={styles.servicePriceText}>$24</Text>
+                                <Text style={styles.servicePriceText}>${item.cost}</Text>
                             </View>
                         </View>
                         <View style={styles.descContainer}>
-                            <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.time}</Text>
-                            <Text style={[styles.descText, { color: 'grey' }]}>{item.desc}</Text>
+                            <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
+                            <Text style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
                         </View>
-                        
                     </View>
                 </View>
                 <View style={styles.detailInfoContainer}>
@@ -46,6 +50,7 @@ export default class ServiceItem extends React.Component {
                     </View>
                 </View>
             </View>
+            </TouchableOpacity>
         );
     }
 }
