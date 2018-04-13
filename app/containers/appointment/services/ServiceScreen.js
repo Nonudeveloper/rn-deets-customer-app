@@ -16,7 +16,9 @@ export default class ServiceScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.fetchServices();
+    if (this.props.services.length === 0) {
+      this.props.actions.fetchServices();
+    }
   }
 
   render() {

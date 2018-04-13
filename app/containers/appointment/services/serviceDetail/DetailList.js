@@ -53,17 +53,17 @@ export default class ServiceDetailHeader extends React.Component {
       
         <View style={{ backgroundColor: '#fff' }}>
             <FlatList
-                data={this.props.showServices ? this.state.ServicesList : this.state.AddonsList}
+                data={this.props.showServices ? this.props.servicesList : this.props.addonsList}
                 ItemSeparatorComponent={this.flatListItemSeparator}
                 renderItem={
                     ({ item }) => 
-                    // render a custom item component here
                     <Text 
                         style={styles.item} 
-                        onPress={this.getItem.bind(this, item.key)} 
-                    > {item.key} </Text>
+                        onPress={this.getItem.bind(this, item.adds_on_name)} 
+                    > {item.adds_on_name} </Text>
                     
                 }
+                keyExtractor={() => Math.random().toString(36).substr(2, 9)}
             />
         </View>
     );

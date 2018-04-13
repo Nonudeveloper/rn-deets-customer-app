@@ -35,7 +35,7 @@ export default class ServiceDetailHeader extends React.Component {
 
   myColor = position => {
     if (this.state.active === position) {
-        return 'green';
+        return '#8ac10b';
       }
       return 'grey';
   }
@@ -57,7 +57,7 @@ export default class ServiceDetailHeader extends React.Component {
   render() {
     const { item } = this.props;
     return (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ flex: 4, flexDirection: 'column' }}>
             <View style={[styles.serviceContainer, { flex: 0 }]}>
                 <View>
                     <Image style={styles.carImage} source={carImage} />
@@ -65,15 +65,15 @@ export default class ServiceDetailHeader extends React.Component {
                 <View style={styles.serviceInfoContainer}>
                     <View style={styles.serviceNameContainer}>
                         <View style={styles.serviceName}>
-                            <Text style={styles.serviceNameText}>{item.key}</Text>
+                            <Text style={styles.serviceNameText}>{item.service_name}</Text>
                         </View>
                         <View style={styles.servicePrice}>
-                            <Text style={styles.servicePriceText}>$24</Text>
+                            <Text style={styles.servicePriceText}>${item.cost}</Text>
                         </View>
                     </View>
                     <View style={styles.descContainer}>
-                        <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.time}</Text>
-                        <Text style={[styles.descText, { color: 'grey' }]}>{item.desc}</Text>
+                        <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
+                        <Text style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
                     </View>
                 </View>
             </View>
@@ -93,9 +93,13 @@ export default class ServiceDetailHeader extends React.Component {
             </View>
             <View style={{ flex: 1, top: 8 }}>
                 <View >
-                    <DetailList showServices={this.state.showServices} />
+                    <DetailList 
+                        servicesList={item.included_adds_on} 
+                        addonsList={item.excluded_adds_on} 
+                        showServices={this.state.showServices} 
+                    />
                 </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
+                {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
                     <Button 
                         style={{ 
                             height: 50,
@@ -106,7 +110,7 @@ export default class ServiceDetailHeader extends React.Component {
                             backgroundColor: '#8ac10b', 
                         }}
                     >Next</Button>
-                </View>
+                </View> */}
             </View>
         </View>
         

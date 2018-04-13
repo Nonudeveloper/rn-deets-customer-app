@@ -11,13 +11,14 @@ export default class ServiceItem extends React.Component {
         super(props);
     }
 
-    singleService = () => {
-        this.props.navigation.navigate('serviceDetailScreen');
+    singleService = (item) => {
+        this.props.navigation.navigate('serviceDetailScreen', { item });
     }
+    
     render() {
         const { item } = this.props;
         return (
-            <TouchableOpacity onPress={this.singleService}>
+            <TouchableOpacity onPress={() => this.singleService(item)}>
             <View style={styles.serviceItemContainer}>
                 <View style={styles.serviceContainer}>
                     <View>
