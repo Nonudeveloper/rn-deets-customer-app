@@ -7,6 +7,7 @@ import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
 import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
+import DateTimeScreen from '../containers/appointment/data&time/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -17,7 +18,8 @@ const drawer1 = StackNavigator({
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
   SelectVehicleScreen: { screen: SelectVehileScreen },
-  AddEditVehicle: { screen: AddVehicle }
+  AddEditVehicle: { screen: AddVehicle },
+  DateTimeScreen: { screen: DateTimeScreen }
 }, {
   headerMode: 'none'
 });

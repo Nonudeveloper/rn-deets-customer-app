@@ -21,6 +21,7 @@ export default class TestComponent extends React.Component {
 
   componentWillMount() {
     this.props.getVehicles();
+    this.props.setBackToInitialState();
     if (this.props.navigation.state.params.items !== '') {
       this.setState({
         title: 'Update Vehicle'

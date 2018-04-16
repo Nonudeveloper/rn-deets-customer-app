@@ -31,7 +31,7 @@ export default class ServiceScreen extends React.Component {
             headerText={'Services'}
             showRightIcon
             rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('selectVehicle')}
+            onPress={() => this.props.navigation.navigate('DateTimeScreen')}
             indicatorSource={indicatorOne}
         />
         <Loader loading={isFetching} />
