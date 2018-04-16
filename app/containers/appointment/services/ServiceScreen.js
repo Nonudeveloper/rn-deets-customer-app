@@ -26,7 +26,6 @@ export default class ServiceScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Header 
-            headerText={'Deets'} 
             navigation={this.props.navigation} 
             headerText={'Services'}
             showRightIcon
