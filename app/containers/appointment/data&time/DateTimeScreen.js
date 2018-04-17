@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableHighlight, Text, Modal, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, TouchableHighlight, Text, Modal, Dimensions, FlatList } from 'react-native';
 import Header from '../../header/Header';
 import { getItem } from '../../../helpers/asyncStorage';
 import Loader from '../../../deetscomponents/Loader';
 import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
-import Calendar from 'react-native-calendar-select';
-import {CalendarList} from 'react-native-calendars';
+// import Calendar from 'react-native-calendar-select';
+import Calendar from 'react-native-calendar';
+
 
 
 const indicatorOne = require('../../../assets/icons/process2.png');
@@ -24,6 +25,56 @@ export default class DateTimeScreen extends React.Component {
     this.state = {
         date: '2016-05-15',
         modalVisible: false,
+      FlatListItems: [
+          {key: '0:00'},
+          {key: '0:30'},
+          {key: '1:00'},
+          {key: '1:30'},
+          {key: '2:00'},
+          {key: '2:30'},
+          {key: '3:00'},
+          {key: '3:30'},
+          {key: '4:00'},
+          {key: '4:30'},
+          {key: '5:00'},
+          {key: '5:30'},
+          {key: '6:00'},
+          {key: '6:30'},
+          {key: '7:00'},
+          {key: '7:30'},
+          {key: '8:00'},
+          {key: '8:30'},
+          {key: '9:00'},
+          {key: '9:30'},
+          {key: '10:00'},
+          {key: '10:30'},
+          {key: '11:00'},
+          {key: '11:30'},
+          {key: '12:00'},
+          {key: '12:30'},
+          {key: '13:00'},
+          {key: '13:30'},
+          {key: '14:00'},
+          {key: '14:30'},
+          {key: '15:00'},
+          {key: '15:30'},
+          {key: '16:00'},
+          {key: '16:30'},
+          {key: '17:00'},
+          {key: '17:30'},
+          {key: '18:00'},
+          {key: '19:00'},
+          {key: '20:00'},
+          {key: '20:30'},
+          {key: '21:00'},
+          {key: '21:30'},
+          {key: '22:00'},
+          {key: '22:30'},
+          {key: '23:00'},
+          {key: '23:30'},
+          {key: '24:00'},
+          {key: '24:30'},
+        ]
       };
   }
 
@@ -33,8 +84,58 @@ export default class DateTimeScreen extends React.Component {
 //     }
 //   }
 renderModal = () => {
+  const customStyle = {
+    calendarContainer: {
+      backgroundColor: StyleConstants.LoginButtonBColor,
+      bottom: 0
+    },
+    calendarControls: {
+      display: 'none',
+    },
+    calendarHeading: {
+      backgroundColor: StyleConstants.LoginButtonBColor,
+      borderBottomColor: StyleConstants.LoginButtonBColor,
+    },
+    controlButtonText: {
+      // color: 'blue',
+    },
+    day: {
+      color: 'white',
+      fontSize: 20, 
+      textAlign: 'center'
+    },
+    dayHeading: {
+      color: 'white',
+      fontSize: 20
+    },
+    dayButton: {
+      backgroundColor: StyleConstants.LoginButtonBColor,
+    },
+    weekendDayButton: {
+      backgroundColor: StyleConstants.LoginButtonBColor,
+      // color: 'white',
+    },
+    currentDayCircle: {
+      backgroundColor: 'gray',
+      borderRadius: 0,
+    },
+    currentDayText: {
+      color: 'blue',
+    },
+    weekendHeading: {
+      fontSize: 20,
+      color: 'white',
+    },
+    weekendDayText: {
+      color: 'white',
+    },
+    selectedDayText: {
+      color: StyleConstants.LoginButtonBColor,
+    },
+  };
     return (
-        <Modal
+      
+    <Modal
             visible={this.state.modalVisible} 
             transparent
             animationType={'none'}
@@ -56,34 +157,48 @@ renderModal = () => {
                     <View style={styles.titleContainer}>
                       {/* <Text style={styles.title}>Select Payment Method</Text> */}
                     </View>
+                    <View style={{}}>
+                      <TouchableHighlight
+                        onPress={() => {
+                          this.setModalVisible(!this.state.modalVisible);
+                        }}
+                        style={styles.cancelStyle}
+                      >
+                        <Image source={crossButton} style={styles.paypalImg} style={{ width: 30, height: 30 }} />
+                      </TouchableHighlight>
+                    </View>
                   </View>
                   <View style={styles.modalBodyContainer}>
-                  <CalendarList
-                //   style={{
-                //     borderWidth: 1,
-                //     borderColor: '#ffffff',
-                //     height: 100
-                //   }}
-                  // Specify theme properties to override specific styles for calendar parts. Default = {}
-                  theme={{
-                    backgroundColor: 'green',
-                    calendarBackground: StyleConstants.LoginButtonBColor,
-                    textSectionTitleColor: '#ffffff',
-                    selectedDayBackgroundColor: '#ffffff',
-                    selectedDayTextColor: StyleConstants.LoginButtonBColor,
-                    todayTextColor: '#00adf5',
-                    dayTextColor: '#ffffff',
-                    textDisabledColor: '#d9e1e8',
-                    monthTextColor: '#ffffff',
-                    textDayFontFamily: 'monospace',
-                    textMonthFontFamily: 'monospace',
-                    textDayHeaderFontFamily: 'monospace',
-                    textMonthFontWeight: 'bold',
-                    textDayFontSize: 16,
-                    textMonthFontSize: 16,
-                    textDayHeaderFontSize: 16
-                  }}
-                  current={'2012-05-16'} pastScrollRange={24} futureScrollRange={24} />
+                  <Calendar
+                    currentMonth={'2015-08-15'}       // Optional date to set the currently displayed month after initialization
+                    customStyle={customStyle} // Customize any pre-defined styles
+                    // dayHeadings={Array}               // Default: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+                    // eventDates={['2015-07-01']}       // Optional array of moment() parseable dates that will show an event indicator
+                    // events={[{date:'2015-07-01'}]}// Optional array of event objects with a date property and custom styles for the event indicator
+                    // monthNames={Array}                // Defaults to english names of months
+                    nextButtonText={'Next'}           // Text for next button. Default: 'Next'
+                    onDateSelect={(date) => this.onDateSelect(date)} // Callback after date selection
+                    onDateLongPress={(date) => this.onDateLongPress(date)} // Callback after date is long pressed
+                    onSwipeNext={this.onSwipeNext}    // Callback for forward swipe event
+                    onSwipePrev={this.onSwipePrev}    // Callback for back swipe event
+                    onTouchNext={this.onTouchNext}    // Callback for next touch event
+                    onTouchPrev={this.onTouchPrev}    // Callback for prev touch event
+                    onTitlePress={this.onTitlePress}  // Callback on title press
+                    prevButtonText={'Prev'}           // Text for previous button. Default: 'Prev'
+                    removeClippedSubviews={false}     // Set to false for us within Modals. Default: true
+                    // renderDay={<CustomDay />} 
+                    varticle
+                    scrollEnded={true}       // Optionally render a custom day component
+                    scrollEnabled={true}              // False disables swiping. Default: False
+                    selectedDate={'2015-08-15'}       // Day to be selected
+                    showControls={false}               // False hides prev/next buttons. Default: False
+                    showEventIndicators={true}        // False hides event indicators. Default:False
+                    startDate={'2015-08-01'} 
+                    endDate={'2015-08-08'}         // The first month that will display. Default: current month
+                    titleFormat={'MMMM YYYY'}         // Format for displaying current month. Default: 'MMMM YYYY'
+                    today={'2015-08-15'}              // Defaults to today
+                    weekStart={1} // Day on which week starts 0 - Sunday, 1 - Monday, 2 - Tuesday, etc, Default: 1
+                  />
                   </View>
                 </View>
             </View>
@@ -94,6 +209,10 @@ renderModal = () => {
 setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+  GetItem (item) {
+   
+    console.log(item)
+    }
 
   render() {
     const { isFetching } = this.props;
@@ -140,6 +259,14 @@ setModalVisible(visible) {
                     </View>
                 </View>
             </View>
+        </View>
+        <View style={{top:10, height: 80, backgroundColor: '#333333', flexDirection: 'row'}}>
+                <View style={{ flex:1, borderRightColor:'gray', borderRightWidth: 2, borderLeftColor: 'gray', borderLeftWidth: 2, marginHorizontal:50, marginVertical:20}}>
+                <FlatList
+       horizontal={true}
+       data={ this.state.FlatListItems } renderItem={({item}) => <Text style={styles.licenceFont} onPress={this.GetItem.bind(this, item.key)}  > {item.key} </Text>}
+      />
+                </View>
         </View>
         {/* <ServicesList services={this.props.services} navigation={this.props.navigation} /> */}
         {this.renderModal()}
@@ -218,7 +345,7 @@ const styles = StyleSheet.create({
       },
       modalContentContainer: {
         backgroundColor: StyleConstants.LoginButtonBColor,
-        height: 300,
+        height: 400,
         width: Dimensions.get('window').width,
         // borderRadius: 10,
         display: 'flex',
