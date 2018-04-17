@@ -15,13 +15,14 @@ const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
 const drawer1 = StackNavigator({
-  reviewScreen: { screen: ReviewScreen },
-  notesScreen: { screen: NotesScreen },
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
   SelectVehicleScreen: { screen: SelectVehileScreen },
-  AddEditVehicle: { screen: AddVehicle }
+  AddEditVehicle: { screen: AddVehicle },
+  reviewScreen: { screen: ReviewScreen },
+  notesScreen: { screen: NotesScreen },
+  
 }, {
   headerMode: 'none'
 });

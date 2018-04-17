@@ -51,8 +51,8 @@ class NotesScreen extends React.Component {
                 backgroundColor: '#8ac10b', 
                 marginTop: 20,
                 borderWidth: 4,
-                
             }}
+            onPress={() => this.props.navigation.navigate('reviewScreen')}
         >Next</Button>
 
       </View>

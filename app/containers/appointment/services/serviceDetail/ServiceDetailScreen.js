@@ -53,6 +53,7 @@ export default class ServiceDetailScreen extends React.Component {
                           flex: 0, 
                           backgroundColor: '#8ac10b', 
                       }}
+                      onPress={() => this.props.navigation.navigate('notesScreen')}
                   >
                     Next
                   </Button>

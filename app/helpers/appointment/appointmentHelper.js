@@ -2,10 +2,12 @@ import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
 
 class AppointmetHelper {
-    addUpdateVehicle = async authData => {
+
+
+    appendVehicleData = (data, authData) => {
         const type = authData.form.type;
         const typeData = type.split(', ');
-        const data = new FormData();
+
         if (Object.keys(authData.vehicleImage).length > 0) {
             const userBase64String = 'data:image/jpeg;base64,' + authData.vehicleImage.data;
             const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
@@ -31,8 +33,11 @@ class AppointmetHelper {
         data.append('notes', authData.form.notes);
         data.append('license_type', 2);
         data.append('vehicle_id', authData.form.vehicle_id);
+    }
 
-
+    addUpdateVehicle = async authData => {
+        const formData = new FormData();
+        const data = this.appendVehicleData(formData, authData);
         return await fetch('http://127.0.0.1:8000/customer/add_or_edit_user_vehicle_information', {
             method: 'POST',
             body: data,
@@ -40,7 +45,30 @@ class AppointmetHelper {
                  return JSON.parse(response._bodyText);
             })
             .catch(error => console.log(error));
-  };
+    };
+
+    appendAppointmentData = (data, appointmentData) => {
+        console.log(appointmentData);
+    }
+
+    postNewAppointment = async appointmentData => {
+        const formData = new FormData();
+        const data = this.appendAppointmentData(formData, appointmentData);
+
+        return await SuperFetch.post('customer/create_new_user_service_appointment', data).then(response => {
+            //console.log(response)
+            return response;
+        });
+
+        // return await fetch('http://127.0.0.1:8000/customer/create_new_user_service_appointment', {
+        //     method: 'POST',
+        //     body: allData,
+        //     }).then(response => {
+        //          return JSON.parse(response._bodyText);
+        //     })
+        //     .catch(error => console.log(error));
+    }
+  
 }
 
 export default new AppointmetHelper();
