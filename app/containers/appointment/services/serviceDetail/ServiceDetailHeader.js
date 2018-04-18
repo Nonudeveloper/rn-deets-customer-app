@@ -68,7 +68,7 @@ export default class ServiceDetailHeader extends React.Component {
                             <Text style={styles.serviceNameText}>{item.service_name}</Text>
                         </View>
                         <View style={styles.servicePrice}>
-                            <Text style={styles.servicePriceText}>${item.cost}</Text>
+                            <Text style={styles.servicePriceText}>${this.props.selectedVehicle.vehicle_type === 2 ? item.service_Large_cost : item.cost}</Text>
                         </View>
                     </View>
                     <View style={styles.descContainer}>
@@ -99,6 +99,9 @@ export default class ServiceDetailHeader extends React.Component {
                         servicesList={item.included_adds_on} 
                         addonsList={item.excluded_adds_on} 
                         showServices={this.state.showServices} 
+                        selectedVehicle={this.props.selectedVehicle}
+                        selectedArrayRef={this.props.selectedArrayRef}
+                        getSelectedItems={this.props.getSelectedItems}
                     />
                 </View>
                 {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >

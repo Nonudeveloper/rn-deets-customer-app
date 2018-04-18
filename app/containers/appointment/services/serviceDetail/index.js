@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.Auth.token
-
+        token: state.Auth.token,
+        selectedVehicle: state.AuthVehicle.selectedVehicle
     };
 };
 

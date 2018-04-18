@@ -57,7 +57,7 @@ class ServicesList extends Component {
                 //     style={styles.item} 
                 //     onPress={this.getItem.bind(this, item.key)} 
                 // > {item.key} </Text>
-                <ServiceItem navigation={this.props.navigation} item={item} />
+                <ServiceItem navigation={this.props.navigation} item={item} selectedVehicle={this.props.selectedVehicle} />
             }
             keyExtractor={() => Math.random().toString(36).substr(2, 9)}
         />

@@ -7,6 +7,7 @@ import {
     ADD_UPDATE_VEHICLE_SUCCESS,
     ADD_UPDATE_VEHICLE_FAILURE,
     HIDE_ALERT,
+    SELECTED_VEHICLE,
 } from './constants';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
       vehicles: [],
       vehicleImage: {},
       errorMessage: '',
+      selectedVehicle: {}
 };
 
 export default function servicesReducer(state = initialState, action) {
@@ -51,6 +53,10 @@ export default function servicesReducer(state = initialState, action) {
         case HIDE_ALERT:
             return Object.assign({}, state, {
                 errorMessage: ''
+            }); 
+        case SELECTED_VEHICLE:
+            return Object.assign({}, state, {
+                selectedVehicle: action.vehicle
             }); 
         default:
             return state;

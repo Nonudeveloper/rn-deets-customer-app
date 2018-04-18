@@ -7,13 +7,28 @@ import Button from '../../../../deetscomponents/Button';
 const indicatorOne = require('../../../../assets/icons/process1.png');
 const backButton = require('../../../../assets/icons/2_back_btn_onclick.png');
 
-export default class ServiceDetailScreen extends React.Component {
+class SelectedArray {
+  constructor() {
+      selectedItemsArray = [];
+  }
+
+  setItem(option) {
+      selectedItemsArray.push(option);
+  }
+
+  getArray() {
+      return selectedItemsArray;
+  }
+}
+
+class ServiceDetailScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
+    selectedArrayRef = new SelectedArray(); 
     this.state = {
-      item: []
+      item: [],
+      totalCost: ''
     };
   }
 
@@ -25,7 +40,30 @@ export default class ServiceDetailScreen extends React.Component {
     });
   }
 
+  getSelectedItems = () => {
+    if (selectedArrayRef.getArray().length === 0) {
+      alert('No Item(s) Selected!');
+    } else {
+      const costdata = [];
+      const data = selectedArrayRef.getArray();
+      data.map((item) => {
+        if (this.props.selectedVehicle.vehicle_type === 2) {
+          costdata.push(parseInt(item.vehicle.large_vehicle_cost));
+        } else {
+          costdata.push(parseInt(item.vehicle.small_vehicle_cost));
+        }
+        
+      })
+      console.log(costdata);
+      costdata.reduce((a, b) => console.log(a + b));
+      console.log(selectedArrayRef.getArray());
+      // this.props.navigation.navigate('serviceScreen');
+    }    
+  }
+  
+
   render() {
+    console.log(this.state.item)
     return (
       <View style={styles.container}>
         <Header 
@@ -37,7 +75,7 @@ export default class ServiceDetailScreen extends React.Component {
             onPress={() => this.props.navigation.navigate('selectVehicle')}
             indicatorSource={indicatorOne}
         />
-            <ServiceDetailHeader item={this.state.item} />
+            <ServiceDetailHeader item={this.state.item} selectedVehicle={this.props.selectedVehicle} selectedArrayRef={selectedArrayRef} getSelectedItems={this.getSelectedItems} />
             <View style={styles.buttonContainer} >
                 <View style={styles.totalPaymentContainer}>
                   <Text style={styles.paymentText}>Total Payment</Text>
@@ -53,6 +91,7 @@ export default class ServiceDetailScreen extends React.Component {
                           flex: 0, 
                           backgroundColor: '#8ac10b', 
                       }}
+                      onPress={this.getSelectedItems}
                   >
                     Next
                   </Button>
@@ -83,3 +122,6 @@ const styles = StyleSheet.create({
     }
    
 });
+
+
+export default ServiceDetailScreen;

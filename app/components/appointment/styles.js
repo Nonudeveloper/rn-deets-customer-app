@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: 'white',
       borderRadius: 50,
-      borderWidth: 2,
+      borderWidth: 1,
     },
 
     checkBoxLabel: {

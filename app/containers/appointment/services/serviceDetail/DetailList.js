@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, Text, FlatList, Alert } from 'react-native';
 import styles from '../styles';
+import Checkbox from '../../../../components/appointment/Checkbox';
 
 const carImage = require('../../../../assets/icons/3_car_img.png');
 const downArrow = require('../../../../assets/icons/down_arrow.png');
@@ -57,10 +58,45 @@ export default class ServiceDetailHeader extends React.Component {
                 ItemSeparatorComponent={this.flatListItemSeparator}
                 renderItem={
                     ({ item }) => 
-                    <Text 
+                    <View style={{flex:1, height: 44,flexDirection: 'row', alignItems: 'center'}}>
+                    
+                    {
+                      (this.props.showServices)
+                      ?
+                      (<View style={{flex:3, }}>
+                        <Text 
                         style={styles.item} 
                         onPress={this.getItem.bind(this, item.adds_on_name)} 
                     > {item.adds_on_name} </Text>
+                    </View>)
+                    :
+                    (<View style={{flexDirection: 'row', alignItems: 'center' }}>
+                      <View style={{flex:9 }}>
+                        <Text 
+                          style={styles.item} 
+                          onPress={this.getItem.bind(this, item.adds_on_name)} 
+                        > {item.adds_on_name} </Text>
+                      </View>
+                      <View style={{flex:1}}>
+                        <Text 
+                            style={{color:'red', fontSize: 15 }} 
+                        > ${this.props.selectedVehicle.vehicle_type === 2 ? item.large_vehicle_cost : item.small_vehicle_cost} </Text>
+                      </View>
+                      <View style={{flex:1}}>
+                      <Checkbox 
+                        size={25} 
+                        keyValue={item.id} 
+                        selectedArrayObject={this.props.selectedArrayRef}  
+                        color='#636c72' 
+                        label={item} 
+                        callback
+                        getSelectedItems={this.props.getSelectedItems}
+                      />
+                      </View>
+                    </View>)
+                    }
+                    </View>
+                      
                     
                 }
                 keyExtractor={() => Math.random().toString(36).substr(2, 9)}
@@ -69,3 +105,4 @@ export default class ServiceDetailHeader extends React.Component {
     );
   }
 }
+

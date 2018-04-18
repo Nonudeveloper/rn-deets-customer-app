@@ -29,6 +29,9 @@ export default class Checkbox extends Component {
             } else {
                 this.props.selectedArrayObject.getArray().splice( this.props.selectedArrayObject.getArray().findIndex(x => x.key == key), 1 );
             }
+            if (this.props.callback) {
+                this.props.getSelectedItems(this.props.selectedArrayObject.getArray());
+            }
         });
     }
     

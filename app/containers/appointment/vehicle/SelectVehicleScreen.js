@@ -11,10 +11,9 @@ import StyleConstants from '../../../config/StyleConstants';
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
 
 
-class SelectVehicleScreen extends React.Component {
+export default class SelectVehicleScreen extends React.Component {
   constructor(props) {
     super(props);
-    selectedArrayRef = new SelectedArray(); 
   }
 
   componentWillMount() {
@@ -23,12 +22,11 @@ class SelectVehicleScreen extends React.Component {
   }
 
   getSelectedItems = () => {
-    if (selectedArrayRef.getArray().length === 0) {
-      alert('No Item(s) Selected!');
-    } else {
-      console.log(selectedArrayRef.getArray());
-      this.props.navigation.navigate('serviceScreen');
-    }    
+    this.props.navigation.navigate('serviceScreen');  
+  }
+  
+  _selectedVehicle = (vehicle) => {
+    this.props.selectedVehicle(vehicle);
   }
 
   render() {
@@ -52,7 +50,7 @@ class SelectVehicleScreen extends React.Component {
         <VehicleFlatList 
           userVehicles={this.props.userVehicle} 
           navigation={this.props.navigation} 
-          selectedArrayRef={selectedArrayRef}
+          selectedVehicle={this._selectedVehicle}
         />
         <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
@@ -70,19 +68,3 @@ class SelectVehicleScreen extends React.Component {
   }
 }
 
-class SelectedArray {
-  constructor() {
-      selectedItemsArray = [];
-  }
-
-  setItem(option) {
-      selectedItemsArray.push(option);
-  }
-
-  getArray() {
-      return selectedItemsArray;
-  }
-}
-
-
-export default SelectVehicleScreen;

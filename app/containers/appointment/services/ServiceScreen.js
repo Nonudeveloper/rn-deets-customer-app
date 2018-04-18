@@ -35,7 +35,7 @@ export default class ServiceScreen extends React.Component {
             indicatorSource={indicatorOne}
         />
         <Loader loading={isFetching} />
-        <ServicesList services={this.props.services} navigation={this.props.navigation} />
+        <ServicesList services={this.props.services} selectedVehicle={this.props.selectedVehicle} navigation={this.props.navigation} />
       </View>
     );
   }

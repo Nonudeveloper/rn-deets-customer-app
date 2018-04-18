@@ -16,6 +16,7 @@ export default class ServiceItem extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         const { item } = this.props;
         return (
             <TouchableOpacity onPress={() => this.singleService(item)}>
@@ -30,7 +31,7 @@ export default class ServiceItem extends React.Component {
                                 <Text style={styles.serviceNameText}>{item.service_name}</Text>
                             </View>
                             <View style={styles.servicePrice}>
-                                <Text style={styles.servicePriceText}>${item.cost}</Text>
+                                <Text style={styles.servicePriceText}>${this.props.selectedVehicle.vehicle_type === 2 ? item.service_Large_cost : item.cost}</Text>
                             </View>
                         </View>
                         <View style={styles.descContainer}>
