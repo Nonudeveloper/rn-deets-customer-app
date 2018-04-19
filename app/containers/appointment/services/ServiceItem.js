@@ -23,7 +23,7 @@ export default class ServiceItem extends React.Component {
             <View style={styles.serviceItemContainer}>
                 <View style={styles.serviceContainer}>
                     <View>
-                        <Image style={styles.carImage} source={carImage} />
+                        <Image style={styles.carImage} source={item.image ? { uri: item.image } : carImage} />
                     </View>
                     <View style={styles.serviceInfoContainer}>
                         <View style={styles.serviceNameContainer}>

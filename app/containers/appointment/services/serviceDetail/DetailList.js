@@ -58,31 +58,20 @@ export default class ServiceDetailHeader extends React.Component {
                 ItemSeparatorComponent={this.flatListItemSeparator}
                 renderItem={
                     ({ item }) => 
-                    <View style={{flex:1, height: 44,flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ flex: 1, height: 44, flexDirection: 'row', alignItems: 'center' }}>
                     
                     {
                       (this.props.showServices)
                       ?
-                      (<View style={{flex:3, }}>
+                      (<View style={{ flex: 3 }}>
                         <Text 
                         style={styles.item} 
                         onPress={this.getItem.bind(this, item.adds_on_name)} 
                     > {item.adds_on_name} </Text>
                     </View>)
                     :
-                    (<View style={{flexDirection: 'row', alignItems: 'center' }}>
-                      <View style={{flex:9 }}>
-                        <Text 
-                          style={styles.item} 
-                          onPress={this.getItem.bind(this, item.adds_on_name)} 
-                        > {item.adds_on_name} </Text>
-                      </View>
-                      <View style={{flex:1}}>
-                        <Text 
-                            style={{color:'red', fontSize: 15 }} 
-                        > ${this.props.selectedVehicle.vehicle_type === 2 ? item.large_vehicle_cost : item.small_vehicle_cost} </Text>
-                      </View>
-                      <View style={{flex:1}}>
+                    (<View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }}>
+                      <View style={{ flex: 1 }}>
                       <Checkbox 
                         size={25} 
                         keyValue={item.id} 
@@ -93,6 +82,18 @@ export default class ServiceDetailHeader extends React.Component {
                         getSelectedItems={this.props.getSelectedItems}
                       />
                       </View>
+                      <View style={{ flex: 9 }}>
+                        <Text 
+                          style={styles.item} 
+                          onPress={this.getItem.bind(this, item.adds_on_name)} 
+                        > {item.adds_on_name} </Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text 
+                            style={{ color: '#8ac10b', fontSize: 15 }} 
+                        > ${this.props.selectedVehicle.vehicle_type === 2 ? item.large_vehicle_cost : item.small_vehicle_cost} </Text>
+                      </View>
+                      
                     </View>)
                     }
                     </View>

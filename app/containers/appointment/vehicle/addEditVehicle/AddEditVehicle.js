@@ -48,6 +48,7 @@ export default class TestComponent extends React.Component {
     if (errorCount === 0) {
       // this.props.navigation.navigate('paymentInformation');
       this.props.actions.addUpdateVehicle(this.props.form.values, this.props.vehicleImage);
+      this.props.navigation.goBack();
     }
   }
 

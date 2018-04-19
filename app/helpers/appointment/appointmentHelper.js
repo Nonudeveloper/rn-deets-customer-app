@@ -1,5 +1,6 @@
 import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
+import { getItem } from '../asyncStorage';
 
 class AppointmetHelper {
     addUpdateVehicle = async authData => {
@@ -13,7 +14,13 @@ class AppointmetHelper {
         } else {
             data.append('vehicle_image', '');
         }
-        data.append('access_token', authData.form.access_token);
+        if (authData.form.access_token) {
+            data.append('access_token', authData.form.access_token);
+        } else {
+            const user = await getItem('user');
+            data.append('access_token', JSON.parse(user).access_token);
+        }
+        
         data.append('flag', authData.form.flag);
         data.append('vehicle_model_id', authData.form.model_id);
         data.append('vehicle_make_id', authData.form.make_id);

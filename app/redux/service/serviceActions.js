@@ -1,6 +1,10 @@
 import { 
-    FETCH_SERVICES, FETCH_SERVICES_SUCCESS, FETCH_SERVICES_FALIURE
-
+    FETCH_SERVICES, 
+    FETCH_SERVICES_SUCCESS, FETCH_SERVICES_FALIURE,
+    CREATE_NEW_USER_SERVIVE_APPOINTMENT,
+    SERVICES_APPOINTMENT_SUCCESS,
+    SERVICES_APPOINTMENT_FALIURE,
+    HIDE_ALERT
 } from './constants';
     
 export function fetchServices() {
@@ -20,5 +24,34 @@ export function fetchServicesFaliure(err) {
     return {
         type: FETCH_SERVICES_FALIURE,
         err
+    };
+}
+
+export function createNewServiceAppointment(service, selectedVehicle, addons) {
+    return {
+        type: CREATE_NEW_USER_SERVIVE_APPOINTMENT,
+        service,
+        selectedVehicle,
+        addons,
+    };
+}
+
+export function serviceAppointmentSuccess(payload) {
+    return {
+        type: SERVICES_APPOINTMENT_SUCCESS,
+        payload
+    };
+}
+
+export function serviceAppointmentFaliure(err) {
+    return {
+        type: SERVICES_APPOINTMENT_FALIURE,
+        err
+    };
+}
+
+export function hideAlert() {
+    return {
+      type: HIDE_ALERT
     };
 }

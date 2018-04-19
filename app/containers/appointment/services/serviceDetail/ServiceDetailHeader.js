@@ -60,7 +60,7 @@ export default class ServiceDetailHeader extends React.Component {
         <View style={{ flex: 4, flexDirection: 'column' }}>
             <View style={[styles.serviceContainer, { flex: 0 }]}>
                 <View>
-                    <Image style={styles.carImage} source={carImage} />
+                    <Image style={styles.carImage} source={item.image ? { uri: item.image } : carImage} />
                 </View>
                 <View style={styles.serviceInfoContainer}>
                     <View style={styles.serviceNameContainer}>

@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     return {
         token: state.Auth.token,
         services: state.Service.services,
-        isFetching: state.Service.isFetching
+        technician: state.Service.technician
     };
 };
 
