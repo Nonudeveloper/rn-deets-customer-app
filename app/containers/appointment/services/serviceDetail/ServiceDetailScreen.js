@@ -135,7 +135,7 @@ class ServiceDetailScreen extends React.Component {
             <ServiceDetailHeader item={this.state.item} selectedVehicle={this.props.selectedVehicle} selectedArrayRef={selectedArrayRef} getSelectedItems={this.getSelectedItems} />
             <View style={styles.buttonContainer} >
                 <View style={styles.totalPaymentContainer}>
-                  <Text style={styles.paymentText}>Total Payment</Text>
+                  <Text style={[styles.paymentText, { flex: 3 }]}>Total Payment</Text>
                   <Text style={styles.paymentText}>${this.state.totalCost}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
       flex: 1, 
       flexDirection: 'row', 
       justifyContent: 'space-around', 
-      top: 15
+      top: 15,
+      paddingHorizontal: 15
     },
     paymentText: {
       fontSize: 17,

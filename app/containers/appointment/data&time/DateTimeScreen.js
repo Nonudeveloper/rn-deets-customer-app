@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableHighlight, Text, Modal, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, View, Image, TouchableHighlight, Text, Modal, Dimensions, FlatList, ScrollView } from 'react-native';
 import Header from '../../header/Header';
 import { getItem } from '../../../helpers/asyncStorage';
 import Loader from '../../../deetscomponents/Loader';
@@ -7,6 +7,7 @@ import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
 // import Calendar from 'react-native-calendar-select';
 import Calendar from 'react-native-calendar';
+import { getAvailability } from './api';
 
 
 
@@ -25,6 +26,9 @@ export default class DateTimeScreen extends React.Component {
     this.state = {
         date: '2016-05-15',
         modalVisible: false,
+        data: [],
+        time: [],
+        selectedItem: '', 
       FlatListItems: [
           {key: '0:00'},
           {key: '0:30'},
@@ -78,11 +82,18 @@ export default class DateTimeScreen extends React.Component {
       };
   }
 
-//   componentDidMount() {
-//     if (this.props.services.length === 0) {
-//       this.props.actions.fetchServices();
-//     }
-//   }
+  componentDidMount() {
+    // if (this.props.services.length === 0) {
+    //   this.props.actions.fetchServices();
+    // }
+    getAvailability()
+        .then(res => {
+          const nw = this.getTechnicanAvailability(res);
+          console.log(nw)
+          this.setState({ data: res, time: nw })
+        })
+        .catch(err => alert("An error occurred"));
+  }
 renderModal = () => {
   const customStyle = {
     calendarContainer: {
@@ -214,8 +225,58 @@ setModalVisible(visible) {
     console.log(item)
     }
 
+    getAverageRating(stars) {
+      const availabilityGrid = [];
+      for (let i = 0; i < 5; i++) {
+        availabilityGrid.push(<Image source={i < stars ? starOn : starOff} key={i} style={{ width: 20, height: 20, marginHorizontal: 3 }} />);
+      }
+      return availabilityGrid;
+    }
+    
+    getTechnicanAvailability(data) {
+      const availableTime = [];
+      if (data.technician) {
+         
+          data.technician.map((tec, i) => {
+            const convertedtime = [];
+            tec.interval.map((interval, j) => {
+              const date = new Date(interval);
+              const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+              convertedtime.push({ key: j, timeavailable: getTime, selected: false });
+            });
+            availableTime.push({ technician: tec, time: convertedtime });
+          });
+      }
+      return availableTime;
+    }
+
+    changeActiveRadioButton(key,data) {
+      this.state.time.map((item) => {
+        if (item.technician.technician_id === data.technician.technician_id) {
+          item.time.map((times) => {
+            if (times.key === key) {
+              times.selected = true;
+              this.setState({
+                selectedItem: item
+              });
+            } else{
+              times.selected = false;
+            }
+          })
+      } else {
+        item.time.map((times) => {
+            times.selected = false;
+        });
+      }
+    });
+      // this.setState({
+      //   radioItems: this.state.radioItems
+      // });
+  }
+
   render() {
-    const { isFetching } = this.props;
+    console.log(this.state);
+    // const { isFetching } = this.props;
     const today = new Date();
     const date = today.toDateString();
     return (
@@ -229,8 +290,8 @@ setModalVisible(visible) {
             // onPress={() => this.props.navigation.navigate('selectVehicle')}
             indicatorSource={indicatorOne}
         />
-        <Loader loading={isFetching} />
-        <View style={{ marginHorizontal: 25 }}>
+        {/* <Loader loading={isFetching} /> */}
+        <View style={{ marginHorizontal: 25, bottom: 7 }}>
             <Button 
                 style={styles.nextButtonStyle}
                 buttonTextStyle={styles.buttonStyle}
@@ -241,33 +302,54 @@ setModalVisible(visible) {
                 {date}
             </Button>
         </View>
-        <View style={styles.vehicleContainer}>
-            <View style={styles.vehicleInnerContainer}>
+        <FlatList
+            data={this.state.time}
+            extraData={this.state} 
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={({ item }) => 
+                <View style={{flex:1}}>
+                  <View style={styles.vehicleContainer}>
+                <View style={styles.vehicleInnerContainer}>
                 <View style={{ flex: 1 }}>
                     <Image source={vehicleIcon} style={{ width: 80, height: 80 }} />
                 </View>
                  <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'space-between' }}>
                       {/* <Text style={styles.vehicleFont}></Text> */}
-                    <Text style={styles.licenceFont}>Virgil Pineda</Text>
+                    <Text style={styles.licenceFont}>{item.technician.first_name} {item.technician.last_name}</Text>
+                    
                     <View style={{ top: 10, flexDirection: 'row' }}>
+                    {this.getAverageRating(item.technician.average_rating)}
+                        {/* <Image source={starOn} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
                         <Image source={starOn} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
                         <Image source={starOn} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
                         <Image source={starOn} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
-                        <Image source={starOn} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
-                        <Image source={starOff} style={{ width: 20, height: 20, marginHorizontal: 3 }} />
-                        <Text style={styles.vehicleFont}>(4.0)</Text>
+                        <Image source={starOff} style={{ width: 20, height: 20, marginHorizontal: 3 }} /> */}
+                        <Text style={styles.vehicleFont}>({item.technician.average_rating})</Text>
                     </View>
                 </View>
             </View>
         </View>
-        <View style={{top:10, height: 80, backgroundColor: '#333333', flexDirection: 'row'}}>
-                <View style={{ flex:1, borderRightColor:'gray', borderRightWidth: 2, borderLeftColor: 'gray', borderLeftWidth: 2, marginHorizontal:50, marginVertical:20}}>
-                <FlatList
-       horizontal={true}
-       data={ this.state.FlatListItems } renderItem={({item}) => <Text style={styles.licenceFont} onPress={this.GetItem.bind(this, item.key)}  > {item.key} </Text>}
-      />
+        {/* {console.log(item.interval)} */}
+        <View style={{top:1, height: 80, backgroundColor: '#333333', flexDirection: 'row'}}>
+                <View style={{ flex:5, borderLeftColor:'gray', alignItems: 'center', borderLeftWidth: 2, marginVertical:20, marginHorizontal:20}}>
+                <ScrollView horizontal styles={{}}>
+                {item.time.map((time, i) => 
+                <Text 
+                  key={time.key}
+                  onPress={this.changeActiveRadioButton.bind(this, time.key, item)}
+                  style={time.selected ? { paddingTop: 5, backgroundColor: StyleConstants.LoginButtonBColor, borderRadius:10,fontSize: 23, color: '#586069', paddingHorizontal:20} : {paddingTop:5,fontSize: 23, color: '#586069', paddingHorizontal:20}}
+                >{time.timeavailable}</Text>)}
+                
+                </ScrollView>
                 </View>
+                <View style={{flex:1,borderLeftColor: 'gray', borderLeftWidth: 2, marginVertical:20, alignItems: 'center'}}>
+                <Text style={{ alignItems: 'center',paddingTop:5,fontSize: 23, color: '#586069'}}>hrs</Text>
+                  </View>
         </View>
+                </View>}
+            keyExtractor={(item, index) => index.toString()}
+        />
+        
         {/* <ServicesList services={this.props.services} navigation={this.props.navigation} /> */}
         {this.renderModal()}
       </View>
@@ -303,7 +385,7 @@ const styles = StyleSheet.create({
         borderTopColor: '#e0e0e0',
         flexDirection: 'row',
         alignItems: 'center',
-        top: 10,
+        // top: 10,
         paddingHorizontal: 20
       },
       radioButtonContainer: {

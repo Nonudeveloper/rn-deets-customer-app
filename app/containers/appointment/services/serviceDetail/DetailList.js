@@ -58,7 +58,7 @@ export default class ServiceDetailHeader extends React.Component {
                 ItemSeparatorComponent={this.flatListItemSeparator}
                 renderItem={
                     ({ item }) => 
-                    <View style={{ flex: 1, height: 44, flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
                     
                     {
                       (this.props.showServices)
@@ -82,11 +82,21 @@ export default class ServiceDetailHeader extends React.Component {
                         getSelectedItems={this.props.getSelectedItems}
                       />
                       </View>
-                      <View style={{ flex: 9 }}>
+                      <View style={{ flex: 9, flexDirection: 'column',  }}>
+                        <Text 
+                          style={{ fontSize: 18, color: 'black'}} 
+                          onPress={this.getItem.bind(this, item.adds_on_name)} 
+                        > {item.adds_on_name} </Text>
+                        <View style={{ flexDirection: 'row', paddingHorizontal: 5 }}>
+                        <Text 
+                          style={[styles.item, { backgroundColor: 'gray' }]} 
+                          onPress={this.getItem.bind(this, item.adds_on_name)} 
+                        > {item.adds_on_type_name} </Text>
                         <Text 
                           style={styles.item} 
                           onPress={this.getItem.bind(this, item.adds_on_name)} 
-                        > {item.adds_on_name} </Text>
+                        > Estimation Time - {item.estimation_time} Mins</Text>
+                        </View>
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text 
