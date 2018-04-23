@@ -33,5 +33,5 @@ function* watchFetchNearByPlaces() {
 
 
 export default function* root() {
-  yield fork(watchFetchNearByPlaces);
+  // yield fork(watchFetchNearByPlaces);
 }

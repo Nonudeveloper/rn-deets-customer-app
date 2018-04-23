@@ -1,6 +1,11 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { postNewAppointmentSuccess, postNewAppointmentFaliure, scheduleNewAppointmentSuccess, scheduleNewAppointmentFaliure } from './actions';
+import { 
+  postNewAppointmentSuccess, 
+  postNewAppointmentFaliure, 
+  scheduleNewAppointmentSuccess, 
+  scheduleNewAppointmentFaliure 
+} from './actions';
 import { POST_NEW_APPOINTMENT, SCHEDULE_NEW_APPOINTMENT } from './constants';
 import AppointmentHelper from '../../helpers/appointment/appointmentHelper';
 
