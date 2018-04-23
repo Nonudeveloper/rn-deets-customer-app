@@ -16,6 +16,7 @@ const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
 const drawer1 = StackNavigator({
+  
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },

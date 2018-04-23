@@ -125,12 +125,12 @@ class ServiceDetailScreen extends React.Component {
             headerText={'Services'}
             showRightIcon
             rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('selectVehicle')}
+            onPress={() => this.goToNext()}
             indicatorSource={indicatorOne}
         />
-        <Loader
+        {/* <Loader
               loading={technicianFetching} 
-        />
+        /> */}
         {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             <ServiceDetailHeader item={this.state.item} selectedVehicle={this.props.selectedVehicle} selectedArrayRef={selectedArrayRef} getSelectedItems={this.getSelectedItems} />
             <View style={styles.buttonContainer} >

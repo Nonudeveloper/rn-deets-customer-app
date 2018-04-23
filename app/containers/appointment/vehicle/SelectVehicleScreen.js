@@ -10,8 +10,6 @@ import StyleConstants from '../../../config/StyleConstants';
 
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
 
-
-
 export default class SelectVehicleScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +29,13 @@ export default class SelectVehicleScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
-      <Loader
+      {/* <Loader
                 loading={isFetching} 
-      />
+      /> */}
         <Header 
             headerText={'Select Vehicle'} 
             navigation={this.props.navigation} 

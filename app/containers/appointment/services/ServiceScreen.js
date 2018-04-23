@@ -28,12 +28,9 @@ export default class ServiceScreen extends React.Component {
         <Header 
             navigation={this.props.navigation} 
             headerText={'Services'}
-            showRightIcon
-            rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('DateTimeScreen')}
             indicatorSource={indicatorOne}
         />
-        <Loader loading={isFetching} />
+        {/* <Loader loading={isFetching} /> */}
         <ServicesList services={this.props.services} selectedVehicle={this.props.selectedVehicle} navigation={this.props.navigation} />
       </View>
     );

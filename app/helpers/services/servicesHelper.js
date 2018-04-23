@@ -45,9 +45,14 @@ class ServicesHelper {
         // .then(response => response)
         // .catch(error => ({ error: JSON.stringify(error) }));
 
-        return await fetch('http://127.0.0.1:8000/customer/create_new_user_service_appointment', {
+        
+        return await fetch('http://newapi.deetsmobile.com/customer/create_new_user_service_appointment', {
             method: 'POST',
             body: data,
+            headers: {
+                'Accept':       'application/json',
+                'Content-Type': 'application/json'
+              }
             }).then(response => {
             return JSON.parse(response._bodyText);
             })
