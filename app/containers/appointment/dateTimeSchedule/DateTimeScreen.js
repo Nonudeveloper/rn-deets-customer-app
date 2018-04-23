@@ -5,7 +5,7 @@ import Loader from '../../../deetscomponents/Loader';
 import Button from '../../../deetscomponents/Button';
 import styles from './styles';
 import { getAvailability } from './api';
-import Calender from './Calender';
+import Calender from './Calendar';
 
 
 const indicatorOne = require('../../../assets/icons/process2.png');

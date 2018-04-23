@@ -7,7 +7,7 @@ import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
 import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
-import DateTimeScreen from '../containers/appointment/data&time/index';
+import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
