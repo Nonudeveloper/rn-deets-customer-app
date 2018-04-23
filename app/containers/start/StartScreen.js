@@ -6,19 +6,35 @@ import {
   ImageBackground,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
+import Loader from '../../components/Loader';
 
 const { width, height } = Dimensions.get('window');
 
 const background = require('./images/back.jpg');
-const mark = require('./images/login1_mark.png');
+const mark = require('../../assets/icons/4_deets_logo.png');
 
 export default class StartScreen extends Component {
+
+
+  constructor(props) {
+    super(props);
+  }
+
+  goToNext() {
+    //initiate loading and fetch vehicles
+    this.props.getVehicles();
+    this.props.navigation.navigate('selectRegisteration');
+  }
+
   render() {
-    console.log(this.props);
+    const { isFetching } = this.props;
     return (
       <View style={styles.container}>
+        <Loader
+            loading={isFetching} 
+        />
         <ImageBackground source={background} style={styles.background} resizeMode="cover">
           <View style={styles.markWrap}>
             <Image source={mark} style={styles.mark} resizeMode="contain" />
@@ -30,8 +46,8 @@ export default class StartScreen extends Component {
               <TouchableOpacity style={styles.login} onPress={() => this.props.navigation.navigate('loginScreen')} >
                 <Text style={{ color: '#cccccc', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.register} onPress={() => this.props.navigation.navigate('personalInformation')} >
-                <Text style={{ color: '#cccccc', fontWeight: 'bold', fontSize: 16 }}>Register</Text>
+              <TouchableOpacity style={styles.register} onPress={this.goToNext.bind(this)} >
+                <Text style={{ color: '#cccccc', fontWeight: 'bold',fontSize: 16 }}>Register{isFetching && 'Loading...'}</Text>
               </TouchableOpacity>
         </View>
       </View>

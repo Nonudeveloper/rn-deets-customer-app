@@ -10,7 +10,7 @@ const DrawerStack = DrawerNavigator({
 });
 
 const DrawerNav = StackNavigator({
-  DrawerStack: { screen: DrawerStack }
+  drawerStack: { screen: DrawerStack }
 }, {
   headerMode: 'float',
   navigationOptions: ({ navigation }) => ({

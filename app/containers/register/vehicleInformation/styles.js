@@ -3,11 +3,9 @@ import { StyleSheet } from 'react-native';
 // const window = Dimensions.get('window');
 
 export default StyleSheet.create({
-  profilePic: {
+    carPic: {
         alignItems: 'center',
         justifyContent: 'center',
-        // height: 100
-       
     },
     circle: {
         borderRadius: 50,
@@ -25,39 +23,37 @@ export default StyleSheet.create({
         borderRadius: 100
     },
     container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  t1: {
-    flex: 2,
-    backgroundColor: '#fff',
-    justifyContent: 'center'
-  },
-  t2: {
-    flex: 7,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    backgroundColor: '#1a1a1a'
-  },
-  t3: {
-    flex: 1,
-    backgroundColor: '#fff',
-    margin: 25
-  },
-  nextButtonContainer: {
-    justifyContent: 'center'
-  },
-  nextButtonStyle: {
-    borderRadius: 100,
-    height: 55,
-    backgroundColor: '#66cc00',
-    borderWidth: 4,
-    borderColor: '#bfff80',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-   formArea: {
-        backgroundColor: '#1a1a1a',
+        flex: 1,
+        flexDirection: 'column',
+    },
+    t1: {
+        justifyContent: 'center',
+        flex: 1
+    },
+    t2: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        flex: 1
+    },
+    t3: {
+        margin: 25,
+        flex: 1
+    },
+    nextButtonContainer: {
+        justifyContent: 'flex-end',
+        paddingTop: 23
+    },
+    nextButtonStyle: {
+        borderRadius: 100,
+        height: 55,
+        // backgroundColor: '#8ac10b',
+        borderWidth: 4,
+        borderColor: '#bfff80',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    formArea: {
+        backgroundColor: '#333333',
     },
     textStyle: {
         color: '#fff'
@@ -66,31 +62,63 @@ export default StyleSheet.create({
         height: 45,
         backgroundColor: '#fff',
         justifyContent: 'center',
+        paddingLeft: 23,
+        paddingRight: 23
     },
     colContainer: {
-        backgroundColor: '#1a1a1a',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 15
+        marginHorizontal: 15,
+        paddingLeft: 6
     },
     colOne: {
         flex: 1,
         borderBottomWidth: 2,
-        borderBottomColor: 'grey' 
+        borderBottomColor: 'grey'
     },
     colTwo: {
         flex: 1,
         borderBottomWidth: 2,
-        borderBottomColor: 'grey' 
+        borderBottomColor: 'grey'
     },
     pickerStyle: {
         color: 'grey',
-        
     },
     inputStyle: {
-        borderBottomWidth: 2,
         borderBottomColor: 'grey',
-        marginHorizontal: 15
+        marginHorizontal: 20,
+    },
+    licenseInnerContainerStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingTop: 10
+    },
+    radio1ContainerStyle: {
+        flex: 4,
+        paddingLeft: 5,
+        flexDirection: 'row'
+    },
+    radio2ContainerStyle: {
+        flex: 1,
+        paddingLeft: 5,
+        flexDirection: 'row'
+    },
+    licenseTextStyle: {
+        // paddingLeft: 10,
+        // color: '#bfff80',
+    },
+    editIcon: {
+        resizeMode: 'contain', 
+        width: 25, 
+        height: 25,
+        zIndex: 999,
+        // marginRight: 10
+    },
+    editButtonWrapper: { 
+        zIndex: 999, 
+        justifyContent: 'flex-end', 
+        marginLeft: 48, 
+        marginBottom: 43 
     }
 });
 

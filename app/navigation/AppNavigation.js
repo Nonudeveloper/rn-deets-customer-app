@@ -1,4 +1,6 @@
-import { StackNavigator } from 'react-navigation';
+
+import React from 'react'; 
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import DrawerNav from './DrawerNavigation';
 import LoginNav from './LoginNavigation';
 
