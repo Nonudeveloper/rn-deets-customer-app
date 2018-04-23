@@ -18,8 +18,9 @@ LocaleConfig.locales.en = {
   export default class DateTimeScreen extends React.Component {
       constructor(props) {
         super(props);
+        
         this.state = {
-            selected: ''
+            selected: this.props.currentDate
         };
       }
 

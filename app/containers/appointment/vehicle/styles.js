@@ -20,7 +20,8 @@ export default StyleSheet.create({
       borderTopColor: '#e0e0e0',
       flexDirection: 'row',
       alignItems: 'center',
-      // top: 10
+      // top: 10,
+      paddingHorizontal: 20
     },
     radioButtonContainer: {
         paddingHorizontal: 17
@@ -57,6 +58,52 @@ export default StyleSheet.create({
       fontSize: 18, 
       color: 'black', 
       fontWeight: 'bold' 
-    }
+    },
+    radioButton:
+    {
+        flexDirection: 'row',
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+ 
+    radioButtonHolder:
+    {
+        borderRadius: 50,
+        borderWidth: 2,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+ 
+    radioIcon:
+    {
+        // borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+ 
+    label:
+    {
+        marginLeft: 10,
+        fontSize: 20
+    },
+ 
+    selectedTextHolder:
+    {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        padding: 15,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+ 
+    selectedText:
+    {
+        fontSize: 18,
+        color: 'white'
+    },
 });
 

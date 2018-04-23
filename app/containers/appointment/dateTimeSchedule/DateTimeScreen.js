@@ -16,13 +16,16 @@ const starOff = require('../../../assets/icons/starOff.png');
 export default class DateTimeScreen extends React.Component {
   constructor(props) {
     super(props);
+    const today = new Date();
+    const date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();
+
     this.state = {
         date: '2016-05-15',
         modalVisible: false,
         data: [],
         time: [],
         selectedItem: '',
-        selectedDate: ''
+        selectedDate: date
       };
   }
 
@@ -46,7 +49,7 @@ export default class DateTimeScreen extends React.Component {
         animationType={'none'}
         onRequestClose={() => console.log('hjk')}
       >
-    <Calender setModalVisible={this.setModalVisible} getSelectedDate={this.getSelectedDate.bind(this)} />
+    <Calender setModalVisible={this.setModalVisible} getSelectedDate={this.getSelectedDate.bind(this)} currentDate={this.state.selectedDate} />
     </Modal>
     );
   }
@@ -110,9 +113,8 @@ export default class DateTimeScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     // const { isFetching } = this.props;
-    const today = new Date();
+    const today = new Date(this.state.selectedDate);
     const date = today.toDateString();
     return (
       <View style={styles.container}>

@@ -5,7 +5,7 @@ import { getItem } from '../asyncStorage';
 class AppointmetHelper {
 
 
-    appendVehicleData = (data, authData) => {
+    appendVehicleData = async (data, authData) => {
         const type = authData.form.type;
         const typeData = type.split(', ');
 

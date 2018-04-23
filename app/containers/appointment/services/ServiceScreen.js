@@ -22,15 +22,16 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
         <Header 
             navigation={this.props.navigation} 
             headerText={'Services'}
-            showRightIcon
-            rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('DateTimeScreen')}
+            // showRightIcon
+            // rightText={'Next'}
+            // onPress={() => this.props.navigation.navigate('DateTimeScreen')}
             indicatorSource={indicatorOne}
         />
         <Loader loading={isFetching} />

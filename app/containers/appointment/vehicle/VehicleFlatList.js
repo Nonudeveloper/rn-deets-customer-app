@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
-import Checkbox from '../../../components/appointment/Checkbox';
-import RadioButton from '../../../components/appointment/RadioButton';
+import { View, Image, FlatList, TouchableOpacity } from 'react-native';
+import VehicleItems from './VehicleItems';
 import styles from './styles';
 
 
-const vehicleIcon = require('../../../assets/icons/car_place_holder.png');
 const editButton = require('../../../assets/icons/edit_btn.png');
 
 export default class VehicleFlatList extends React.Component {
@@ -54,6 +52,7 @@ export default class VehicleFlatList extends React.Component {
         this.setState({
           radioItems: this.state.radioItems
         });
+        this.props.navigation.navigate('serviceScreen');  
     }
 
 
@@ -65,21 +64,16 @@ export default class VehicleFlatList extends React.Component {
             ItemSeparatorComponent={this.FlatListItemSeparator}
             renderItem={({ item }) => 
                 <View style={styles.vehicleContainer}>
-                  <View style={styles.radioButtonContainer}>
-                    <RadioButton key={item.vehicle_id} button={item} onClick={this.changeActiveRadioButton.bind(this, item.vehicle_id)} />
-                  </View>
                   {this.props.selectedVehicle(this.state.selectedItem)}
-                  <View style={styles.vehicleInnerContainer}>
-                    <View style={{ flex: 1 }}>
-                      <Image source={vehicleIcon} style={{ width: 80, height: 80 }} />
-                    </View>
-                    <View style={{ flex: 2 }}>
-                      <Text style={styles.vehicleFont}>{item.vehicle_make}</Text>
-                      <Text style={styles.vehicleFont}>{item.vehicle_year}, {item.vehicle_color}</Text>
-                      <Text style={styles.licenceFont}>HSHSB</Text>
-                    </View>
-                  </View>
-                  <View style={{ right: 15 }}>
+                  <VehicleItems 
+                    key={item.vehicle_id} 
+                    button={item} 
+                    onClick={this.changeActiveRadioButton.bind(this, item.vehicle_id)} 
+                    vehicleMake={item.vehicle_make}
+                    vehicleYear={item.vehicle_year}
+                    vehicleColor={item.vehicle_color}
+                  />
+                  <View style={{ right: 45 }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: item })} >
                         <Image 
                           source={editButton} 

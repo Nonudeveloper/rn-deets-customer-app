@@ -82,6 +82,7 @@ class ServiceDetailScreen extends React.Component {
   }
 
   goToNext() {
+    console.log('dfdf')
     if (selectedArrayRef.getArray().length === 0) {
       const addOns = '';
       this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
@@ -116,6 +117,7 @@ class ServiceDetailScreen extends React.Component {
   
 
   render() {
+    console.log(this.props)
     const { technicianFetching } = this.props;
     return (
       <View style={styles.container}>
@@ -125,7 +127,7 @@ class ServiceDetailScreen extends React.Component {
             headerText={'Services'}
             showRightIcon
             rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('selectVehicle')}
+            onPress={() => this.goToNext()}
             indicatorSource={indicatorOne}
         />
         <Loader
@@ -138,23 +140,6 @@ class ServiceDetailScreen extends React.Component {
                   <Text style={[styles.paymentText, { flex: 3 }]}>Total Payment</Text>
                   <Text style={styles.paymentText}>${this.state.totalCost}</Text>
                 </View>
-                {/* <View style={{ flex: 1 }}>
-                  <Button 
-                      style={{ 
-                          height: 50,
-                          borderRadius: 100,
-                          borderColor: '#a8a8a8',
-                          marginHorizontal: 25, 
-                          flex: 0, 
-                          backgroundColor: '#8ac10b', 
-                      }}
-
-                      onPress={this.goToNext.bind(this)}
-
-                  >
-                    Next
-                  </Button>
-                </View> */}
             </View>
       </View>
     );
