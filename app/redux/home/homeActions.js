@@ -1,24 +1,26 @@
 import { 
-    FETCH_NEARBY_PLACES, FETCH_NEARBY_PLACES_SUCCESS, FETCH_NEARBY_PLACES_FALIURE, 
+    FETCH_NEARBY_SERVICE_PROVIDERS, 
+    FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS, 
+    FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE
 } from './constants';
     
 export function fetchNearByPlaces(payload) {
     return {
-        type: FETCH_NEARBY_PLACES,
+        type: FETCH_NEARBY_SERVICE_PROVIDERS,
         payload
     };
 }
 
-export function fetchNearByPlacesSuccess(nearByPlaces) {
+export function fetchNearByPlacesSuccess(serviceProviders) {
     return {
-        type: FETCH_NEARBY_PLACES_SUCCESS,
-        nearByPlaces: nearByPlaces.data
+        type: FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS,
+        serviceProviders
     };
 }
 
 export function fetchNearByPlacesFaliure(err) {
     return {
-        type: FETCH_NEARBY_PLACES_FALIURE,
+        type: FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE,
         err
     };
 }

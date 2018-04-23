@@ -1,24 +1,26 @@
 import { 
-    FETCH_NEARBY_PLACES, FETCH_NEARBY_PLACES_SUCCESS, FETCH_NEARBY_PLACES_FALIURE
+    FETCH_NEARBY_SERVICE_PROVIDERS, 
+    FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS, 
+    FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE
 } from './constants';
 
 const initialState = {
       isFetching: false,
-      nearByPlaces: [],
+      serviceProviders: [],
 };
 
 export default function homeReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCH_NEARBY_PLACES:
+        case FETCH_NEARBY_SERVICE_PROVIDERS:
             return Object.assign({}, state, {
                 isFetching: true
             });
-        case FETCH_NEARBY_PLACES_SUCCESS:
+        case FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                nearByPlaces: action.nearByPlaces
+                serviceProviders: action.serviceProviders
             });
-        case FETCH_NEARBY_PLACES_FALIURE:
+        case FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE:
             return Object.assign({}, state, {
                 isFetching: false,
                 err: action.err

@@ -74,8 +74,8 @@ export default class ServiceDetailHeader extends React.Component {
                     </View>
                     <View style={styles.descContainer}>
                         <View style={{ marginHorizontal: 5 }}>
-                        <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
-                        <Text style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
+                            <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
+                            <Text style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
                         </View>
                     </View>
                 </View>

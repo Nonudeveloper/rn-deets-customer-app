@@ -148,7 +148,9 @@ class ServiceDetailScreen extends React.Component {
                           flex: 0, 
                           backgroundColor: '#8ac10b', 
                       }}
+
                       onPress={this.goToNext.bind(this)}
+
                   >
                     Next
                   </Button>
