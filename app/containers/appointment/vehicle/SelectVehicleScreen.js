@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import Header from '../../header/Header';
 import VehicleFlatList from './VehicleFlatList';
 import Loader from '../../../deetscomponents/Loader';
@@ -9,6 +9,7 @@ import StyleConstants from '../../../config/StyleConstants';
 
 
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
+
 
 
 export default class SelectVehicleScreen extends React.Component {
@@ -53,13 +54,16 @@ export default class SelectVehicleScreen extends React.Component {
           selectedVehicle={this._selectedVehicle}
         />
         <View style={styles.nextButtonContainer}>
-            <View style={{ marginHorizontal: 25 }}>
+            <View style={{ flexDirection: 'row', marginHorizontal: 25, justifyContent: 'flex-end', }}>
               <Button 
                 style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
                 onPress={this.getSelectedItems}
               >
                 Next
               </Button>
+              {/* <TouchableOpacity onPress={() => navigate()}>
+                <Image source={backButton} style={{ width: 50, height: 50 }} />
+                        </TouchableOpacity> */}
             </View>
           </View>
           </View>

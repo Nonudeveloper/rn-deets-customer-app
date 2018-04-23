@@ -7,6 +7,7 @@ import Button from '../../../../deetscomponents/Button';
 
 const carImage = require('../../../../assets/icons/3_car_img.png');
 const downArrow = require('../../../../assets/icons/down_arrow.png');
+const upArrow = require('../../../../assets/icons/down_arrow_onclick.png');
 
 export default class ServiceDetailHeader extends React.Component {
 
@@ -83,13 +84,13 @@ export default class ServiceDetailHeader extends React.Component {
                 <TouchableHighlight onPress={this.showServices}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(0) }}>INCLUDED SERVICES</Text>
-                        <Image style={styles.downArrow} source={downArrow} />
+                        <Image style={styles.downArrow} source={this.state.showServices ? upArrow : downArrow} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight onPress={this.showAddons}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(1) }}>ADD-ON SERVICES</Text>
-                        <Image style={styles.downArrow} source={downArrow} />
+                        <Image style={styles.downArrow} source={this.state.showServices ? downArrow : upArrow} />
                     </View>
                 </TouchableHighlight>
             </View>

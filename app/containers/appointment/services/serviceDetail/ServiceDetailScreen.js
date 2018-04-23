@@ -138,7 +138,7 @@ class ServiceDetailScreen extends React.Component {
                   <Text style={[styles.paymentText, { flex: 3 }]}>Total Payment</Text>
                   <Text style={styles.paymentText}>${this.state.totalCost}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
+                {/* <View style={{ flex: 1 }}>
                   <Button 
                       style={{ 
                           height: 50,
@@ -152,7 +152,7 @@ class ServiceDetailScreen extends React.Component {
                   >
                     Next
                   </Button>
-                </View>
+                </View> */}
             </View>
       </View>
     );
@@ -164,8 +164,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     buttonContainer: { 
-      flex: 1, 
-      justifyContent: 'center' 
+      // flex: 1, 
+      justifyContent: 'center',
+      height: 65
     },
     totalPaymentContainer: { 
       flex: 1, 
@@ -175,8 +176,9 @@ const styles = StyleSheet.create({
       paddingHorizontal: 15
     },
     paymentText: {
-      fontSize: 17,
-      color: '#8ac10b'
+      fontSize: 23,
+      color: '#8ac10b',
+      fontWeight: 'bold'
     }
    
 });

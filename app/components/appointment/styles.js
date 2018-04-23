@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     uncheckedView: {
       flex: 1,
       backgroundColor: 'white',
-      borderRadius: 50,
-      borderWidth: 1,
+      // borderRadius: 50,
+      // borderWidth: 1,
     },
 
     checkBoxLabel: {
