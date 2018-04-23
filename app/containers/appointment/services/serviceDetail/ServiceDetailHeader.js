@@ -7,6 +7,7 @@ import Button from '../../../../deetscomponents/Button';
 
 const carImage = require('../../../../assets/icons/3_car_img.png');
 const downArrow = require('../../../../assets/icons/down_arrow.png');
+const upArrow = require('../../../../assets/icons/down_arrow_onclick.png');
 
 export default class ServiceDetailHeader extends React.Component {
 
@@ -60,7 +61,7 @@ export default class ServiceDetailHeader extends React.Component {
         <View style={{ flex: 4, flexDirection: 'column' }}>
             <View style={[styles.serviceContainer, { flex: 0 }]}>
                 <View>
-                    <Image style={styles.carImage} source={carImage} />
+                    <Image style={styles.carImage} source={item.image ? { uri: item.image } : carImage} />
                 </View>
                 <View style={styles.serviceInfoContainer}>
                     <View style={styles.serviceNameContainer}>
@@ -68,7 +69,7 @@ export default class ServiceDetailHeader extends React.Component {
                             <Text style={styles.serviceNameText}>{item.service_name}</Text>
                         </View>
                         <View style={styles.servicePrice}>
-                            <Text style={styles.servicePriceText}>${item.cost}</Text>
+                            <Text style={styles.servicePriceText}>${this.props.selectedVehicle.vehicle_type === 2 ? item.service_Large_cost : item.cost}</Text>
                         </View>
                     </View>
                     <View style={styles.descContainer}>
@@ -83,13 +84,13 @@ export default class ServiceDetailHeader extends React.Component {
                 <TouchableHighlight onPress={this.showServices}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(0) }}>INCLUDED SERVICES</Text>
-                        <Image style={styles.downArrow} source={downArrow} />
+                        <Image style={styles.downArrow} source={this.state.showServices ? upArrow : downArrow} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight onPress={this.showAddons}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(1) }}>ADD-ON SERVICES</Text>
-                        <Image style={styles.downArrow} source={downArrow} />
+                        <Image style={styles.downArrow} source={this.state.showServices ? downArrow : upArrow} />
                     </View>
                 </TouchableHighlight>
             </View>
@@ -99,6 +100,9 @@ export default class ServiceDetailHeader extends React.Component {
                         servicesList={item.included_adds_on} 
                         addonsList={item.excluded_adds_on} 
                         showServices={this.state.showServices} 
+                        selectedVehicle={this.props.selectedVehicle}
+                        selectedArrayRef={this.props.selectedArrayRef}
+                        getSelectedItems={this.props.getSelectedItems}
                     />
                 </View>
                 {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >

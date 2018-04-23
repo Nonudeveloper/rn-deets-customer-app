@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import * as registerActions from '../../../../redux/register/actions';
 import AddEditVehicleInformation from './AddEditVehicle';
-import { fetchMakeModel, updateModels  } from '../../../../redux/register/vehicleInformation/vehicleActions';
+import { fetchMakeModel, updateModels, setBackToInitialState } from '../../../../redux/register/vehicleInformation/vehicleActions';
 import { fetchVehicles } from '../../../../redux/register/startActions';
 import * as authVehicleActions from '../../../../redux/appointment/vehicle/vehicleActions';
 
@@ -19,7 +19,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         getVehicles: () => {
             dispatch(fetchVehicles());
-        }
+        },
+        setBackToInitialState: () => {
+            dispatch(setBackToInitialState());
+        },
     };
 };
 

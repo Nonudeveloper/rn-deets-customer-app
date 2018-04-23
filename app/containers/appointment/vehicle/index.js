@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthVehicleInformation from './SelectVehicleScreen';
-import { fetchAuthVehicles } from '../../../redux/appointment/vehicle/vehicleActions';
+import { fetchAuthVehicles, selectedVehicle } from '../../../redux/appointment/vehicle/vehicleActions';
 import { setBackToInitialState } from '../../../redux/register/vehicleInformation/vehicleActions';
 
 const mapDispatchToProps = (dispatch) => {
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setBackToInitialState: () => {
             dispatch(setBackToInitialState());
+        },
+        selectedVehicle: (vehicle) => {
+            dispatch(selectedVehicle(vehicle));
         },
     };
 };

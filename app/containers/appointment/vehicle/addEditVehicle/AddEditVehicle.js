@@ -21,6 +21,7 @@ export default class TestComponent extends React.Component {
 
   componentWillMount() {
     this.props.getVehicles();
+    this.props.setBackToInitialState();
     if (this.props.navigation.state.params.items !== '') {
       this.setState({
         title: 'Update Vehicle'
@@ -47,6 +48,7 @@ export default class TestComponent extends React.Component {
     if (errorCount === 0) {
       // this.props.navigation.navigate('paymentInformation');
       this.props.actions.addUpdateVehicle(this.props.form.values, this.props.vehicleImage);
+      this.props.navigation.goBack();
     }
   }
 

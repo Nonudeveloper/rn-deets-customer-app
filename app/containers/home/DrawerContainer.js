@@ -68,7 +68,7 @@ export default class DrawerContainer extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.menu, this.props.activeItemKey === 'HomeComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('HomeComponent')} 
+              onPress={() => navigation.navigate('DateTimeScreen')} 
             >
                   <Icon name='cog' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Settings</Text>

@@ -4,6 +4,7 @@ import styles from './styles';
 import PropTypes from 'prop-types';
 
 const checkButton = require('../../assets/icons/6_check_btn.png');
+const unCheckButton = require('../../assets/icons/6_uncheck_btn.png');
 
 export default class Checkbox extends Component {
    constructor() {
@@ -29,6 +30,9 @@ export default class Checkbox extends Component {
             } else {
                 this.props.selectedArrayObject.getArray().splice( this.props.selectedArrayObject.getArray().findIndex(x => x.key == key), 1 );
             }
+            if (this.props.callback) {
+                this.props.getSelectedItems(this.props.selectedArrayObject.getArray());
+            }
         });
     }
     
@@ -44,7 +48,9 @@ export default class Checkbox extends Component {
                        <Image source={checkButton} style={styles.checkedImage} />
                     </View>)
                  :
-                    (<View style={styles.uncheckedView} />)
+                    (<View style={styles.uncheckedView} >
+                        <Image source={unCheckButton} style={styles.checkedImage} />
+                    </View>)
               }
               </View>
               {/* <Text style = {[ styles.checkBoxLabel, { color: this.props.color }]}>{ this.props.label }</Text> */}
