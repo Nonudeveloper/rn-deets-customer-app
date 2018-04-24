@@ -9,7 +9,7 @@ import ServiceScreen from '../containers/appointment/services/index';
 import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
 import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 import NotesScreen from '../containers/appointment/notes/index';
-import ReviewScreen from '../containers/appointment/review/ReviewScreen';
+import ReviewScreen from '../containers/appointment/review/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');

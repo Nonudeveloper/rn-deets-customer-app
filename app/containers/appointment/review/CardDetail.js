@@ -37,7 +37,7 @@ export default class CardDetail extends React.Component {
             <Text style={{ fontWeight: '600' }}> $24 </Text>
             <Image source={arrowBtn} resizeMode={'contain'} style={{ width: 30, height: 30, marginRight: 1 }} />
         </View>
-        <Button 
+        {/* <Button 
             style={{ 
                 height: 45,
                 borderRadius: 100,
@@ -47,7 +47,7 @@ export default class CardDetail extends React.Component {
                 borderWidth: 4,
                 marginTop: 40
             }}
-        >Next</Button>
+        >Next</Button> */}
       </View>
     );
   }

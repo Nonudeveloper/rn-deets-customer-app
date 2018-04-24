@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
+import CommonTypeTextInput from '../../../components/form/Input';
 
 const indicatorThree = require('../../../assets/icons/process3.png');
 
@@ -28,16 +29,16 @@ class NotesScreen extends React.Component {
         />
         {/* <Loader loading={isFetching} /> */}
         <View style={styles.inputView}>
-            <TextInput
-                multiline
-                numberOfLines={8}
-                onChangeText={(text) => console.log(text)}
-                style={styles.input}
+            
+            <Field
+                name={'notes'}
+                component={CommonTypeTextInput}
+                props={this.props}
                 placeholder={'Type your notes here!'}
-                placeholderTextColor={'grey'}
+                placeholderTextColor='grey'
                 underlineColorAndroid="transparent"
-                editable
-                maxLength={500}
+                type="multilinetext"
+                borderBotmWidth={styles.input}
             />
         </View>
 

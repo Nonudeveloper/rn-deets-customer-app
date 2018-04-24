@@ -4,7 +4,8 @@ import {
     POST_NEW_APPOINTMENT_FALIURE,
     SCHEDULE_NEW_APPOINTMENT,
     SCHEDULE_NEW_APPOINTMENT_SUCCESS,
-    SCHEDULE_NEW_APPOINTMENT_FALIURE
+    SCHEDULE_NEW_APPOINTMENT_FALIURE,
+    STORE_APPOINTMENT_SCHEDULE
 } from './constants';
     
 export function postNewAppointment(payload) {
@@ -46,5 +47,12 @@ export function scheduleNewAppointmentFaliure(err) {
     return {
         type: SCHEDULE_NEW_APPOINTMENT_FALIURE,
         err
+    };
+}
+
+export function storeAppointmentschedule(selectedSchedule) {
+    return {
+        type: STORE_APPOINTMENT_SCHEDULE,
+        selectedSchedule
     };
 }

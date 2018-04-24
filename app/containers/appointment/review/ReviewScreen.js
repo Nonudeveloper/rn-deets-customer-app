@@ -17,14 +17,15 @@ export default class ReviewScreen extends React.Component {
 
 
   render() {
-    const { isFetching } = this.props;
+    console.log(this.props);
+    // const { isFetching } = this.props;
     return (
       <View style={styles.container}>
         <Header 
             navigation={this.props.navigation} 
             headerText={'Review'}
             showRightIcon
-            rightText={'Next'}
+            rightText={'Confirm'}
             onPress={() => this.props.navigation.navigate('selectVehicle')}
             indicatorSource={indicatorFour}
         />
@@ -32,8 +33,8 @@ export default class ReviewScreen extends React.Component {
         {/* //sp details component */}
         {/* //appointment details component */}
         {/* //credit card details component */}
-        <ServiveProviderDetail />
-        <ServiceDetail />
+        <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
+        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.notes : ''}/>
         <CardDetail />
         {/* <Button 
             style={{ 
