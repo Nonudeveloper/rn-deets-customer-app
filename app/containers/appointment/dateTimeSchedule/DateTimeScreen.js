@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, Modal, FlatList, ScrollView } from 'react-native';
+import { View, Image, Text, Modal, FlatList, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import Header from '../../header/Header';
 import Loader from '../../../deetscomponents/Loader';
 import Button from '../../../deetscomponents/Button';
@@ -16,13 +16,16 @@ const starOff = require('../../../assets/icons/starOff.png');
 export default class DateTimeScreen extends React.Component {
   constructor(props) {
     super(props);
+    const today = new Date();
+    const date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();
+
     this.state = {
-        date: '2016-05-15',
         modalVisible: false,
         data: [],
         time: [],
         selectedItem: '',
-        selectedDate: ''
+        selectedDate: date,
+        selectedTime: ''
       };
   }
 
@@ -46,7 +49,7 @@ export default class DateTimeScreen extends React.Component {
         animationType={'none'}
         onRequestClose={() => console.log('hjk')}
       >
-    <Calender setModalVisible={this.setModalVisible} getSelectedDate={this.getSelectedDate.bind(this)} />
+    <Calender setModalVisible={this.setModalVisible} getSelectedDate={this.getSelectedDate.bind(this)} currentDate={this.state.selectedDate} />
     </Modal>
     );
   }
@@ -95,7 +98,8 @@ export default class DateTimeScreen extends React.Component {
           if (times.key === key) {
              times.selected = true;
             this.setState({
-              selectedItem: item
+              selectedItem: item,
+              selectedTime: times.timeavailable
             });
           } else{
             times.selected = false;
@@ -109,10 +113,22 @@ export default class DateTimeScreen extends React.Component {
     });
   }
 
+  goToNext() {
+    if (this.state.selectedItem) {
+      this.props.actions.storeAppointmentschedule(this.state);
+      this.props.navigation.navigate('notesScreen');
+    } else {
+      Alert.alert(
+        'Error',
+        'Select Technican first..'
+      );
+    }
+  }
+
   render() {
-    console.log(this.state);
+    console.log(this.state)
     // const { isFetching } = this.props;
-    const today = new Date();
+    const today = new Date(this.state.selectedDate);
     const date = today.toDateString();
     return (
       <View style={styles.container}>
@@ -120,9 +136,9 @@ export default class DateTimeScreen extends React.Component {
             headerText={'Deets'} 
             navigation={this.props.navigation} 
             headerText={'Date & Time'}
-            // showRightIcon
-            // rightText={'Next'}
-            // onPress={() => this.props.navigation.navigate('selectVehicle')}
+            showRightIcon
+            rightText={'Next'}
+            onPress={() => this.goToNext()}
             indicatorSource={indicatorOne}
         />
         {/* <Loader loading={isFetching} /> */}
@@ -145,8 +161,8 @@ export default class DateTimeScreen extends React.Component {
                 <View style={{ flex: 1 }}>
                   <View style={styles.technicianContainer}>
                     <View style={styles.technicianInnerContainer}>
-                      <View style={{ flex: 1 }}>
-                        <Image source={vehicleIcon} style={{ width: 80, height: 80 }} />
+                      <View style={{ flex: 1, }}>
+                        <Image source={item.technician.image ? { uri: item.technician.image } : vehicleIcon} style={{ width: '80%', height: '80%' }} />
                       </View>
                       <View style={styles.technicianInfoContainer}>
                           <Text style={styles.licenceFont}>{item.technician.first_name} {item.technician.last_name}</Text>
@@ -161,11 +177,12 @@ export default class DateTimeScreen extends React.Component {
                     <View style={styles.availabilityInnerContainer}>
                       <ScrollView horizontal styles={{}}>
                           {item.time.map((time, i) => 
-                            <Text 
+                            <TouchableOpacity 
                               key={time.key}
                               onPress={this.changeActiveRadioButton.bind(this, time.key, item)}
-                              style={time.selected ? styles.scrollViewSelectedText : styles.scrollViewText}
-                            >{time.timeavailable}</Text>)}
+                            >
+                              <Text style={time.selected ? styles.scrollViewSelectedText : styles.scrollViewText}>{time.timeavailable}</Text>
+                            </TouchableOpacity>)}
                       </ScrollView>
                     </View>
                     <View style={styles.hourContainer}>

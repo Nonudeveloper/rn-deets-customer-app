@@ -22,6 +22,7 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>

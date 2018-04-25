@@ -290,6 +290,7 @@ class VehicleForm extends React.Component {
                     underlineColorAndroid="transparent"
                     borderBotmWidth={{ borderBottomWidth: 0 }}
                     onPress={this._showPicker.bind(this)}
+                    type="modaltype"
                 />
                 </View>
             <View style={styles.licenseStyle}>

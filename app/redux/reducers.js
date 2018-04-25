@@ -8,6 +8,7 @@ import HomeReducer from '../redux/home/homeReducer';
 import GeoReducer from '../redux/geoCoding/geoReducer';
 import AuthVehicle from '../redux/appointment/vehicle/vehicleReducer';
 import ServiceReducer from '../redux/service/serviceReducer';
+import appointmentReducer from '../redux/appointment/reducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   home: HomeReducer,
   Geo: GeoReducer,
   AuthVehicle,
-  Service: ServiceReducer
+  Service: ServiceReducer,
+  Appointment: appointmentReducer
 });
 
 export default rootReducer;

@@ -2,21 +2,24 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SummaryScreen from './SummaryScreen';
+import ReviewScreen from './ReviewScreen';
 
-import * as serviceActions from '../../../redux/service/serviceActions';
+import * as appointmentActions from '../../../redux/appointment/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // actions: bindActionCreators(serviceActions, dispatch),
+        actions: bindActionCreators(appointmentActions, dispatch),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
+        selectedSchedule: state.Appointment.selectedSchedule,
+        notes: state.form.notes.values,
+        selectedServices: state.Service.selectedServices
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SummaryScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewScreen);
 

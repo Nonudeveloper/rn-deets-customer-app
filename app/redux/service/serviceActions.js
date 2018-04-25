@@ -4,7 +4,8 @@ import {
     CREATE_NEW_USER_SERVIVE_APPOINTMENT,
     SERVICES_APPOINTMENT_SUCCESS,
     SERVICES_APPOINTMENT_FALIURE,
-    HIDE_ALERT
+    HIDE_ALERT,
+    GET_SELECTED_SERVICES
 } from './constants';
     
 export function fetchServices() {
@@ -53,5 +54,12 @@ export function serviceAppointmentFaliure(err) {
 export function hideAlert() {
     return {
       type: HIDE_ALERT
+    };
+}
+
+export function storeSelectedServices(selectedServices) {
+    return {
+      type: GET_SELECTED_SERVICES,
+      selectedServices
     };
 }

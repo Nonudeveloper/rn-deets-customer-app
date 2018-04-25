@@ -43,26 +43,27 @@ export default class SelectVehicleScreen extends React.Component {
             // titleType={'logo'}
             showRightIcon
             rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}
-            rightImageSource={backButton}
-            rightIconType={'image'}
+            onPress={() => this.getSelectedItems()}
+            // rightImageSource={backButton}
+            // rightIconType={'image'}
         />
         <VehicleFlatList 
           userVehicles={this.props.userVehicle} 
           navigation={this.props.navigation} 
           selectedVehicle={this._selectedVehicle}
+          navigation={this.props.navigation}
         />
         <View style={styles.nextButtonContainer}>
             <View style={{ flexDirection: 'row', marginHorizontal: 25, justifyContent: 'flex-end', }}>
-              <Button 
+              {/* <Button 
                 style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
                 onPress={this.getSelectedItems}
               >
                 Next
-              </Button>
-              {/* <TouchableOpacity onPress={() => navigate()}>
-                <Image source={backButton} style={{ width: 50, height: 50 }} />
-                        </TouchableOpacity> */}
+              </Button> */}
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}>
+                <Image source={backButton} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
             </View>
           </View>
           </View>

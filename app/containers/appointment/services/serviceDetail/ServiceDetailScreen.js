@@ -30,7 +30,9 @@ class ServiceDetailScreen extends React.Component {
     this.state = {
       item: [],
       initialCost: '',
-      totalCost: ''
+      totalCost: '',
+      initialEstimationTime: '',
+      totalEstimationTime: ''
     };
   }
 
@@ -41,12 +43,16 @@ class ServiceDetailScreen extends React.Component {
         if (this.props.selectedVehicle.vehicle_type === 2) {
           this.setState({
             initialCost: this.state.item.service_Large_cost,
-            totalCost: this.state.item.service_Large_cost
+            totalCost: this.state.item.service_Large_cost,
+            initialEstimationTime: this.state.item.estimation_time,
+            totalEstimationTime: this.state.item.estimation_time,
           });
         } else {
           this.setState({
             initialCost: this.state.item.cost,
-            totalCost: this.state.item.cost
+            totalCost: this.state.item.cost,
+            initialEstimationTime: this.state.item.estimation_time,
+            totalEstimationTime: this.state.item.estimation_time,
           });
         }
     });
@@ -60,6 +66,7 @@ class ServiceDetailScreen extends React.Component {
       });
     } else {
       const costdata = [];
+      const totalTime = [];
       const data = selectedArrayRef.getArray();
       data.map((item) => {
         if (this.props.selectedVehicle.vehicle_type === 2) {
@@ -67,14 +74,24 @@ class ServiceDetailScreen extends React.Component {
         } else {
           costdata.push(parseInt(item.vehicle.small_vehicle_cost));
         }
+        totalTime.push(parseInt(item.vehicle.estimation_time));
       });
+
+
        let sum = 0;
       for (let i = 0; i < costdata.length; i++) {
         sum += costdata[i];
       }
+
+      let timeSum = 0;
+      for (let i = 0; i < totalTime.length; i++) {
+        timeSum += totalTime[i];
+      }
       const totalCost = parseInt(this.state.initialCost) + parseInt(sum);
+      const totalEstimationTime = parseInt(this.state.initialEstimationTime) + parseInt(timeSum);
       this.setState({
-        totalCost
+        totalCost,
+        totalEstimationTime
       });
       console.log(selectedArrayRef.getArray());
       // this.props.navigation.navigate('serviceScreen');
@@ -84,7 +101,14 @@ class ServiceDetailScreen extends React.Component {
   goToNext() {
     if (selectedArrayRef.getArray().length === 0) {
       const addOns = '';
-      this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
+      this.props.actions.storeSelectedServices({ 
+        serviceSelected: this.state.item, 
+        vehicleSelected: this.props.selectedVehicle, 
+        selectedaddOns: addOns,
+        totalCost: this.state.totalCost,
+        totalEstimationTime: this.state.totalEstimationTime
+      });
+      // this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
     } else {
       const costdata = [];
       const data = selectedArrayRef.getArray();
@@ -92,7 +116,14 @@ class ServiceDetailScreen extends React.Component {
           costdata.push(item.vehicle.id);
       });
       const addOns = costdata.join();
-      this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
+      this.props.actions.storeSelectedServices({ 
+        serviceSelected: this.state.item, 
+        vehicleSelected: this.props.selectedVehicle, 
+        selectedaddOns: selectedArrayRef.getArray(),
+        totalCost: this.state.totalCost,
+        totalEstimationTime: this.state.totalEstimationTime
+      });
+      // this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
       this.props.navigation.navigate('DateTimeScreen');
     }
   }
@@ -138,23 +169,6 @@ class ServiceDetailScreen extends React.Component {
                   <Text style={[styles.paymentText, { flex: 3 }]}>Total Payment</Text>
                   <Text style={styles.paymentText}>${this.state.totalCost}</Text>
                 </View>
-                {/* <View style={{ flex: 1 }}>
-                  <Button 
-                      style={{ 
-                          height: 50,
-                          borderRadius: 100,
-                          borderColor: '#a8a8a8',
-                          marginHorizontal: 25, 
-                          flex: 0, 
-                          backgroundColor: '#8ac10b', 
-                      }}
-
-                      onPress={this.goToNext.bind(this)}
-
-                  >
-                    Next
-                  </Button>
-                </View> */}
             </View>
       </View>
     );

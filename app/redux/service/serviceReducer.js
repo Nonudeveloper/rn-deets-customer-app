@@ -5,7 +5,8 @@ import {
     CREATE_NEW_USER_SERVIVE_APPOINTMENT,
     SERVICES_APPOINTMENT_SUCCESS,
     SERVICES_APPOINTMENT_FALIURE,
-    HIDE_ALERT
+    HIDE_ALERT,
+    GET_SELECTED_SERVICES
 } from './constants';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
       technician: [],
       technicianFetching: false,
       errorMessage: '',
+      selectedServices: []
 };
 
 export default function servicesReducer(state = initialState, action) {
@@ -49,6 +51,10 @@ export default function servicesReducer(state = initialState, action) {
         case HIDE_ALERT:
             return Object.assign({}, state, {
                 errorMessage: ''
+            });
+        case GET_SELECTED_SERVICES:
+            return Object.assign({}, state, {
+                selectedServices: action.selectedServices
             });
         default:
             return state;

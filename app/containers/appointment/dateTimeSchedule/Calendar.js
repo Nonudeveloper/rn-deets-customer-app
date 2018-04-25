@@ -18,8 +18,9 @@ LocaleConfig.locales.en = {
   export default class DateTimeScreen extends React.Component {
       constructor(props) {
         super(props);
+        
         this.state = {
-            selected: ''
+            selected: this.props.currentDate
         };
       }
 
@@ -35,6 +36,9 @@ LocaleConfig.locales.en = {
     }
 
     render() {
+      const newdate = new Date(this.state.selected);
+      newdate.setDate(newdate.getDate() + 7);
+      const maxDate = newdate.getFullYear() + '-' + ('0' + (newdate.getMonth() + 1)).slice(-2) + '-' + newdate.getDate();
         return (
             <View style={styles.modalBackground}>
             <View style={styles.modalContentContainer}>
@@ -58,12 +62,12 @@ LocaleConfig.locales.en = {
                   style={{
                     borderWidth: 1,
                     borderColor: 'gray',
-                    height:400
+                    height: 400
                   }}
                   // currentDate={'2018-04-21'}
-                  minDate={'2018-04-10'}
+                  minDate={this.state.selected}
                   // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                  maxDate={'2018-04-28'}
+                  maxDate={maxDate}
                   // onDayPress={(day) => {console.log('selected day', day)}}
                   onDayPress={this.onDayPress.bind(this)}
                   markingType={'custom'}

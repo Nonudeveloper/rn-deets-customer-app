@@ -9,6 +9,8 @@ const directionOff = require('../../../assets/icons/direction_off.png');
 export default class ServiceDetail extends React.Component {
 
   render() {
+      console.log(this.props)
+      const vehicleInfo = this.props.selectedServices.vehicleSelected;
     return (
         <View style={styles.container}>
         {/* <Text>Service Provider Details</Text> */}
@@ -24,36 +26,52 @@ export default class ServiceDetail extends React.Component {
 
                 }}
             >
-                <View style={{ flex: 2, flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1, alignItems: 'center' }}>
+                <View style={{ flex: 2, flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1, alignItems: 'center',marginTop: 4 }}>
                     <View 
-                        style={{ flex: 1, alignItems: 'center', marginHorizontal: 10 }}
+                        style={{ flex: 1, alignItems: 'center', marginHorizontal: 30 }}
                     >
-                        <Image resizeMode={'contain'} style={{ width: 50, height: 50 }} source={car} />
+                        <Image 
+                            resizeMode={'contain'} style={{ width: 80, height: 80 }} 
+                            source={vehicleInfo.vehicle_image ? { uri: vehicleInfo.vehicle_image } : car} 
+                        />
                     </View>
 
                     <View 
                         style={{ flex: 3 }}
 
                     >
-                        <Text style={{ color: '#1a1a1a', fontSize: 15 }}>ACURA ILX, 2016,</Text>
-                        <Text style={{ color: '#1a1a1a', fontSize: 15 }}>WHITE, HSHSB</Text>
+                        <Text style={{ color: '#1a1a1a', fontSize: 20 }}>{vehicleInfo.vehicle_make}, {vehicleInfo.vehicle_year},</Text>
+                        <Text style={{ color: '#1a1a1a', fontSize: 25 }}>{vehicleInfo.vehicle_color}, HSHSB</Text>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
-                        <Text color={'#1a1a1a'}>$24</Text>
+                        <Text style={{ fontSize: 20, color: '#1a1a1a' }}>${this.props.selectedServices.totalCost}</Text>
                     </View>
                 </View>
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: 10, borderBottomColor: 'grey', borderBottomWidth: 1 }}>
-                    <View style={{ flex: 4.1 }}>
-                        <Text style={{ fontSize: 14, color: '#000' }}>Exterior Wash (only)</Text>
+                <View style={{ marginHorizontal: 30,flex: 1, flexDirection: 'column', marginVertical: 5, alignItems: 'center', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{ flex: 8 }}>
+                            <Text style={{ fontSize: 20, color: '#000' }}>{this.props.selectedServices.serviceSelected.service_name}</Text>
+                        </View>
+                        <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
+                            <Text style={{ fontSize: 20, color: '#1a1a1a' }}>${vehicleInfo.vehicle_type === 2 ? this.props.selectedServices.serviceSelected.service_Large_cost : this.props.selectedServices.serviceSelected.cost}</Text>
+                        </View>
                     </View>
-                    <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
-                        <Text color={'#1a1a1a'}>$24</Text>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={{ flex: 4 }}>
+                            <Text style={{ fontSize: 16, color: '#000' }}>Addon Services - </Text>
+                        </View>
+                        <View style={{ flex: 4 }}>
+                            <Text style={{ fontSize: 14, color: '#000' }}>{this.props.selectedServices.serviceSelected.service_name}</Text>
+                        </View>
+                        <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
+                            <Text color={'#1a1a1a'}>${vehicleInfo.vehicle_type === 2 ? this.props.selectedServices.serviceSelected.service_Large_cost : this.props.selectedServices.serviceSelected.cost}</Text>
+                        </View>
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 14, color: '#000' }}>Notes:</Text>
-                        <Text style={{ fontSize: 12, color: 'grey', left: 5 }}>bananascccc</Text>
+                        <Text style={{ fontSize: 20, color: '#000' }}>Notes:</Text>
+                        <Text style={{ fontSize: 16, color: 'grey', left: 5 }}>{this.props.notes}</Text>
 
                     </View>
                 </View>
