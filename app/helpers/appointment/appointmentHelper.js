@@ -63,7 +63,6 @@ class AppointmetHelper {
         const data = this.appendAppointmentData(formData, appointmentData);
 
         return await SuperFetch.post('customer/create_new_user_service_appointment', data).then(response => {
-            //console.log(response)
             return response;
         });
 

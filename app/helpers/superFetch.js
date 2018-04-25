@@ -7,7 +7,6 @@ const customHeader = () => ({
 });
 
 const base = (method, url, data = {}) => {
-  console.log(`${apiConfig.url}${url}`);
   let body = undefined;
   if (method !== 'get') {
     body = JSON.stringify(data);
