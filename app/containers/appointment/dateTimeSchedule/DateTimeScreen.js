@@ -30,15 +30,16 @@ export default class DateTimeScreen extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.props.services.length === 0) {
-    //   this.props.actions.fetchServices();
-    // }
-    getAvailability()
-        .then(res => {
-          const nw = this.getTechnicanAvailability(res);
-          this.setState({ data: res, time: nw })
-        })
-        .catch(err => alert("An error occurred"));
+    console.log(this.props.technicians);
+    const nw = this.getTechnicanAvailability(this.props.technicians);
+    this.setState({ data: this.props.technicians, time: nw });
+    // getAvailability()
+    //     .then(res => {
+    //       console.log(res);
+    //       const nw = this.getTechnicanAvailability(res);
+    //       this.setState({ data: res, time: nw });
+    //     })
+    //     .catch(err => alert("An error occurred"));
   }
   
   renderModal = () => {
@@ -63,14 +64,21 @@ export default class DateTimeScreen extends React.Component {
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
+  
   GetItem(item) {
-    console.log(item)
+    console.log(item);
   }
 
   getAverageRating(stars) {
     const availabilityGrid = [];
     for (let i = 0; i < 5; i++) {
-        availabilityGrid.push(<Image source={i < stars ? starOn : starOff} key={i} style={{ width: 20, height: 20, marginHorizontal: 3 }} />);
+        availabilityGrid.push(
+          <Image 
+            source={i < stars ? starOn : starOff} 
+            key={i} 
+            style={{ width: 20, height: 20, marginHorizontal: 3 }} 
+          />
+        );
     }
     return availabilityGrid;
   }
@@ -92,7 +100,7 @@ export default class DateTimeScreen extends React.Component {
   }
 
   changeActiveRadioButton(key, data) {
-    this.state.time.map((item) => {
+    this.props.technicians.map((item) => {
       if (item.technician.technician_id === data.technician.technician_id) {
         item.time.map((times) => {
           if (times.key === key) {
@@ -101,10 +109,10 @@ export default class DateTimeScreen extends React.Component {
               selectedItem: item,
               selectedTime: times.timeavailable
             });
-          } else{
+          } else {
             times.selected = false;
           }
-        })
+        });
       } else {
         item.time.map((times) => {
             times.selected = false;
@@ -126,8 +134,8 @@ export default class DateTimeScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     // const { isFetching } = this.props;
+    console.log(this.props.technicians);
     const today = new Date(this.state.selectedDate);
     const date = today.toDateString();
     return (
@@ -154,18 +162,21 @@ export default class DateTimeScreen extends React.Component {
           </Button>
         </View>
         <FlatList
-            data={this.state.time}
+            data={this.props.technicians}
             extraData={this.state} 
             ItemSeparatorComponent={this.FlatListItemSeparator}
-            renderItem={({ item }) => 
+            renderItem={
+              ({ item }) => 
                 <View style={{ flex: 1 }}>
                   <View style={styles.technicianContainer}>
                     <View style={styles.technicianInnerContainer}>
-                      <View style={{ flex: 1, }}>
-                        <Image source={item.technician.image ? { uri: item.technician.image } : vehicleIcon} style={{ width: '80%', height: '80%' }} />
+                      <View style={{ flex: 1 }}>
+                        <Image source={item.technician.image ? { uri: item.technician.image } : vehicleIcon} style={{ width: '70%', height: '70%' }} />
                       </View>
                       <View style={styles.technicianInfoContainer}>
-                          <Text style={styles.licenceFont}>{item.technician.first_name} {item.technician.last_name}</Text>
+                          <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                            <Text style={styles.licenceFont}>{item.technician.first_name} {item.technician.last_name}</Text>
+                          </View>
                           <View style={styles.ratingContainer}>
                             {this.getAverageRating(item.technician.average_rating)}
                             <Text style={styles.vehicleFont}>({item.technician.average_rating})</Text>
@@ -175,21 +186,25 @@ export default class DateTimeScreen extends React.Component {
                   </View>
                   <View style={styles.availabilityOuterContainer}>
                     <View style={styles.availabilityInnerContainer}>
-                      <ScrollView horizontal styles={{}}>
-                          {item.time.map((time, i) => 
+                      <ScrollView horizontal >
+                          {
+                            item.time.map((time, i) => 
                             <TouchableOpacity 
                               key={time.key}
                               onPress={this.changeActiveRadioButton.bind(this, time.key, item)}
+                              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
                             >
                               <Text style={time.selected ? styles.scrollViewSelectedText : styles.scrollViewText}>{time.timeavailable}</Text>
-                            </TouchableOpacity>)}
+                            </TouchableOpacity>)
+                          }
                       </ScrollView>
                     </View>
                     <View style={styles.hourContainer}>
                       <Text style={styles.hourText}>hrs</Text>
                     </View>
                   </View>
-                </View>}
+                </View>
+            }
             keyExtractor={(item, index) => index.toString()}
         />
         {this.renderModal()}

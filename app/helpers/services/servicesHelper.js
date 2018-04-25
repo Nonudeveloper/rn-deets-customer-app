@@ -22,8 +22,8 @@ class ServicesHelper {
         } else {
             data.append('service_cost', appointmentInfo.service.cost);
         }
-        const today = new Date();
-        const date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate();
+        const today = new Date('2018-04-19');
+        // const date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate();
 
         const payload = {
             service_cost: appointmentInfo.selectedVehicle.vehicle_type === 2 ? appointmentInfo.service.service_Large_cost : appointmentInfo.service.cost,
@@ -31,10 +31,10 @@ class ServicesHelper {
             service_id: appointmentInfo.service.service_id,
             access_token: JSON.parse(user).access_token,
             service_name: appointmentInfo.service.service_name,
-            service_location_zipcode: '7302',
+            service_location_zipcode: '11106',
             service_location_latitude: '33.8218570',
             service_location_longitude: '-118.0615270',
-            service_date: '2018-04-26',
+            service_date: '2018-04-19',
             service_duration_minutes: appointmentInfo.service.estimation_time,
             current_date_time: today.toJSON(),
             adds_on_id: appointmentInfo.addons,

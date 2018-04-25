@@ -23,12 +23,8 @@ class VehicleForm extends React.Component {
           };
     }
     
-    componentDidMount() {
-        this.props.onRef(this);
-    }
-    componentWillUnmount() {
-        this.props.onRef(undefined);
-    }
+   
+   
 
     validateForm = () => {
         console.log('validating.. vehicle form!');
@@ -197,6 +193,15 @@ class VehicleForm extends React.Component {
             this.props.dispatch(change('addEditVehicleForm', 'access_token', this.props.authUser.access_token));
         }
     }
+
+    componentDidMount() {
+        this.props.onRef(this);
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined);
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.makeModel.length > 0) {
             if (this.state.initialValue === 0) {
