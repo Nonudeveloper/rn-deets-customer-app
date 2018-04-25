@@ -20,7 +20,8 @@ const mapStateToProps = (state) => {
         errorMessage: state.Auth.errorMessage,
         showAlert: state.Auth.showAlert,
         isLoading: state.Auth.isLoading,
-        isAuthenticated: state.Auth.isAuthenticated
+        isAuthenticated: state.Auth.isAuthenticated,
+        deviceToken: state.Auth.deviceToken,
     };
 };
 

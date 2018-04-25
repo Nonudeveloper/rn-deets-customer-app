@@ -1,6 +1,6 @@
 
 import React from 'react'; 
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import DrawerNav from './DrawerNavigation';
 import LoginNav from './LoginNavigation';
 
@@ -11,7 +11,7 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'loginStack'
+  initialRouteName: 'drawerStack'
 });
 
 export default PrimaryNav;

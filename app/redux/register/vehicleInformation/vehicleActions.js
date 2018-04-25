@@ -3,7 +3,8 @@ import {
   FETCH_MAKE_MODEL_SUCCESS, 
   FETCH_MAKE_MODEL_FALIURE,
   UPDATE_MODELS,
-  STORE_VEHICLE_IMAGE 
+  STORE_VEHICLE_IMAGE,
+  SET_BACK_TO_INITIAL_STATE
 } from '../constants';
   
   export function fetchMakeModel(year) {
@@ -37,6 +38,12 @@ import {
     return {
       type: STORE_VEHICLE_IMAGE,
       image,
+    };
+  }
+
+  export function setBackToInitialState() {
+    return {
+      type: SET_BACK_TO_INITIAL_STATE,
     };
   }
 

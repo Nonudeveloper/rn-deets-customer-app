@@ -1,10 +1,10 @@
 import { AsyncStorage } from 'react-native';
 
-export const AUTH_TOKEN = 'id_token';
+export const AUTH_TOKEN = 'token';
 export const USER = 'user';
 
 
-export const onSignOut = () => AsyncStorage.removeItem(AUTH_TOKEN);
+export const onSignOut = () => AsyncStorage.removeItem(USER);
 
 export const isSignedIn = () => {
     AsyncStorage.removeItem(AUTH_TOKEN);
@@ -39,8 +39,19 @@ export function getToken() {
 }
 
 export function setUser(user) {
-  AsyncStorage.setItem(USER, JSON.stringify(user));
+  setLoginUser(user);
+  // AsyncStorage.setItem(USER, JSON.stringify(user));
 }
+
+const setLoginUser = async (user) => {
+        try {
+            await AsyncStorage.setItem(USER, JSON.stringify(user));
+            console.log('data stored');
+        } catch (error) {
+            // Error saving data
+            console.log('AsyncStorage save error: ' + error.message);
+        }
+};
 
 export function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
@@ -73,22 +84,22 @@ export function dataURLtoFile(dataurl, filename) {
   return new File([u8arr], filename, { type: mime });
 }
 
-export const getBase64ImageFromUrl = async (imageUrl) => {
-  const res = await fetch(imageUrl);
-  const blob = await res.blob();
+// export const getBase64ImageFromUrl = async (imageUrl) => {
+//   const res = await fetch(imageUrl);
+//   const blob = await res.blob();
 
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-        resolve(reader.result);
-    }, false);
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.addEventListener('load', () => {
+//         resolve(reader.result);
+//     }, false);
 
-    reader.onerror = () => {
-      return reject(this);
-    };
-    reader.readAsDataURL(blob);
-  });
-};
+//     reader.onerror = () => {
+//       return reject(this);
+//     };
+//     reader.readAsDataURL(blob);
+//   });
+// };
 
 export const toDataUrl = (url, callback) => {
   const xhr = new XMLHttpRequest();
@@ -102,4 +113,16 @@ export const toDataUrl = (url, callback) => {
   xhr.open('GET', url);
   xhr.responseType = 'blob';
   xhr.send();
+};
+
+
+export const saveAuthVehiclesData = async (vehicle) => {
+  try {
+      AsyncStorage.removeItem('authVehicles');
+      await AsyncStorage.setItem('authVehicles', JSON.stringify(vehicle));
+      console.log('data stored');
+  } catch (error) {
+      // Error saving data
+      console.log('AsyncStorage save error: ' + error.message);
+  }
 };

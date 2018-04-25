@@ -8,7 +8,7 @@ import {
 import Header from '../../header/Header';
 import Form from '../../login/forgotPassword/Form';
 import styles from './styles.js';
-import Loader from '../../../components/Loader';
+import Loader from '../../../deetscomponents/Loader';
 
 export default class ForgotPasswordScreen extends Component {
 
