@@ -1,7 +1,7 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
 import { fetchServicesSuccess, fetchServicesFaliure, serviceAppointmentSuccess, serviceAppointmentFaliure } from './serviceActions';
-import { FETCH_SERVICES, CREATE_NEW_USER_SERVIVE_APPOINTMENT } from './constants';
+import { FETCH_SERVICES, CREATE_NEW_USER_SERVICE_APPOINTMENT } from './constants';
 import ServicesHelper from '../../helpers/services/servicesHelper';
 
 
@@ -49,7 +49,7 @@ function* watchFetchServices() {
   //**Generator */
 function* watchcreateNewServiceAppointment() {
   while (true) {
-    const payload = yield take(CREATE_NEW_USER_SERVIVE_APPOINTMENT);
+    const payload = yield take(CREATE_NEW_USER_SERVICE_APPOINTMENT);
     try {
       const response = yield call(createAppointmentCall, payload);
       yield put(serviceAppointmentSuccess(response));

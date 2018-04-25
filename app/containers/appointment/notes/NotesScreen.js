@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Keyboard } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
@@ -53,7 +53,10 @@ class NotesScreen extends React.Component {
                 marginTop: 20,
                 borderWidth: 4,
             }}
-            onPress={() => this.props.navigation.navigate('reviewScreen')}
+            onPress={() => {
+                Keyboard.dismiss();
+                this.props.navigation.navigate('reviewScreen')
+            }}
         >Next</Button>
 
       </View>

@@ -2,23 +2,21 @@ import React from 'react';
 import { StyleSheet, View, Text, Alert } from 'react-native';
 import Header from '../../../header/Header';
 import ServiceDetailHeader from './ServiceDetailHeader';
-import Button from '../../../../deetscomponents/Button';
 import Loader from '../../../../deetscomponents/Loader';
 
 const indicatorOne = require('../../../../assets/icons/process1.png');
-const backButton = require('../../../../assets/icons/2_back_btn_onclick.png');
 
 class SelectedArray {
   constructor() {
-      selectedItemsArray = [];
+      this.selectedItemsArray = [];
   }
 
   setItem(option) {
-      selectedItemsArray.push(option);
+      this.selectedItemsArray.push(option);
   }
 
   getArray() {
-      return selectedItemsArray;
+      return this.selectedItemsArray;
   }
 }
 
@@ -40,21 +38,13 @@ class ServiceDetailScreen extends React.Component {
     this.setState({
       item: this.props.navigation.state.params.item
     }, () => {
-        if (this.props.selectedVehicle.vehicle_type === 2) {
-          this.setState({
-            initialCost: this.state.item.service_Large_cost,
-            totalCost: this.state.item.service_Large_cost,
+        const isVehicleLarge = this.props.selectedVehicle.vehicle_type === 2 ? 1 : 0;
+        this.setState({
+            initialCost: isVehicleLarge ? this.state.item.service_Large_cost : this.state.item.cost,
+            totalCost: isVehicleLarge ? this.state.item.service_Large_cost : this.state.item.cost,
             initialEstimationTime: this.state.item.estimation_time,
             totalEstimationTime: this.state.item.estimation_time,
-          });
-        } else {
-          this.setState({
-            initialCost: this.state.item.cost,
-            totalCost: this.state.item.cost,
-            initialEstimationTime: this.state.item.estimation_time,
-            totalEstimationTime: this.state.item.estimation_time,
-          });
-        }
+        });
     });
   }
 
@@ -99,33 +89,25 @@ class ServiceDetailScreen extends React.Component {
   }
 
   goToNext() {
-    if (selectedArrayRef.getArray().length === 0) {
-      const addOns = '';
-      this.props.actions.storeSelectedServices({ 
-        serviceSelected: this.state.item, 
-        vehicleSelected: this.props.selectedVehicle, 
-        selectedaddOns: addOns,
-        totalCost: this.state.totalCost,
-        totalEstimationTime: this.state.totalEstimationTime
-      });
-      // this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
-    } else {
-      const costdata = [];
-      const data = selectedArrayRef.getArray();
-      data.map((item) => {
-          costdata.push(item.vehicle.id);
-      });
-      const addOns = costdata.join();
-      this.props.actions.storeSelectedServices({ 
-        serviceSelected: this.state.item, 
-        vehicleSelected: this.props.selectedVehicle, 
-        selectedaddOns: selectedArrayRef.getArray(),
-        totalCost: this.state.totalCost,
-        totalEstimationTime: this.state.totalEstimationTime
-      });
-      // this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOns);
-      this.props.navigation.navigate('DateTimeScreen');
-    }
+    const addOnIDs = [];
+    let addOnString = '';
+
+    const data = selectedArrayRef.getArray();
+    data.map((item) => {
+        addOnIDs.push(item.vehicle.id);
+    });
+    addOnString = addOnIDs.join();
+    this.props.actions.storeSelectedServices({ 
+      serviceSelected: this.state.item, 
+      vehicleSelected: this.props.selectedVehicle, 
+      selectedaddOns: data,
+      totalCost: this.state.totalCost,
+      totalEstimationTime: this.state.totalEstimationTime
+    });
+    //dispatch createNewServiceAppointment action 
+    this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOnString);
+    //navigate
+    this.props.navigation.navigate('DateTimeScreen');
   }
 
   renderAlert(error) {
