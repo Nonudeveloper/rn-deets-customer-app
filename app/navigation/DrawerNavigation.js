@@ -10,6 +10,7 @@ import ServiceDetailScreen from '../containers/appointment/services/serviceDetai
 import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 import NotesScreen from '../containers/appointment/notes/index';
 import ReviewScreen from '../containers/appointment/review/index';
+import CreditCardForm from '../containers/appointment/review/CreditCardForm';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -25,6 +26,7 @@ const drawer1 = StackNavigator({
   DateTimeScreen: { screen: DateTimeScreen },
   reviewScreen: { screen: ReviewScreen },
   notesScreen: { screen: NotesScreen },
+  creditCardForm: { screen: CreditCardForm },
 }, {
   headerMode: 'none'
 });

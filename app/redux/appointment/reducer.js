@@ -5,13 +5,15 @@ import {
     SCHEDULE_NEW_APPOINTMENT, 
     SCHEDULE_NEW_APPOINTMENT_SUCCESS, 
     SCHEDULE_NEW_APPOINTMENT_FALIURE,
-    STORE_APPOINTMENT_SCHEDULE 
+    STORE_APPOINTMENT_SCHEDULE,
+    USER_CARD_DETAILS_SUCCESS 
 } from './constants';
 
 const initialState = {
       isFetching: false,
       success: false,
-      selectedSchedule: []
+      selectedSchedule: [],
+      userCardDetails: []
 };
 
 export default function appointmentReducer(state = initialState, action) {
@@ -45,6 +47,10 @@ export default function appointmentReducer(state = initialState, action) {
         case STORE_APPOINTMENT_SCHEDULE:
             return Object.assign({}, state, {
                 selectedSchedule: action.selectedSchedule
+            });
+        case USER_CARD_DETAILS_SUCCESS:
+            return Object.assign({}, state, {
+                userCardDetails: action.cardDetails
             });
         default:
             return state;

@@ -5,7 +5,9 @@ import {
     SCHEDULE_NEW_APPOINTMENT,
     SCHEDULE_NEW_APPOINTMENT_SUCCESS,
     SCHEDULE_NEW_APPOINTMENT_FALIURE,
-    STORE_APPOINTMENT_SCHEDULE
+    STORE_APPOINTMENT_SCHEDULE,
+    USER_CARD_DETAILS,
+    USER_CARD_DETAILS_SUCCESS
 } from './constants';
     
 export function postNewAppointment(payload) {
@@ -54,5 +56,18 @@ export function storeAppointmentschedule(selectedSchedule) {
     return {
         type: STORE_APPOINTMENT_SCHEDULE,
         selectedSchedule
+    };
+}
+
+export function fetchCardDetails() {
+    return {
+      type: USER_CARD_DETAILS
+    };
+}
+
+export function fetchCardDetailsSuccess(cardDetails) {
+    return {
+      type: USER_CARD_DETAILS_SUCCESS,
+      cardDetails
     };
 }

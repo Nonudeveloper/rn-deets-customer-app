@@ -1,13 +1,14 @@
-import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
 import { 
   postNewAppointmentSuccess, 
   postNewAppointmentFaliure, 
   scheduleNewAppointmentSuccess, 
-  scheduleNewAppointmentFaliure 
+  scheduleNewAppointmentFaliure,
+  fetchCardDetailsSuccess 
 } from './actions';
-import { POST_NEW_APPOINTMENT, SCHEDULE_NEW_APPOINTMENT } from './constants';
+import { POST_NEW_APPOINTMENT, SCHEDULE_NEW_APPOINTMENT, USER_CARD_DETAILS } from './constants';
 import AppointmentHelper from '../../helpers/appointment/appointmentHelper';
+import { getCardDetails } from '../../helpers/asyncStorage';
 
 
 function postNewAppointmentCall(payload) {
@@ -62,8 +63,22 @@ function* watchScheduleNewAppointment() {
     }
   }
 
+  function* watchCardDetailsFromAsyncStorage() {
+    while (true) {
+      yield take(USER_CARD_DETAILS);
+      try {
+        const response = yield getCardDetails('authCardDetails');
+        yield put(fetchCardDetailsSuccess(JSON.parse(response)));
+        console.log('SAGA FETCH SUCCESS: ', response);
+      } catch (err) {
+        console.log('SAGA FETCH ERR: ', err);
+      }
+    }
+  }
+
 
 export default function* root() {
   yield fork(watchPostNewAppointment);
   yield fork(watchScheduleNewAppointment);
+  yield fork(watchCardDetailsFromAsyncStorage);
 }
