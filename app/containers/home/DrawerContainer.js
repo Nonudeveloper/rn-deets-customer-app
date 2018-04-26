@@ -45,6 +45,7 @@ export default class DrawerContainer extends React.Component {
 
   render() {
     const { navigation } = this.props;
+    console.log(this.props);
     return (
       // <View style={styles.container}>
       <LinearGradient 
