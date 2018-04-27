@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal } from 'react-native';
+import { FlatList, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal } from 'react-native';
 import styles from './styles';
 
 const visaImage = require('../../../assets/icons/small_VISA.png');
@@ -10,6 +10,7 @@ const BTClient = require('react-native-braintree-xplat');
 
 const smallPaypalLogo = require('../../../assets/icons/papal.png');
 const visaLogo = require('../../../assets/icons/small_VISA.png');
+const popup = require('../../../assets/icons/popup_bg.png');
 
 export default class CardDetail extends React.Component {
 
@@ -20,6 +21,7 @@ export default class CardDetail extends React.Component {
     
       state = {
         modalVisible: false,
+        selectedCard: []
       };
     
       setModalVisible(visible) {
@@ -39,12 +41,21 @@ export default class CardDetail extends React.Component {
       }
     
       withCard = () => {
+        this.props.navigation.navigate('creditCardForm', this.state.selectedCard);
         this.setModalVisible(!this.state.modalVisible);
-        this.props.navigation.navigate('creditCardForm');
+      }
+
+      cardSelected(card) {
+        this.setState(() => {
+          return {
+            selectedCard: card
+          };
+        }, () => {
+        this.setModalVisible(!this.state.modalVisible);
+       });
       }
 
     renderModal = () => {
-        console.log(this.props)
         return (
             <Modal
                 visible={this.state.modalVisible} 
@@ -62,7 +73,7 @@ export default class CardDetail extends React.Component {
                             }}
                             style={styles.cancelStyle}
                           >
-                            <Text style={{ color: '#4da6ff' }}>Cancel</Text>
+                            <Text style={styles.modelCancelText}>Cancel</Text>
                           </TouchableHighlight>
                         </View>
                         <View style={styles.titleContainer}>
@@ -70,7 +81,36 @@ export default class CardDetail extends React.Component {
                         </View>
                       </View>
                       <View style={styles.modalBodyContainer}>
-                            <TouchableHighlight onPress={() => this.withPaypal()}>
+                            <View style={styles.flatlistContainer}>
+                                <Text style={styles.recentText}>RECENT</Text> 
+                              <FlatList
+                                data={this.props.userCardDetails}
+                                horizontal
+                                // ItemSeparatorComponent={this.flatListItemSeparator}
+                                renderItem={
+                                    ({ item }) => 
+                                    <View style={styles.flatlistBodyOuterContainer}>
+                                      <TouchableHighlight onPress={() => this.cardSelected(item)} 
+                                        style={styles.TouchableHighlightOuterContainer}>
+                                        <View style={styles.TouchableHighlightInnerContainer} >
+                                          <Image source={item.type === 'PayPal' ? smallPaypalLogo : visaLogo} style={{ resizeMode: 'contain', width: 80, height: 50 }} />
+                                        </View>
+                                      </TouchableHighlight>
+                                      <View style={styles.paymentTypeContainer}>
+                                          <Text style={styles.paymentTypeText}>{item.type}</Text>
+                                      </View>
+                                      <View style={{ height: 30, width: 110 }}>
+                                          <Text numberOfLines={1} style={{ fontSize: 16, flexWrap: 'wrap' }}>{item.type === 'PayPal' ? item.email : '*** **** **' + item.card_number.toString().substr(-2)}</Text>
+                                      </View>
+                                    </View>
+                                    
+                                    }
+                                keyExtractor={() => Math.random().toString(36).substr(2, 9)}
+                              />  
+                              <Text style={styles.otherText}>OTHER</Text>  
+                              </View>
+                              <View style={{ flex: 1 }}>
+                            <TouchableHighlight onPress={() => this.withPaypal()} >
                               <View style={styles.paymentItem} >
                                 <View >
                                   <Image source={smallPaypalLogo} style={styles.paypalImg} />
@@ -90,38 +130,55 @@ export default class CardDetail extends React.Component {
                                 </View>
                               </View>
                             </TouchableHighlight>
+                            </View>
                       </View>
                     </View>
                 </View>
             </Modal>
         );
       }
+    
+      componentWillReceiveProps(newProps) {
+        if (newProps.userCardDetails.length > 0) {
+          newProps.userCardDetails.map((item, i) => {
+            if (item.is_default === 1) {
+              this.setState({
+                selectedCard: item
+              });
+            }
+          });
+        }
+      }
 
   render() {
     return (
       <View style={styles.container}>
-        <View 
-            style={{ 
-                height: 50, 
-                backgroundColor: '#fff', 
-                borderBottomColor: 'grey', 
-                borderTopColor: 'grey', 
-                borderTopWidth: 1, 
-                borderBottomWidth: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around'
-            }}
-        >
-            <Text style={{ }}>Payment </Text>
-            <Image resizeMode={'contain'} style={{ width: 60, height: 30 }} source={visaImage} />
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image resizeMode={'contain'} style={{ width: 8, height: 8, marginRight: 1 }} source={passwordPoint} />
-                <Image resizeMode={'contain'} style={{ width: 8, height: 8, marginRight: 1 }} source={passwordPoint} />
-                <Image resizeMode={'contain'} style={{ width: 8, height: 8, marginRight: 1 }} source={passwordPoint} />
-                <Image resizeMode={'contain'} style={{ width: 8, height: 8, marginRight: 1 }} source={passwordPoint} />
-                <Text style={{ left: 5 }}>1111</Text>
-            </View>
+        <View style={styles.cardDetailBodyContainer} >
+          <Text>Payment </Text>
+            { 
+              (this.state.selectedCard.length === 0) ?
+                null
+                :
+                  (<View style={{ flexDirection: 'row' }}>
+                    <Image resizeMode={'contain'} style={{ width: 60, height: 30 }} source={this.state.selectedCard.type === 'PayPal' ? smallPaypalLogo : visaImage} />
+                      {
+                        (this.state.selectedCard.type === 'PayPal') ?
+                        (<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ left: 5 }}>{this.state.selectedCard.email}</Text>
+                        </View>)
+                        :
+                        (<View style={styles.passwordImageContainer}>
+                          <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
+                          <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
+                          <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
+                          <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
+                          <Text style={{ left: 5 }}>{this.state.selectedCard.card_number.toString().substr(-4)}</Text>
+                        </View>)
+                      }
+                      
+                    </View>)
+            }
+            
             
             <Text style={{ fontWeight: '600' }}> $24 </Text>
             <TouchableOpacity onPress={() => this.setModalVisible(true)}>
@@ -133,11 +190,3 @@ export default class CardDetail extends React.Component {
     );
   }
 }
-
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1
-//     },
-  
-// });

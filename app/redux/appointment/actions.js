@@ -7,7 +7,11 @@ import {
     SCHEDULE_NEW_APPOINTMENT_FALIURE,
     STORE_APPOINTMENT_SCHEDULE,
     USER_CARD_DETAILS,
-    USER_CARD_DETAILS_SUCCESS
+    USER_CARD_DETAILS_SUCCESS,
+    ADD_NEW_CARD_DETAILS,
+    ADD_NEW_CARD_DETAILS_SUCCESS,
+    ADD_NEW_CARD_DETAILS_FALIURE,
+    HIDE_ALERT
 } from './constants';
     
 export function postNewAppointment(payload) {
@@ -69,5 +73,31 @@ export function fetchCardDetailsSuccess(cardDetails) {
     return {
       type: USER_CARD_DETAILS_SUCCESS,
       cardDetails
+    };
+}
+
+export function addNewCardDetails(cardDetails) {
+    return {
+      type: ADD_NEW_CARD_DETAILS,
+      cardDetails
+    };
+}
+
+export function addNewCardDetailsSuccess() {
+    return {
+        type: ADD_NEW_CARD_DETAILS_SUCCESS,
+    };
+}
+
+export function addNewCardDetailsFaliure(err) {
+    return {
+        type: ADD_NEW_CARD_DETAILS_FALIURE,
+        err
+    };
+}
+
+export function hideAlert() {
+    return {
+      type: HIDE_ALERT
     };
 }
