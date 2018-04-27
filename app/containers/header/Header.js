@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
-
-//Make header component
-
-const backButton = require('../../assets/icons/2_back_btn_onclick.png');
+import Icon from 'react-native-vector-icons/FontAwesome';
+// const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 const hamBurger = require('../../assets/icons/5_burger_btn.png');
 const deetsLogo = require('../../assets/icons/4_deets_logo.png');
+
+const backButton = (<Icon name="arrow-left" size={30} color="black" />);
 
 const Header = (props) => {
     const { 
@@ -14,7 +14,8 @@ const Header = (props) => {
         outerViewStyle, 
         menuIconStyle, 
         headerDetailStyle, 
-        logoImg
+        logoImg,
+        rightTextStyle
     } = styles;
 
     const navigate = () => {
@@ -36,18 +37,24 @@ const Header = (props) => {
             style={styles.backButton} 
         />
     ) : (
-        <Text style={textStyle}>{props.rightText}</Text>
+        <Text style={rightTextStyle}>{props.rightText}</Text>
     );
     
+    const leftIcon = props.buttonType === 'burger' ? (
+        <Image 
+            source={hamBurger} 
+            style={styles.backButton} 
+        />
+    ) : (
+        backButton 
+    );
+
     return (
             <View style={outerViewStyle}>
                 <View style={viewStyle}>
                     <View style={menuIconStyle}>
                         <TouchableOpacity onPress={() => navigate()}>
-                            <Image 
-                                source={props.buttonType === 'burger' ? hamBurger : backButton} 
-                                style={styles.backButton} 
-                            />
+                          {leftIcon}
                         </TouchableOpacity>
                     </View>
                     <View style={headerDetailStyle}>
@@ -81,12 +88,21 @@ const styles = {
         height: 47,
         justifyContent: 'center',
         marginTop:Platform.OS == "ios" ? 20 : 0,
-        backgroundColor: 'grey'
+        backgroundColor: 'transparent'
     },
     textStyle: {
         fontSize: 20,
-        color: '#8ac10b',
-        fontWeight: 'bold'
+        color: '#00802b',
+        fontWeight: 'bold',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 3, height: 5 },
+        textShadowRadius: 15,
+        letterSpacing: 5
+    },
+    rightTextStyle: {
+        fontSize: 20,
+        color: 'grey',
+        fontWeight: 'bold',
     },
     headerDetailStyle: {
         flex: 1,
@@ -95,8 +111,8 @@ const styles = {
     },
     backButton: {
         resizeMode: 'contain', 
-        width: 30, 
-        height: 30 
+        width: 25, 
+        height: 25 
     },
     logoImg: {
         resizeMode: 'contain',

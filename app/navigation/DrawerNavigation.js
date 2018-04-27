@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, TouchableOpacity, Animated, Easing } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/drawer/DrawerContainer';
@@ -64,8 +64,6 @@ const TransitionConfiguration = () => {
     };
 };
 
-
-
 // drawer stack
 
 const appointmentStack = StackNavigator({
@@ -84,7 +82,6 @@ const appointmentStack = StackNavigator({
     activeTintColor: "#e91e63",
     activeBackgroundColor: 'purple',
   },
-  headerMode: 'none'
 });
 
 const DrawerStack = DrawerNavigator({
@@ -95,7 +92,9 @@ const DrawerStack = DrawerNavigator({
   headerMode: 'none',
   gesturesEnabled: false,
   contentComponent: DrawerContainer,
-  drawerBackgroundColor: 'transparent'
+  drawerBackgroundColor: 'transparent',
+  drawerWidth: 240,
+  useNativeAnimations: true
 });
 
 // const DrawerNav = StackNavigator({
