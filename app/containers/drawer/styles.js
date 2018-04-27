@@ -26,10 +26,9 @@ export const colors = {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      // backgroundColor: '#f6f6f6',
       paddingTop: 40,
       paddingHorizontal: 20,
-      backgroundColor: colors.bgMain,
+      backgroundColor: 'transparent'
     },
     uglyDrawerItem: {
       fontSize: 18,
@@ -64,15 +63,16 @@ const styles = StyleSheet.create({
     },
     menu: {
         paddingHorizontal: 7,
-        borderBottomWidth: 3,
-        marginVertical: 10,
-        borderBottomColor: '#000',
-        backgroundColor: 'pink',
+        borderBottomWidth: 1,
+        marginVertical: 7,
+        borderBottomColor: '#fff',
     },
     menuText: {
         marginLeft: 20,
         color: 'white',
-        fontSize: 15
+        fontSize: 16,
+        marginBottom: 5,
+        fontWeight: 'bold'
     },
     header: {
         marginTop: 20,

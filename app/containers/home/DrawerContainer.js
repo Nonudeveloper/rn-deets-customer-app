@@ -27,7 +27,7 @@ const colors = {
   bdWhite: '#ffffff',
   bdLine: '#dddddd',
   bdInput: '#cbcbcb'
-}
+};
 
 export default class DrawerContainer extends React.Component {
 
@@ -52,7 +52,8 @@ export default class DrawerContainer extends React.Component {
         start={{ x: 0.0, y: 0.25 }} 
         end={{ x: 0.5, y: 1.0 }}
         locations={[0.1, 0.75, 1]}
-        colors={['#5cb85c', '#94c194', '#5cb85c']} style={styles.container}
+        // colors={['#5cb85c', '#94c194', '#5cb85c']} 
+        style={styles.container}
       >
 {/* </LinearGradient> */}
         <View style={{ alignSelf: 'center' }}>
@@ -61,8 +62,8 @@ export default class DrawerContainer extends React.Component {
         <View style={styles.sideMenu}>
           <View style={{ paddingHorizontal: 30 }}>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'SelectVehileScreen' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('SelectVehileScreen')} 
+              style={[styles.menu, this.props.activeItemKey === 'appointmentStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('appointmentStack')} 
             >
                   <Icon name='home' color={colors.txtWhite} size={24} />
                   <Text style={styles.menuText} type='h5White'>Home</Text>
@@ -72,11 +73,11 @@ export default class DrawerContainer extends React.Component {
               onPress={() => navigation.navigate('DateTimeScreen')} 
             >
                   <Icon name='cog' color={colors.txtWhite} size={24} />
-                  <Text style={styles.menuText} type='h5White'>Settings</Text>
+                  <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={ styles.menu }>
+            <TouchableOpacity style={styles.menu}>
                   <Icon name='bell-o' color={colors.txtWhite} size={24} />
-                  <Text style={styles.menuText} type='h5White'>Notification</Text>
+                  <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
             <TouchableOpacity style={ styles.menu } onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
                   <Icon name='sign-out' color={colors.txtWhite} size={24} />

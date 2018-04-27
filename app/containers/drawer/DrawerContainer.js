@@ -27,37 +27,36 @@ export default class DrawerContainer extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      // <View style={styles.container}>
       <LinearGradient 
         start={{ x: 0.0, y: 0.25 }} 
         end={{ x: 0.5, y: 1.0 }}
         locations={[0.1, 0.75, 1]}
-        colors={['#5cb85c', '#94c194', '#5cb85c']} style={styles.container}
+        colors={['#40404099', '#bfbfbf', '#66666680']} 
+        style={styles.container}
       >
-{/* </LinearGradient> */}
         <View style={styles.sideMenu}>
           <View style={{}}>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'SelectVehileScreen' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('SelectVehileScreen')} 
+              style={[styles.menu, this.props.activeItemKey === 'appointmentStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('HomeComponent')} 
             >
-                  <Text style={styles.menuText} type='h5White'>Home</Text>
+                  <Text style={styles.menuText} type='h5White'>New Appointment</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.menu, this.props.activeItemKey === 'HomeComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('DateTimeScreen')} 
             >
-                  <Text style={styles.menuText} type='h5White'>Settings</Text>
+                  <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menu}>
-                  <Text style={styles.menuText} type='h5White'>Notification</Text>
+                  <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
                   <Text style={styles.menuText} type='h5White'>Log Out</Text>
             </TouchableOpacity>
           </View>
         </View>
-        </LinearGradient>
+      </LinearGradient>
     );
   }
 }

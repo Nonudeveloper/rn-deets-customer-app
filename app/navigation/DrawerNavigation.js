@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, Image, TouchableOpacity } from 'react-native';
-import { StackNavigator, DrawerNavigator, withNavigationFocus } from 'react-navigation';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
-import DrawerContainer from '../containers/home/DrawerContainer';
+import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
@@ -15,7 +14,7 @@ import ReviewScreen from '../containers/appointment/review/index';
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
-const drawerStackNav = StackNavigator({
+const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
@@ -25,18 +24,22 @@ const drawerStackNav = StackNavigator({
   reviewScreen: { screen: ReviewScreen },
   notesScreen: { screen: NotesScreen },
 }, {
+  contentOptions: {
+    activeTintColor: "#e91e63",
+    activeBackgroundColor: 'purple',
+  },
   headerMode: 'none'
 });
 
 const DrawerStack = DrawerNavigator({
-  drawer1: {
-    screen: drawerStackNav,
+  appointmentStack: {
+    screen: appointmentStack
   },
 }, {
   headerMode: 'none',
   gesturesEnabled: false,
-  contentComponent: DrawerContainer
-  
+  contentComponent: DrawerContainer,
+  drawerBackgroundColor: 'transparent'
 });
 
 // const DrawerNav = StackNavigator({
@@ -46,5 +49,5 @@ const DrawerStack = DrawerNavigator({
 //   headerMode: 'none'
 // });
 
-export default withNavigationFocus(DrawerStack);
+export default DrawerStack;
 
