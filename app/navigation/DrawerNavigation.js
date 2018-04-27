@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, Image, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
-import DrawerContainer from '../containers/home/DrawerContainer';
+import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
@@ -15,8 +14,7 @@ import ReviewScreen from '../containers/appointment/review/index';
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
 // drawer stack
 
-const drawer1 = StackNavigator({
-  
+const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
@@ -26,43 +24,30 @@ const drawer1 = StackNavigator({
   reviewScreen: { screen: ReviewScreen },
   notesScreen: { screen: NotesScreen },
 }, {
+  contentOptions: {
+    activeTintColor: "#e91e63",
+    activeBackgroundColor: 'purple',
+  },
   headerMode: 'none'
 });
 
 const DrawerStack = DrawerNavigator({
-  drawer1: {
-    screen: drawer1
+  appointmentStack: {
+    screen: appointmentStack
   },
 }, {
-  gesturesEnabled: false,
-  contentComponent: DrawerContainer
-  
-});
-
-const DrawerNav = StackNavigator({
-  drawerStack: { screen: DrawerStack }
-}, {
   headerMode: 'none',
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: { backgroundColor: 'gray' },
-    backBehavior: 'none',
-    // title: 'Logged In to your app!',
-    headerLeft: <TouchableOpacity
-                  style={{ paddingLeft: 5 }}
-                  onPress={() => {
-                    console.log(navigation);
-                      if (navigation.state.index === 0) {
-                          navigation.navigate('DrawerOpen');
-                      } else {
-                          navigation.navigate('DrawerClose');
-                      }
-                  }}
-    >
-                  <Image source={processOne} style={{ width: 30, height: 30 }} />
-                </TouchableOpacity>
-  })
-
+  gesturesEnabled: false,
+  contentComponent: DrawerContainer,
+  drawerBackgroundColor: 'transparent'
 });
 
-export default DrawerNav;
+// const DrawerNav = StackNavigator({
+//   drawerStack: { screen: DrawerStack }
+ 
+// }, {
+//   headerMode: 'none'
+// });
+
+export default DrawerStack;
 
