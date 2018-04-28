@@ -74,6 +74,14 @@ class AppointmetHelper {
         //     })
         //     .catch(error => console.log(error));
     }
+
+    addNewCardDetails = async ({ cardDetails }) => {
+        return await SuperFetch.post('customer/add_new_payment_method_for_existing_user', cardDetails)
+            .then(response => {
+                return response;
+            })
+            .catch(error => console.log(error));
+      };
   
 }
 

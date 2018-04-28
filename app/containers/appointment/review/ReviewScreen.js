@@ -15,6 +15,9 @@ export default class ReviewScreen extends React.Component {
     // this.props.actions.fetchServices();
   }
 
+  componentWillMount() {
+    this.props.actions.fetchCardDetails();
+  }
 
   render() {
     console.log(this.props);
@@ -35,7 +38,7 @@ export default class ReviewScreen extends React.Component {
         {/* //credit card details component */}
         <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
         <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.notes : ''}/>
-        <CardDetail />
+        <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} />
         {/* <Button 
             style={{ 
                 height: 45,

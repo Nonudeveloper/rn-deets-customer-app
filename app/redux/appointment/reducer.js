@@ -5,13 +5,21 @@ import {
     SCHEDULE_NEW_APPOINTMENT, 
     SCHEDULE_NEW_APPOINTMENT_SUCCESS, 
     SCHEDULE_NEW_APPOINTMENT_FALIURE,
-    STORE_APPOINTMENT_SCHEDULE 
+    STORE_APPOINTMENT_SCHEDULE,
+    USER_CARD_DETAILS_SUCCESS,
+    ADD_NEW_CARD_DETAILS,
+    ADD_NEW_CARD_DETAILS_SUCCESS,
+    ADD_NEW_CARD_DETAILS_FALIURE,
+    HIDE_ALERT
 } from './constants';
 
 const initialState = {
       isFetching: false,
       success: false,
-      selectedSchedule: []
+      selectedSchedule: [],
+      userCardDetails: [],
+      fetchingCardData: false,
+      errorMessage: ''
 };
 
 export default function appointmentReducer(state = initialState, action) {
@@ -45,6 +53,27 @@ export default function appointmentReducer(state = initialState, action) {
         case STORE_APPOINTMENT_SCHEDULE:
             return Object.assign({}, state, {
                 selectedSchedule: action.selectedSchedule
+            });
+        case USER_CARD_DETAILS_SUCCESS:
+            return Object.assign({}, state, {
+                userCardDetails: action.cardDetails
+            });
+        case ADD_NEW_CARD_DETAILS:
+            return Object.assign({}, state, {
+                fetchingCardData: true
+            });
+        case ADD_NEW_CARD_DETAILS_SUCCESS:
+            return Object.assign({}, state, {
+                fetchingCardData: false,
+            });
+        case ADD_NEW_CARD_DETAILS_FALIURE:
+            return Object.assign({}, state, {
+                fetchingCardData: false,
+                errorMessage: action.err
+            });
+        case HIDE_ALERT:
+            return Object.assign({}, state, {
+                errorMessage: ''
             });
         default:
             return state;
