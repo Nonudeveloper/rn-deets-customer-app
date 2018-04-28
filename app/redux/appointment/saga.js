@@ -44,7 +44,11 @@ function scheduleNewAppointmentCall(payload) {
     return new Promise((resolve, reject) => {
         AppointmentHelper.postNewAppointment(payload)
         .then(res => {
+          if (res.log) {
             resolve(res);
+         } else {
+           reject({ log: 'Unable to process' });
+         }
         })
         .catch(err => reject(err));
     });
@@ -83,7 +87,6 @@ function* watchScheduleNewAppointment() {
     return new Promise((resolve, reject) => {
         AppointmentHelper.addNewCardDetails(payload)
         .then(res => {
-          console.log(res)
           if (res.status) {
              reject({ error: 'Unable to add Card' });
           } else {

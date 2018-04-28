@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NotesScreen from './NotesScreen';
 
-import * as serviceActions from '../../../redux/service/serviceActions';
+import * as appointmentActions from '../../../redux/appointment/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // actions: bindActionCreators(serviceActions, dispatch),
+        actions: bindActionCreators(appointmentActions, dispatch),
     };
 };
 
@@ -19,4 +19,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotesScreen);
-

@@ -5,7 +5,8 @@ import {
     SERVICES_APPOINTMENT_SUCCESS,
     SERVICES_APPOINTMENT_FALIURE,
     HIDE_ALERT,
-    GET_SELECTED_SERVICES
+    GET_SELECTED_SERVICES,
+    STORE_SERVICE_APPOINTMENT_ID
 } from './constants';
     
 export function fetchServices() {
@@ -80,4 +81,11 @@ function getTechnicanAvailability(data) {
         });
     }
     return availableTime;
+}
+
+export function storeUserServiceAppointmentId(appoitmentId) {
+    return {
+      type: STORE_SERVICE_APPOINTMENT_ID,
+      appoitmentId
+    };
 }

@@ -23,7 +23,23 @@ export default class CardDetail extends React.Component {
         modalVisible: false,
         selectedCard: []
       };
-    
+      
+      componentWillMount() {
+        if (this.props.userCardDetails.length > 0) {
+          this.props.userCardDetails.map((item, i) => {
+            if (item.is_default === 1) {
+              this.setState(() => {
+                return {
+                  selectedCard: item
+                };
+              }, () => {
+              this.props.getSelectedCard(item);
+             });
+            }
+          });
+        }
+      }
+
       setModalVisible(visible) {
         this.setState({ modalVisible: visible });
       }
@@ -52,6 +68,7 @@ export default class CardDetail extends React.Component {
           };
         }, () => {
         this.setModalVisible(!this.state.modalVisible);
+        this.props.getSelectedCard(card);
        });
       }
 
@@ -137,18 +154,6 @@ export default class CardDetail extends React.Component {
             </Modal>
         );
       }
-    
-      componentWillReceiveProps(newProps) {
-        if (newProps.userCardDetails.length > 0) {
-          newProps.userCardDetails.map((item, i) => {
-            if (item.is_default === 1) {
-              this.setState({
-                selectedCard: item
-              });
-            }
-          });
-        }
-      }
 
   render() {
     return (
@@ -180,7 +185,7 @@ export default class CardDetail extends React.Component {
             }
             
             
-            <Text style={{ fontWeight: '600' }}> $24 </Text>
+            <Text style={{ fontWeight: '600' }}> ${this.props.selectedServices.totalCost} </Text>
             <TouchableOpacity onPress={() => this.setModalVisible(true)}>
             <Image source={arrowBtn} resizeMode={'contain'} style={{ width: 30, height: 30, marginRight: 1 }} />
             </TouchableOpacity>

@@ -14,7 +14,10 @@ class NotesScreen extends React.Component {
     // this.props.actions.fetchServices();
   }
 
-
+  componentWillMount() {
+    this.props.actions.fetchCardDetails();
+  }
+  
   render() {
     const { isFetching } = this.props;
     return (

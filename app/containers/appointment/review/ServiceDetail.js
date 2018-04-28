@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 
 const car = require('../../../assets/icons/car_place_holder.png');
 const ratingStartActive = require('../../../assets/icons/rate_star_active.png');
@@ -26,7 +26,7 @@ export default class ServiceDetail extends React.Component {
 
                 }}
             >
-                <View style={{ flex: 2, flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1, alignItems: 'center',marginTop: 4 }}>
+                <View style={{ flex: 1.5, flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1, alignItems: 'center',marginTop: 4 }}>
                     <View 
                         style={{ flex: 1, alignItems: 'center', marginHorizontal: 30 }}
                     >
@@ -47,7 +47,7 @@ export default class ServiceDetail extends React.Component {
                         <Text style={{ fontSize: 20, color: '#1a1a1a' }}>${this.props.selectedServices.totalCost}</Text>
                     </View>
                 </View>
-                <View style={{ marginHorizontal: 30,flex: 1, flexDirection: 'column', marginVertical: 5, alignItems: 'center', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
+                <View style={{ marginHorizontal: 30,flex: 2, flexDirection: 'column', marginVertical: 5, alignItems: 'center', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
                         <View style={{ flex: 8 }}>
                             <Text style={{ fontSize: 20, color: '#000' }}>{this.props.selectedServices.serviceSelected.service_name}</Text>
@@ -56,17 +56,28 @@ export default class ServiceDetail extends React.Component {
                             <Text style={{ fontSize: 20, color: '#1a1a1a' }}>${vehicleInfo.vehicle_type === 2 ? this.props.selectedServices.serviceSelected.service_Large_cost : this.props.selectedServices.serviceSelected.cost}</Text>
                         </View>
                     </View>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{ flex: 4 }}>
-                            <Text style={{ fontSize: 16, color: '#000' }}>Addon Services - </Text>
-                        </View>
-                        <View style={{ flex: 4 }}>
-                            <Text style={{ fontSize: 14, color: '#000' }}>{this.props.selectedServices.serviceSelected.service_name}</Text>
-                        </View>
-                        <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
-                            <Text color={'#1a1a1a'}>${vehicleInfo.vehicle_type === 2 ? this.props.selectedServices.serviceSelected.service_Large_cost : this.props.selectedServices.serviceSelected.cost}</Text>
-                        </View>
+                    <View style={{flex: 2, flexDirection: 'row'}}>
+                    <View style={{width:'40%'}}>
+                    <Text style={{ fontSize: 16, color: '#000' }}>Addon Services - </Text>
                     </View>
+                    <ScrollView> 
+                    {this.props.selectedServices.selectedaddOns !== ''?
+                        this.props.selectedServices.selectedaddOns.map((addons, i) => 
+                            <View key={i} style={{flex: 1, flexDirection: 'row'}}>
+                                <View style={{ flex: 4.4 }}>
+                                    <Text numberOfLines={1} style={{ fontSize: 16, color: '#000' }}>{addons.vehicle.adds_on_name} </Text>
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center', borderLeftWidth: 1, borderLeftColor: 'grey' }}>
+                                    <Text color={'#1a1a1a'}>${vehicleInfo.vehicle_type === 2 ? addons.vehicle.large_vehicle_cost : addons.vehicle.small_vehicle_cost}</Text>
+                                </View>
+                            </View>
+                        )
+                    :
+                    null
+                }
+                        
+            </ScrollView>
+                </View>      
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -85,7 +96,7 @@ export default class ServiceDetail extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 3,
         // backgroundColor: 'pink'
     },
   

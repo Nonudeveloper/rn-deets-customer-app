@@ -11,7 +11,9 @@ import {
     ADD_NEW_CARD_DETAILS,
     ADD_NEW_CARD_DETAILS_SUCCESS,
     ADD_NEW_CARD_DETAILS_FALIURE,
-    HIDE_ALERT
+    HIDE_ALERT,
+    STORE_USER_SELECTED_CARD_DETAILS,
+    HIDE_SCHEDULE_ALERT
 } from './constants';
     
 export function postNewAppointment(payload) {
@@ -99,5 +101,18 @@ export function addNewCardDetailsFaliure(err) {
 export function hideAlert() {
     return {
       type: HIDE_ALERT
+    };
+}
+
+export function storeSelectedCardDetails(selectedCard) {
+    return {
+      type: STORE_USER_SELECTED_CARD_DETAILS,
+      selectedCard
+    };
+}
+
+export function hideScheduleAlert() {
+    return {
+      type: HIDE_SCHEDULE_ALERT,
     };
 }
