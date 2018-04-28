@@ -10,6 +10,7 @@ import ServiceDetailScreen from '../containers/appointment/services/serviceDetai
 import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 import NotesScreen from '../containers/appointment/notes/index';
 import ReviewScreen from '../containers/appointment/review/index';
+import ProfileScreen from '../containers/profile/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -64,7 +65,7 @@ const TransitionConfiguration = () => {
     };
 };
 
-// drawer stack
+// appointment stack
 
 const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
@@ -79,8 +80,19 @@ const appointmentStack = StackNavigator({
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
   contentOptions: {
-    activeTintColor: "#e91e63",
-    activeBackgroundColor: 'purple',
+    activeTintColor: '#e91e63',
+  },
+});
+
+// profile stack
+
+const profileStack = StackNavigator({
+  profileComponent: { screen: ProfileScreen },
+}, {
+  headerMode: 'none',
+  transitionConfig: TransitionConfiguration,
+  contentOptions: {
+    activeTintColor: '#e91e63',
   },
 });
 
@@ -88,6 +100,9 @@ const DrawerStack = DrawerNavigator({
   appointmentStack: {
     screen: appointmentStack
   },
+  profileStack: {
+    screen: profileStack
+  }
 }, {
   headerMode: 'none',
   gesturesEnabled: false,
@@ -96,13 +111,6 @@ const DrawerStack = DrawerNavigator({
   drawerWidth: 240,
   useNativeAnimations: true
 });
-
-// const DrawerNav = StackNavigator({
-//   drawerStack: { screen: DrawerStack }
- 
-// }, {
-//   headerMode: 'none'
-// });
 
 export default DrawerStack;
 

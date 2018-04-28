@@ -37,18 +37,26 @@ export default class DrawerContainer extends React.Component {
         <View style={styles.sideMenu}>
           <View style={{}}>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'appointmentStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              style={[styles.menu, 
+                this.props.activeItemKey === 'appointmentStack' ? 
+                { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : 
+                { backgroundColor: 'transparent' }
+              ]}
               onPress={() => navigation.navigate('HomeComponent')} 
             >
                   <Text style={styles.menuText} type='h5White'>New Appointment</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'HomeComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('DateTimeScreen')} 
-            >
+            <TouchableOpacity style={styles.menu}>
                   <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menu}>
+            <TouchableOpacity 
+              style={[styles.menu, 
+                this.props.activeItemKey === 'profileStack' ? 
+                { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : 
+                { backgroundColor: 'transparent' }
+              ]}
+              onPress={() => navigation.navigate('profileComponent')} 
+            >
                   <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
