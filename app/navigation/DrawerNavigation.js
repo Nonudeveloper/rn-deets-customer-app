@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, Image, TouchableOpacity } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
-import DrawerContainer from '../containers/home/DrawerContainer';
+import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
@@ -14,10 +14,60 @@ import CreditCardForm from '../containers/appointment/review/paymentInformation/
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
+
+/**Cunstom Transitions */
+const MyTransition = (toIndex, thisSceneIndex, height, width, scenes, position) => {
+  const translateX = position.interpolate({
+          inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+          outputRange: [width, 0, 0]
+  });
+  const translateY = position.interpolate({
+          inputRange: [0, thisSceneIndex],
+          outputRange: [height, 0]
+  });
+
+  const slideFromRight = { transform: [{ translateX }] };
+  const slideFromBottom = { transform: [{ translateY }] };
+
+  const lastSceneIndex = scenes[scenes.length - 1].index;
+
+  // Test whether we're skipping back more than one screen
+  if (lastSceneIndex - toIndex > 1) {
+      // Do not transoform the screen being navigated to
+      if (scene.index === toIndex) return;
+      // Hide all screens in between
+      if (scene.index !== lastSceneIndex) return { opacity: 0 };
+      // Slide top screen down
+      return slideFromBottom;
+  }
+  return slideFromRight;
+};
+
+/**Transition Configurator */
+
+const TransitionConfiguration = () => {
+  return {
+        transitionSpec: {
+            duration: 550,
+            easing: Easing.out(Easing.poly(4)),
+            timing: Animated.timing,
+            useNativeDriver: true,
+        },
+      // Define scene interpolation, eq. custom transition
+         screenInterpolator: (sceneProps) => {
+            const { position, layout, scene, index, scenes } = sceneProps;
+            const toIndex = index;
+            const thisSceneIndex = scene.index;
+            const height = layout.initHeight;
+            const width = layout.initWidth;
+            return MyTransition(toIndex, thisSceneIndex, height, width, scenes, position); 
+        }
+    };
+};
+
 // drawer stack
 
-const drawer1 = StackNavigator({
-  
+const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
   serviceDetailScreen: { screen: ServiceDetailScreen },
@@ -28,43 +78,33 @@ const drawer1 = StackNavigator({
   notesScreen: { screen: NotesScreen },
   creditCardForm: { screen: CreditCardForm },
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  transitionConfig: TransitionConfiguration,
+  contentOptions: {
+    activeTintColor: "#e91e63",
+    activeBackgroundColor: 'purple',
+  },
 });
 
 const DrawerStack = DrawerNavigator({
-  drawer1: {
-    screen: drawer1
+  appointmentStack: {
+    screen: appointmentStack
   },
 }, {
-  gesturesEnabled: false,
-  contentComponent: DrawerContainer
-  
-});
-
-const DrawerNav = StackNavigator({
-  drawerStack: { screen: DrawerStack }
-}, {
   headerMode: 'none',
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: { backgroundColor: 'gray' },
-    backBehavior: 'none',
-    // title: 'Logged In to your app!',
-    headerLeft: <TouchableOpacity
-                  style={{ paddingLeft: 5 }}
-                  onPress={() => {
-                    console.log(navigation);
-                      if (navigation.state.index === 0) {
-                          navigation.navigate('DrawerOpen');
-                      } else {
-                          navigation.navigate('DrawerClose');
-                      }
-                  }}
-    >
-                  <Image source={processOne} style={{ width: 30, height: 30 }} />
-                </TouchableOpacity>
-  })
-
+  gesturesEnabled: false,
+  contentComponent: DrawerContainer,
+  drawerBackgroundColor: 'transparent',
+  drawerWidth: 240,
+  useNativeAnimations: true
 });
 
-export default DrawerNav;
+// const DrawerNav = StackNavigator({
+//   drawerStack: { screen: DrawerStack }
+ 
+// }, {
+//   headerMode: 'none'
+// });
+
+export default DrawerStack;
 

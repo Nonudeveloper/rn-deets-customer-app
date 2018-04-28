@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';

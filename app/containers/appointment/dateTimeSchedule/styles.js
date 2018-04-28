@@ -23,7 +23,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     technicianContainer: {
-        height: 100, 
+        height: 85, 
         backgroundColor: 'white',
         borderBottomWidth: 2, 
         borderBottomColor: '#e0e0e0', 
@@ -58,7 +58,7 @@ export default StyleSheet.create({
         marginHorizontal: 3
     },
     licenceFont: { 
-        fontSize: 25, 
+        fontSize: 19, 
         color: '#586069', 
         // fontWeight: 'bold',
         top: 0
@@ -147,54 +147,47 @@ export default StyleSheet.create({
         color: 'grey',
     },
     technicianInfoContainer: {
-        flex: 3, 
-        flexDirection: 'column', 
-        justifyContent: 'space-between'
+        flex: 3,
     },
     ratingContainer: {
-        top: 10, 
+        flex: 1,
         flexDirection: 'row'
     },
     availabilityOuterContainer: {
         top: 1, 
-        height: 80, 
+        height: 50, 
         backgroundColor: '#333333', 
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     availabilityInnerContainer: {
         flex: 5, 
-        borderLeftColor: 'gray', 
-        alignItems: 'center', 
+        borderLeftColor: 'grey', 
         borderLeftWidth: 2, 
-        marginVertical: 20, 
-        marginHorizontal: 20
+        marginHorizontal: 10,
     },
     hourContainer: {
         flex: 1,
-        borderLeftColor: 'gray', 
+        borderLeftColor: 'grey', 
         borderLeftWidth: 2,
-        marginVertical: 20, 
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     hourText: {
         alignItems: 'center',
-        paddingTop: 5,
-        fontSize: 23, 
+        fontSize: 18, 
         color: '#586069'
     },
     scrollViewText: {
-        paddingTop: 5,
-        fontSize: 23, 
+        fontSize: 18, 
         color: '#586069', 
-        paddingHorizontal: 20
+        paddingHorizontal: 10
     },
     scrollViewSelectedText: {
-        paddingTop: 5, 
         backgroundColor: StyleConstants.LoginButtonBColor, 
         borderRadius: 10,
-        fontSize: 23, 
+        fontSize: 18, 
         color: '#586069',
-         paddingHorizontal: 20
+        paddingHorizontal: 10
     }
 });
 

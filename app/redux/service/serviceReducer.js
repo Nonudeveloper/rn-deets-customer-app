@@ -2,7 +2,7 @@ import {
     FETCH_SERVICES, 
     FETCH_SERVICES_SUCCESS, 
     FETCH_SERVICES_FALIURE,
-    CREATE_NEW_USER_SERVIVE_APPOINTMENT,
+    CREATE_NEW_USER_SERVICE_APPOINTMENT,
     SERVICES_APPOINTMENT_SUCCESS,
     SERVICES_APPOINTMENT_FALIURE,
     HIDE_ALERT,
@@ -34,14 +34,14 @@ export default function servicesReducer(state = initialState, action) {
                 isFetching: false,
                 err: action.err
             });
-        case CREATE_NEW_USER_SERVIVE_APPOINTMENT:
+        case CREATE_NEW_USER_SERVICE_APPOINTMENT:
             return Object.assign({}, state, {
                 technicianFetching: true
             });
         case SERVICES_APPOINTMENT_SUCCESS:
             return Object.assign({}, state, {
                 technicianFetching: false,
-                technician: action.payload
+                technician: action.technicians
             });
         case SERVICES_APPOINTMENT_FALIURE:
             return Object.assign({}, state, {
