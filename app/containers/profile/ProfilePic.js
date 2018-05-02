@@ -47,19 +47,19 @@ export default class ProfilePic extends React.Component {
         });
     }
 
-    // componentWillMount() {
-    //     if (this.props.fbData !== null) {
-    //         this.setState(() => {
-    //             return {
-    //                 ImageSource: {
-    //                     uri: this.props.fbData.picture.data.url
-    //                 }
-    //             };
-    //         }, () => {
-    //             // this.props.getImage(this.state.ImageSource);
-    //         });
-    //     }
-    // }
+    componentDidMount() {
+        if (this.props.profilePic !== undefined) {
+            this.setState(() => {
+                return {
+                    ImageSource: {
+                        uri: this.props.profilePic
+                    }
+                };
+            }, () => {
+                // this.props.getImage(this.state.ImageSource);
+            });
+        }
+    }
 
     render() {
         return (

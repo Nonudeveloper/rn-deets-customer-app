@@ -4,7 +4,6 @@ import { reduxForm, Field, formValues, change, untouch, initialize } from 'redux
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import CommonTextInput from '../../deetscomponents/form/Input';
-import asyncValidate from './asyncValidate';
 
 const info = (<Icon name="info-circle" size={18} color="#fff" />);
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
@@ -20,8 +19,19 @@ class FormArea extends React.Component {
         };
     }
 
-    serviceAddress = () => {
-        this.props.navigation.navigate('serviceAddress');
+
+    componentWillMount() {
+        if (this.props.authUser.length !== 0) {
+            const user = this.props.authUser;
+            const initialFormData = {
+                fname: user.first_name,
+                lname: user.last_name,
+                mobile: user.mobile,
+                email: user.email,
+                access_token: user.access_token
+            };
+            this.props.dispatch(initialize('profileDetails', initialFormData));
+        }
     }
 
     clear(fieldName) {
@@ -42,35 +52,6 @@ class FormArea extends React.Component {
             this.setState({ clearemailfield: false });
         }
     }
-
-    // componentWillMount() {
-    //     if (this.props.fbData !== null) {
-    //         const fbUserData = JSON.parse(this.props.fbData.profile);
-    //         // var userEmail = '';
-    //         // if (fbUserData.email){
-    //         //     var userEmail = fbUserData.email;
-    //         // }
-    //         const initialFormData = {
-    //             fname: fbUserData.first_name,
-    //             lname: fbUserData.last_name,
-    //             flag: 1,
-    //             fb_access_token: this.props.fbData.credentials.token,
-    //             fb_id: fbUserData.id,
-    //             email: fbUserData.email,
-    //             gender: fbUserData.gender,
-    //             device_token: this.props.deviceToken
-                
-    //     };
-    
-    //     this.props.dispatch(initialize('signUp', initialFormData));
-    //     } else {
-    //         const initialFormData = {
-    //             flag: 3,
-    //             device_token: this.props.deviceToken
-    //         };
-    //         this.props.dispatch(initialize('signUp', initialFormData));
-    //     }
-    // }
 
 
     render() {
@@ -94,6 +75,12 @@ class FormArea extends React.Component {
         return (
             <View style={styles.formArea}>
                 <Field
+                    name={'access_token'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
                     name={'fname'}
                     component={CommonTextInput}
                     props={this.props}
@@ -102,7 +89,7 @@ class FormArea extends React.Component {
                     underlineColorAndroid="transparent"
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
-                    editable={this.props.editable}
+                    editable={this.props.formEditable}
                 />
                 <Field
                     name={'lname'}
@@ -113,7 +100,7 @@ class FormArea extends React.Component {
                     underlineColorAndroid="transparent"
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
-                    editable={this.props.editable}
+                    editable={this.props.formEditable}
                 />
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ flex: 6 }}>
@@ -127,7 +114,7 @@ class FormArea extends React.Component {
                             type="email"
                             onChange={(value) => this.emailClear(value)}
                             borderBotmWidth={{ borderBottomWidth: 2 }}
-                            editable={this.props.editable}
+                            editable={false}
                         /> 
                     </View>
                     <View style={styles.crossButtonContainer}>
@@ -153,7 +140,7 @@ class FormArea extends React.Component {
                             type="mobile"
                             normalize={normalizePhone}
                             parse={phoneParser}
-                            editable={this.props.editable}
+                            editable={this.props.formEditable}
                         />
                     </View>
                     <View style={styles.crossButtonContainerMobile}>
@@ -198,7 +185,5 @@ export default reduxForm({
           : undefined;
           
         return errors;
-    },
-     asyncValidate,
-     asyncBlurFields: ['email']
+    }
 })(FormArea);

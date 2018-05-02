@@ -2,9 +2,9 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import DetailsScreen from './Details';
+import ChangePasswordScreen from './ChangePasswordScreen';
 
-import * as profileActions from '../../redux/profile/actions';
+import * as profileActions from '../../../redux/profile/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,12 +15,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        authUser: state.Profile.authUser,
         isFetching: state.Profile.isFetching,
         form: state.form,
-        errorMessage: state.Profile.errorMessage,
+        passwordConfirmation: state.Profile.passwordConfirmation
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePasswordScreen);
 

@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
   AuthVehicle,
   Service: ServiceReducer,
   Appointment: appointmentReducer,
-  profile: profileReducer
+  Profile: profileReducer
 });
 
 export default rootReducer;
