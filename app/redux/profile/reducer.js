@@ -8,14 +8,18 @@ import {
     HIDE_ALERT,
     CHANGE_USER_PASSWORD,
     CHANGE_USER_PASSWORD_SUCCESS,
-    CHANGE_USER_PASSWORD_FAILURE
+    CHANGE_USER_PASSWORD_FAILURE,
+    GET_AUTH_USER_VEHICLE_DETAILS,
+    GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE
 } from './constants';
 
 const initialState = {
       isFetching: false,
       authUser: [],
       errorMessage: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      authVehiclesData: []
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -65,6 +69,20 @@ export default function profileReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isFetching: false,
                 passwordConfirmation: action.err
+            });
+        case GET_AUTH_USER_VEHICLE_DETAILS:
+            return Object.assign({}, state, {
+                // isFetching: false
+            });
+        case GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS:
+            return Object.assign({}, state, {
+                // isFetching: false,
+                authVehiclesData: action.userVehiclesData
+            });
+        case GET_AUTH_USER_VEHICLE_DETAILS_FAILURE:
+            return Object.assign({}, state, {
+                // isFetching: false,
+                errorMessage: action.err
             });
         default:
             return state;

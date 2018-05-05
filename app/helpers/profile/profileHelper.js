@@ -34,5 +34,13 @@ class ProfileHelper {
     })
     .catch(error => ({ error: JSON.stringify(error) }));
     }
+
+    fetchVehiclesMakeModel = async year => {
+        return await SuperFetch.post('customer/get_vehicle_data_for_year', { year })
+        .then(response => {
+          return response;
+        })
+        .catch(error => ({ error: JSON.stringify(error) }));
+      }
 }
 export default new ProfileHelper();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Dimensions, Image, Text, Alert } from 'react-native';
+import { View, TouchableOpacity, Dimensions, Image, Text, Alert, LayoutAnimation, UIManager, Platform } from 'react-native';
 import Header from '../header/Header';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
@@ -7,6 +7,8 @@ import styles from './styles';
 import Button from '../../deetscomponents/Button';
 import Loader from '../../deetscomponents/Loader';
 import StyleConstants from '../../config/StyleConstants';
+import DetailsItem from './DetailsItem';
+import VehiclesScreen from './vehiclesDetail/index';
 
 const window = Dimensions.get('window');
 const editButton = require('../../assets/icons/edit_normal.png');
@@ -16,11 +18,25 @@ const tickButton = require('../../assets/icons/tick_normal.png');
 export default class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
+    if (Platform.OS === 'android') {
+          UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
     this.state = {
         profileEditable: false,
         vehicleEditable: false,
-        newImage:'',
-        showPasswordButton: true
+        newImage: '',
+        showPasswordButton: true,
+        detailFlexValue: 2,
+        vehicleFlexValue: 1,
+        showDetailEditButton: true,
+        showVehicleEditButton: false,
+        showDetail: true,
+        showVehicle: false,
+        showDetailWidth: window.width,
+        showVehicleWidth: 0,
+        showDetailFlex: 1,
+        showVehicleFlex: 0,
+        stretchFlex: 3
     };
   }
 
@@ -50,7 +66,18 @@ export default class DetailsScreen extends React.Component {
   } 
 
   editVehicles() {
-
+    this.state.vehicleEditable ? 
+    this.setState(() => {
+        return {
+            vehicleEditable: false,
+        };
+    }, () => {
+        // this.saveData();
+    })
+    :
+    this.setState({
+        vehicleEditable: true,
+    });
   }
 
   saveData() {
@@ -95,8 +122,43 @@ export default class DetailsScreen extends React.Component {
     );
   }
 
+  changeLayout = (val) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+ 
+        if (val === 'detail') {
+            this.setState({ 
+                detailFlexValue: 2,
+                vehicleFlexValue: 1,
+                showDetailEditButton: true,
+                showVehicleEditButton: false,
+                showDetail: true,
+                showVehicle: false,
+                showPasswordButton: true,
+                showDetailWidth: window.width,
+                showVehicleWidth: 0,
+                showDetailFlex: 1,
+                showVehicleFlex: 0,
+                stretchFlex: 3
+            });
+        } else {
+            this.setState({ 
+                detailFlexValue: 1,
+                vehicleFlexValue: 2,
+                showDetailEditButton: false,
+                showVehicleEditButton: true,
+                showDetail: false,
+                showVehicle: true,
+                showPasswordButton: false,
+                showDetailWidth: 0,
+                showVehicleWidth: window.width,
+                showDetailFlex: 0,
+                showVehicleFlex: 1,
+                stretchFlex: 13
+            });
+        }
+    }
+
   render() {
-    const width = window.width/2 - 10;
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
         <View style={styles.container}>
@@ -107,53 +169,76 @@ export default class DetailsScreen extends React.Component {
             />
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             <View style={styles.toggleButtonContainer}>
-                <View style={{ width, height: 60 }} >
-                    <TouchableOpacity style={styles.detailButtonInnerContainer} >
+                <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60 }} >
+                    <TouchableOpacity style={styles.detailButtonInnerContainer} onPress={this.changeLayout.bind(this, 'detail')} >
                         <View style={styles.detailButtonInnerWraper}>
                             <Text style={styles.detailTextContainer}>
                                 Details
                             </Text>
                         </View>
+                        { this.state.showDetailEditButton &&
                         <TouchableOpacity style={{ flex: 1, position: 'absolute', right: 10 }} onPress={this.editDetails.bind(this)}>
                             <Image style={{ width: 30, height: 30 }} source={this.state.profileEditable ? tickButton : editButton} />
                         </TouchableOpacity>
+                        }
                     </TouchableOpacity>
                 </View>
-                <View style={{ width, height: 60, }} >
-                    <TouchableOpacity style={styles.vehicleButtonInnerContainer} >
+                <View style={{ flex: this.state.vehicleFlexValue, marginLeft: 10, height: 60 }} >
+                    <TouchableOpacity style={styles.vehicleButtonInnerContainer} onPress={this.changeLayout.bind(this, 'vehicle')} >
+                    { this.state.showVehicleEditButton &&
+                        <TouchableOpacity style={{ flex: 1, position: 'absolute', left: 10 }} onPress={this.editVehicles.bind(this)}>
+                            <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
+                        </TouchableOpacity>
+                    }
+                        <View style={styles.detailButtonInnerWraper}>
                         <Text style={styles.vehicleTextContainer}>
                             Vehicles
                         </Text>
-                        <TouchableOpacity style={{ flex: 1, position: 'absolute', right: 10 }} onPress={this.editVehicles}>
-                            <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
-                        </TouchableOpacity>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.pictureWraper}>
+            <View style={{ flex: 7 }}>
+            {/* <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
                     <ProfilePic getImage={this.getImage.bind(this)} editable={this.state.profileEditable} getImage={this.getImage.bind(this)} profilePic={this.props.authUser.image} />
                 </View>
                 <View style={styles.logoutButtonContainer}>
                     <Image 
-                        style={{ width: '76%', height: '60%', }}
+                        style={{ width: '66%', height: '50%', }}
                         source={logOutButton}
                     />
                 </View>
             </View>
             <View style={styles.formContainer}>
                 <FormArea navigation={this.props.navigation} formEditable={this.state.profileEditable} authUser={this.props.authUser} />
+            </View> */}
+            { this.state.showDetail &&
+            // <View style={{ flex: this.state.showDetailFlex, width: this.state.showDetailWidth }}>
+            <DetailsItem
+            getImage={this.getImage.bind(this)} editable={this.state.profileEditable} getImage={this.getImage.bind(this)} profilePic={this.props.authUser.image}
+            navigation={this.props.navigation} formEditable={this.state.profileEditable} authUser={this.props.authUser}
+            />
+                // </View>
+             }
+            { this.state.showVehicle && 
+            // <View style={{ flex: this.state.showVehicleFlex, width: this.state.showVehicleWidth }}>
+            <VehiclesScreen editable={this.state.vehicleEditable} /> 
+            //</View>
+             }
             </View>
-            <View style={styles.nextButtonContainer}>
             { this.state.showPasswordButton &&
+            <View style={styles.nextButtonContainer}>
+            
                 <Button 
                     style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
                     onPress={this.goToNext.bind(this)}
                 >
                 Change Password
                 </Button>
-            }
+            
             </View>
+            }
         </View>
     );
   }

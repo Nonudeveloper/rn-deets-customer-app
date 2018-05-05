@@ -8,7 +8,10 @@ import {
     HIDE_ALERT,
     CHANGE_USER_PASSWORD,
     CHANGE_USER_PASSWORD_SUCCESS,
-    CHANGE_USER_PASSWORD_FAILURE
+    CHANGE_USER_PASSWORD_FAILURE,
+    GET_AUTH_USER_VEHICLE_DETAILS,
+    GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -78,4 +81,46 @@ export function changeUserPasswordFailure(err) {
       err
     };
 }
+
+export function getAuthUserVehicleDetails() {
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS,
+    };
+}
+
+export function getAuthUserVehicleDetailsSuccess(userVehiclesData) {
+    console.log(userVehiclesData);
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+      userVehiclesData
+    };
+}
+
+export function getAuthUserVehicleDetailsFailure(err) {
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+      err
+    };
+}
+
+// export function fetchVehiclesMakeModel() {
+//     return {
+//       type: GET_AUTH_USER_VEHICLE_DETAILS,
+//     };
+// }
+
+// export function getAuthUserVehicleDetailsSuccess(vehicleData) {
+//     console.log(vehicleData);
+//     return {
+//       type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+//       vehicleData
+//     };
+// }
+
+// export function getAuthUserVehicleDetailsFailure(err) {
+//     return {
+//       type: GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+//       err
+//     };
+// }
 
