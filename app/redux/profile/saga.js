@@ -1,5 +1,5 @@
 import React from 'react';
-import { take, put, call, fork } from 'redux-saga/effects';
+import { take, put, call, fork, select } from 'redux-saga/effects';
 import { fetchAuthUserDetailsSuccess, 
   fetchAuthUserDetailsFailure, 
   editUserProfileSuccess, 
@@ -7,8 +7,10 @@ import { fetchAuthUserDetailsSuccess,
   changeUserPasswordSuccess, 
   changeUserPasswordFailure,
   getAuthUserVehicleDetailsSuccess,
-  getAuthUserVehicleDetailsFailure } from './actions';
-import { FETCH_AUTH_USER_DETAILS, EDIT_USER_PROFILE, CHANGE_USER_PASSWORD, GET_AUTH_USER_VEHICLE_DETAILS } from './constants';
+  getAuthUserVehicleDetailsFailure,
+  fetchVehiclesMakeModelByYearSuccess,
+  fetchVehiclesMakeModelByYearFailure } from './actions';
+import { FETCH_AUTH_USER_DETAILS, EDIT_USER_PROFILE, CHANGE_USER_PASSWORD, GET_AUTH_USER_VEHICLE_DETAILS, FETCH_VEHICLE_MAKE_MODEL_BY_YEAR } from './constants';
 import { getItem, setItem } from '../../helpers/asyncStorage';
 import ProfileHelper from '../../helpers/profile/profileHelper';
 import { NavigationActions } from 'react-navigation';
@@ -138,9 +140,48 @@ function vehiclesMakeModelCall(payload) {
   });
 }
 
+export const authVehiclesData = (state) => state.Profile.authVehiclesData;
+
+function* watchFetchVehicleMakeModelByYear() {
+  while (true) {
+   const { year, vehicle } = yield take(FETCH_VEHICLE_MAKE_MODEL_BY_YEAR);
+    try {
+      const changedVehicle = yield select(authVehiclesData);
+      const response = yield call(vehiclesMakeModelByYearCall, year);
+      changedVehicle.map((previousdata) => {
+        if (previousdata.data.vehicle_id === vehicle.vehicle_id) {
+            previousdata.makeModel = response;
+        }
+      });
+      yield put(fetchVehiclesMakeModelByYearSuccess(changedVehicle));
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(fetchVehiclesMakeModelByYearFailure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
+  }
+}
+
+
+function vehiclesMakeModelByYearCall(payload) {
+  return new Promise((resolve, reject) => {
+    ProfileHelper.fetchVehiclesMakeModel(payload)
+      .then(res => {
+        if (res.data) {
+          resolve(res);
+        } else {
+           const log = res.error;
+           reject({ log });
+        }
+      })
+      .catch(err => reject(err));
+  });
+}
+
 export default function* root() {
   yield fork(watchAuthUserDetails);
   yield fork(watchEditUserProfile);
   yield fork(watchChangeUserPassword);
   yield fork(watchGetAuthUserVehiclesFromAsyncStorage);
+  yield fork(watchFetchVehicleMakeModelByYear);
 }

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 // const window = Dimensions.get('window');
-
+const SCREEN_WIDTH = Dimensions.get("window").width;
 export default StyleSheet.create({
     carPic: {
         alignItems: 'center',
@@ -150,5 +150,24 @@ export default StyleSheet.create({
         marginBottom: 20,
         marginHorizontal: 100
     },
+    screen: {
+        height: 600,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 25,
+        backgroundColor: "white"
+      },
+      scrollPage: {
+        width: SCREEN_WIDTH,
+        padding: 20
+      },
+      scrollView: {
+        flexDirection: "row",
+        backgroundColor: "#00d4ff"
+      },
+      text: {
+        fontSize: 45,
+        fontWeight: "bold"
+      }
 });
 

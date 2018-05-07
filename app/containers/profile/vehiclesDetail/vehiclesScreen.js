@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Alert } from 'react-native';
 import CarPicture from './CarPicture';
 import VehicleForm from './VehicleForm';
 import styles from '../styles';
@@ -93,12 +93,15 @@ export default class VehiclesScreen extends React.Component {
     );
   }
 
-
   render() {
+    console.log(this.props.authVehiclesData);
     return (
         <View style={styles.container}>
         {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
-        <Swiper loadMinimal showsPagination={false} loadMinimalSize={1} style={{ flex: 1 }} loop={false} >
+        <Swiper loadMinimal={false} loadMinimalSize={1} showsPagination={false} loadMinimalSize={1} style={{ flex: 1 }} loop={false} 
+        onMomentumScrollEnd={ console.log('klkl') }
+        >
+       
         {
             this.props.authVehiclesData.map((item, i) =>
           <View key={i} style={{ flex: 1, top: 10 }}>
@@ -122,13 +125,15 @@ export default class VehiclesScreen extends React.Component {
               </View> */}
             <View style={styles.formContainer}>
             <VehicleForm 
+                item={item}
                 style={styles.t2} 
                 vehicleData={this.props.vehicleData} 
                 onRef={ref => (this.child = ref)}
                 vehicleInfo={item.data}
-                makeModelData={item.makeModel.data}
+                // makeModelData={item.makeModel.data}
                 editable={this.props.editable}
                 form={'editVehicleForm' + i}
+                fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
               /> 
             </View>
             </View>)

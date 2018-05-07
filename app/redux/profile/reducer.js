@@ -11,7 +11,10 @@ import {
     CHANGE_USER_PASSWORD_FAILURE,
     GET_AUTH_USER_VEHICLE_DETAILS,
     GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
-    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE
+    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
 } from './constants';
 
 const initialState = {
@@ -80,6 +83,21 @@ export default function profileReducer(state = initialState, action) {
                 authVehiclesData: action.userVehiclesData
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_FAILURE:
+            return Object.assign({}, state, {
+                // isFetching: false,
+                errorMessage: action.err
+            });
+        case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR:
+            return Object.assign({}, state, {
+                // isFetching: false,
+                // errorMessage: action.err
+            });
+        case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS:
+            return Object.assign({}, state, {
+                // isFetching: false,
+                authVehiclesData: action.data,
+            });
+        case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE:
             return Object.assign({}, state, {
                 // isFetching: false,
                 errorMessage: action.err

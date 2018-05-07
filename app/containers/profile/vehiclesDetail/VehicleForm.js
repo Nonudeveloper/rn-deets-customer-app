@@ -37,7 +37,7 @@ class VehicleForm extends React.Component {
                 year
             };
         }, () => {
-            // this.props.fetchMakeModel(year);
+            this.props.fetchVehiclesMakeModelByYear(year, this.props.vehicleInfo);
         });
     }
 
@@ -155,8 +155,8 @@ class VehicleForm extends React.Component {
     }
     
     componentWillMount() {
-        if (this.props.vehicleInfo !== null) {
-            const authVehicleData = this.props.vehicleInfo;
+        if (this.props.item !== null) {
+            const authVehicleData = this.props.item.data;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
             const initialFormData = {
                 year: authVehicleData.vehicle_year,
@@ -185,6 +185,7 @@ class VehicleForm extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.props.onRef(this);
     }
 
@@ -192,8 +193,10 @@ class VehicleForm extends React.Component {
         this.props.onRef(undefined);
     }
 
-
   render() {
+      console.log('item');
+      console.log(this.props.item);
+      console.log(this.props.item.makeModel);
     const { pickerStyle, inputStyle } = styles;
     return (
         <View style={styles.formArea}>
@@ -238,8 +241,8 @@ class VehicleForm extends React.Component {
                     <Field name="make_id" selectedValue={this.state.make} editable={this.props.editable} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
                         { 
-                            this.props.makeModelData ? 
-                            this.props.makeModelData.map(
+                            this.props.item.makeModel ? 
+                            this.props.item.makeModel.data.map(
                                 (make, i) => <Picker.Item 
                                     key={i} 
                                     value={make.make_id} 
@@ -253,8 +256,8 @@ class VehicleForm extends React.Component {
                 <Field name="model_id" selectedValue={this.state.model} editable={this.props.editable} component={MyPicker} onChange={(model) => this._modelChanged(model)}>
                         <Picker.Item label={'Model'} />
                         { 
-                            this.props.makeModelData ? 
-                            this.props.makeModelData.map(
+                            this.props.item.makeModel ? 
+                            this.props.item.makeModel.data.map(
                                 (make, i) => 
                                 (make.make_id === this.state.make) ?
                                     make.model.map((model, j) =>

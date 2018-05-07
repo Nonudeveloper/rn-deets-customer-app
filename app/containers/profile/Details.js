@@ -36,7 +36,8 @@ export default class DetailsScreen extends React.Component {
         showVehicleWidth: 0,
         showDetailFlex: 1,
         showVehicleFlex: 0,
-        stretchFlex: 3
+        stretchFlex: 3,
+        yearSelected: ''
     };
   }
 
@@ -158,6 +159,10 @@ export default class DetailsScreen extends React.Component {
         }
     }
 
+    selectedYear(year) {
+        this.setState({ selectedYear: year });
+    }
+
   render() {
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
@@ -223,7 +228,11 @@ export default class DetailsScreen extends React.Component {
              }
             { this.state.showVehicle && 
             // <View style={{ flex: this.state.showVehicleFlex, width: this.state.showVehicleWidth }}>
-            <VehiclesScreen editable={this.state.vehicleEditable} /> 
+            <VehiclesScreen 
+                editable={this.state.vehicleEditable} 
+                selectedYear={this.selectedYear.bind(this)} 
+                year={this.state.selectedYear}
+            /> 
             //</View>
              }
             </View>

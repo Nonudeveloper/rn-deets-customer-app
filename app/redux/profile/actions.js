@@ -11,7 +11,10 @@ import {
     CHANGE_USER_PASSWORD_FAILURE,
     GET_AUTH_USER_VEHICLE_DETAILS,
     GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
-    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE
+    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -89,7 +92,6 @@ export function getAuthUserVehicleDetails() {
 }
 
 export function getAuthUserVehicleDetailsSuccess(userVehiclesData) {
-    console.log(userVehiclesData);
     return {
       type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
       userVehiclesData
@@ -103,24 +105,25 @@ export function getAuthUserVehicleDetailsFailure(err) {
     };
 }
 
-// export function fetchVehiclesMakeModel() {
-//     return {
-//       type: GET_AUTH_USER_VEHICLE_DETAILS,
-//     };
-// }
+export function fetchVehiclesMakeModelByYear(year, vehicle) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
+      year,
+      vehicle
+    };
+}
 
-// export function getAuthUserVehicleDetailsSuccess(vehicleData) {
-//     console.log(vehicleData);
-//     return {
-//       type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
-//       vehicleData
-//     };
-// }
+export function fetchVehiclesMakeModelByYearSuccess(data) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
+      data
+    };
+}
 
-// export function getAuthUserVehicleDetailsFailure(err) {
-//     return {
-//       type: GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
-//       err
-//     };
-// }
+export function fetchVehiclesMakeModelByYearFailure(err) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+      err
+    };
+}
 
