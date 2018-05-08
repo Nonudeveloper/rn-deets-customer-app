@@ -5,6 +5,7 @@ import homeSaga from './home/saga';
 import geoSaga from './geoCoding/saga';
 import authVehicleSagas from './appointment/vehicle/saga';
 import serviceSaga from './service/saga';
+import appointmentSaga from './appointment/saga';
 import profileSaga from './profile/saga';
 
 export default function* rootSaga() {
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     geoSaga(),
     authVehicleSagas(),
     serviceSaga(),
+    appointmentSaga(),
     profileSaga()
   ]);
 }

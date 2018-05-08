@@ -36,3 +36,29 @@ export const removeItem = async (name) => {
     }
     
 };
+
+export const setCardDetails = async (card) => {
+    try {
+        await AsyncStorage.removeItem('authCardDetails');
+        await AsyncStorage.setItem('authCardDetails', JSON.stringify(card));
+        console.log('data stored');
+    } catch (error) {
+        // Error saving data
+        console.log('AsyncStorage save error: ' + error.message);
+    }
+  };
+
+  export const getCardDetails = async (name) => {
+    return new Promise((resolve, reject) => {
+      AsyncStorage.getItem(name)
+        .then(res => {
+            console.log(res)
+          if (res !== null) {
+            resolve(res);
+          } else {
+            resolve(false);
+          }
+        })
+        .catch(err => reject(err));
+    });
+  };

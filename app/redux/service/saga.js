@@ -1,6 +1,6 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { fetchServicesSuccess, fetchServicesFaliure, serviceAppointmentSuccess, serviceAppointmentFaliure } from './serviceActions';
+import { fetchServicesSuccess, fetchServicesFaliure, serviceAppointmentSuccess, serviceAppointmentFaliure, storeUserServiceAppointmentId } from './serviceActions';
 import { FETCH_SERVICES, CREATE_NEW_USER_SERVICE_APPOINTMENT } from './constants';
 import ServicesHelper from '../../helpers/services/servicesHelper';
 
@@ -53,6 +53,7 @@ function* watchcreateNewServiceAppointment() {
     try {
       const response = yield call(createAppointmentCall, payload);
       yield put(serviceAppointmentSuccess(response));
+      yield put(storeUserServiceAppointmentId(response.user_service_appointment_id));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(serviceAppointmentFaliure(err));

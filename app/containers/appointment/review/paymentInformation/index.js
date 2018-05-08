@@ -2,9 +2,9 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NotesScreen from './NotesScreen';
+import CreditCardForm from './CreditCardForm';
 
-import * as appointmentActions from '../../../redux/appointment/actions';
+import * as appointmentActions from '../../../../redux/appointment/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +15,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
+        fetchingCardData: state.Appointment.fetchingCardData,
+        errorMessage: state.Appointment.errorMessage
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCardForm);
+

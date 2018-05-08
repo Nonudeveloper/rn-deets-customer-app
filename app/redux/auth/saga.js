@@ -5,6 +5,7 @@ import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
 import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
+import { setCardDetails } from '../../helpers/asyncStorage';
 
 function loginCall({ state }) {
   return new Promise((resolve, reject) => {
@@ -50,6 +51,7 @@ function* watchLoginRequest() {
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
       yield setToken(response.access_token);
+      yield setCardDetails(response.card);
       yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {
