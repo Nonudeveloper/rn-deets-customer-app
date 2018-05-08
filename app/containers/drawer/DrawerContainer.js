@@ -48,7 +48,10 @@ export default class DrawerContainer extends React.Component {
             >
                   <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menu}>
+            <TouchableOpacity 
+              style={styles.menu}
+              onPress={() => navigation.navigate('detailsScreen')} 
+            >
                   <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >

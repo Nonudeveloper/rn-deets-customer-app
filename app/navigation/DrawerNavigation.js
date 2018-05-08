@@ -10,6 +10,8 @@ import ServiceDetailScreen from '../containers/appointment/services/serviceDetai
 import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 import NotesScreen from '../containers/appointment/notes/index';
 import ReviewScreen from '../containers/appointment/review/index';
+import DetailScreen from '../containers/profile/index';
+import ChangePasswordScreen from '../containers/profile/changePassword/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -75,6 +77,8 @@ const appointmentStack = StackNavigator({
   DateTimeScreen: { screen: DateTimeScreen },
   reviewScreen: { screen: ReviewScreen },
   notesScreen: { screen: NotesScreen },
+  detailsScreen: { screen: DetailScreen },
+  changePasswordScreen: { screen: ChangePasswordScreen },
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,

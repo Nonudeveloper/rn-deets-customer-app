@@ -5,6 +5,7 @@ import homeSaga from './home/saga';
 import geoSaga from './geoCoding/saga';
 import authVehicleSagas from './appointment/vehicle/saga';
 import serviceSaga from './service/saga';
+import profileSaga from './profile/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -13,6 +14,7 @@ export default function* rootSaga() {
     homeSaga(),
     geoSaga(),
     authVehicleSagas(),
-    serviceSaga()
+    serviceSaga(),
+    profileSaga()
   ]);
 }
