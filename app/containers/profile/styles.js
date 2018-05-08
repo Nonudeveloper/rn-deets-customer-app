@@ -74,7 +74,8 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        top: 30
+        top: 30,
+        height:60
     },
     detailButtonInnerContainer: {
         flex: 1,
@@ -130,7 +131,8 @@ export default StyleSheet.create({
     },
     pictureWraper: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     profilePicContainer: {
         flex: 1.5,

@@ -8,7 +8,13 @@ import {
     HIDE_ALERT,
     CHANGE_USER_PASSWORD,
     CHANGE_USER_PASSWORD_SUCCESS,
-    CHANGE_USER_PASSWORD_FAILURE
+    CHANGE_USER_PASSWORD_FAILURE,
+    GET_AUTH_USER_VEHICLE_DETAILS,
+    GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+    GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -75,6 +81,48 @@ export function changeUserPasswordSuccess(res) {
 export function changeUserPasswordFailure(err) {
     return {
       type: CHANGE_USER_PASSWORD_FAILURE,
+      err
+    };
+}
+
+export function getAuthUserVehicleDetails() {
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS,
+    };
+}
+
+export function getAuthUserVehicleDetailsSuccess(userVehiclesData) {
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
+      userVehiclesData
+    };
+}
+
+export function getAuthUserVehicleDetailsFailure(err) {
+    return {
+      type: GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
+      err
+    };
+}
+
+export function fetchVehiclesMakeModelByYear(year, vehicle) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
+      year,
+      vehicle
+    };
+}
+
+export function fetchVehiclesMakeModelByYearSuccess(data) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
+      data
+    };
+}
+
+export function fetchVehiclesMakeModelByYearFailure(err) {
+    return {
+      type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
       err
     };
 }
