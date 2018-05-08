@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Easing } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, createBottomTabNavigator } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
@@ -13,6 +13,7 @@ import ReviewScreen from '../containers/appointment/review/index';
 import CreditCardForm from '../containers/appointment/review/paymentInformation/index';
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
+import AppointmentList from '../containers/appointmentList/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -67,7 +68,7 @@ const TransitionConfiguration = () => {
     };
 };
 
-// drawer stack
+// appointmentStack stack
 
 const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
@@ -90,10 +91,29 @@ const appointmentStack = StackNavigator({
   },
 });
 
+//appointmentListStack
+const appointmentListStack = StackNavigator({
+  appointmentList: { screen: AppointmentList }
+}, {
+  headerMode: 'none'
+});
+
+//Tab Navigator 
+const appointmentListTab = createBottomTabNavigator({
+  Home: ServiceScreen,
+  Settings: ServiceScreen,
+});
+
 const DrawerStack = DrawerNavigator({
   appointmentStack: {
     screen: appointmentStack
   },
+  appointmentListStack: {
+    screen: appointmentListStack
+  },
+  appointmentListTab: {
+    screen: appointmentListTab
+  }
 }, {
   headerMode: 'none',
   gesturesEnabled: false,

@@ -15,7 +15,6 @@ export const getItem = async (name) => {
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem(name)
       .then(res => {
-          console.log(res)
         if (res !== null) {
           resolve(res);
         } else {
