@@ -9,6 +9,7 @@ import GeoReducer from '../redux/geoCoding/geoReducer';
 import AuthVehicle from '../redux/appointment/vehicle/vehicleReducer';
 import ServiceReducer from '../redux/service/serviceReducer';
 import appointmentReducer from '../redux/appointment/reducer';
+import profileReducer from '../redux/profile/reducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   Geo: GeoReducer,
   AuthVehicle,
   Service: ServiceReducer,
-  Appointment: appointmentReducer
+  Appointment: appointmentReducer,
+  Profile: profileReducer
 });
 
 export default rootReducer;

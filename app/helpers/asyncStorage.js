@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 
 export const setItem = async (name, data) => {
     try {
+        await AsyncStorage.removeItem(name);
         await AsyncStorage.setItem(name, JSON.stringify(data));
     } catch (error) {
         // Error saving data
@@ -14,10 +15,12 @@ export const getItem = async (name) => {
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem(name)
       .then(res => {
+          console.log(res)
         if (res !== null) {
           resolve(res);
         } else {
-          resolve(false);
+            const error = 'unable to process';
+             reject({ error });
         }
       })
       .catch(err => reject(err));
