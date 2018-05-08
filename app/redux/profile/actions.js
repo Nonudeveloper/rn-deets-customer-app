@@ -14,7 +14,10 @@ import {
     GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
-    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+    ADD_NEW_VEHICLE,
+    ADD_NEW_VEHICLE_FAILURE
+
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -123,6 +126,21 @@ export function fetchVehiclesMakeModelByYearSuccess(data) {
 export function fetchVehiclesMakeModelByYearFailure(err) {
     return {
       type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+      err
+    };
+}
+
+export function fetchAddNewVehicle(form, vehicleImage) {
+    return {
+      type: ADD_NEW_VEHICLE,
+      form,
+      vehicleImage
+    };
+}
+
+export function fetchAddNewVehicleFailure(err) {
+    return {
+      type: ADD_NEW_VEHICLE_FAILURE,
       err
     };
 }

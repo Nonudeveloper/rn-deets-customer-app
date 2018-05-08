@@ -37,7 +37,8 @@ export default class DetailsScreen extends React.Component {
         showDetailFlex: 1,
         showVehicleFlex: 0,
         stretchFlex: 3,
-        yearSelected: ''
+        image: '',
+        selectedPage: 0
     };
   }
 
@@ -73,7 +74,7 @@ export default class DetailsScreen extends React.Component {
             vehicleEditable: false,
         };
     }, () => {
-        // this.saveData();
+        this.saveEditVehicleData();
     })
     :
     this.setState({
@@ -106,6 +107,29 @@ export default class DetailsScreen extends React.Component {
     this.props.navigation.navigate('changePasswordScreen');
   }
 
+  saveEditVehicleData() {
+    const errors = this.props.form['editVehicleForm' + this.state.selectedPage].syncErrors;
+    let errorCount = 0;
+    for (const error in errors) {
+      if (errors[error] !== undefined && errorCount === 0) {
+        Alert.alert(
+          'Error',
+          errors[error],
+          [
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ],
+          { cancelable: false }
+        );
+        errorCount++;
+      }
+    }
+    if (errorCount === 0) {
+    //    this.props.actions.editUserProfile(this.props.form.profileDetails.values, this.state.newImage);
+    }
+  }
+  getSelectedPage(index) {
+      this.setState({ selectedPage: index });
+  }
   renderAlert(error) {
     Alert.alert(
       'Error',
@@ -158,12 +182,12 @@ export default class DetailsScreen extends React.Component {
             });
         }
     }
-
-    selectedYear(year) {
-        this.setState({ selectedYear: year });
+    getVehicleImage(image) {
+        this.setState({ image });
     }
 
   render() {
+      console.log(this.state)
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
         <View style={styles.container}>
@@ -230,8 +254,9 @@ export default class DetailsScreen extends React.Component {
             // <View style={{ flex: this.state.showVehicleFlex, width: this.state.showVehicleWidth }}>
             <VehiclesScreen 
                 editable={this.state.vehicleEditable} 
-                selectedYear={this.selectedYear.bind(this)} 
-                year={this.state.selectedYear}
+                navigation={this.props.navigation}
+                getVehicleImage={this.getVehicleImage.bind(this)}
+                getSelectedPage={this.getSelectedPage.bind(this)}
             /> 
             //</View>
              }

@@ -14,7 +14,8 @@ import {
     GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
-    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+    ADD_NEW_VEHICLE_FAILURE
 } from './constants';
 
 const initialState = {
@@ -22,7 +23,9 @@ const initialState = {
       authUser: [],
       errorMessage: '',
       passwordConfirmation: '',
-      authVehiclesData: []
+      authVehiclesData: [],
+      fetchMakeModel: false,
+      errorMessageForVehicle: ''
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -57,7 +60,8 @@ export default function profileReducer(state = initialState, action) {
         case HIDE_ALERT:
             return Object.assign({}, state, {
                 errorMessage: '',
-                passwordConfirmation: ''
+                passwordConfirmation: '',
+                errorMessageForVehicle: ''
             });
         case CHANGE_USER_PASSWORD:
             return Object.assign({}, state, {
@@ -89,18 +93,21 @@ export default function profileReducer(state = initialState, action) {
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR:
             return Object.assign({}, state, {
-                // isFetching: false,
-                // errorMessage: action.err
+                fetchMakeModel: true,
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS:
             return Object.assign({}, state, {
-                // isFetching: false,
+                fetchMakeModel: false,
                 authVehiclesData: action.data,
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE:
             return Object.assign({}, state, {
-                // isFetching: false,
+                fetchMakeModel: false,
                 errorMessage: action.err
+            });
+        case ADD_NEW_VEHICLE_FAILURE:
+            return Object.assign({}, state, {
+                errorMessageForVehicle: action.err
             });
         default:
             return state;

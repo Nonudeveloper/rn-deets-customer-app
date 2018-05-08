@@ -42,5 +42,51 @@ class ProfileHelper {
         })
         .catch(error => ({ error: JSON.stringify(error) }));
       }
+
+
+    addNewVehicle = async authData => {
+        const formData = new FormData();
+        const type = authData.form.type;
+        const typeData = type.split(', ');
+
+        if (Object.keys(authData.vehicleImage).length > 0) {
+            const userBase64String = 'data:image/jpeg;base64,' + authData.vehicleImage.data;
+            const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
+            formData.append('vehicle_image', userVehicleImageFile);
+        } else {
+            formData.append('vehicle_image', '');
+        }
+        if (authData.form.access_token) {
+            formData.append('access_token', authData.form.access_token);
+        } else {
+            const user = await getItem('user');
+            formData.append('access_token', JSON.parse(user).access_token);
+        }
+        
+        formData.append('flag', authData.form.flag);
+        formData.append('vehicle_model_id', authData.form.model_id);
+        formData.append('vehicle_make_id', authData.form.make_id);
+        formData.append('vehicle_color_id', authData.form.color_id);
+        formData.append('vehicle_year_id', authData.form.year);
+        formData.append('license', authData.form.license);
+        formData.append('vehicle_make', authData.form.make_id);
+        formData.append('vehicle_model', authData.form.model);
+        formData.append('vehicle_color', authData.form.color);
+        formData.append('vehicle_year', authData.form.year);
+        formData.append('vehicle_type', authData.form.vehicle_type);
+        formData.append('vehicle_type_name', typeData[0]);
+        formData.append('vehicle_type_segment', typeData[1]);
+        formData.append('vehicle_type_segment_id', authData.form.vehicle_type_segment_id);
+        formData.append('notes', authData.form.notes);
+        formData.append('license_type', 2);
+        formData.append('vehicle_id', authData.form.vehicle_id);
+        return await fetch('http://127.0.0.1:8000/customer/add_or_edit_user_vehicle_information', {
+            method: 'POST',
+            body: formData,
+            }).then(response => {
+                 return JSON.parse(response._bodyText);
+            })
+            .catch(error => console.log(error));
+    };
 }
 export default new ProfileHelper();

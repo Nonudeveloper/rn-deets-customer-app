@@ -9,11 +9,13 @@ import { fetchAuthUserDetailsSuccess,
   getAuthUserVehicleDetailsSuccess,
   getAuthUserVehicleDetailsFailure,
   fetchVehiclesMakeModelByYearSuccess,
-  fetchVehiclesMakeModelByYearFailure } from './actions';
-import { FETCH_AUTH_USER_DETAILS, EDIT_USER_PROFILE, CHANGE_USER_PASSWORD, GET_AUTH_USER_VEHICLE_DETAILS, FETCH_VEHICLE_MAKE_MODEL_BY_YEAR } from './constants';
+  fetchVehiclesMakeModelByYearFailure,
+  fetchAddNewVehicleFailure } from './actions';
+import { FETCH_AUTH_USER_DETAILS, EDIT_USER_PROFILE, CHANGE_USER_PASSWORD, GET_AUTH_USER_VEHICLE_DETAILS, FETCH_VEHICLE_MAKE_MODEL_BY_YEAR, ADD_NEW_VEHICLE } from './constants';
 import { getItem, setItem } from '../../helpers/asyncStorage';
 import ProfileHelper from '../../helpers/profile/profileHelper';
 import { NavigationActions } from 'react-navigation';
+import { saveAuthVehiclesData } from '../../helpers/utility';
 
 
 
@@ -178,10 +180,41 @@ function vehiclesMakeModelByYearCall(payload) {
   });
 }
 
+function* watchAddNewVehicleRequest() {
+  while (true) {
+      const payload = yield take(ADD_NEW_VEHICLE);
+      try {
+        const response = yield call(addNewVehicleCall, payload);
+        yield saveAuthVehiclesData(response);
+        yield put(NavigationActions.navigate({ routeName: 'detailsScreen' }));
+        console.log('SAGA RESET PASSWORD Mail SENT: ', response);
+      } catch (err) {
+        console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
+        yield put(fetchAddNewVehicleFailure(err));
+      }
+    }
+}
+
+function addNewVehicleCall(payload) {
+  return new Promise((resolve, reject) => {
+    ProfileHelper.addNewVehicle(payload)
+    .then((data) => {
+      console.log('dfdf')
+      if (data.vehicle) {
+        resolve(data.vehicle);
+      } else {
+         const error = data.error;
+         reject({ error: error });
+      } 
+    });
+  });
+}
+
 export default function* root() {
   yield fork(watchAuthUserDetails);
   yield fork(watchEditUserProfile);
   yield fork(watchChangeUserPassword);
   yield fork(watchGetAuthUserVehiclesFromAsyncStorage);
   yield fork(watchFetchVehicleMakeModelByYear);
+  yield fork(watchAddNewVehicleRequest);
 }
