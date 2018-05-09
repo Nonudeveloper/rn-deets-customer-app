@@ -88,5 +88,18 @@ class ProfileHelper {
             })
             .catch(error => console.log(error));
     };
+
+    deleteVehicle = async vehicleId => {
+        const user = await getItem('user');
+        const access_token =  JSON.parse(user).access_token;
+        const newDate = new Date();
+        const current_date_time = newDate.getFullYear() + '-' + ('0' + (newDate.getMonth()+1)).slice(-2) + '-' + ('0' + newDate.getDate()).slice(-2) +
+                        ' ' + ('0' + newDate.getHours()).slice(-2) + ':' + ('0' + newDate.getMinutes()).slice(-2) + ':' + ('0' + newDate.getSeconds()).slice(-2);
+        const vehicle_id = vehicleId;
+    return await SuperFetch.post('/customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
+        return JSON.parse(response._bodyText);
+    })
+    .catch(error => ({ error: JSON.stringify(error) }));
+    }
 }
 export default new ProfileHelper();

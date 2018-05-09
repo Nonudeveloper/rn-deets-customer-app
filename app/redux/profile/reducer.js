@@ -15,7 +15,10 @@ import {
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
-    ADD_NEW_VEHICLE_FAILURE
+    ADD_NEW_VEHICLE_FAILURE,
+    DELETE_VEHICLE,
+    DELETE_VEHICLE_SUCCESS,
+    DELETE_VEHICLE_FAILURE
 } from './constants';
 
 const initialState = {
@@ -41,7 +44,8 @@ export default function profileReducer(state = initialState, action) {
             });
         case FETCH_AUTH_USER_DETAILS_FAILURE:
             return Object.assign({}, state, {
-                isFetching: false
+                isFetching: false,
+                errorMessage: action.err
             });
         case EDIT_USER_PROFILE:
             return Object.assign({}, state, {
@@ -79,16 +83,16 @@ export default function profileReducer(state = initialState, action) {
             });
         case GET_AUTH_USER_VEHICLE_DETAILS:
             return Object.assign({}, state, {
-                // isFetching: false
+                isFetching: true
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS:
             return Object.assign({}, state, {
-                // isFetching: false,
+                isFetching: false,
                 authVehiclesData: action.userVehiclesData
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_FAILURE:
             return Object.assign({}, state, {
-                // isFetching: false,
+                isFetching: false,
                 errorMessage: action.err
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR:
@@ -106,6 +110,18 @@ export default function profileReducer(state = initialState, action) {
                 errorMessage: action.err
             });
         case ADD_NEW_VEHICLE_FAILURE:
+            return Object.assign({}, state, {
+                errorMessageForVehicle: action.err
+            });
+        case DELETE_VEHICLE:
+            return Object.assign({}, state, {
+                // errorMessageForVehicle: action.err
+            });
+        case DELETE_VEHICLE_SUCCESS:
+            return Object.assign({}, state, {
+                // errorMessageForVehicle: action.err
+            });
+        case DELETE_VEHICLE_FAILURE:
             return Object.assign({}, state, {
                 errorMessageForVehicle: action.err
             });

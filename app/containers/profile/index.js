@@ -3,13 +3,20 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DetailsScreen from './Details';
-
+import { fetchVehicles } from '../../redux/register/startActions';
 import * as profileActions from '../../redux/profile/actions';
+import { logout } from '../../redux/auth/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(profileActions, dispatch),
+        getVehicles: () => {
+            dispatch(fetchVehicles());
+        },
+        logout: () => {
+            dispatch(logout());
+        }
     };
 };
 

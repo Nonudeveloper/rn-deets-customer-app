@@ -166,6 +166,7 @@ class VehicleForm extends React.Component {
                 model_id: authVehicleData.vehicle_model_id,
                 model: authVehicleData.vehicle_model,
                 type: vehicleType,
+                flag: 2,
                 license: authVehicleData.license,
                 vin: authVehicleData.license,
                 notes: authVehicleData.notes,
@@ -195,7 +196,6 @@ class VehicleForm extends React.Component {
     }
 
   render() {
-      console.log(this.props)
     const { pickerStyle, inputStyle } = styles;
     return (
         <View style={styles.formArea}>
@@ -420,6 +420,12 @@ class VehicleForm extends React.Component {
                 />
                 <Field
                     name={'vehicle_id'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'flag'}
                     component={CommonTextInput}
                     props={this.props}
                     type="hidden"

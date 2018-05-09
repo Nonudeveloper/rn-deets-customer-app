@@ -8,7 +8,9 @@ import {
   RESET_PASSWORD_MAIL_ERROR,
   HIDE_ALERT,
   HIDE_RESET_ALERT,
-  SAVE_DEVICE_TOKEN
+  SAVE_DEVICE_TOKEN,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE
 } from './constants';
 
 export function loginRequest(state) {
@@ -79,6 +81,19 @@ export function saveDeviceToken(token) {
   return {
     type: SAVE_DEVICE_TOKEN,
     token,
+  };
+}
+
+export function logoutSuccess() {
+  return {
+    type: LOGOUT_SUCCESS,
+  };
+}
+
+export function logoutFailure(err) {
+  return {
+    type: LOGOUT_FAILURE,
+    err
   };
 }
 

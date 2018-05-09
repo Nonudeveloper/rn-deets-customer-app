@@ -44,6 +44,8 @@ export default class DetailsScreen extends React.Component {
 
   componentWillMount() {
       this.props.actions.fetchAuthUserDetails();
+      this.props.getVehicles();
+      this.props.actions.getAuthUserVehicleDetails();
   }
 
   getImage(image) {
@@ -124,12 +126,22 @@ export default class DetailsScreen extends React.Component {
       }
     }
     if (errorCount === 0) {
-    //    this.props.actions.editUserProfile(this.props.form.profileDetails.values, this.state.newImage);
+        const pageSelected = this.state.selectedPage;
+        const imagePageSelected = this.state.image.currentPage;
+        const imageSelected = pageSelected === imagePageSelected ? this.state.image.response : {};
+        this.props.actions.fetchAddNewVehicle(this.props.form['editVehicleForm' + this.state.selectedPage].values, imageSelected);
     }
   }
+
+  deleteVehicle() {
+    const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
+    this.props.actions.deleteVehicle(vehicleId);
+  } 
+
   getSelectedPage(index) {
       this.setState({ selectedPage: index });
   }
+
   renderAlert(error) {
     Alert.alert(
       'Error',
@@ -178,7 +190,7 @@ export default class DetailsScreen extends React.Component {
                 showVehicleWidth: window.width,
                 showDetailFlex: 0,
                 showVehicleFlex: 1,
-                stretchFlex: 13
+                stretchFlex: 9
             });
         }
     }
@@ -187,7 +199,6 @@ export default class DetailsScreen extends React.Component {
     }
 
   render() {
-      console.log(this.state)
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
         <View style={styles.container}>
@@ -199,7 +210,7 @@ export default class DetailsScreen extends React.Component {
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             <View style={styles.toggleButtonContainer}>
                 <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60 }} >
-                    <TouchableOpacity style={styles.detailButtonInnerContainer} onPress={this.changeLayout.bind(this, 'detail')} >
+                    <TouchableOpacity activeOpacity={1} style={styles.detailButtonInnerContainer} onPress={this.changeLayout.bind(this, 'detail')} >
                         <View style={styles.detailButtonInnerWraper}>
                             <Text style={styles.detailTextContainer}>
                                 Details
@@ -213,7 +224,7 @@ export default class DetailsScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: this.state.vehicleFlexValue, marginLeft: 10, height: 60 }} >
-                    <TouchableOpacity style={styles.vehicleButtonInnerContainer} onPress={this.changeLayout.bind(this, 'vehicle')} >
+                    <TouchableOpacity activeOpacity={1} style={styles.vehicleButtonInnerContainer} onPress={this.changeLayout.bind(this, 'vehicle')} >
                     { this.state.showVehicleEditButton &&
                         <TouchableOpacity style={{ flex: 1, position: 'absolute', left: 10 }} onPress={this.editVehicles.bind(this)}>
                             <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
@@ -224,10 +235,17 @@ export default class DetailsScreen extends React.Component {
                             Vehicles
                         </Text>
                         </View>
+                        {/* <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                        { this.state.showVehicleEditButton &&
+                        <TouchableOpacity style={{ flex: 1, position: 'absolute' }} onPress={this.deleteVehicle.bind(this)}>
+                            <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
+                        </TouchableOpacity>
+                        }
+                        </View> */}
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ flex: 7 }}>
+            <View style={{ flex: this.state.stretchFlex }}>
             {/* <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
                     <ProfilePic getImage={this.getImage.bind(this)} editable={this.state.profileEditable} getImage={this.getImage.bind(this)} profilePic={this.props.authUser.image} />
@@ -247,6 +265,7 @@ export default class DetailsScreen extends React.Component {
             <DetailsItem
             getImage={this.getImage.bind(this)} editable={this.state.profileEditable} getImage={this.getImage.bind(this)} profilePic={this.props.authUser.image}
             navigation={this.props.navigation} formEditable={this.state.profileEditable} authUser={this.props.authUser}
+            logout={this.props.logout}
             />
                 // </View>
              }

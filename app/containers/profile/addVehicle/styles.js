@@ -117,8 +117,8 @@ export default StyleSheet.create({
     editButtonWrapper: { 
         zIndex: 999, 
         justifyContent: 'flex-end', 
-        marginLeft: 48, 
-        marginBottom: 43 
+        marginLeft: 73, 
+        marginBottom: 78 
     }
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Alert, TouchableOpacity } from 'react-native';
+import { View, Image, Alert, TouchableHighlight } from 'react-native';
 import CarPicture from './CarPicture';
 import VehicleForm from './VehicleForm';
 import styles from '../styles';
@@ -50,8 +50,8 @@ export default class VehiclesScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getVehicles();
-    this.props.actions.getAuthUserVehicleDetails();
+    // this.props.getVehicles();
+    // this.props.actions.getAuthUserVehicleDetails();
   }
 
   saveData() {
@@ -77,10 +77,6 @@ export default class VehiclesScreen extends React.Component {
     }
   }
 
-  getVehicleImage(image) {
-    this.props.actions.storeVehicleImage(image);
-  }
-
   renderAlert(error) {
     Alert.alert(
       'Error',
@@ -104,9 +100,11 @@ export default class VehiclesScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.stepIndicator}>
+        <View style={{marginHorizontal: 100, top:160}}>
           <StepIndicator customStyles={firstIndicatorStyles} currentPosition={this.state.currentPage} stepCount={totalPages} />
+          
         </View>
+        
         <ViewPager
           style={{flexGrow:1}}
           onPageSelected={(page) => {this.setState({ currentPage: page.position }); this.props.getSelectedPage(page.position)}}
@@ -116,12 +114,12 @@ export default class VehiclesScreen extends React.Component {
           <View key={i} style={{ flex: 1, top: 10 }}>
             <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
-                <CarPicture getVehicleImage={this.props.getVehicleImage} vehicleImage={item.data.vehicle_image} editable={this.props.editable} />
+                <CarPicture getVehicleImage={this.props.getVehicleImage} currentPage={this.state.currentPage} vehicleImage={item.data.vehicle_image} editable={this.props.editable} />
                 </View>
                 <View style={styles.logoutButtonContainer}>
-                    <TouchableOpacity style={{ flex: 1, position: 'absolute' }} onPress={() => this.props.navigation.navigate('addVehicleScreen')} >
+                    <TouchableHighlight underlayColor={'transparent'} style={{ flex: 1, position: 'absolute' }} onPress={() => this.props.navigation.navigate('addVehicleScreen')} >
                             <Image style={{ width: 100, height: 58 }} source={logOutButton} />
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                 </View>
             </View>
             {/* <View style={[styles.stepIndicatorHeader, {marginHorizontal: 100}]}>

@@ -16,7 +16,7 @@ export default class VehicleInformation extends React.Component {
       super(props);
       //props.fetchVehiclesFromAsyncStorage(); 
       this.state = {
-          image: ''
+          image: {}
       }     
   }
 
@@ -46,6 +46,7 @@ export default class VehicleInformation extends React.Component {
   }
 
   getVehicleImage(image) {
+    console.log(image);
     this.setState({ image });
   }
 

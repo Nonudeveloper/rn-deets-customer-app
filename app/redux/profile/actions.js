@@ -16,8 +16,10 @@ import {
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
     ADD_NEW_VEHICLE,
-    ADD_NEW_VEHICLE_FAILURE
-
+    ADD_NEW_VEHICLE_FAILURE,
+    DELETE_VEHICLE,
+    DELETE_VEHICLE_SUCCESS,
+    DELETE_VEHICLE_FAILURE
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -33,9 +35,10 @@ export function fetchAuthUserDetailsSuccess(user) {
     };
 }
 
-export function fetchAuthUserDetailsFailure() {
+export function fetchAuthUserDetailsFailure(err) {
     return {
-        type: FETCH_AUTH_USER_DETAILS_FAILURE
+        type: FETCH_AUTH_USER_DETAILS_FAILURE,
+        err
     };
 }
 
@@ -141,6 +144,27 @@ export function fetchAddNewVehicle(form, vehicleImage) {
 export function fetchAddNewVehicleFailure(err) {
     return {
       type: ADD_NEW_VEHICLE_FAILURE,
+      err
+    };
+}
+
+export function deleteVehicle(vehicleId) {
+    return {
+      type: DELETE_VEHICLE,
+      vehicleId
+    };
+}
+
+export function deleteVehicleSuccess(log) {
+    return {
+      type: DELETE_VEHICLE_SUCCESS,
+      log
+    };
+}
+
+export function deleteVehicleFailure(err) {
+    return {
+      type: DELETE_VEHICLE_FAILURE,
       err
     };
 }
