@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Alert, StyleSheet } from 'react-native';
+import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight } from 'react-native';
+import Swipeout from 'react-native-swipeout';
 
 class PastAppointmentsList extends Component {
 
@@ -19,6 +20,49 @@ class PastAppointmentsList extends Component {
         );
     }
 
+    renderItem(item) {
+        const swipeBtns = [
+            {
+              text: 'Delete',
+              backgroundColor: 'red',
+              underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+              onPress: () => { this.deleteNote(item); }
+           },
+            {
+              text: 'Duplicate',
+              backgroundColor: 'blue',
+              underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+              onPress: () => { this.duplicateNote(item); }
+           }
+        ];
+
+        return (
+            <Swipeout 
+                right={swipeBtns}
+                autoClose='true'
+                backgroundColor='transparent'
+            >
+                <TouchableHighlight
+                    underlayColor='rgba(192,192,192,1,0.6)'
+                    onPress={this.viewNote.bind(this, item)} 
+                >
+                    <View style={styles.itemContainer}>
+                        <Text 
+                            style={styles.item} 
+                            onPress={this.getItem.bind(this, item.key)} 
+                        > 
+                            {item.appointment.service_name} 
+                        </Text>
+                        <Text>Service End Time: {item.appointment.service_end_time}</Text>
+                        <Text>Location: {item.appointment.service_location_string}</Text>
+                        <Text>Cost: {item.appointment.total_cost}</Text>
+                        
+                    </View>
+                </TouchableHighlight>
+            </Swipeout>
+        );
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -26,19 +70,7 @@ class PastAppointmentsList extends Component {
                     data={this.props.data}
                     ItemSeparatorComponent={this.flatListItemSeparator}
                     renderItem={
-                        ({ item }) => 
-                        <View style={styles.itemContainer}>
-                            <Text 
-                                style={styles.item} 
-                                onPress={this.getItem.bind(this, item.key)} 
-                            > 
-                                {item.appointment.service_name} 
-                            </Text>
-                            <Text>Service End Time: {item.appointment.service_end_time}</Text>
-                            <Text>Location: {item.appointment.service_location_string}</Text>
-                            <Text>Cost: {item.appointment.total_cost}</Text>
-                            
-                        </View>
+                        ({ item }) => this.renderItem(item)
                     }
                 />
             </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Easing } from 'react-native';
-import { StackNavigator, DrawerNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
@@ -14,6 +14,8 @@ import CreditCardForm from '../containers/appointment/review/paymentInformation/
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
 import AppointmentList from '../containers/appointmentList/index';
+import SwipeableList from '../containers/appointmentList/SwipeableList';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -93,16 +95,48 @@ const appointmentStack = StackNavigator({
 
 //appointmentListStack
 const appointmentListStack = StackNavigator({
+  // swipeableList: { screen: SwipeableList },
   appointmentList: { screen: AppointmentList }
 }, {
   headerMode: 'none'
 });
 
 //Tab Navigator 
-const appointmentListTab = createBottomTabNavigator({
-  Home: ServiceScreen,
-  Settings: ServiceScreen,
-});
+// const appointmentListTab = createBottomTabNavigator({
+//   Home: ServiceScreen,
+//   Settings: ServiceScreen,
+// });
+
+const appointmentListTab = TabNavigator({
+  Home: { screen: AppointmentList },
+  Settings: { screen: ServiceScreen },
+},
+{
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      let iconName;
+      if (routeName === 'Home') {
+        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+      } else if (routeName === 'Settings') {
+        iconName = `ios-options${focused ? '' : '-outline'}`;
+      }
+
+      // You can return any component that you like here! We usually use an
+      // icon component from react-native-vector-icons
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }),
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+  },
+  tabBarComponent: TabBarBottom,
+  tabBarPosition: 'bottom',
+  animationEnabled: false,
+  swipeEnabled: false,
+}
+);
 
 const DrawerStack = DrawerNavigator({
   appointmentStack: {
