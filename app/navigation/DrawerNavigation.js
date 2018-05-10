@@ -14,6 +14,8 @@ import CreditCardForm from '../containers/appointment/review/paymentInformation/
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
 import AppointmentList from '../containers/appointmentList/index';
+import PastAppointmentsList from '../containers/appointmentList/past/index';
+import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
 import SwipeableList from '../containers/appointmentList/SwipeableList';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -88,7 +90,7 @@ const appointmentStack = StackNavigator({
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
   contentOptions: {
-    activeTintColor: "#e91e63",
+    activeTintColor: '#e91e63',
     activeBackgroundColor: 'purple',
   },
 });
@@ -108,30 +110,21 @@ const appointmentListStack = StackNavigator({
 // });
 
 const appointmentListTab = TabNavigator({
-  Home: { screen: AppointmentList },
-  Settings: { screen: ServiceScreen },
+  Past: { screen: PastAppointmentsList },
+  Upcoming: { screen: UpcomingAppointmentsList },
 },
 {
-  navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, tintColor }) => {
-      const { routeName } = navigation.state;
-      let iconName;
-      if (routeName === 'Home') {
-        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-      } else if (routeName === 'Settings') {
-        iconName = `ios-options${focused ? '' : '-outline'}`;
-      }
-
-      // You can return any component that you like here! We usually use an
-      // icon component from react-native-vector-icons
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
-    },
-  }),
   tabBarOptions: {
-    activeTintColor: 'tomato',
-    inactiveTintColor: 'gray',
+    activeTintColor: 'green',
+    inactiveTintColor: 'grey',
+    style: {
+      backgroundColor: '#fff',
+    },
+    labelStyle: {
+      fontSize: 17,
+    },
   },
-  tabBarComponent: TabBarBottom,
+  // tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,

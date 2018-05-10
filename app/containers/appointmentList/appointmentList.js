@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Alert, StyleSheet } from 'react-native';
 import Header from '../header/Header';
-import PastAppointmentList from './pastAppointmentsList';
 
 class AppointmentList extends Component {
 
@@ -34,7 +33,6 @@ class AppointmentList extends Component {
                     navigation={this.props.navigation} 
                     headerText={'Appointments'}
                 />
-                <PastAppointmentList data={this.props.pastAppointments} />
             </View>
         );
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 
-class PastAppointmentsList extends Component {
+class UpcomingAppointmentsList extends Component {
 
     getItem(item) {
         Alert.alert(item);
@@ -18,6 +18,10 @@ class PastAppointmentsList extends Component {
             }}
           />
         );
+    }
+
+    viewNote = item => {
+        console.log(item);
     }
 
     renderItem(item) {
@@ -39,12 +43,12 @@ class PastAppointmentsList extends Component {
         return (
             <Swipeout 
                 right={swipeBtns}
-                autoClose='true'
+                autoClose
                 backgroundColor='transparent'
             >
                 <TouchableHighlight
-                    underlayColor='rgba(192,192,192,1,0.6)'
                     onPress={this.viewNote.bind(this, item)} 
+                    key={item.key}
                 >
                     <View style={styles.itemContainer}>
                         <Text 
@@ -67,7 +71,7 @@ class PastAppointmentsList extends Component {
         return (
             <View style={styles.mainContainer}>
                 <FlatList
-                    data={this.props.data}
+                    data={this.props.pastAppointments}
                     ItemSeparatorComponent={this.flatListItemSeparator}
                     renderItem={
                         ({ item }) => this.renderItem(item)
@@ -98,4 +102,4 @@ const styles = StyleSheet.create({
      
 });
 
-export default PastAppointmentsList;
+export default UpcomingAppointmentsList;
