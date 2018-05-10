@@ -26,6 +26,7 @@ const mapStateToProps = (state) => {
         isFetching: state.Profile.isFetching,
         form: state.form,
         errorMessage: state.Profile.errorMessage,
+        vehicleDeleteMessage: state.Profile.vehicleDeleteMessage
     };
 };
 

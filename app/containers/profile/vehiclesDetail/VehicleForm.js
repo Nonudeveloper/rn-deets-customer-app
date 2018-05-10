@@ -177,17 +177,16 @@ class VehicleForm extends React.Component {
                 vehicle_id: authVehicleData.vehicle_id
         };
             this.setState({
-                year: authVehicleData.vehicle_year_id,
-                color: authVehicleData.vehicle_color_id,
+                year: parseInt(authVehicleData.vehicle_year_id),
+                color: parseInt(authVehicleData.vehicle_color_id),
                 make: authVehicleData.vehicle_make_id,
-                model: authVehicleData.vehicle_model_id
+                model: parseInt(authVehicleData.vehicle_model_id)
             });
             this.props.dispatch(initialize(this.props.form, initialFormData));
         } 
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.props.onRef(this);
     }
 

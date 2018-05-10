@@ -159,7 +159,6 @@ class VehicleForm extends React.Component {
     const { pickerStyle, inputStyle } = styles;
     return (
         <View style={styles.formArea}>
-        {console.log(this.props.makeModel.data)}
             <View style={styles.colContainer}>
                 <View style={styles.colOne}>
                     <Field name="year" selectedValue={this.state.year} component={MyPicker} onChange={(year, index) => this._fetchMakeModel(year, index)}>

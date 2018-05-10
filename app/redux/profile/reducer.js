@@ -28,7 +28,8 @@ const initialState = {
       passwordConfirmation: '',
       authVehiclesData: [],
       fetchMakeModel: false,
-      errorMessageForVehicle: ''
+      errorMessageForVehicle: '',
+      vehicleDeleteMessage: ''
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -65,7 +66,8 @@ export default function profileReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 errorMessage: '',
                 passwordConfirmation: '',
-                errorMessageForVehicle: ''
+                errorMessageForVehicle: '',
+                vehicleDeleteMessage: ''
             });
         case CHANGE_USER_PASSWORD:
             return Object.assign({}, state, {
@@ -115,15 +117,17 @@ export default function profileReducer(state = initialState, action) {
             });
         case DELETE_VEHICLE:
             return Object.assign({}, state, {
-                // errorMessageForVehicle: action.err
+                isFetching: true,
             });
         case DELETE_VEHICLE_SUCCESS:
             return Object.assign({}, state, {
-                // errorMessageForVehicle: action.err
+                isFetching: false,
+                vehicleDeleteMessage: action.log
             });
         case DELETE_VEHICLE_FAILURE:
             return Object.assign({}, state, {
-                errorMessageForVehicle: action.err
+                isFetching: false,
+                vehicleDeleteMessage: action.err
             });
         default:
             return state;

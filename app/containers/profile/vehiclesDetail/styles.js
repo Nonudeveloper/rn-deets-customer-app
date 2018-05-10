@@ -4,6 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 export default StyleSheet.create({
     carPic: {
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -125,10 +126,10 @@ export default StyleSheet.create({
     pictureWraper: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
     profilePicContainer: {
-        flex: 1.5,
+        flex: 2,
         justifyContent: 'center', 
         alignItems: 'flex-end'
     },
@@ -142,8 +143,8 @@ export default StyleSheet.create({
         flexDirection: 'column'
     },
     stepIndicatorHeader: {
-        flex:1,
-        height:50,
+        flex: 1,
+        height: 50,
         // flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',

@@ -97,7 +97,7 @@ class ProfileHelper {
                         ' ' + ('0' + newDate.getHours()).slice(-2) + ':' + ('0' + newDate.getMinutes()).slice(-2) + ':' + ('0' + newDate.getSeconds()).slice(-2);
         const vehicle_id = vehicleId;
     return await SuperFetch.post('/customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
-        return JSON.parse(response._bodyText);
+        return response;
     })
     .catch(error => ({ error: JSON.stringify(error) }));
     }

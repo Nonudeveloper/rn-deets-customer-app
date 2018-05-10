@@ -49,7 +49,7 @@ export default class CarPicture extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.vehicleImage !== null) {
+        if (this.props.vehicleImage && this.props.vehicleImage !== '') {
             this.setState(() => {
                 return {
                     ImageSource: {
@@ -69,10 +69,6 @@ export default class CarPicture extends React.Component {
                     <Image source={editBtn} style={styles.editIcon} />
                 </View>
                 <TouchableOpacity style={{ position: 'absolute' }} onPress={this.props.editable ? this.selectPhotoTapped.bind(this) : null}>
-                    
-                    {/* { this.state.ImageSource === null ? <Image style={styles.proImageStyle} source={carIcon} /> :
-                    <Image style={styles.proImageStyle} source={this.state.ImageSource} />
-                    } */}
                     <Image style={styles.proImageStyle} source={this.state.ImageSource === null ? carIcon : this.state.ImageSource} />
                 </TouchableOpacity>
                 
