@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import Header from '../../header/Header';
 import VehicleFlatList from './VehicleFlatList';
 import Loader from '../../../deetscomponents/Loader';
 import styles from './styles';
-import Button from '../../../deetscomponents/Button';
-import StyleConstants from '../../../config/StyleConstants';
 
 
 const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
@@ -29,23 +27,16 @@ export default class SelectVehicleScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    const { isFetching } = this.props;
+    if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
       <View style={styles.container}>
-      {/* <Loader
-                loading={isFetching} 
-      /> */}
         <Header 
             headerText={'Select Vehicle'} 
             navigation={this.props.navigation} 
             buttonType={'back'} 
-            // titleType={'logo'}
             showRightIcon
             rightText={'Next'}
             onPress={() => this.getSelectedItems()}
-            // rightImageSource={backButton}
-            // rightIconType={'image'}
         />
         <VehicleFlatList 
           userVehicles={this.props.userVehicle} 
@@ -55,18 +46,12 @@ export default class SelectVehicleScreen extends React.Component {
         />
         <View style={styles.nextButtonContainer}>
             <View style={{ flexDirection: 'row', marginHorizontal: 25, justifyContent: 'flex-end', }}>
-              {/* <Button 
-                style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
-                onPress={this.getSelectedItems}
-              >
-                Next
-              </Button> */}
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}>
                 <Image source={backButton} style={{ width: 30, height: 30 }} />
-                        </TouchableOpacity>
+              </TouchableOpacity>
             </View>
-          </View>
-          </View>
+        </View>
+      </View>
      
     );
   }
