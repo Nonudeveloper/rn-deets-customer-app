@@ -14,7 +14,11 @@ import {
     GET_AUTH_USER_VEHICLE_DETAILS_FAILURE,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
-    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE
+    FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+    ADD_NEW_VEHICLE_FAILURE,
+    DELETE_VEHICLE,
+    DELETE_VEHICLE_SUCCESS,
+    DELETE_VEHICLE_FAILURE
 } from './constants';
 
 const initialState = {
@@ -22,7 +26,10 @@ const initialState = {
       authUser: [],
       errorMessage: '',
       passwordConfirmation: '',
-      authVehiclesData: []
+      authVehiclesData: [],
+      fetchMakeModel: false,
+      errorMessageForVehicle: '',
+      vehicleDeleteMessage: ''
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -38,7 +45,8 @@ export default function profileReducer(state = initialState, action) {
             });
         case FETCH_AUTH_USER_DETAILS_FAILURE:
             return Object.assign({}, state, {
-                isFetching: false
+                isFetching: false,
+                errorMessage: action.err
             });
         case EDIT_USER_PROFILE:
             return Object.assign({}, state, {
@@ -57,7 +65,9 @@ export default function profileReducer(state = initialState, action) {
         case HIDE_ALERT:
             return Object.assign({}, state, {
                 errorMessage: '',
-                passwordConfirmation: ''
+                passwordConfirmation: '',
+                errorMessageForVehicle: '',
+                vehicleDeleteMessage: ''
             });
         case CHANGE_USER_PASSWORD:
             return Object.assign({}, state, {
@@ -75,32 +85,49 @@ export default function profileReducer(state = initialState, action) {
             });
         case GET_AUTH_USER_VEHICLE_DETAILS:
             return Object.assign({}, state, {
-                // isFetching: false
+                isFetching: true
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS:
             return Object.assign({}, state, {
-                // isFetching: false,
+                isFetching: false,
                 authVehiclesData: action.userVehiclesData
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_FAILURE:
             return Object.assign({}, state, {
-                // isFetching: false,
+                isFetching: false,
                 errorMessage: action.err
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR:
             return Object.assign({}, state, {
-                // isFetching: false,
-                // errorMessage: action.err
+                fetchMakeModel: true,
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS:
             return Object.assign({}, state, {
-                // isFetching: false,
+                fetchMakeModel: false,
                 authVehiclesData: action.data,
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE:
             return Object.assign({}, state, {
-                // isFetching: false,
+                fetchMakeModel: false,
                 errorMessage: action.err
+            });
+        case ADD_NEW_VEHICLE_FAILURE:
+            return Object.assign({}, state, {
+                errorMessageForVehicle: action.err
+            });
+        case DELETE_VEHICLE:
+            return Object.assign({}, state, {
+                isFetching: true,
+            });
+        case DELETE_VEHICLE_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                vehicleDeleteMessage: action.log
+            });
+        case DELETE_VEHICLE_FAILURE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                vehicleDeleteMessage: action.err
             });
         default:
             return state;

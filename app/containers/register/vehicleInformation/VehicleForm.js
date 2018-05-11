@@ -195,8 +195,8 @@ class VehicleForm extends React.Component {
                     <Field name="make_id" selectedValue={this.state.make} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
                         { 
-                            this.props.makeModel.length > 0 ? 
-                            this.props.makeModel.map(
+                            this.props.makeModel.data ? 
+                            this.props.makeModel.data.map(
                                 (make, i) => <Picker.Item 
                                     key={i} 
                                     value={make.make_id} 

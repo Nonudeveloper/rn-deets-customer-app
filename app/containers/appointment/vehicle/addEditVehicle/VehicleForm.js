@@ -443,6 +443,12 @@ class VehicleForm extends React.Component {
                     props={this.props}
                     type="hidden"
                 />
+                <Field
+                    name={'flag'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
             </View>
         </View>
     );

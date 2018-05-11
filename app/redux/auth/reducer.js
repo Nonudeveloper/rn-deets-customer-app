@@ -9,6 +9,8 @@ import {
     HIDE_ALERT,
     HIDE_RESET_ALERT,
     SAVE_DEVICE_TOKEN,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAILURE
 } from './constants';
 import { LOAD } from 'redux-storage';
 
@@ -102,8 +104,12 @@ export default function user(state = initialState, action) {
         return Object.assign({}, state, {
           deviceToken: action.token
         });
-      case LOGOUT:
+      case LOGOUT_SUCCESS:
         return initialState;
+      case LOGOUT_FAILURE:
+        return Object.assign({}, state, {
+          errorMessage: action.err
+        });
       default:
         return state;
     }
