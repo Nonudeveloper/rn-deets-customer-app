@@ -18,7 +18,7 @@ const initialState = {
       selectedVehicle: {}
 };
 
-export default function servicesReducer(state = initialState, action) {
+export default function authReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_MY_VEHICLES:
             return Object.assign({}, state, {

@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import ServiveProviderDetail from './ServiceProviderDetail';
 import ServiceDetail from './ServiceDetail';
 import CardDetail from './CardDetail';
 import Header from '../../header/Header';
 import Loader from '../../../deetscomponents/Loader';
+import styles from './styles';
 
 const indicatorFour = require('../../../assets/icons/process4.png');
 
@@ -82,11 +83,3 @@ export default class ReviewScreen extends React.Component {
     );
   }
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-  
-});

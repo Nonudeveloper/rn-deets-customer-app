@@ -15,46 +15,45 @@ export default class VehicleFlatList extends React.Component {
       };
     }
 
-    componentWillReceiveProps(newProps) {
-      if (newProps.userVehicles.length > 0) {
-        const userVehicles = [];
-        newProps.userVehicles.map((item, i) => {
-          if (i === 0) {
-            item.selected = true;
-          } else {
-            item.selected = false;
-          }
-          userVehicles.push(item);
-        });
-        this.setState({
-          radioItems: userVehicles
-        }, () => {
-        this.state.radioItems.map((item) => {
-              if (item.selected === true) {
-                return this.setState({ selectedItem: item });
-              }
-          });
-        });
-      }
-    }
-
-    changeActiveRadioButton(index) {
+  componentWillMount() {
+    if (this.props.userVehicles.length > 0) {
+      const userVehicles = [];
+      this.props.userVehicles.map((item, i) => {
+        if (i === 0) {
+          item.selected = true;
+        } else {
+          item.selected = false;
+        }
+        userVehicles.push(item);
+      });
+      this.setState({
+        radioItems: userVehicles
+      }, () => {
       this.state.radioItems.map((item) => {
-          if (item.vehicle_id === index) {
-            item.selected = true;
-            this.setState({
-              selectedItem: item
-            })
-          } else {
-            item.selected = false;
-          }
+            if (item.selected === true) {
+              this.setState({ selectedItem: item });
+              this.props.selectedVehicle(item);
+            }
         });
-        this.setState({
-          radioItems: this.state.radioItems
-        });
-        this.props.navigation.navigate('serviceScreen');  
+      });
     }
+  }
 
+  changeActiveRadioButton(index) {
+    this.state.radioItems.map((item) => {
+        if (item.vehicle_id === index) {
+          item.selected = true;
+          this.setState({ selectedItem: item });
+          this.props.selectedVehicle(item);
+        } else {
+          item.selected = false;
+        }
+      });
+      this.setState({
+        radioItems: this.state.radioItems
+      });
+      this.props.navigation.navigate('serviceScreen'); 
+  }
 
   render() {
     return (
@@ -64,7 +63,6 @@ export default class VehicleFlatList extends React.Component {
             ItemSeparatorComponent={this.FlatListItemSeparator}
             renderItem={({ item }) => 
                 <View style={styles.vehicleContainer}>
-                  {this.props.selectedVehicle(this.state.selectedItem)}
                   <VehicleItems 
                     key={item.vehicle_id} 
                     button={item} 
