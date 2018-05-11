@@ -1,15 +1,15 @@
 // @flow
-// Container for UpcomingAppointmentsList Component
+// Container for PastAppointmentsList Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UpcomingAppointmentsList from './UpcomingAppointmentList';
 
-import * as homeActions from '../../../redux/home/homeActions';
+import * as appointmentListActions from '../../../redux/appointmentList/upcoming/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(homeActions, dispatch),
+        actions: bindActionCreators(appointmentListActions, dispatch),
     };
 };
 
@@ -19,6 +19,5 @@ const mapStateToProps = (state) => {
         pastAppointments: state.appointmentLists.pastAppointments
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(UpcomingAppointmentsList);
 

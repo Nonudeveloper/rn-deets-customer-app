@@ -102,6 +102,10 @@ class AppointmetHelper {
         };
         return await SuperFetch.post('customer/get_user_upcoming_and_past_appointments', data);
     }
+
+    deleteAppointment = async payload => {
+        console.log(payload);
+    }
   
 }
 

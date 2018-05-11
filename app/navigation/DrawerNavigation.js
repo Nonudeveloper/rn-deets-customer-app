@@ -95,14 +95,6 @@ const appointmentStack = StackNavigator({
   },
 });
 
-//appointmentListStack
-const appointmentListStack = StackNavigator({
-  // swipeableList: { screen: SwipeableList },
-  appointmentList: { screen: AppointmentList }
-}, {
-  headerMode: 'none'
-});
-
 //Tab Navigator 
 // const appointmentListTab = createBottomTabNavigator({
 //   Home: ServiceScreen,
@@ -114,33 +106,37 @@ const appointmentListTab = TabNavigator({
   Upcoming: { screen: UpcomingAppointmentsList },
 },
 {
+  headerMode: 'screen',
   tabBarOptions: {
-    activeTintColor: 'green',
+    activeTintColor: '#fff',
     inactiveTintColor: 'grey',
+    indicatorStyle: {
+      backgroundColor: '#009933',
+      height: '100%'
+    },
     style: {
       backgroundColor: '#fff',
+      height: 50,
     },
     labelStyle: {
-      fontSize: 17,
+      fontSize: 15,
+      
     },
   },
   // tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  animationEnabled: false,
+  animationEnabled: true,
   swipeEnabled: false,
 }
 );
 
 const DrawerStack = DrawerNavigator({
+  appointmentListTab: {
+    screen: appointmentListTab
+  },
   appointmentStack: {
     screen: appointmentStack
   },
-  appointmentListStack: {
-    screen: appointmentListStack
-  },
-  appointmentListTab: {
-    screen: appointmentListTab
-  }
 }, {
   headerMode: 'none',
   gesturesEnabled: false,

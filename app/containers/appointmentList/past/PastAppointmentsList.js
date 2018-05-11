@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import Header from '../../header/Header';
-import ListItem from './ListItem';
+import ListItem from '../ListItem';
 
 class PastAppointmentsList extends Component {
 
@@ -35,6 +35,12 @@ class PastAppointmentsList extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
+                <Header 
+                    navigation={this.props.navigation} 
+                    headerText={'Appointments'}
+                    rightText={'Edit'}
+                    showRightIcon
+                />
                 <FlatList
                     data={this.props.pastAppointments}
                     ItemSeparatorComponent={this.flatListItemSeparator}
@@ -55,15 +61,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10
     },
-     
-    item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-    },
-    itemContainer: {
-        flex: 1
-    }
+   
      
 });
 
