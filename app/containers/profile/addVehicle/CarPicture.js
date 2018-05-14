@@ -43,23 +43,9 @@ export default class CarPicture extends React.Component {
               this.setState({
                 ImageSource: source
               });
-              this.props.getVehicleImage({ response, currentPage: this.props.currentPage });
+              this.props.getVehicleImage(response);
             }
         });
-    }
-
-    componentWillMount() {
-        if (this.props.vehicleImage && this.props.vehicleImage !== '') {
-            this.setState(() => {
-                return {
-                    ImageSource: {
-                        uri: this.props.vehicleImage
-                    }
-                };
-            }, () => {
-                // this.props.getImage(this.state.ImageSource);
-            });
-        }
     }
 
     render() {
@@ -68,8 +54,11 @@ export default class CarPicture extends React.Component {
                 <View style={styles.editButtonWrapper}>
                     <Image source={editBtn} style={styles.editIcon} />
                 </View>
-                <TouchableOpacity style={{ position: 'absolute' }} onPress={this.props.editable ? this.selectPhotoTapped.bind(this) : null}>
-                    <Image style={styles.proImageStyle} source={this.state.ImageSource === null ? carIcon : this.state.ImageSource} />
+                <TouchableOpacity style={{ position: 'absolute' }} onPress={this.selectPhotoTapped.bind(this)}>
+                    
+                    { this.state.ImageSource === null ? <Image style={styles.proImageStyle} source={carIcon} /> :
+                    <Image style={styles.proImageStyle} source={this.state.ImageSource} />
+                    }
                 </TouchableOpacity>
                 
             </View>

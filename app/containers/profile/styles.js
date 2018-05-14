@@ -75,7 +75,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         top: 30,
-        height:60
+        height: 60
     },
     detailButtonInnerContainer: {
         flex: 1,
@@ -86,12 +86,12 @@ export default StyleSheet.create({
         borderBottomRightRadius: 100,
         borderTopRightRadius: 100,
         height: 55,
-        backgroundColor: '#28a745',
+        // backgroundColor: '#28a745',
         // borderWidth: 4,
         borderTopWidth: 6,
         borderBottomWidth: 6,
         borderRightWidth: 6,
-        borderColor: '#5eaf71',
+        // borderColor: '#5eaf71',
     },
     detailButtonInnerWraper: {
         flex: 1, 
@@ -114,9 +114,9 @@ export default StyleSheet.create({
         borderBottomLeftRadius: 100,
         borderTopLeftRadius: 100,
         height: 55,
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
         // borderWidth: 4,
-        borderColor: 'grey',
+        // borderColor: 'grey',
         borderTopWidth: 6,
         borderBottomWidth: 6,
         borderLeftWidth: 6,
@@ -152,6 +152,14 @@ export default StyleSheet.create({
         flex: 1, 
         marginHorizontal: 25, 
         justifyContent: 'center'
+    },
+    activeButtonStyle: {
+        backgroundColor: '#28a745',
+        borderColor: '#5eaf71',
+    },
+    unactioveButtonStyle: {
+        backgroundColor: 'black',
+        borderColor: 'grey',
     }
 
 });

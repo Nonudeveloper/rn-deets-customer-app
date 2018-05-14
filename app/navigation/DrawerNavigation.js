@@ -13,11 +13,10 @@ import ReviewScreen from '../containers/appointment/review/index';
 import CreditCardForm from '../containers/appointment/review/paymentInformation/index';
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
-import AppointmentList from '../containers/appointmentList/index';
 import PastAppointmentsList from '../containers/appointmentList/past/index';
 import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
-import SwipeableList from '../containers/appointmentList/SwipeableList';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AddVehicleScreen from '../containers/profile/addVehicle/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -86,6 +85,7 @@ const appointmentStack = StackNavigator({
   creditCardForm: { screen: CreditCardForm },
   detailsScreen: { screen: DetailScreen },
   changePasswordScreen: { screen: ChangePasswordScreen },
+  addVehicleScreen: { screen: AddVehicleScreen }
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,

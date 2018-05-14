@@ -1,10 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // const window = Dimensions.get('window');
-const SCREEN_WIDTH = Dimensions.get("window").width;
+
 export default StyleSheet.create({
     carPic: {
-        flex:1,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -30,8 +29,6 @@ export default StyleSheet.create({
     t1: {
         justifyContent: 'center',
         flex: 1,
-        paddingTop: 20,
-        paddingBottom: 20
     },
     t2: {
         flexDirection: 'column',
@@ -122,53 +119,6 @@ export default StyleSheet.create({
         justifyContent: 'flex-end', 
         marginLeft: 73, 
         marginBottom: 78 
-    },
-    pictureWraper: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    profilePicContainer: {
-        flex: 2,
-        justifyContent: 'center', 
-        alignItems: 'flex-end'
-    },
-    logoutButtonContainer: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'flex-end' 
-    },
-    formContainer: {
-        flex: 2, 
-        flexDirection: 'column'
-    },
-    stepIndicatorHeader: {
-        flex: 1,
-        height: 50,
-        // flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        marginBottom: 20,
-        marginHorizontal: 100
-    },
-    screen: {
-        height: 600,
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 25,
-        backgroundColor: "white"
-      },
-      scrollPage: {
-        width: SCREEN_WIDTH,
-        padding: 20
-      },
-      scrollView: {
-        flexDirection: "row",
-        backgroundColor: "#00d4ff"
-      },
-      text: {
-        fontSize: 45,
-        fontWeight: "bold"
-      }
+    }
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableHighlight } from 'react-native';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
@@ -11,6 +11,9 @@ export default class DetailsItem extends React.Component {
     super(props);
   }
 
+  _logout() {
+    this.props.logout();
+  }
 
   render() {
     return (
@@ -20,10 +23,13 @@ export default class DetailsItem extends React.Component {
                     <ProfilePic getImage={this.props.getImage} editable={this.props.editable} getImage={this.props.getImage} profilePic={this.props.profilePic} />
                 </View>
                 <View style={styles.logoutButtonContainer}>
-                    <Image 
+                    {/* <Image 
                         style={{ width: '66%', height: '50%', }}
                         source={logOutButton}
-                    />
+                    /> */}
+                    <TouchableHighlight underlayColor={'transparent'} style={{ flex: 1, position: 'absolute' }} onPress={this._logout} >
+                            <Image style={{ width: 100, height: 58 }} source={logOutButton} />
+                        </TouchableHighlight>
                 </View>
             </View>
             <View style={styles.formContainer}>
