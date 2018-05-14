@@ -7,6 +7,7 @@ import authVehicleSagas from './appointment/vehicle/saga';
 import serviceSaga from './service/saga';
 import appointmentSaga from './appointment/saga';
 import profileSaga from './profile/saga';
+import upcomingAppointmentSaga from './appointmentList/upcoming/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     authVehicleSagas(),
     serviceSaga(),
     appointmentSaga(),
-    profileSaga()
+    profileSaga(),
+    upcomingAppointmentSaga()
   ]);
 }

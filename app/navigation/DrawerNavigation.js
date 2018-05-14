@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Easing } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import SelectVehileScreen from '../containers/appointment/vehicle/index';
 import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
@@ -13,6 +13,9 @@ import ReviewScreen from '../containers/appointment/review/index';
 import CreditCardForm from '../containers/appointment/review/paymentInformation/index';
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
+import PastAppointmentsList from '../containers/appointmentList/past/index';
+import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
 
 
@@ -68,7 +71,7 @@ const TransitionConfiguration = () => {
     };
 };
 
-// drawer stack
+// appointmentStack stack
 
 const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
@@ -87,12 +90,50 @@ const appointmentStack = StackNavigator({
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
   contentOptions: {
-    activeTintColor: "#e91e63",
+    activeTintColor: '#e91e63',
     activeBackgroundColor: 'purple',
   },
 });
 
+//Tab Navigator 
+// const appointmentListTab = createBottomTabNavigator({
+//   Home: ServiceScreen,
+//   Settings: ServiceScreen,
+// });
+
+const appointmentListTab = TabNavigator({
+  Past: { screen: PastAppointmentsList },
+  Upcoming: { screen: UpcomingAppointmentsList },
+},
+{
+  headerMode: 'screen',
+  tabBarOptions: {
+    activeTintColor: '#fff',
+    inactiveTintColor: 'grey',
+    indicatorStyle: {
+      backgroundColor: '#009933',
+      height: '100%'
+    },
+    style: {
+      backgroundColor: '#fff',
+      height: 50,
+    },
+    labelStyle: {
+      fontSize: 15,
+      
+    },
+  },
+  // tabBarComponent: TabBarBottom,
+  tabBarPosition: 'bottom',
+  animationEnabled: true,
+  swipeEnabled: false,
+}
+);
+
 const DrawerStack = DrawerNavigator({
+  appointmentListTab: {
+    screen: appointmentListTab
+  },
   appointmentStack: {
     screen: appointmentStack
   },

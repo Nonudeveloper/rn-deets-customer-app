@@ -91,7 +91,21 @@ class AppointmetHelper {
                 return response;
             })
             .catch(error => console.log(error));
-      };
+    };
+
+    fetchUpcomingAndPastAppointments = async () => {
+        const user = await getItem('user');
+        const dateToday = new Date();
+        const data = {
+            access_token: JSON.parse(user).access_token,
+            current_date_time: dateToday
+        };
+        return await SuperFetch.post('customer/get_user_upcoming_and_past_appointments', data);
+    }
+
+    deleteAppointment = async payload => {
+        console.log(payload);
+    }
   
 }
 
