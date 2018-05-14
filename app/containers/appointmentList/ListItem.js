@@ -7,6 +7,8 @@ const avatar = require('../../assets/icons/temp_avatar.png');
 const locationIcon = require('../../assets/icons/direction_on.png');
 const messageIcon = require('../../assets/icons/messageIcon.png');
 const phoneIcon = require('../../assets/icons/phoneIcon.png');
+const rateStarActive = require('../../assets/icons/rate_star_active.png');
+const uncheckButton = require('../../assets/icons/6_uncheck_btn.png');
 
 class ListItem extends Component {
 
@@ -64,10 +66,30 @@ class ListItem extends Component {
         return `${hour}:${minute} ${prepand}`;
     }
 
+    renderRating(item = null) {
+        const rating = [];
+        for (let i = 0; i < 5; i++) {
+            rating.push(<Image key={i} style={styles.ratingStart} source={rateStarActive} />);
+        }
+        return rating;
+    }
+
     deleteItem(item) {
-        console.log(item);
+        this.props.onDelete(item);
+    }
+
+    callToTechnician(item) {
+        this.props.makeCallToTechnician(item.user);
     }
     
+    messageToTechnician(item) {
+        this.props.messageToTechnician(item.user);
+    }
+
+    selectAppointment() {
+
+    }
+
     render() {
         const rightSwipeBtns = [
             {
@@ -85,6 +107,8 @@ class ListItem extends Component {
             }
         ];
 
+        const { item } = this.props;
+
         return (
             <Swipeout 
                 right={rightSwipeBtns}
@@ -93,11 +117,18 @@ class ListItem extends Component {
                 backgroundColor='transparent'
             >
                 <TouchableHighlight
-                    onPress={this.viewNote.bind(this, this.props.item)} 
-                    key={this.props.item.key}
+                    onPress={this.viewNote.bind(this, item)} 
+                    key={item.key}
                 >
                     <View style={styles.itemContainer}>
                         <View style={styles.itemDetailContainer}>
+                            <TouchableHighlight 
+                                onPress={() => this.selectAppointment(item)} 
+                                style={styles.radioContainer}
+                                activeOpacity={1}
+                            >
+                                <Image style={styles.radioImage} source={uncheckButton} />
+                            </TouchableHighlight>
                             <View style={styles.avatarContainer}>
                                 <View style={styles.avatar}>
                                     <Image style={styles.image} source={avatar} />
@@ -107,27 +138,38 @@ class ListItem extends Component {
                                 <View style={{}}>
                                     <Text 
                                         style={styles.item} 
-                                        onPress={this.getItem.bind(this, this.props.item.key)} 
+                                        onPress={this.getItem.bind(this, item.key)} 
                                     > 
-                                        {this.props.item.appointment.service_name} 
+                                        {item.appointment.service_name} 
                                     </Text>
+                                    <View style={styles.ratingContainer}>
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                    </View>
                                     <Text style={styles.dateTime}>
-                                        {this.renderFormatedDate(this.props.item.appointment.service_end_time)}
+                                        {this.renderFormatedDate(item.appointment.service_end_time)}
                                     </Text>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <Text style={styles.dateTime}>
-                                            {this.renderFormatedTime(this.props.item.appointment.service_start_time)} 
+                                            {this.renderFormatedTime(item.appointment.service_start_time)} 
                                         </Text>
                                         <Text style={{ paddingHorizontal: 8, fontSize: 15, color: '#1a1a1a' }}>to</Text>
                                         <Text style={styles.dateTime}>
-                                            {this.renderFormatedTime(this.props.item.appointment.service_end_time)}
+                                            {this.renderFormatedTime(item.appointment.service_end_time)}
                                         </Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={styles.options}>
-                                <Image source={phoneIcon} style={styles.messageIcon} />
-                                <Image source={messageIcon} style={styles.messageIcon} />
+                                <TouchableHighlight onPress={() => this.callToTechnician(item)}>
+                                    <Image source={phoneIcon} style={styles.messageIcon} />
+                                </TouchableHighlight>
+                                <TouchableHighlight onPress={() => this.messageToTechnician(item)}>
+                                    <Image source={messageIcon} style={styles.messageIcon} />
+                                </TouchableHighlight>
                             </View>
                         </View>
                         <View style={styles.locationContainer}>
@@ -136,7 +178,7 @@ class ListItem extends Component {
                             </View>
                             <View style={styles.locationTextCont}>
                                 <Text style={styles.text}>
-                                    {this.props.item.appointment.service_location_string.substr(0, 45)}...
+                                    {item.appointment.service_location_string.substr(0, 45)}...
                                 </Text>
                             </View>
                         </View>

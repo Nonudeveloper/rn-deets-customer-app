@@ -28,7 +28,12 @@ class PastAppointmentsList extends Component {
 
     renderItem(item) {
         return (
-            <ListItem item={item} />
+            <ListItem 
+                item={item} 
+                onDelete={() => this.props.actions.deleteAppointment(item)} 
+                makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
+                messageToTechnician={() => this.props.actions.messageToTechnician(item)}
+            />
         );
     }
 
