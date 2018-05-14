@@ -3,14 +3,17 @@ import {
     FETCH_UPCOMING_AND_PAST_APPOINTMENTS_SUCCESS, 
     FETCH_UPCOMING_AND_PAST_APPOINTMENTS_FALIURE, 
     DELETE_APPOINTMENT, DELETE_APPOINTMENT_SUCCESS, 
-    DELETE_APPOINTMENT_FALIURE
+    DELETE_APPOINTMENT_FALIURE,
+    SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+    SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE
 } from './constants';
 
 const initialState = {
       isFetching: false,
       upcomingAppointments: [],
       pastAppointments: [],
-      deleteSuccessfull: false
+      deleteSuccessfull: false,
+      selectedAppointment: ''
 };
 
 export default function homeReducer(state = initialState, action) {
@@ -41,6 +44,14 @@ export default function homeReducer(state = initialState, action) {
         case DELETE_APPOINTMENT_FALIURE:
             return Object.assign({}, state, {
                 isFetching: false
+            });
+        case SELECTED_APPOINTMENT_FOR_RESCHEDULE:
+            return Object.assign({}, state, {
+                selectedAppointment: action.appointment
+            });
+        case SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE:
+            return Object.assign({}, state, {
+                selectedAppointment: ''
             });
         default:
             return state;

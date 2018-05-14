@@ -67,6 +67,12 @@ class ListItem extends Component {
     deleteItem(item) {
         console.log(item);
     }
+
+    scheduleItem(item) {
+        console.log(item);
+        this.props.actions.selectedAppointmentForReschedule(item);
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
+    }
     
     render() {
         const rightSwipeBtns = [
@@ -82,6 +88,7 @@ class ListItem extends Component {
                 text: 'Schedule',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                onPress: () => { this.scheduleItem(this.props.item); }
             }
         ];
 

@@ -28,7 +28,7 @@ class PastAppointmentsList extends Component {
 
     renderItem(item) {
         return (
-            <ListItem item={item} />
+            <ListItem item={item} navigation={this.props.navigation} actions={this.props.actions} />
         );
     }
 

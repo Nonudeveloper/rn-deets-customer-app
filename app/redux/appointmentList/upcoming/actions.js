@@ -5,6 +5,8 @@ import {
     DELETE_APPOINTMENT,
     DELETE_APPOINTMENT_SUCCESS,
     DELETE_APPOINTMENT_FALIURE,
+    SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+    SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE
 } from './constants';
     
 export function fetchUpcomingAndPastAppointments(payload) {
@@ -47,5 +49,18 @@ export function deleteAppointmentFaliure(err) {
     return {
         type: DELETE_APPOINTMENT_FALIURE,
         err
+    };
+}
+
+export function selectedAppointmentForReschedule(appointment) {
+    return {
+        type: SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+        appointment
+    };
+}
+
+export function setSelectedAppointmentToInitialState() {
+    return {
+        type: SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE,
     };
 }

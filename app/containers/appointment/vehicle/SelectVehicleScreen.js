@@ -16,6 +16,9 @@ export default class SelectVehicleScreen extends React.Component {
   componentWillMount() {
     this.props.fetchAuthVehicles();
     this.props.setBackToInitialState();
+    if (this.props.navigation.state.params === undefined) {
+      this.props.setSelectedAppointmentToInitialState();
+    }
   }
 
   getSelectedItems = () => {
@@ -43,6 +46,8 @@ export default class SelectVehicleScreen extends React.Component {
           navigation={this.props.navigation} 
           selectedVehicle={this._selectedVehicle}
           navigation={this.props.navigation}
+          rescheduling={this.props.navigation.state.params !== undefined ? true : false}
+          rescheduleAppointment={this.props.selectedAppointment}
         />
         <View style={styles.nextButtonContainer}>
             <View style={{ flexDirection: 'row', marginHorizontal: 25, justifyContent: 'flex-end', }}>
