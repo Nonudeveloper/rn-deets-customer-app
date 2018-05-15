@@ -20,7 +20,16 @@ const initialState = {
       pastAppointments: [],
       deleteSuccessfull: false,
       editMode: false,
-      selectedAppointments: []
+      selectedAppointments: [],
+};
+
+const pushOrFilterID = (selectedAppointments, id) => {
+    const forDeletion = [id];
+    if (selectedAppointments.includes(id)) {
+        return selectedAppointments.filter(item => !forDeletion.includes(item));
+    } 
+    selectedAppointments.push(id);
+    return selectedAppointments;
 };
 
 export default function homeReducer(state = initialState, action) {
@@ -82,29 +91,7 @@ export default function homeReducer(state = initialState, action) {
             });
         case SELECT_APPOINTMENT:
             return Object.assign({}, state, {
-                selectedAppointments: state.selectedAppointments.map(id => {
-                    if (id === action.appointmentID) {
-                        //slice from here selectedAppointments oldschool version
-                        const index = state.selectedAppointments.indexOf(action.appointmentID);
-                        if (index > -1) {
-                            state.selectedAppointments.splice(index, 1);
-                        }
-                        console.log(state.selectedAppointments);
-                        return state.selectedAppointments;
-                        //es6 VERSION
-                        // let forDeletion = [2, 3, 5]
-
-                        // let arr = [1, 2, 3, 4, 5, 3]
-
-                        // arr = arr.filter(item => !forDeletion.includes(item))
-                        // // !!! Read below about array.includes(...) support !!!
-
-                        // console.log(arr)
-                        // // [ 1, 4 ]
-                    } 
-                    console.log([...state.selectedAppointments, action.appointmentID]);
-                    return [...state.selectedAppointments, action.appointmentID];
-                })
+                selectedAppointments: pushOrFilterID(state.selectedAppointments, action.appointmentID)
             });
         default:
             return state;

@@ -14,7 +14,8 @@ import {
   FETCH_UPCOMING_AND_PAST_APPOINTMENTS, 
   DELETE_APPOINTMENT, 
   MAKE_CALL_TO_TECHNICIAN, 
-  MESSAGE_TO_TECHNICIAN
+  MESSAGE_TO_TECHNICIAN,
+  SELECT_APPOINTMENT
 } from './constants';
 import appointmentHelper from '../../../helpers/appointment/appointmentHelper';
 

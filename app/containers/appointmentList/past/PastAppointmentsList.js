@@ -8,6 +8,10 @@ class PastAppointmentsList extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectedAppointments: this.props.selectedAppointments
+        };
     }
 
     componentDidMount() {
@@ -33,6 +37,8 @@ class PastAppointmentsList extends Component {
                 onDelete={() => this.props.actions.deleteAppointment(item)} 
                 makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
                 messageToTechnician={() => this.props.actions.messageToTechnician(item)}
+                selectAppointment={id => this.props.actions.selectAppointment(id)}
+                selectedAppointments={this.props.selectedAppointments}
             />
         );
     }
@@ -46,12 +52,14 @@ class PastAppointmentsList extends Component {
                     rightText={'Edit'}
                     showRightIcon
                 />
+                <Text>{this.state.selectedAppointments}</Text>
                 <FlatList
                     data={this.props.pastAppointments}
                     ItemSeparatorComponent={this.flatListItemSeparator}
                     renderItem={
                         ({ item }) => this.renderItem(item)
                     }
+                    extraData={this.state}
                 />
             </View>
         );

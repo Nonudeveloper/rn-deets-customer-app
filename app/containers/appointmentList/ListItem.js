@@ -86,8 +86,8 @@ class ListItem extends Component {
         this.props.messageToTechnician(item.user);
     }
 
-    selectAppointment() {
-
+    selectAppointment(id) {
+        this.props.selectAppointment(id);
     }
 
     render() {
@@ -123,11 +123,18 @@ class ListItem extends Component {
                     <View style={styles.itemContainer}>
                         <View style={styles.itemDetailContainer}>
                             <TouchableHighlight 
-                                onPress={() => this.selectAppointment(item)} 
+                                onPress={() => this.selectAppointment(item.appointment.id)} 
                                 style={styles.radioContainer}
                                 activeOpacity={1}
                             >
-                                <Image style={styles.radioImage} source={uncheckButton} />
+                            {
+                                this.props.selectedAppointments.includes(item.appointment.id) ? (
+                                    <Image style={styles.radioImage} source={uncheckButton} />
+                                ) : (
+                                    <Text>heha{this.props.selectedAppointments.includes(item.appointment.id)}</Text>
+                                )
+                            }
+                                
                             </TouchableHighlight>
                             <View style={styles.avatarContainer}>
                                 <View style={styles.avatar}>
