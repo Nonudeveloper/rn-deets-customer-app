@@ -16,7 +16,7 @@ import {
     SELECT_APPOINTMENT_FALIURE,
     TOGGLE_EDIT_MODE,
 } from './constants';
-    
+
 export function fetchUpcomingAndPastAppointments(payload) {
     return {
         type: FETCH_UPCOMING_AND_PAST_APPOINTMENTS,

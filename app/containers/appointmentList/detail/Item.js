@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Swipeout from 'react-native-swipeout';
 import { Text, TouchableHighlight, View, Alert, Image } from 'react-native';
-import styles from './styles';
+import styles from '../styles';
 
-const avatar = require('../../assets/icons/temp_avatar.png');
-const locationIcon = require('../../assets/icons/direction_on.png');
-const messageIcon = require('../../assets/icons/messageIcon.png');
-const phoneIcon = require('../../assets/icons/phoneIcon.png');
-const rateStarActive = require('../../assets/icons/rate_star_active.png');
-const uncheckButton = require('../../assets/icons/6_uncheck_btn.png');
+const avatar = require('../../../assets/icons/temp_avatar.png');
+const locationIcon = require('../../../assets/icons/direction_on.png');
+const messageIcon = require('../../../assets/icons/messageIcon.png');
+const phoneIcon = require('../../../assets/icons/phoneIcon.png');
+const rateStarActive = require('../../../assets/icons/rate_star_active.png');
+const uncheckButton = require('../../../assets/icons/6_uncheck_btn.png');
 
-class ListItem extends Component {
+class Item extends Component {
 
     getItem(item) {
         Alert.alert(item);
@@ -116,26 +116,10 @@ class ListItem extends Component {
                 autoClose
                 backgroundColor='transparent'
             >
-                <TouchableHighlight
-                    onPress={this.appointmentDetail.bind(this, item)} 
-                    key={item.key}
-                >
+             
+                
                     <View style={styles.itemContainer}>
                         <View style={styles.itemDetailContainer}>
-                            <TouchableHighlight 
-                                onPress={() => this.selectAppointment(item.appointment.id)} 
-                                style={styles.radioContainer}
-                                activeOpacity={1}
-                            >
-                            {
-                                this.props.selectedAppointments && this.props.selectedAppointments.includes(item.appointment.id) ? (
-                                    <Text>selected</Text>
-                                ) : (
-                                    <Image style={styles.radioImage} source={uncheckButton} />
-                                )
-                            }
-                                
-                            </TouchableHighlight>
                             <View style={styles.avatarContainer}>
                                 <View style={styles.avatar}>
                                     <Image style={styles.image} source={avatar} />
@@ -190,11 +174,10 @@ class ListItem extends Component {
                             </View>
                         </View>
                     </View>
-                </TouchableHighlight>
             </Swipeout>
         );
     }
 }
 
-export default ListItem;
+export default Item;
 

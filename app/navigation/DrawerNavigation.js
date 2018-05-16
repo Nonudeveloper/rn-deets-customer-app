@@ -17,6 +17,7 @@ import PastAppointmentsList from '../containers/appointmentList/past/index';
 import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
+import AppointmentDetail from '../containers/appointmentList/detail/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -101,8 +102,16 @@ const appointmentStack = StackNavigator({
 //   Settings: ServiceScreen,
 // });
 
+const pastStack = StackNavigator({
+  PastAppointmentsList: { screen: PastAppointmentsList },
+  PastAppointmentsDetail: { screen: AppointmentDetail }
+}, {
+  headerMode: 'none',
+  transitionConfig: TransitionConfiguration,
+});
+
 const appointmentListTab = TabNavigator({
-  Past: { screen: PastAppointmentsList },
+  Past: pastStack,
   Upcoming: { screen: UpcomingAppointmentsList },
 },
 {

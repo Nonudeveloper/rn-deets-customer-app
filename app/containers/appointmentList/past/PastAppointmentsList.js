@@ -39,6 +39,7 @@ class PastAppointmentsList extends Component {
                 messageToTechnician={() => this.props.actions.messageToTechnician(item)}
                 selectAppointment={id => this.props.actions.selectAppointment(id)}
                 selectedAppointments={this.props.selectedAppointments}
+                navigation={this.props.navigation}
             />
         );
     }
