@@ -13,13 +13,26 @@ export default class AddonItemsScreen extends Component {
       this.state = { checked: null };
    }
  
-    componentWillMount(){
+    componentWillMount() {
         if (this.props.checked) {
             this.setState({ checked: true }, () => {
                 this.props.selectedArrayObject.setItem({ 'key': this.props.keyValue, 'vehicle': this.props.label });
             });
         } else {
             this.setState({ checked: false });
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.selectedArrayObject.getArray().length !== 0) {
+        this.props.selectedArrayObject.getArray().splice( this.props.selectedArrayObject.getArray().findIndex(x => x.key == this.props.keyValue), 1 );
+        }
+        if (this.props.reSchedule !== '') {
+            this.props.reSchedule.service_adds_on.map((addons) => {
+                if (addons.adds_on_id === this.props.item.id) {
+                    this.toggleState(this.props.keyValue, this.props.label)
+                }
+            });
         }
     }
  

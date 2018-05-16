@@ -7,7 +7,8 @@ import {
     SERVICES_APPOINTMENT_FALIURE,
     HIDE_ALERT,
     GET_SELECTED_SERVICES,
-    STORE_SERVICE_APPOINTMENT_ID
+    STORE_SERVICE_APPOINTMENT_ID,
+    RESCHEDULE_SERVICE_APPOINTMENT
 } from './constants';
 
 const initialState = {
@@ -61,6 +62,10 @@ export default function servicesReducer(state = initialState, action) {
         case STORE_SERVICE_APPOINTMENT_ID:
             return Object.assign({}, state, {
                 serviceAppointmentId: action.appoitmentId
+            });
+        case RESCHEDULE_SERVICE_APPOINTMENT:
+            return Object.assign({}, state, {
+                technicianFetching: true
             });
         default:
             return state;

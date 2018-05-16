@@ -76,6 +76,27 @@ class ServicesHelper {
         //     })
         //     .catch(error => ({ error: JSON.stringify(error) }));
     }
+
+    reschudleAppointment = async reschudleAppointmentInfo => {
+        console.log(reschudleAppointmentInfo);
+        const user = await getItem('user');
+        const data = new FormData();
+        const today = new Date('2018-04-19');
+        // const date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate();
+
+        const payload = {
+            access_token: JSON.parse(user).access_token,
+            service_date: '2018-04-19',
+            current_date_time: today.toJSON(),
+            adds_on_id: reschudleAppointmentInfo.addOns,
+            service_appointment_id: reschudleAppointmentInfo.appointmentId
+        };
+        return await SuperFetch.post('/customer/reschedule_user_current_appointment', payload)
+        .then(response => response)
+        .catch(error => ({ error: JSON.stringify(error) }));
+    }
+
+
 }
 
 

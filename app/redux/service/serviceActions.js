@@ -6,7 +6,8 @@ import {
     SERVICES_APPOINTMENT_FALIURE,
     HIDE_ALERT,
     GET_SELECTED_SERVICES,
-    STORE_SERVICE_APPOINTMENT_ID
+    STORE_SERVICE_APPOINTMENT_ID,
+    RESCHEDULE_SERVICE_APPOINTMENT
 } from './constants';
     
 export function fetchServices() {
@@ -87,5 +88,13 @@ export function storeUserServiceAppointmentId(appoitmentId) {
     return {
       type: STORE_SERVICE_APPOINTMENT_ID,
       appoitmentId
+    };
+}
+
+export function rescheduleServiceAppointment(appointmentId, addOns) {
+    return {
+      type: RESCHEDULE_SERVICE_APPOINTMENT,
+      appointmentId,
+      addOns
     };
 }

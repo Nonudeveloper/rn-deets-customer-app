@@ -22,8 +22,6 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    const reSchedule = this.props.navigation.state.params;
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
       <View style={styles.container}>
@@ -34,9 +32,9 @@ export default class ServiceScreen extends React.Component {
         />
         <ServicesList 
           services={this.props.services} 
-          selectedVehicle={reSchedule !== undefined ? this.props.selectedAppointment.appointment.dataValues : this.props.selectedVehicle} 
+          selectedVehicle={this.props.selectedVehicle} 
           navigation={this.props.navigation}
-          reSchedule={reSchedule} 
+          reSchedule={this.props.selectedAppointment} 
           selectedAppointment={this.props.selectedAppointment}
         />
       </View>

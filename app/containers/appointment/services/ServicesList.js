@@ -9,7 +9,7 @@ class ServicesList extends Component {
   }
 
   componentWillMount() {
-    if (this.props.reSchedule !== undefined) {
+    if (this.props.reSchedule !== '') {
       if (this.props.services.length !== 0) {
         this.props.services.map((service) => {
           if (service.service_id === this.props.selectedAppointment.appointment.service_id) {

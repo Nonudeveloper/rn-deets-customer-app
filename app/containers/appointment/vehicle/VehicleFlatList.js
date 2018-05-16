@@ -28,7 +28,6 @@ export default class VehicleFlatList extends React.Component {
             }
           }
         } else {
-          console.log('thger')
           if (i === 0) {
             item.selected = true;
           } else {

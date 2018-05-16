@@ -47,6 +47,7 @@ class PastAppointmentsList extends Component {
                     renderItem={
                         ({ item }) => this.renderItem(item)
                     }
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </View>
         );
