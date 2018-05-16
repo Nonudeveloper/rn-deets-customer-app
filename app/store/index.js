@@ -27,7 +27,7 @@ export default function configureStore(onComplete) {
     compose(
       applyMiddleware(
         sagaMiddleware,
-        storeMiddleware,
+        // storeMiddleware,
         logger,
       ),
       devTools(),

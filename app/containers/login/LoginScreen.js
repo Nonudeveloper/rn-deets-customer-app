@@ -8,10 +8,10 @@ import {
 import Header from '../header/Header';
 import Form from '../login/Form';
 import styles from './loginScreen.style';
-import DeetsFacebook from '../../components/facebook';
-import Hr from '../../components/hr';
-import Loader from '../../components/Loader';
-import Button from '../../components/Button';
+import DeetsFacebook from '../../deetscomponents/facebook';
+import Hr from '../../deetscomponents/hr';
+import Loader from '../../deetscomponents/Loader';
+import Button from '../../deetscomponents/Button';
 
 
 
@@ -69,6 +69,7 @@ export default class LoginScreen extends Component {
             email: this.props.form.signIn.values.email,
             password: this.props.form.signIn.values.password,
             flag: 3,
+            device_token: this.props.deviceToken.token
           };
       }, () => {
           this.props.actions.loginRequest(this.state);
@@ -82,6 +83,7 @@ export default class LoginScreen extends Component {
         flag: 1,
         fb_id: e.credentials.userId,
         access_token: e.credentials.token,
+        device_token: this.props.deviceToken.token
       };
     }, () => {
       this.props.actions.loginRequest(this.state);

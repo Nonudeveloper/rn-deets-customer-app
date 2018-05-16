@@ -1,10 +1,11 @@
 import React from 'react';
 import { reduxForm, Field, initialize, change } from 'redux-form';
-import { View, Text, Picker, TextInput, Keyboard } from 'react-native';
+import { View, Text, Picker, TextInput } from 'react-native';
 import styles from './styles';
-import MyPicker from '../../../components/form/MyPicker';
+import MyPicker from '../../../deetscomponents/form/AndroidPicker';
 import RadioButton from 'radio-button-react-native';
-import CommonTextInput from '../../../components/form/Input';
+import CommonTextInput from '../../../deetscomponents/form/Input';
+import CommonTypeTextInput from '../../../components/form/Input';
 import ModelPicker from 'react-native-picker';
 
 class VehicleForm extends React.Component {
@@ -87,7 +88,6 @@ class VehicleForm extends React.Component {
     }
 
     _showPicker() {
-        Keyboard.dismiss();
         ModelPicker.init({
         pickerData: this._createTypeData(),
         pickerTitleText: 'Select Type..',
@@ -195,8 +195,8 @@ class VehicleForm extends React.Component {
                     <Field name="make_id" selectedValue={this.state.make} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
                         { 
-                            this.props.makeModel.length > 0 ? 
-                            this.props.makeModel.map(
+                            this.props.makeModel.data ? 
+                            this.props.makeModel.data.map(
                                 (make, i) => <Picker.Item 
                                     key={i} 
                                     value={make.make_id} 
@@ -224,14 +224,14 @@ class VehicleForm extends React.Component {
             <View style={styles.licenseTextStyle}>
                 <Field
                     name={'type'}
-                    component={CommonTextInput}
+                    component={CommonTypeTextInput}
                     props={this.props}
                     placeholder={'Type'}
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
-                    type="text"
                     borderBotmWidth={{ borderBottomWidth: 0 }}
-                    onFocus={this._showPicker.bind(this)}
+                    onPress={this._showPicker.bind(this)}
+                    type="modaltype"
                 />
                 </View>
             <View style={styles.licenseStyle}>

@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import Loader from '../../components/Loader';
+import Loader from '../../deetscomponents/Loader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,7 +16,6 @@ const background = require('./images/back.jpg');
 const mark = require('../../assets/icons/4_deets_logo.png');
 
 export default class StartScreen extends Component {
-
 
   constructor(props) {
     super(props);

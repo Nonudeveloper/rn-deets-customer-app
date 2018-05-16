@@ -7,7 +7,10 @@ import {
     RESET_PASSWORD_MAIL_SENT,
     RESET_PASSWORD_MAIL_ERROR,
     HIDE_ALERT,
-    HIDE_RESET_ALERT
+    HIDE_RESET_ALERT,
+    SAVE_DEVICE_TOKEN,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAILURE
 } from './constants';
 import { LOAD } from 'redux-storage';
 
@@ -23,7 +26,8 @@ const initialState = {
     isLoading: false,
     resetSuccessLog: false,
     showResetAlert: false,
-    resetErrorLog: false
+    resetErrorLog: false,
+    deviceToken: {}
 };
 
 export default function user(state = initialState, action) {
@@ -45,7 +49,7 @@ export default function user(state = initialState, action) {
         return Object.assign({}, state, {
           isFetching: false,
           isAuthenticated: true,
-          token: action.token,
+          token: action.access_token,
           failure: false,
           user: action.user,
           isLoading: false
@@ -96,8 +100,16 @@ export default function user(state = initialState, action) {
           resetSuccessLog: false,
           resetErrorLog: false
         });
-      case LOGOUT:
+      case SAVE_DEVICE_TOKEN:
+        return Object.assign({}, state, {
+          deviceToken: action.token
+        });
+      case LOGOUT_SUCCESS:
         return initialState;
+      case LOGOUT_FAILURE:
+        return Object.assign({}, state, {
+          errorMessage: action.err
+        });
       default:
         return state;
     }

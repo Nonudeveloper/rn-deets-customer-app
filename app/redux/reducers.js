@@ -4,6 +4,13 @@ import Auth from './auth/reducer';
 import Register from './register/reducer';
 import Start from './register/startReducer';
 import Vehicle from '../redux/register/vehicleInformation/vehicleReducer';
+import HomeReducer from '../redux/home/homeReducer';
+import GeoReducer from '../redux/geoCoding/geoReducer';
+import AuthVehicle from '../redux/appointment/vehicle/vehicleReducer';
+import ServiceReducer from '../redux/service/serviceReducer';
+import appointmentReducer from '../redux/appointment/reducer';
+import profileReducer from '../redux/profile/reducer';
+import appointmentLists from '../redux/appointmentList/upcoming/reducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -19,6 +26,13 @@ const rootReducer = combineReducers({
   Start,
   Vehicle,
   form,
+  home: HomeReducer,
+  Geo: GeoReducer,
+  AuthVehicle,
+  Service: ServiceReducer,
+  Appointment: appointmentReducer,
+  Profile: profileReducer,
+  appointmentLists
 });
 
 export default rootReducer;

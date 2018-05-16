@@ -10,7 +10,7 @@ import * as PersonalInformationActions from '../../../redux/register/actions';
 class PI extends Component {
 
     render() {
-       const { form, isFetching, emailAvailability, actions, navigation } = this.props;
+       const { form, isFetching, emailAvailability, actions, navigation, deviceToken } = this.props;
  
        return (
             <PersonalInformation 
@@ -20,6 +20,7 @@ class PI extends Component {
                 actions={actions}
                 navigation={navigation}  
                 testProps={'testing'}
+                deviceToken={deviceToken}
             />
        );
     }
@@ -38,6 +39,7 @@ const mapStateToProps = (state) => {
         form: state.form,
         isFetching: state.Register.isFetching,
         emailAvailability: state.Register.emailAvailability,
+        deviceToken: state.Auth.deviceToken,
     };
 };
 

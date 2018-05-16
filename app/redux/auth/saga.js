@@ -1,25 +1,26 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure } from './actions';
-import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST } from './constants';
+import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure, logoutSuccess, logoutFailure } from './actions';
+import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST, LOGOUT } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
-import { setUser } from '../../helpers/utility';
+import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
+import { setCardDetails, removeItem } from '../../helpers/asyncStorage';
 
 function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
-      console.log(data);
       if (data.status === 200) {
-        console.log('in 200 from saga');
         resolve(data);
+      } else if (data.status === 401) {
+        reject({ status: data.error });
       } else {
          const error = JSON.parse(data._bodyText).error;
          reject({ status: error });
       } 
     })
-    .catch(err => console.log(err));
+    // .catch(err => console.log(err));
   });
 }
 
@@ -47,7 +48,10 @@ function* watchLoginRequest() {
       };
       const response = yield call(loginCall, payload);
       yield put(loginSuccess(response));
-      // yield setUser(response.user);
+      yield saveAuthVehiclesData(response.vehicle);
+      yield setUser(response.user);
+      yield setToken(response.access_token);
+      yield setCardDetails(response.card);
       yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {
@@ -75,8 +79,39 @@ function* watchForgotPasswordRequest() {
   }
 }
 
+function logOutCall() {
+  return new Promise((resolve, reject) => {
+    AuthHelper.logout()
+    .then((data) => {
+      if (!data.error) {
+        resolve(data);
+      } else {
+         const error = JSON.parse(data._bodyText).error;
+         reject({ error: error });
+      } 
+    });
+  });
+}
+
+function* watchLogOutRequest() {
+  while (true) {
+     yield take(LOGOUT);
+    try {
+      const response = yield call(logOutCall);
+      yield removeItem('user');
+      yield put(logoutSuccess());
+      console.log('SAGA RESET PASSWORD Mail SENT: ', response);
+    } catch (err) {
+
+      console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
+      yield put(logoutFailure(err));
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(watchLoginRequest);
   yield fork(watchForgotPasswordRequest);
+  yield fork(watchLogOutRequest);
 }

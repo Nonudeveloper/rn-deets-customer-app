@@ -7,7 +7,10 @@ import {
   RESET_PASSWORD_MAIL_SENT,
   RESET_PASSWORD_MAIL_ERROR,
   HIDE_ALERT,
-  HIDE_RESET_ALERT
+  HIDE_RESET_ALERT,
+  SAVE_DEVICE_TOKEN,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE
 } from './constants';
 
 export function loginRequest(state) {
@@ -17,11 +20,13 @@ export function loginRequest(state) {
   };
 }
 
-export function loginSuccess({ token, user }) {
+
+export function loginSuccess({ access_token, user, vehicle }) {
   return {
     type: LOGIN_SUCCESS,
-    token,
+    access_token,
     user,
+    vehicle,
   };
 }
 
@@ -69,6 +74,26 @@ export function hideAlert() {
 export function hideResetAlert() {
   return {
     type: HIDE_RESET_ALERT
+  };
+}
+
+export function saveDeviceToken(token) {
+  return {
+    type: SAVE_DEVICE_TOKEN,
+    token,
+  };
+}
+
+export function logoutSuccess() {
+  return {
+    type: LOGOUT_SUCCESS,
+  };
+}
+
+export function logoutFailure(err) {
+  return {
+    type: LOGOUT_FAILURE,
+    err
   };
 }
 

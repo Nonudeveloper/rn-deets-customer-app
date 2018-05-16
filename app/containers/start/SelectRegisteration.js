@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Hr from '../../components/hr';
+import Hr from '../../deetscomponents/hr';
 import Header from '../header/Header';
-import DeetsFacebook from '../../components/facebook';
+import DeetsFacebook from '../../deetscomponents/facebook';
 import StyleConstants from '../../config/StyleConstants';
-import Button from '../../components/Button';
+import Button from '../../deetscomponents/Button';
 //Make Select Register component
 
 const buttonIcon = require('../../assets/icons/3_email_icon.png');
@@ -58,7 +58,7 @@ const styles = {
         marginHorizontal: 25
     },
     textWithDivider: {
-        color: "black",
+        color: 'black',
         marginVertical: 10,
         paddingHorizontal: 10
     },

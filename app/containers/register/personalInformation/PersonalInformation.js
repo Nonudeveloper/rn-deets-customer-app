@@ -5,7 +5,7 @@ import Header from '../../header/RegisterHeader';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
-import Button from '../../../components/Button';
+import Button from '../../../deetscomponents/Button';
 import StyleConstants from '../../../config/StyleConstants';
 
 const processOne = require('../../../assets/icons/process_selection_01.png');
@@ -78,7 +78,7 @@ export default class PersonalInformation extends Component {
             process={processOne}
           />
           <ProfilePic getImage={this.getImage.bind(this)} fbData={this.props.navigation.state.params ? JSON.parse(this.props.navigation.state.params.profile) : null} />
-          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} />
+          <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} deviceToken={this.props.deviceToken} />
           <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
               <Button 
