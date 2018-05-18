@@ -41,7 +41,14 @@ const styles = StyleSheet.create({
     },
     iconInnerContainer: {
         flex: 1, 
-        alignItems: 'center'
+        alignItems: 'center',
+        //if icon used
+        justifyContent: 'center',
+        borderColor: 'black',
+        borderWidth: 2,
+        borderRadius: 50,
+        marginHorizontal: 20,
+        height: 37
     },
     iconImageStyle: {
         height: '25%', 

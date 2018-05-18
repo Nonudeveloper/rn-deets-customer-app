@@ -11,6 +11,7 @@ import ServiceReducer from '../redux/service/serviceReducer';
 import appointmentReducer from '../redux/appointment/reducer';
 import profileReducer from '../redux/profile/reducer';
 import appointmentLists from '../redux/appointmentList/upcoming/reducer';
+import promoCodeReducer from '../redux/promotionCode/reducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   Service: ServiceReducer,
   Appointment: appointmentReducer,
   Profile: profileReducer,
-  appointmentLists
+  appointmentLists,
+  PromotionCode: promoCodeReducer
 });
 
 export default rootReducer;
