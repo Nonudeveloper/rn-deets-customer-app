@@ -57,8 +57,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey'
     },
     locationContainer: {
-        height: 40,
-        flex: 1,
+        height: 30,
         flexDirection: 'row',
     },
     locationIconCont: {
@@ -100,6 +99,10 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         width: 20,
         height: 20
+    },
+    tabsContainer: { 
+        flexDirection: 'row',
+        backgroundColor: 'green' 
     }
 });
 

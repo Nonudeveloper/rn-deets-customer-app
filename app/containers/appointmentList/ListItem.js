@@ -108,7 +108,6 @@ class ListItem extends Component {
         ];
 
         const { item } = this.props;
-        console.log(item);
         return (
             <Swipeout 
                 right={rightSwipeBtns}
@@ -147,7 +146,7 @@ class ListItem extends Component {
                                         style={styles.item} 
                                         onPress={this.getItem.bind(this, item.key)} 
                                     > 
-                                        {item.appointment.service_name} 
+                                        {item.user[0].first_name} {item.user[0].last_name} 
                                     </Text>
                                     <View style={styles.ratingContainer}>
                                         <Image style={styles.ratingStart} source={rateStarActive} />
@@ -185,7 +184,7 @@ class ListItem extends Component {
                             </View>
                             <View style={styles.locationTextCont}>
                                 <Text style={styles.text}>
-                                    {item.appointment.service_location_string.substr(0, 45)}...
+                                    {item.appointment.service_location_string.substr(0, 39)}...
                                 </Text>
                             </View>
                         </View>

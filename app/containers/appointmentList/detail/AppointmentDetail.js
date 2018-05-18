@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import Header from '../../header/Header';
 import Item from './Item';
+import VehicleInfo from './VehicleInfo';
 
 export default class AppointmentDetail extends Component {
     render() {
@@ -11,10 +12,7 @@ export default class AppointmentDetail extends Component {
                 <Header 
                         navigation={this.props.navigation} 
                         headerText={'Service Details'}
-                        rightText={'Edit'}
-                        showRightIcon
                 />
-                <View style={{flex: 1}}>
                <Item 
                     item={item} 
                     onDelete={() => this.props.actions.deleteAppointment(item)} 
@@ -24,7 +22,7 @@ export default class AppointmentDetail extends Component {
                     selectedAppointments={this.props.selectedAppointments}
                     navigation={this.props.navigation}
                />
-               </View>
+               <VehicleInfo item={item} />
             </View>
         );
     }
