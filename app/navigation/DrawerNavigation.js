@@ -17,6 +17,7 @@ import PastAppointmentsList from '../containers/appointmentList/past/index';
 import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
+import AppointmentDetail from '../containers/appointmentList/detail/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -95,44 +96,18 @@ const appointmentStack = StackNavigator({
   },
 });
 
-//Tab Navigator 
-// const appointmentListTab = createBottomTabNavigator({
-//   Home: ServiceScreen,
-//   Settings: ServiceScreen,
-// });
-
-const appointmentListTab = TabNavigator({
-  Past: { screen: PastAppointmentsList },
-  Upcoming: { screen: UpcomingAppointmentsList },
-},
-{
-  headerMode: 'screen',
-  tabBarOptions: {
-    activeTintColor: '#fff',
-    inactiveTintColor: 'grey',
-    indicatorStyle: {
-      backgroundColor: '#009933',
-      height: '100%'
-    },
-    style: {
-      backgroundColor: '#fff',
-      height: 50,
-    },
-    labelStyle: {
-      fontSize: 15,
-      
-    },
-  },
-  // tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-  animationEnabled: true,
-  swipeEnabled: false,
-}
-);
+const appointmentListStack = StackNavigator({
+  PastAppointmentsList: { screen: PastAppointmentsList },
+  UpcomingAppointmentsList: { screen: UpcomingAppointmentsList },
+  PastAppointmentsDetail: { screen: AppointmentDetail }
+}, {
+  headerMode: 'none',
+  transitionConfig: TransitionConfiguration,
+});
 
 const DrawerStack = DrawerNavigator({
-  appointmentListTab: {
-    screen: appointmentListTab
+  appointmentListStack: {
+    screen: appointmentListStack
   },
   appointmentStack: {
     screen: appointmentStack
