@@ -43,14 +43,8 @@ export default class DrawerContainer extends React.Component {
                   <Text style={styles.menuText} type='h5White'>New Appointment</Text>
             </TouchableOpacity>
             <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'HomeComponent' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('DateTimeScreen')} 
-            >
-                  <Text style={styles.menuText} type='h5White'>Appointments</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'appointmentListTab' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('appointmentListTab')} 
+              style={[styles.menu, this.props.activeItemKey === 'appointmentListStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
+              onPress={() => navigation.navigate('appointmentListStack')} 
             >
                   <Text style={styles.menuText} type='h5White'>Appointment List</Text>
             </TouchableOpacity>

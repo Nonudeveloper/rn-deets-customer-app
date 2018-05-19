@@ -151,10 +151,9 @@ dependencies {
     compile ("com.android.support:appcompat-v7:24.2.1") {
         exclude module: 'support-v4'
     }
-     compile ("com.facebook.react:react-native:0.53.3") {
+    compile ("com.facebook.react:react-native:0.53.3") {
         force=true
     }  // From node_modules
-    // compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-picker')
     compile project(':react-native-braintree-xplat')
     compile project(':react-native-linear-gradient')
