@@ -3,6 +3,7 @@ import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight } from 'rea
 import Header from '../../header/Header';
 import ListItem from '../ListItem';
 import { getAppointments } from '../detail/api';
+import AppoinmentTabs from './Tabs';
 
 class PastAppointmentsList extends Component {
 
@@ -11,15 +12,16 @@ class PastAppointmentsList extends Component {
 
         this.state = {
             appointments: [],
-            selectedAppointments: this.props.selectedAppointments
+            selectedAppointments: this.props.selectedAppointments,
+            selectedTab: 'past',
+            editMode: false
         };
     }
 
     componentWillMount() {
         getAppointments()
         .then(res => {
-            console.log(res[0].data);
-            this.setState({ appointments: res[0].data[0], loading: false })
+            this.setState({ appointments: res[0].data[0], loading: false });
         })
         .catch(err => alert("An error occurred"));
     }
@@ -40,6 +42,18 @@ class PastAppointmentsList extends Component {
         );
     }
 
+    changeActiveTab = tabName => {
+        if (tabName === 'past') {
+            this.setState({
+                selectedTab: 'past'
+            });
+        } else {
+            this.setState({
+                selectedTab: 'upcoming'
+            });
+        }
+    }
+
     renderItem(item) {
         return (
             <ListItem 
@@ -50,6 +64,7 @@ class PastAppointmentsList extends Component {
                 selectAppointment={id => this.props.actions.selectAppointment(id)}
                 selectedAppointments={this.props.selectedAppointments}
                 navigation={this.props.navigation}
+                editMode={this.state.editMode}
             />
         );
     }
@@ -60,35 +75,17 @@ class PastAppointmentsList extends Component {
                 <Header 
                     navigation={this.props.navigation} 
                     headerText={'Appointments'}
-                    rightText={'Edit'}
+                    rightText={this.state.editMode ? 'Cancel' : 'Edit'}
                     showRightIcon
+                    onPress={() => this.setState({ editMode: !this.state.editMode })}
+                    buttonType={'burger'}
                 />
-                <View style={{ flexDirection: 'row', height: 50 }}>
-                    <TouchableHighlight 
-                        style={{ 
-                            flex: 1, 
-                            backgroundColor: '#009933',
-                            alignItems: 'center', 
-                            justifyContent: 'center' 
-                        }}
-                        onPress={() => console.log('press4ed')}
-                    >
-                        <Text style={{ color: '#fff', fontSize: 15 }}>ccccccccccc</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight 
-                        style={{ 
-                            flex: 1, 
-                            alignItems: 'center', 
-                            justifyContent: 'center', 
-                            backgroundColor: '#fff' 
-                        }}
-                        onPress={() => this.props.navigation.navigate('UpcomingAppointmentsList')}
-                    >
-                        <Text style={{ fontSize: 15 }}>ccccccccccc</Text>
-                    </TouchableHighlight>
-                </View>
+                <AppoinmentTabs 
+                    selectedTab={this.state.selectedTab} 
+                    onTabClick={this.changeActiveTab} 
+                />
                 <FlatList
-                    data={this.state.appointments.past_appointments}
+                    data={this.state.selectedTab === 'past' ? this.state.appointments.past_appointments : this.state.appointments.upcoming_appointments}
                     ItemSeparatorComponent={this.flatListItemSeparator}
                     renderItem={
                         ({ item }) => this.renderItem(item)

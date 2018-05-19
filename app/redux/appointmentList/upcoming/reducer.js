@@ -23,6 +23,7 @@ const initialState = {
       selectedAppointments: [],
 };
 
+
 const pushOrFilterID = (selectedAppointments, id) => {
     const forDeletion = [id];
     if (selectedAppointments.includes(id)) {

@@ -96,49 +96,6 @@ const appointmentStack = StackNavigator({
   },
 });
 
-//Tab Navigator 
-// const appointmentListTab = createBottomTabNavigator({
-//   Home: ServiceScreen,
-//   Settings: ServiceScreen,
-// });
-
-// const pastStack = StackNavigator({
-//   PastAppointmentsList: { screen: PastAppointmentsList },
-//   PastAppointmentsDetail: { screen: AppointmentDetail }
-// }, {
-//   headerMode: 'none',
-//   transitionConfig: TransitionConfiguration,
-// });
-
-// const appointmentListTab = TabNavigator({
-//   Past: pastStack,
-//   Upcoming: { screen: UpcomingAppointmentsList },
-// },
-// {
-//   headerMode: 'screen',
-//   tabBarOptions: {
-//     activeTintColor: '#fff',
-//     inactiveTintColor: 'grey',
-//     indicatorStyle: {
-//       backgroundColor: '#009933',
-//       height: '100%'
-//     },
-//     style: {
-//       backgroundColor: '#fff',
-//       height: 50,
-//     },
-//     labelStyle: {
-//       fontSize: 15,
-      
-//     },
-//   },
-//   // tabBarComponent: TabBarBottom,
-//   tabBarPosition: 'bottom',
-//   animationEnabled: true,
-//   swipeEnabled: false,
-// }
-// );
-
 const appointmentListStack = StackNavigator({
   PastAppointmentsList: { screen: PastAppointmentsList },
   UpcomingAppointmentsList: { screen: UpcomingAppointmentsList },
