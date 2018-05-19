@@ -14,7 +14,6 @@ import CreditCardForm from '../containers/appointment/review/paymentInformation/
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
 import PastAppointmentsList from '../containers/appointmentList/past/index';
-import UpcomingAppointmentsList from '../containers/appointmentList/upcoming/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
 import AppointmentDetail from '../containers/appointmentList/detail/index';
@@ -98,7 +97,6 @@ const appointmentStack = StackNavigator({
 
 const appointmentListStack = StackNavigator({
   PastAppointmentsList: { screen: PastAppointmentsList },
-  UpcomingAppointmentsList: { screen: UpcomingAppointmentsList },
   PastAppointmentsDetail: { screen: AppointmentDetail }
 }, {
   headerMode: 'none',
