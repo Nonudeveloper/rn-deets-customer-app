@@ -16,6 +16,8 @@ import ChangePasswordScreen from '../containers/profile/changePassword/index';
 import PastAppointmentsList from '../containers/appointmentList/past/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
+import DrawerServicesList from '../containers/drawer/services/index';
+import PromotionCodeScreen from '../containers/drawer/promotion/index';
 import AppointmentDetail from '../containers/appointmentList/detail/index';
 
 
@@ -85,7 +87,8 @@ const appointmentStack = StackNavigator({
   creditCardForm: { screen: CreditCardForm },
   detailsScreen: { screen: DetailScreen },
   changePasswordScreen: { screen: ChangePasswordScreen },
-  addVehicleScreen: { screen: AddVehicleScreen }
+  addVehicleScreen: { screen: AddVehicleScreen },
+  drawerServicesList: { screen: DrawerServicesList }
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
@@ -110,6 +113,12 @@ const DrawerStack = DrawerNavigator({
   appointmentStack: {
     screen: appointmentStack
   },
+  drawerServicesListStack: {
+    screen: DrawerServicesList
+  },
+  promotionCodeStack: {
+    screen: PromotionCodeScreen
+  }
 }, {
   headerMode: 'none',
   gesturesEnabled: false,

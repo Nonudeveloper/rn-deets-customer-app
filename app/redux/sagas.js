@@ -8,6 +8,7 @@ import serviceSaga from './service/saga';
 import appointmentSaga from './appointment/saga';
 import profileSaga from './profile/saga';
 import upcomingAppointmentSaga from './appointmentList/upcoming/saga';
+import promotionCodeSaga from './promotionCode/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     serviceSaga(),
     appointmentSaga(),
     profileSaga(),
-    upcomingAppointmentSaga()
+    upcomingAppointmentSaga(),
+    promotionCodeSaga()
   ]);
 }

@@ -35,11 +35,6 @@ class ServiceDetailScreen extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.navigation.state.params.schedule){
-      console.log('here')
-    } else {
-      console.log('there')
-    }
     this.setState({
       item: this.props.navigation.state.params.item
     }, () => {
