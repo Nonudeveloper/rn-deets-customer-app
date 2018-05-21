@@ -94,7 +94,7 @@ export default class CardDetail extends React.Component {
                                 />  
                                 <Text style={styles.otherText}>OTHER</Text>  
                             </View>
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, top: 50 }}>
                                 <TouchableHighlight onPress={() => this.withPaypal()} >
                                     <View style={styles.paymentItem} >
                                         <View >

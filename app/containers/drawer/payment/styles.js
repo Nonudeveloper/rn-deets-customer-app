@@ -95,7 +95,8 @@ export default StyleSheet.create({
   },
   otherText: {
     fontSize: 20, 
-    paddingLeft: 20
+    paddingLeft: 20,
+    top: 20
   },
   flatlistBodyOuterContainer: {
     justifyContent: 'space-around',

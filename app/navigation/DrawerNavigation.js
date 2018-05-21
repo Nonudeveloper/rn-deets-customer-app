@@ -19,6 +19,7 @@ import AddVehicleScreen from '../containers/profile/addVehicle/index';
 import DrawerServicesList from '../containers/drawer/services/index';
 import PromotionCodeScreen from '../containers/drawer/promotion/index';
 import AppointmentDetail from '../containers/appointmentList/detail/index';
+import RecentLocations from '../containers/home/recentLocations/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -88,7 +89,8 @@ const appointmentStack = StackNavigator({
   detailsScreen: { screen: DetailScreen },
   changePasswordScreen: { screen: ChangePasswordScreen },
   addVehicleScreen: { screen: AddVehicleScreen },
-  drawerServicesList: { screen: DrawerServicesList }
+  drawerServicesList: { screen: DrawerServicesList },
+  RecentLocations: { screen: RecentLocations }
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,

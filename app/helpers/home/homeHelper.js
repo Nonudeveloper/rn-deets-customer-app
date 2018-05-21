@@ -1,4 +1,5 @@
 import SuperFetch from '../superFetch';
+import { getItem } from '../asyncStorage';
 
 class HomeHelper {
 
@@ -30,7 +31,23 @@ class HomeHelper {
       .catch(error => ({ error }));
   }
 
+  getRecentLocations = async () => {
+    const user = await getItem('user');
+    const data = {
+        access_token: JSON.parse(user).access_token,
+    };
+    return await SuperFetch.post('customer/get_customer_recent_locations', data);
+  } 
+
+  deleteRecentLocation = async (locationId) => {
+    const user = await getItem('user');
+    const data = {
+        access_token: JSON.parse(user).access_token,
+        id: 78676
+    };
+    return await SuperFetch.post('customer/delete_user_recent_location', data);
+  }
+
 }
 
 export default new HomeHelper();
-

@@ -9,6 +9,7 @@ import appointmentSaga from './appointment/saga';
 import profileSaga from './profile/saga';
 import upcomingAppointmentSaga from './appointmentList/upcoming/saga';
 import promotionCodeSaga from './promotionCode/saga';
+import recentLocationsSaga from './home/recentLocations/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     appointmentSaga(),
     profileSaga(),
     upcomingAppointmentSaga(),
-    promotionCodeSaga()
+    promotionCodeSaga(),
+    recentLocationsSaga()
   ]);
 }

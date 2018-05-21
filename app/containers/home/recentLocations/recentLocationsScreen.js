@@ -1,0 +1,104 @@
+import React from 'react';
+import { Text, View, FlatList, Alert, Image } from 'react-native';
+import Header from '../../header/Header';
+import Loader from '../../../deetscomponents/Loader';
+import Swipeout from 'react-native-swipeout';
+import styles from './styles';
+
+
+const mapImage = require('../../../assets/icons/map.png');
+
+export default class RecentLocationsScreen extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        this.props.actions.fetchRecentLocations();
+    }
+
+    flatListItemSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 1,
+              width: '100%',
+              backgroundColor: '#607D8B',
+            }}
+          />
+        );
+    }
+
+    deleteLocation(id) {
+        this.props.actions.deleteRecentLocation(id);
+    }
+    
+    renderAlert(error) {
+        Alert.alert(
+            'Error',
+            error,
+            [
+                { 
+                text: 'OK', 
+                onPress: () => {
+                //dispath an action to make showAlert false
+                    this.props.actions.hideAlert();
+                } 
+                },
+            ],
+            { cancelable: false }
+        );
+    }
+
+    renderItem(item) {
+        const rightSwipeBtns = [
+            {
+              text: 'Delete',
+              backgroundColor: '#ff3300',
+              underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+              onPress: () => { this.deleteLocation(item.id); }
+           }
+        ];
+        return (
+            <Swipeout 
+                right={rightSwipeBtns}
+                autoClose
+                backgroundColor='transparent'
+            >
+                <View style={styles.bodyContainer}>
+                    <View style={styles.mapImageContainer}>
+                        <Image source={mapImage} style={styles.imageStyle} />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textStyle}>{item.service_location_string}</Text>
+                    </View>
+                </View>
+            </Swipeout>
+        );
+    }
+  
+    render() {
+        return (
+        <View style={styles.container}>
+            <Header 
+                navigation={this.props.navigation} 
+                headerText={'RECENT LOCATIONS'}
+            />
+            <Loader loading={this.props.isFetching} />
+            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
+            <View style={styles.mainContainer}>
+                <FlatList
+                    data={this.props.recentLocations}
+                    ItemSeparatorComponent={this.flatListItemSeparator}
+                    renderItem={
+                        ({ item }) => this.renderItem(item)
+                    }
+                    keyExtractor={(item, index) => index.toString()}
+                    extraData={this.state}
+                />
+            </View>
+        </View>
+        );
+    }
+}
