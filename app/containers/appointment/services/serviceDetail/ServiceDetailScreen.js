@@ -35,6 +35,11 @@ class ServiceDetailScreen extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.navigation.state.params.schedule){
+      console.log('here')
+    } else {
+      console.log('there')
+    }
     this.setState({
       item: this.props.navigation.state.params.item
     }, () => {
@@ -105,7 +110,12 @@ class ServiceDetailScreen extends React.Component {
       totalEstimationTime: this.state.totalEstimationTime
     });
     //dispatch createNewServiceAppointment action 
-    this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOnString);
+    if (this.props.selectedAppointment === '') {
+      this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOnString);
+    } else {
+      this.props.actions.rescheduleServiceAppointment(this.props.selectedAppointment.appointment.id, addOnString);
+    }
+    
     //navigate
     this.props.navigation.navigate('DateTimeScreen');
   }
@@ -145,7 +155,13 @@ class ServiceDetailScreen extends React.Component {
               loading={technicianFetching} 
         /> */}
         {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
-            <ServiceDetailHeader item={this.state.item} selectedVehicle={this.props.selectedVehicle} selectedArrayRef={selectedArrayRef} getSelectedItems={this.getSelectedItems} />
+            <ServiceDetailHeader 
+              item={this.state.item} 
+              selectedVehicle={this.props.selectedVehicle} 
+              selectedArrayRef={selectedArrayRef} 
+              getSelectedItems={this.getSelectedItems} 
+              reSchedule={this.props.selectedAppointment}
+            />
             <View style={styles.buttonContainer} >
                 <View style={styles.totalPaymentContainer}>
                   <Text style={[styles.paymentText, { flex: 3 }]}>Total Payment</Text>

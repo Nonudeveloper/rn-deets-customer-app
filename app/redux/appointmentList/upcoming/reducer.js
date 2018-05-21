@@ -4,6 +4,8 @@ import {
     FETCH_UPCOMING_AND_PAST_APPOINTMENTS_FALIURE, 
     DELETE_APPOINTMENT, DELETE_APPOINTMENT_SUCCESS, 
     DELETE_APPOINTMENT_FALIURE,
+    SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+    SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE,
     MAKE_CALL_TO_TECHNICIAN,
     MAKE_CALL_TO_TECHNICIAN_SUCCESS,
     MAKE_CALL_TO_TECHNICIAN_FALIURE,
@@ -19,6 +21,7 @@ const initialState = {
       upcomingAppointments: [],
       pastAppointments: [],
       deleteSuccessfull: false,
+      selectedAppointment: '',
       editMode: false,
       selectedAppointments: [],
 };
@@ -61,6 +64,14 @@ export default function homeReducer(state = initialState, action) {
         case DELETE_APPOINTMENT_FALIURE:
             return Object.assign({}, state, {
                 isFetching: false
+            });
+        case SELECTED_APPOINTMENT_FOR_RESCHEDULE:
+            return Object.assign({}, state, {
+                selectedAppointment: action.appointment
+            });
+        case SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE:
+            return Object.assign({}, state, {
+                selectedAppointment: ''
             });
         case MAKE_CALL_TO_TECHNICIAN:
             return Object.assign({}, state, {

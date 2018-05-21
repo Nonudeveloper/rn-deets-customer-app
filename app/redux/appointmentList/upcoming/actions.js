@@ -5,6 +5,8 @@ import {
     DELETE_APPOINTMENT,
     DELETE_APPOINTMENT_SUCCESS,
     DELETE_APPOINTMENT_FALIURE,
+    SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+    SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE,
     MAKE_CALL_TO_TECHNICIAN,
     MAKE_CALL_TO_TECHNICIAN_SUCCESS,
     MAKE_CALL_TO_TECHNICIAN_FALIURE,
@@ -60,6 +62,18 @@ export function deleteAppointmentFaliure(err) {
     };
 }
 
+export function selectedAppointmentForReschedule(appointment) {
+    return {
+        type: SELECTED_APPOINTMENT_FOR_RESCHEDULE,
+        appointment
+    };
+}
+
+export function setSelectedAppointmentToInitialState() {
+    return {
+        type: SET_SELECTED_APPOINTMENT_TO_INITIAL_STATE,
+    };
+}
 export function makeCallToTechnician(payload) {
     return {
         type: MAKE_CALL_TO_TECHNICIAN,

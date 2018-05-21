@@ -12,7 +12,7 @@ class PastAppointmentsList extends Component {
 
         this.state = {
             appointments: [],
-            selectedAppointments: this.props.selectedAppointments,
+            selectedAppointments: '',
             selectedTab: 'past',
             editMode: false
         };
@@ -45,13 +45,22 @@ class PastAppointmentsList extends Component {
     changeActiveTab = tabName => {
         if (tabName === 'past') {
             this.setState({
-                selectedTab: 'past'
+                selectedTab: 'past',
+                
             });
         } else {
             this.setState({
                 selectedTab: 'upcoming'
             });
         }
+    }
+    selectAppointment(id) {
+        this.props.actions.selectAppointment(id);
+        setTimeout(() => {
+            this.setState({
+                selectedAppointments: this.props.selectedAppointments,
+            });
+        }, 0.1);
     }
 
     renderItem(item) {
@@ -61,10 +70,11 @@ class PastAppointmentsList extends Component {
                 onDelete={() => this.props.actions.deleteAppointment(item)} 
                 makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
                 messageToTechnician={() => this.props.actions.messageToTechnician(item)}
-                selectAppointment={id => this.props.actions.selectAppointment(id)}
-                selectedAppointments={this.props.selectedAppointments}
+                selectAppointment={this.selectAppointment.bind(this)}
+                selectedAppointments={this.state.selectedAppointments}
                 navigation={this.props.navigation}
                 editMode={this.state.editMode}
+                actions={this.props.actions}
             />
         );
     }
@@ -90,6 +100,7 @@ class PastAppointmentsList extends Component {
                     renderItem={
                         ({ item }) => this.renderItem(item)
                     }
+                    keyExtractor={(item, index) => index.toString()}
                     extraData={this.state}
                 />
             </View>

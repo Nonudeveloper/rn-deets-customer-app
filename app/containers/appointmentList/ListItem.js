@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swipeout from 'react-native-swipeout';
-import { Text, TouchableHighlight, View, Alert, Image } from 'react-native';
+import { Text, TouchableOpacity, View, Alert, Image } from 'react-native';
 import { renderFormatedDate, renderFormatedTime } from '../../helpers/utility';
 import styles from './styles';
 
@@ -10,6 +10,7 @@ const messageIcon = require('../../assets/icons/messageIcon.png');
 const phoneIcon = require('../../assets/icons/phoneIcon.png');
 const rateStarActive = require('../../assets/icons/rate_star_active.png');
 const uncheckButton = require('../../assets/icons/6_uncheck_btn.png');
+const checkButton = require('../../assets/icons/6_check_btn.png');
 
 class ListItem extends Component {
 
@@ -36,6 +37,11 @@ class ListItem extends Component {
     callToTechnician(item) {
         this.props.makeCallToTechnician(item.user);
     }
+
+    scheduleItem(item) {
+        this.props.actions.selectedAppointmentForReschedule(item);
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
+    }
     
     messageToTechnician(item) {
         this.props.messageToTechnician(item.user);
@@ -59,6 +65,7 @@ class ListItem extends Component {
                 text: 'Schedule',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                onPress: () => { this.scheduleItem(this.props.item); }
             }
         ];
 
@@ -70,29 +77,30 @@ class ListItem extends Component {
                 autoClose
                 backgroundColor='transparent'
             >
-                <TouchableHighlight
+                <TouchableOpacity
                     onPress={this.appointmentDetail.bind(this, item)} 
                     key={item.key}
+                    activeOpacity={1}
                 >
                     <View style={styles.itemContainer}>
                         <View style={styles.itemDetailContainer}>
 
                             {
                                 this.props.editMode ? (
-                                    <TouchableHighlight 
+                                    <TouchableOpacity 
                                         onPress={() => this.selectAppointment(item.appointment.id)} 
                                         style={styles.radioContainer}
                                         activeOpacity={1}
                                     >
                                     {
                                         this.props.selectedAppointments && this.props.selectedAppointments.includes(item.appointment.id) ? (
-                                            <Text>selected</Text>
+                                            <Image style={styles.radioImage} source={checkButton} />
                                         ) : (
                                             <Image style={styles.radioImage} source={uncheckButton} />
                                         )
                                     }
                                         
-                                    </TouchableHighlight>
+                                    </TouchableOpacity>
                                 ) : (
                                     null
                                 )
@@ -100,7 +108,14 @@ class ListItem extends Component {
                             
                             <View style={styles.avatarContainer}>
                                 <View style={styles.avatar}>
-                                    <Image style={styles.image} source={avatar} />
+                                    <Image 
+                                        style={styles.image} 
+                                        source={
+                                            item.user[0].image !== '' ? 
+                                            { uri: item.user[0].image } :
+                                             avatar
+                                        } 
+                                    />
                                 </View>
                             </View>
                             <View style={styles.appointmentDetails}>
@@ -133,12 +148,12 @@ class ListItem extends Component {
                                 </View>
                             </View>
                             <View style={styles.options}>
-                                <TouchableHighlight onPress={() => this.callToTechnician(item)}>
+                                <TouchableOpacity onPress={() => this.callToTechnician(item)}>
                                     <Image source={phoneIcon} style={styles.messageIcon} />
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={() => this.messageToTechnician(item)}>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.messageToTechnician(item)}>
                                     <Image source={messageIcon} style={styles.messageIcon} />
-                                </TouchableHighlight>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.locationContainer}>
@@ -152,7 +167,7 @@ class ListItem extends Component {
                             </View>
                         </View>
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
             </Swipeout>
         );
     }

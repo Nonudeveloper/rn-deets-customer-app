@@ -18,7 +18,8 @@ const mapStateToProps = (state) => {
         token: state.Auth.token,
         services: state.Service.services,
         isFetching: state.Service.isFetching,
-        selectedVehicle: state.AuthVehicle.selectedVehicle
+        selectedVehicle: state.AuthVehicle.selectedVehicle,
+        selectedAppointment: state.appointmentLists.selectedAppointment
     };
 };
 

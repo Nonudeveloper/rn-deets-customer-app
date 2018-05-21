@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
         selectedVehicle: state.AuthVehicle.selectedVehicle,
         errorMessage: state.Service.errorMessage,
         technicianFetching: state.Service.technicianFetching,
+        selectedAppointment: state.appointmentLists.selectedAppointment
     };
 };
 

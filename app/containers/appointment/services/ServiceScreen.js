@@ -22,8 +22,7 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    const { isFetching } = this.props;
+    if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
       <View style={styles.container}>
         <Header 
@@ -31,8 +30,13 @@ export default class ServiceScreen extends React.Component {
             headerText={'Services'}
             indicatorSource={indicatorOne}
         />
-        {/* <Loader loading={isFetching} /> */}
-        <ServicesList services={this.props.services} selectedVehicle={this.props.selectedVehicle} navigation={this.props.navigation} />
+        <ServicesList 
+          services={this.props.services} 
+          selectedVehicle={this.props.selectedVehicle} 
+          navigation={this.props.navigation}
+          reSchedule={this.props.selectedAppointment} 
+          selectedAppointment={this.props.selectedAppointment}
+        />
       </View>
     );
   }
