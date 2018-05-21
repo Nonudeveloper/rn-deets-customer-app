@@ -9,14 +9,15 @@ import * as appointmentListActions from '../../../redux/appointmentList/upcoming
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(appointmentListActions, dispatch),
+        actions: bindActionCreators(appointmentListActions, dispatch)
     };
 };
 
 const mapStateToProps = (state) => {
     return {
         isFetching: state.Service.isFetching,
-        pastAppointments: state.appointmentLists.pastAppointments
+        pastAppointments: state.appointmentLists.pastAppointments,
+        selectedAppointments: state.appointmentLists.selectedAppointments
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PastAppointmentsList);

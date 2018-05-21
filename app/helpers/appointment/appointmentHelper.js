@@ -103,9 +103,39 @@ class AppointmetHelper {
         return await SuperFetch.post('customer/get_user_upcoming_and_past_appointments', data);
     }
 
-    deleteAppointment = async payload => {
-        console.log(payload);
+    deleteAppointment = async appointmentData => {
+        const user = await getItem('user');
+        const data = {
+            access_token: JSON.parse(user).access_token,
+            service_appointment_id: appointmentData.payload.appointment.id,
+            technician_id: appointmentData.payload.appointment.technician_id,
+            flag: 3,
+            service_start_time: appointmentData.payload.appointment.service_start_time,
+            ReasonId: 3
+        };
+        return await SuperFetch.post('customer/delete_or_cancelled_user_service_appointment_by_customer', data);
     }
+
+    callToTechnician = async callData => {
+        const user = await getItem('user');
+        const data = {
+            access_token: JSON.parse(user).access_token,
+            phone: '+919882503084',
+            registration_type: 2
+        };
+        return await SuperFetch.post('customer/make_call_to_technician_or_user', data);
+    }
+
+    textMessageToTechnician = async messageData => {
+        const user = await getItem('user');
+        const data = {
+            access_token: JSON.parse(user).access_token,
+            phone: '+919882503084',
+            registration_type: 2,
+            message_body: 2
+        };
+        return await SuperFetch.post('send_text_message_to_technician_or_user', data);
+    } 
   
 }
 
