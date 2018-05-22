@@ -16,7 +16,6 @@ export default class ServiceItem extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         const { item } = this.props;
         return (
             <TouchableOpacity onPress={() => this.singleService(item)}>

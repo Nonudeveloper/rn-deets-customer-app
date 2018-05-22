@@ -11,7 +11,7 @@ function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
-      if (data.status === 200) {
+      if (data.user) {
         resolve(data);
       } else if (data.status === 401) {
         reject({ status: data.error });

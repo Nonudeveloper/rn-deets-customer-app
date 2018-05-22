@@ -37,18 +37,18 @@ class CreditCardForm extends React.Component {
         if (this.state.nowCanSubmit) {
             BTClient.getCardNonce(card).then((nonce) => {
                 if (this.props.navigation.state.params !== undefined) {
-
                     const options = {
-                        customer_id: this.props.navigation.state.params.customer_id,
+                        customer_id: this.props.navigation.state.params.selectedCard.customer_id,
                         // customer_id: '631784283',
-                        id: this.props.navigation.state.params.id,
+                        id: this.props.navigation.state.params.selectedCard.id,
                         is_default: 2,
                         email: this.state.user.email,
                         type: 'PayPal',
                         first_name: this.state.user.first_name,
                         last_name: this.state.user.last_name,
                         nonce,
-                        access_token: this.state.user.access_token
+                        access_token: this.state.user.access_token,
+                        process: this.props.navigation.state.params.process
                     };
                     this.props.actions.addNewCardDetails(options);
                 }

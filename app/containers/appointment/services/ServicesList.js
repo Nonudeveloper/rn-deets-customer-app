@@ -8,6 +8,18 @@ class ServicesList extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    if (this.props.reSchedule !== '') {
+      if (this.props.services.length !== 0) {
+        this.props.services.map((service) => {
+          if (service.service_id === this.props.selectedAppointment.appointment.service_id) {
+            this.props.navigation.navigate('serviceDetailScreen', { item: service, schedule: 'reschedule' });
+          }
+        });
+      }
+    }
+  }
+
   getItem(item) {
     Alert.alert(item);
   }

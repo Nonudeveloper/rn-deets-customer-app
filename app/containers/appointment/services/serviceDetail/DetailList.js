@@ -32,6 +32,10 @@ export default class ServiceDetailHeader extends React.Component {
     );
   }
 
+  checkAddOns() {
+    
+  }
+
   render() {
     return (
       
@@ -62,6 +66,7 @@ export default class ServiceDetailHeader extends React.Component {
                           getSelectedItems={this.props.getSelectedItems}
                           item={item}
                           selectedVehicle={this.props.selectedVehicle}
+                          reSchedule={this.props.reSchedule}
                       />)
                     }
                     </View>

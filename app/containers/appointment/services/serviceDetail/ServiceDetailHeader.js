@@ -99,10 +99,11 @@ export default class ServiceDetailHeader extends React.Component {
                     <DetailList 
                         servicesList={item.included_adds_on} 
                         addonsList={item.excluded_adds_on} 
-                        showServices={this.state.showServices} 
+                        showServices={this.props.reSchedule ? '' : this.state.showServices} 
                         selectedVehicle={this.props.selectedVehicle}
                         selectedArrayRef={this.props.selectedArrayRef}
                         getSelectedItems={this.props.getSelectedItems}
+                        reSchedule={this.props.reSchedule}
                     />
                 </View>
                 {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >

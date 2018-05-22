@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Swipeout from 'react-native-swipeout';
-import { Text, TouchableHighlight, View, Alert, Image } from 'react-native';
+import { Text, TouchableOpacity, View, Alert, Image } from 'react-native';
+import { renderFormatedDate, renderFormatedTime } from '../../helpers/utility';
 import styles from './styles';
 
 const avatar = require('../../assets/icons/temp_avatar.png');
 const locationIcon = require('../../assets/icons/direction_on.png');
 const messageIcon = require('../../assets/icons/messageIcon.png');
 const phoneIcon = require('../../assets/icons/phoneIcon.png');
+const rateStarActive = require('../../assets/icons/rate_star_active.png');
+const uncheckButton = require('../../assets/icons/6_uncheck_btn.png');
+const checkButton = require('../../assets/icons/6_check_btn.png');
 
 class ListItem extends Component {
 
@@ -14,60 +18,39 @@ class ListItem extends Component {
         Alert.alert(item);
     }
 
-    viewNote = item => {
-        console.log(item);
+    appointmentDetail = item => {
+        this.props.navigation.navigate('PastAppointmentsDetail', { item });
     }
 
-    renderFormatedDate(fullDate) {
-        const dateObj = new Date(fullDate);
-        const day = dateObj.getDay();
-        const date = dateObj.getDate();
-        const daysList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        // const dateStr = dateObj.toString().split(' ')[0];
-        // const arr = fullDate.split('-');
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const year = dateObj.getFullYear();
-
-        return `${daysList[day]} ${date} ${months[dateObj.getMonth()]}. ${year}`;
-    }
-
-    renderFormatedTime(date) {
-        const dateObj = new Date(date);
-        let hour = dateObj.getHours();
-        const minute = dateObj.getMinutes();
-        const second = dateObj.getSeconds();
-        let prepand = (hour >= 12) ? 'PM' : 'AM';
-        hour = (hour >= 12) ? hour - 12 : hour;
-        if (hour === 0 && prepand === ' PM ') { 
-            if (minute === 0 && second === 0) { 
-                hour = 12;
-                prepand = ' Noon';
-            } else { 
-                hour = 12;
-                prepand = ' PM';
-            } 
-        } 
-        if (hour === 0 && prepand === ' AM ') { 
-            if (minute === 0 && second === 0) { 
-                hour = 12;
-                prepand = ' Midnight';
-            } else { 
-                hour = 12;
-                prepand = ' AM';
-            } 
-        } 
-
-        if (hour < 10) {
-            hour = `0${hour}`;
+    renderRating(item = null) {
+        const rating = [];
+        for (let i = 0; i < 5; i++) {
+            rating.push(<Image key={i} style={styles.ratingStart} source={rateStarActive} />);
         }
-        return `${hour}:${minute} ${prepand}`;
+        return rating;
     }
 
     deleteItem(item) {
-        console.log(item);
+        this.props.onDelete(item);
+    }
+
+    callToTechnician(item) {
+        this.props.makeCallToTechnician(item.user);
+    }
+
+    scheduleItem(item) {
+        this.props.actions.selectedAppointmentForReschedule(item);
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
     
+    messageToTechnician(item) {
+        this.props.messageToTechnician(item.user);
+    }
+
+    selectAppointment(id) {
+        this.props.selectAppointment(id);
+    }
+
     render() {
         const rightSwipeBtns = [
             {
@@ -82,9 +65,11 @@ class ListItem extends Component {
                 text: 'Schedule',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                onPress: () => { this.scheduleItem(this.props.item); }
             }
         ];
 
+        const { item } = this.props;
         return (
             <Swipeout 
                 right={rightSwipeBtns}
@@ -92,42 +77,83 @@ class ListItem extends Component {
                 autoClose
                 backgroundColor='transparent'
             >
-                <TouchableHighlight
-                    onPress={this.viewNote.bind(this, this.props.item)} 
-                    key={this.props.item.key}
+                <TouchableOpacity
+                    onPress={this.appointmentDetail.bind(this, item)} 
+                    key={item.key}
+                    activeOpacity={1}
                 >
                     <View style={styles.itemContainer}>
                         <View style={styles.itemDetailContainer}>
+
+                            {
+                                this.props.editMode ? (
+                                    <TouchableOpacity 
+                                        onPress={() => this.selectAppointment(item.appointment.id)} 
+                                        style={styles.radioContainer}
+                                        activeOpacity={1}
+                                    >
+                                    {
+                                        this.props.selectedAppointments && this.props.selectedAppointments.includes(item.appointment.id) ? (
+                                            <Image style={styles.radioImage} source={checkButton} />
+                                        ) : (
+                                            <Image style={styles.radioImage} source={uncheckButton} />
+                                        )
+                                    }
+                                        
+                                    </TouchableOpacity>
+                                ) : (
+                                    null
+                                )
+                            }
+                            
                             <View style={styles.avatarContainer}>
                                 <View style={styles.avatar}>
-                                    <Image style={styles.image} source={avatar} />
+                                    <Image 
+                                        style={styles.image} 
+                                        source={
+                                            item.user[0].image !== '' ? 
+                                            { uri: item.user[0].image } :
+                                             avatar
+                                        } 
+                                    />
                                 </View>
                             </View>
                             <View style={styles.appointmentDetails}>
                                 <View style={{}}>
                                     <Text 
                                         style={styles.item} 
-                                        onPress={this.getItem.bind(this, this.props.item.key)} 
+                                        onPress={this.getItem.bind(this, item.key)} 
                                     > 
-                                        {this.props.item.appointment.service_name} 
+                                        {item.user[0].first_name} {item.user[0].last_name} 
                                     </Text>
+                                    <View style={styles.ratingContainer}>
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                        <Image style={styles.ratingStart} source={rateStarActive} />
+                                    </View>
                                     <Text style={styles.dateTime}>
-                                        {this.renderFormatedDate(this.props.item.appointment.service_end_time)}
+                                        {renderFormatedDate(item.appointment.service_end_time)}
                                     </Text>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <Text style={styles.dateTime}>
-                                            {this.renderFormatedTime(this.props.item.appointment.service_start_time)} 
+                                            {renderFormatedTime(item.appointment.service_start_time)} 
                                         </Text>
                                         <Text style={{ paddingHorizontal: 8, fontSize: 15, color: '#1a1a1a' }}>to</Text>
                                         <Text style={styles.dateTime}>
-                                            {this.renderFormatedTime(this.props.item.appointment.service_end_time)}
+                                            {renderFormatedTime(item.appointment.service_end_time)}
                                         </Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={styles.options}>
-                                <Image source={phoneIcon} style={styles.messageIcon} />
-                                <Image source={messageIcon} style={styles.messageIcon} />
+                                <TouchableOpacity onPress={() => this.callToTechnician(item)}>
+                                    <Image source={phoneIcon} style={styles.messageIcon} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.messageToTechnician(item)}>
+                                    <Image source={messageIcon} style={styles.messageIcon} />
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.locationContainer}>
@@ -136,12 +162,12 @@ class ListItem extends Component {
                             </View>
                             <View style={styles.locationTextCont}>
                                 <Text style={styles.text}>
-                                    {this.props.item.appointment.service_location_string.substr(0, 45)}...
+                                    {item.appointment.service_location_string.substr(0, 39)}...
                                 </Text>
                             </View>
                         </View>
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
             </Swipeout>
         );
     }

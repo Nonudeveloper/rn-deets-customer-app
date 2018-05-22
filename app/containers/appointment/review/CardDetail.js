@@ -57,7 +57,7 @@ export default class CardDetail extends React.Component {
       }
     
       withCard = () => {
-        this.props.navigation.navigate('creditCardForm', this.state.selectedCard);
+        this.props.navigation.navigate('creditCardForm', { selectedCard: this.state.selectedCard, process: 'review' });
         this.setModalVisible(!this.state.modalVisible);
       }
 

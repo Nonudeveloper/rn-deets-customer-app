@@ -19,11 +19,21 @@ export default class VehicleFlatList extends React.Component {
     if (this.props.userVehicles.length > 0) {
       const userVehicles = [];
       this.props.userVehicles.map((item, i) => {
-        if (i === 0) {
-          item.selected = true;
+        if (this.props.rescheduling) {
+          if (this.props.rescheduleAppointment !== '' && this.props.rescheduleAppointment.service_vehicle.length !== 0) {
+            if (item.vehicle_id === this.props.rescheduleAppointment.service_vehicle[0].user_vehicle_id) {
+              item.selected = true;
+            } else {
+              item.selected = false;
+            }
+          }
         } else {
-          item.selected = false;
-        }
+          if (i === 0) {
+            item.selected = true;
+          } else {
+            item.selected = false;
+          }
+      }
         userVehicles.push(item);
       });
       this.setState({
