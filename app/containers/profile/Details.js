@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Dimensions, Image, Text, Alert, LayoutAnimation, UIManager, Platform } from 'react-native';
+import { View, TouchableOpacity, Dimensions, Image, Text, Alert, LayoutAnimation, UIManager, Platform, ToastAndroid } from 'react-native';
 import Header from '../header/Header';
 import styles from './styles';
 import Button from '../../deetscomponents/Button';
@@ -224,6 +224,7 @@ export default class DetailsScreen extends React.Component {
             />
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
+            {this.props.logoutMessage !== '' && ToastAndroid.showWithGravityAndOffset(this.props.logoutMessage.error, ToastAndroid.LONG, ToastAndroid.TOP, 25, 50)}
             <View style={styles.toggleButtonContainer}>
                 <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60 }} >
                     <TouchableOpacity 

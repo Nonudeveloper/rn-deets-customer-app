@@ -27,7 +27,7 @@ export default class DetailsItem extends React.Component {
                         style={{ width: '66%', height: '50%', }}
                         source={logOutButton}
                     /> */}
-                    <TouchableHighlight underlayColor={'transparent'} style={{ flex: 1, position: 'absolute' }} onPress={this._logout} >
+                    <TouchableHighlight underlayColor={'transparent'} style={{ flex: 1, position: 'absolute' }} onPress={this._logout.bind(this)} >
                             <Image style={{ width: 100, height: 58 }} source={logOutButton} />
                         </TouchableHighlight>
                 </View>

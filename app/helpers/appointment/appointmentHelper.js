@@ -61,7 +61,7 @@ class AppointmetHelper {
             access_token: JSON.parse(user).access_token,
             cost: appointmentData.cost,
             notes: appointmentData.notes,
-            body_payment_card_id: appointmentData.body_payment_card_id,
+            payment_card_id: appointmentData.body_payment_card_id,
             service_end_time: appointmentData.service_end_time,
             service_location_zipcode: '11106',
             service_location_latitude: '33.8218570',
