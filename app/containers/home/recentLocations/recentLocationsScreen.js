@@ -24,7 +24,7 @@ export default class RecentLocationsScreen extends React.Component {
             style={{
               height: 1,
               width: '100%',
-              backgroundColor: '#607D8B',
+              backgroundColor: '#aaa',
             }}
           />
         );
@@ -34,10 +34,12 @@ export default class RecentLocationsScreen extends React.Component {
         this.props.actions.deleteRecentLocation(id);
     }
     
-    renderAlert(error) {
+    renderAlert(message) {
+        const msg = message.error ? message.error : message;
+        const heading = message.error ? 'Error' : 'Success';
         Alert.alert(
-            'Error',
-            error,
+            heading,
+            msg,
             [
                 { 
                 text: 'OK', 
@@ -86,7 +88,7 @@ export default class RecentLocationsScreen extends React.Component {
                 headerText={'RECENT LOCATIONS'}
             />
             <Loader loading={this.props.isFetching} />
-            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
+            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage)}
             <View style={styles.mainContainer}>
                 <FlatList
                     data={this.props.recentLocations}

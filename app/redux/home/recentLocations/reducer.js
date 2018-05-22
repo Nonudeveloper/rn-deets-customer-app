@@ -42,7 +42,7 @@ export default function recentLocationsReducer(state = initialState, action) {
       case DELETE_RECENT_LOCATION_SUCCESS:
         return Object.assign({}, state, {
           isFetching: false,
-        recentLocations: action.log,
+          errorMessage: action.log,
         });
       case DELETE_RECENT_LOCATION_FAILURE:
         return Object.assign({}, state, {

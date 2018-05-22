@@ -43,7 +43,7 @@ class HomeHelper {
     const user = await getItem('user');
     const data = {
         access_token: JSON.parse(user).access_token,
-        id: 78676
+        id: locationId
     };
     return await SuperFetch.post('customer/delete_user_recent_location', data);
   }
