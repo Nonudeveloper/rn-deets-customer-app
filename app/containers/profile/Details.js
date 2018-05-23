@@ -220,7 +220,7 @@ export default class DetailsScreen extends React.Component {
             <Header 
                 headerText={'PROFILE'} 
                 navigation={this.props.navigation} 
-                buttonType={'back'}
+                buttonType={'hamburger'}
             />
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}

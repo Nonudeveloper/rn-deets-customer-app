@@ -78,6 +78,7 @@ class PastAppointmentsList extends Component {
                 navigation={this.props.navigation}
                 editMode={this.state.editMode}
                 actions={this.props.actions}
+                activeTab={this.state.activeTab}
             />
         );
     }
@@ -85,7 +86,6 @@ class PastAppointmentsList extends Component {
     selectAll = () => {
         const IDs = [];
         //if selected tab is past
-        console.log(this.state.selectedTab);
         if (this.state.selectedTab === 'past') {
             for (const item of this.state.appointments.past_appointments) {
                 IDs.push(item.appointment.id);
@@ -102,6 +102,30 @@ class PastAppointmentsList extends Component {
                 selectedAppointments: this.props.selectedAppointments,
             });
         }, 0.1);
+    }
+
+    renderTrashModal = () => {
+        if (this.state.editMode) {
+            return (
+                <View 
+                    style={{ 
+                        height: 50, 
+                        backgroundColor: '#000', 
+                        opacity: 0.8, 
+                        flexDirection: 'row', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center' 
+                    }}
+                >
+                        <TouchableHighlight onPress={() => this.selectAll()}>
+                            <Text style={{ color: '#fff', marginLeft: 20 }}>Select all</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight onPress={() => this.selectAll()}>
+                            <Text style={{ color: '#fff', marginRight: 20 }}>Trash</Text>
+                        </TouchableHighlight>
+                </View>
+            );
+        }
     }
 
     render() {
@@ -121,7 +145,9 @@ class PastAppointmentsList extends Component {
                         onTabClick={this.changeActiveTab} 
                     />
                     <FlatList
-                        data={this.state.selectedTab === 'past' ? this.state.appointments.past_appointments : this.state.appointments.upcoming_appointments}
+                        data={this.state.selectedTab === 'past' ? 
+                        this.state.appointments.past_appointments : 
+                        this.state.appointments.upcoming_appointments}
                         ItemSeparatorComponent={this.flatListItemSeparator}
                         renderItem={
                             ({ item }) => this.renderItem(item)
@@ -131,23 +157,7 @@ class PastAppointmentsList extends Component {
                     />
                     
                 </View>
-                <View 
-                    style={{ 
-                        height: 50, 
-                        backgroundColor: '#000', 
-                        opacity: 0.8, 
-                        flexDirection: 'row', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center' 
-                    }}
-                >
-                        <TouchableHighlight onPress={() => this.selectAll()}>
-                            <Text style={{ color: '#fff', marginLeft: 20 }}>Select all</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.selectAll}>
-                            <Text style={{ color: '#fff', marginRight: 20 }}>Trash</Text>
-                        </TouchableHighlight>
-                </View>
+                {this.renderTrashModal()}
             </ScrollView>
         );
     }
