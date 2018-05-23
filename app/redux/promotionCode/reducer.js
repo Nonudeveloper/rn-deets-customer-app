@@ -12,7 +12,6 @@ import {
 const initialState = {
     isFetching: false,
     errorMessage: '',
-    successMessage: '',
     promotionCode: ''
 };
 
@@ -35,7 +34,6 @@ export default function promoCodeReducer(state = initialState, action) {
       case HIDE_ALERT:
         return Object.assign({}, state, {
           errorMessage: '',
-          successMessage: ''
         });
     case USE_PROMO_CODE_BY_USER:
         return Object.assign({}, state, {
@@ -44,7 +42,7 @@ export default function promoCodeReducer(state = initialState, action) {
     case USE_PROMO_CODE_BY_USER_SUCCESS:
         return Object.assign({}, state, {
           isFetching: false,
-          successMessage: action.log,
+          errorMessage: action.log,
         });
     case USE_PROMO_CODE_BY_USER_FAILURE:
         return Object.assign({}, state, {

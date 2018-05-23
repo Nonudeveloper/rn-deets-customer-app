@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight } from 'react-native';
-import Header from '../../header/Header';
-import ListItem from '../ListItem';
-import { getAppointments } from '../detail/api';
+import { View, FlatList, Alert, StyleSheet } from 'react-native';
+import Header from '../header/Header';
+import ListItem from './ListItem';
+import { getAppointments } from './detail/api';
 import AppoinmentTabs from './Tabs';
+import styles from './styles';
 
 class PastAppointmentsList extends Component {
 
@@ -107,17 +108,5 @@ class PastAppointmentsList extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
- 
-    mainContainer: {
-        // Setting up View inside content in Vertically center.
-        justifyContent: 'center',
-        flex: 1,
-        margin: 10
-    },
-   
-     
-});
 
 export default PastAppointmentsList;

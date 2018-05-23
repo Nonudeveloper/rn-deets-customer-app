@@ -13,11 +13,11 @@ import ReviewScreen from '../containers/appointment/review/index';
 import CreditCardForm from '../containers/appointment/review/paymentInformation/index';
 import DetailScreen from '../containers/profile/index';
 import ChangePasswordScreen from '../containers/profile/changePassword/index';
-import PastAppointmentsList from '../containers/appointmentList/past/index';
+import PastAppointmentsList from '../containers/appointmentList/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddVehicleScreen from '../containers/profile/addVehicle/index';
-import DrawerServicesList from '../containers/drawer/services/index';
-import PromotionCodeScreen from '../containers/drawer/promotion/index';
+import DrawerServicesList from '../containers/serviceList/index';
+import PromotionCodeScreen from '../containers/promotionCode/index';
 import AppointmentDetail from '../containers/appointmentList/detail/index';
 import RecentLocations from '../containers/home/recentLocations/index';
 
