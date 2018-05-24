@@ -42,6 +42,10 @@ class ListItem extends Component {
         this.props.actions.selectedAppointmentForReschedule(item);
         this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
+
+    updateAppointment() {
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });
+    }
     
     messageToTechnician(item) {
         this.props.messageToTechnician(item.user);
@@ -62,10 +66,14 @@ class ListItem extends Component {
         ];
         const leftSwipeBtns = [
             {
-                text: 'Schedule',
+                text: this.props.activeTab === 'past' ? 'schedule' : 'update',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-                onPress: () => { this.scheduleItem(this.props.item); }
+                onPress: () => { this.props.activeTab === 'past' ? 
+                    this.scheduleItem(this.props.item) :
+                    this.updateAppointment(this.props.item)
+                }
+                
             }
         ];
 

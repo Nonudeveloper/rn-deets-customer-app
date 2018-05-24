@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, FlatList, Alert, StyleSheet } from 'react-native';
-import Header from '../header/Header';
-import ListItem from './ListItem';
-import { getAppointments } from './detail/api';
+import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
+import Header from '../../header/Header';
+import ListItem from '../ListItem';
+import { getAppointments } from '../detail/api';
 import AppoinmentTabs from './Tabs';
 import styles from './styles';
 
@@ -17,7 +17,7 @@ class PastAppointmentsList extends Component {
             selectedTab: 'past',
             editMode: false
         };
-    }
+    } 
 
     componentWillMount() {
         getAppointments()
@@ -57,6 +57,9 @@ class PastAppointmentsList extends Component {
     }
     selectAppointment(id) {
         this.props.actions.selectAppointment(id);
+        // this.setState({
+        //     selectedAppointments: this.props.selectedAppointments,
+        // });
         setTimeout(() => {
             this.setState({
                 selectedAppointments: this.props.selectedAppointments,
@@ -76,37 +79,103 @@ class PastAppointmentsList extends Component {
                 navigation={this.props.navigation}
                 editMode={this.state.editMode}
                 actions={this.props.actions}
+                activeTab={this.state.activeTab}
             />
         );
     }
 
+    selectAll = () => {
+        const IDs = [];
+        //if selected tab is past
+        if (this.state.selectedTab === 'past') {
+            for (const item of this.state.appointments.past_appointments) {
+                IDs.push(item.appointment.id);
+            }
+        } else {
+            for (const item of this.state.appointments.upcoming_appointments) {
+                IDs.push(item.appointment.id);
+            }
+        }
+        //action to select all the appointments
+        this.props.actions.selectAllAppointments(IDs);
+        setTimeout(() => {
+            this.setState({
+                selectedAppointments: this.props.selectedAppointments,
+            });
+        }, 0.1);
+    }
+
+    renderTrashModal = () => {
+        if (this.state.editMode) {
+            return (
+                <View 
+                    style={{ 
+                        height: 50, 
+                        backgroundColor: '#000', 
+                        opacity: 0.8, 
+                        flexDirection: 'row', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center' 
+                    }}
+                >
+                        <TouchableHighlight onPress={() => this.selectAll()}>
+                            <Text style={{ color: '#fff', marginLeft: 20 }}>Select all</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight onPress={() => this.selectAll()}>
+                            <Text style={{ color: '#fff', marginRight: 20 }}>Trash</Text>
+                        </TouchableHighlight>
+                </View>
+            );
+        }
+    }
+
     render() {
         return (
-            <View style={styles.mainContainer}>
-                <Header 
-                    navigation={this.props.navigation} 
-                    headerText={'Appointments'}
-                    rightText={this.state.editMode ? 'Cancel' : 'Edit'}
-                    showRightIcon
-                    onPress={() => this.setState({ editMode: !this.state.editMode })}
-                    buttonType={'burger'}
-                />
-                <AppoinmentTabs 
-                    selectedTab={this.state.selectedTab} 
-                    onTabClick={this.changeActiveTab} 
-                />
-                <FlatList
-                    data={this.state.selectedTab === 'past' ? this.state.appointments.past_appointments : this.state.appointments.upcoming_appointments}
-                    ItemSeparatorComponent={this.flatListItemSeparator}
-                    renderItem={
-                        ({ item }) => this.renderItem(item)
-                    }
-                    keyExtractor={(item, index) => index.toString()}
-                    extraData={this.state}
-                />
-            </View>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
+                <View style={styles.mainContainer}>
+                    <Header 
+                        navigation={this.props.navigation} 
+                        headerText={'Appointments'}
+                        rightText={this.state.editMode ? 'Cancel' : 'Edit'}
+                        showRightIcon
+                        onPress={() => this.setState({ editMode: !this.state.editMode })}
+                        buttonType={'burger'}
+                    />
+                    <AppoinmentTabs 
+                        selectedTab={this.state.selectedTab} 
+                        onTabClick={this.changeActiveTab} 
+                    />
+                    <FlatList
+                        data={this.state.selectedTab === 'past' ? 
+                        this.state.appointments.past_appointments : 
+                        this.state.appointments.upcoming_appointments}
+                        ItemSeparatorComponent={this.flatListItemSeparator}
+                        renderItem={
+                            ({ item }) => this.renderItem(item)
+                        }
+                        keyExtractor={(item, index) => index.toString()}
+                        extraData={this.state}
+                    />
+                    
+                </View>
+                {this.renderTrashModal()}
+            </ScrollView>
         );
     }
 }
 
+<<<<<<< HEAD:app/containers/appointmentList/PastAppointmentsList.js
+=======
+const styles = StyleSheet.create({
+ 
+    mainContainer: {
+        // Setting up View inside content in Vertically center.
+        justifyContent: 'center',
+        margin: 10,
+    },
+   
+     
+});
+
+>>>>>>> develop:app/containers/appointmentList/past/PastAppointmentsList.js
 export default PastAppointmentsList;
