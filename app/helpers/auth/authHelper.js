@@ -57,12 +57,10 @@ class AuthHelper {
 
   async logout() {
         const user = await getItem('user');
-        const access_token =  JSON.parse(user).access_token;
+        const access_token = JSON.parse(user).access_token;
         const registration_type = 2;
     return await SuperFetch.post('/customer/get_user_logout_from_app', { access_token, registration_type })
-      .then(response => response.json())
-      .then(res => res)
-      .catch(error => ({ error }));
+      .then(response => { return response; });
   }
 }
 export default new AuthHelper();

@@ -83,7 +83,7 @@ function logOutCall() {
   return new Promise((resolve, reject) => {
     AuthHelper.logout()
     .then((data) => {
-      if (!data.error) {
+      if (!data.status === 401) {
         resolve(data);
       } else {
          const error = JSON.parse(data._bodyText).error;

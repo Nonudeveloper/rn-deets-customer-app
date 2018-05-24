@@ -47,7 +47,7 @@ function scheduleNewAppointmentCall(payload) {
           if (res.log) {
             resolve(res);
          } else {
-           reject({ log: 'Unable to process' });
+           reject({ error: 'Unable to process' });
          }
         })
         .catch(err => reject(err));

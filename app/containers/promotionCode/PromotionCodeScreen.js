@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, View, Keyboard, Image, Alert } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
-import Header from '../../header/Header';
-import Button from '../../../deetscomponents/Button';
-import CommonTextInput from '../../../deetscomponents/form/Input';
-import Loader from '../../../deetscomponents/Loader';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Field, reduxForm } from 'redux-form';
+import Header from '../header/Header';
+import Button from '../../deetscomponents/Button';
+import CommonTextInput from '../../deetscomponents/form/Input';
+import Loader from '../../deetscomponents/Loader';
 import styles from './styles';
 
 
-const promoIcon = require('../../../assets/icons/promo_icon.png');
+const promoIcon = require('../../assets/icons/promo_icon.png');
 
 const facebookIcon = (<Icon name="facebook" size={18} color="black" />);
 const twitterIcon = (<Icon name="twitter" size={18} color="black" />);
@@ -42,27 +42,12 @@ class PromotionCodeScreen extends React.Component {
         }
     }
 
-    renderAlert(error) {
-        console.log('here')
+    renderAlert(message) {
+        const msg = message.error ? message.error : message;
+        const heading = message.error ? 'Error' : 'Success';
         Alert.alert(
-            'Error',
-            error,
-            [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                    this.props.actions.hideAlert();
-                } 
-                },
-            ],
-            { cancelable: false }
-        );
-    }
-
-    renderSuccessAlert(success) {
-        Alert.alert(
-            success,
+            heading,
+            msg,
             [
                 { 
                 text: 'OK', 
@@ -84,8 +69,7 @@ class PromotionCodeScreen extends React.Component {
                 headerText={'PROMOTION CODE'}
             />
             <Loader loading={this.props.isFetching} />
-            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
-            {this.props.successMessage !== '' && this.renderSuccessAlert(this.props.errorMessage)}
+            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage)}
             <View style={{ flex: 1 }}>
                 <View style={styles.inputView}>
                     <View style={styles.inputViewInnerContainer}>
@@ -99,9 +83,6 @@ class PromotionCodeScreen extends React.Component {
                             underlineColorAndroid="transparent"
                             type="text"
                             borderBotmWidth={{ width: 500 }}
-                            validate={[
-                                (val) => val ? undefined : 'Password field is required',
-                            ]}
                         />
                     </View>
                 </View>

@@ -4,6 +4,7 @@ import Header from '../../header/Header';
 import ListItem from '../ListItem';
 import { getAppointments } from '../detail/api';
 import AppoinmentTabs from './Tabs';
+import styles from './styles';
 
 class PastAppointmentsList extends Component {
 
@@ -163,6 +164,8 @@ class PastAppointmentsList extends Component {
     }
 }
 
+<<<<<<< HEAD:app/containers/appointmentList/PastAppointmentsList.js
+=======
 const styles = StyleSheet.create({
  
     mainContainer: {
@@ -174,4 +177,5 @@ const styles = StyleSheet.create({
      
 });
 
+>>>>>>> develop:app/containers/appointmentList/past/PastAppointmentsList.js
 export default PastAppointmentsList;

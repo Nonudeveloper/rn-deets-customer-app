@@ -1,50 +1,50 @@
 import { 
-    FETCH_PROMO_CODE, 
-    FETCH_PROMO_CODE_SUCCESS, 
-    FETCH_PROMO_CODE_FAILURE,
+    FETCH_RECENT_LOCATIONS,
+    FETCH_RECENT_LOCATIONS_SUCCESS,
+    FETCH_RECENT_LOCATIONS_FAILURE,
     HIDE_ALERT,
-    USE_PROMO_CODE_BY_USER,
-    USE_PROMO_CODE_BY_USER_SUCCESS,
-    USE_PROMO_CODE_BY_USER_FAILURE
+    DELETE_RECENT_LOCATION,
+    DELETE_RECENT_LOCATION_SUCCESS,
+    DELETE_RECENT_LOCATION_FAILURE
 } from './constants';
 
 
 const initialState = {
     isFetching: false,
     errorMessage: '',
-    promotionCode: ''
+    recentLocations: ''
 };
 
-export default function promoCodeReducer(state = initialState, action) {
+export default function recentLocationsReducer(state = initialState, action) {
     switch (action.type) {
-      case FETCH_PROMO_CODE:
+      case FETCH_RECENT_LOCATIONS:
         return Object.assign({}, state, {
-        //   isFetching: true,
+          isFetching: true,
         });
-      case FETCH_PROMO_CODE_SUCCESS:
+      case FETCH_RECENT_LOCATIONS_SUCCESS:
         return Object.assign({}, state, {
-        //   isFetching: false,
-          promotionCode: action.promoCode,
+          isFetching: false,
+        recentLocations: action.recentLocations,
         });
-      case FETCH_PROMO_CODE_FAILURE:
+      case FETCH_RECENT_LOCATIONS_FAILURE:
         return Object.assign({}, state, {
-        //   isFetching: false,
+          isFetching: false,
           errorMessage: action.err,
         });
       case HIDE_ALERT:
         return Object.assign({}, state, {
-          errorMessage: '',
+          errorMessage: ''
         });
-    case USE_PROMO_CODE_BY_USER:
+    case DELETE_RECENT_LOCATION:
         return Object.assign({}, state, {
           isFetching: true,
         });
-    case USE_PROMO_CODE_BY_USER_SUCCESS:
+      case DELETE_RECENT_LOCATION_SUCCESS:
         return Object.assign({}, state, {
           isFetching: false,
           errorMessage: action.log,
         });
-    case USE_PROMO_CODE_BY_USER_FAILURE:
+      case DELETE_RECENT_LOCATION_FAILURE:
         return Object.assign({}, state, {
           isFetching: false,
           errorMessage: action.err,

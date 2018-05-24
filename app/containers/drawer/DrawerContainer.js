@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { onSignOut } from '../../helpers/utility';
 import styles, { colors } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
-import PaymentDetails from './payment/index';
+import PaymentDetails from '../payments/index';
 
 
 const userPic = require('../../assets/icons/3_user_img.png');

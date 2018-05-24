@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PromotionCodeScreen from './PromotionCodeScreen';
-import * as promoCodeActions from '../../../redux/promotionCode/actions';
+import * as promoCodeActions from '../../redux/promotionCode/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
