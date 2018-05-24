@@ -220,7 +220,7 @@ export default class DetailsScreen extends React.Component {
             <Header 
                 headerText={'PROFILE'} 
                 navigation={this.props.navigation} 
-                buttonType={'back'}
+                buttonType={'hamburger'}
             />
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
@@ -259,13 +259,6 @@ export default class DetailsScreen extends React.Component {
                             Vehicles
                         </Text>
                         </View>
-                        {/* <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        { this.state.showVehicleEditButton &&
-                        <TouchableOpacity style={{ flex: 1, position: 'absolute' }} onPress={this.deleteVehicle.bind(this)}>
-                            <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
-                        </TouchableOpacity>
-                        }
-                        </View> */}
                     </TouchableOpacity>
                 </View>
             </View>
