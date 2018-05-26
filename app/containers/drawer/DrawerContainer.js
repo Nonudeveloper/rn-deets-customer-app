@@ -108,4 +108,3 @@ export default class DrawerContainer extends React.Component {
     );
   }
 }
-

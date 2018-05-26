@@ -83,13 +83,15 @@ function logOutCall() {
   return new Promise((resolve, reject) => {
     AuthHelper.logout()
     .then((data) => {
-      if (!data.status === 401) {
+      console.log(data);
+      if (typeof data.status === 'undefined') {
         resolve(data);
       } else {
-         const error = JSON.parse(data._bodyText).error;
-         reject({ error: error });
-      } 
-    });
+        const error = JSON.parse(data).error;
+        reject({ error });
+      }
+    })
+    .catch((error) => console.warn(error));
   });
 }
 
@@ -100,9 +102,9 @@ function* watchLogOutRequest() {
       const response = yield call(logOutCall);
       yield removeItem('user');
       yield put(logoutSuccess());
+      yield put(NavigationActions.navigate({ routeName: 'loginStack' }));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);
     } catch (err) {
-
       console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
       yield put(logoutFailure(err));
     }

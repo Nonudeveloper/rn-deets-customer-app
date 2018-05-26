@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
-import Header from '../../header/Header';
-import ListItem from '../ListItem';
-import { getAppointments } from '../detail/api';
+import Header from '../header/Header';
+import ListItem from './ListItem';
+import { getAppointments } from './detail/api';
 import AppoinmentTabs from './Tabs';
 import styles from './styles';
 
@@ -164,18 +164,4 @@ class PastAppointmentsList extends Component {
     }
 }
 
-<<<<<<< HEAD:app/containers/appointmentList/PastAppointmentsList.js
-=======
-const styles = StyleSheet.create({
- 
-    mainContainer: {
-        // Setting up View inside content in Vertically center.
-        justifyContent: 'center',
-        margin: 10,
-    },
-   
-     
-});
-
->>>>>>> develop:app/containers/appointmentList/past/PastAppointmentsList.js
 export default PastAppointmentsList;
