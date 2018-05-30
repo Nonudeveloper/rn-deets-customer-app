@@ -14,8 +14,9 @@ import {
     MESSAGE_TO_TECHNICIAN_SUCCESS,
     MESSAGE_TO_TECHNICIAN_FALIURE,
     SELECT_APPOINTMENT,
+    SELECT_APPOINTMENT_SUCCESS,
+    SELECT_APPOINTMENT_FALIURE,
     TOGGLE_EDIT_MODE,
-    SELECT_ALL_APPOINTMENTS,
 } from './constants';
 
 export function fetchUpcomingAndPastAppointments(payload) {
@@ -121,10 +122,17 @@ export function selectAppointment(appointmentID) {
     };
 }
 
-export function selectAllAppointments(IDs) {
+export function selectAppointmentSuccess(res = false) {
     return {
-        type: SELECT_ALL_APPOINTMENTS,
-        IDs
+        type: SELECT_APPOINTMENT_SUCCESS,
+        res
+    };
+}
+
+export function selectAppointmentFaliure(err) {
+    return {
+        type: SELECT_APPOINTMENT_FALIURE,
+        err
     };
 }
 

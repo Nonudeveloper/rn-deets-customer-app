@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Dimensions, Image, Text, Alert, LayoutAnimation, UIManager, Platform } from 'react-native';
+import { View, TouchableOpacity, Dimensions, Image, Text, Alert, LayoutAnimation, UIManager, Platform, ToastAndroid } from 'react-native';
 import Header from '../header/Header';
 import styles from './styles';
 import Button from '../../deetscomponents/Button';
@@ -220,10 +220,11 @@ export default class DetailsScreen extends React.Component {
             <Header 
                 headerText={'PROFILE'} 
                 navigation={this.props.navigation} 
-                buttonType={'back'}
+                buttonType={'burger'}
             />
             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
+            {this.props.logoutMessage !== '' && ToastAndroid.showWithGravityAndOffset(this.props.logoutMessage.error, ToastAndroid.LONG, ToastAndroid.TOP, 25, 50)}
             <View style={styles.toggleButtonContainer}>
                 <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60 }} >
                     <TouchableOpacity 
@@ -259,13 +260,6 @@ export default class DetailsScreen extends React.Component {
                             Vehicles
                         </Text>
                         </View>
-                        {/* <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        { this.state.showVehicleEditButton &&
-                        <TouchableOpacity style={{ flex: 1, position: 'absolute' }} onPress={this.deleteVehicle.bind(this)}>
-                            <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
-                        </TouchableOpacity>
-                        }
-                        </View> */}
                     </TouchableOpacity>
                 </View>
             </View>

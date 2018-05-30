@@ -81,13 +81,13 @@ export default class ServiceDetailHeader extends React.Component {
                 </View>
             </View>
             <View style={[styles.detailInfoContainer, { flex: 0 }]}>
-                <TouchableHighlight onPress={this.showServices}>
+                <TouchableHighlight onPress={this.showServices} underlayColor={'transparent'}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(0) }}>INCLUDED SERVICES</Text>
                         <Image style={styles.downArrow} source={this.state.showServices ? upArrow : downArrow} />
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.showAddons}>
+                <TouchableHighlight onPress={this.showAddons} underlayColor={'transparent'}>
                     <View style={styles.dropItem}>
                         <Text style={{ color: this.myColor(1) }}>ADD-ON SERVICES</Text>
                         <Image style={styles.downArrow} source={this.state.showServices ? downArrow : upArrow} />

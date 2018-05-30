@@ -1,17 +1,15 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Header from '../../header/Header';
+import { View } from 'react-native';
+import Header from '../header/Header';
 import ServicesList from './ServicesList';
-import Loader from '../../../deetscomponents/Loader';
+import Loader from '../../deetscomponents/Loader';
+import styles from './styles';
 
-
-const indicatorOne = require('../../../assets/icons/process1.png');
 
 export default class ServiceScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.props.actions.fetchServices();
   }
 
   componentDidMount() {
@@ -27,7 +25,6 @@ export default class ServiceScreen extends React.Component {
         <Header 
             navigation={this.props.navigation} 
             headerText={'Services'}
-            indicatorSource={indicatorOne}
         />
         <ServicesList 
           services={this.props.services}
@@ -36,9 +33,3 @@ export default class ServiceScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});

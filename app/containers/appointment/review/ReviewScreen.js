@@ -41,14 +41,19 @@ export default class ReviewScreen extends React.Component {
     this.props.actions.scheduleNewAppointment(options);
   }
 
-  renderAlert(msg) {
+  renderAlert(message) {
+    const msg = message.error ? message.error : message.log;
+    const heading = message.error ? 'Error' : 'Success';
     Alert.alert(
-      'Error',
+      heading,
       msg,
       [
         { 
           text: 'OK', 
           onPress: () => {
+            if (message.log) {
+              this.props.navigation.navigate('appointmentListStack');
+            }
             //dispath an action to make showAlert false
             this.props.actions.hideAlert();
           } 
@@ -72,7 +77,7 @@ export default class ReviewScreen extends React.Component {
             indicatorSource={indicatorFour}
         />
         {/* <Loader loading={isFetching} /> */}
-        {this.props.appointmentScheduleMsg !== '' && this.renderAlert(this.props.appointmentScheduleMsg.log)}
+        {this.props.appointmentScheduleMsg !== '' && this.renderAlert(this.props.appointmentScheduleMsg)}
         {/* //sp details component */}
         {/* //appointment details component */}
         {/* //credit card details component */}

@@ -2,9 +2,9 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PaymemtDetails from './paymentDetails';
+import PaymemtDetails from './PaymentDetails';
 
-import * as appointmentActions from '../../../redux/appointment/actions';
+import * as appointmentActions from '../../redux/appointment/actions';
 
 
 const mapDispatchToProps = (dispatch) => {

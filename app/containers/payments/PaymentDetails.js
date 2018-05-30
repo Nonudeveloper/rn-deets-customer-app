@@ -1,16 +1,12 @@
 import React from 'react';
-import { FlatList, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal } from 'react-native';
+import { FlatList, View, Text, Image, TouchableHighlight } from 'react-native';
 import styles from './styles';
 
-const visaImage = require('../../../assets/icons/small_VISA.png');
-const passwordPoint = require('../../../assets/icons/6_uncheck_btn.png');
-const arrowBtn = require('../../../assets/icons/current_arrow_btn.png');
 
 const BTClient = require('react-native-braintree-xplat');
 
-const smallPaypalLogo = require('../../../assets/icons/papal.png');
-const visaLogo = require('../../../assets/icons/small_VISA.png');
-const popup = require('../../../assets/icons/popup_bg.png');
+const smallPaypalLogo = require('../../assets/icons/papal.png');
+const visaLogo = require('../../assets/icons/small_VISA.png');
 
 export default class CardDetail extends React.Component {
 
@@ -94,7 +90,7 @@ export default class CardDetail extends React.Component {
                                 />  
                                 <Text style={styles.otherText}>OTHER</Text>  
                             </View>
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, top: 50 }}>
                                 <TouchableHighlight onPress={() => this.withPaypal()} >
                                     <View style={styles.paymentItem} >
                                         <View >

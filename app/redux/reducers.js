@@ -7,11 +7,12 @@ import Vehicle from '../redux/register/vehicleInformation/vehicleReducer';
 import HomeReducer from '../redux/home/homeReducer';
 import GeoReducer from '../redux/geoCoding/geoReducer';
 import AuthVehicle from '../redux/appointment/vehicle/vehicleReducer';
-import ServiceReducer from '../redux/service/serviceReducer';
+import ServiceReducer from '../redux/appointment/services/serviceReducer';
 import appointmentReducer from '../redux/appointment/reducer';
 import profileReducer from '../redux/profile/reducer';
-import appointmentLists from '../redux/appointmentList/upcoming/reducer';
+import appointmentLists from '../redux/appointmentList/reducer';
 import promoCodeReducer from '../redux/promotionCode/reducer';
+import recentLocationsReducer from '../redux/home/recentLocations/reducer';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
   Appointment: appointmentReducer,
   Profile: profileReducer,
   appointmentLists,
-  PromotionCode: promoCodeReducer
+  PromotionCode: promoCodeReducer,
+  RecentLocations: recentLocationsReducer
 });
 
 export default rootReducer;

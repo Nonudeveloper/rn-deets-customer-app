@@ -14,7 +14,6 @@ import {
     MESSAGE_TO_TECHNICIAN_FALIURE,
     TOGGLE_EDIT_MODE,
     SELECT_APPOINTMENT,
-    SELECT_ALL_APPOINTMENTS,
 } from './constants';
 
 const initialState = {
@@ -37,7 +36,7 @@ const pushOrFilterID = (selectedAppointments, id) => {
     return selectedAppointments;
 };
 
-export default function homeReducer(state = initialState, action) {
+export default function appointmentListReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_UPCOMING_AND_PAST_APPOINTMENTS:
             return Object.assign({}, state, {
@@ -105,10 +104,6 @@ export default function homeReducer(state = initialState, action) {
         case SELECT_APPOINTMENT:
             return Object.assign({}, state, {
                 selectedAppointments: pushOrFilterID(state.selectedAppointments, action.appointmentID)
-            });
-        case SELECT_ALL_APPOINTMENTS:
-            return Object.assign({}, state, {
-                selectedAppointments: action.IDs
             });
         default:
             return state;

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, FlatList, Alert, Image, Text } from 'react-native';
 import styles from './styles';
 
-const carImage = require('../../../assets/icons/3_car_img.png');
-const downArrow = require('../../../assets/icons/down_arrow.png');
+const carImage = require('../../assets/icons/3_car_img.png');
+const downArrow = require('../../assets/icons/down_arrow.png');
 
 class ServicesList extends Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class ServicesList extends Component {
       <View
         style={{
           height: 1,
-          width: "100%",
-          backgroundColor: "#607D8B",
+          width: '100%',
+          backgroundColor: '#607D8B',
         }}
       />
     );

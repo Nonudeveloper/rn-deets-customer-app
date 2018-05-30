@@ -1,33 +1,24 @@
 // @flow
-// Container for Login Component
+// Container for PastAppointmentsList Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AppointmentList from './appointmentList';
-// import PastAppointmentsList from './pastAppointmentsList';
-// import UpcomingAppointmentsList from './upcomingAppointmentList';
+import PastAppointmentsList from './PastAppointmentsList';
 
-import * as appointmentListActions from '../../redux/appointmentList/upcoming/actions';
+import * as appointmentListActions from '../../redux/appointmentList/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(appointmentListActions, dispatch),
+        actions: bindActionCreators(appointmentListActions, dispatch)
     };
 };
 
 const mapStateToProps = (state) => {
     return {
         isFetching: state.Service.isFetching,
-        pastAppointments: state.appointmentLists.pastAppointments
+        pastAppointments: state.appointmentLists.pastAppointments,
+        selectedAppointments: state.appointmentLists.selectedAppointments
     };
 };
-// const mySpecialContainerCreator = connect(mapStateToProps, mapDispatchToProps);
-
-// export const FirstConnectedComponent = mySpecialContainerCreator(PastAppointmentsList);
-// export const SecondConnectedComponent = mySpecialContainerCreator(UpcomingAppointmentsList);
-// const components = [PastAppointmentsList, UpcomingAppointmentsList];
-
-// export default components.map(mySpecialContainerCreator);
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppointmentList);
+export default connect(mapStateToProps, mapDispatchToProps)(PastAppointmentsList);
 

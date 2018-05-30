@@ -2,7 +2,7 @@ import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
 import { fetchServicesSuccess, fetchServicesFaliure, serviceAppointmentSuccess, serviceAppointmentFaliure, storeUserServiceAppointmentId } from './serviceActions';
 import { FETCH_SERVICES, CREATE_NEW_USER_SERVICE_APPOINTMENT, RESCHEDULE_SERVICE_APPOINTMENT } from './constants';
-import ServicesHelper from '../../helpers/services/servicesHelper';
+import ServicesHelper from '../../../helpers/services/servicesHelper';
 
 
 function fetchServicesCall(accessToken) {

@@ -4,11 +4,12 @@ import registerSagas from './register/saga';
 import homeSaga from './home/saga';
 import geoSaga from './geoCoding/saga';
 import authVehicleSagas from './appointment/vehicle/saga';
-import serviceSaga from './service/saga';
+import serviceSaga from './appointment/services/saga';
 import appointmentSaga from './appointment/saga';
 import profileSaga from './profile/saga';
-import upcomingAppointmentSaga from './appointmentList/upcoming/saga';
+import upcomingAppointmentSaga from './appointmentList/saga';
 import promotionCodeSaga from './promotionCode/saga';
+import recentLocationsSaga from './home/recentLocations/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     appointmentSaga(),
     profileSaga(),
     upcomingAppointmentSaga(),
-    promotionCodeSaga()
+    promotionCodeSaga(),
+    recentLocationsSaga()
   ]);
 }

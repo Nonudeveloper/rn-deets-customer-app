@@ -20,6 +20,7 @@ class CreditCardForm extends React.Component {
             number: '4111111111111111',
             expirationDate: '10/20', // or "10/2020" or any valid date
             cvv: '400',
+            type: ''
         },
         nowCanSubmit: false,
         user: ''
@@ -43,7 +44,7 @@ class CreditCardForm extends React.Component {
                         id: this.props.navigation.state.params.selectedCard.id,
                         is_default: 2,
                         email: this.state.user.email,
-                        type: 'PayPal',
+                        type: this.state.card.type,
                         first_name: this.state.user.first_name,
                         last_name: this.state.user.last_name,
                         nonce,
@@ -75,7 +76,8 @@ class CreditCardForm extends React.Component {
                 card: {
                     number: formData.values.number.toString(),
                     expirationDate: formData.values.expiry,
-                    cvv: formData.values.cvc
+                    cvv: formData.values.cvc,
+                    type: formData.values.type
                 },
                 nowCanSubmit: true
             });
