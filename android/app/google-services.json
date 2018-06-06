@@ -1,27 +1,31 @@
 {
   "project_info": {
-    "project_number": "422724865895",
-    "firebase_url": "https://deetsapi.firebaseio.com",
-    "project_id": "deetsapi",
-    "storage_bucket": "deetsapi.appspot.com"
+    "project_number": "57106999997",
+    "firebase_url": "https://deetscp.firebaseio.com",
+    "project_id": "deetscp",
+    "storage_bucket": "deetscp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:422724865895:android:f569321e2b4de30d",
+        "mobilesdk_app_id": "1:57106999997:android:83e9624b885f0218",
         "android_client_info": {
-          "package_name": "com.deets.cp"
+          "package_name": "com.deetscp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "422724865895-7j2ku177uhr8murcjphuapjk428pk20f.apps.googleusercontent.com",
+          "client_id": "57106999997-22i3bb1fi7e4ak0ku6a63f60cjdgb4ov.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "57106999997-22i3bb1fi7e4ak0ku6a63f60cjdgb4ov.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqop-e1CG2JjmZ1xqFqaFrY6IDcAz_WNg"
+          "current_key": "AIzaSyBbZ6ze5J9kK3c4n62xE3ceFFYwKOgQ9qA"
         }
       ],
       "services": {
