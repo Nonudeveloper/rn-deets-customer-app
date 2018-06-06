@@ -79,7 +79,7 @@ class PastAppointmentsList extends Component {
                 navigation={this.props.navigation}
                 editMode={this.state.editMode}
                 actions={this.props.actions}
-                activeTab={this.state.activeTab}
+                activeTab={this.state.selectedTab}
             />
         );
     }

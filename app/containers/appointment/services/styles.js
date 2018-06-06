@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     item: {
         // padding: 10,
         fontSize: 18,
@@ -16,10 +19,12 @@ const styles = StyleSheet.create({
     },
     serviceInfoContainer: { 
         flex: 1, 
-        marginLeft: 10 
+        marginLeft: 10,
+        flexDirection: 'column'
     },
     serviceNameContainer: { 
-        height: 58, 
+        // height: 58, 
+        flex: 1,
         backgroundColor: '#8ac10b', 
         flexDirection: 'row', 
         alignItems: 'center' 
@@ -42,7 +47,8 @@ const styles = StyleSheet.create({
         color: '#fff' 
     },
     descContainer: { 
-        height: 58, 
+        // height: 58, 
+        flex: 2,
         backgroundColor: '#fff', 
         justifyContent: 'center', 
     },
@@ -115,6 +121,23 @@ const styles = StyleSheet.create({
       checkBoxLabel: {
         fontSize: 17,
         paddingLeft: 10
+      },
+      buttonContainer: { 
+        // flex: 1, 
+        justifyContent: 'center',
+        height: 55
+      },
+      totalPaymentContainer: { 
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'space-around', 
+        top: 15,
+        paddingHorizontal: 15
+      },
+      paymentText: {
+        fontSize: 23,
+        color: '#8ac10b',
+        fontWeight: 'bold'
       }
 });
 

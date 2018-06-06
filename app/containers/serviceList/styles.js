@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
     },
     serviceInfoContainer: { 
         flex: 1, 
-        marginLeft: 10 
+        marginLeft: 10,
+        flexDirection: 'column'
     },
     serviceNameContainer: { 
-        height: 58, 
+        // height: 58, 
+        flex: 1,
         backgroundColor: '#8ac10b', 
         flexDirection: 'row', 
         alignItems: 'center' 
@@ -45,7 +47,8 @@ const styles = StyleSheet.create({
         color: '#fff' 
     },
     descContainer: { 
-        height: 58, 
+        // height: 58, 
+        flex: 2,
         backgroundColor: '#fff', 
         justifyContent: 'center', 
     },
