@@ -5,7 +5,7 @@ export default class LoadingSplash extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Deets CP</Text>
+                <Text style={styles.text}>Deets</Text>
             </View>
         );
     }

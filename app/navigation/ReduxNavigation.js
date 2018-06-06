@@ -5,7 +5,6 @@ import DrawerNavigation from './DrawerNavigation';
 import AppNavigation from './AppNavigation';
 import { isSignedIn } from '../helpers/utility';
 import { addListener } from '../helpers/utils/redux';
-import PushNotification from 'react-native-push-notification';
 import { saveDeviceToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
  
@@ -47,10 +46,6 @@ class ReduxNavigation extends React.Component {
         }
       })
       .catch(err => console.log(err));
-  }
-
-  componentDidMount() {
-    
   }
 
   render() {
