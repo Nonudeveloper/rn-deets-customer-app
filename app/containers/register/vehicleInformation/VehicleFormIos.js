@@ -19,7 +19,8 @@ class VehicleFormIos extends React.Component {
               color: 'Color',
               make: 'Make',
               model: 'Model',
-              license: ''
+              license: '',
+              type: 'Type'
           };
 
     }
@@ -36,7 +37,6 @@ class VehicleFormIos extends React.Component {
     }
 
     _fetchMakeModel = (year) => {
-        console.log(year);
         //now dispath an action to fetch make and model
         this.setState(() => {
             return {
@@ -54,10 +54,8 @@ class VehicleFormIos extends React.Component {
                 make: makeID
             };
         }, () => {
-            console.log(this.props);
             this.props.makeModel.data.map((make, i) => {
                 if (make.make_id === makeID) {
-                    console.log(make);
                     //dispatch an action here and update props
                     this.props.updateModels(make.model);
                     this.props.dispatch(change('vehicleForm', 'make', make.make_name));
@@ -105,7 +103,8 @@ class VehicleFormIos extends React.Component {
             onPickerConfirm: data => {
                 const initialFormData = {
                     type: data[0] + ', ' + data[1]  
-            };
+                };
+                this.setState({type: data[0] + ', ' + data[1]});
                 this.props.dispatch(initialize('vehicleForm', initialFormData, 'type'));
 
                 this.props.vehicleData.type.map((type, i) => {
@@ -161,7 +160,6 @@ class VehicleFormIos extends React.Component {
     }
     
     render() {
-        console.log(this.props)
         const { pickerStyle, inputStyle } = styles;
         return (
             <View style={styles.formArea}>
@@ -176,7 +174,6 @@ class VehicleFormIos extends React.Component {
                     </Text>
                     <IosPicker ref={'picker'}
                         onSubmit={(option)=> {
-                            console.log(option);
                             this._fetchMakeModel(option);
                         }}
                         >
@@ -218,7 +215,7 @@ class VehicleFormIos extends React.Component {
                     </IosPicker>
                 </View>
             </View>
-            <View >
+            <View>
                 <View style={[inputStyle]}>
                     <Text
                         style={{color:'white', fontSize: 16, marginTop: 20}}
@@ -277,19 +274,20 @@ class VehicleFormIos extends React.Component {
                 </View>
                 
             </View>
-            <View style={styles.licenseTextStyle}>
-                <Field
-                    name={'type'}
-                    component={CommonTypeTextInput}
-                    props={this.props}
-                    placeholder={'Type'}
-                    placeholderTextColor='grey'
-                    underlineColorAndroid="transparent"
-                    borderBotmWidth={{ borderBottomWidth: 0 }}
-                    onPress={this._showPicker.bind(this)}
-                    type="modaltype"
-                />
+
+            <View>  
+                <View style={styles.licenseStyle}>
+                    <Text
+                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        onPress={()=>{
+                            this._showPicker();
+                        }}>
+                       {this.state.type} {avatar}
+                    </Text>
+                </View>
             </View>
+           
+            
             <View style={styles.licenseStyle}>
                 <View style={styles.licenseInnerContainerStyle}>
                     <View style={styles.radio1ContainerStyle}>
