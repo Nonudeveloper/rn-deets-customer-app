@@ -39,12 +39,13 @@ class ListItem extends Component {
     }
 
     scheduleItem(item) {
+        console.log(item)
         this.props.actions.selectedAppointmentForReschedule(item);
         this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
 
     updateAppointment() {
-        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });
+        this.props.navigation.navigate('SelectVehicleScreen');
     }
     
     messageToTechnician(item) {
@@ -76,7 +77,7 @@ class ListItem extends Component {
                 
             }
         ];
-
+        console.log(this.props);
         const { item } = this.props;
         return (
             <Swipeout 

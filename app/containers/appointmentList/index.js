@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.Service.isFetching,
         pastAppointments: state.appointmentLists.pastAppointments,
+        upcomingAppointments: state.appointmentLists.upcomingAppointments,
         selectedAppointments: state.appointmentLists.selectedAppointments
     };
 };

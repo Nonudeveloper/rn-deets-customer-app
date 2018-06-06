@@ -79,7 +79,7 @@ class PastAppointmentsList extends Component {
                 navigation={this.props.navigation}
                 editMode={this.state.editMode}
                 actions={this.props.actions}
-                activeTab={this.state.activeTab}
+                activeTab={this.state.selectedTab}
             />
         );
     }
@@ -147,8 +147,8 @@ class PastAppointmentsList extends Component {
                     />
                     <FlatList
                         data={this.state.selectedTab === 'past' ? 
-                        this.state.appointments.past_appointments : 
-                        this.state.appointments.upcoming_appointments}
+                        this.props.pastAppointments : 
+                        this.props.upcomingAppointments}
                         ItemSeparatorComponent={this.flatListItemSeparator}
                         renderItem={
                             ({ item }) => this.renderItem(item)

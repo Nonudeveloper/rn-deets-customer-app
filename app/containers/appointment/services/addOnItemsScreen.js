@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Image, } from 'react-native';
-import styles from '../styles';
+import styles from './styles';
 import PropTypes from 'prop-types';
 
-const checkButton = require('../../../../assets/icons/6_check_btn.png');
-const unCheckButton = require('../../../../assets/icons/6_uncheck_btn.png');
+const checkButton = require('../../../assets/icons/6_check_btn.png');
+const unCheckButton = require('../../../assets/icons/6_uncheck_btn.png');
 
 export default class AddonItemsScreen extends Component {
    constructor() {
@@ -28,11 +28,13 @@ export default class AddonItemsScreen extends Component {
         this.props.selectedArrayObject.getArray().splice( this.props.selectedArrayObject.getArray().findIndex(x => x.key == this.props.keyValue), 1 );
         }
         if (this.props.reSchedule !== '') {
-            this.props.reSchedule.service_adds_on.map((addons) => {
-                if (addons.adds_on_id === this.props.item.id) {
-                    this.toggleState(this.props.keyValue, this.props.label)
-                }
-            });
+            if (this.props.service.service_id === this.props.reSchedule.appointment.service_id) {
+                this.props.reSchedule.service_adds_on.map((addons) => {
+                    if (addons.adds_on_id === this.props.item.id) {
+                        this.toggleState(this.props.keyValue, this.props.label)
+                    }
+                });
+            }
         }
     }
  

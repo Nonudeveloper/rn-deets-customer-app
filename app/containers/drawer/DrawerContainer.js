@@ -57,7 +57,7 @@ export default class DrawerContainer extends React.Component {
         start={{ x: 0.0, y: 0.25 }} 
         end={{ x: 0.5, y: 1.0 }}
         locations={[0.1, 0.75, 1]}
-        colors={['#73737399', '#bfbfbf', '#66666680']} 
+        colors={['rgba(217, 217, 217, 0.9)', 'rgba(217, 217, 217, 0.9)', 'rgba(217, 217, 217, 0.9)']} 
         style={styles.container}
       >
         <View style={styles.sideMenu}>
