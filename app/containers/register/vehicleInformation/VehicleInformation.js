@@ -97,6 +97,7 @@ export default class VehicleInformation extends React.Component {
                     makeModel={this.props.makeModel}
                     models={this.props.models}
                     updateModels={this.props.updateModels}
+                    onRef={ref => (this.child = ref)}
                   /> )
                 } 
               <View style={[styles.nextButtonContainer, styles.t3]}>
