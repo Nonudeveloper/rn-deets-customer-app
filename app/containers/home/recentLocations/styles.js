@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
         top: 20
     },
     bodyContainer: {
-        flex: 1, 
         flexDirection: 'row', 
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 60
     },
     mapImageContainer: {
         flex: 0.5, 
@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
         flex: 3
     },
     textStyle: {
-        fontSize: 20, 
-        color: 'black'
+        fontSize: 17, 
+        color: '#404040',
+        lineHeight: 20
     }
 });
 

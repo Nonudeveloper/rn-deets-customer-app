@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 100,
         borderColor: '#fff',
+        zIndex: 999
     },
     image: {
-        resizeMode: 'contain',
-        height: '100%',
-        width: '100%'
+        width: 70,
+        height: 70,
+        borderRadius: 100
     },
     locationIcon: {
         resizeMode: 'contain',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList, Alert, Image } from 'react-native';
+import { Text, View, FlatList, Alert, Image, TouchableOpacity } from 'react-native';
 import Header from '../../header/Header';
 import Loader from '../../../deetscomponents/Loader';
 import Swipeout from 'react-native-swipeout';
@@ -53,6 +53,10 @@ export default class RecentLocationsScreen extends React.Component {
         );
     }
 
+    navigateToMap = (item) => {
+        this.props.navigation.navigate('HomeComponent', { location: item });
+    }
+
     renderItem(item) {
         const rightSwipeBtns = [
             {
@@ -68,14 +72,14 @@ export default class RecentLocationsScreen extends React.Component {
                 autoClose
                 backgroundColor='transparent'
             >
-                <View style={styles.bodyContainer}>
+                <TouchableOpacity style={styles.bodyContainer} onPress={() => this.navigateToMap(item)}>
                     <View style={styles.mapImageContainer}>
                         <Image source={mapImage} style={styles.imageStyle} />
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle}>{item.service_location_string}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             </Swipeout>
         );
     }

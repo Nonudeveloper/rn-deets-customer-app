@@ -12,6 +12,7 @@ import Header from '../header/Header';
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
 const backButton = require('../../assets/icons/2_back_btn_onclick.png');
+const recentLocationIcon = require('../../assets/icons/map.png');
 
 const layerStyles = Mapbox.StyleSheet.create({
   smileyFace: {
@@ -29,9 +30,10 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       coordinates: [11.254, 43.772],
-      center: [-122.43475910000001, 37.7620333],
+      center: [11.254, 43.772],
       loading: false,
-      renderPolygon: false
+      renderPolygon: false,
+      inputVal: ''
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -95,6 +97,7 @@ export default class HomeScreen extends Component {
     //dispatch an action and get data for GeoJSON polygon
     // this.props.actions.fetchNearByPlaces(center);
     await this.setState({ renderPolygon: true, loading: false });
+    this.props.navigation.navigate('SelectVehicleScreen');
   }
   
 
@@ -138,7 +141,24 @@ export default class HomeScreen extends Component {
     );
   }
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    const location = navigation.getParam('location', {});
+    let isMyObjectEmpty = !Object.keys(location).length;
+    if(!isMyObjectEmpty) {
+      this.setState({
+        center: [
+          parseInt(location.service_location_longitude), 
+          parseInt(location.service_location_latitude)
+        ],
+        inputVal: location.service_location_string
+      });
+    }
+  }
+
   render() {
+    
+
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -182,7 +202,7 @@ export default class HomeScreen extends Component {
         <View style={styles.container}>
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
-              centerCoordinate={[-68.13734351262877, 45.137451890638886]}
+              centerCoordinate={this.state.center}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
               // onWillStartLoadingMap={() => {
               //   console.log('region will change...');
@@ -190,7 +210,7 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={5}
+              zoomLevel={11}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
@@ -207,13 +227,15 @@ export default class HomeScreen extends Component {
               buttonType={'burger'} 
               titleType={'logo'}
               showRightIcon
-              rightText={'Next'}
-              onPress={() => this.props.navigation.navigate('SelectVehicleScreen')}
+              rightIconType={'image'}
+              rightImageSource={recentLocationIcon}
+              onPress={() => this.props.navigation.navigate('RecentLocations')}
             />
             <GeoCodeSearch 
               onAddressGet={(address) => { 
-                this.setState({ coordinates: address.geometry.coordinates });
+                this.setState({ center: address.geometry.coordinates });
               }} 
+              inputVal={this.state.inputVal}
             />
             <View style={styles.calloutWraper}>
               <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>
