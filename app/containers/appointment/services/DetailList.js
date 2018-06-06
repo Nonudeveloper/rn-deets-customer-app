@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, FlatList, Alert } from 'react-native';
-import styles from '../styles';
+import styles from './styles';
 import AddonItemsScreen from './addOnItemsScreen';
 
 // const carImage = require('../../../../assets/icons/3_car_img.png');
@@ -10,14 +10,8 @@ export default class ServiceDetailHeader extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-  
-  componentWillMount() {
-    // this.props.actions.fetchServices({ access_token: this.props.token });
-  }
-
-  getItem(item) {
-    Alert.alert(item);
+    this.state = {
+    };
   }
 
   flatListItemSeparator = () => {
@@ -32,46 +26,52 @@ export default class ServiceDetailHeader extends React.Component {
     );
   }
 
-  checkAddOns() {
-    
-  }
+ renderAddOnsList(item) {
+  return (  
+        <View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
+            <AddonItemsScreen 
+                size={20} 
+                keyValue={item.id} 
+                selectedArrayObject={this.props.selectedArrayRef}  
+                color='#636c72' 
+                label={item} 
+                callback
+                getSelectedItems={this.props.getSelectedItems}
+                item={item}
+                selectedVehicle={this.props.selectedVehicle}
+                reSchedule={this.props.reSchedule}
+                service={this.props.service}
+            />
+        </View>
+  );
+ }
 
   render() {
+    
     return (
-      
         <View style={{ backgroundColor: '#fff' }}>
             <FlatList
                 data={this.props.showServices ? this.props.servicesList : this.props.addonsList}
                 ItemSeparatorComponent={this.flatListItemSeparator}
+                extraData={this.state}
                 renderItem={
                     ({ item }) => 
-                    <View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ flex: 1 }}>
                     {
-                      (this.props.showServices)
-                      ?
-                      (<View style={{ flex: 3 }}>
+                      (this.props.showServices === true)
+                      ? 
+                      (<View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
+                      <View style={{ flex: 3 }}>
                         <Text 
                           style={styles.item} 
-                          onPress={this.getItem.bind(this, item.adds_on_name)} 
+                        //   onPress={this.getItem.bind(this, item.adds_on_name)} 
                         > {item.adds_on_name} </Text>
+                      </View>
                       </View>)
                       :
-                      (<AddonItemsScreen 
-                          size={20} 
-                          keyValue={item.id} 
-                          selectedArrayObject={this.props.selectedArrayRef}  
-                          color='#636c72' 
-                          label={item} 
-                          callback
-                          getSelectedItems={this.props.getSelectedItems}
-                          item={item}
-                          selectedVehicle={this.props.selectedVehicle}
-                          reSchedule={this.props.reSchedule}
-                      />)
+                      (this.renderAddOnsList(item))
                     }
                     </View>
-                      
-                    
                 }
                 keyExtractor={() => Math.random().toString(36).substr(2, 9)}
             />
