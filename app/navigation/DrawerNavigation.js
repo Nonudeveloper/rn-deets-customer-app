@@ -6,7 +6,7 @@ import DrawerContainer from '../containers/drawer/DrawerContainer';
 import HomeScreen from '../containers/home/index';
 import AddVehicle from '../containers/appointment/vehicle/addEditVehicle/index';
 import ServiceScreen from '../containers/appointment/services/index';
-import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
+// import ServiceDetailScreen from '../containers/appointment/services/serviceDetail/index';
 import DateTimeScreen from '../containers/appointment/dateTimeSchedule/index';
 import NotesScreen from '../containers/appointment/notes/index';
 import ReviewScreen from '../containers/appointment/review/index';
@@ -79,7 +79,7 @@ const TransitionConfiguration = () => {
 const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
-  serviceDetailScreen: { screen: ServiceDetailScreen },
+  // serviceDetailScreen: { screen: ServiceDetailScreen },
   SelectVehicleScreen: { screen: SelectVehileScreen },
   AddEditVehicle: { screen: AddVehicle },
   DateTimeScreen: { screen: DateTimeScreen },
@@ -109,11 +109,11 @@ const appointmentListStack = StackNavigator({
 });
 
 const DrawerStack = DrawerNavigator({
-  appointmentListStack: {
-    screen: appointmentListStack
-  },
   appointmentStack: {
     screen: appointmentStack
+  },
+  appointmentListStack: {
+    screen: appointmentListStack
   },
   drawerServicesListStack: {
     screen: DrawerServicesList

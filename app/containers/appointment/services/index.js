@@ -2,7 +2,7 @@
 // Container for Login Component
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ServiceScreen from './ServiceScreen';
+import ServicesScreen from './ServicesScreen';
 
 import * as serviceActions from '../../../redux/appointment/services/serviceActions';
 
@@ -19,9 +19,11 @@ const mapStateToProps = (state) => {
         services: state.Service.services,
         isFetching: state.Service.isFetching,
         selectedVehicle: state.AuthVehicle.selectedVehicle,
-        selectedAppointment: state.appointmentLists.selectedAppointment
+        selectedAppointment: state.appointmentLists.selectedAppointment,
+        errorMessage: state.Service.errorMessage,
+        technicianFetching: state.Service.technicianFetching,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ServicesScreen);
 

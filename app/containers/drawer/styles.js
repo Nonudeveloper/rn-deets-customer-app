@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     menuText: {
         marginLeft: 20,
         color: 'white',
-        fontSize: 16,
+        fontSize: 18,
         marginBottom: 5,
         fontWeight: 'bold'
     },
