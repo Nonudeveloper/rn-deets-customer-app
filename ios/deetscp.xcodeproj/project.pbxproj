@@ -1686,9 +1686,9 @@
 					"$(SRCROOT)/../node_modules/react-native-facebook-login/RCTFBLogin/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-pickeriosRCTBEEPickerManager",
-					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager/**",
 					"$(SRCROOT)/../node_modules/react-native-braintree-xplat/ios/RCTBraintree/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient/**",
 				);
 				INFOPLIST_FILE = deetscp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1721,9 +1721,9 @@
 					"$(SRCROOT)/../node_modules/react-native-facebook-login/RCTFBLogin/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)..\node_modules\neact-native-pickeriosRCTBEEPickerManager",
-					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager/**",
 					"$(SRCROOT)/../node_modules/react-native-braintree-xplat/ios/RCTBraintree/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient/**",
 				);
 				INFOPLIST_FILE = deetscp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

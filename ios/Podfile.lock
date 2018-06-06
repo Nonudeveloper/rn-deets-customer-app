@@ -1,7 +1,4 @@
 PODS:
-  - Picker (4.3.5):
-    - Picker/Core (= 4.3.5)
-  - Picker/Core (4.3.5)
   - React (0.53.3):
     - React/Core (= 0.53.3)
   - react-native-mapbox-gl (6.1.1):
@@ -47,7 +44,6 @@ PODS:
   - yoga (0.53.3.React)
 
 DEPENDENCIES:
-  - Picker (from `../node_modules/react-native-picker`)
   - react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -68,8 +64,6 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
 
 EXTERNAL SOURCES:
-  Picker:
-    :path: ../node_modules/react-native-picker
   React:
     :path: ../node_modules/react-native
   react-native-mapbox-gl:
@@ -78,11 +72,10 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
-  Picker: f11a9887a32fb5112a31851bbf523362af0f7bbc
   React: af66244a7d630be2aef03b4ddfe3570e4eff39fc
   react-native-mapbox-gl: b42480060cdcc515dfa3d8e403fb4dd32466a1b9
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 788ecb807a700ead96c4d08a50488dc973bad556
+PODFILE CHECKSUM: 6ffc39c423c3203172bd7a8a829572566433e368
 
 COCOAPODS: 1.4.0
