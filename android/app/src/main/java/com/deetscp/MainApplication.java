@@ -41,7 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new ImagePickerPackage(),
             new FacebookLoginPackage(),
-            new RNInstabugReactnativePackage.Builder("YOUR_ANDROID_APPLICATION_TOKEN",MainApplication.this)
+            new RNInstabugReactnativePackage.Builder("dda9da27cd350702efec4ebefd63f507",MainApplication.this)
 							.setInvocationEvent("shake")
 							.setPrimaryColor("#1D82DC")
 							.setFloatingEdge("left")
