@@ -74,15 +74,13 @@ const Header = (props) => {
 
 const styles = {
     menuIconStyle: {
-        flex: 1,
         marginLeft: 7,
-        position: 'absolute'
     },
     viewStyle: {
         alignItems: 'center',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
     },
     outerViewStyle: {
         height: 47,
@@ -97,7 +95,7 @@ const styles = {
         textShadowColor: 'rgba(0, 0, 0, 0.5)',
         textShadowOffset: { width: 3, height: 5 },
         textShadowRadius: 15,
-        letterSpacing: 5
+        letterSpacing: 5,
     },
     rightTextStyle: {
         fontSize: 20,
@@ -105,9 +103,8 @@ const styles = {
         fontWeight: 'bold',
     },
     headerDetailStyle: {
-        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     backButton: {
         resizeMode: 'contain', 
@@ -120,8 +117,6 @@ const styles = {
         height: 30,
     },
     rightIconContainer: { 
-        flex: 1, 
-        position: 'absolute', 
         right: 7,
       
     },
