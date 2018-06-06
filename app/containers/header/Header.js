@@ -34,7 +34,7 @@ const Header = (props) => {
     const rightIcon = props.rightIconType === 'image' ? (
         <Image 
             source={props.rightImageSource} 
-            style={styles.backButton} 
+            style={styles.rightIcon} 
         />
     ) : (
         <Text style={rightTextStyle}>{props.rightText}</Text>
@@ -110,6 +110,11 @@ const styles = {
         resizeMode: 'contain', 
         width: 25, 
         height: 25 
+    },
+    rightIcon: {
+        resizeMode: 'contain', 
+        width: 35, 
+        height: 30 
     },
     logoImg: {
         resizeMode: 'contain',

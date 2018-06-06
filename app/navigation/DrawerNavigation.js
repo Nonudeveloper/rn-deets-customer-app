@@ -109,11 +109,11 @@ const appointmentListStack = StackNavigator({
 });
 
 const DrawerStack = DrawerNavigator({
-  appointmentListStack: {
-    screen: appointmentListStack
-  },
   appointmentStack: {
     screen: appointmentStack
+  },
+  appointmentListStack: {
+    screen: appointmentListStack
   },
   drawerServicesListStack: {
     screen: DrawerServicesList

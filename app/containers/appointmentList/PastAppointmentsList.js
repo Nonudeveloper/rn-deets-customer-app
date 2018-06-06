@@ -147,8 +147,8 @@ class PastAppointmentsList extends Component {
                     />
                     <FlatList
                         data={this.state.selectedTab === 'past' ? 
-                        this.state.appointments.past_appointments : 
-                        this.state.appointments.upcoming_appointments}
+                        this.props.pastAppointments : 
+                        this.props.upcomingAppointments}
                         ItemSeparatorComponent={this.flatListItemSeparator}
                         renderItem={
                             ({ item }) => this.renderItem(item)
