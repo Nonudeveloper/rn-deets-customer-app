@@ -30,6 +30,8 @@ target 'deetscp' do
   # Mapbox
   pod 'react-native-mapbox-gl', :path => '../node_modules/@mapbox/react-native-mapbox-gl'
 
+  pod 'Picker', :path => '../node_modules/react-native-picker'
+
 end
 
 
