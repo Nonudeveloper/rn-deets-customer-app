@@ -1,5 +1,5 @@
 const apiConfig = {
-  url: 'https://newapi.deetsmobile.com/',
+  url: 'https://api.deetsmobile.com/',
 };
 
 export {

@@ -40,10 +40,11 @@ class ReduxNavigation extends React.Component {
             this.props.dispatch(actionToDispatch);
           });
         } else {
-          // this.setState({
-          //   loggedInStatus: false,
-          //   checkedSignIn: false
-          // });
+          this.setState({
+            loggedInStatus: false,
+            checkedSignIn: false,
+            showLoadingSplash: false
+          });
         }
       })
       .catch(err => console.log(err));
