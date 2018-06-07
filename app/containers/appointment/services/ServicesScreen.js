@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import Header from '../../header/Header';
 import ServicesList from './ServicesList';
 import Loader from '../../../deetscomponents/Loader';
@@ -19,6 +19,23 @@ export default class ServiceScreen extends React.Component {
     }
   }
 
+  renderAlert(error) {
+    Alert.alert(
+      'Error',
+      error,
+      [
+        { 
+          text: 'OK', 
+          onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
+          } 
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
   render() {
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
@@ -31,6 +48,7 @@ export default class ServiceScreen extends React.Component {
           services={this.props.services}
         /> */}
         {/* <ScrollView> */}
+        {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
           <ServicesPanel 
               actions={this.props.actions}
               services={this.props.services} 
