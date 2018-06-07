@@ -12,7 +12,8 @@ import Header from '../header/Header';
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
 const backButton = require('../../assets/icons/2_back_btn_onclick.png');
-const recentLocationIcon = require('../../assets/icons/map.png');
+const recentLocationIcon = require('../../assets/icons/map_black.png');
+const MAPBOX_API_KEY = 'pk.eyJ1Ijoic2hpdmFtMTYwMjkxIiwiYSI6ImNqZWZiN3k3bDJmZGkzM2xlbnFuM3J4YWMifQ.NesZbu4KaREG0LWPD5boRA';
 
 const layerStyles = Mapbox.StyleSheet.create({
   smileyFace: {
@@ -30,7 +31,7 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       coordinates: [11.254, 43.772],
-      center: [-122.44492709999997, 37.7875445],
+      center: [-122.44492709999997, 37.787544],
       loading: false,
       renderPolygon: false,
       inputVal: ''
@@ -69,10 +70,12 @@ export default class HomeScreen extends Component {
     this.setState({ loading: true });
   }
 
-  async onRegionDidChange() { 
-    this.breakIt = 0; 
+  async onRegionDidChange() {
     const center = await this._map.getCenter();
+    console.log(center);
     await this.setState({ loading: false, center });
+    //dispath an action here for reverse geocoding
+    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
@@ -225,7 +228,7 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={5}
+              zoomLevel={11}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
