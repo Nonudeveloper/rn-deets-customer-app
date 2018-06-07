@@ -30,7 +30,7 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       coordinates: [11.254, 43.772],
-      center: [11.254, 43.772],
+      center: [-122.44492709999997, 37.7875445],
       loading: false,
       renderPolygon: false,
       inputVal: ''
@@ -154,11 +154,26 @@ export default class HomeScreen extends Component {
         inputVal: location.service_location_string
       });
     }
+
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => {
+    //     this.setState({
+    //       center: [
+    //         position.coords.latitude,
+    //         position.coords.longitude
+    //       ]
+    //     });
+    //       console.log("Lat: " + position.coords.latitude + "\nLon: " + position.coords.longitude);
+    //   },
+    //   (error) => {
+    //        console.log(error.message);
+    //   }, {
+    //        timeout: 5000
+    //   }
+    // );
   }
 
   render() {
-    
-
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -210,7 +225,7 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={11}
+              zoomLevel={5}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
