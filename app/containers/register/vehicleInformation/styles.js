@@ -87,6 +87,7 @@ export default StyleSheet.create({
     inputStyle: {
         borderBottomColor: 'grey',
         marginHorizontal: 20,
+        borderBottomWidth: 2
     },
     licenseInnerContainerStyle: {
         flex: 1,

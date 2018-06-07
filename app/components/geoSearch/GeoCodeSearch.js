@@ -22,7 +22,15 @@ export default class GeoCodeSearch extends React.Component {
             searchedAdresses: this.props.features,
             inputVal: ''
         };
+       
         this.searchLocation = this.searchLocation.bind(this);
+    }
+
+    componentDidMount() {
+      console.log(this.props.inputVal);
+       this.setState({
+          inputVal: this.props.inputVal
+        });
     }
 
     onListItemClicked= (address) => {

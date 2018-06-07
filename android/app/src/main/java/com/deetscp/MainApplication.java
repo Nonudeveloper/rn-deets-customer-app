@@ -3,7 +3,7 @@ package com.deetscp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.beefe.picker.PickerViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -17,6 +17,7 @@ import com.facebook.soloader.SoLoader;
 import com.pw.droplet.braintree.BraintreePackage; 
 import android.content.Intent; 
 import com.mapbox.rctmgl.RCTMGLPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 
 
 import java.util.Arrays;
@@ -33,14 +34,14 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new ReactNativePushNotificationPackage(),
+            new MainReactPackage(),
+            new FIRMessagingPackage(),
             new LinearGradientPackage(),
             new PickerViewPackage(),
             new VectorIconsPackage(),
             new ImagePickerPackage(),
             new FacebookLoginPackage(),
-            		new RNInstabugReactnativePackage.Builder("YOUR_ANDROID_APPLICATION_TOKEN",MainApplication.this)
+            new RNInstabugReactnativePackage.Builder("dda9da27cd350702efec4ebefd63f507",MainApplication.this)
 							.setInvocationEvent("shake")
 							.setPrimaryColor("#1D82DC")
 							.setFloatingEdge("left")
