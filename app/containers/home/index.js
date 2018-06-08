@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        
+        addressString: state.Geo.addressString,
+        isLoading: state.Geo.isFetching
     };
 };
 

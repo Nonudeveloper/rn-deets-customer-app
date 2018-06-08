@@ -6,8 +6,8 @@ import GeoCodeSearch from '../../components/geoSearch/index';
 // import polyGeoJSON from '../../../../assets/polygon.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import customMarker from '../../assets/icons/icon_location_pin_green.png';
-// import gridPattern from '../../../../assets/grid_pattern.png';
 import Header from '../header/Header';
+import Loader from '../../deetscomponents/Loader';
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
@@ -71,11 +71,11 @@ export default class HomeScreen extends Component {
   }
 
   async onRegionDidChange() {
+    console.log('onRegionDidChange');
     const center = await this._map.getCenter();
-    console.log(center);
+    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
     //dispath an action here for reverse geocoding
-    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
@@ -177,6 +177,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -218,6 +219,9 @@ export default class HomeScreen extends Component {
     };
     return (
         <View style={styles.container}>
+            <Loader
+                loading={isLoading} 
+            />
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
@@ -253,7 +257,7 @@ export default class HomeScreen extends Component {
               onAddressGet={(address) => { 
                 this.setState({ center: address.geometry.coordinates });
               }} 
-              inputVal={this.state.inputVal}
+              inputVal={this.props.addressString}
             />
             <View style={styles.calloutWraper}>
               <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>

@@ -5,8 +5,8 @@ import {
     EMPTY_FEATURES,
     GET_FULL_ADDRESS_REVERSE_GEO,
     GET_FULL_ADDRESS_REVERSE_GEO_FALIURE, 
+    GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS
 } from './constants';
-import { GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS } from '../profile/constants';
 
 export function searchAddress(payload) {
     return {
@@ -45,8 +45,8 @@ export function getFullAddressReverseGeo(payload) {
 
 export function getFullAddressReverseGeoSuccess(res) {
     return {
-        type: GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS,
-        res
+        type: GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
+        addressString: res ? JSON.parse(res._bodyText).features[0].place_name : ''
     };
 }
 

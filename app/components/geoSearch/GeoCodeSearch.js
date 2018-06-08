@@ -26,12 +26,9 @@ export default class GeoCodeSearch extends React.Component {
         this.searchLocation = this.searchLocation.bind(this);
     }
 
-    componentDidMount() {
-      console.log(this.props.inputVal);
-       this.setState({
-          inputVal: this.props.inputVal
-        });
-    }
+    // componentWillReceiveProps(nextProps) {
+    //   console.log(nextProps);
+    // }
 
     onListItemClicked= (address) => {
         Keyboard.dismiss();
@@ -92,7 +89,7 @@ export default class GeoCodeSearch extends React.Component {
                           onChangeText={this.searchLocation}
                           placeholder="Location for service " 
                           underlineColorAndroid='rgba(0,0,0,0)'
-                          value={this.state.inputVal}
+                          value={this.props.inputVal}
                           placeholderTextColor="grey"
                       />
                     </View>

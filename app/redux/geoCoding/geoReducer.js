@@ -35,7 +35,7 @@ export default function addressReducer(state = initialState, action) {
         case GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                addressString: action.res
+                addressString: action.addressString
             });
         default:
             return state;
