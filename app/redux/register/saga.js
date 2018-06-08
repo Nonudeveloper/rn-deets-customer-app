@@ -16,6 +16,8 @@ import { verifyEmailSuccess, registerSuccess, registerFailure } from './actions'
 import RegisterHelper from '../../helpers/register/registerHelper';
 import { fetchMakeModelSuccess } from './vehicleInformation/vehicleActions';
 import { setUser } from '../../helpers/utility';
+import { setItem } from '../../helpers/asyncStorage';
+import { NavigationActions } from 'react-navigation';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -113,6 +115,7 @@ function registerCall(payload) {
   return new Promise((resolve, reject) => {
     RegisterHelper.register(payload)
       .then(response => {
+        console.log(response);
           resolve(response);
       })
       .catch(err => reject(err));
@@ -123,10 +126,12 @@ function* watchRegisterRequest() {
   while (true) {
     const payload = yield take(REGISTER_REQUEST);
     try {
-      console.log(payload)
       const response = yield call(registerCall, payload);
         yield put(registerSuccess(response.user.access_token, response));
-       yield setUser(response.user);
+        yield setItem(response.user);
+        yield setItem('authVehicles', response.vehicle);
+        yield setItem('authCardDetails', response.card ? response.card : []);
+        yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(registerFailure(err));

@@ -58,7 +58,10 @@ class FormArea extends React.Component {
                 fb_id: fbUserData.id,
                 email: fbUserData.email,
                 gender: fbUserData.gender,
-                device_token: this.props.deviceToken
+                // device_token: this.props.deviceToken
+                device_token: { token: 'erwerwegdfgdfgdfg',
+                                os: 'android'
+                              }
                 
         };
     
@@ -66,7 +69,10 @@ class FormArea extends React.Component {
         } else {
             const initialFormData = {
                 flag: 3,
-                device_token: this.props.deviceToken
+                // device_token: this.props.deviceToken
+                device_token: { token: 'erwerwegdfgdfgdfg',
+                                os: 'android'
+                              }
             };
             this.props.dispatch(initialize('signUp', initialFormData));
         }
