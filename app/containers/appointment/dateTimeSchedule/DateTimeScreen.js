@@ -17,8 +17,8 @@ export default class DateTimeScreen extends React.Component {
   constructor(props) {
     super(props);
     const today = new Date();
-    const currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 
+    const currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     this.state = {
         modalVisible: false,
         data: [],

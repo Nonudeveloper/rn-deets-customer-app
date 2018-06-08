@@ -93,7 +93,7 @@ const styles = {
         color: '#00802b',
         fontWeight: 'bold',
         textShadowColor: 'rgba(0, 0, 0, 0.5)',
-        textShadowOffset: { width: 3, height: 5 },
+        textShadowOffset: { width: 1, height: 2 },
         textShadowRadius: 15,
         letterSpacing: 5,
     },

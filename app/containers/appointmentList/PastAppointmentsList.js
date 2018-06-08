@@ -139,7 +139,7 @@ class PastAppointmentsList extends Component {
                         rightText={this.state.editMode ? 'Cancel' : 'Edit'}
                         showRightIcon
                         onPress={() => this.setState({ editMode: !this.state.editMode })}
-                        buttonType={'burger'}
+                        buttonType={'back'}
                     />
                     <AppoinmentTabs 
                         selectedTab={this.state.selectedTab} 

@@ -6,13 +6,14 @@ import GeoCodeSearch from '../../components/geoSearch/index';
 // import polyGeoJSON from '../../../../assets/polygon.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import customMarker from '../../assets/icons/icon_location_pin_green.png';
-// import gridPattern from '../../../../assets/grid_pattern.png';
 import Header from '../header/Header';
+import Loader from '../../deetscomponents/Loader';
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
 const backButton = require('../../assets/icons/2_back_btn_onclick.png');
-const recentLocationIcon = require('../../assets/icons/map.png');
+const recentLocationIcon = require('../../assets/icons/map_black.png');
+const MAPBOX_API_KEY = 'pk.eyJ1Ijoic2hpdmFtMTYwMjkxIiwiYSI6ImNqZWZiN3k3bDJmZGkzM2xlbnFuM3J4YWMifQ.NesZbu4KaREG0LWPD5boRA';
 
 const layerStyles = Mapbox.StyleSheet.create({
   smileyFace: {
@@ -30,7 +31,7 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       coordinates: [11.254, 43.772],
-      center: [11.254, 43.772],
+      center: [-122.44492709999997, 37.787544],
       loading: false,
       renderPolygon: false,
       inputVal: ''
@@ -69,10 +70,12 @@ export default class HomeScreen extends Component {
     this.setState({ loading: true });
   }
 
-  async onRegionDidChange() { 
-    this.breakIt = 0; 
+  async onRegionDidChange() {
+    console.log('onRegionDidChange');
     const center = await this._map.getCenter();
+    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
+    //dispath an action here for reverse geocoding
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
@@ -154,11 +157,27 @@ export default class HomeScreen extends Component {
         inputVal: location.service_location_string
       });
     }
+
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => {
+    //     this.setState({
+    //       center: [
+    //         position.coords.latitude,
+    //         position.coords.longitude
+    //       ]
+    //     });
+    //       console.log("Lat: " + position.coords.latitude + "\nLon: " + position.coords.longitude);
+    //   },
+    //   (error) => {
+    //        console.log(error.message);
+    //   }, {
+    //        timeout: 5000
+    //   }
+    // );
   }
 
   render() {
-    
-
+    const { isLoading } = this.props;
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -200,6 +219,9 @@ export default class HomeScreen extends Component {
     };
     return (
         <View style={styles.container}>
+            <Loader
+                loading={isLoading} 
+            />
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
@@ -235,7 +257,7 @@ export default class HomeScreen extends Component {
               onAddressGet={(address) => { 
                 this.setState({ center: address.geometry.coordinates });
               }} 
-              inputVal={this.state.inputVal}
+              inputVal={this.props.addressString}
             />
             <View style={styles.calloutWraper}>
               <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>

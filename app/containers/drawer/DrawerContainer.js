@@ -8,6 +8,7 @@ import PaymentDetails from '../payments/index';
 
 
 const userPic = require('../../assets/icons/3_user_img.png');
+const deetsLogo = require('../../assets/icons/4_deets_logo.png');
 // let SideMenuWidth = 300;
 
 
@@ -57,10 +58,13 @@ export default class DrawerContainer extends React.Component {
         start={{ x: 0.0, y: 0.25 }} 
         end={{ x: 0.5, y: 1.0 }}
         locations={[0.1, 0.75, 1]}
-        colors={['rgba(217, 217, 217, 0.9)', 'rgba(217, 217, 217, 0.9)', 'rgba(217, 217, 217, 0.9)']} 
+        colors={['#fff', '#fff', '#fff']} 
         style={styles.container}
       >
         <View style={styles.sideMenu}>
+          <View style={{ backgroundColor: '#4CAF50', alignItems: 'center', marginBottom: 30 }}>
+              <Image source={deetsLogo} style={{ resizeMode: 'contain', height: 40, width: 100 }} />
+          </View>
           <View style={{}}>
             <TouchableOpacity 
               style={styles.menu}
@@ -68,12 +72,7 @@ export default class DrawerContainer extends React.Component {
             >
                   <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'appointmentStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('HomeComponent')} 
-            >
-                  <Text style={styles.menuText} type='h5White'>New Appointment</Text>
-            </TouchableOpacity>
+          
             <TouchableOpacity 
               style={[styles.menu, this.props.activeItemKey === 'drawerServicesListStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('drawerServicesListStack')} 
