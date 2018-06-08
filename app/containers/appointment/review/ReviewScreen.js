@@ -51,11 +51,11 @@ export default class ReviewScreen extends React.Component {
         { 
           text: 'OK', 
           onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
             if (message.log) {
               this.props.navigation.navigate('appointmentListStack');
             }
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
           } 
         },
       ],
@@ -64,7 +64,6 @@ export default class ReviewScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
@@ -76,7 +75,7 @@ export default class ReviewScreen extends React.Component {
             onPress={() => this.goToNext()}
             indicatorSource={indicatorFour}
         />
-        {/* <Loader loading={isFetching} /> */}
+        <Loader loading={isFetching} />
         {this.props.appointmentScheduleMsg !== '' && this.renderAlert(this.props.appointmentScheduleMsg)}
         {/* //sp details component */}
         {/* //appointment details component */}

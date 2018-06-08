@@ -14,7 +14,7 @@ class PastAppointmentsList extends Component {
         this.state = {
             appointments: [],
             selectedAppointments: '',
-            selectedTab: 'past',
+            selectedTab: 'upcoming',
             editMode: false
         };
     } 
@@ -35,9 +35,9 @@ class PastAppointmentsList extends Component {
         return (
           <View
             style={{
-              height: 1,
+              height: 3,
               width: '100%',
-              backgroundColor: '#607D8B',
+              backgroundColor: '#333',
             }}
           />
         );

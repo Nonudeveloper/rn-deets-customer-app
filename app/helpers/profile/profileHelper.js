@@ -1,6 +1,7 @@
 import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
 import { getItem } from '../asyncStorage';
+import { apiConfig } from '../../config';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
@@ -10,7 +11,7 @@ class ProfileHelper {
         data.append('last_name', userInfo.userProfileDetails.lname);
         data.append('mobile', userInfo.userProfileDetails.mobile);
         data.append('access_token', userInfo.userProfileDetails.access_token);
-        return await fetch('http://127.0.0.1:8000/customer/edit_user_profile', {
+        return await fetch(`${apiConfig.url}/customer/edit_user_profile`, {
             method: 'POST',
             body: data,
         }).then(response => {
@@ -80,7 +81,7 @@ class ProfileHelper {
         formData.append('notes', authData.form.notes);
         formData.append('license_type', 2);
         formData.append('vehicle_id', authData.form.vehicle_id);
-        return await fetch('http://127.0.0.1:8000/customer/add_or_edit_user_vehicle_information', {
+        return await fetch(`${apiConfig.url}/customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',
             body: formData,
             }).then(response => {

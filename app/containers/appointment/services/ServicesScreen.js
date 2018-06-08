@@ -48,6 +48,7 @@ export default class ServiceScreen extends React.Component {
           services={this.props.services}
         /> */}
         {/* <ScrollView> */}
+        <Loader loading={this.props.technicianFetching} />
         {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
           <ServicesPanel 
               actions={this.props.actions}

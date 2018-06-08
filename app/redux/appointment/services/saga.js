@@ -40,7 +40,7 @@ function* watchFetchServices() {
           if (res.technician) {
             resolve(res);
           } else {
-             const error = res.error;
+            const error = JSON.parse(res._bodyText).error;
              reject({ error });
           }
         })
@@ -72,7 +72,7 @@ function reschudleAppointmentCall(payload) {
         if (res.technician) {
           resolve(res);
         } else {
-           const error = res.error;
+          const error = JSON.parse(res._bodyText).error;
            reject({ error });
         }
       })
