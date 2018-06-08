@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
      
     item: {
-        fontSize: 17,
+        fontSize: 19,
         marginBottom: 5,
         color: '#1a1a1a'
     },
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey'
     },
     locationContainer: {
-        height: 30,
-        flexDirection: 'row',
+        height: 40,
+        flexDirection: 'row'
     },
     locationIconCont: {
         flex: 1,
@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
         
     },
     text: {
-        fontSize: 15
+        fontSize: 15,
     },
     messageIcon: {
         marginVertical: 15,
-        width: 25,
-        height: 25
+        width: 20,
+        height: 20
     },
     dateTime: {
         fontSize: 15,
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
     },
     ratingStart: {
         resizeMode: 'contain',
-        height: 20,
-        width: 20,
-        marginRight: 2
+        height: 18,
+        width: 18,
+        marginRight: 6
     },
     ratingContainer: {
         flexDirection: 'row'
@@ -103,6 +103,12 @@ const styles = StyleSheet.create({
     tabsContainer: { 
         flexDirection: 'row',
         backgroundColor: 'green' 
+    },
+    hrContainer: {
+        flex: 0.5, 
+        borderLeftColor: 'gray', 
+        borderLeftWidth: 1, 
+        marginVertical: 5
     }
 });
 

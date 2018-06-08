@@ -51,7 +51,7 @@ class VehicleForm extends React.Component {
             make: makeID
             };
         }, () => {
-            this.props.makeModel.map((make, i) => {
+            this.props.makeModel.data.map((make, i) => {
                 if (make.make_id === makeID) {
                     //dispatch an action here and update props
                     this.props.updateModels(make.model);
