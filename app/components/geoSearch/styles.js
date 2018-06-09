@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
       flexDirection: 'column'
     },
     textinput: {
-        color: 'grey'
+        color: 'grey',
+        paddingTop: 10
     },
     listViewContainer: {
       zIndex: 99
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       marginHorizontal: 10,
       height: 40,
-      shadowColor: 'red',
+      shadowColor: 'lightgrey',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.8,
       shadowRadius: 4,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     inputContainer: {
       flex: 9
     }
-  
+
   });
-  
+
 export default styles;
