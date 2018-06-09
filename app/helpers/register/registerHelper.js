@@ -1,6 +1,6 @@
 import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
-
+import { apiConfig } from '../../config';
 
 class RegisterHelper {
   
@@ -54,12 +54,12 @@ class RegisterHelper {
     data.append('notes', userInfo.form2.notes);
     data.append('license_type', 2);
     data.append('nonce', userInfo.nonce);
-
-    return await fetch('https://api.deetsmobile.com/customer/register_new_user', {
+    
+    return await fetch(`${apiConfig.url}/customer/register_new_user`, {
       method: 'POST',
       body: data,
     }).then(response => {
-       return JSON.parse(response._bodyText).result;
+       return JSON.parse(response._bodyText);
     })
     .catch(error => ({ error: JSON.stringify(error) }));
   };

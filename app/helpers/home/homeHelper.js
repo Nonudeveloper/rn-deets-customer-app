@@ -31,6 +31,18 @@ class HomeHelper {
       .catch(error => ({ error }));
   }
 
+  hitMapboxReverseGeo = async (data) => {
+    console.log(data);
+    const path = `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.center[0]},${data.center[1]}.json?access_token=${
+      data.mapboxApiKey}`;
+
+    return await fetch(path, {
+      method: 'get',
+    })
+      .then(res => res)
+      .catch(error => ({ error }));
+  }
+
   getRecentLocations = async () => {
     const user = await getItem('user');
     const data = {

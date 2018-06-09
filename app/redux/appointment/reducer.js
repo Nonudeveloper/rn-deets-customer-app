@@ -79,7 +79,8 @@ export default function appointmentReducer(state = initialState, action) {
             });
         case HIDE_ALERT:
             return Object.assign({}, state, {
-                errorMessage: ''
+                errorMessage: '',
+                appointmentScheduleMsg: ''
             });
         case STORE_USER_SELECTED_CARD_DETAILS:
             return Object.assign({}, state, {

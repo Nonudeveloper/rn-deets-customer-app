@@ -20,7 +20,8 @@ LocaleConfig.locales.en = {
         super(props);
         
         this.state = {
-            selected: this.props.currentDate
+            selected: this.props.selectedDate,
+            currentDate: this.props.currentDate
         };
       }
 
@@ -36,7 +37,8 @@ LocaleConfig.locales.en = {
     }
 
     render() {
-      const newdate = new Date(this.state.selected);
+
+      const newdate = new Date(this.state.currentDate);
       newdate.setDate(newdate.getDate() + 7);
       const maxDate = newdate.getFullYear() + '-' + ('0' + (newdate.getMonth() + 1)).slice(-2) + '-' + newdate.getDate();
         return (
@@ -65,7 +67,8 @@ LocaleConfig.locales.en = {
                     height: 400
                   }}
                   // currentDate={'2018-04-21'}
-                  minDate={this.state.selected}
+
+                  minDate={this.state.currentDate}
                   // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
                   maxDate={maxDate}
                   // onDayPress={(day) => {console.log('selected day', day)}}
@@ -88,7 +91,7 @@ LocaleConfig.locales.en = {
                         // alignItems: 'center',
                       },
                     }
-                  }}}
+                  } }}
                   // dayComponent={({date, state}) => {
                   //   console.log(date)
                   //   console.log(state)

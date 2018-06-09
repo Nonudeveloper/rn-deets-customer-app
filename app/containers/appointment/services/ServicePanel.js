@@ -104,7 +104,7 @@ export default class ServicesPanel extends React.Component {
       }
       
       //navigate
-      this.props.navigation.navigate('DateTimeScreen');
+      // this.props.navigation.navigate('DateTimeScreen');
     }
   
     render() {

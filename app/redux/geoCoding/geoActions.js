@@ -2,7 +2,10 @@ import {
     SEARCH_ADDRESS, 
     SEARCH_ADDRESS_SUCCESS, 
     SEARCH_ADDRESS_FALIURE, 
-    EMPTY_FEATURES 
+    EMPTY_FEATURES,
+    GET_FULL_ADDRESS_REVERSE_GEO,
+    GET_FULL_ADDRESS_REVERSE_GEO_FALIURE, 
+    GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS
 } from './constants';
 
 export function searchAddress(payload) {
@@ -30,5 +33,26 @@ export function emptyFeatures() {
     return {
         type: EMPTY_FEATURES,
         features: []
+    };
+}
+
+export function getFullAddressReverseGeo(payload) {
+    return {
+        type: GET_FULL_ADDRESS_REVERSE_GEO,
+        payload
+    };
+}
+
+export function getFullAddressReverseGeoSuccess(res) {
+    return {
+        type: GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
+        addressString: res ? JSON.parse(res._bodyText).features[0].place_name : ''
+    };
+}
+
+export function getFullAddressReverseGeoFaliure(err) {
+    return {
+        type: GET_FULL_ADDRESS_REVERSE_GEO_FALIURE,
+        err
     };
 }

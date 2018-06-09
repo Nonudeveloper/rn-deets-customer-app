@@ -48,7 +48,7 @@ export default class ProfilePic extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.profilePic !== undefined) {
+        if (this.props.profilePic !== undefined && this.props.profilePic !== '') {
             this.setState(() => {
                 return {
                     ImageSource: {

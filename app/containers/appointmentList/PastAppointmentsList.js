@@ -14,7 +14,7 @@ class PastAppointmentsList extends Component {
         this.state = {
             appointments: [],
             selectedAppointments: '',
-            selectedTab: 'past',
+            selectedTab: 'upcoming',
             editMode: false
         };
     } 
@@ -35,9 +35,9 @@ class PastAppointmentsList extends Component {
         return (
           <View
             style={{
-              height: 1,
+              height: 3,
               width: '100%',
-              backgroundColor: '#607D8B',
+              backgroundColor: '#333',
             }}
           />
         );
@@ -139,7 +139,7 @@ class PastAppointmentsList extends Component {
                         rightText={this.state.editMode ? 'Cancel' : 'Edit'}
                         showRightIcon
                         onPress={() => this.setState({ editMode: !this.state.editMode })}
-                        buttonType={'burger'}
+                        buttonType={'back'}
                     />
                     <AppoinmentTabs 
                         selectedTab={this.state.selectedTab} 

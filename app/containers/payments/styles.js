@@ -33,12 +33,12 @@ export default StyleSheet.create({
   },
   titleContainer: { 
     flex: 1, 
-    position: 'absolute'
+    position: 'absolute',
   },
   title: { 
     fontWeight: 'bold', 
     color: '#1a1a1a',
-    fontSize: 20 
+    fontSize: 17
   },
   modalBodyContainer: {
     flex: 1,

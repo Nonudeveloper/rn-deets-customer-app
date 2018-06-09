@@ -39,7 +39,7 @@ class ListItem extends Component {
     }
 
     scheduleItem(item) {
-        console.log(item)
+        console.log(item);
         this.props.actions.selectedAppointmentForReschedule(item);
         this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
@@ -67,7 +67,7 @@ class ListItem extends Component {
         ];
         const leftSwipeBtns = [
             {
-                text: this.props.activeTab === 'past' ? 'schedule' : 'update',
+                text: this.props.activeTab === 'past' ? 'reschedule' : 'update',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
                 onPress: () => { this.props.activeTab === 'past' ? 
@@ -77,7 +77,6 @@ class ListItem extends Component {
                 
             }
         ];
-        console.log(this.props);
         const { item } = this.props;
         return (
             <Swipeout 
@@ -169,9 +168,10 @@ class ListItem extends Component {
                             <View style={styles.locationIconCont}>
                                 <Image source={locationIcon} style={styles.locationIcon} />
                             </View>
+                            <View style={styles.hrContainer} />
                             <View style={styles.locationTextCont}>
-                                <Text style={styles.text}>
-                                    {item.appointment.service_location_string.substr(0, 39)}...
+                                <Text numberOfLines={1} style={styles.text}>
+                                    {item.appointment.service_location_string}
                                 </Text>
                             </View>
                         </View>

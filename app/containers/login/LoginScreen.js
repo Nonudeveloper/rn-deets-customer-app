@@ -13,8 +13,6 @@ import Hr from '../../deetscomponents/hr';
 import Loader from '../../deetscomponents/Loader';
 import Button from '../../deetscomponents/Button';
 
-
-
 export default class LoginScreen extends Component {
 
   constructor(props) {
@@ -32,6 +30,8 @@ export default class LoginScreen extends Component {
   forgotPassword = () => {
       this.props.navigation.navigate('forgotPasswordScreen');
   }
+
+
 
   componentDidUpdate() {
     console.log('componentDidUpdate ');
@@ -84,7 +84,8 @@ export default class LoginScreen extends Component {
         flag: 1,
         fb_id: e.credentials.userId,
         access_token: e.credentials.token,
-        device_token: this.props.deviceToken.token
+        // device_token: this.props.deviceToken.token
+        device_token: this.state.device_token
       };
     }, () => {
       this.props.actions.loginRequest(this.state);
