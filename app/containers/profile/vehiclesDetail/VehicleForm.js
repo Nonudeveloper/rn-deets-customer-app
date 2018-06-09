@@ -23,9 +23,6 @@ class VehicleForm extends React.Component {
           };
     }
     
-   
-   
-
     validateForm = () => {
         console.log('validating.. vehicle form!');
     }

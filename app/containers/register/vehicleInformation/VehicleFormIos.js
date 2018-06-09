@@ -2,7 +2,6 @@ import React from 'react';
 import { reduxForm, Field, initialize, change } from 'redux-form';
 import { View, Text, Picker, TextInput, PickerIOS } from 'react-native';
 import styles from './styles';
-import IosPicker from '../../../deetscomponents/form/IosPicker';
 import CommonTextInput from '../../../deetscomponents/form/Input';
 import CommonTypeTextInput from '../../../components/form/Input';
 import RadioButton from 'radio-button-react-native';
@@ -22,7 +21,6 @@ class VehicleFormIos extends React.Component {
               license: '',
               type: 'Type'
           };
-
     }
 
     componentDidMount() {
@@ -76,8 +74,6 @@ class VehicleFormIos extends React.Component {
             }
         });
     }
-
-     
 
     _updateType(data) {
         const initialFormData = {
@@ -139,7 +135,6 @@ class VehicleFormIos extends React.Component {
                     selectedYear.push(year.year.toString());
                 }
             });
-            console.log(years, selectedYear);
         }
         this._loadPicker(years, selectedYear, 'Year');
     }
@@ -154,7 +149,6 @@ class VehicleFormIos extends React.Component {
                     selectedColor.push(color.color);
                 }
             });
-            console.log(colors, selectedColor);
         }
         this._loadPicker(colors, selectedColor, 'Color');
     }
@@ -169,7 +163,6 @@ class VehicleFormIos extends React.Component {
                     selectedMake.push(make.make_name);
                 }
             });
-            console.log(makes, selectedMake);
         }
         this._loadPicker(makes, selectedMake, 'Make');
     }
@@ -184,7 +177,6 @@ class VehicleFormIos extends React.Component {
                     selectedModel.push(model.model_name);
                 }
             });
-            console.log(models, selectedModel);
         }
         this._loadPicker(models, selectedModel, 'Model');
     }
@@ -202,8 +194,6 @@ class VehicleFormIos extends React.Component {
                 _data[type.vehicle_type_name] = segments;
                 types.push(_data);
             });
-            console.log(types);
-            console.log(this.state.type.split(',', 2));
             this._loadPicker(types, this.state.type.split(',', 2), 'Type');
         }
     }
@@ -221,11 +211,9 @@ class VehicleFormIos extends React.Component {
             onPickerConfirm: data => {
                 switch (type) {
                     case 'Year' : 
-                        console.log(data);
                         this._fetchMakeModel(data[0]);
                         break;
                     case 'Color' : 
-                        console.log(data);
                         this._colorChanged(data[0]);
                         break;
                     case 'Make' :
@@ -257,7 +245,7 @@ class VehicleFormIos extends React.Component {
                 <View style={styles.colContainer}>
                 <View style={styles.colOne}>
                     <Text
-                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {
                             this._fetchYear();
                         }}>
@@ -266,7 +254,7 @@ class VehicleFormIos extends React.Component {
                 </View>
                 <View style={styles.colTwo}>
                     <Text
-                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {
                             this._fetchColor();
                         }}>
@@ -277,7 +265,7 @@ class VehicleFormIos extends React.Component {
             <View>
                 <View style={[inputStyle]}>
                     <Text
-                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {
                             this._fetchMake();
                         }}>
@@ -286,9 +274,8 @@ class VehicleFormIos extends React.Component {
                 </View>
 
                 <View style={[inputStyle]}>
-
                     <Text
-                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {
                             this._fetchModel();
                         }}>
@@ -298,7 +285,7 @@ class VehicleFormIos extends React.Component {
 
                 <View style={[inputStyle]}>
                     <Text
-                        style={{color:'white', fontSize: 16, marginTop: 20}}
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={()=>{
                             this._fetchTypes();
                         }}>
@@ -377,67 +364,6 @@ class VehicleFormIos extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
-                />
-                
-                <Field
-                    name={'color_id'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'make_id'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'model_id'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'color'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                 <Field
-                    name={'year'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'make'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'model'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'vehicle_type'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'vehicle_type_segment_id'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
-                />
-                <Field
-                    name={'radio_button_type'}
-                    component={CommonTextInput}
-                    props={this.props}
-                    type="hidden"
                 />
         </View>
     );

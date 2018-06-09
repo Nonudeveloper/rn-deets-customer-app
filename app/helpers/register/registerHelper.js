@@ -55,7 +55,7 @@ class RegisterHelper {
     data.append('license_type', 2);
     data.append('nonce', userInfo.nonce);
 
-    return await fetch('http://127.0.0.1:8000/customer/register_new_user', {
+    return await fetch('https://api.deetsmobile.com/customer/register_new_user', {
       method: 'POST',
       body: data,
     }).then(response => {
