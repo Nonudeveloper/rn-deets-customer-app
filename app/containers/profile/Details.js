@@ -175,7 +175,7 @@ export default class DetailsScreen extends React.Component {
     }
 
     changeLayout = (val) => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
         if (val === 'detail') {
             this.setState({ 
                 detailFlexValue: 2,

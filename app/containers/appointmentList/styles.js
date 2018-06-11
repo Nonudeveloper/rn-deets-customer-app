@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderLeftWidth: 1,
         borderLeftColor: 'grey',
+        marginVertical: 10
     },
     appointmentDetails: {
         flex: 3,
@@ -109,6 +110,21 @@ const styles = StyleSheet.create({
         borderLeftColor: 'gray', 
         borderLeftWidth: 1, 
         marginVertical: 5
+    },
+    notAvailableContainer: {
+        flex: 1, 
+        alignItems: 'center', 
+        marginVertical: 20
+    },
+    notAvailableText: {
+        fontSize: 20, 
+        color: '#1a1a1a',
+        paddingTop: 20, 
+        textAlign: 'center'
+    },
+    notAvailableImage: {
+        width: 72, 
+        height: 75
     }
 });
 
