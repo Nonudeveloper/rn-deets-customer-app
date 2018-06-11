@@ -176,37 +176,20 @@ export default class DetailsScreen extends React.Component {
 
     changeLayout = (val) => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        if (val === 'detail') {
             this.setState({ 
-                detailFlexValue: 2,
-                vehicleFlexValue: 1,
-                showDetailEditButton: true,
-                showVehicleEditButton: false,
-                showDetail: true,
-                showVehicle: false,
-                showPasswordButton: true,
-                showDetailWidth: window.width,
-                showVehicleWidth: 0,
-                stretchFlex: 3,
+                detailFlexValue: val === 'detail' ? 2 : 1,
+                vehicleFlexValue: val === 'detail' ? 1 : 2,
+                showDetailEditButton: val === 'detail',
+                showVehicleEditButton: val !== 'detail',
+                showDetail: val === 'detail',
+                showVehicle: val !== 'detail',
+                showPasswordButton: val === 'detail',
+                showDetailWidth: val === 'detail' ? window.width : 0,
+                showVehicleWidth: val === 'detail' ? 0 : window.width,
+                stretchFlex: val === 'detail' ? 3 : 9,
                 profileEditable: false,
                 vehicleEditable: false,
             });
-        } else {
-            this.setState({ 
-                detailFlexValue: 1,
-                vehicleFlexValue: 2,
-                showDetailEditButton: false,
-                showVehicleEditButton: true,
-                showDetail: false,
-                showVehicle: true,
-                showPasswordButton: false,
-                showDetailWidth: 0,
-                showVehicleWidth: window.width,
-                stretchFlex: 9,
-                profileEditable: false,
-                vehicleEditable: false,
-            });
-        }
     }
 
     getVehicleImage(image) {

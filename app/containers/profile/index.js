@@ -3,6 +3,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DetailsScreen from './Details';
+import ProfileScreen from './ProfileScreen';
 import { fetchVehicles } from '../../redux/register/startActions';
 import * as profileActions from '../../redux/profile/actions';
 import { logout } from '../../redux/auth/actions';
@@ -31,5 +32,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 

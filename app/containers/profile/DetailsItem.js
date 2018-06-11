@@ -17,7 +17,7 @@ export default class DetailsItem extends React.Component {
 
   render() {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: 'pink', flex: 5 }]}>
             <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
                     <ProfilePic getImage={this.props.getImage} editable={this.props.editable} getImage={this.props.getImage} profilePic={this.props.profilePic} />
