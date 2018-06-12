@@ -155,7 +155,7 @@ class VehicleForm extends React.Component {
         });
     }
     
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.item !== null) {
             const authVehicleData = this.props.item.data;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
@@ -321,21 +321,6 @@ class VehicleForm extends React.Component {
             </View>
             <View style={styles.licenseTextStyle}>
                 {this.state.value === 0 ?
-                    // <TextInput
-                    //     style={{ 
-                    //         height: 60,
-                    //         borderColor: 'grey',
-                    //         color: 'grey',
-                    //         marginHorizontal: 10 
-                    //     }}
-                    //     onClick={ console.log('df')}
-                    //     value={this.state.license}
-                    //     placeholder={'License #'}
-                    //     placeholderTextColor='grey'
-                    //     underlineColorAndroid="transparent"
-                    //     editable={this.state.editable}
-                    //     onFocus={Keyboard.dismiss}
-                    // />
                 <Field
                     name={'license'}
                     component={CommonTextInput}
@@ -347,19 +332,6 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                     : 
-                    // <TextInput
-                    //     style={{ 
-                    //         height: 60,
-                    //         borderColor: 'grey',
-                    //         color: 'grey',
-                    //         marginHorizontal: 10,
-                    //     }}
-                    //     onChangeText={(license) => this.setState({ license })}
-                    //     value={this.state.license}
-                    //     placeholder={'VIN #'}
-                    //     placeholderTextColor='grey'
-                    //     underlineColorAndroid="transparent"
-                    // />
                 <Field
                     name={'vin'}
                     component={CommonTextInput}
@@ -371,7 +343,6 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                 }
-
                 <Field
                     name={'notes'}
                     component={CommonTextInput}

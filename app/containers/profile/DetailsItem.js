@@ -9,6 +9,7 @@ const logOutButton = require('../../assets/icons/logout_pressed.png');
 export default class DetailsItem extends React.Component {
   constructor(props) {
     super(props);
+   
   }
 
   _logout() {
@@ -17,7 +18,7 @@ export default class DetailsItem extends React.Component {
 
   render() {
     return (
-        <View style={[styles.container, { backgroundColor: 'pink', flex: 5 }]}>
+        <View style={{ flex: this.props.flex }}>
             <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
                     <ProfilePic getImage={this.props.getImage} editable={this.props.editable} getImage={this.props.getImage} profilePic={this.props.profilePic} />

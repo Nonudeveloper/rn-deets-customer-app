@@ -68,8 +68,18 @@ export default class CarPicture extends React.Component {
                 <View style={styles.editButtonWrapper}>
                     <Image source={editBtn} style={styles.editIcon} />
                 </View>
-                <TouchableOpacity style={{ position: 'absolute' }} onPress={this.props.editable ? this.selectPhotoTapped.bind(this) : null}>
-                    <Image style={styles.proImageStyle} source={this.state.ImageSource === null ? carIcon : this.state.ImageSource} />
+                <TouchableOpacity 
+                    style={{ position: 'absolute' }} 
+                    onPress={this.props.editable ? 
+                    this.selectPhotoTapped.bind(this) : 
+                    null}
+                >
+                    <Image 
+                        style={styles.proImageStyle} 
+                        source={this.state.ImageSource === null ? 
+                        carIcon : 
+                        this.state.ImageSource} 
+                    />
                 </TouchableOpacity>
                 
             </View>

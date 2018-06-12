@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const SCREEN_WIDTH = Dimensions.get("window").width;
 export default StyleSheet.create({
     carPic: {
-        flex:1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -12,15 +12,14 @@ export default StyleSheet.create({
         borderRadius: 50,
         borderWidth: 3,
         borderColor: '#000',
-        height: 50,
-        width: 50,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'pink'
 
     },
     proImageStyle: {
-        width: 100,
-        height: 100,
+        width: 60,
+        height: 60,
         borderRadius: 100
     },
     container: {
@@ -119,12 +118,10 @@ export default StyleSheet.create({
     },
     editButtonWrapper: { 
         zIndex: 999, 
-        justifyContent: 'flex-end', 
-        marginLeft: 73, 
-        marginBottom: 78 
+        marginLeft: 50, 
+        marginBottom: 45 
     },
     pictureWraper: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
     },
@@ -169,6 +166,7 @@ export default StyleSheet.create({
       text: {
         fontSize: 45,
         fontWeight: "bold"
-      }
+      },
+      
 });
 

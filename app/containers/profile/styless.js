@@ -8,7 +8,6 @@ export const IMAGE_HEIGHT_SMALL = window.width / 7;
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'blue'
     },
     nextButtonStyle: {
         borderRadius: 100,
@@ -129,20 +128,18 @@ export default StyleSheet.create({
     pictureWraper: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
     },
     profilePicContainer: {
-        flex: 1.5,
+        flex: 1,
         justifyContent: 'center', 
-        alignItems: 'flex-end'
+        alignItems: 'center',
     },
     logoutButtonContainer: {
-        flex: 1,
         justifyContent: 'center', 
         alignItems: 'flex-end' 
     },
     formContainer: {
-        flex: 2, 
+        flex: 4, 
         flexDirection: 'column'
     },
     nextButtonContainer: {
@@ -157,6 +154,9 @@ export default StyleSheet.create({
     unactioveButtonStyle: {
         backgroundColor: 'black',
         borderColor: 'grey',
+    },
+    vehiclesContainer: {
+        flex: 5,
     }
 
 });

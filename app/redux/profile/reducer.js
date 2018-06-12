@@ -40,7 +40,6 @@ export default function profileReducer(state = initialState, action) {
             });
         case FETCH_AUTH_USER_DETAILS_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: false,
                 authUser: action.user
             });
         case FETCH_AUTH_USER_DETAILS_FAILURE:

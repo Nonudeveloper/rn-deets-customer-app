@@ -13,11 +13,24 @@ import {
 } from 'react-native';
 import Header from '../header/Header';
 import DetailsItem from './DetailsItem';
+import VehiclesScreen from './vehiclesDetail/index';
+import Loader from '../../deetscomponents/Loader';
 import styles from './styless';
 
 const window = Dimensions.get('window');
 const editButton = require('../../assets/icons/edit_normal.png');
 const tickButton = require('../../assets/icons/tick_normal.png');
+
+class MyComponent extends Component {
+    components = {
+        details: DetailsItem,
+        vehicles: VehiclesScreen
+    };
+    render() {
+       const TagName = this.components[this.props.tag || 'details'];
+       return <TagName />;
+    }
+}
 
 export default class ProfileScreen extends Component {
 
@@ -41,11 +54,12 @@ export default class ProfileScreen extends Component {
             showVehicleWidth: 0,
             stretchFlex: 3,
             image: '',
-            selectedPage: 0
+            selectedPage: 0,
+            detailsFlex: 5
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.actions.fetchAuthUserDetails();
         this.props.getVehicles();
         this.props.actions.getAuthUserVehicleDetails();
@@ -70,6 +84,7 @@ export default class ProfileScreen extends Component {
             stretchFlex: val === 'detail' ? 3 : 9,
             profileEditable: false,
             vehicleEditable: false,
+            detailsFlex: 0
         });
     }
 
@@ -126,6 +141,14 @@ export default class ProfileScreen extends Component {
         });
     }
 
+    getVehicleImage(image) {
+        this.setState({ image });
+    }
+
+    getSelectedPage(index) {
+        this.setState({ selectedPage: index });
+    }
+
     saveEditVehicleData() {
         const errors = this.props.form['editVehicleForm' + this.state.selectedPage].syncErrors;
         let errorCount = 0;
@@ -155,16 +178,34 @@ export default class ProfileScreen extends Component {
         this.props.actions.deleteVehicle(vehicleId);
     }
 
+
+
     render() {
+        const WhatTag = this.state.showDetail ? "DetailsItem" : "VehiclesScreen";
+        const DetailsOrVehicles = (<WhatTag 
+                getImage={this.getImage.bind(this)} 
+                editable={this.state.profileEditable} 
+                getImage={this.getImage.bind(this)} 
+                profilePic={this.props.authUser.image}
+                navigation={this.props.navigation} 
+                formEditable={this.state.profileEditable} 
+                authUser={this.props.authUser}
+                logout={this.props.logout}
+                editable={this.state.vehicleEditable} 
+                navigation={this.props.navigation}
+                getVehicleImage={this.getVehicleImage.bind(this)}
+                getSelectedPage={this.getSelectedPage.bind(this)}
+        />);
         return (
             <View style={styles.container}>
+                <Loader loading={this.props.isFetching} />
                 <Header 
                     headerText={'PROFILE'} 
                     navigation={this.props.navigation} 
                     buttonType={'back'}
                 />
                 <View style={styles.toggleButtonContainer}>
-                    <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60 }} >
+                    <View style={{ flex: this.state.detailFlexValue, marginRight: 10, height: 60, top: 25 }} >
                         <TouchableOpacity 
                             activeOpacity={1} 
                             style={[styles.detailButtonInnerContainer, this.state.detailFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
@@ -182,26 +223,33 @@ export default class ProfileScreen extends Component {
                             }
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flex: this.state.vehicleFlexValue, marginLeft: 10, height: 60 }} >
+                    <View style={{ flex: this.state.vehicleFlexValue, marginLeft: 10, height: 60, top: 25 }} >
                         <TouchableOpacity 
                             activeOpacity={1} 
                             style={[styles.vehicleButtonInnerContainer, this.state.vehicleFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
                             onPress={this.changeLayout.bind(this, 'vehicle')} 
                         >
                         { this.state.showVehicleEditButton &&
-                            <TouchableOpacity style={{ flex: 1, position: 'absolute', left: 10 }} onPress={this.editVehicles.bind(this)}>
-                                <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
+                            <TouchableOpacity 
+                                style={{ flex: 1, position: 'absolute', left: 10 }} 
+                                onPress={this.editVehicles.bind(this)}
+                            >
+                                <Image 
+                                    style={{ width: 30, height: 30 }} 
+                                    source={this.state.vehicleEditable ? tickButton : editButton} 
+                                />
                             </TouchableOpacity>
                         }
                             <View style={styles.detailButtonInnerWraper}>
-                            <Text style={styles.vehicleTextContainer}>
-                                Vehicles
-                            </Text>
+                                <Text style={styles.vehicleTextContainer}>
+                                    Vehicles
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <DetailsItem
+          
+                {/* <MyComponent
                     getImage={this.getImage.bind(this)} 
                     editable={this.state.profileEditable} 
                     getImage={this.getImage.bind(this)} 
@@ -210,7 +258,28 @@ export default class ProfileScreen extends Component {
                     formEditable={this.state.profileEditable} 
                     authUser={this.props.authUser}
                     logout={this.props.logout}
-                />
+                    tag={'details'}
+                /> */}
+              
+                {this.state.showDetail ? (
+                    <DetailsItem
+                        getImage={this.getImage.bind(this)} 
+                        editable={this.state.profileEditable} 
+                        getImage={this.getImage.bind(this)} 
+                        profilePic={this.props.authUser.image}
+                        navigation={this.props.navigation} 
+                        formEditable={this.state.profileEditable} 
+                        authUser={this.props.authUser}
+                        logout={this.props.logout}
+                    />
+                ) : (
+                    <VehiclesScreen 
+                        editable={this.state.vehicleEditable} 
+                        navigation={this.props.navigation}
+                        getVehicleImage={this.getVehicleImage.bind(this)}
+                        getSelectedPage={this.getSelectedPage.bind(this)}
+                    /> 
+                )}
             </View>
         );
     }

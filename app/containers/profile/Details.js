@@ -197,6 +197,7 @@ export default class DetailsScreen extends React.Component {
     }
 
   render() {
+      console.log(this.state);
     if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
         <View style={styles.container}>
