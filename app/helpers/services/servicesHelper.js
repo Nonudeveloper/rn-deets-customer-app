@@ -13,7 +13,6 @@ class ServicesHelper {
     }
 
     createNewAppointment = async appointmentInfo => {
-        console.log(appointmentInfo);
         const user = await getItem('user');
         const data = new FormData();
 
@@ -22,8 +21,8 @@ class ServicesHelper {
         } else {
             data.append('service_cost', appointmentInfo.service.cost);
         }
-        const today = new Date('2018-04-19');
-        // const date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate();
+        const today = new Date();
+        const serviceDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 
         const payload = {
             service_cost: appointmentInfo.selectedVehicle.vehicle_type === 2 ? appointmentInfo.service.service_Large_cost : appointmentInfo.service.cost,
@@ -31,15 +30,15 @@ class ServicesHelper {
             service_id: appointmentInfo.service.service_id,
             access_token: JSON.parse(user).access_token,
             service_name: appointmentInfo.service.service_name,
-            service_location_zipcode: '11106',
-            service_location_latitude: '33.8218570',
-            service_location_longitude: '-118.0615270',
-            service_date: '2018-04-19',
+            service_location_zipcode: appointmentInfo.geoData.geoLocationData[0].zipcode,
+            service_location_latitude: appointmentInfo.geoData.geoLocationData[0].coordinates[1],
+            service_location_longitude: appointmentInfo.geoData.geoLocationData[0].coordinates[0],
+            service_date: serviceDate,
             service_duration_minutes: appointmentInfo.service.estimation_time,
             current_date_time: today.toJSON(),
             adds_on_id: appointmentInfo.addons,
             user_vehicle_id: appointmentInfo.selectedVehicle.vehicle_id,
-            service_location_string: '1386–1468 State Route 97, Narrowsburg, NY  12764, United States',
+            service_location_string: appointmentInfo.geoData.addressString,
             vehicle_type_key_cost: appointmentInfo.selectedVehicle.vehicle_type_key_cost
         };
         // data.append('service_image', appointmentInfo.service.image);
@@ -81,12 +80,12 @@ class ServicesHelper {
         console.log(reschudleAppointmentInfo);
         const user = await getItem('user');
         const data = new FormData();
-        const today = new Date('2018-04-19');
-        // const date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate();
+        const today = new Date();
+        const serviceDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 
         const payload = {
             access_token: JSON.parse(user).access_token,
-            service_date: '2018-04-19',
+            service_date: serviceDate,
             current_date_time: today.toJSON(),
             adds_on_id: reschudleAppointmentInfo.addOns,
             service_appointment_id: reschudleAppointmentInfo.appointmentId

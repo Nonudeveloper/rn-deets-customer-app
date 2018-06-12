@@ -30,12 +30,13 @@ export function fetchServicesFaliure(err) {
     };
 }
 
-export function createNewServiceAppointment(service, selectedVehicle, addons) {
+export function createNewServiceAppointment(service, selectedVehicle, addons, geoData) {
     return {
         type: CREATE_NEW_USER_SERVICE_APPOINTMENT,
         service,
         selectedVehicle,
         addons,
+        geoData
     };
 }
 

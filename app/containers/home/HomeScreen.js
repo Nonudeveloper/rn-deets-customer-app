@@ -73,7 +73,6 @@ export default class HomeScreen extends Component {
   }
 
   async onRegionDidChange() {
-    console.log('onRegionDidChange');
     const center = await this._map.getCenter();
     this.props.getFullAddressReverseGeo({center, mapboxApiKey: MAPBOX_API_KEY});
     await this.setState({loading: false, center});
@@ -143,8 +142,8 @@ export default class HomeScreen extends Component {
     if (!isMyObjectEmpty) {
       this.setState({
         center: [
-          parseInt(location.service_location_longitude),
-          parseInt(location.service_location_latitude)
+          Number(location.service_location_longitude),
+          Number(location.service_location_latitude)
         ],
         inputVal: location.service_location_string
       });
