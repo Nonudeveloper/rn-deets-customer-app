@@ -25,9 +25,9 @@ class NotesScreen extends React.Component {
         <Header 
             navigation={this.props.navigation} 
             headerText={'Notes'}
-            showRightIcon
-            rightText={'Next'}
-            onPress={() => this.props.navigation.navigate('selectVehicle')}
+            // showRightIcon
+            // rightText={'Next'}
+            // onPress={() => this.props.navigation.navigate('selectVehicle')}
             indicatorSource={indicatorThree}
         />
         {/* <Loader loading={isFetching} /> */}

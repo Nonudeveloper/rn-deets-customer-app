@@ -56,6 +56,8 @@ export default class ServiceScreen extends React.Component {
               selectedVehicle={this.props.selectedVehicle}
               navigation={this.props.navigation}
               reSchedule={this.props.selectedAppointment}
+              addressString={this.props.addressString}
+              geoLocationData={this.props.geoLocationData}
           />
         {/* </ScrollView> */}
       </View>

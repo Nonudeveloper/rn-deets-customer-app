@@ -44,9 +44,11 @@ export function getFullAddressReverseGeo(payload) {
 }
 
 export function getFullAddressReverseGeoSuccess(res) {
+    const geoLocationData = res ? getZipCodes(JSON.parse(res._bodyText).features) : {};
     return {
         type: GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
-        addressString: res ? JSON.parse(res._bodyText).features[0].place_name : ''
+        addressString: res ? JSON.parse(res._bodyText).features[0].place_name : '',
+        geoLocationData
     };
 }
 
@@ -55,4 +57,22 @@ export function getFullAddressReverseGeoFaliure(err) {
         type: GET_FULL_ADDRESS_REVERSE_GEO_FALIURE,
         err
     };
+}
+
+function getZipCodes(geoData) {
+    const geoLocationData = [];
+    geoData.map((geo) => {
+        if (geo.place_type[0] === 'postcode') {
+            geoLocationData.push({ zipcode: geo.text, coordinates: geo.geometry.coordinates });
+        }
+        //   const convertedtime = [];
+        //   tec.interval.map((interval, j) => {
+        //     const date = new Date(interval);
+        //     const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        //     convertedtime.push({ key: j, timeavailable: getTime, selected: false });
+        //   });
+        //   availableTime.push({ technician: tec, time: convertedtime });
+        });
+
+    return geoLocationData;
 }
