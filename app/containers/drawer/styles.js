@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
       bottom: 0,
       left: 0,
       // width: SideMenuWidth,
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
     },
     sideMenuTitle: {
         marginLeft: 20,

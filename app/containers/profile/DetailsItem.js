@@ -18,7 +18,7 @@ export default class DetailsItem extends React.Component {
 
   render() {
     return (
-        <View style={{ flex: this.props.flex }}>
+        <View style={{ flex: this.props.flex, opacity: this.props.opacity }}>
             <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
                     <ProfilePic getImage={this.props.getImage} editable={this.props.editable} getImage={this.props.getImage} profilePic={this.props.profilePic} />
@@ -40,5 +40,4 @@ export default class DetailsItem extends React.Component {
     );
   }
 }
-
 

@@ -23,9 +23,6 @@ class VehicleForm extends React.Component {
           };
     }
     
-   
-   
-
     validateForm = () => {
         console.log('validating.. vehicle form!');
     }
@@ -144,7 +141,7 @@ class VehicleForm extends React.Component {
         }, () => {
 
             this.props.item.makeModel.data.map((make, i) => {
-                if (make.make_id === this.state.make){
+                if (make.make_id === this.state.make) {
                     make.model.map((model, j) => {
                         if (model.model_id === modelId) {
                             this.props.dispatch(change(this.props.form, 'model', model.model_name));
@@ -155,7 +152,7 @@ class VehicleForm extends React.Component {
         });
     }
     
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.item !== null) {
             const authVehicleData = this.props.item.data;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
@@ -408,9 +405,8 @@ class VehicleForm extends React.Component {
 
 
 export default reduxForm({ 
-    destroyOnUnmount: false,
-    keepDirtyOnReinitialize: true,
-    enableReinitialize: true,
+    keepDirtyOnReinitialize: false,
+    enableReinitialize: false,
     validate: (values) => {
         const errors = {};
         errors.year = !values.year
