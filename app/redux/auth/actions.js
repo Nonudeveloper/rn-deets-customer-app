@@ -10,7 +10,10 @@ import {
   HIDE_RESET_ALERT,
   SAVE_DEVICE_TOKEN,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE
+  LOGOUT_FAILURE,
+  LOGIN_THROUGH_ACCESS_TOKEN,
+  LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS,
+  LOGIN_THROUGH_ACCESS_TOKEN_FAILURE
 } from './constants';
 
 export function loginRequest(state) {
@@ -21,12 +24,13 @@ export function loginRequest(state) {
 }
 
 
-export function loginSuccess({ access_token, user, vehicle }) {
+export function loginSuccess(authUserData) {
+  const { user, vehicle } = authUserData;
   return {
     type: LOGIN_SUCCESS,
-    access_token,
     user,
     vehicle,
+    authUserData
   };
 }
 
@@ -93,6 +97,30 @@ export function logoutSuccess() {
 export function logoutFailure(err) {
   return {
     type: LOGOUT_FAILURE,
+    err
+  };
+}
+
+export function loginThroughAccessToken(deviceToken) {
+  return {
+    type: LOGIN_THROUGH_ACCESS_TOKEN,
+    deviceToken
+  };
+}
+
+export function loginThroughAccessTokenSuccess(authUserData) {
+  const { user, vehicle } = authUserData;
+  return {
+    type: LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS,
+    user,
+    vehicle,
+    authUserData
+  };
+}
+
+export function loginThroughAccessTokenFailure(err) {
+  return {
+    type: LOGIN_THROUGH_ACCESS_TOKEN_FAILURE,
     err
   };
 }
