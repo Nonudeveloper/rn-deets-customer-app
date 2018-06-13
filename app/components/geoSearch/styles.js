@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop: 22,
-      flexDirection: 'column'
+      marginTop: 22
     },
     textinput: {
         color: 'grey',

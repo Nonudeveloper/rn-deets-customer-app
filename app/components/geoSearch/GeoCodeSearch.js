@@ -1,11 +1,11 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { 
-  ListView, 
-  Text, 
-  TextInput, 
-  TouchableHighlight, 
-  View, 
+import {
+  ListView,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  View,
   Keyboard
 } from 'react-native';
 import styles from './styles';
@@ -22,7 +22,7 @@ export default class GeoCodeSearch extends React.Component {
             searchedAdresses: this.props.features,
             inputVal: ''
         };
-       
+
         this.searchLocation = this.searchLocation.bind(this);
     }
 
@@ -48,7 +48,7 @@ export default class GeoCodeSearch extends React.Component {
 
       if (query !== '') {
         //dispatch an action here SEARCH_ADDRESS
-        this.props.actions.searchAddress(data); 
+        this.props.actions.searchAddress(data);
         this.setState({
           inputVal: query
         });
@@ -87,7 +87,7 @@ export default class GeoCodeSearch extends React.Component {
                       <TextInput
                           style={styles.textinput}
                           onChangeText={this.searchLocation}
-                          placeholder="Location for service " 
+                          placeholder="Location for service "
                           underlineColorAndroid='rgba(0,0,0,0)'
                           value={this.props.inputVal}
                           placeholderTextColor="grey"
@@ -97,7 +97,7 @@ export default class GeoCodeSearch extends React.Component {
                   <View style={styles.listViewContainer}>
                     <ListView
                         dataSource={ds.cloneWithRows(this.props.features)}
-                        renderRow={this.renderAdress} 
+                        renderRow={this.renderAdress}
                         style={styles.listView}
                         renderSeparator={this.renderSeparator}
                         enableEmptySections
@@ -108,4 +108,3 @@ export default class GeoCodeSearch extends React.Component {
         );
     }
 }
-
