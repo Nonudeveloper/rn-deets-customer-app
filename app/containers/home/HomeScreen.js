@@ -147,12 +147,12 @@ export default class HomeScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     const location = navigation.getParam('location', {});
-    let isMyObjectEmpty = !Object.keys(location).length;
-    if(!isMyObjectEmpty) {
+    const isMyObjectEmpty = !Object.keys(location).length;
+    if (!isMyObjectEmpty) {
       this.setState({
         center: [
-          parseInt(location.service_location_longitude),
-          parseInt(location.service_location_latitude)
+          Number(location.service_location_longitude),
+          Number(location.service_location_latitude)
         ],
         inputVal: location.service_location_string
       });

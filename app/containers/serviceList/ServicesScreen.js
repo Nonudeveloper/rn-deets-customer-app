@@ -20,16 +20,14 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
-    if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
       <View style={styles.container}>
+      <Loader loading={this.props.isFetching} />
         <Header 
             navigation={this.props.navigation} 
             headerText={'Services'}
         />
-        {/* <ServicesList 
-          services={this.props.services}
-        /> */}
+      
         <ScrollView>
           <ServicesPanel services={this.props.services} />
         </ScrollView>
