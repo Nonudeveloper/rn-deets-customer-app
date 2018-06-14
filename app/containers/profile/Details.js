@@ -191,6 +191,7 @@ export default class DetailsScreen extends React.Component {
                 profileEditable: false,
                 vehicleEditable: false,
             });
+        }
     }
 
     getVehicleImage(image) {
