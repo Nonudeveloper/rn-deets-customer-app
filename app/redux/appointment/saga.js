@@ -109,7 +109,7 @@ function* watchAddNewCardDetails() {
         existingCards.push(response);
         yield setCardDetails(existingCards);
         yield put(NavigationActions.navigate({ routeName: payload.process === 'review' ? 'reviewScreen' : 'HomeComponent' }));
-        yield put(addNewCardDetailsSuccess());
+        yield put(addNewCardDetailsSuccess(existingCards));
         console.log('SAGA FETCH SUCCESS: ', response);
       } catch (err) {
         yield put(addNewCardDetailsFaliure(err));

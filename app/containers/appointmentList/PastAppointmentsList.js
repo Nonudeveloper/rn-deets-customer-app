@@ -133,7 +133,6 @@ class PastAppointmentsList extends Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
                 <View style={styles.mainContainer}>
                     <Header 
                         navigation={this.props.navigation} 
@@ -157,7 +156,7 @@ class PastAppointmentsList extends Component {
                         }
                         keyExtractor={(item, index) => index.toString()}
                         extraData={this.state}
-                        ListHeaderComponent={() => 
+                        ListEmptyComponent={() => 
                             <View style={styles.notAvailableContainer}>
                              {(!this.props.upcomingAppointments.length && this.state.selectedTab !== 'past' ? 
                             <View style={styles.notAvailableContainer}>
@@ -172,13 +171,10 @@ class PastAppointmentsList extends Component {
                             </View>
                             : null)}
                             </View>
-                            
                         }
                     />
-                    
+                     {this.renderTrashModal()}
                 </View>
-                {this.renderTrashModal()}
-            </ScrollView>
         );
     }
 }

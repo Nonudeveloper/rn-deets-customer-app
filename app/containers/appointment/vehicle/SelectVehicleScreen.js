@@ -14,7 +14,9 @@ export default class SelectVehicleScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchAuthVehicles();
+    if (!this.props.userVehicle.length) {
+      this.props.fetchAuthVehicles();
+    }
     this.props.setBackToInitialState();
     if (this.props.navigation.state.params === undefined) {
       this.props.setSelectedAppointmentToInitialState();
