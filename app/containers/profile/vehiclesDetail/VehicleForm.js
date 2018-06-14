@@ -141,7 +141,7 @@ class VehicleForm extends React.Component {
         }, () => {
 
             this.props.item.makeModel.data.map((make, i) => {
-                if (make.make_id === this.state.make){
+                if (make.make_id === this.state.make) {
                     make.model.map((model, j) => {
                         if (model.model_id === modelId) {
                             this.props.dispatch(change(this.props.form, 'model', model.model_name));
@@ -318,21 +318,6 @@ class VehicleForm extends React.Component {
             </View>
             <View style={styles.licenseTextStyle}>
                 {this.state.value === 0 ?
-                    // <TextInput
-                    //     style={{ 
-                    //         height: 60,
-                    //         borderColor: 'grey',
-                    //         color: 'grey',
-                    //         marginHorizontal: 10 
-                    //     }}
-                    //     onClick={ console.log('df')}
-                    //     value={this.state.license}
-                    //     placeholder={'License #'}
-                    //     placeholderTextColor='grey'
-                    //     underlineColorAndroid="transparent"
-                    //     editable={this.state.editable}
-                    //     onFocus={Keyboard.dismiss}
-                    // />
                 <Field
                     name={'license'}
                     component={CommonTextInput}
@@ -344,19 +329,6 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                     : 
-                    // <TextInput
-                    //     style={{ 
-                    //         height: 60,
-                    //         borderColor: 'grey',
-                    //         color: 'grey',
-                    //         marginHorizontal: 10,
-                    //     }}
-                    //     onChangeText={(license) => this.setState({ license })}
-                    //     value={this.state.license}
-                    //     placeholder={'VIN #'}
-                    //     placeholderTextColor='grey'
-                    //     underlineColorAndroid="transparent"
-                    // />
                 <Field
                     name={'vin'}
                     component={CommonTextInput}
@@ -368,7 +340,6 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
                 />
                 }
-
                 <Field
                     name={'notes'}
                     component={CommonTextInput}
@@ -434,9 +405,8 @@ class VehicleForm extends React.Component {
 
 
 export default reduxForm({ 
-    destroyOnUnmount: false,
-    keepDirtyOnReinitialize: true,
-    enableReinitialize: true,
+    keepDirtyOnReinitialize: false,
+    enableReinitialize: false,
     validate: (values) => {
         const errors = {};
         errors.year = !values.year

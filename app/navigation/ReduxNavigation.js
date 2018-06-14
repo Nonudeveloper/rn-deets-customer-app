@@ -57,12 +57,12 @@ class ReduxNavigation extends React.Component {
       state: nav,
       addListener,
     });
-
-    if (this.state.showLoadingSplash) {
-      return <LoadingSplash />;
-    } else {
-      return <AppNavigation navigation={navigation} />;
-    }
+    return <AppNavigation navigation={navigation} />;
+    // if (this.state.showLoadingSplash) {
+    //   return <LoadingSplash />;
+    // } else {
+    //   return <AppNavigation navigation={navigation} />;
+    // }
   }
 }
 

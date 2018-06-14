@@ -20,7 +20,7 @@ class FormArea extends React.Component {
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.authUser.length !== 0) {
             const user = this.props.authUser;
             const initialFormData = {
@@ -155,8 +155,8 @@ class FormArea extends React.Component {
 }
 export default reduxForm({ 
     form: 'profileDetails',
-    destroyOnUnmount: false,
-    keepDirtyOnReinitialize: true,
+    keepDirtyOnReinitialize: false,
+    enableReinitialize: false,
     validate: (values) => {
         const errors = {};
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

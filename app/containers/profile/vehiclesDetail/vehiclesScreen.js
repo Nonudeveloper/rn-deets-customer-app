@@ -4,8 +4,7 @@ import StepIndicator from 'react-native-step-indicator';
 import { ViewPager } from 'rn-viewpager';
 import CarPicture from './CarPicture';
 import VehicleForm from './VehicleForm';
-//import VehicleFormIos from '.VehicleFormIos';
-import styles from '../styles';
+import styles from '../styless';
 
 
 const addVehicleButton = require('../../../assets/icons/add_car_pressed.png');
@@ -74,9 +73,13 @@ export default class VehiclesScreen extends React.Component {
   render() {
     const totalPages = this.props.authVehiclesData.length;
     return (
-      <View style={styles.container}>
-        <View style={{ marginHorizontal: 100, top: 160 }}>
-          <StepIndicator customStyles={firstIndicatorStyles} currentPosition={this.state.currentPage} stepCount={totalPages} />
+      <View style={[{ opacity: this.props.opacity, flex: this.props.flex }]}>
+          <View style={{ marginHorizontal: 100, top: 5 }}>
+            <StepIndicator 
+              customStyles={firstIndicatorStyles} 
+              currentPosition={this.state.currentPage} 
+              stepCount={totalPages} 
+            />
         </View>
         <ViewPager
           style={{ flexGrow: 1 }}
@@ -84,14 +87,23 @@ export default class VehiclesScreen extends React.Component {
         >
           {this.props.authVehiclesData.map((item, i) =>
          
-          <View key={i} style={{ flex: 1, top: 10 }}>
+          <View key={i} >
             <View style={styles.pictureWraper}>
                 <View style={styles.profilePicContainer}>
-                <CarPicture getVehicleImage={this.props.getVehicleImage} currentPage={this.state.currentPage} vehicleImage={item.data.vehicle_image} editable={this.props.editable} />
+                  <CarPicture 
+                    getVehicleImage={this.props.getVehicleImage} 
+                    currentPage={this.state.currentPage} 
+                    vehicleImage={item.data.vehicle_image} 
+                    editable={this.props.editable} 
+                  />
                 </View>
-                <View style={styles.logoutButtonContainer}>
-                    <TouchableHighlight underlayColor={'transparent'} style={{ flex: 1, position: 'absolute' }} onPress={() => this.props.navigation.navigate('addVehicleScreen')} >
-                      <Image style={{ width: 100, height: 66 }} source={addVehicleButton} />
+                <View style={[styles.logoutButtonContainer, {}]}>
+                    <TouchableHighlight 
+                      underlayColor={'transparent'} 
+                      style={{ position: 'absolute' }} 
+                      onPress={() => this.props.navigation.navigate('addVehicleScreen')} 
+                    >
+                      <Image style={{ width: 80, height: 52 }} source={addVehicleButton} />
                     </TouchableHighlight>
                 </View>
             </View>
