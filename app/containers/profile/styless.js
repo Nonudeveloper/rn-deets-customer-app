@@ -20,7 +20,6 @@ export default StyleSheet.create({
     profilePic: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 7
     },
     circle: {
         borderRadius: 50,
@@ -71,7 +70,7 @@ export default StyleSheet.create({
     toggleButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        flex: 1
+        flex: 1,
     },
     detailButtonInnerContainer: {
         flex: 1,
@@ -131,8 +130,6 @@ export default StyleSheet.create({
     },
     profilePicContainer: {
         flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'center',
     },
     logoutButtonContainer: {
         justifyContent: 'center', 
@@ -140,7 +137,8 @@ export default StyleSheet.create({
     },
     formContainer: {
         flex: 4, 
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: 'red'
     },
     nextButtonContainer: {
         flex: 1, 

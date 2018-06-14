@@ -9,7 +9,8 @@ import {
     LayoutAnimation, 
     UIManager, 
     Platform, 
-    Animated
+    Animated,
+    Easing
 } from 'react-native';
 import Header from '../header/Header';
 import StyleConstants from '../../config/StyleConstants';
@@ -54,18 +55,13 @@ export default class ProfileScreen extends Component {
             vehicleEditable: false,
             newImage: '',
             showPasswordButton: true,
-            detailFlexValue: 2,
-            vehicleFlexValue: 1,
             showDetailEditButton: true,
             showVehicleEditButton: false,
-            showDetail: true,
-            showVehicle: false,
-            showDetailWidth: window.width,
-            showVehicleWidth: 0,
             image: '',
             selectedPage: 0,
             detailsOpacity: 100,
-            data: [],
+            detailFlexValue: 2,
+            vehicleFlexValue: 1
         };
     }
 
@@ -73,14 +69,10 @@ export default class ProfileScreen extends Component {
         this.props.actions.fetchAuthUserDetails();
         this.props.getVehicles();
         this.props.actions.getAuthUserVehicleDetails();
-        clearInterval(this.interval);
     }
 
     componentDidMount() {
-        this.generateData();
-        this.interval = setInterval(() => {
-          this.generateData();
-        }, 1000);
+      
     }
 
     generateData = () => {
@@ -98,23 +90,18 @@ export default class ProfileScreen extends Component {
         this.setState({ newImage: image });
     }
 
-    animate = val => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setStates = val => {
         this.setState({ 
-            detailFlexValue: val === 'detail' ? 2 : 1,
-            vehicleFlexValue: val === 'detail' ? 1 : 2,
+            detailsOpacity: val === 'detail' ? 100 : 0,
             showDetailEditButton: val === 'detail',
             showVehicleEditButton: val !== 'detail',
-            showDetail: val === 'detail',
-            showVehicle: val !== 'detail',
             showPasswordButton: val === 'detail',
-            showDetailWidth: val === 'detail' ? window.width : 0,
-            showVehicleWidth: val === 'detail' ? 0 : window.width,
+            detailFlexValue: val === 'detail' ? 2 : 1,
+            vehicleFlexValue: val === 'detail' ? 1 : 2
         });
     }
 
     animateDetailBarTo = (delay, value) => {
-        console.log('animateDetailBarTo');
         Animated.sequence([
           Animated.delay(delay),
           Animated.timing(this._detailBarFlex, {
@@ -124,7 +111,6 @@ export default class ProfileScreen extends Component {
     }
 
     animateVehicleBarTo = (delay, value) => {
-        console.log('animateVehicleBarTo');
         Animated.sequence([
           Animated.delay(delay),
           Animated.timing(this._vehicleBarFlex, {
@@ -133,11 +119,26 @@ export default class ProfileScreen extends Component {
         ]).start();
     }
 
-    changeLayout = val => {
-        this.setState({ 
-            detailsOpacity: val === 'detail' ? 100 : 0
-        });
+    animateBars = (whichBar) => {
+        Animated.timing(
+            this._detailBarFlex,
+            {
+                toValue: whichBar === 'detail' ? 2 : 1,
+                duration: 1000,
+                easing: Easing.linear
+            }
+        ).start();
+
+        Animated.timing(
+            this._vehicleBarFlex,
+            {
+                toValue: whichBar === 'detail' ? 1 : 2,
+                duration: 1000,
+                easing: Easing.linear
+            }
+        ).start();
     }
+
 
     editDetails() {
         this.state.profileEditable ? 
@@ -234,11 +235,11 @@ export default class ProfileScreen extends Component {
     }
 
     render() {
-        const detailBarStyle = {
+        const detailFlex = {
             flex: this._detailBarFlex
         };
 
-        const vehicleBarStyle = {
+        const vehicleFlex = {
             flex: this._vehicleBarFlex
         };
         if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
@@ -250,16 +251,13 @@ export default class ProfileScreen extends Component {
                     buttonType={'back'}
                 />
                 <View style={styles.toggleButtonContainer}>
-                    <Animated.View style={[detailBarStyle, { backgroundColor: 'blue', marginRight: 10, height: 60, top: 25 }]} >
+                    <Animated.View style={[detailFlex, { marginRight: 10, height: 60, top: 25 }]} >
                         <TouchableOpacity 
                             activeOpacity={1} 
                             style={[styles.detailButtonInnerContainer, this.state.detailFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
                             onPress={() => {
-                                this.setState({
-                                    detailsOpacity: 100
-                                });
-                                this.animateVehicleBarTo(DELAY, 1);
-                                this.animateDetailBarTo(DELAY, 2);
+                                this.animateBars('detail');
+                                this.setStates('detail');
                             }} 
                         >
                             <View style={styles.detailButtonInnerWraper}>
@@ -274,16 +272,13 @@ export default class ProfileScreen extends Component {
                             }
                         </TouchableOpacity>
                     </Animated.View>
-                    <Animated.View style={{ flex: this._vehicleBarFlex, marginLeft: 10, height: 60, top: 25 }} >
+                    <Animated.View style={[vehicleFlex, { marginLeft: 10, height: 60, top: 25 }]} >
                         <TouchableOpacity 
                             activeOpacity={1} 
                             style={[styles.vehicleButtonInnerContainer, this.state.vehicleFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
                             onPress={() => {
-                                this.setState({
-                                    detailsOpacity: 0
-                                });
-                                this.animateVehicleBarTo(DELAY, 2);
-                                this.animateDetailBarTo(DELAY, 1);
+                                this.animateBars('vehicle');
+                                this.setStates('vehicle');
                             }} 
                         >
                         { this.state.showVehicleEditButton &&
@@ -306,60 +301,30 @@ export default class ProfileScreen extends Component {
                     </Animated.View>
                 </View>
           
-                {/* <MyComponent
-                    getImage={this.getImage.bind(this)} 
-                    editable={this.state.profileEditable} 
-                    getImage={this.getImage.bind(this)} 
-                    profilePic={this.props.authUser.image}
-                    navigation={this.props.navigation} 
-                    formEditable={this.state.profileEditable} 
-                    authUser={this.props.authUser}
-                    logout={this.props.logout}
-                    tag={'details'}
-                /> */}
-
-                <DetailsItem
-                        getImage={this.getImage.bind(this)} 
-                        editable={this.state.profileEditable} 
-                        getImage={this.getImage.bind(this)} 
-                        profilePic={this.props.authUser.image}
-                        navigation={this.props.navigation} 
-                        formEditable={this.state.profileEditable} 
-                        authUser={this.props.authUser}
-                        logout={this.props.logout}
-                        opacity={this.state.detailsOpacity}
-                        flex={this.state.detailsOpacity ? 5 : 0}
-                />
-
-                <VehiclesScreen 
-                        editable={this.state.vehicleEditable} 
-                        navigation={this.props.navigation}
-                        getVehicleImage={this.getVehicleImage.bind(this)}
-                        getSelectedPage={this.getSelectedPage.bind(this)}
-                        opacity={this.state.detailsOpacity ? 0 : 100}
-                        flex={this.state.detailsOpacity ? 0 : 5}
-                /> 
-              
-                {/* {this.state.showDetail ? (
+                <View style={{ flex: 4 }}>
                     <DetailsItem
-                        getImage={this.getImage.bind(this)} 
-                        editable={this.state.profileEditable} 
-                        getImage={this.getImage.bind(this)} 
-                        profilePic={this.props.authUser.image}
-                        navigation={this.props.navigation} 
-                        formEditable={this.state.profileEditable} 
-                        authUser={this.props.authUser}
-                        logout={this.props.logout}
-                        opacity={this.state.detailsOpacity}
+                            getImage={this.getImage.bind(this)} 
+                            editable={this.state.profileEditable} 
+                            getImage={this.getImage.bind(this)} 
+                            profilePic={this.props.authUser.image}
+                            navigation={this.props.navigation} 
+                            formEditable={this.state.profileEditable} 
+                            authUser={this.props.authUser}
+                            logout={this.props.logout}
+                            opacity={this.state.detailsOpacity}
+                            flex={this.state.detailsOpacity ? 5 : 0}
                     />
-                ) : (
+
                     <VehiclesScreen 
-                        editable={this.state.vehicleEditable} 
-                        navigation={this.props.navigation}
-                        getVehicleImage={this.getVehicleImage.bind(this)}
-                        getSelectedPage={this.getSelectedPage.bind(this)}
+                            editable={this.state.vehicleEditable} 
+                            navigation={this.props.navigation}
+                            getVehicleImage={this.getVehicleImage.bind(this)}
+                            getSelectedPage={this.getSelectedPage.bind(this)}
+                            opacity={this.state.detailsOpacity ? 0 : 100}
+                            flex={this.state.detailsOpacity ? 0 : 5}
                     /> 
-                )} */}
+                </View>
+         
 
                 { this.state.showPasswordButton &&
                     <View style={styles.nextButtonContainer}>
@@ -373,11 +338,6 @@ export default class ProfileScreen extends Component {
                     </View>
                 }
             </View>
-            // <View style={{ flex: 1, backgroundColor: '#F5FCFF', justifyContent: 'center'}}>
-            //     <View>
-            //         <AnimatedBar value={200} delay={DELAY} key={1} />
-            //     </View>
-            // </View>
         );
     }
 }

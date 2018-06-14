@@ -74,7 +74,6 @@ export default class ProfilePic extends React.Component {
                         <Image style={styles.proImageStyle} source={this.state.ImageSource} />
                     }
                 </TouchableOpacity>
-                
             </View>
         );
     }
