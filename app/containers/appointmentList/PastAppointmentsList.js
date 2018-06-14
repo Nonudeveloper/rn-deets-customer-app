@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
+import { Text, View, FlatList, Alert, StyleSheet, TouchableHighlight, ScrollView, Image } from 'react-native';
 import Header from '../header/Header';
 import ListItem from './ListItem';
 import { getAppointments } from './detail/api';
 import AppoinmentTabs from './Tabs';
 import styles from './styles';
 
+
+const notAvailableIcon = require('../../assets/icons/tech_placeholder_not_available.png');
 class PastAppointmentsList extends Component {
 
     constructor(props) {
@@ -14,7 +16,7 @@ class PastAppointmentsList extends Component {
         this.state = {
             appointments: [],
             selectedAppointments: '',
-            selectedTab: 'past',
+            selectedTab: 'upcoming',
             editMode: false
         };
     } 
@@ -35,9 +37,9 @@ class PastAppointmentsList extends Component {
         return (
           <View
             style={{
-              height: 1,
+              height: 3,
               width: '100%',
-              backgroundColor: '#607D8B',
+              backgroundColor: '#333',
             }}
           />
         );
@@ -155,6 +157,23 @@ class PastAppointmentsList extends Component {
                         }
                         keyExtractor={(item, index) => index.toString()}
                         extraData={this.state}
+                        ListHeaderComponent={() => 
+                            <View style={styles.notAvailableContainer}>
+                             {(!this.props.upcomingAppointments.length && this.state.selectedTab !== 'past' ? 
+                            <View style={styles.notAvailableContainer}>
+                                <Image source={notAvailableIcon} style={styles.notAvailableImage} />
+                                <Text style={styles.notAvailableText}>Sorry, you have no upcoming appointments.</Text>
+                            </View>
+                            : null)}
+                            {(!this.props.pastAppointments.length && this.state.selectedTab === 'past' ? 
+                            <View style={styles.notAvailableContainer}>
+                                <Image source={notAvailableIcon} style={styles.notAvailableImage} />
+                                <Text style={styles.notAvailableText}>Sorry, you have no past appointments.</Text>
+                            </View>
+                            : null)}
+                            </View>
+                            
+                        }
                     />
                     
                 </View>

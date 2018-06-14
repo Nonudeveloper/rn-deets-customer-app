@@ -4,10 +4,7 @@ const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: 'grey',
-      flexDirection: 'column',
-      // justifyContent: 'flex-start',
+      flex: 1
     },
     annotationContainer: {
       width: 30,
@@ -31,9 +28,9 @@ const styles = StyleSheet.create({
       left: 0,
       bottom: 0,
     },
-    calloutWraper: { 
-      position: 'absolute', 
-      top: (height / 2) - 86, 
+    calloutWraper: {
+      position: 'absolute',
+      top: (height / 2) - 86,
       left: (width / 2) - 50,
       backgroundColor: '#66cc00',
       width: 95,
@@ -44,11 +41,11 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       borderColor: '#bfff80',
     },
-    customMarker: { 
-      position: 'absolute', 
-      top: (height / 2) - 50, 
+    customMarker: {
+      position: 'absolute',
+      top: (height / 2) - 50,
       left: (width / 2) - 17,
-  
+
     }
   });
 

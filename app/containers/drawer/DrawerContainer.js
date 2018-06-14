@@ -41,7 +41,7 @@ export default class DrawerContainer extends React.Component {
   renderModal = () => {
     return (
       <Modal
-        visible={this.state.modalVisible} 
+        visible={this.state.modalVisible}
         transparent
         animationType={'none'}
         onRequestClose={() => console.log('hjk')}
@@ -54,11 +54,11 @@ export default class DrawerContainer extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <LinearGradient 
-        start={{ x: 0.0, y: 0.25 }} 
+      <LinearGradient
+        start={{ x: 0.0, y: 0.25 }}
         end={{ x: 0.5, y: 1.0 }}
         locations={[0.1, 0.75, 1]}
-        colors={['#fff', '#fff', '#fff']} 
+        colors={['#fff', '#fff', '#fff']}
         style={styles.container}
       >
         <View style={styles.sideMenu}>
@@ -66,37 +66,54 @@ export default class DrawerContainer extends React.Component {
               <Image source={deetsLogo} style={{ resizeMode: 'contain', height: 40, width: 100 }} />
           </View>
           <View style={{}}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.menu}
-              onPress={() => navigation.navigate('detailsScreen')} 
+              onPress={() => navigation.navigate('detailsScreen')}
             >
                   <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
-          
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'drawerServicesListStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('drawerServicesListStack')} 
-            >
-                  <Text style={styles.menuText} type='h5White'>Services</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'appointmentListStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('appointmentListStack')} 
+
+
+            <TouchableOpacity
+              style={styles.menu}
+              onPress={() => navigation.navigate('appointmentListStack')}
             >
                   <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.menu}
-              onPress={() => this.setModalVisible(true)} 
-            >
-                  <Text style={styles.menuText} type='h5White'>Payment</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.menu, this.props.activeItemKey === 'promotionCodeStack' ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
-              onPress={() => navigation.navigate('promotionCodeStack')} 
+              onPress={() => navigation.navigate('promotionCodeStack')}
             >
                   <Text style={styles.menuText} type='h5White'>Promotion Code</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menu}
+              onPress={() => navigation.navigate('drawerServicesListStack')}
+            >
+                  <Text style={styles.menuText} type='h5White'>Services</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menu}
+              onPress={() => this.setModalVisible(true)}
+            >
+                  <Text style={styles.menuText} type='h5White'>Payment</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menu}
+            >
+                  <Text style={styles.menuText} type='h5White'>Feedback</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menu}
+            >
+                  <Text style={styles.menuText} type='h5White'>Contact us</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menu}
+            >
+                  <Text style={styles.menuText} type='h5White'>Legal</Text>
+            </TouchableOpacity>
+
             {/* <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
                   <Text style={styles.menuText} type='h5White'>Log Out</Text>
             </TouchableOpacity> */}

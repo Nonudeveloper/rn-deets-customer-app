@@ -74,7 +74,7 @@ const Header = (props) => {
 
 const styles = {
     menuIconStyle: {
-        marginLeft: 7,
+        marginLeft: 20,
     },
     viewStyle: {
         alignItems: 'center',
@@ -105,6 +105,7 @@ const styles = {
     headerDetailStyle: {
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop:Platform.OS == "ios" ? 40 : 0,
     },
     backButton: {
         resizeMode: 'contain', 
@@ -122,7 +123,7 @@ const styles = {
         height: 30,
     },
     rightIconContainer: { 
-        right: 7,
+        right: 20,
       
     },
     indicatorStyle: {

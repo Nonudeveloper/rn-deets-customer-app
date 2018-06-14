@@ -1,6 +1,7 @@
 import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
 import { getItem } from '../asyncStorage';
+import { apiConfig } from '../../config';
 
 class AppointmetHelper {
 
@@ -45,7 +46,7 @@ class AppointmetHelper {
     addUpdateVehicle = async authData => {
         const formData = new FormData();
         const data = this.appendVehicleData(formData, authData);
-        return await fetch('http://127.0.0.1:8000/customer/add_or_edit_user_vehicle_information', {
+        return await fetch(`${apiConfig.url}/customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',
             body: data,
             }).then(response => {
@@ -63,10 +64,10 @@ class AppointmetHelper {
             notes: appointmentData.notes,
             payment_card_id: appointmentData.body_payment_card_id,
             service_end_time: appointmentData.service_end_time,
-            service_location_zipcode: '11106',
-            service_location_latitude: '33.8218570',
-            service_location_longitude: '-118.0615270',
-            service_location_string: '1386–1468 State Route 97, Narrowsburg, NY  12764, United States',
+            service_location_zipcode: appointmentData.service_location_zipcode,
+            service_location_latitude: appointmentData.service_location_latitude,
+            service_location_longitude: appointmentData.service_location_longitude,
+            service_location_string: appointmentData.service_location_string,
             service_start_time: appointmentData.service_start_time,
             technician_id: appointmentData.technician_id,
             user_service_appointment_id: appointmentData.user_service_appointment_id,

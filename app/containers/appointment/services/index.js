@@ -22,6 +22,8 @@ const mapStateToProps = (state) => {
         selectedAppointment: state.appointmentLists.selectedAppointment,
         errorMessage: state.Service.errorMessage,
         technicianFetching: state.Service.technicianFetching,
+        addressString: state.Geo.addressString,
+        geoLocationData: state.Geo.geoLocationData
     };
 };
 

@@ -28,6 +28,7 @@ export default class ReviewScreen extends React.Component {
     const endTime = startDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     const endDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + endTime);
     const endDateTime = endDate.toISOString();
+    const { reSchedule } = this.props;
     const options = {
               cost: this.props.selectedServices.totalCost,
               notes: this.props.notes !== undefined ? this.props.notes.notes : '',
@@ -37,6 +38,10 @@ export default class ReviewScreen extends React.Component {
               technician_id: this.props.selectedSchedule.selectedItem.technician.technician_id,
               user_service_appointment_id: this.props.serviceAppointmentId,
               service_duration_minutes: this.props.selectedServices.totalEstimationTime,
+              service_location_zipcode: reSchedule === '' ? this.props.geoLocationData[0].zipcode : reSchedule.appointment.service_location_zipcode,
+              service_location_latitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[1] : reSchedule.appointment.service_location_latitude,
+              service_location_longitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[0] : reSchedule.appointment.service_location_longitude,
+              service_location_string: reSchedule === '' ? this.props.addressString : reSchedule.appointment.service_location_string,
     };
     this.props.actions.scheduleNewAppointment(options);
   }
@@ -51,11 +56,11 @@ export default class ReviewScreen extends React.Component {
         { 
           text: 'OK', 
           onPress: () => {
+            //dispath an action to make showAlert false
+            this.props.actions.hideAlert();
             if (message.log) {
               this.props.navigation.navigate('appointmentListStack');
             }
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
           } 
         },
       ],
@@ -64,7 +69,6 @@ export default class ReviewScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
@@ -76,7 +80,7 @@ export default class ReviewScreen extends React.Component {
             onPress={() => this.goToNext()}
             indicatorSource={indicatorFour}
         />
-        {/* <Loader loading={isFetching} /> */}
+        <Loader loading={isFetching} />
         {this.props.appointmentScheduleMsg !== '' && this.renderAlert(this.props.appointmentScheduleMsg)}
         {/* //sp details component */}
         {/* //appointment details component */}

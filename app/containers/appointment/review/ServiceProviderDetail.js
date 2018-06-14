@@ -30,7 +30,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
     const newDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + this.props.selectedSchedule.selectedTime);
     const newDateIso = newDate.toISOString();
     const now = new Date(newDateIso);
-    now.setMinutes(now.getMinutes() + this.props.endTime);
+    now.setMinutes(now.getMinutes() + parseInt(this.props.endTime));
     const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     
     return (

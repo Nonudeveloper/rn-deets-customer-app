@@ -3,6 +3,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { fetchServicesSuccess, fetchServicesFaliure, serviceAppointmentSuccess, serviceAppointmentFaliure, storeUserServiceAppointmentId } from './serviceActions';
 import { FETCH_SERVICES, CREATE_NEW_USER_SERVICE_APPOINTMENT, RESCHEDULE_SERVICE_APPOINTMENT } from './constants';
 import ServicesHelper from '../../../helpers/services/servicesHelper';
+import { NavigationActions } from 'react-navigation';
 
 
 function fetchServicesCall(accessToken) {
@@ -39,7 +40,7 @@ function* watchFetchServices() {
           if (res.technician) {
             resolve(res);
           } else {
-             const error = res.error;
+            const error = JSON.parse(res._bodyText).error;
              reject({ error });
           }
         })
@@ -54,6 +55,7 @@ function* watchcreateNewServiceAppointment() {
       const response = yield call(createAppointmentCall, payload);
       yield put(serviceAppointmentSuccess(response));
       yield put(storeUserServiceAppointmentId(response.user_service_appointment_id));
+      yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(serviceAppointmentFaliure(err));
@@ -70,7 +72,7 @@ function reschudleAppointmentCall(payload) {
         if (res.technician) {
           resolve(res);
         } else {
-           const error = res.error;
+          const error = JSON.parse(res._bodyText).error;
            reject({ error });
         }
       })
@@ -85,6 +87,7 @@ while (true) {
     const response = yield call(reschudleAppointmentCall, payload);
     yield put(serviceAppointmentSuccess(response));
     yield put(storeUserServiceAppointmentId(response.user_service_appointment_id));
+    yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
     console.log('SAGA FETCH SUCCESS: ', response);
   } catch (err) {
     yield put(serviceAppointmentFaliure(err));

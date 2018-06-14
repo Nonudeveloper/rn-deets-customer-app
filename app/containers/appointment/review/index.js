@@ -22,7 +22,10 @@ const mapStateToProps = (state) => {
         serviceAppointmentId: state.Service.serviceAppointmentId,
         selectedCardDetails: state.Appointment.selectedCardDetails,
         isFetching: state.Appointment.isFetching,
-        appointmentScheduleMsg: state.Appointment.appointmentScheduleMsg
+        appointmentScheduleMsg: state.Appointment.appointmentScheduleMsg,
+        reSchedule: state.appointmentLists.selectedAppointment,
+        addressString: state.Geo.addressString,
+        geoLocationData: state.Geo.geoLocationData
     };
 };
 

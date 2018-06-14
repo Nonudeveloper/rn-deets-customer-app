@@ -17,15 +17,16 @@ export default class DateTimeScreen extends React.Component {
   constructor(props) {
     super(props);
     const today = new Date();
-    const date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + (today.getDate())).slice(-2);
+
+    const currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     this.state = {
         modalVisible: false,
         data: [],
         time: [],
         selectedItem: '',
-        selectedDate: date,
+        selectedDate: currentDate,
         selectedTime: '',
-        currentDate: date
+        currentDate: currentDate
       };
   }
 
@@ -52,9 +53,10 @@ export default class DateTimeScreen extends React.Component {
       >
     <Calender 
       setModalVisible={this.setModalVisible} 
-      currentDate={this.state.currentDate} 
       getSelectedDate={this.getSelectedDate.bind(this)} 
-      currentDate={this.state.selectedDate} />
+      currentDate={this.state.currentDate} 
+      selectedDate={this.state.selectedDate}
+    />
     </Modal>
     );
   }
@@ -139,7 +141,7 @@ export default class DateTimeScreen extends React.Component {
 
   render() {
     // const { isFetching } = this.props;
-    console.log(this.props.technicians);
+    console.log(this.state);
     const today = new Date(this.state.selectedDate);
     const date = today.toDateString();
     return (

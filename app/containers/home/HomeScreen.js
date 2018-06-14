@@ -39,9 +39,9 @@ export default class HomeScreen extends Component {
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
     this.onDidFinishLoadingMap = this.onDidFinishLoadingMap.bind(this);
-    
+
     this.setLocation = this.setLocation.bind(this);
-    
+
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
     this.breakIt = 0;
@@ -51,7 +51,7 @@ export default class HomeScreen extends Component {
         {
           "type": "Feature",
           "properties": {
-    
+
           },
           "geometry": {
             "type": "Polygon",
@@ -65,7 +65,7 @@ export default class HomeScreen extends Component {
   async onDidFinishLoadingMap() {
     await this.setState({ loading: false });
   }
-  
+
   onRegionWillChange = () => {
     this.setState({ loading: true });
   }
@@ -79,8 +79,8 @@ export default class HomeScreen extends Component {
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
-  
-  
+
+
   getLng() {
     const { center } = this.state;
     return center.length === 2
@@ -102,10 +102,10 @@ export default class HomeScreen extends Component {
     await this.setState({ renderPolygon: true, loading: false });
     this.props.navigation.navigate('SelectVehicleScreen');
   }
-  
+
 
   addOnMapChangedListener = () => console.log('addOnMapChangedListener!')
-  
+
   get markers() {
     return {
       type: 'FeatureCollection',
@@ -114,7 +114,7 @@ export default class HomeScreen extends Component {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: this.state.center 
+            coordinates: this.state.center
           }
         }
       ]
@@ -126,7 +126,7 @@ export default class HomeScreen extends Component {
       <Mapbox.PointAnnotation
         key='pointAnnotation'
         id='pointAnnotation'
-        coordinate={this.state.coordinates} 
+        coordinate={this.state.coordinates}
       >
         <View style={styles.annotationContainer}>
           <View style={styles.annotationFill} />
@@ -151,7 +151,7 @@ export default class HomeScreen extends Component {
     if(!isMyObjectEmpty) {
       this.setState({
         center: [
-          parseInt(location.service_location_longitude), 
+          parseInt(location.service_location_longitude),
           parseInt(location.service_location_latitude)
         ],
         inputVal: location.service_location_string
@@ -184,7 +184,7 @@ export default class HomeScreen extends Component {
         {
           "type": "Feature",
           "properties": {
-    
+
           },
           "geometry": {
             "type": "Polygon",
@@ -209,7 +209,7 @@ export default class HomeScreen extends Component {
             [-67.79141211614706, 45.702585354182816],
             [-67.13734351262877, 45.137451890638886]]]
           },
-          
+
         }
       ],
       'paint': {
@@ -220,7 +220,7 @@ export default class HomeScreen extends Component {
     return (
         <View style={styles.container}>
             <Loader
-                loading={isLoading} 
+                loading={isLoading}
             />
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
@@ -236,31 +236,33 @@ export default class HomeScreen extends Component {
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
-            > 
-              
+            >
+
               <Mapbox.VectorSource>
                 <Mapbox.BackgroundLayer id='background' />
               </Mapbox.VectorSource>
               {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
             </Mapbox.MapView>
-            <Header 
-              headerText={'Deets'} 
-              navigation={this.props.navigation} 
-              buttonType={'burger'} 
+            <Header
+              headerText={'Deets'}
+              navigation={this.props.navigation}
+              buttonType={'burger'}
               titleType={'logo'}
               showRightIcon
               rightIconType={'image'}
               rightImageSource={recentLocationIcon}
               onPress={() => this.props.navigation.navigate('RecentLocations')}
             />
-            <GeoCodeSearch 
-              onAddressGet={(address) => { 
+            <GeoCodeSearch
+              onAddressGet={(address) => {
                 this.setState({ center: address.geometry.coordinates });
-              }} 
+              }}
               inputVal={this.props.addressString}
             />
             <View style={styles.calloutWraper}>
-              <TouchableOpacity onPress={this.setLocation}><Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text></TouchableOpacity>
+              <TouchableOpacity onPress={this.setLocation}>
+                <Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.customMarker}>
               <Image

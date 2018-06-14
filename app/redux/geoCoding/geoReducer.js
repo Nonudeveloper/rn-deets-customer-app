@@ -5,7 +5,8 @@ import {
 const initialState = {
       isFetching: false,
       features: [],
-      addressString: ''
+      addressString: '',
+      geoLocationData: []
 };
 
 export default function addressReducer(state = initialState, action) {
@@ -35,7 +36,8 @@ export default function addressReducer(state = initialState, action) {
         case GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                addressString: action.addressString
+                addressString: action.addressString,
+                geoLocationData: action.geoLocationData
             });
         default:
             return state;

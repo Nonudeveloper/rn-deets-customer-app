@@ -98,13 +98,17 @@ export default class ServicesPanel extends React.Component {
       });
       //dispatch createNewServiceAppointment action 
       if (this.props.reSchedule === '') {
-        this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOnString);
+        const options = {
+          addressString: this.props.addressString,
+          geoLocationData: this.props.geoLocationData
+        };
+        this.props.actions.createNewServiceAppointment(this.state.item, this.props.selectedVehicle, addOnString, options);
       } else {
         this.props.actions.rescheduleServiceAppointment(this.props.reSchedule.appointment.id, addOnString);
       }
       
       //navigate
-      this.props.navigation.navigate('DateTimeScreen');
+      // this.props.navigation.navigate('DateTimeScreen');
     }
   
     render() {

@@ -7,7 +7,7 @@ export const colors = {
     txtDescription: '#757575',
     txtDark: '#214559',
     txtWhite: '#ffffff',
-  
+
     bgMain: '#5699b5',
     bgMainDark: '#214559', // For screens > auth
     bgMainRed: '#FE6165',
@@ -15,7 +15,7 @@ export const colors = {
     bgError: '#fb642d',
     bgChat: '#f1f1f1',
     bgSuccess: '#25ce66',
-  
+
     bdMain: '#214559',
     bdMainRed: '#FE6165',
     bdWhite: '#ffffff',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
       flex: 1,
       paddingTop: 40,
       paddingHorizontal: 20,
-      backgroundColor: '#e6e6e6'
+      backgroundColor: '#f1f1f1'
     },
     uglyDrawerItem: {
       fontSize: 18,
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
       height: 55,
       borderRadius: 100,
       alignSelf: 'center'
-      
+
     },
     sideMenu: {
       position: 'absolute',
-      top: 20,
+      top: 30,
       right: 0,
       bottom: 0,
       left: 0,
@@ -69,9 +69,9 @@ const styles = StyleSheet.create({
     },
     menuText: {
         marginLeft: 20,
-        color: '#666666',
+        color: '#333333',
         fontSize: 18,
-        marginBottom: 5,
+        marginBottom: 10,
         fontWeight: 'bold'
     },
     header: {
@@ -109,5 +109,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
   });
-  
+
   export default styles;

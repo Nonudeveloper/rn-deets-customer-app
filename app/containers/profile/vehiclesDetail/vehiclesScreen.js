@@ -108,16 +108,21 @@ export default class VehiclesScreen extends React.Component {
                 </View>
             </View>
             <View style={styles.formContainer}>
-              <VehicleForm 
-                  item={item}
-                  style={styles.t2} 
-                  vehicleData={this.props.vehicleData} 
-                  onRef={ref => (this.child = ref)}
-                  vehicleInfo={item.data}
-                  editable={this.props.editable}
-                  form={'editVehicleForm' + i}
-                  fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
-              /> 
+              
+
+                 
+                  <VehicleForm 
+                    item={item}
+                    style={styles.t2} 
+                    vehicleData={this.props.vehicleData} 
+                    onRef={ref => (this.child = ref)}
+                    vehicleInfo={item.data}
+                    editable={this.props.editable}
+                    form={'editVehicleForm' + i}
+                    fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
+                  />
+                  
+                  
             </View>
           </View>)
         }
