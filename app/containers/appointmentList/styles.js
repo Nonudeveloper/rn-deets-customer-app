@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         // Setting up View inside content in Vertically center.
         justifyContent: 'center',
         flex: 1,
-        margin: 10
+        // margin: 10
     },
      
     item: {
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     },
     radioContainer: {
         flex: 0.5,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        left: 10
     },
     radioImage: {
         resizeMode: 'contain',

@@ -71,6 +71,7 @@ export default function appointmentReducer(state = initialState, action) {
         case ADD_NEW_CARD_DETAILS_SUCCESS:
             return Object.assign({}, state, {
                 fetchingCardData: false,
+                userCardDetails: action.cardDetails
             });
         case ADD_NEW_CARD_DETAILS_FALIURE:
             return Object.assign({}, state, {

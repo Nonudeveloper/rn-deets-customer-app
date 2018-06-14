@@ -10,7 +10,10 @@ import {
     HIDE_RESET_ALERT,
     SAVE_DEVICE_TOKEN,
     LOGOUT_SUCCESS,
-    LOGOUT_FAILURE
+    LOGOUT_FAILURE,
+    LOGIN_THROUGH_ACCESS_TOKEN,
+    LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS,
+    LOGIN_THROUGH_ACCESS_TOKEN_FAILURE
 } from './constants';
 import { LOAD } from 'redux-storage';
 
@@ -27,7 +30,9 @@ const initialState = {
     resetSuccessLog: false,
     showResetAlert: false,
     resetErrorLog: false,
-    deviceToken: {}
+    deviceToken: {},
+    authUserWholeData: [],
+    userVehicledata: [],
 };
 
 export default function user(state = initialState, action) {
@@ -49,10 +54,12 @@ export default function user(state = initialState, action) {
         return Object.assign({}, state, {
           isFetching: false,
           isAuthenticated: true,
-          token: action.access_token,
+          token: action.user.access_token,
           failure: false,
           user: action.user,
-          isLoading: false
+          isLoading: false,
+          authUserWholeData: action.authUserData,
+          userVehicledata: action.vehicle,
         });
       case LOGIN_FAILURE:
         return Object.assign({}, state, {
@@ -107,6 +114,20 @@ export default function user(state = initialState, action) {
       case LOGOUT_SUCCESS:
         return initialState;
       case LOGOUT_FAILURE:
+        return Object.assign({}, state, {
+          errorMessage: action.err
+        });
+      case LOGIN_THROUGH_ACCESS_TOKEN:
+        return Object.assign({}, state, {
+        });
+      case LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS:
+        return Object.assign({}, state, {
+          token: action.user.access_token,
+          user: action.user,
+          authUserWholeData: action.authUserData,
+          userVehicledata: action.vehicle,
+        });
+      case LOGIN_THROUGH_ACCESS_TOKEN_FAILURE:
         return Object.assign({}, state, {
           errorMessage: action.err
         });

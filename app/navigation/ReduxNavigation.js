@@ -6,7 +6,7 @@ import AppNavigation from './AppNavigation';
 import { isSignedIn } from '../helpers/utility';
 import { addListener } from '../helpers/utils/redux';
 //import PushNotification from 'react-native-push-notification';
-import { saveDeviceToken } from '../redux/auth/actions';
+import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
  
 class ReduxNavigation extends React.Component {
@@ -17,7 +17,8 @@ class ReduxNavigation extends React.Component {
     this.state = {
       loggedInStatus: false,
       checkedSignIn: false,
-      showLoadingSplash: true
+      showLoadingSplash: true,
+      deviceToken: 'dfdf878500mkhfdvcoiuyrwazx'
     };
   }
 
@@ -38,6 +39,7 @@ class ReduxNavigation extends React.Component {
               actions: [ReactNavigation.NavigationActions.navigate({ routeName: 'drawerStack' })]
             });
             this.props.dispatch(actionToDispatch);
+            this.props.dispatch(loginThroughAccessToken(this.state.deviceToken));
           });
         } else {
           this.setState({

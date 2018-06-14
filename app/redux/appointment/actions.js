@@ -85,9 +85,10 @@ export function addNewCardDetails(cardDetails) {
     };
 }
 
-export function addNewCardDetailsSuccess() {
+export function addNewCardDetailsSuccess(cardDetails) {
     return {
         type: ADD_NEW_CARD_DETAILS_SUCCESS,
+        cardDetails
     };
 }
 

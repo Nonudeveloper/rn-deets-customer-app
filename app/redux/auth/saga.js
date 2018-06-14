@@ -1,11 +1,12 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure, logoutSuccess, logoutFailure } from './actions';
-import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST, LOGOUT } from './constants';
+import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure, logoutSuccess, logoutFailure, loginThroughAccessTokenSuccess, loginThroughAccessTokenFailure } from './actions';
+import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST, LOGOUT, LOGIN_THROUGH_ACCESS_TOKEN } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
 import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 import { setCardDetails, removeItem } from '../../helpers/asyncStorage';
+import { fetchRecentLocationsSuccess } from '../home/recentLocations/actions';
 
 function loginCall({ state }) {
   return new Promise((resolve, reject) => {
@@ -48,6 +49,7 @@ function* watchLoginRequest() {
       };
       const response = yield call(loginCall, payload);
       yield put(loginSuccess(response));
+      yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
       yield setToken(response.access_token);
@@ -111,9 +113,47 @@ function* watchLogOutRequest() {
   }
 }
 
+function loginThroughAccessTokenCall(deviceToken) {
+  return new Promise((resolve, reject) => {
+    AuthHelper.loginThroughAccessToken(deviceToken)
+    .then((data) => {
+      if (data.user) {
+        resolve(data);
+      } else if (data.status === 401) {
+        reject({ status: data.error });
+      } else {
+         const error = JSON.parse(data._bodyText).error;
+         reject({ status: error });
+      } 
+    })
+    // .catch(err => console.log(err));
+  });
+}
+
+function* watchloginThroughAccessTokenRequest() {
+  while (true) {
+   const { deviceToken } = yield take(LOGIN_THROUGH_ACCESS_TOKEN);
+
+    try {
+      const response = yield call(loginThroughAccessTokenCall, deviceToken);
+      yield put(loginThroughAccessTokenSuccess(response));
+      yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
+      yield saveAuthVehiclesData(response.vehicle);
+      yield setUser(response.user);
+      yield setToken(response.access_token);
+      yield setCardDetails(response.card);
+      //console.log('SAGA LOGIN SUCCESS: ', response);
+    } catch (err) {
+      console.log('SAGA LOGIN ERR: ', err);
+      yield put(loginThroughAccessTokenFailure(err.status));
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(watchLoginRequest);
   yield fork(watchForgotPasswordRequest);
   yield fork(watchLogOutRequest);
+  yield fork(watchloginThroughAccessTokenRequest);
 }

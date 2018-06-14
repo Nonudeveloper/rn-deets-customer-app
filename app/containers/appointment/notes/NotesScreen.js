@@ -15,7 +15,9 @@ class NotesScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.fetchCardDetails();
+      if (!this.props.userCardDetails.length) {
+        this.props.actions.fetchCardDetails();
+      }
   }
   
   render() {

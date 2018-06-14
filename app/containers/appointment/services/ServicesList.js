@@ -128,7 +128,7 @@ export default class ServiceList extends React.Component {
         this.props.toggleActiveState(this.props.servicePanelIndex, this.props.item);
         setTimeout(() => {
           this.handlePressTout();
-        }, 0.1);
+        }, 0.01);
       }
   
     render() {

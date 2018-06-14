@@ -12,7 +12,7 @@ const rateStarActive = require('../../assets/icons/rate_star_active.png');
 const uncheckButton = require('../../assets/icons/6_uncheck_btn.png');
 const checkButton = require('../../assets/icons/6_check_btn.png');
 
-class ListItem extends Component {
+class ListItem extends React.PureComponent {
 
     getItem(item) {
         Alert.alert(item);

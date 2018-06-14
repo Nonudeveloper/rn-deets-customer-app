@@ -62,5 +62,16 @@ class AuthHelper {
     return await SuperFetch.post('/customer/get_user_logout_from_app', { access_token, registration_type })
       .then(response => { return response; });
   }
+
+  loginThroughAccessToken = async deviceToken => {
+    const user = await getItem('user');
+    const payload = {
+      access_token: JSON.parse(user).access_token,
+      registration_type: 2,
+      device_token: deviceToken
+    }
+    return await SuperFetch.post('/customer/login_through_accesstoken', payload)
+    .then(response => { return response; });
+  }
 }
 export default new AuthHelper();

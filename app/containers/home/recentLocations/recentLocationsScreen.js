@@ -15,7 +15,9 @@ export default class RecentLocationsScreen extends React.Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchRecentLocations();
+        if (this.props.recentLocations === '') {
+            this.props.actions.fetchRecentLocations();
+        }
     }
 
     flatListItemSeparator = () => {
