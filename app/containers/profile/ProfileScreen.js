@@ -6,7 +6,6 @@ import {
     Image, 
     Text, 
     Alert, 
-    LayoutAnimation, 
     UIManager, 
     Platform, 
     Animated,
@@ -18,11 +17,9 @@ import DetailsItem from './DetailsItem';
 import Button from '../../deetscomponents/Button';
 import VehiclesScreen from './vehiclesDetail/index';
 import Loader from '../../deetscomponents/Loader';
-import AnimatedBar from './AnimatedBar';
 import styles from './styless';
 
 const window = Dimensions.get('window');
-const DELAY = 1;
 
 const editButton = require('../../assets/icons/edit_normal.png');
 const tickButton = require('../../assets/icons/tick_normal.png');
