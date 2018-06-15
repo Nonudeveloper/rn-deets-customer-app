@@ -28,7 +28,6 @@ export default class GeoCodeSearch extends React.Component {
 
     componentWillReceiveProps(nextProps) {
       const { inputVal } = nextProps;
-      console.log(nextProps);
       this.setState({
         inputVal
       });
@@ -54,7 +53,7 @@ export default class GeoCodeSearch extends React.Component {
 
       if (query !== '') {
         //dispatch an action here SEARCH_ADDRESS
-        this.props.actions.searchAddress(data);
+        this.props.searchAddress(data);
         this.setState({
           inputVal: query
         });

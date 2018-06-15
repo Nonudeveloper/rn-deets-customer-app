@@ -147,7 +147,6 @@ export default class HomeScreen extends Component {
     const { navigation } = this.props;
     const location = navigation.getParam('location', {});
     const isMyObjectEmpty = !Object.keys(location).length;
-    console.log(isMyObjectEmpty);
     if (!isMyObjectEmpty) {
       this.setState({
         center: [
@@ -156,7 +155,6 @@ export default class HomeScreen extends Component {
         ],
         inputVal: location.service_location_string
       }, () => {
-        console.log(this.state);
       });
     } else {
       this.setState({
