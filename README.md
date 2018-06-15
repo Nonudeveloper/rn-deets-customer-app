@@ -58,7 +58,7 @@ Run the following command in a Command Prompt or shell:
 
 ### Configure app
 
-Edit src/config/config.js file to add the url where you have setup:
+Edit app/config/index.js file to add the url where you have setup:
 
 - backend api
 - oauth like endpoint for auth
