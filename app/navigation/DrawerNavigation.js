@@ -90,7 +90,9 @@ const appointmentStack = StackNavigator({
   changePasswordScreen: { screen: ChangePasswordScreen },
   addVehicleScreen: { screen: AddVehicleScreen },
   drawerServicesList: { screen: DrawerServicesList },
-  RecentLocations: { screen: RecentLocations }
+  RecentLocations: { screen: RecentLocations },
+  PastAppointmentsList: { screen: PastAppointmentsList },
+  PastAppointmentsDetail: { screen: AppointmentDetail },
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
@@ -100,20 +102,32 @@ const appointmentStack = StackNavigator({
   },
 });
 
-const appointmentListStack = StackNavigator({
-  PastAppointmentsList: { screen: PastAppointmentsList },
-  PastAppointmentsDetail: { screen: AppointmentDetail }
-}, {
-  headerMode: 'none',
-  transitionConfig: TransitionConfiguration,
-});
+// const AppStackNavigator = StackNavigator({
+//   loginFlow: { 
+//     screen: StackNavigator({
+//       splash: { screen: SplashScreen },
+//       login: { screen: LoginScreen },
+//       forgotPassword: { screen: ForgotPasswordScreen }
+//     })
+//   },
+//   mainFlow: {
+//     screen: StackNavigator({
+//       main: { screen: MainScreen },
+//       settings: { screen: SettingsScreen },
+//       someTab: { 
+//         screen: TabNavigator({
+//           firstTab: { screen: FirstTabScreen },
+//           secondTab: { screen: SecondTabScreen },
+//           thirdTab: { screen: ThirdTabScreen }
+//         })
+//       }
+//     })
+//   }
+// });
 
 const DrawerStack = DrawerNavigator({
   appointmentStack: {
     screen: appointmentStack
-  },
-  appointmentListStack: {
-    screen: appointmentListStack
   },
   drawerServicesListStack: {
     screen: DrawerServicesList
@@ -129,13 +143,6 @@ const DrawerStack = DrawerNavigator({
   drawerWidth: 240,
   useNativeAnimations: true
 });
-
-// const DrawerNav = StackNavigator({
-//   drawerStack: { screen: DrawerStack }
- 
-// }, {
-//   headerMode: 'none'
-// });
 
 export default DrawerStack;
 
