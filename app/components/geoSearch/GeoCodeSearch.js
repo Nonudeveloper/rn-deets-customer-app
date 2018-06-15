@@ -26,9 +26,13 @@ export default class GeoCodeSearch extends React.Component {
         this.searchLocation = this.searchLocation.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //   console.log(nextProps);
-    // }
+    componentWillReceiveProps(nextProps) {
+      const { inputVal } = nextProps;
+      console.log(nextProps);
+      this.setState({
+        inputVal
+      });
+    }
 
     onListItemClicked= (address) => {
         Keyboard.dismiss();
@@ -45,6 +49,8 @@ export default class GeoCodeSearch extends React.Component {
           query,
           MAPBOX_API_KEY
       };
+      //call parent function to update props
+      this.props.onChangeSearchText(query);
 
       if (query !== '') {
         //dispatch an action here SEARCH_ADDRESS
@@ -89,7 +95,7 @@ export default class GeoCodeSearch extends React.Component {
                           onChangeText={this.searchLocation}
                           placeholder="Location for service "
                           underlineColorAndroid='rgba(0,0,0,0)'
-                          value={this.props.inputVal}
+                          value={this.state.inputVal}
                           placeholderTextColor="grey"
                       />
                     </View>

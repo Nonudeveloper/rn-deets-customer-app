@@ -71,7 +71,6 @@ export default class HomeScreen extends Component {
   }
 
   async onRegionDidChange() {
-    console.log('onRegionDidChange');
     const center = await this._map.getCenter();
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
@@ -148,6 +147,7 @@ export default class HomeScreen extends Component {
     const { navigation } = this.props;
     const location = navigation.getParam('location', {});
     const isMyObjectEmpty = !Object.keys(location).length;
+    console.log(isMyObjectEmpty);
     if (!isMyObjectEmpty) {
       this.setState({
         center: [
@@ -155,6 +155,12 @@ export default class HomeScreen extends Component {
           Number(location.service_location_latitude)
         ],
         inputVal: location.service_location_string
+      }, () => {
+        console.log(this.state);
+      });
+    } else {
+      this.setState({
+        inputVal: 'San Francisco, CA, USA'
       });
     }
 
@@ -174,6 +180,12 @@ export default class HomeScreen extends Component {
     //        timeout: 5000
     //   }
     // );
+  }
+
+  onChangeSearchText = (val) => {
+    this.setState({
+      inputVal: val
+    });
   }
 
   render() {
@@ -257,7 +269,8 @@ export default class HomeScreen extends Component {
               onAddressGet={(address) => {
                 this.setState({ center: address.geometry.coordinates });
               }}
-              inputVal={this.props.addressString}
+              inputVal={this.state.inputVal}
+              onChangeSearchText={(val) => this.onChangeSearchText(val)}
             />
             <View style={styles.calloutWraper}>
               <TouchableOpacity onPress={this.setLocation}>
