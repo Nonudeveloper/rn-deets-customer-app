@@ -79,7 +79,6 @@ const TransitionConfiguration = () => {
 const appointmentStack = StackNavigator({
   HomeComponent: { screen: HomeScreen },
   serviceScreen: { screen: ServiceScreen },
-  // serviceDetailScreen: { screen: ServiceDetailScreen },
   SelectVehicleScreen: { screen: SelectVehileScreen },
   AddEditVehicle: { screen: AddVehicle },
   DateTimeScreen: { screen: DateTimeScreen },
@@ -89,10 +88,11 @@ const appointmentStack = StackNavigator({
   detailsScreen: { screen: DetailScreen },
   changePasswordScreen: { screen: ChangePasswordScreen },
   addVehicleScreen: { screen: AddVehicleScreen },
-  drawerServicesList: { screen: DrawerServicesList },
+  DrawerServicesList: { screen: DrawerServicesList },
   RecentLocations: { screen: RecentLocations },
   PastAppointmentsList: { screen: PastAppointmentsList },
   PastAppointmentsDetail: { screen: AppointmentDetail },
+  PromotionCodeScreen: { screen: PromotionCodeScreen }
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
@@ -129,12 +129,6 @@ const DrawerStack = DrawerNavigator({
   appointmentStack: {
     screen: appointmentStack
   },
-  drawerServicesListStack: {
-    screen: DrawerServicesList
-  },
-  promotionCodeStack: {
-    screen: PromotionCodeScreen
-  }
 }, {
   headerMode: 'none',
   gesturesEnabled: false,

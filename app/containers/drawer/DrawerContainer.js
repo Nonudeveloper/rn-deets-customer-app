@@ -82,13 +82,13 @@ export default class DrawerContainer extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
-              onPress={() => navigation.navigate('promotionCodeStack')}
+              onPress={() => navigation.navigate('PromotionCodeScreen')}
             >
                   <Text style={styles.menuText} type='h5White'>Promotion Code</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
-              onPress={() => navigation.navigate('drawerServicesListStack')}
+              onPress={() => navigation.navigate('DrawerServicesList')}
             >
                   <Text style={styles.menuText} type='h5White'>Services</Text>
             </TouchableOpacity>
