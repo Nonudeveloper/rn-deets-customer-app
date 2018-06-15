@@ -124,7 +124,8 @@ const styles = {
     },
     rightIconContainer: { 
         right: 20,
-      
+        backgroundColor: 'blue',
+        width: 35
     },
     indicatorStyle: {
         resizeMode: 'contain',
