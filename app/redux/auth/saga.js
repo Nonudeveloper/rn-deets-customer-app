@@ -102,7 +102,7 @@ function* watchLogOutRequest() {
      yield take(LOGOUT);
     try {
       const response = yield call(logOutCall);
-      // yield removeItem('user');
+      yield removeItem('user');
       yield put(logoutSuccess());
       yield put(NavigationActions.navigate({ routeName: 'loginStack' }));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);
