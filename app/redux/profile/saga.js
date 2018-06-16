@@ -1,4 +1,4 @@
-import { take, put, call, fork, select } from 'redux-saga/effects';
+import { take, put, call, fork, takeEvery } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 import ProfileHelper from '../../helpers/profile/profileHelper';
 import { saveAuthVehiclesData } from '../../helpers/utility';
@@ -16,7 +16,8 @@ import {
     fetchVehiclesMakeModelByYearFailure,
     fetchAddNewVehicleFailure, 
     deleteVehicleSuccess, 
-    deleteVehicleFailure
+    deleteVehicleFailure,
+    fetchAddNewSuccess
 } from './actions';
 import { 
     FETCH_AUTH_USER_DETAILS,
@@ -73,8 +74,7 @@ function* watchEditUserProfile() {
       userDetails['mobile'] = response.mobile;
       userDetails['image'] = response.image;
       yield setItem('user', userDetails);
-      yield put(NavigationActions.navigate({ routeName: 'detailsScreen' }));
-      yield put(editUserProfileSuccess(response));
+      yield put(editUserProfileSuccess(userDetails));
        console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(editUserProfileFailure(err));
@@ -120,12 +120,7 @@ function* watchGetAuthUserVehiclesFromAsyncStorage() {
     try {
       const response = yield getItem('authVehicles');
       const vehicleData = JSON.parse(response);
-      const datavehicle = [];
-      yield* vehicleData.map(function* (data) {
-        const makeModel = yield call(vehiclesMakeModelCall, data.vehicle_year);
-        datavehicle.push({ data, makeModel });
-      });
-      yield put(getAuthUserVehicleDetailsSuccess(datavehicle));
+      yield put(getAuthUserVehicleDetailsSuccess(vehicleData));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(getAuthUserVehicleDetailsFailure(err));
@@ -135,45 +130,26 @@ function* watchGetAuthUserVehiclesFromAsyncStorage() {
 }
 
 
-function vehiclesMakeModelCall(payload) {
-  return new Promise((resolve, reject) => {
-    ProfileHelper.fetchVehiclesMakeModel(payload)
-      .then(res => {
-        if (res.data) {
-          resolve(res);
-        } else {
-           const log = res.error;
-           reject({ log });
-        }
-      })
-      .catch(err => reject(err));
-  });
+function* fetchUser(action) {
+  try {
+    const { year } = action;
+        const response = yield call(vehiclesMakeModelByYearCall, year);
+        yield put(fetchVehiclesMakeModelByYearSuccess(response, year));
+        console.log('SAGA FETCH SUCCESS: ', response);
+      } catch (err) {
+        yield put(fetchVehiclesMakeModelByYearFailure(err));
+        console.log('SAGA FETCH ERR: ', err);
+      }
 }
 
-export const authVehiclesData = (state) => state.Profile.authVehiclesData;
 
 function* watchFetchVehicleMakeModelByYear() {
-  while (true) {
-   const { year, vehicle } = yield take(FETCH_VEHICLE_MAKE_MODEL_BY_YEAR);
-    try {
-      const changedVehicle = yield select(authVehiclesData);
-      const response = yield call(vehiclesMakeModelByYearCall, year);
-      changedVehicle.map((previousdata) => {
-        if (previousdata.data.vehicle_id === vehicle.vehicle_id) {
-            previousdata.makeModel = response;
-        }
-      });
-      yield put(fetchVehiclesMakeModelByYearSuccess(changedVehicle));
-      console.log('SAGA FETCH SUCCESS: ', response);
-    } catch (err) {
-      yield put(fetchVehiclesMakeModelByYearFailure(err));
-      console.log('SAGA FETCH ERR: ', err);
-    }
-  }
+  yield takeEvery(FETCH_VEHICLE_MAKE_MODEL_BY_YEAR, fetchUser);
 }
 
 
 function vehiclesMakeModelByYearCall(payload) {
+  console.log(payload);
   return new Promise((resolve, reject) => {
     ProfileHelper.fetchVehiclesMakeModel(payload)
       .then(res => {
@@ -194,7 +170,7 @@ function* watchAddNewVehicleRequest() {
       try {
         const response = yield call(addNewVehicleCall, payload);
         yield saveAuthVehiclesData(response);
-        yield put(NavigationActions.navigate({ routeName: 'detailsScreen' }));
+        yield put(fetchAddNewSuccess(response));
         console.log('SAGA RESET PASSWORD Mail SENT: ', response);
       } catch (err) {
         console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
@@ -246,7 +222,6 @@ function* watchDeleteVehicleRequest() {
       });
       yield setItem('authVehicles', vehicleData);
       yield put(deleteVehicleSuccess(response));
-      // yield put(NavigationActions.navigate({ routeName: 'detailsScreen' }));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);
     } catch (err) {
       console.log('SAGA RESET PASSWORD Mail ERROR: ', err);

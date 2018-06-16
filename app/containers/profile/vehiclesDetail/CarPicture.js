@@ -49,6 +49,7 @@ export default class CarPicture extends React.Component {
     }
 
     componentWillMount() {
+        console.log(this.props);
         if (this.props.vehicleImage && this.props.vehicleImage !== '') {
             this.setState(() => {
                 return {

@@ -20,9 +20,9 @@ const mapStateToProps = (state) => {
     return {
         vehicleData: state.Start.vehicles,
         isFetching: state.Vehicle.isFetching,
-        authVehiclesData: state.Profile.authVehiclesData,
         errorMessage: state.Profile.errorMessage,
-        fetchMakeModel: state.Profile.fetchMakeModel
+        fetchMakeModel: state.Profile.fetchMakeModel,
+        makeModelData: state.Profile.makeModelData
     };
 };
 

@@ -29,7 +29,9 @@ const mapStateToProps = (state) => {
         form: state.form,
         errorMessage: state.Profile.errorMessage,
         vehicleDeleteMessage: state.Profile.vehicleDeleteMessage,
-        logoutMessage: state.Auth.errorMessage
+        logoutMessage: state.Auth.errorMessage,
+        authVehiclesData: state.Profile.authVehiclesData,
+        vehicleData: state.Start.vehicles,
     };
 };
 

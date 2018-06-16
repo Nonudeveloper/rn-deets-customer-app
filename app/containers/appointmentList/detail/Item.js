@@ -128,9 +128,10 @@ class Item extends Component {
                                 <View style={styles.locationIconCont}>
                                     <Image source={locationIcon} style={styles.locationIcon} />
                                 </View>
+                                <View style={styles.hrContainer} />
                                 <View style={styles.locationTextCont}>
-                                    <Text style={styles.text}>
-                                        {item.appointment.service_location_string.substr(0, 39)}...
+                                    <Text numberOfLines={1} style={styles.text}>
+                                        {item.appointment.service_location_string}
                                     </Text>
                                 </View>
                             </View>

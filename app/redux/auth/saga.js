@@ -7,6 +7,8 @@ import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 import { setCardDetails, removeItem } from '../../helpers/asyncStorage';
 import { fetchRecentLocationsSuccess } from '../home/recentLocations/actions';
+import { fetchAuthUserDetailsSuccess, getAuthUserVehicleDetailsSuccess } from '../profile/actions';
+import { fetchAuthVehiclesSuccess } from '../appointment/vehicle/vehicleActions';
 
 function loginCall({ state }) {
   return new Promise((resolve, reject) => {
@@ -50,6 +52,9 @@ function* watchLoginRequest() {
       const response = yield call(loginCall, payload);
       yield put(loginSuccess(response));
       yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
+      yield put(fetchAuthUserDetailsSuccess(response.user));
+      yield put(getAuthUserVehicleDetailsSuccess(response.vehicle));
+      yield put(fetchAuthVehiclesSuccess(response.vehicle));
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
       yield setToken(response.access_token);
@@ -138,6 +143,9 @@ function* watchloginThroughAccessTokenRequest() {
       const response = yield call(loginThroughAccessTokenCall, deviceToken);
       yield put(loginThroughAccessTokenSuccess(response));
       yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
+      yield put(fetchAuthUserDetailsSuccess(response.user));
+      yield put(getAuthUserVehicleDetailsSuccess(response.vehicle));
+      yield put(fetchAuthVehiclesSuccess(response.vehicle));
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
       yield setToken(response.access_token);

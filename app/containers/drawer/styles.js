@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 7,
         borderBottomWidth: 1,
         marginVertical: 7,
-        borderBottomColor: '#333333',
+        borderBottomColor: '#fff',
     },
     menuText: {
         marginLeft: 20,
-        color: '#333333',
+        color: '#FFFFFF',
         fontSize: 18,
         marginBottom: 10,
         fontWeight: 'bold'
