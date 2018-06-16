@@ -26,6 +26,7 @@ class ReduxNavigation extends React.Component {
     isSignedIn()
       .then(res => {
         if (res !== false) {
+          console.log('in if');
           this.setState(() => {
             return {
               loggedInStatus: true,
@@ -42,6 +43,7 @@ class ReduxNavigation extends React.Component {
             this.props.dispatch(loginThroughAccessToken(this.state.deviceToken));
           });
         } else {
+          console.log('in else');
           this.setState({
             loggedInStatus: false,
             checkedSignIn: false,
@@ -59,12 +61,11 @@ class ReduxNavigation extends React.Component {
       state: nav,
       addListener,
     });
-    return <AppNavigation navigation={navigation} />;
-    // if (this.state.showLoadingSplash) {
-    //   return <LoadingSplash />;
-    // } else {
-    //   return <AppNavigation navigation={navigation} />;
-    // }
+    if (this.state.showLoadingSplash) {
+      return <LoadingSplash />;
+    } else {
+      return <AppNavigation navigation={navigation} />;
+    }
   }
 }
 

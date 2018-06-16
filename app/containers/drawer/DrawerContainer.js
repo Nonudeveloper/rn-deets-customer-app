@@ -108,15 +108,16 @@ export default class DrawerContainer extends React.Component {
             >
                   <Text style={styles.menuText} type='h5White'>Contact us</Text>
             </TouchableOpacity>
+            
             <TouchableOpacity
               style={styles.menu}
             >
                   <Text style={styles.menuText} type='h5White'>Legal</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
+            <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
                   <Text style={styles.menuText} type='h5White'>Log Out</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         </View>
         {this.renderModal()}
