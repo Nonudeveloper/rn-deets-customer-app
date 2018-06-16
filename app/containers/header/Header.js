@@ -57,7 +57,7 @@ const Header = (props) => {
                           {leftIcon}
                         </TouchableOpacity>
                     </View>
-                    <View style={headerDetailStyle}>
+                    <View style={[headerDetailStyle, { right: props.showRightIcon ? 0 : 10 }]}>
                         {title}
                         <Image style={styles.indicatorStyle} source={props.indicatorSource} />
                     </View>
@@ -74,7 +74,7 @@ const Header = (props) => {
 
 const styles = {
     menuIconStyle: {
-        marginLeft: 20,
+        marginLeft: 18,
     },
     viewStyle: {
         alignItems: 'center',
@@ -123,7 +123,7 @@ const styles = {
         height: 30,
     },
     rightIconContainer: { 
-        right: 20,
+        right: 16,
       
     },
     indicatorStyle: {

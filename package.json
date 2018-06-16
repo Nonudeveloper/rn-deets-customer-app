@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "rm node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "@mapbox/react-native-mapbox-gl": "https://github.com/mapbox/react-native-mapbox-gl.git#master",
     "immutable": "^3.8.2",
     "instabug-reactnative": "^2.6.0",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "radio-button-react-native": "^1.1.6",
     "react": "16.2.0",
