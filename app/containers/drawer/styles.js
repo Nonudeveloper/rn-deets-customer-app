@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
     menu: {
         paddingHorizontal: 7,
         borderBottomWidth: 1,
-        marginVertical: 7,
         borderBottomColor: '#fff',
+        height: 40,
+        justifyContent: 'center'
     },
     menuText: {
         marginLeft: 20,
         color: '#FFFFFF',
-        fontSize: 18,
-        marginBottom: 10,
+        fontSize: 17,
         fontWeight: 'bold'
     },
     header: {
