@@ -229,9 +229,9 @@ export default class HomeScreen extends Component {
     };
     return (
         <View style={styles.container}>
-            <Loader
+            {/* <Loader
                 loading={isLoading}
-            />
+            /> */}
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
