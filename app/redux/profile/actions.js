@@ -16,10 +16,11 @@ import {
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
     ADD_NEW_VEHICLE,
+    ADD_NEW_VEHICLE_SUCCESS,
     ADD_NEW_VEHICLE_FAILURE,
     DELETE_VEHICLE,
     DELETE_VEHICLE_SUCCESS,
-    DELETE_VEHICLE_FAILURE
+    DELETE_VEHICLE_FAILURE,
 } from './constants';
     
 export function fetchAuthUserDetails() {
@@ -111,18 +112,18 @@ export function getAuthUserVehicleDetailsFailure(err) {
     };
 }
 
-export function fetchVehiclesMakeModelByYear(year, vehicle) {
+export function fetchVehiclesMakeModelByYear(year) {
     return {
       type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
-      year,
-      vehicle
+      year
     };
 }
 
-export function fetchVehiclesMakeModelByYearSuccess(data) {
+export function fetchVehiclesMakeModelByYearSuccess(data, year) {
     return {
       type: FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
-      data
+      data,
+      year
     };
 }
 
@@ -138,6 +139,13 @@ export function fetchAddNewVehicle(form, vehicleImage) {
       type: ADD_NEW_VEHICLE,
       form,
       vehicleImage
+    };
+}
+
+export function fetchAddNewSuccess(vehicles) {
+    return {
+      type: ADD_NEW_VEHICLE_SUCCESS,
+      vehicles
     };
 }
 

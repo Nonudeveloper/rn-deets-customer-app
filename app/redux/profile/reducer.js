@@ -15,10 +15,12 @@ import {
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS,
     FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE,
+    ADD_NEW_VEHICLE,
+    ADD_NEW_VEHICLE_SUCCESS,
     ADD_NEW_VEHICLE_FAILURE,
     DELETE_VEHICLE,
     DELETE_VEHICLE_SUCCESS,
-    DELETE_VEHICLE_FAILURE
+    DELETE_VEHICLE_FAILURE,
 } from './constants';
 
 const initialState = {
@@ -29,7 +31,17 @@ const initialState = {
       authVehiclesData: [],
       fetchMakeModel: false,
       errorMessageForVehicle: '',
-      vehicleDeleteMessage: ''
+      vehicleDeleteMessage: '',
+      makeModelData: []
+};
+
+const pushOrFilterID = (makeModelData, data, id) => {
+    const result = makeModelData.find( makeModel => makeModel.id === id);
+    if (result !== undefined) {
+        return makeModelData;
+    }
+    makeModelData.push({ id, makeModel: data });
+    return makeModelData;
 };
 
 export default function profileReducer(state = initialState, action) {
@@ -40,6 +52,7 @@ export default function profileReducer(state = initialState, action) {
             });
         case FETCH_AUTH_USER_DETAILS_SUCCESS:
             return Object.assign({}, state, {
+                isFetching: false,
                 authUser: action.user
             });
         case FETCH_AUTH_USER_DETAILS_FAILURE:
@@ -54,7 +67,7 @@ export default function profileReducer(state = initialState, action) {
         case EDIT_USER_PROFILE_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                // authUser: action.user
+                authUser: action.user
             });
         case EDIT_USER_PROFILE_FAILURE:
             return Object.assign({}, state, {
@@ -84,7 +97,7 @@ export default function profileReducer(state = initialState, action) {
             });
         case GET_AUTH_USER_VEHICLE_DETAILS:
             return Object.assign({}, state, {
-                isFetching: true
+                // isFetching: true
             });
         case GET_AUTH_USER_VEHICLE_DETAILS_SUCCESS:
             return Object.assign({}, state, {
@@ -103,15 +116,26 @@ export default function profileReducer(state = initialState, action) {
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_SUCCESS:
             return Object.assign({}, state, {
                 fetchMakeModel: false,
-                authVehiclesData: action.data,
+                // authVehiclesData: action.data,
+                selectedAppointments: pushOrFilterID(state.makeModelData, action.data, action.year)
             });
         case FETCH_VEHICLE_MAKE_MODEL_BY_YEAR_FAILURE:
             return Object.assign({}, state, {
                 fetchMakeModel: false,
                 errorMessage: action.err
             });
+        case ADD_NEW_VEHICLE:
+            return Object.assign({}, state, {
+                isFetching: true,
+            });
+        case ADD_NEW_VEHICLE_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                authVehiclesData: action.vehicles
+            });
         case ADD_NEW_VEHICLE_FAILURE:
             return Object.assign({}, state, {
+                isFetching: false,
                 errorMessageForVehicle: action.err
             });
         case DELETE_VEHICLE:

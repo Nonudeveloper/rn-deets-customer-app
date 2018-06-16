@@ -67,7 +67,7 @@ class ListItem extends React.PureComponent {
         ];
         const leftSwipeBtns = [
             {
-                text: this.props.activeTab === 'past' ? 'reschedule' : 'update',
+                text: this.props.activeTab === 'past' ? 'Reschedule' : 'Update',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
                 onPress: () => { this.props.activeTab === 'past' ? 

@@ -63,9 +63,14 @@ export default class ProfileScreen extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchAuthUserDetails();
-        this.props.getVehicles();
-        this.props.actions.getAuthUserVehicleDetails();
+        if (this.props.authUser.length === 0) {
+            this.props.actions.fetchAuthUserDetails();
+        }
+        if (this.props.authVehiclesData.length === 0) {
+            this.props.actions.getAuthUserVehicleDetails();
+        }
+        this.props.vehicleData.length === 0 ? this.props.getVehicles() : null;
+        
     }
 
     componentDidMount() {
@@ -94,7 +99,9 @@ export default class ProfileScreen extends Component {
             showVehicleEditButton: val !== 'detail',
             showPasswordButton: val === 'detail',
             detailFlexValue: val === 'detail' ? 2 : 1,
-            vehicleFlexValue: val === 'detail' ? 1 : 2
+            vehicleFlexValue: val === 'detail' ? 1 : 2,
+            vehicleEditable: false,
+            profileEditable: false
         });
     }
 
@@ -122,7 +129,7 @@ export default class ProfileScreen extends Component {
             {
                 toValue: whichBar === 'detail' ? 2 : 1,
                 duration: 1000,
-                easing: Easing.linear
+                easing: Easing.quad
             }
         ).start();
 
@@ -131,7 +138,7 @@ export default class ProfileScreen extends Component {
             {
                 toValue: whichBar === 'detail' ? 1 : 2,
                 duration: 1000,
-                easing: Easing.linear
+                easing: Easing.quad
             }
         ).start();
     }
@@ -150,7 +157,7 @@ export default class ProfileScreen extends Component {
         :
         this.setState({
             profileEditable: true,
-            showPasswordButton: false
+            showPasswordButton: false,
         });
     } 
 
@@ -172,7 +179,9 @@ export default class ProfileScreen extends Component {
         }
         if (errorCount === 0) {
             this.props.actions.editUserProfile(this.props.form.profileDetails.values, this.state.newImage);
-        }   
+        } else {
+            this.setState({ profileEditable: true });
+        }
     }
 
     editVehicles() {
@@ -195,6 +204,7 @@ export default class ProfileScreen extends Component {
     }
 
     getSelectedPage(index) {
+        this.state.selectedPage !== index ? this.setState({ vehicleEditable: false }) : this.setState({ vehicleEditable: true });
         this.setState({ selectedPage: index });
     }
 
@@ -223,7 +233,9 @@ export default class ProfileScreen extends Component {
             const imagePageSelected = this.state.image.currentPage;
             const imageSelected = pageSelected === imagePageSelected ? this.state.image.response : {};
             this.props.actions.fetchAddNewVehicle(this.props.form['editVehicleForm' + this.state.selectedPage].values, imageSelected);
-        }   
+        } else {
+            this.setState({ vehicleEditable: true });
+        }
     }
 
     deleteVehicle() {
@@ -239,7 +251,6 @@ export default class ProfileScreen extends Component {
         const vehicleFlex = {
             flex: this._vehicleBarFlex
         };
-        if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
         return (
             <View style={styles.container}>
                 <Header 
@@ -247,6 +258,7 @@ export default class ProfileScreen extends Component {
                     navigation={this.props.navigation} 
                     buttonType={'back'}
                 />
+                <Loader loading={this.props.isFetching} />
                 <View style={styles.toggleButtonContainer}>
                     <Animated.View style={[detailFlex, { marginRight: 10, height: 60, top: 25 }]} >
                         <TouchableOpacity 
@@ -319,6 +331,7 @@ export default class ProfileScreen extends Component {
                             getSelectedPage={this.getSelectedPage.bind(this)}
                             opacity={this.state.detailsOpacity ? 0 : 100}
                             flex={this.state.detailsOpacity ? 0 : 5}
+                            authVehiclesData={this.props.authVehiclesData}
                     /> 
                 </View>
          

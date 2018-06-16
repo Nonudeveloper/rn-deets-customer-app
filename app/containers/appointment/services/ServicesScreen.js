@@ -37,7 +37,7 @@ export default class ServiceScreen extends React.Component {
   }
 
   render() {
-    if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
+    // if (this.props.isFetching) return <Loader loading={this.props.isFetching} />;
     return (
       <View style={styles.container}>
         {/* <Header 
@@ -48,6 +48,7 @@ export default class ServiceScreen extends React.Component {
           services={this.props.services}
         /> */}
         {/* <ScrollView> */}
+        <Loader loading={this.props.isFetching} />
         <Loader loading={this.props.technicianFetching} />
         {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
           <ServicesPanel 
