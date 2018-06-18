@@ -64,13 +64,13 @@ export default class LoginScreen extends Component {
       }
     }
     if (errorCount === 0) {
-      let device_token =  this.props.deviceToken.token ? this.props.deviceToken.token : 'devicetoken';
+      const device_token = this.props.deviceToken.token ? this.props.deviceToken.token : 'devicetoken';
       this.setState(() => {
           return {
             email: this.props.form.signIn.values.email,
             password: this.props.form.signIn.values.password,
             flag: 3,
-            device_token: device_token
+            device_token
           };
       }, () => {
           this.props.actions.loginRequest(this.state);
@@ -79,13 +79,13 @@ export default class LoginScreen extends Component {
   }
 
   fbLogin = (e) => {
+    const device_token = this.props.deviceToken.token ? this.props.deviceToken.token : 'devicetoken';
     this.setState(() => {
       return {
         flag: 1,
         fb_id: e.credentials.userId,
         access_token: e.credentials.token,
-        // device_token: this.props.deviceToken.token
-        device_token: this.state.device_token
+        device_token
       };
     }, () => {
       this.props.actions.loginRequest(this.state);

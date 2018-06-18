@@ -5,7 +5,7 @@ import styles from './styles';
 import PropTypes from 'prop-types';
 import Header from '../../header/Header';
 
-const CONTAINER_PADDING_TOP = 10;
+const CONTAINER_PADDING_TOP = 50;
 const indicatorOne = require('../../../assets/icons/process1.png');
 
 export default class ServicesPanel extends React.Component {

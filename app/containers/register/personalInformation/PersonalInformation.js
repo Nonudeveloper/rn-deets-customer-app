@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Header from '../../header/RegisterHeader';
+import Header from '../../header/Header';
 import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
@@ -71,23 +71,17 @@ export default class PersonalInformation extends Component {
           keyboardShouldPersistTaps='always'
         >
         {this.props.emailAvailability.flag === 6 && this.renderAlert(this.props.emailAvailability.error)}
-          <Header 
-            headerText={'Personal Information'} 
-            curre={0}
+        <Header 
             navigation={this.props.navigation} 
-            process={processOne}
-          />
+            headerText={'DETAILS'}
+            showRightIcon
+            rightText={'Next'}
+            onPress={this.goToNext.bind(this)}
+            indicatorSource={processOne}
+        />
+        <View style={styles.mainContainer}>
           <ProfilePic getImage={this.getImage.bind(this)} fbData={this.props.navigation.state.params ? JSON.parse(this.props.navigation.state.params.profile) : null} />
           <FormArea navigation={this.props.navigation} isFetching={this.props.isFetching} fbData={this.props.navigation.state.params ? this.props.navigation.state.params : null} deviceToken={this.props.deviceToken} />
-          <View style={styles.nextButtonContainer}>
-            <View style={{ marginHorizontal: 25 }}>
-              <Button 
-                style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
-                onPress={this.goToNext.bind(this)}
-              >
-                Next
-              </Button>
-            </View>
           </View>
         </KeyboardAwareScrollView>
     );
