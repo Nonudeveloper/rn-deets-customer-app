@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity, Modal } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { onSignOut } from '../../helpers/utility';
-import styles, { colors } from './styles';
+import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import PaymentDetails from '../payments/index';
+import Instabug from 'instabug-reactnative';
 
 
 const userPic = require('../../assets/icons/3_user_img.png');
@@ -36,6 +36,11 @@ export default class DrawerContainer extends React.Component {
   setModalVisible = (visible) => {
     this.props.navigation.navigate('DrawerClose');
     this.setState({ modalVisible: visible });
+  }
+
+  invokeInstabug = () => {
+    this.props.navigation.navigate('DrawerClose');
+    Instabug.invoke();
   }
 
   renderModal = () => {
@@ -100,11 +105,13 @@ export default class DrawerContainer extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
+              onPress={this.invokeInstabug}
             >
                   <Text style={styles.menuText} type='h5White'>Feedback</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
+              onPress={this.invokeInstabug}
             >
                   <Text style={styles.menuText} type='h5White'>Contact us</Text>
             </TouchableOpacity>

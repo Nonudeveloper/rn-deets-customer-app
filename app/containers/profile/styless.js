@@ -131,10 +131,7 @@ export default StyleSheet.create({
     profilePicContainer: {
         flex: 1,
     },
-    logoutButtonContainer: {
-        justifyContent: 'center', 
-        alignItems: 'flex-end' 
-    },
+    
     formContainer: {
         flex: 4, 
         flexDirection: 'column',
