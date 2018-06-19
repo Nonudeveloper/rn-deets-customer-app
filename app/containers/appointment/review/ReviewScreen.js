@@ -20,12 +20,36 @@ export default class ReviewScreen extends React.Component {
     this.props.actions.storeSelectedCardDetails(CardDetails);
   }
 
+  getTime(date) {
+    var date, TimeType, hour, minutes, seconds, fullTime;
+    hour = date.getHours(); 
+    if(hour <= 11) {
+      TimeType = 'AM';
+    } else {
+      TimeType = 'PM';
+    }
+
+    if( hour > 12 ){
+      hour = hour - 12;
+    }
+    if( hour == 0 ) {
+        hour = 12;
+    } 
+    minutes = date.getMinutes();
+    if(minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
+    fullTime = hour.toString() + ':' + minutes.toString() + ' ' + TimeType.toString();
+    return fullTime;
+  }
+
   goToNext() {
     const startDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + this.props.selectedSchedule.selectedTime);
     const startTime = startDate.toISOString();
     const startDateTime = new Date(startTime);
-    startDateTime.setMinutes(startDateTime.getMinutes() + this.props.selectedServices.totalEstimationTime);
-    const endTime = startDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    startDateTime.setMinutes(startDateTime.getMinutes() + Number(this.props.selectedServices.totalEstimationTime));
+    const endTime = this.getTime(startDateTime);
+    // const endTime = startDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     const endDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + endTime);
     const endDateTime = endDate.toISOString();
     const { reSchedule } = this.props;
@@ -70,6 +94,7 @@ export default class ReviewScreen extends React.Component {
 
   render() {
     const { isFetching } = this.props;
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <Header 
@@ -86,7 +111,7 @@ export default class ReviewScreen extends React.Component {
         {/* //appointment details component */}
         {/* //credit card details component */}
         <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
-        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.notes : ''} />
+        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.value.notes : ''} />
         <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} getSelectedCard={this.getSelectedCard} selectedServices={this.props.selectedServices} />
       </View>
     );

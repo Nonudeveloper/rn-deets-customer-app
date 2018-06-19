@@ -117,6 +117,7 @@ export default class VehiclesScreen extends React.Component {
                     form={'editVehicleForm' + i}
                     fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
                     makeModelData={this.props.makeModelData}
+                    count={this.props.count}
                 /> 
             </View>
           </View>)

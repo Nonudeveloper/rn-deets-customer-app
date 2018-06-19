@@ -24,14 +24,39 @@ export default class ServiceProviderDetailScreen extends React.Component {
     return availabilityGrid;
   }
 
+  getTime(date) {
+    var date, TimeType, hour, minutes, seconds, fullTime;
+    hour = date.getHours(); 
+    if(hour <= 11) {
+      TimeType = 'AM';
+    } else {
+      TimeType = 'PM';
+    }
+
+    if( hour > 12 ){
+      hour = hour - 12;
+    }
+    if( hour == 0 ) {
+        hour = 12;
+    } 
+    minutes = date.getMinutes();
+    if(minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
+    fullTime = hour.toString() + ':' + minutes.toString() + ' ' + TimeType.toString();
+    return fullTime;
+  }
+
   render() {
+      console.log(this.props);
     const selectedDate = new Date(this.props.selectedSchedule.selectedDate);
     const appointmentDate = selectedDate.toDateString();
-    const newDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + this.props.selectedSchedule.selectedTime);
-    const newDateIso = newDate.toISOString();
-    const now = new Date(newDateIso);
-    now.setMinutes(now.getMinutes() + parseInt(this.props.endTime));
-    const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    // const newDate = new Date(this.props.selectedSchedule.selectedInterval);
+    // const newDateIso = newDate.toISOString();
+    const now = new Date(this.props.selectedSchedule.selectedInterval);
+    now.setMinutes(now.getMinutes() + Number(this.props.endTime));
+    const endTime = this.getTime(now);
+    // const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     
     return (
       <View style={{ flex: 2 }}>
