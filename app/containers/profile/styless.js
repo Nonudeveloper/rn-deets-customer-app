@@ -138,7 +138,7 @@ export default StyleSheet.create({
     formContainer: {
         flex: 4, 
         flexDirection: 'column',
-        backgroundColor: 'red'
+        // backgroundColor: 'red'
     },
     nextButtonContainer: {
         flex: 1, 

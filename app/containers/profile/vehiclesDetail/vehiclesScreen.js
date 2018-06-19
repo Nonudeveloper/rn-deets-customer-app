@@ -93,7 +93,7 @@ export default class VehiclesScreen extends React.Component {
                   <CarPicture 
                     getVehicleImage={this.props.getVehicleImage} 
                     currentPage={this.state.currentPage} 
-                    vehicleImage={item.data.vehicle_image} 
+                    vehicleImage={item.vehicle_image} 
                     editable={this.props.editable} 
                   />
                 </View>
@@ -108,21 +108,16 @@ export default class VehiclesScreen extends React.Component {
                 </View>
             </View>
             <View style={styles.formContainer}>
-              
-
-                 
-                  <VehicleForm 
+                <VehicleForm 
                     item={item}
                     style={styles.t2} 
                     vehicleData={this.props.vehicleData} 
                     onRef={ref => (this.child = ref)}
-                    vehicleInfo={item.data}
                     editable={this.props.editable}
                     form={'editVehicleForm' + i}
                     fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
-                  />
-                  
-                  
+                    makeModelData={this.props.makeModelData}
+                /> 
             </View>
           </View>)
         }

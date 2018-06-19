@@ -19,7 +19,8 @@ class VehicleForm extends React.Component {
               model: '',
               license: '',
               value: 0,
-              initialValue: 0
+              initialValue: 0,
+              makeName: ''
           };
     }
     
@@ -33,10 +34,14 @@ class VehicleForm extends React.Component {
             return {
                 year,
                 make: '',
-                model: ''
+                model: '',
+                makeName: ''
             };
         }, () => {
-            this.props.fetchVehiclesMakeModelByYear(year, this.props.vehicleInfo);
+            const result = this.props.makeModelData.find( makeModel => makeModel.id === year);
+            if (result === undefined) {
+                this.props.fetchVehiclesMakeModelByYear(year);
+            } 
             this.props.dispatch(change(this.props.form, 'make', ''));
             this.props.dispatch(change(this.props.form, 'model', ''));
         });
@@ -48,11 +53,15 @@ class VehicleForm extends React.Component {
             make: makeID
             };
         }, () => {
-            this.props.item.makeModel.data.map((make, i) => {
-                if (make.make_id === makeID) {
-                    this.props.dispatch(change(this.props.form, 'make', make.make_name));
-                }
-            });
+            this.props.makeModelData.map((items) => 
+                (items.id === this.state.year) ?
+                items.makeModel.data.map((make, i) => {
+                    if (make.make_id === makeID) {
+                        this.props.dispatch(change(this.props.form, 'make', make.make_name));
+                    }
+                })
+                : null
+                );
         });
     }
 
@@ -139,22 +148,26 @@ class VehicleForm extends React.Component {
             model: modelId
             };
         }, () => {
-
-            this.props.item.makeModel.data.map((make, i) => {
-                if (make.make_id === this.state.make) {
-                    make.model.map((model, j) => {
-                        if (model.model_id === modelId) {
-                            this.props.dispatch(change(this.props.form, 'model', model.model_name));
-                        }
-                    });
-                }
-            });
+            this.props.makeModelData.map((items) => 
+                (items.id === this.state.year) ?
+                items.makeModel.data.map((make, i) => 
+                (make.make_id === this.state.make || make.make_id === this.state.makeName) ?
+                        make.model.map((model, j) => {
+                            if (model.model_id === modelId) {
+                                this.props.dispatch(change(this.props.form, 'model', model.model_name));
+                            }
+                        })
+                    :
+                    []
+            )
+            : null
+                );
         });
     }
     
     componentWillMount() {
         if (this.props.item !== null) {
-            const authVehicleData = this.props.item.data;
+            const authVehicleData = this.props.item;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
             const initialFormData = {
                 year: authVehicleData.vehicle_year,
@@ -173,15 +186,18 @@ class VehicleForm extends React.Component {
                 vehicle_type: authVehicleData.vehicle_type,
                 vehicle_id: authVehicleData.vehicle_id
         };
+        this.props.fetchVehiclesMakeModelByYear(parseInt(authVehicleData.vehicle_year_id));
             this.setState({
                 year: parseInt(authVehicleData.vehicle_year_id),
                 color: parseInt(authVehicleData.vehicle_color_id),
                 make: authVehicleData.vehicle_make_id,
-                model: parseInt(authVehicleData.vehicle_model_id)
+                model: parseInt(authVehicleData.vehicle_model_id),
+                makeName: authVehicleData.vehicle_make
             });
             this.props.dispatch(initialize(this.props.form, initialFormData));
         } 
     }
+
 
     componentDidMount() {
         this.props.onRef(this);
@@ -233,28 +249,27 @@ class VehicleForm extends React.Component {
             </View>
             <View >
                 <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-                    <Field name="make_id" selectedValue={this.state.make} editable={this.props.editable} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
+                    <Field name="make_id" selectedValue={this.state.make || this.state.makeName} editable={this.props.editable} component={MyPicker} onChange={(make, index) => this._populateModel(make, index)} >
                         <Picker.Item label={'Make'} />
-                        { 
-                            this.props.item.makeModel ? 
-                            this.props.item.makeModel.data.map(
-                                (make, i) => <Picker.Item 
-                                    key={i} 
-                                    value={make.make_id} 
-                                    label={make.make_name} 
-                                />) 
-                                : [] 
+                        {this.props.makeModelData.map((items) => 
+                            (items.id === this.state.year) ?
+                            items.makeModel.data.map((make, i) => <Picker.Item 
+                            key={i} 
+                            value={make.make_id} 
+                            label={make.make_name} 
+                            />)
+                        : []
+                            )
                         }
                     </Field>
                 </View>
                 <View style={[inputStyle, { borderBottomWidth: 2 }]}>
                 <Field name="model_id" selectedValue={this.state.model} editable={this.props.editable} component={MyPicker} onChange={(model) => this._modelChanged(model)}>
                         <Picker.Item label={'Model'} />
-                        { 
-                            this.props.item.makeModel ? 
-                            this.props.item.makeModel.data.map(
-                                (make, i) => 
-                                (make.make_id === this.state.make) ?
+                        {this.props.makeModelData.map((items) => 
+                            (items.id === this.state.year) ?
+                            items.makeModel.data.map((make, i) => 
+                            (make.make_id === this.state.make || make.make_id === this.state.makeName) ?
                                     make.model.map((model, j) =>
                                     <Picker.Item 
                                      key={j} value={model.model_id} 
@@ -262,8 +277,9 @@ class VehicleForm extends React.Component {
                                     />)
                                 :
                                 []
-                            ) 
-                            : [] 
+                        )
+                        : []
+                            )
                         }
                     </Field>
                 </View>

@@ -55,10 +55,10 @@ export default class DrawerContainer extends React.Component {
     const { navigation } = this.props;
     return (
       <LinearGradient
-        start={{ x: 0.0, y: 0.25 }}
-        end={{ x: 0.5, y: 1.0 }}
-        locations={[0.1, 0.75, 1]}
-        colors={['#fff', '#fff', '#fff']}
+        start={{ x: 0.1, y: 0.1 }}
+        end={{ x: 0.3, y: 1.0 }}
+        locations={[0.1, 0.85, 1]}
+        colors={['#AEACA7', '#8AA9B3', '#646464']}
         style={styles.container}
       >
         <View style={styles.sideMenu}>
@@ -108,13 +108,11 @@ export default class DrawerContainer extends React.Component {
             >
                   <Text style={styles.menuText} type='h5White'>Contact us</Text>
             </TouchableOpacity>
-            
             <TouchableOpacity
               style={styles.menu}
             >
                   <Text style={styles.menuText} type='h5White'>Legal</Text>
             </TouchableOpacity>
-
             <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
                   <Text style={styles.menuText} type='h5White'>Log Out</Text>
             </TouchableOpacity>

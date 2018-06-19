@@ -5,6 +5,7 @@ import ListItem from './ListItem';
 import { getAppointments } from './detail/api';
 import AppoinmentTabs from './Tabs';
 import styles from './styles';
+import Loader from '../../deetscomponents/Loader';
 
 
 const notAvailableIcon = require('../../assets/icons/tech_placeholder_not_available.png');
@@ -31,6 +32,14 @@ class PastAppointmentsList extends Component {
 
     componentDidMount() {
         this.props.actions.fetchUpcomingAndPastAppointments();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.upcomingAppointments.length) {
+            this.setState({ selectedTab: 'past' });
+        } else {
+            this.setState({ selectedTab: 'upcoming' });
+        }
     }
 
     flatListItemSeparator = () => {
@@ -142,6 +151,7 @@ class PastAppointmentsList extends Component {
                         onPress={() => this.setState({ editMode: !this.state.editMode })}
                         buttonType={'back'}
                     />
+                    <Loader loading={this.props.isFetching} />
                     <AppoinmentTabs 
                         selectedTab={this.state.selectedTab} 
                         onTabClick={this.changeActiveTab} 
@@ -158,13 +168,13 @@ class PastAppointmentsList extends Component {
                         extraData={this.state}
                         ListEmptyComponent={() => 
                             <View style={styles.notAvailableContainer}>
-                             {(!this.props.upcomingAppointments.length && this.state.selectedTab !== 'past' ? 
+                             {(!this.props.upcomingAppointments.length && this.state.selectedTab !== 'past' && !this.props.isFetching ? 
                             <View style={styles.notAvailableContainer}>
                                 <Image source={notAvailableIcon} style={styles.notAvailableImage} />
                                 <Text style={styles.notAvailableText}>Sorry, you have no upcoming appointments.</Text>
                             </View>
                             : null)}
-                            {(!this.props.pastAppointments.length && this.state.selectedTab === 'past' ? 
+                            {(!this.props.pastAppointments.length && this.state.selectedTab === 'past' && !this.props.isFetching ? 
                             <View style={styles.notAvailableContainer}>
                                 <Image source={notAvailableIcon} style={styles.notAvailableImage} />
                                 <Text style={styles.notAvailableText}>Sorry, you have no past appointments.</Text>

@@ -123,7 +123,7 @@ const styles = {
         height: 30,
     },
     rightIconContainer: { 
-        right: 16,
+        right: 12,
       
     },
     indicatorStyle: {

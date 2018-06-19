@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.Service.isFetching,
+        isFetching: state.appointmentLists.isFetching,
         pastAppointments: state.appointmentLists.pastAppointments,
         upcomingAppointments: state.appointmentLists.upcomingAppointments,
         selectedAppointments: state.appointmentLists.selectedAppointments
