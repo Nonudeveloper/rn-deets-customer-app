@@ -353,7 +353,7 @@ export default class ProfileScreen extends Component {
                 { this.state.showPasswordButton &&
                     <View style={styles.nextButtonContainer}>
                         <Button 
-                            style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
+                            style={[styles.nextButtonStyle, { backgroundColor: '#28a745' }]}
                             onPress={this.goToNext.bind(this)}
                         >
                             Change Password

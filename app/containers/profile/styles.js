@@ -40,7 +40,6 @@ export default StyleSheet.create({
         borderRadius: 100
     },
     formArea: {
-        marginTop: 20,
         backgroundColor: '#333333',
     },
     textStyle: {
@@ -144,7 +143,7 @@ export default StyleSheet.create({
         justifyContent: 'flex-start', 
         alignItems: 'center',
         position: 'absolute',
-        top: 35, 
+        top: 30, 
         width: 100,
         height: 50,
         borderColor: '#333',
@@ -153,14 +152,6 @@ export default StyleSheet.create({
         borderBottomLeftRadius: 100,
         borderTopLeftRadius: 100,
         zIndex: 999
-    },
-    touchableLogoutClosedButtonContainer: { 
-        borderColor: '#000', 
-        borderWidth: 2, 
-        width: 35, 
-        height: 35, 
-        borderRadius: 100,
-        zIndex: 999,
     },
     logoutOpenButtonContainer: {
         position: 'absolute', 
@@ -215,12 +206,6 @@ export default StyleSheet.create({
         borderRadius: 100,
         zIndex: 999,
     },
-    logoutOpenButtonContainer: {
-        position: 'absolute', 
-        top: 180, 
-        zIndex: 999, 
-        alignItems: 'flex-end', 
-        left: 260 
-    },
+
 
 });

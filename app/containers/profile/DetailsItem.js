@@ -4,7 +4,6 @@ import ProfilePic from './ProfilePic';
 import FormArea from './Form';
 import styles from './styles';
 
-const logOutButton = require('../../assets/icons/logout_pressed.png');
 const logOutClosedButton = require('../../assets/icons/logout_closed.png');
 
 export default class DetailsItem extends React.Component {
@@ -33,7 +32,7 @@ export default class DetailsItem extends React.Component {
 
   render() {
     return (
-        <View style={{ flex: this.props.flex, opacity: this.props.opacity, top: 15 }}>
+        <View style={{ flex: this.props.flex, opacity: this.props.opacity }}>
             <View style={styles.pictureWraper}>
                 <View style={styles.picContainer}>
                     <ProfilePic 
@@ -56,11 +55,10 @@ export default class DetailsItem extends React.Component {
                     >
                             <Image style={{ width: 20, height: 20 }} source={logOutClosedButton} />
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor={'transparent'} onPress={this._logout}>
+                    <TouchableHighlight underlayColor={'transparent'} style={{ width: 60 }} onPress={this._logout}>
                         <Text style={{ left: 5 }}>Logout</Text> 
                     </TouchableHighlight>
                 </View>
-                <FormArea navigation={this.props.navigation} formEditable={this.props.formEditable} authUser={this.props.authUser} />
             </View>
             <View style={styles.formContainer}>
                 <FormArea navigation={this.props.navigation} formEditable={this.props.formEditable} authUser={this.props.authUser} />
