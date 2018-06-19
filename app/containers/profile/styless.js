@@ -70,7 +70,7 @@ export default StyleSheet.create({
     toggleButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        flex: 1,
+        height: 90,
     },
     detailButtonInnerContainer: {
         flex: 1,
@@ -131,9 +131,10 @@ export default StyleSheet.create({
     profilePicContainer: {
         flex: 1,
     },
-    logoutButtonContainer: {
-        justifyContent: 'center', 
-        alignItems: 'flex-end' 
+    floatingAddButton: { 
+        position: 'absolute', 
+        right: 0, 
+        top: '7%' 
     },
     formContainer: {
         flex: 4, 

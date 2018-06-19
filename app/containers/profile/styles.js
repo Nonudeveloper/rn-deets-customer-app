@@ -35,12 +35,11 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 100,
-        height: 100,
+        width: 70,
+        height: 70,
         borderRadius: 100
     },
     formArea: {
-        marginTop: 20,
         backgroundColor: '#333333',
     },
     textStyle: {
@@ -56,8 +55,8 @@ export default StyleSheet.create({
     editButtonWrapper: { 
         zIndex: 999, 
         justifyContent: 'flex-end', 
-        marginLeft: 73, 
-        marginBottom: 78 
+        marginLeft: 60, 
+        marginBottom: 50
     },
     editIcon: {
         resizeMode: 'contain', 
@@ -140,9 +139,26 @@ export default StyleSheet.create({
         alignItems: 'flex-end'
     },
     logoutButtonContainer: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'flex-end' 
+        flexDirection: 'row',
+        justifyContent: 'flex-start', 
+        alignItems: 'center',
+        position: 'absolute',
+        top: 30, 
+        width: 100,
+        height: 50,
+        borderColor: '#333',
+        borderWidth: 2,
+        borderRightWidth: 0,
+        borderBottomLeftRadius: 100,
+        borderTopLeftRadius: 100,
+        zIndex: 999
+    },
+    logoutOpenButtonContainer: {
+        position: 'absolute', 
+        top: 180, 
+        zIndex: 999, 
+        alignItems: 'flex-end', 
+        left: 260 
     },
     formContainer: {
         flex: 2, 
@@ -160,6 +176,36 @@ export default StyleSheet.create({
     unactioveButtonStyle: {
         backgroundColor: 'black',
         borderColor: 'grey',
-    }
+    },
+    picContainer: { 
+        flex: 1, 
+        justifyContent: 'center', 
+        top: 5, 
+        alignItems: 'center'
+    },
+    logoutClosedButtonContainer: { 
+        position: 'absolute', 
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 180, 
+        left: 312,
+        width: 50,
+        height: 50,
+        borderColor: '#333',
+        borderWidth: 2,
+        borderBottomLeftRadius: 100,
+        borderTopLeftRadius: 100
+    },
+    touchableLogoutClosedButtonContainer: { 
+        borderColor: '#333', 
+        borderWidth: 2, 
+        width: 35, 
+        height: 35, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        borderRadius: 100,
+        zIndex: 999,
+    },
+
 
 });
