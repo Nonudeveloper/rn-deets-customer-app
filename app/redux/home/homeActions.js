@@ -51,6 +51,6 @@ export function fetchPolygonDataFaliure(err) {
 }
 
 function arrangeDataForPolygon(res) {
-    const polygonData = res.data.map((item) => [item.coordinates[1], item.coordinates[0]]);
+    const polygonData = res.data.map((item) => [Number(item.coordinates[1]), Number(item.coordinates[0])]);
     return polygonData;
 }
