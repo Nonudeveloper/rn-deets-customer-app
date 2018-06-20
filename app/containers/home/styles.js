@@ -46,18 +46,19 @@ const styles = StyleSheet.create({
       top: (height / 2) - 50,
       left: (width / 2) - 17,
     },
-    myAppoinments: {
+    myAppointments: {
       position: 'absolute',
       bottom: 0,
-      height: 50,
+      height: 60,
       width: '100%',
       backgroundColor: '#333',
       justifyContent: 'center',
       alignItems: 'center'
     },
-    myAppoinmentsText: {
+    myAppointmentsText: {
       color: '#fff',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: 18
     }
   });
 

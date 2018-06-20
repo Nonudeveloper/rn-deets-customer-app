@@ -185,7 +185,7 @@ export default class HomeScreen extends Component {
       inputVal: val
     });
   }
-  
+
   navigateToAppointmentsList = () => {
     this.props.navigation.navigate('PastAppointmentsList');
   }
@@ -285,8 +285,8 @@ export default class HomeScreen extends Component {
                 style={{ width: 32, height: 40 }}
               />
             </View>
-            <TouchableOpacity style={styles.myAppoinments} onPress={this.navigateToAppointmentsList}>
-              <Text style={styles.myAppoinmentsText}>My Appointments</Text>
+            <TouchableOpacity style={styles.myAppointments} onPress={this.navigateToAppointmentsList}>
+              <Text style={styles.myAppointmentsText}>My Appointments</Text>
             </TouchableOpacity>
         </View>
     );
