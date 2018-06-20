@@ -188,6 +188,21 @@ export default StyleSheet.create({
         fontSize: 18, 
         color: '#586069',
         paddingHorizontal: 10
+    },
+    notAvailableContainer: {
+        flex: 1, 
+        alignItems: 'center', 
+        marginVertical: 20
+    },
+    notAvailableText: {
+        fontSize: 20, 
+        color: '#1a1a1a',
+        paddingTop: 20, 
+        textAlign: 'center'
+    },
+    notAvailableImage: {
+        width: 72, 
+        height: 75
     }
 });
 

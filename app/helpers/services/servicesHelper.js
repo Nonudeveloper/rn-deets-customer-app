@@ -22,7 +22,8 @@ class ServicesHelper {
             data.append('service_cost', appointmentInfo.service.cost);
         }
         const today = new Date();
-        const serviceDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        const selectedDate = appointmentInfo.serviceDate === '' ? new Date() : new Date(appointmentInfo.serviceDate);
+        const serviceDate = selectedDate.getFullYear() + '-' + ('0' + (selectedDate.getMonth() + 1)).slice(-2) + '-' + ('0' + selectedDate.getDate()).slice(-2);
 
         const payload = {
             service_cost: appointmentInfo.selectedVehicle.vehicle_type === 2 ? appointmentInfo.service.service_Large_cost : appointmentInfo.service.cost,
@@ -77,11 +78,11 @@ class ServicesHelper {
     }
 
     reschudleAppointment = async reschudleAppointmentInfo => {
-        console.log(reschudleAppointmentInfo);
         const user = await getItem('user');
         const data = new FormData();
         const today = new Date();
-        const serviceDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        const selectedDate = reschudleAppointmentInfo.serviceDate === '' ? new Date() : new Date(reschudleAppointmentInfo.serviceDate);
+        const serviceDate = selectedDate.getFullYear() + '-' + ('0' + (selectedDate.getMonth() + 1)).slice(-2) + '-' + ('0' + selectedDate.getDate()).slice(-2);
 
         const payload = {
             access_token: JSON.parse(user).access_token,

@@ -126,7 +126,7 @@ export default class PaymentInformation extends React.Component {
       <View style={styles.container}>
           <Header 
               navigation={this.props.navigation} 
-              headerText={'Payment'}
+              headerText={'Payment Information'}
               showRightIcon
               rightText={'Register'}
               onPress={this.goToNext.bind(this)}

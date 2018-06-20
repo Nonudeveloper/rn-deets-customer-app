@@ -254,7 +254,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1
   },
   costTextStyle: {
-    fontSize: 20, 
+    fontSize: 17, 
     color: '#1a1a1a'
   },
   serviceDetailInnerConatainer: {
@@ -266,7 +266,7 @@ export default StyleSheet.create({
     color: '#000'
   },
   serviceDetailCostContainer: {
-    flex: .5, 
+    flex: 0.5, 
     alignItems: 'flex-end', 
     justifyContent: 'flex-end',
     borderLeftWidth: 1, 
