@@ -37,10 +37,13 @@ export default class ServiceDetail extends React.Component {
                     </View>
                     <View style={styles.serviceAddonConatiner}>
                         <View style={{ width: '40%' }}>
+                        {this.props.selectedServices.selectedaddOns.length !== 0 ?
                             <Text style={styles.addonsTextStyle}>Addon Services - </Text>
+                            : null
+                        }
                         </View>
                         <ScrollView> 
-                            {this.props.selectedServices.selectedaddOns !== '' ?
+                            {this.props.selectedServices.selectedaddOns.length !== 0 ?
                                 this.props.selectedServices.selectedaddOns.map((addons, i) => 
                                     <View key={i} style={styles.addonsInnerConatainer}>
                                         <View style={{ flex: 4.4 }}>

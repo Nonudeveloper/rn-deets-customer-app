@@ -8,6 +8,8 @@ import { addListener } from '../helpers/utils/redux';
 //import PushNotification from 'react-native-push-notification';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
+import FCM, { NotificationActionType } from "react-native-fcm";
+import { Platform } from 'react-native';
  
 class ReduxNavigation extends React.Component {
   constructor(props) {
@@ -52,6 +54,28 @@ class ReduxNavigation extends React.Component {
         }
       })
       .catch(err => console.log(err));
+  }
+
+  componentDidMount() {
+    FCM.getFCMToken().then(token => {
+      console.log("TOKEN (getFCMToken)", token);
+      const deviceToken = {
+        token,
+        os: 'android'
+      };
+      this.props.dispatch(saveDeviceToken(deviceToken));
+    });
+
+    if (Platform.OS === "ios") {
+      FCM.getAPNSToken().then(token => {
+        console.log("APNS TOKEN (getFCMToken)", token);
+        const deviceToken = {
+          token,
+          os: 'ios'
+        };
+        this.props.dispatch(saveDeviceToken(deviceToken));
+      });
+    }
   }
 
   render() {

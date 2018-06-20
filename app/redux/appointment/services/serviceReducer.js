@@ -49,6 +49,7 @@ export default function servicesReducer(state = initialState, action) {
         case SERVICES_APPOINTMENT_FALIURE:
             return Object.assign({}, state, {
                 technicianFetching: false,
+                technician: [],
                 errorMessage: action.err
             });
         case HIDE_ALERT:

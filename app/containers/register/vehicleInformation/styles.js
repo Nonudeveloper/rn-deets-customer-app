@@ -18,13 +18,15 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 55,
-        height: 55,
+        width: 85,
+        height: 85,
         borderRadius: 100
     },
     container: {
         flex: 1,
         flexDirection: 'column',
+        justifyContent: 'space-between',
+        marginVertical: 40
     },
     t1: {
         justifyContent: 'center',
@@ -118,8 +120,12 @@ export default StyleSheet.create({
     editButtonWrapper: { 
         zIndex: 999, 
         justifyContent: 'flex-end', 
-        marginLeft: 48, 
-        marginBottom: 43 
+        marginLeft: 68, 
+        marginBottom: 63 
+    },
+    formOuterContainer: {
+        flex: 2,
+        top: 20
     }
 });
 

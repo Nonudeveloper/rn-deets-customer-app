@@ -30,13 +30,14 @@ export function fetchServicesFaliure(err) {
     };
 }
 
-export function createNewServiceAppointment(service, selectedVehicle, addons, geoData) {
+export function createNewServiceAppointment(service, selectedVehicle, addons, geoData, serviceDate) {
     return {
         type: CREATE_NEW_USER_SERVICE_APPOINTMENT,
         service,
         selectedVehicle,
         addons,
-        geoData
+        geoData,
+        serviceDate
     };
 }
 
@@ -76,14 +77,38 @@ function getTechnicanAvailability(data) {
           const convertedtime = [];
           tec.interval.map((interval, j) => {
             const date = new Date(interval);
-            const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-            convertedtime.push({ key: j, timeavailable: getTime, selected: false });
+            const getTimein = getTime(date);
+            // const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            convertedtime.push({ key: j, timeavailable: getTimein, interval, selected: false });
           });
           availableTime.push({ technician: tec, time: convertedtime });
         });
     }
     return availableTime;
 }
+
+function getTime(date) {
+    var TimeType, hour, minutes, seconds, fullTime;
+    hour = date.getHours(); 
+    if (hour <= 11) {
+      TimeType = 'AM';
+    } else {
+      TimeType = 'PM';
+    }
+
+    if (hour > 12) {
+      hour = hour - 12;
+    }
+    if (hour === 0) {
+        hour = 12;
+    } 
+    minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
+    fullTime = hour.toString() + ':' + minutes.toString() + ' ' + TimeType.toString();
+    return fullTime;
+  }
 
 export function storeUserServiceAppointmentId(appoitmentId) {
     return {
@@ -92,10 +117,11 @@ export function storeUserServiceAppointmentId(appoitmentId) {
     };
 }
 
-export function rescheduleServiceAppointment(appointmentId, addOns) {
+export function rescheduleServiceAppointment(appointmentId, addOns, serviceDate) {
     return {
       type: RESCHEDULE_SERVICE_APPOINTMENT,
       appointmentId,
-      addOns
+      addOns,
+      serviceDate
     };
 }

@@ -42,7 +42,7 @@ class RegisterHelper {
     data.append('vehicle_make_id', userInfo.form2.make_id);
     data.append('vehicle_color_id', userInfo.form2.color_id);
     data.append('vehicle_year_id', userInfo.form2.year);
-    data.append('license', userInfo.form2.license);
+    data.append('license', userInfo.form2.radio_button_type === 0 ? userInfo.form2.license : userInfo.form2.vin);
     data.append('vehicle_make', userInfo.form2.make_id);
     data.append('vehicle_model', userInfo.form2.model);
     data.append('vehicle_color', userInfo.form2.color);
@@ -52,7 +52,7 @@ class RegisterHelper {
     data.append('vehicle_type_segment', typeData[1]);
     data.append('vehicle_type_segment_id', userInfo.form2.vehicle_type_segment_id);
     data.append('notes', userInfo.form2.notes);
-    data.append('license_type', 2);
+    data.append('license_type', userInfo.form2.radio_button_type === 0 ? 2 : 1);
     data.append('nonce', userInfo.nonce);
     
     return await fetch(`${apiConfig.url}/customer/register_new_user`, {

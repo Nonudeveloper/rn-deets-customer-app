@@ -192,6 +192,7 @@ export default class HomeScreen extends Component {
 
   render() {
     const { isLoading } = this.props;
+    // return <Text>jkkjkj</Text>;
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -236,7 +237,7 @@ export default class HomeScreen extends Component {
             {/* <Loader
                 loading={isLoading}
             /> */}
-            <Mapbox.MapView
+            {/* <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
@@ -256,7 +257,7 @@ export default class HomeScreen extends Component {
                 <Mapbox.BackgroundLayer id='background' />
               </Mapbox.VectorSource>
               {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
-            </Mapbox.MapView>
+            </Mapbox.MapView> */}
             <Header
               headerText={'Deets'}
               navigation={this.props.navigation}

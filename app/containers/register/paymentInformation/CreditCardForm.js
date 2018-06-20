@@ -2,10 +2,11 @@ import React from 'react';
 import { Text, View, Alert } from 'react-native';
 import { LiteCreditCardInput } from 'react-native-credit-card-input'; // 0.4.1
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Header from '../../header/RegisterHeader';
+import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
 import styles from './styles';
 import StyleConstants from '../../../config/StyleConstants';
+import Loader from '../../../deetscomponents/Loader';
 
 const BTClient = require('react-native-braintree-xplat');
 
@@ -76,12 +77,22 @@ _onFocus = (field) => console.log('focusing', field);
   render() {
     return (
       <View style={styles.container}>
-            <Header 
+            {/* <Header 
                 headerText={'Payment Information'} 
                 curre={1} 
                 navigation={this.props.navigation} 
                 process={processThree}
+            /> */}
+            <Header 
+            navigation={this.props.navigation} 
+            headerText={'Payment Information'}
+            showRightIcon
+            rightText={'Register'}
+            onPress={() => this.getNonceAndSubmit(this.state.card)}
+
+            indicatorSource={processThree}
             />
+             <Loader loading={this.props.isFetching} />
             <View style={styles.container2}>
                 <LiteCreditCardInput
                     autoFocus
@@ -95,7 +106,7 @@ _onFocus = (field) => console.log('focusing', field);
                     onChange={this._onChange} 
                 />
             </View>
-            <Button 
+            {/* <Button 
                 style={{ 
                 borderWidth: 4, 
                 borderColor: '#bfff80', 
@@ -107,7 +118,7 @@ _onFocus = (field) => console.log('focusing', field);
                 onPress={() => this.getNonceAndSubmit(this.state.card)}
             >
                     Register
-            </Button>
+            </Button> */}
       </View>
     );
   }

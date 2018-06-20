@@ -55,10 +55,13 @@ function* watchcreateNewServiceAppointment() {
       const response = yield call(createAppointmentCall, payload);
       yield put(serviceAppointmentSuccess(response));
       yield put(storeUserServiceAppointmentId(response.user_service_appointment_id));
-      yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
+      if (payload.serviceDate === '') {
+        yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
+      }
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
-      yield put(serviceAppointmentFaliure(err));
+      const error = payload.serviceDate !== '' ? '' : err;
+      yield put(serviceAppointmentFaliure(error));
       console.log('SAGA FETCH ERR: ', err);
     }
   }
@@ -87,10 +90,13 @@ while (true) {
     const response = yield call(reschudleAppointmentCall, payload);
     yield put(serviceAppointmentSuccess(response));
     yield put(storeUserServiceAppointmentId(response.user_service_appointment_id));
-    yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
+    if (payload.serviceDate === '') {
+      yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
+    }
     console.log('SAGA FETCH SUCCESS: ', response);
   } catch (err) {
-    yield put(serviceAppointmentFaliure(err));
+    const error = payload.serviceDate !== '' ? '' : err;
+    yield put(serviceAppointmentFaliure(error));
     console.log('SAGA FETCH ERR: ', err);
   }
 }

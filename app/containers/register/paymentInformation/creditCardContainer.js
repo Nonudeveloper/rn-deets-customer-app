@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
     return {
          form: state.form,
          vehicleImage: state.Vehicle.vehicleImage,
-         image: state.Register.image
+         image: state.Register.image,
+         isFetching: state.Register.isFetching
     };
 };
 

@@ -21,12 +21,13 @@ export default class ReviewScreen extends React.Component {
   }
 
   goToNext() {
-    const startDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + this.props.selectedSchedule.selectedTime);
-    const startTime = startDate.toISOString();
-    const startDateTime = new Date(startTime);
-    startDateTime.setMinutes(startDateTime.getMinutes() + this.props.selectedServices.totalEstimationTime);
-    const endTime = startDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const endDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + endTime);
+    // const startDate = new Date(this.props.selectedSchedule.selectedDate + ' ' + this.props.selectedSchedule.selectedTime);
+    // const startTime = startDate.toISOString();
+    const startDateTime = new Date(this.props.selectedSchedule.selectedInterval);
+    startDateTime.setMinutes(startDateTime.getMinutes() + Number(this.props.selectedServices.totalEstimationTime));
+    // const endTime = this.getTime(startDateTime);
+    // const endTime = startDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const endDate = new Date(startDateTime);
     const endDateTime = endDate.toISOString();
     const { reSchedule } = this.props;
     const options = {
@@ -34,7 +35,7 @@ export default class ReviewScreen extends React.Component {
               notes: this.props.notes !== undefined ? this.props.notes.notes : '',
               body_payment_card_id: this.props.selectedCardDetails.id,
               service_end_time: endDateTime,
-              service_start_time: startTime,
+              service_start_time: this.props.selectedSchedule.selectedInterval,
               technician_id: this.props.selectedSchedule.selectedItem.technician.technician_id,
               user_service_appointment_id: this.props.serviceAppointmentId,
               service_duration_minutes: this.props.selectedServices.totalEstimationTime,
@@ -70,6 +71,7 @@ export default class ReviewScreen extends React.Component {
 
   render() {
     const { isFetching } = this.props;
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <Header 
@@ -86,7 +88,7 @@ export default class ReviewScreen extends React.Component {
         {/* //appointment details component */}
         {/* //credit card details component */}
         <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
-        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.notes : ''} />
+        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.value.notes : ''} />
         <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} getSelectedCard={this.getSelectedCard} selectedServices={this.props.selectedServices} />
       </View>
     );

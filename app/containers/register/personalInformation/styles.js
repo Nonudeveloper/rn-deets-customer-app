@@ -10,6 +10,7 @@ export default StyleSheet.create({
     // flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    // marginVertical: 50
   },
     nextButtonContainer: {
         paddingTop: 60
@@ -39,8 +40,8 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 55,
-        height: 55,
+        width: 85,
+        height: 85,
         borderRadius: 100
     },
     formArea: {
@@ -60,14 +61,20 @@ export default StyleSheet.create({
     editButtonWrapper: { 
         zIndex: 999, 
         justifyContent: 'flex-end', 
-        marginLeft: 48, 
-        marginBottom: 43 
+        marginLeft: 68, 
+        marginBottom: 63 
     },
     editIcon: {
         resizeMode: 'contain', 
         width: 25, 
         height: 25,
         zIndex: 999,
+    },
+    mainContainer: {
+        flex: 1, 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        marginVertical: 40
     }
 
 });
