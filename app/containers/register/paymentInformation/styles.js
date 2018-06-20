@@ -88,5 +88,15 @@ export default StyleSheet.create({
         fontSize: 16,
         color: 'grey',
       },
-
+      textContainer: {
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        marginHorizontal: 20
+      },
+      textStyle: {
+        color: '#666666', 
+        fontSize: 22, 
+        textAlign: 'center'
+      }
 });

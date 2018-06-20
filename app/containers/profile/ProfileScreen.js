@@ -48,7 +48,8 @@ export default class ProfileScreen extends Component {
             selectedPage: 0,
             detailsOpacity: 100,
             detailFlexValue: 2,
-            vehicleFlexValue: 1
+            vehicleFlexValue: 1,
+            showVehicleComponent: false
         };
     }
 
@@ -65,6 +66,7 @@ export default class ProfileScreen extends Component {
             this.props.actions.getAuthUserVehicleDetails();
         }
         this.props.vehicleData.length === 0 ? this.props.getVehicles() : null;
+        this.setState({ showVehicleComponent: true });
     }
 
     generateData = () => {
@@ -337,7 +339,7 @@ export default class ProfileScreen extends Component {
                         opacity={this.state.detailsOpacity}
                         flex={this.state.detailsOpacity ? 5 : 0}
                     />
-
+                        {this.state.showVehicleComponent &&
                     <VehiclesScreen 
                         editable={this.state.vehicleEditable} 
                         navigation={this.props.navigation}
@@ -347,6 +349,7 @@ export default class ProfileScreen extends Component {
                         flex={this.state.detailsOpacity ? 0 : 5}
                         authVehiclesData={this.props.authVehiclesData}
                     /> 
+                        }
                 </View>
          
 

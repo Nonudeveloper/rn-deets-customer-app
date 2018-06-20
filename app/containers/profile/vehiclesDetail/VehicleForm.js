@@ -166,6 +166,14 @@ class VehicleForm extends React.Component {
     }
     
     componentWillMount() {
+        console.log(this.props);
+       
+    }
+    
+    
+
+    componentDidMount() {
+        this.props.onRef(this);
         if (this.props.item !== null) {
             const authVehicleData = this.props.item;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
@@ -196,11 +204,6 @@ class VehicleForm extends React.Component {
             });
             this.props.dispatch(initialize(this.props.form, initialFormData));
         } 
-    }
-
-
-    componentDidMount() {
-        this.props.onRef(this);
     }
 
     componentWillUnmount() {
@@ -423,7 +426,10 @@ class VehicleForm extends React.Component {
 export default reduxForm({ 
     keepDirtyOnReinitialize: false,
     enableReinitialize: false,
-    validate: (values) => {
+    validate: (values, props) => {
+        if (!props.editable) {
+            return null;
+        }
         const errors = {};
         errors.year = !values.year
           ? 'Year field is required'

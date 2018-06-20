@@ -12,6 +12,7 @@ const indicatorOne = require('../../../assets/icons/process2.png');
 const vehicleIcon = require('../../../assets/icons/tech_placeholder.png');
 const starOn = require('../../../assets/icons/starOn.png');
 const starOff = require('../../../assets/icons/starOff.png');
+const notAvailableIcon = require('../../../assets/icons/tech_placeholder_not_available.png');
 
 export default class DateTimeScreen extends React.Component {
   constructor(props) {
@@ -31,7 +32,6 @@ export default class DateTimeScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.technicians);
     const nw = this.getTechnicanAvailability(this.props.technicians);
     this.setState({ data: this.props.technicians, time: nw });
     // getAvailability()
@@ -56,6 +56,7 @@ export default class DateTimeScreen extends React.Component {
       getSelectedDate={this.getSelectedDate.bind(this)} 
       currentDate={this.state.currentDate} 
       selectedDate={this.state.selectedDate}
+      propsData={this.props}
     />
     </Modal>
     );
@@ -96,13 +97,37 @@ export default class DateTimeScreen extends React.Component {
           const convertedtime = [];
           tec.interval.map((interval, j) => {
             const date = new Date(interval);
-            const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-            convertedtime.push({ key: j, timeavailable: getTime, selected: false });
+            const getTime = this.getTime(date);
+            // const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            convertedtime.push({ key: j, timeavailable: getTime, interval, selected: false });
           });
           availableTime.push({ technician: tec, time: convertedtime });
         });
     }
     return availableTime;
+  }
+
+  getTime(date) {
+    var TimeType, hour, minutes, seconds, fullTime;
+    hour = date.getHours(); 
+    if (hour <= 11) {
+      TimeType = 'AM';
+    } else {
+      TimeType = 'PM';
+    }
+
+    if (hour > 12) {
+      hour = hour - 12;
+    }
+    if (hour === 0) {
+        hour = 12;
+    } 
+    minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
+    fullTime = hour.toString() + ':' + minutes.toString() + ' ' + TimeType.toString();
+    return fullTime;
   }
 
   changeActiveRadioButton(key, data) {
@@ -113,7 +138,8 @@ export default class DateTimeScreen extends React.Component {
              times.selected = true;
             this.setState({
               selectedItem: item,
-              selectedTime: times.timeavailable
+              selectedTime: times.timeavailable,
+              selectedInterval: times.interval
             });
           } else {
             times.selected = false;
@@ -141,7 +167,6 @@ export default class DateTimeScreen extends React.Component {
 
   render() {
     // const { isFetching } = this.props;
-    console.log(this.state);
     const today = new Date(this.state.selectedDate);
     const date = today.toDateString();
     return (
@@ -171,6 +196,14 @@ export default class DateTimeScreen extends React.Component {
             data={this.props.technicians}
             extraData={this.state} 
             ItemSeparatorComponent={this.FlatListItemSeparator}
+            ListEmptyComponent={() => 
+              <View style={styles.notAvailableContainer}>
+              <View style={styles.notAvailableContainer}>
+                  <Image source={notAvailableIcon} style={styles.notAvailableImage} />
+                  <Text style={styles.notAvailableText}>Sorry, No Technican Available right now.</Text>
+              </View>
+              </View>
+          }
             renderItem={
               ({ item }) => 
                 <View style={{ flex: 1 }}>

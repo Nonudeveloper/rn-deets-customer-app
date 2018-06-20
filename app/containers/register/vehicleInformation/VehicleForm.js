@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, initialize, change } from 'redux-form';
+import { reduxForm, Field, change } from 'redux-form';
 import { View, Text, Picker, TextInput } from 'react-native';
 import styles from './styles';
 import MyPicker from '../../../deetscomponents/form/AndroidPicker';
@@ -24,6 +24,7 @@ class VehicleForm extends React.Component {
     
     componentDidMount() {
         this.props.onRef(this);
+        this.props.dispatch(change('vehicleForm', 'radio_button_type', this.state.value)); 
     }
     componentWillUnmount() {
         this.props.onRef(undefined);
@@ -95,10 +96,8 @@ class VehicleForm extends React.Component {
         pickerFontSize: 18,
         selectedValue: [59],
         onPickerConfirm: data => {
-            const initialFormData = {
-                type: data[0] + ', ' + data[1]  
-        };
-            this.props.dispatch(initialize('vehicleForm', initialFormData, 'type'));
+            const typeData = data[0] + ', ' + data[1];
+            this.props.dispatch(change(this.props.form, 'type', typeData));
 
             this.props.vehicleData.type.map((type, i) => {
                 if (type.vehicle_type_name === data[0]) {

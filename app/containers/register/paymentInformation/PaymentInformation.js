@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Modal, TouchableHighlight, Image } from 'react-native';
-import Header from '../../header/RegisterHeader';
+import { Text, View, Modal, TouchableHighlight, Image, Alert } from 'react-native';
+import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
+import Loader from '../../../deetscomponents/Loader';
 import styles from './styles';
 
 const BTClient = require('react-native-braintree-xplat');
@@ -21,6 +22,7 @@ export default class PaymentInformation extends React.Component {
 
   state = {
     modalVisible: false,
+    paypalNonce: ''
   };
 
   setModalVisible(visible) {
@@ -29,9 +31,10 @@ export default class PaymentInformation extends React.Component {
 
   withPaypal = () => {
     console.log('in with paypal');
-    BTClient.showPayPalViewController().then(function(nonce) {
+    BTClient.showPayPalViewController().then(nonce => {
       //payment succeeded, pass nonce to server
       console.log(nonce);
+     this.setState({ paypalNonce: nonce, modalVisible: false });
     })
     .catch(function(err) {
       //error handling
@@ -42,6 +45,27 @@ export default class PaymentInformation extends React.Component {
   withCard = () => {
     this.setModalVisible(!this.state.modalVisible);
     this.props.navigation.navigate('creditCardForm');
+  }
+
+
+  goToNext() {
+    if (this.state.paypalNonce !== '') {
+    const userImage = this.props.image;
+    const vehicleImage = this.props.vehicleImage;
+    const form1 = this.props.form.signUp.values;
+    const form2 = this.props.form.vehicleForm.values;
+    const nonce = this.state.paypalNonce;
+    this.props.actions.registerRequest(userImage, vehicleImage, form1, form2, nonce);
+    } else {
+      Alert.alert(
+        'Error',
+        'Enter Payment Information First',
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+        { cancelable: false }
+    );
+    }
   }
 
   renderModal = () => {
@@ -70,7 +94,7 @@ export default class PaymentInformation extends React.Component {
                     </View>
                   </View>
                   <View style={styles.modalBodyContainer}>
-                        <TouchableHighlight onPress={() => this.withPaypal()}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => this.withPaypal()}>
                           <View style={styles.paymentItem} >
                             <View >
                               <Image source={smallPaypalLogo} style={styles.paypalImg} />
@@ -101,12 +125,15 @@ export default class PaymentInformation extends React.Component {
     return (
       <View style={styles.container}>
           <Header 
-            headerText={'Payment Information'} 
-            curre={1} 
-            navigation={this.props.navigation} 
-            process={processThree}
+              navigation={this.props.navigation} 
+              headerText={'Payment Information'}
+              showRightIcon
+              rightText={'Register'}
+              onPress={this.goToNext.bind(this)}
+              indicatorSource={processThree}
           />
-        <View style={{ flex: 1 }}>
+          <Loader loading={this.props.isFetching} />
+        <View style={{ flex: 2 }}>
           <Button 
             style={{ 
               borderWidth: 4, 
@@ -125,7 +152,13 @@ export default class PaymentInformation extends React.Component {
           </Button>
         </View>
           {this.renderModal()}
-            
+        <View style={styles.textContainer}>
+        <Text style={styles.textStyle}>
+            Your card will only be charged 
+            after you order a service
+            and the service has been completed.
+        </Text>
+          </View>
       </View>
     );
   }

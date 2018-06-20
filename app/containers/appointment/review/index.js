@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         selectedSchedule: state.Appointment.selectedSchedule,
-        notes: state.form.notes.values,
+        notes: state.form.notes,
         selectedServices: state.Service.selectedServices,
         userCardDetails: state.Appointment.userCardDetails,
         serviceAppointmentId: state.Service.serviceAppointmentId,

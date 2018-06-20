@@ -26,18 +26,37 @@ LocaleConfig.locales.en = {
       }
 
     onDayPress(day) {
+      this.props.getSelectedDate(day.dateString);
         this.setState({
           selected: day.dateString
         });
+
+        const addOnIDs = [];
+  
+      const data = this.props.propsData.selectedServices.selectedaddOns;
+      data.map((item) => {
+          addOnIDs.push(item.vehicle.id);
+      });
+      const addOnString = data.length > 0 ? addOnIDs.join() : '';
+      const serviceDate = day.dateString;
+      //dispatch createNewServiceAppointment action 
+      if (this.props.propsData.reSchedule === '') {
+        const options = {
+          addressString: this.props.propsData.addressString,
+          geoLocationData: this.props.propsData.geoLocationData
+        };
+        this.props.propsData.createNewServiceAppointment(this.props.propsData.selectedServices.serviceSelected, this.props.propsData.selectedServices.vehicleSelected, addOnString, options, serviceDate);
+      } else {
+        this.props.propsData.rescheduleServiceAppointment(this.props.propsData.reSchedule.appointment.id, addOnString, serviceDate);
+      }
     }
 
     getDate() {
-        this.props.getSelectedDate(this.state.selected);
+        // this.props.getSelectedDate(this.state.selected);
         this.props.setModalVisible(false);
     }
 
     render() {
-
       const newdate = new Date(this.state.currentDate);
       newdate.setDate(newdate.getDate() + 7);
       const maxDate = newdate.getFullYear() + '-' + ('0' + (newdate.getMonth() + 1)).slice(-2) + '-' + newdate.getDate();
@@ -46,7 +65,7 @@ LocaleConfig.locales.en = {
             <View style={styles.modalContentContainer}>
               <View style={styles.modalHeaderContainer}>
                 <View style={styles.cancelContainer}>
-                  <TouchableHighlight onPress={() => { this.props.setModalVisible(false); }} style={styles.cancelStyle} >
+                  <TouchableHighlight underlayColor={'transparent'} onPress={this.getDate.bind(this)} style={styles.cancelStyle} >
                     <Image source={crossButton} style={styles.paypalImg} style={{ width: 30, height: 30 }} />
                   </TouchableHighlight>
                 </View>
@@ -54,7 +73,7 @@ LocaleConfig.locales.en = {
                     {/* <Text style={styles.title}>Select Payment Method</Text> */}
                 </View>
                 <View style={{ paddingRight: 10 }}>
-                  <TouchableHighlight onPress={this.getDate.bind(this)} style={styles.cancelStyle} >
+                  <TouchableHighlight underlayColor={'transparent'} onPress={this.getDate.bind(this)} style={styles.cancelStyle} >
                     <Image source={rightButton} style={styles.paypalImg} style={{ width: 30, height: 30 }} />
                   </TouchableHighlight>
                 </View>
