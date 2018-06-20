@@ -14,7 +14,6 @@ export default StyleSheet.create({
         borderColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'pink'
 
     },
     proImageStyle: {

@@ -185,9 +185,14 @@ export default class HomeScreen extends Component {
       inputVal: val
     });
   }
+  
+  navigateToAppointmentsList = () => {
+    this.props.navigation.navigate('PastAppointmentsList');
+  }
 
   render() {
     const { isLoading } = this.props;
+    // return <Text>jkkjkj</Text>;
     let polyGeoJSON = {
       "type": "FeatureCollection",
       "features": [
@@ -232,7 +237,7 @@ export default class HomeScreen extends Component {
             {/* <Loader
                 loading={isLoading}
             /> */}
-            <Mapbox.MapView
+            {/* <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
@@ -252,7 +257,7 @@ export default class HomeScreen extends Component {
                 <Mapbox.BackgroundLayer id='background' />
               </Mapbox.VectorSource>
               {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
-            </Mapbox.MapView>
+            </Mapbox.MapView> */}
             <Header
               headerText={'Deets'}
               navigation={this.props.navigation}
@@ -281,6 +286,9 @@ export default class HomeScreen extends Component {
                 style={{ width: 32, height: 40 }}
               />
             </View>
+            <TouchableOpacity style={styles.myAppoinments} onPress={this.navigateToAppointmentsList}>
+              <Text style={styles.myAppoinmentsText}>My Appointments</Text>
+            </TouchableOpacity>
         </View>
     );
   }

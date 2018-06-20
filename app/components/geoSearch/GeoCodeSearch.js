@@ -39,8 +39,8 @@ export default class GeoCodeSearch extends React.Component {
         this.props.actions.emptyFeatures();
         this.setState({
           searchedAdresses: [],
-          inputVal: address.place_name
         });
+        this.props.onChangeSearchText(address.place_name);
     }
 
     searchLocation(query) {

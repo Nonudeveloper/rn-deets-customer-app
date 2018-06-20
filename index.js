@@ -12,3 +12,4 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 AppRegistry.registerComponent('deetscp', () => App);
+export default App;

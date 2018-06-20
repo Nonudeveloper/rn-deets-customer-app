@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: 40,
-      paddingHorizontal: 20,
-      backgroundColor: '#f1f1f1'
+      paddingHorizontal: 20
     },
     uglyDrawerItem: {
       fontSize: 18,
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     menuText: {
         marginLeft: 20,
         color: '#FFFFFF',
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     header: {
