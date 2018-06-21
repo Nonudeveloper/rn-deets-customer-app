@@ -63,6 +63,7 @@ class ReduxNavigation extends React.Component {
         token,
         os: 'android'
       };
+      this.setState({ deviceToken: token });
       this.props.dispatch(saveDeviceToken(deviceToken));
     });
 
@@ -73,6 +74,7 @@ class ReduxNavigation extends React.Component {
           token,
           os: 'ios'
         };
+        this.setState({ deviceToken: token });
         this.props.dispatch(saveDeviceToken(deviceToken));
       });
     }

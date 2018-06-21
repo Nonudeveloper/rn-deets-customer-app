@@ -85,7 +85,7 @@ _onFocus = (field) => console.log('focusing', field);
             /> */}
             <Header 
             navigation={this.props.navigation} 
-            headerText={'Payment Information'}
+            headerText={'  Payment '}
             showRightIcon
             rightText={'Register'}
             onPress={() => this.getNonceAndSubmit(this.state.card)}

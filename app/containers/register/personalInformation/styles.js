@@ -74,7 +74,7 @@ export default StyleSheet.create({
         flex: 1, 
         flexDirection: 'column', 
         justifyContent: 'center', 
-        marginVertical: 40
+        marginVertical: 20
     }
 
 });
