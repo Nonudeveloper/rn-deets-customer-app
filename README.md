@@ -127,3 +127,25 @@ Then it will try a production build.
 Whenever react native is upgraded please run this command.
 
 rm -rf node_modules/ && npm cache clean && npm install
+
+---
+## Instabug [Crash Report](https://docs.instabug.com/docs/react-native-crash-reporting) 
+
+## Adding Crash report for Android 
+ 
+react-native bundle --platform android \
+  --entry-file index.js \
+  --dev false \
+  --bundle-output ./android/main.jsbundle \
+  --sourcemap-output ./android-sourcemap.json &&
+  zip ./android-sourcemap.zip ./android-sourcemap.json
+
+## Adding Crash report for Ios
+
+react-native bundle --platform ios \
+  --entry-file index.js \
+  --dev false \
+  --bundle-output ./ios/main.jsbundle \
+  --sourcemap-output ./ios-sourcemap.json &&
+  zip ./ios-sourcemap.zip ./ios-sourcemap.json 
+
