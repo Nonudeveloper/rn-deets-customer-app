@@ -10,12 +10,12 @@ import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions'
 import LoadingSplash from './LoadingSplash';
 import FCM, { NotificationActionType } from "react-native-fcm";
 import { Platform } from 'react-native';
- 
+
 class ReduxNavigation extends React.Component {
   constructor(props) {
     super(props);
-    
-    
+
+
     this.state = {
       loggedInStatus: false,
       checkedSignIn: false,
@@ -57,25 +57,27 @@ class ReduxNavigation extends React.Component {
   }
 
   componentDidMount() {
-    FCM.getFCMToken().then(token => {
-      console.log("TOKEN (getFCMToken)", token);
-      const deviceToken = {
-        token,
-        os: 'android'
-      };
-      this.props.dispatch(saveDeviceToken(deviceToken));
-    });
-
-    if (Platform.OS === "ios") {
-      FCM.getAPNSToken().then(token => {
-        console.log("APNS TOKEN (getFCMToken)", token);
+    if (Platform.OS === "android") {
+      FCM.getFCMToken().then(token => {
+        console.log("TOKEN (getFCMToken)", token);
         const deviceToken = {
           token,
-          os: 'ios'
+          os: 'android'
         };
         this.props.dispatch(saveDeviceToken(deviceToken));
       });
     }
+
+    // if (Platform.OS === "ios") {
+    //   FCM.getAPNSToken().then(token => {
+    //     console.log("APNS TOKEN (getFCMToken)", token);
+    //     const deviceToken = {
+    //       token,
+    //       os: 'ios'
+    //     };
+    //     this.props.dispatch(saveDeviceToken(deviceToken));
+    //   });
+    // }
   }
 
   render() {

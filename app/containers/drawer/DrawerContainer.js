@@ -38,9 +38,14 @@ export default class DrawerContainer extends React.Component {
     this.setState({ modalVisible: visible });
   }
 
-  invokeInstabug = () => {
+  invokeInstabugFeedbackMode = () => {
     this.props.navigation.navigate('DrawerClose');
-    Instabug.invoke();
+    Instabug.invokeWithInvocationMode(Instabug.invocationMode.newFeedback);
+  }
+
+  invokeInstabug =() => {
+     this.props.navigation.navigate('DrawerClose');
+     Instabug.invoke();
   }
 
   renderModal = () => {
@@ -105,7 +110,7 @@ export default class DrawerContainer extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
-              onPress={this.invokeInstabug}
+              onPress={this.invokeInstabugFeedbackMode}
             >
                   <Text style={styles.menuText} type='h5White'>Feedback</Text>
             </TouchableOpacity>
