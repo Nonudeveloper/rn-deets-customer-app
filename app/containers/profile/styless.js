@@ -156,6 +156,12 @@ export default StyleSheet.create({
     },
     vehiclesContainer: {
         flex: 5,
+    },
+    floatingVehicleAddButton: {
+        position: 'absolute', 
+        zIndex: 2, 
+        right: 0,
+        top: '7%'
     }
 
 });

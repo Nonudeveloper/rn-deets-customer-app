@@ -69,7 +69,7 @@ class ProfileHelper {
         formData.append('vehicle_make_id', authData.form.make_id);
         formData.append('vehicle_color_id', authData.form.color_id);
         formData.append('vehicle_year_id', authData.form.year);
-        formData.append('license', authData.form.license);
+        formData.append('license', authData.form.radio_button_type === 0 ? authData.form.license : authData.form.vin);
         formData.append('vehicle_make', authData.form.make_id);
         formData.append('vehicle_model', authData.form.model);
         formData.append('vehicle_color', authData.form.color);
@@ -79,7 +79,7 @@ class ProfileHelper {
         formData.append('vehicle_type_segment', typeData[1]);
         formData.append('vehicle_type_segment_id', authData.form.vehicle_type_segment_id);
         formData.append('notes', authData.form.notes);
-        formData.append('license_type', 2);
+        formData.append('license_type', authData.form.radio_button_type === 0 ? 2 : 1);
         formData.append('vehicle_id', authData.form.vehicle_id);
         return await fetch(`${apiConfig.url}/customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',

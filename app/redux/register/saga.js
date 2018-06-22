@@ -1,6 +1,6 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import { take, put, call, fork } from 'redux-saga/effects';
+import { take, put, call, fork, select } from 'redux-saga/effects';
 import { 
   fetchVehiclesSuccess, 
   recieveVehiclesData,
@@ -18,6 +18,7 @@ import { fetchMakeModelSuccess } from './vehicleInformation/vehicleActions';
 import { setUser } from '../../helpers/utility';
 import { setItem } from '../../helpers/asyncStorage';
 import { NavigationActions } from 'react-navigation';
+import { loginThroughAccessToken } from '../auth/actions';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -122,15 +123,19 @@ function registerCall(payload) {
   });
 }
 
+export const getDeviceToken = (state) => state.Auth.deviceToken;
+
 function* watchRegisterRequest() {
   while (true) {
     const payload = yield take(REGISTER_REQUEST);
     try {
       const response = yield call(registerCall, payload);
         yield put(registerSuccess(response.user.access_token, response));
-        yield setItem(response.user);
-        yield setItem('authVehicles', response.vehicle);
-        yield setItem('authCardDetails', response.card ? response.card : []);
+        yield setUser(response.user);
+        const deviceToken = yield select(getDeviceToken);
+        yield put(loginThroughAccessToken(deviceToken.token));
+        // yield setItem('authVehicles', response.vehicle);
+        // yield setItem('authCardDetails', response.card ? response.card : []);
         yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {

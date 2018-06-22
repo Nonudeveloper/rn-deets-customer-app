@@ -30,6 +30,21 @@ const styles = StyleSheet.create({
         fontSize: 17, 
         color: '#404040',
         lineHeight: 20
+    },
+    notAvailableContainer: {
+        flex: 1, 
+        alignItems: 'center', 
+        marginVertical: 20
+    },
+    notAvailableText: {
+        fontSize: 20, 
+        color: '#1a1a1a',
+        paddingTop: 20, 
+        textAlign: 'center'
+    },
+    notAvailableImage: {
+        width: 72, 
+        height: 75
     }
 });
 

@@ -83,7 +83,7 @@ export default class VehiclesScreen extends React.Component {
           </View>
           <TouchableHighlight 
             underlayColor={'transparent'} 
-            style={styles.floatingAddButton}
+            style={styles.floatingVehicleAddButton}
             onPress={() => this.props.navigation.navigate('addVehicleScreen')} 
           >
             <Image style={{ width: 80, height: 52 }} source={addVehicleButton} />

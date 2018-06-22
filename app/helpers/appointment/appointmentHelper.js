@@ -29,7 +29,7 @@ class AppointmetHelper {
         data.append('vehicle_make_id', authData.form.make_id);
         data.append('vehicle_color_id', authData.form.color_id);
         data.append('vehicle_year_id', authData.form.year);
-        data.append('license', authData.form.license);
+        data.append('license', authData.form.radio_button_type === 0 ? authData.form.license : authData.form.vin);
         data.append('vehicle_make', authData.form.make_id);
         data.append('vehicle_model', authData.form.model);
         data.append('vehicle_color', authData.form.color);
@@ -39,7 +39,7 @@ class AppointmetHelper {
         data.append('vehicle_type_segment', typeData[1]);
         data.append('vehicle_type_segment_id', authData.form.vehicle_type_segment_id);
         data.append('notes', authData.form.notes);
-        data.append('license_type', 2);
+        data.append('license_type', authData.form.radio_button_type === 0 ? 2 : 1);
         data.append('vehicle_id', authData.form.vehicle_id);
     }
 
