@@ -110,6 +110,17 @@ android {
         multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            if (project.hasProperty('DEETSCP_RELEASE_STORE_FILE')) {
+                storeFile file(DEETSCP_RELEASE_STORE_FILE)
+                storePassword DEETSCP_RELEASE_STORE_PASSWORD
+                keyAlias DEETSCP_RELEASE_KEY_ALIAS
+                keyPassword DEETSCP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+
     dexOptions {
         jumboMode true
     }
@@ -126,6 +137,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
