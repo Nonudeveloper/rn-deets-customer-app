@@ -23,10 +23,8 @@ class VehicleForm extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props);
         if (this.props.authVehicleData !== null) {
             const authVehicleData = this.props.authVehicleData;
-            console.log(authVehicleData);
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
             const initialFormData = {
                 access_token: this.props.authUser.access_token,
