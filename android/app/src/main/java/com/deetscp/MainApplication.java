@@ -18,6 +18,7 @@ import com.pw.droplet.braintree.BraintreePackage;
 import android.content.Intent; 
 import com.mapbox.rctmgl.RCTMGLPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 
 import java.util.Arrays;
@@ -48,7 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
 							.setFloatingButtonOffsetFromTop(250)
 							.build(),
             new BraintreePackage(),
-            new RCTMGLPackage()
+            new RCTMGLPackage(),
+            new SplashScreenReactPackage()
       );
     }
 

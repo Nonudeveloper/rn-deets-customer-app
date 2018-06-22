@@ -1,7 +1,9 @@
 package com.deetscp;
 
+import android.os.Bundle; 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -18,5 +20,11 @@ public class MainActivity extends ReactActivity {
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);
+        super.onCreate(savedInstanceState);
     }
 }
