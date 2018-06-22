@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import SuperFetch from '../superFetch';
 import { getItem } from '../asyncStorage';
+import Instabug from 'instabug-reactnative';
 
 class AuthHelper {
   login = async userInfo => {
@@ -59,6 +60,7 @@ class AuthHelper {
         const user = await getItem('user');
         const access_token = JSON.parse(user).access_token;
         const registration_type = 2;
+        Instabug.logOut();
     return await SuperFetch.post('/customer/get_user_logout_from_app', { access_token, registration_type })
       .then(response => { return response; });
   }

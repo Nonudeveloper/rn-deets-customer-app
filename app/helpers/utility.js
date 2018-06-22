@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import Instabug from 'instabug-reactnative';
 
 export const AUTH_TOKEN = 'token';
 export const USER = 'user';
@@ -41,6 +42,7 @@ export function getToken() {
 
 export function setUser(user) {
   setLoginUser(user);
+  Instabug.identifyUserWithEmail(user.email, `${user.first_name} ${user.last_name}`);
   // AsyncStorage.setItem(USER, JSON.stringify(user));
 }
 
