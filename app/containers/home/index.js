@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
         getFullAddressReverseGeo: (data) => {
             dispatch(getFullAddressReverseGeo(data));
         },
+        fetchPolygonData: data => {
+            dispatch(homeActions.fetchPolygonData(data));
+        }
    
     };
 };
@@ -20,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         addressString: state.Geo.addressString,
-        isLoading: state.Geo.isFetching
+        isLoading: state.Geo.isFetching,
+        polygonData: state.home.polygonData
     };
 };
 

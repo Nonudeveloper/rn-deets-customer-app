@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from './app/store/index';
 import StartScreen from './app/containers/start/StartScreen';
 import ReduxNavigation from './app/navigation/ReduxNavigation';
+import SplashScreen from 'react-native-splash-screen';
 
 const store = configureStore();
 
@@ -11,7 +12,8 @@ export default class App extends React.Component {
     constructor() {
         super();
         Instabug.startWithToken('dda9da27cd350702efec4ebefd63f507', Instabug.invocationEvent.shake);
-
+        
+        SplashScreen.hide();
         this.state = {
             signedIn: false,
             checkedSignIn: false
@@ -24,7 +26,7 @@ export default class App extends React.Component {
     
     render() {
         return ( 
-            < Provider store={store} >
+            <Provider store={store}>
                  <ReduxNavigation />
             </Provider>
         );

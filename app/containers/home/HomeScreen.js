@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import inside from 'turf-inside';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';
@@ -33,8 +34,38 @@ export default class HomeScreen extends Component {
       coordinates: [11.254, 43.772],
       center: [-122.44492709999997, 37.787544],
       loading: false,
-      renderPolygon: false,
-      inputVal: ''
+      renderPolygon: true,
+      inputVal: '',
+      polygonData: {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+  
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": []
+            },
+  
+          }
+        ],
+        'paint': {
+            'fill-color': '#088',
+            'fill-opacity': 0.8
+        }
+      },
+      markerPoint: {
+        "type": "Feature",
+        "properties": {
+          "marker-color": "#f00"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": []
+        }
+      }
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -45,21 +76,6 @@ export default class HomeScreen extends Component {
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
     this.breakIt = 0;
-    this.polyGeoJSON = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {
-
-          },
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [this.props.nearByPlaces]
-          }
-        }
-      ]
-    };
   }
 
   async onDidFinishLoadingMap() {
@@ -72,9 +88,60 @@ export default class HomeScreen extends Component {
 
   async onRegionDidChange() {
     const center = await this._map.getCenter();
+    await this.setState({
+      markerPoint: {
+        "type": "Feature",
+        "properties": {
+          "marker-color": "#f00"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": center
+        }
+      }
+    });
+
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
-    //dispath an action here for reverse geocoding
+    if (this.props.addressString !== '' && this.props.addressString !== undefined) {
+      this.setState({
+        inputVal: this.props.addressString
+      });
+    }
+
+    // const isInside = inside(this.state.markerPoint, this.state.polygonData);
+    // console.log(isInside);
+    //all an action to get real polygon data
+    // console.log(this.props.addressString);
+    // this.props.fetchPolygonData(this.props.addressString);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.addressString !== '' && this.props.addressString !== nextProps.addressString) {
+      this.props.fetchPolygonData(nextProps.addressString);
+    }
+    this.setState({
+      polygonData: {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+  
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [nextProps.polygonData]
+            },
+  
+          }
+        ],
+        'paint': {
+            'fill-color': '#088',
+            'fill-opacity': 0.8
+        }
+      }
+    });
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
@@ -191,53 +258,35 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+    console.log(JSON.stringify(this.state.polygonData));
+    console.log(this.state.markerPoint);
     const { isLoading } = this.props;
-    // return <Text>jkkjkj</Text>;
-    let polyGeoJSON = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {
+    // const polyGeoJSON = {
+    //   "type": "FeatureCollection",
+    //   "features": [
+    //     {
+    //       "type": "Feature",
+    //       "properties": {
 
-          },
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [[[-67.13734351262877, 45.137451890638886],
-            [-66.96466, 44.8097],
-            [-68.03252, 44.3252],
-            [-69.06, 43.98],
-            [-70.11617, 43.68405],
-            [-70.64573401557249, 43.090083319667144],
-            [-70.75102474636725, 43.08003225358635],
-            [-70.79761105007827, 43.21973948828747],
-            [-70.98176001655037, 43.36789581966826],
-            [-70.94416541205806, 43.46633942318431],
-            [-71.08482, 45.3052400000002],
-            [-70.6600225491012, 45.46022288673396],
-            [-70.30495378282376, 45.914794623389355],
-            [-70.00014034695016, 46.69317088478567],
-            [-69.23708614772835, 47.44777598732787],
-            [-68.90478084987546, 47.184794623394396],
-            [-68.23430497910454, 47.35462921812177],
-            [-67.79035274928509, 47.066248887716995],
-            [-67.79141211614706, 45.702585354182816],
-            [-67.13734351262877, 45.137451890638886]]]
-          },
+    //       },
+    //       "geometry": {
+    //         "type": "Polygon",
+    //         "coordinates": [this.state.polygonData]
+    //       },
 
-        }
-      ],
-      'paint': {
-          'fill-color': '#088',
-          'fill-opacity': 0.8
-      }
-    };
+    //     }
+    //   ],
+    //   'paint': {
+    //       'fill-color': '#088',
+    //       'fill-opacity': 0.8
+    //   }
+    // };
     return (
         <View style={styles.container}>
             {/* <Loader
                 loading={isLoading}
             /> */}
-            {/* <Mapbox.MapView
+            <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
@@ -247,17 +296,17 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={11}
+              zoomLevel={9}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
             >
 
-              <Mapbox.VectorSource>
+              {/* <Mapbox.VectorSource>
                 <Mapbox.BackgroundLayer id='background' />
-              </Mapbox.VectorSource>
-              {this.state.renderPolygon && this.renderPolygon(polyGeoJSON)}
-            </Mapbox.MapView> */}
+              </Mapbox.VectorSource> */}
+              {this.renderPolygon(this.state.polygonData)}
+            </Mapbox.MapView>
             <Header
               headerText={'Deets'}
               navigation={this.props.navigation}
