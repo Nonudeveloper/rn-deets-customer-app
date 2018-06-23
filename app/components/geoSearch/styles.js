@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     listViewContainer: {
-      zIndex: 99
+      zIndex: 99,
+      marginHorizontal: 10
     },
     listView: {
       backgroundColor: '#fff',
