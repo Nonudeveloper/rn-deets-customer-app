@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, StatusBar } from 'react-native';
 
 export default class LoadingSplash extends Component {
     render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Deets On Demand</Text>
-            </View>
-        );
+        return <Image style={{ height: '100%', width: '100%', flex: 1 }} source={this.props.source} />
     }
 }
 

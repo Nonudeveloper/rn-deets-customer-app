@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../header/Header';
 import ProfilePic from './ProfilePic';
@@ -67,7 +67,7 @@ export default class PersonalInformation extends Component {
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={styles.container}
           automaticallyAdjustContentInsets={false}
-          bounces={false}
+          bounces={true}
           keyboardShouldPersistTaps='always'
         >
         {this.props.emailAvailability.flag === 6 && this.renderAlert(this.props.emailAvailability.error)}
