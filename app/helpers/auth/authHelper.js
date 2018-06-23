@@ -61,7 +61,7 @@ class AuthHelper {
         const access_token = JSON.parse(user).access_token;
         const registration_type = 2;
         Instabug.logOut();
-    return await SuperFetch.post('/customer/get_user_logout_from_app', { access_token, registration_type })
+    return await SuperFetch.post('customer/get_user_logout_from_app', { access_token, registration_type })
       .then(response => { return response; });
   }
 
@@ -72,7 +72,7 @@ class AuthHelper {
       registration_type: 2,
       device_token: deviceToken
     }
-    return await SuperFetch.post('/customer/login_through_accesstoken', payload)
+    return await SuperFetch.post('customer/login_through_accesstoken', payload)
     .then(response => { return response; });
   }
 }

@@ -5,8 +5,8 @@ import { apiConfig } from '../../config';
 
 class AppointmetHelper {
 
-
-    appendVehicleData = async (data, authData) => {
+    addUpdateVehicle = async authData => {
+        const data = new FormData();
         const type = authData.form.type;
         const typeData = type.split(', ');
 
@@ -41,12 +41,7 @@ class AppointmetHelper {
         data.append('notes', authData.form.notes);
         data.append('license_type', authData.form.radio_button_type === 0 ? 2 : 1);
         data.append('vehicle_id', authData.form.vehicle_id);
-    }
-
-    addUpdateVehicle = async authData => {
-        const formData = new FormData();
-        const data = this.appendVehicleData(formData, authData);
-        return await fetch(`${apiConfig.url}/customer/add_or_edit_user_vehicle_information`, {
+        return await fetch(`${apiConfig.url}customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',
             body: data,
             }).then(response => {

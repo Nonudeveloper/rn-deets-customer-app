@@ -241,9 +241,6 @@ export default class ProfileScreen extends Component {
                 onPress: () => {
                 //dispath an action to make showAlert false
                 this.props.actions.hideAlert();
-                    if (error.flag === 35) {
-                        this.props.navigation.navigate('detailsScreen');
-                    }
                 } 
                 },
             ],
@@ -260,19 +257,14 @@ export default class ProfileScreen extends Component {
                 text: 'OK', 
                 onPress: () => {
                 //dispath an action to make showAlert false
-                this.props.actions.hideAlert();
-                    if (error.flag === 35) {
-                        this.props.navigation.navigate('detailsScreen');
-                    }
+                const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
+                this.props.actions.deleteVehicle(vehicleId);
                 } 
                 },
+                { text: 'Cancel' },
             ],
-            { cancelable: false }
+            // { cancelable: false }
         );
-        
-        
-        const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
-        this.props.actions.deleteVehicle(vehicleId);
     }
 
     render() {

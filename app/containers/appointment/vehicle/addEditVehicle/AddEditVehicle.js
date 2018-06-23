@@ -20,7 +20,8 @@ export default class TestComponent extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getVehicles();
+    // this.props.getVehicles();
+    this.props.vehicleData.length === 0 ? this.props.getVehicles() : null;
     this.props.setBackToInitialState();
     if (this.props.navigation.state.params.items !== '') {
       this.setState({
@@ -48,7 +49,6 @@ export default class TestComponent extends React.Component {
     if (errorCount === 0) {
       // this.props.navigation.navigate('paymentInformation');
       this.props.actions.addUpdateVehicle(this.props.form.values, this.props.vehicleImage);
-      this.props.navigation.goBack();
     }
   }
 
@@ -93,13 +93,10 @@ export default class TestComponent extends React.Component {
             <Header 
                 headerText={this.state.title} 
                 navigation={this.props.navigation} 
-                buttonType={'back'} 
-                // titleType={'logo'}
-                // showRightIcon
-                // rightText={'Next'}
-                // onPress={() => this.props.navigation.navigate('selectVehicle')}
-                // rightImageSource={backButton}
-                // rightIconType={'image'}
+                buttonType={'back'}
+                showRightIcon
+                rightText={'Save'}
+                onPress={this.saveData.bind(this)}
             />
              {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
             <View style={styles.container}>
@@ -118,14 +115,6 @@ export default class TestComponent extends React.Component {
                 authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
                 authUser={this.props.authUser}
               /> 
-              <View style={[styles.nextButtonContainer, styles.t3]}>
-                <Button 
-                  style={[styles.nextButtonStyle, { backgroundColor: StyleConstants.RegisterButtonBColor }]}
-                  onPress={this.saveData.bind(this)}
-                >
-                  save
-                </Button>
-              </View>
             </View>
           </View>
       </KeyboardAwareScrollView>

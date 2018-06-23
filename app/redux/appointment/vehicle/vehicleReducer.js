@@ -40,14 +40,16 @@ export default function authReducer(state = initialState, action) {
             });
         case ADD_UPDATE_AUTH_VEHICLE:
             return Object.assign({}, state, {
-            //   vehicleImage: action.image
+                isFetching: true
             });
         case ADD_UPDATE_VEHICLE_SUCCESS:
             return Object.assign({}, state, {
-            //   vehicleImage: action.image
+                isFetching: false,
+                vehicles: action.vehicles
             });
         case ADD_UPDATE_VEHICLE_FAILURE:
             return Object.assign({}, state, {
+                isFetching: false,
                 errorMessage: action.err
             }); 
         case HIDE_ALERT:

@@ -28,7 +28,7 @@ import {
     ADD_NEW_VEHICLE, 
     DELETE_VEHICLE
 } from './constants';
-
+import { fetchAuthVehiclesSuccess } from '../appointment/vehicle/vehicleActions';
 
 //**Generator */
 function* watchAuthUserDetails() {
@@ -171,6 +171,7 @@ function* watchAddNewVehicleRequest() {
         const response = yield call(addNewVehicleCall, payload);
         yield saveAuthVehiclesData(response);
         yield put(fetchAddNewSuccess(response));
+        yield put(fetchAuthVehiclesSuccess(response));
         if (payload.formType === 'addVehicle') {
           yield put(NavigationActions.back());
         }
@@ -224,6 +225,8 @@ function* watchDeleteVehicleRequest() {
         }
       });
       yield setItem('authVehicles', vehicleData);
+      yield put(fetchAddNewSuccess(vehicleData));
+      yield put(fetchAuthVehiclesSuccess(vehicleData));
       yield put(deleteVehicleSuccess(response));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);
     } catch (err) {

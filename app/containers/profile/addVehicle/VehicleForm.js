@@ -155,6 +155,7 @@ class VehicleForm extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(change('vehicleForm', 'flag', 1));
+        this.props.dispatch(change('vehicleForm', 'radio_button_type', 0));
     }
     
   render() {
