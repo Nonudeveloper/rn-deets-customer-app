@@ -88,6 +88,7 @@ export default class HomeScreen extends Component {
 
   async onRegionDidChange() {
     const center = await this._map.getCenter();
+    console.log(center);
     await this.setState({
       markerPoint: {
         "type": "Feature",
@@ -103,12 +104,6 @@ export default class HomeScreen extends Component {
 
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
-    if (this.props.addressString !== '' && this.props.addressString !== undefined) {
-      this.setState({
-        inputVal: this.props.addressString
-      });
-    }
-
     // const isInside = inside(this.state.markerPoint, this.state.polygonData);
     // console.log(isInside);
     //all an action to get real polygon data
@@ -118,6 +113,9 @@ export default class HomeScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.addressString !== '' && this.props.addressString !== nextProps.addressString) {
+      this.setState({
+        inputVal: nextProps.addressString
+      });
       this.props.fetchPolygonData(nextProps.addressString);
     }
     this.setState({
@@ -225,7 +223,7 @@ export default class HomeScreen extends Component {
       });
     } else {
       this.setState({
-        inputVal: 'San Francisco, CA, USA'
+        inputVal: this.props.addressString
       });
     }
 
@@ -258,8 +256,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    console.log(JSON.stringify(this.state.polygonData));
-    console.log(this.state.markerPoint);
     const { isLoading } = this.props;
     // const polyGeoJSON = {
     //   "type": "FeatureCollection",
