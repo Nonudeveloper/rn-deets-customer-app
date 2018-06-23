@@ -121,6 +121,12 @@ const styles = StyleSheet.create({
       checkBoxLabel: {
         fontSize: 17,
         paddingLeft: 10
+      },
+      addOnsListItem: { 
+          flex: 1, 
+          height: 65, 
+          flexDirection: 'row', 
+          alignItems: 'center' 
       }
 });
 

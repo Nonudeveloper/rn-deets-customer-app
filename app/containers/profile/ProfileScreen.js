@@ -233,7 +233,7 @@ export default class ProfileScreen extends Component {
 
     renderDeleteAlert(error) {
         Alert.alert(
-            'Error',
+            'Success',
             error.log,
             [
                 { 
@@ -250,8 +250,8 @@ export default class ProfileScreen extends Component {
 
     deleteVehicle() {
         Alert.alert(
-            'Deets',
-            'Are you sure ..',
+            'Delete',
+            'Are you sure you want to delete this vehicle?',
             [
                 { 
                 text: 'OK', 

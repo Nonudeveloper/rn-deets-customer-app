@@ -28,7 +28,7 @@ export default class ServiceDetailHeader extends React.Component {
 
  renderAddOnsList(item) {
   return (  
-        <View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={styles.addOnsListItem}>
             <AddonItemsScreen 
                 size={20} 
                 keyValue={item.id} 
@@ -53,7 +53,7 @@ export default class ServiceDetailHeader extends React.Component {
                 extraData={this.state}
                 renderItem={
                     ({ item }) => 
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, left: 10 }}>
                     {
                       (this.props.showServices === true)
                       ? 
