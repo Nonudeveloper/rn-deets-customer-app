@@ -12,7 +12,7 @@ export default class App extends React.Component {
     constructor() {
         super();
         Instabug.startWithToken('dda9da27cd350702efec4ebefd63f507', Instabug.invocationEvent.shake);
-        
+        // Instabug.setCrashReportingEnabled(true);
         SplashScreen.hide();
         this.state = {
             signedIn: false,

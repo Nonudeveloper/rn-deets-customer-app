@@ -171,6 +171,9 @@ function* watchAddNewVehicleRequest() {
         const response = yield call(addNewVehicleCall, payload);
         yield saveAuthVehiclesData(response);
         yield put(fetchAddNewSuccess(response));
+        if (payload.formType === 'addVehicle') {
+          yield put(NavigationActions.back());
+        }
         console.log('SAGA RESET PASSWORD Mail SENT: ', response);
       } catch (err) {
         console.log('SAGA RESET PASSWORD Mail ERROR: ', err);

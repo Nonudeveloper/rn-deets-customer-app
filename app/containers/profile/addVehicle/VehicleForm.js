@@ -95,10 +95,12 @@ class VehicleForm extends React.Component {
         pickerFontSize: 18,
         selectedValue: [59],
         onPickerConfirm: data => {
-            const initialFormData = {
-                type: data[0] + ', ' + data[1]  
-        };
-            this.props.dispatch(initialize('vehicleForm', initialFormData, 'type'));
+            const typeData = data[0] + ', ' + data[1];
+            //     const initialFormData = {
+            //         type: data[0] + ', ' + data[1]  
+            // };
+            //     this.props.dispatch(initialize('addEditVehicleForm', initialFormData, 'type'));
+                this.props.dispatch(change('vehicleForm', 'type', typeData));
 
             this.props.vehicleData.type.map((type, i) => {
                 if (type.vehicle_type_name === data[0]) {

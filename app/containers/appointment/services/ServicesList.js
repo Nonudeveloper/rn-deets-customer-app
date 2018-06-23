@@ -55,7 +55,7 @@ export default class ServiceList extends React.Component {
       this.collapsePanelRef.measure((x, y, width, height, pageX, pageY) => {
         this.measurements.pageY = pageY;
         this.measurements.height = height;
-        this.props.handleLayout(this.measurements, this.props.servicePanelIndex);
+        // this.props.handleLayout(this.measurements, this.props.servicePanelIndex);
       });
     }
   
@@ -83,7 +83,7 @@ export default class ServiceList extends React.Component {
         duration: SUBCATEGORY_FADE_TIME,
         easing: Easing.inOut(Easing.quad),
       }).start(() => {
-        this.props.handlePressTout(this.props.servicePanelIndex);
+        // this.props.handlePressTout(this.props.servicePanelIndex);
       });
     }
   

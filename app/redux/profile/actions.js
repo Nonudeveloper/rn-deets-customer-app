@@ -134,11 +134,12 @@ export function fetchVehiclesMakeModelByYearFailure(err) {
     };
 }
 
-export function fetchAddNewVehicle(form, vehicleImage) {
+export function fetchAddNewVehicle(form, vehicleImage, formType) {
     return {
       type: ADD_NEW_VEHICLE,
       form,
-      vehicleImage
+      vehicleImage,
+      formType
     };
 }
 

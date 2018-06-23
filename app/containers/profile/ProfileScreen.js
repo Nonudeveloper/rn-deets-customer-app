@@ -25,6 +25,7 @@ const window = Dimensions.get('window');
 
 const editButton = require('../../assets/icons/edit_normal.png');
 const tickButton = require('../../assets/icons/tick_normal.png');
+const crossButton = require('../../assets/icons/2_cross_btn.png');
 
 export default class ProfileScreen extends Component {
 
@@ -203,10 +204,11 @@ export default class ProfileScreen extends Component {
             }
         }
         if (errorCount === 0) {
+            const formType = 'editVehicle';
             const pageSelected = this.state.selectedPage;
             const imagePageSelected = this.state.image.currentPage;
             const imageSelected = pageSelected === imagePageSelected ? this.state.image.response : {};
-            this.props.actions.fetchAddNewVehicle(this.props.form['editVehicleForm' + this.state.selectedPage].values, imageSelected);
+            this.props.actions.fetchAddNewVehicle(this.props.form['editVehicleForm' + this.state.selectedPage].values, imageSelected, formType);
         } else {
             this.setState({ vehicleEditable: true });
         }
@@ -250,6 +252,25 @@ export default class ProfileScreen extends Component {
     }
 
     deleteVehicle() {
+        Alert.alert(
+            'Deets',
+            'Are you sure ..',
+            [
+                { 
+                text: 'OK', 
+                onPress: () => {
+                //dispath an action to make showAlert false
+                this.props.actions.hideAlert();
+                    if (error.flag === 35) {
+                        this.props.navigation.navigate('detailsScreen');
+                    }
+                } 
+                },
+            ],
+            { cancelable: false }
+        );
+        
+        
         const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
         this.props.actions.deleteVehicle(vehicleId);
     }
@@ -322,6 +343,17 @@ export default class ProfileScreen extends Component {
                                     Vehicles
                                 </Text>
                             </View>
+                            { this.state.showVehicleEditButton &&
+                            <TouchableOpacity 
+                                style={{ flex: 1, position: 'absolute', right: 10 }} 
+                                onPress={this.deleteVehicle.bind(this)}
+                            >
+                                <Image 
+                                    style={{ width: 30, height: 30 }} 
+                                    source={crossButton} 
+                                />
+                            </TouchableOpacity>
+                        }
                         </TouchableOpacity>
                     </Animated.View>
                 </View>

@@ -28,7 +28,7 @@ class PromotionCodeScreen extends React.Component {
     }
 
     saveData() {
-        if (this.props.forms.promotion.values) {
+        if (this.props.forms.promotion !== undefined) {
             this.props.actions.usePromoCodeByUser(this.props.forms.promotion.values);
         } else {
             Alert.alert(

@@ -33,17 +33,17 @@ export default class ServicesPanel extends React.Component {
 
     measurements = [];
     
-    handlePressTout = (servicePanelIndex) => {
-      this.scrollViewRef.scrollTo({
-        y: this.measurements[servicePanelIndex].pageY - CONTAINER_PADDING_TOP,
-      });
-    }
+    // handlePressTout = (servicePanelIndex) => {
+    //   this.scrollViewRef.scrollTo({
+    //     y: this.measurements[servicePanelIndex].pageY - CONTAINER_PADDING_TOP,
+    //   });
+    // }
 
-    handleLayout = (measurements, servicePanelIndex) => {
-      if (!this.measurements[servicePanelIndex]) {
-        this.measurements[servicePanelIndex] = measurements;
-      }
-    }
+    // handleLayout = (measurements, servicePanelIndex) => {
+    //   if (!this.measurements[servicePanelIndex]) {
+    //     this.measurements[servicePanelIndex] = measurements;
+    //   }
+    // }
 
     toggleState(key, item) {
       if (this.state.activeSection === key) {

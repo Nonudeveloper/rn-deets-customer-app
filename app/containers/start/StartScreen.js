@@ -36,8 +36,8 @@ export default class StartScreen extends Component {
         />
         <ImageBackground source={background} style={styles.background} resizeMode="cover">
           <View style={styles.markWrap}>
-            <Image source={mark} style={styles.mark} resizeMode="contain" />
-            <Text style={styles.title}>The Experts in Enhancing & Maintaining your Vehicle's Appearance!</Text>
+            {/* <Image source={mark} style={styles.mark} resizeMode="contain" />
+            <Text style={styles.title}>The Experts in Enhancing & Maintaining your Vehicle's Appearance!</Text> */}
           </View>
           
         </ImageBackground>

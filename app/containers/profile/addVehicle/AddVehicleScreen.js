@@ -41,7 +41,8 @@ export default class VehicleInformation extends React.Component {
       }
     }
     if (errorCount === 0) {
-        this.props.actions.fetchAddNewVehicle(this.props.form.values, this.state.image);
+        const formType = 'addVehicle';
+        this.props.actions.fetchAddNewVehicle(this.props.form.values, this.state.image, formType);
     }
   }
 
