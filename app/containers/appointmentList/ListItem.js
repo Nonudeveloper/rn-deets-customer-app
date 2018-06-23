@@ -19,7 +19,7 @@ class ListItem extends React.PureComponent {
     }
 
     appointmentDetail = item => {
-        this.props.navigation.navigate('PastAppointmentsDetail', { item });
+        this.props.navigation.navigate('PastAppointmentsDetail', { item, activeTab: this.props.activeTab });
     }
 
     renderRating(item = null) {
@@ -39,7 +39,6 @@ class ListItem extends React.PureComponent {
     }
 
     scheduleItem(item) {
-        console.log(item);
         this.props.actions.selectedAppointmentForReschedule(item);
         this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }

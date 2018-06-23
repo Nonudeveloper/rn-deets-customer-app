@@ -45,6 +45,15 @@ class Item extends Component {
         this.props.selectAppointment(id);
     }
 
+    scheduleItem(item) {
+        this.props.selectedAppointmentForReschedule(item);
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
+    }
+
+    updateAppointment() {
+        this.props.navigation.navigate('SelectVehicleScreen');
+    }
+
     render() {
         const rightSwipeBtns = [
             {
@@ -56,18 +65,22 @@ class Item extends Component {
         ];
         const leftSwipeBtns = [
             {
-                text: 'Update',
-                backgroundColor: 'pink',
+                text: this.props.activeTab === 'past' ? 'Reschedule' : 'Update',
+                backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                onPress: () => { this.props.activeTab === 'past' ? 
+                    this.scheduleItem(this.props.item) :
+                    this.updateAppointment(this.props.item);
+                }
+                
             }
         ];
 
         const { item } = this.props;
-        console.log(item);
         return (
             <View>
-                <View style={{ height: 40, backgroundColor: '#e6e6e6', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: '#000', fontSize: 17 }}>Swipe to Edit the Services</Text>
+                <View style={styles.outerTitleContainer}>
+                        <Text style={styles.outerTitleText}>Swipe to Edit the Services</Text>
                 </View>
                 <Swipeout 
                     right={rightSwipeBtns}
@@ -76,7 +89,7 @@ class Item extends Component {
                     backgroundColor='transparent'
                 >   
                     
-                    <View style={[{ height: 150, borderBottomColor: 'grey', borderBottomWidth: 1 }]}>
+                    <View style={styles.swipOutContainer}>
                     
                             <View style={styles.itemDetailContainer}>
                                
