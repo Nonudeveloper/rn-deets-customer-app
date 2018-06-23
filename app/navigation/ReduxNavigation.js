@@ -11,6 +11,9 @@ import LoadingSplash from './LoadingSplash';
 import FCM, { NotificationActionType } from "react-native-fcm";
 import { Platform } from 'react-native';
 
+
+
+
 class ReduxNavigation extends React.Component {
   constructor(props) {
     super(props);
@@ -84,13 +87,14 @@ class ReduxNavigation extends React.Component {
 
   render() {
     const { dispatch, nav } = this.props;
+    const background = require('../containers/start/images/back.png');
     const navigation = ReactNavigation.addNavigationHelpers({
       dispatch,
       state: nav,
       addListener,
     });
     if (this.state.showLoadingSplash) {
-      return <LoadingSplash />;
+      return <LoadingSplash source={background} />;
     } else {
       return <AppNavigation navigation={navigation} />;
     }

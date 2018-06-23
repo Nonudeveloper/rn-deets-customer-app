@@ -92,9 +92,9 @@ const styles = {
         fontSize: 20,
         color: '#00802b',
         fontWeight: 'bold',
-        textShadowColor: 'rgba(0, 0, 0, 0.5)',
-        textShadowOffset: { width: 1, height: 2 },
-        textShadowRadius: 15,
+        // textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        // textShadowOffset: { width: 0, height: 1 },
+        // textShadowRadius: 5,
         letterSpacing: 5,
     },
     rightTextStyle: {
