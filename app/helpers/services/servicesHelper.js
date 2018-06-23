@@ -59,7 +59,7 @@ class ServicesHelper {
            
     
         // const token = await getItem('token');
-        return await SuperFetch.post('/customer/create_new_user_service_appointment', payload)
+        return await SuperFetch.post('customer/create_new_user_service_appointment', payload)
         .then(response => response)
         .catch(error => ({ error: JSON.stringify(error) }));
 
@@ -91,7 +91,7 @@ class ServicesHelper {
             adds_on_id: reschudleAppointmentInfo.addOns,
             service_appointment_id: reschudleAppointmentInfo.appointmentId
         };
-        return await SuperFetch.post('/customer/reschedule_user_current_appointment', payload)
+        return await SuperFetch.post('customer/reschedule_user_current_appointment', payload)
         .then(response => response)
         .catch(error => ({ error: JSON.stringify(error) }));
     }

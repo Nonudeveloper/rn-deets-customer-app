@@ -183,15 +183,15 @@ class VehicleForm extends React.Component {
                 model: authVehicleData.vehicle_model,
                 type: vehicleType,
                 flag: 2,
-                license: authVehicleData.vehicle_type === 2 ? authVehicleData.license : '',
-                vin: authVehicleData.vehicle_type === 1 ? authVehicleData.license : '',
+                license: parseInt(authVehicleData.license_type) === 2 ? authVehicleData.license : '',
+                vin: parseInt(authVehicleData.license_type) === 1 ? authVehicleData.license : '',
                 notes: authVehicleData.notes,
                 make_id: authVehicleData.vehicle_make_id,
                 make: authVehicleData.vehicle_make,
                 vehicle_type_segment_id: authVehicleData.vehicle_type_segment_id,
                 vehicle_type: authVehicleData.vehicle_type,
                 vehicle_id: authVehicleData.vehicle_id,
-                radio_button_type: authVehicleData.vehicle_type !== 2 ? 1 : 0
+                radio_button_type: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
         };
         this.props.fetchVehiclesMakeModelByYear(parseInt(authVehicleData.vehicle_year_id));
             this.setState({
@@ -200,7 +200,7 @@ class VehicleForm extends React.Component {
                 make: authVehicleData.vehicle_make_id,
                 model: parseInt(authVehicleData.vehicle_model_id),
                 makeName: authVehicleData.vehicle_make,
-                value: authVehicleData.vehicle_type !== 2 ? 1 : 0
+                value: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
             });
             this.props.dispatch(initialize(this.props.form, initialFormData));
         } 

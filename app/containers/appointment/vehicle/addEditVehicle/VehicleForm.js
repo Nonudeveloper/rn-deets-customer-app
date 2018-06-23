@@ -35,15 +35,15 @@ class VehicleForm extends React.Component {
                 model_id: authVehicleData.vehicle_model_id,
                 model: authVehicleData.vehicle_model,
                 type: vehicleType,
-                license: authVehicleData.vehicle_type === 2 ? authVehicleData.license : '',
-                vin: authVehicleData.vehicle_type === 1 ? authVehicleData.license : '',
+                license: parseInt(authVehicleData.license_type) === 2 ? authVehicleData.license : '',
+                vin: parseInt(authVehicleData.license_type) === 1 ? authVehicleData.license : '',
                 notes: authVehicleData.notes,
                 make_id: authVehicleData.vehicle_make_id,
                 make: authVehicleData.vehicle_make,
                 vehicle_type_segment_id: authVehicleData.vehicle_type_segment_id,
                 vehicle_type: authVehicleData.vehicle_type,
                 vehicle_id: authVehicleData.vehicle_id,
-                radio_button_type: authVehicleData.vehicle_type !== 2 ? 1 : 0
+                radio_button_type: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
                 
         };
             this._fetchMakeModel(initialFormData.year, initialFormData.year);
@@ -52,7 +52,7 @@ class VehicleForm extends React.Component {
                 color: parseInt(authVehicleData.vehicle_color_id),
                 make: authVehicleData.vehicle_make_id,
                 model: parseInt(authVehicleData.vehicle_model_id),
-                value: authVehicleData.vehicle_type !== 2 ? 1 : 0
+                value: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
             });
             this.props.dispatch(initialize('addEditVehicleForm', initialFormData));
         } else {
@@ -62,6 +62,7 @@ class VehicleForm extends React.Component {
             };
             this.props.dispatch(initialize('addEditVehicleForm', initialFormData));
             this.props.dispatch(change('addEditVehicleForm', 'access_token', this.props.authUser.access_token));
+            this.props.dispatch(change('addEditVehicleForm', 'radio_button_type', 0));
         }
     }
 

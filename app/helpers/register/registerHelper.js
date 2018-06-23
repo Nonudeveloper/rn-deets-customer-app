@@ -55,7 +55,7 @@ class RegisterHelper {
     data.append('license_type', userInfo.form2.radio_button_type === 0 ? 2 : 1);
     data.append('nonce', userInfo.nonce);
     
-    return await fetch(`${apiConfig.url}/customer/register_new_user`, {
+    return await fetch(`${apiConfig.url}customer/register_new_user`, {
       method: 'POST',
       body: data,
     }).then(response => {

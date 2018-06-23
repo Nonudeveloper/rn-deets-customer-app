@@ -11,7 +11,7 @@ class ProfileHelper {
         data.append('last_name', userInfo.userProfileDetails.lname);
         data.append('mobile', userInfo.userProfileDetails.mobile);
         data.append('access_token', userInfo.userProfileDetails.access_token);
-        return await fetch(`${apiConfig.url}/customer/edit_user_profile`, {
+        return await fetch(`${apiConfig.url}customer/edit_user_profile`, {
             method: 'POST',
             body: data,
         }).then(response => {
@@ -81,7 +81,7 @@ class ProfileHelper {
         formData.append('notes', authData.form.notes);
         formData.append('license_type', authData.form.radio_button_type === 0 ? 2 : 1);
         formData.append('vehicle_id', authData.form.vehicle_id);
-        return await fetch(`${apiConfig.url}/customer/add_or_edit_user_vehicle_information`, {
+        return await fetch(`${apiConfig.url}customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',
             body: formData,
             }).then(response => {
@@ -97,7 +97,7 @@ class ProfileHelper {
         const current_date_time = newDate.getFullYear() + '-' + ('0' + (newDate.getMonth()+1)).slice(-2) + '-' + ('0' + newDate.getDate()).slice(-2) +
                         ' ' + ('0' + newDate.getHours()).slice(-2) + ':' + ('0' + newDate.getMinutes()).slice(-2) + ':' + ('0' + newDate.getSeconds()).slice(-2);
         const vehicle_id = vehicleId;
-    return await SuperFetch.post('/customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
+    return await SuperFetch.post('customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
         return response;
     })
     .catch(error => ({ error: JSON.stringify(error) }));
