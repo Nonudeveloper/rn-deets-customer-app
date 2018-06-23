@@ -7,6 +7,7 @@ import styles from './styles';
 
 
 const mapImage = require('../../../assets/icons/map.png');
+const notAvailableIcon = require('../../../assets/icons/tech_placeholder_not_available.png');
 
 export default class RecentLocationsScreen extends React.Component {
 
@@ -104,6 +105,14 @@ export default class RecentLocationsScreen extends React.Component {
                     }
                     keyExtractor={(item, index) => index.toString()}
                     extraData={this.state}
+                    ListEmptyComponent={() => 
+                        <View style={styles.notAvailableContainer}>
+                        <View style={styles.notAvailableContainer}>
+                            <Image source={notAvailableIcon} style={styles.notAvailableImage} />
+                            <Text style={styles.notAvailableText}>Sorry, No Location Available right now.</Text>
+                        </View>
+                        </View>
+                    }
                 />
             </View>
         </View>

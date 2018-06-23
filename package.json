@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "postinstall": "rm node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+    "test": "jest"
   },
   "dependencies": {
     "@mapbox/react-native-mapbox-gl": "https://github.com/mapbox/react-native-mapbox-gl.git#master",
@@ -27,6 +26,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.4.4",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-picker": "^4.3.5",
+    "react-native-splash-screen": "^3.0.9",
     "react-native-step-indicator": "0.0.7",
     "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.5.0",
@@ -40,7 +40,8 @@
     "redux-storage": "^4.1.2",
     "redux-storage-engine-reactnativeasyncstorage": "^1.0.5",
     "remote-redux-devtools": "^0.5.12",
-    "rn-viewpager": "^1.2.9"
+    "rn-viewpager": "^1.2.9",
+    "turf-inside": "^3.0.12"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",

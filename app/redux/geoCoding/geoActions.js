@@ -65,14 +65,7 @@ function getZipCodes(geoData) {
         if (geo.place_type[0] === 'postcode') {
             geoLocationData.push({ zipcode: geo.text, coordinates: geo.geometry.coordinates });
         }
-        //   const convertedtime = [];
-        //   tec.interval.map((interval, j) => {
-        //     const date = new Date(interval);
-        //     const getTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-        //     convertedtime.push({ key: j, timeavailable: getTime, selected: false });
-        //   });
-        //   availableTime.push({ technician: tec, time: convertedtime });
-        });
+    });
 
     return geoLocationData;
 }

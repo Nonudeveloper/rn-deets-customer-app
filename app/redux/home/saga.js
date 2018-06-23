@@ -1,7 +1,7 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
-import { fetchNearByPlacesSuccess, fetchNearByPlacesFaliure } from './homeActions';
-import { FETCH_NEARBY_PLACES } from './constants';
+import { fetchNearByPlacesSuccess, fetchNearByPlacesFaliure, fetchPolygonDataSuccess, fetchPolygonDataFaliure } from './homeActions';
+import { FETCH_NEARBY_PLACES, FETCH_POLYGON_DATA } from './constants';
 import HomeHelper from '../../helpers/home/homeHelper';
 
 
@@ -29,9 +29,34 @@ function* watchFetchNearByPlaces() {
         console.log('SAGA FETCH ERR: ', err);
       }
     }
+}
+
+//**Generator**//
+function* watchFetchPolygonData() {
+  while (true) {
+    const { addressString } = yield take(FETCH_POLYGON_DATA);
+    try {
+      const response = yield call(fetchPolygonDataCall, addressString);
+      yield put(fetchPolygonDataSuccess(response));
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(fetchPolygonDataFaliure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
   }
+}
+
+function fetchPolygonDataCall(addressString) {
+  return new Promise((resolve, reject) => {
+    HomeHelper.fetchPolygonData(addressString)
+      .then(res => {
+          resolve(res);
+      })
+      .catch(err => reject(err));
+  });
+}
 
 
 export default function* root() {
-  // yield fork(watchFetchNearByPlaces);
+  yield fork(watchFetchPolygonData);
 }
