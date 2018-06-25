@@ -6,7 +6,7 @@ import VehicleInfo from './VehicleInfo';
 
 export default class AppointmentDetail extends Component {
     render() {
-        const { item } = this.props.navigation.state.params;
+        const { item, activeTab } = this.props.navigation.state.params;
         return (
             <View style={styles.container}>
                 <Header 
@@ -21,6 +21,8 @@ export default class AppointmentDetail extends Component {
                     selectAppointment={id => this.props.actions.selectAppointment(id)}
                     selectedAppointments={this.props.selectedAppointments}
                     navigation={this.props.navigation}
+                    selectedAppointmentForReschedule={() => this.props.actions.selectedAppointmentForReschedule(item)}
+                    activeTab={activeTab}
                />
                <VehicleInfo item={item} />
             </View>

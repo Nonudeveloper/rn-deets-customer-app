@@ -126,6 +126,21 @@ const styles = StyleSheet.create({
     notAvailableImage: {
         width: 72, 
         height: 75
+    },
+    outerTitleContainer: {
+        height: 40, 
+        backgroundColor: '#e6e6e6', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    outerTitleText: {
+        color: '#000', 
+        fontSize: 17
+    },
+    swipOutContainer: {
+        height: 150, 
+        borderBottomColor: 'grey', 
+        borderBottomWidth: 1
     }
 });
 
