@@ -36,6 +36,7 @@ export default class HomeScreen extends Component {
       loading: false,
       renderPolygon: true,
       inputVal: '',
+      shouldUpdateAddressString: true,
       polygonData: {
         "type": "FeatureCollection",
         "features": [
@@ -70,9 +71,7 @@ export default class HomeScreen extends Component {
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
     this.onDidFinishLoadingMap = this.onDidFinishLoadingMap.bind(this);
-
     this.setLocation = this.setLocation.bind(this);
-
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
     this.breakIt = 0;
@@ -88,7 +87,6 @@ export default class HomeScreen extends Component {
 
   async onRegionDidChange() {
     const center = await this._map.getCenter();
-    console.log(center);
     await this.setState({
       markerPoint: {
         "type": "Feature",
@@ -112,7 +110,9 @@ export default class HomeScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.addressString !== '' && this.props.addressString !== nextProps.addressString) {
+    if (nextProps.addressString !== '' && 
+        this.props.addressString !== nextProps.addressString && 
+        this.state.shouldUpdateAddressString === true) {
       this.setState({
         inputVal: nextProps.addressString
       });
@@ -218,12 +218,14 @@ export default class HomeScreen extends Component {
           Number(location.service_location_longitude),
           Number(location.service_location_latitude)
         ],
-        inputVal: location.service_location_string
+        inputVal: location.service_location_string,
+        shouldUpdateAddressString: false
       }, () => {
       });
     } else {
       this.setState({
-        inputVal: this.props.addressString
+        inputVal: this.props.addressString,
+        shouldUpdateAddressString: true
       });
     }
 
@@ -292,7 +294,7 @@ export default class HomeScreen extends Component {
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={9}
+              zoomLevel={14}
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
