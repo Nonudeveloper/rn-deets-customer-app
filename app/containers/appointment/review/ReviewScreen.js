@@ -32,7 +32,7 @@ export default class ReviewScreen extends React.Component {
     const { reSchedule } = this.props;
     const options = {
               cost: this.props.selectedServices.totalCost,
-              notes: this.props.notes !== undefined ? this.props.notes.notes : '',
+              notes: this.props.notes !== undefined ? this.props.notes.values.notes : '',
               body_payment_card_id: this.props.selectedCardDetails.id,
               service_end_time: endDateTime,
               service_start_time: this.props.selectedSchedule.selectedInterval,
@@ -88,7 +88,7 @@ export default class ReviewScreen extends React.Component {
         {/* //appointment details component */}
         {/* //credit card details component */}
         <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
-        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.value.notes : ''} />
+        <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.values.notes : ''} />
         <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} getSelectedCard={this.getSelectedCard} selectedServices={this.props.selectedServices} />
       </View>
     );

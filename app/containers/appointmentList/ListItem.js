@@ -66,7 +66,7 @@ class ListItem extends React.PureComponent {
         ];
         const leftSwipeBtns = [
             {
-                text: this.props.activeTab === 'past' ? 'Reschedule' : 'Update',
+                text: this.props.activeTab === 'past' ? 'Schedule' : 'Update',
                 backgroundColor: '#009933',
                 underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
                 onPress: () => { this.props.activeTab === 'past' ? 
@@ -168,13 +168,13 @@ class ListItem extends React.PureComponent {
                                 <Image source={locationIcon} style={styles.locationIcon} />
                             </View>
                             <View style={styles.hrContainer} />
-                            <View style={styles.locationTextCont}>
-                                <Text numberOfLines={1} style={styles.text}>
-                                    {item.appointment.service_location_string}
-                                </Text>
+                                <View style={styles.locationTextCont}>
+                                    <Text numberOfLines={1} style={styles.text}>
+                                        {item.appointment.service_location_string}
+                                    </Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
                 </TouchableOpacity>
             </Swipeout>
         );

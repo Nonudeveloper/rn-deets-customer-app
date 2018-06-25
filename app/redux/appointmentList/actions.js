@@ -17,6 +17,7 @@ import {
     SELECT_APPOINTMENT_SUCCESS,
     SELECT_APPOINTMENT_FALIURE,
     TOGGLE_EDIT_MODE,
+    SELECT_ALL_APPOINTMENTS,
 } from './constants';
 
 export function fetchUpcomingAndPastAppointments(payload) {
@@ -133,6 +134,13 @@ export function selectAppointmentFaliure(err) {
     return {
         type: SELECT_APPOINTMENT_FALIURE,
         err
+    };
+}
+
+export function selectAllAppointments(IDs) {
+    return {
+        type: SELECT_ALL_APPOINTMENTS,
+        IDs
     };
 }
 

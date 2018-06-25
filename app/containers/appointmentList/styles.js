@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     },
      
     item: {
-        fontSize: 19,
-        marginBottom: 5,
+        fontSize: 17,
+        marginBottom: 2,
         color: '#1a1a1a'
     },
     itemContainer: {
@@ -52,13 +52,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     itemDetailContainer: {
-        flex: 1,
         flexDirection: 'row',
         borderBottomWidth: 1,
-        borderBottomColor: 'grey'
+        borderBottomColor: 'grey',
     },
     locationContainer: {
-        height: 40,
+        height: 35,
         flexDirection: 'row'
     },
     locationIconCont: {
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     locationTextCont: {
         flex: 4,
         justifyContent: 'center',
+        left: 10
         
     },
     text: {
@@ -80,8 +80,9 @@ const styles = StyleSheet.create({
         height: 20
     },
     dateTime: {
-        fontSize: 15,
+        fontSize: 13,
         color: '#1a1a1a',
+        top: 3
     },
     ratingStart: {
         resizeMode: 'contain',
@@ -107,10 +108,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'green' 
     },
     hrContainer: {
-        flex: 0.5, 
-        borderLeftColor: 'gray', 
+        borderLeftColor: 'grey', 
         borderLeftWidth: 1, 
-        marginVertical: 5
+        marginVertical: 5,
     },
     notAvailableContainer: {
         flex: 1, 

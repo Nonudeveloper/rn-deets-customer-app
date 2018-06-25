@@ -57,6 +57,7 @@ export default class RecentLocationsScreen extends React.Component {
     }
 
     navigateToMap = (item) => {
+        console.log(item);
         this.props.navigation.navigate('HomeComponent', { location: item });
     }
 
