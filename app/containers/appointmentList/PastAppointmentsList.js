@@ -99,11 +99,11 @@ class PastAppointmentsList extends Component {
         const IDs = [];
         //if selected tab is past
         if (this.state.selectedTab === 'past') {
-            for (const item of this.state.appointments.past_appointments) {
+            for (const item of this.props.pastAppointments) {
                 IDs.push(item.appointment.id);
             }
         } else {
-            for (const item of this.state.appointments.upcoming_appointments) {
+            for (const item of this.props.upcomingAppointments) {
                 IDs.push(item.appointment.id);
             }
         }

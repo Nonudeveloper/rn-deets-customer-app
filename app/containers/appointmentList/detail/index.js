@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AppointmentDetail from './AppointmentDetail';
 
-import * as appointmentDetailActions from '../../../redux/appointmentList/upcoming/actions';
+import * as appointmentDetailActions from '../../../redux/appointmentList/actions';
 
 
 const mapDispatchToProps = (dispatch) => {
