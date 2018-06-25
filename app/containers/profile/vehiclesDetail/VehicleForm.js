@@ -166,7 +166,7 @@ class VehicleForm extends React.Component {
     }
     
     componentWillMount() {
-        console.log(this.props);
+        // console.log(this.props);
        
     }
     
@@ -425,7 +425,7 @@ class VehicleForm extends React.Component {
 
 export default reduxForm({ 
     keepDirtyOnReinitialize: false,
-    enableReinitialize: false,
+    enableReinitialize: true,
     validate: (values, props) => {
         if (!props.editable) {
             return null;

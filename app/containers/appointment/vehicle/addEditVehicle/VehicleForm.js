@@ -91,7 +91,6 @@ class VehicleForm extends React.Component {
     }
 
     _populateModel = (makeID, makeIndex) => {
-        console.log(makeID);
         console.log(this.props.makeModel);
         this.setState(() => {
             return {
@@ -453,7 +452,7 @@ class VehicleForm extends React.Component {
 
 export default reduxForm({ 
     form: 'addEditVehicleForm',
-    destroyOnUnmount: false,
+    // destroyOnUnmount: false,
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values) => {

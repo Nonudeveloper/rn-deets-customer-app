@@ -162,6 +162,31 @@ export default StyleSheet.create({
         zIndex: 2, 
         right: 0,
         top: '7%'
-    }
+    },
+    logoutButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start', 
+        alignItems: 'center',
+        position: 'absolute',
+        top: 30, 
+        width: 100,
+        height: 50,
+        borderColor: '#28a745',
+        borderWidth: 2,
+        borderRightWidth: 0,
+        borderBottomLeftRadius: 100,
+        borderTopLeftRadius: 100,
+        zIndex: 999
+    },
+    touchableLogoutClosedButtonContainer: { 
+        borderColor: '#28a745', 
+        borderWidth: 2, 
+        width: 35, 
+        height: 35, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        borderRadius: 100,
+        zIndex: 999,
+    },
 
 });

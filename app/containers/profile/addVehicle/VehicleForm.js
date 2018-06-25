@@ -389,7 +389,7 @@ class VehicleForm extends React.Component {
 
 export default reduxForm({ 
     form: 'vehicleForm',
-    destroyOnUnmount: false,
+    // destroyOnUnmount: false,
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values) => {
