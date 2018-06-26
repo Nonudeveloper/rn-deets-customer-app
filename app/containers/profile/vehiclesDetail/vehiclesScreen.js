@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Image, Alert, TouchableHighlight } from 'react-native';
+import { View, Image, Alert, TouchableHighlight, Text } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { ViewPager } from 'rn-viewpager';
 import CarPicture from './CarPicture';
 import VehicleForm from './VehicleForm';
 import styles from '../styless';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const info = (<Icon name="plus" size={20} color="#28a745" />);
 
 
 const addVehicleButton = require('../../../assets/icons/add_car_pressed.png');
+const logOutClosedButton = require('../../../assets/icons/logout_closed.png');
 
 const firstIndicatorStyles = {
   stepIndicatorSize: 15,
@@ -81,13 +85,30 @@ export default class VehiclesScreen extends React.Component {
               stepCount={totalPages} 
             />
           </View>
-          <TouchableHighlight 
+          {/* <TouchableHighlight 
             underlayColor={'transparent'} 
             style={styles.floatingVehicleAddButton}
             onPress={() => this.props.navigation.navigate('addVehicleScreen')} 
           >
             <Image style={{ width: 80, height: 52 }} source={addVehicleButton} />
-          </TouchableHighlight>
+          </TouchableHighlight> */}
+          <View style={[styles.logoutButtonContainer, styles.floatingVehicleAddButton, { left: this.state.marginLeft }]}>
+                    <TouchableHighlight 
+                        underlayColor={'transparent'} 
+                        onPress={this.props.logout} 
+                        style={[styles.touchableLogoutClosedButtonContainer, { marginLeft: 5 }]}
+                        onPress={() => {
+                            this.setState({
+                                marginLeft: this.state.marginLeft === 312 ? 260 : 312
+                            });
+                        }}
+                    >
+                            {info}
+                    </TouchableHighlight>
+                    <TouchableHighlight underlayColor={'transparent'} style={{ width: 60 }} onPress={() => this.props.navigation.navigate('addVehicleScreen')} >
+                        <Text style={{ color: '#28a745', left: 7 }}>Add</Text> 
+                    </TouchableHighlight>
+                </View>
         <ViewPager
           style={{ flexGrow: 1 }}
           onPageSelected={(page) => { this.setState({ currentPage: page.position }); this.props.getSelectedPage(page.position); }}

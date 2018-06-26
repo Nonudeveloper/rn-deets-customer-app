@@ -6,6 +6,7 @@ import styles from './styles';
 import CommonTextInput from '../../deetscomponents/form/Input';
 
 
+
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
 
 class FormArea extends React.Component {
@@ -171,7 +172,10 @@ export default reduxForm({
     form: 'profileDetails',
     keepDirtyOnReinitialize: false,
     enableReinitialize: true,
-    validate: (values) => {
+    validate: (values, props) => {
+        if (!props.editable) {
+            return null;
+        }
         const errors = {};
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         let isValidEmail = false;
