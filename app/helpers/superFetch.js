@@ -25,7 +25,7 @@ const base = (method, url, data = {}) => {
       } 
     })
     .then(res => res)
-    .catch(error => ({ error: 'Server Error' }));
+    .catch(error => { throw error; });
 };
 const SuperFetch = {};
 ['get', 'post', 'put', 'delete'].forEach(method => {

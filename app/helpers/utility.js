@@ -57,9 +57,12 @@ const setLoginUser = async (user) => {
 };
 
 export function dataURItoBlob(dataURI) {
+  if (!global.atob) {
+    global.atob = require('base-64').decode;
+  }
   // convert base64/URLEncoded data component to raw binary data held in a string
   let byteString;
-  if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);
+  if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = global.atob(dataURI.split(',')[1]);
   else byteString = unescape(dataURI.split(',')[1]);
 
   // separate out the mime component
@@ -75,9 +78,13 @@ export function dataURItoBlob(dataURI) {
 }
 
 export function dataURLtoFile(dataurl, filename) {
+  if (!global.atob) {
+    global.atob = require('base-64').decode;
+  }
+
   var arr = dataurl.split(','), 
       mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), 
+      bstr = global.atob(arr[1]), 
       n = bstr.length, 
       u8arr = new Uint8Array(n);
 
@@ -86,6 +93,7 @@ export function dataURLtoFile(dataurl, filename) {
   }
   return new File([u8arr], filename, { type: mime });
 }
+
 
 // export const getBase64ImageFromUrl = async (imageUrl) => {
 //   const res = await fetch(imageUrl);

@@ -1,7 +1,8 @@
 import SuperFetch from '../superFetch';
-import { dataURLtoFile } from '../utility';
+import { dataURLtoFile, dataURItoBlob } from '../utility';
 import { getItem } from '../asyncStorage';
 import { apiConfig } from '../../config';
+import RNFetchBlob from 'rn-fetch-blob';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
@@ -51,9 +52,18 @@ class ProfileHelper {
         const typeData = type.split(', ');
 
         if (Object.keys(authData.vehicleImage).length > 0) {
-            const userBase64String = 'data:image/jpeg;base64,' + authData.vehicleImage.data;
-            const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-            formData.append('vehicle_image', userVehicleImageFile);
+            // const userBase64String = 'data:image/jpeg;base64,' + authData.vehicleImage.data;
+            // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
+            // const userVehicleImageFile = dataURItoBlob(userBase64String, 'my_photo.jpg');
+            // const fs = RNFetchBlob.fs
+            const photo = {
+                uri: authData.vehicleImage.uri,
+                type: 'image/jpeg',
+                name: 'photo.jpg',
+            };
+            // const image = await fs.createFile(authData.vehicleImage.uri, 'foo', 'utf8')
+            //   console.log(userVehicleImageFile);
+            formData.append('vehicle_image', JSON.stringify(photo));
         } else {
             formData.append('vehicle_image', '');
         }
@@ -81,6 +91,7 @@ class ProfileHelper {
         formData.append('notes', authData.form.notes);
         formData.append('license_type', authData.form.radio_button_type === 0 ? 2 : 1);
         formData.append('vehicle_id', authData.form.vehicle_id);
+        
         return await fetch(`${apiConfig.url}customer/add_or_edit_user_vehicle_information`, {
             method: 'POST',
             body: formData,

@@ -5,16 +5,22 @@ import Instabug from 'instabug-reactnative';
 
 class AuthHelper {
   login = async userInfo => {
+    console.log('in authhelper login');
     if (userInfo.flag === 3) {
        if (!userInfo.email || !userInfo.password) {
          return { error: 'please fill in the input' };
       }
     }
-    return await SuperFetch.post('customer/user_login', userInfo).then(response => {
-      const result = this.checkExpirity(response.access_token);
-      result.user = response.user;
-      return response;
-    });
+    return await SuperFetch.post('customer/user_login', userInfo)
+      .then(response => {
+        // const result = this.checkExpirity(response.user.access_token);
+        // result.user = response.user;
+        console.log(response);
+        return response;
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
   };
 
   sendMail = async userInfo => {

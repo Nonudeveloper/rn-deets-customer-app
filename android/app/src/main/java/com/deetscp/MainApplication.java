@@ -3,6 +3,7 @@ package com.deetscp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.beefe.picker.PickerViewPackage;
@@ -20,7 +21,6 @@ import com.mapbox.rctmgl.RCTMGLPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNFetchBlobPackage(),
             new FIRMessagingPackage(),
             new LinearGradientPackage(),
             new PickerViewPackage(),

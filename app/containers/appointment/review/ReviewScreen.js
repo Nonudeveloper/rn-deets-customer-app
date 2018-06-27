@@ -59,9 +59,7 @@ export default class ReviewScreen extends React.Component {
           onPress: () => {
             //dispath an action to make showAlert false
             this.props.actions.hideAlert();
-            if (message.log) {
-              this.props.navigation.navigate('appointmentListStack');
-            }
+            this.props.navigation.navigate('HomeComponent');
           } 
         },
       ],
