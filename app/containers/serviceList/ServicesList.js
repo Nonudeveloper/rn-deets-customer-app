@@ -8,7 +8,7 @@ const downArrow = require('../../assets/icons/down_arrow.png');
 const upArrow = require('../../assets/icons/down_arrow_onclick.png');
 
 const SUBCATEGORY_FADE_TIME = 100;
-const SUBCATEGORY_HEIGHT = 65;
+const SUBCATEGORY_HEIGHT = 67;
 
 export default class ServiceList extends React.Component { 
     constructor(props) {
