@@ -14,6 +14,8 @@ function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
+      console.log('in AuthHelper.login');
+      console.log(data);
       if (data.user) {
         resolve(data);
       } else if (data.status === 401) {
@@ -23,7 +25,7 @@ function loginCall({ state }) {
          reject({ status: error });
       } 
     })
-    // .catch(err => console.log(err));
+    .catch(err => { throw err; });
   });
 }
 
@@ -50,6 +52,7 @@ function* watchLoginRequest() {
         state
       };
       const response = yield call(loginCall, payload);
+      console.log(response);
       yield put(loginSuccess(response));
       yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
       yield put(fetchAuthUserDetailsSuccess(response.user));

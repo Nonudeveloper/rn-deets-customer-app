@@ -8,8 +8,6 @@ import Loader from '../../../deetscomponents/Loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../header/Header';
 
-
-
 export default class VehicleInformation extends React.Component {
 
   constructor(props) {
@@ -75,7 +73,7 @@ export default class VehicleInformation extends React.Component {
     return (
       <KeyboardAwareScrollView
           resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={ {
+          contentContainerStyle={{
             flex: 1,
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -89,13 +87,13 @@ export default class VehicleInformation extends React.Component {
           <Loader
                 loading={isFetching} 
           />
-            <Header 
-                headerText={'NEW VEHICLE'} 
-                navigation={this.props.navigation} 
-                showRightIcon
-                rightText={'Save'}
-                onPress={() => this.goToNext()}
-            />
+          <Header 
+              headerText={'NEW VEHICLE'} 
+              navigation={this.props.navigation} 
+              showRightIcon
+              rightText={'Save'}
+              onPress={() => this.goToNext()}
+          />
           <View style={container}>
               <View style={styles.t1}>
                 <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} />

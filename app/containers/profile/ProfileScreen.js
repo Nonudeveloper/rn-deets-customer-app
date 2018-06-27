@@ -284,7 +284,7 @@ export default class ProfileScreen extends Component {
                 />
                 <Loader loading={this.props.isFetching} />
                 
-                {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
+                {(this.props.errorMessage !== undefined && this.props.errorMessage !== '') && this.renderAlert(this.props.errorMessage.error)}
                 {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
                 {this.props.logoutMessage !== '' && ToastAndroid.showWithGravityAndOffset(this.props.logoutMessage.error, ToastAndroid.LONG, ToastAndroid.TOP, 25, 50)}
                 

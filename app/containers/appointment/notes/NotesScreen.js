@@ -27,9 +27,12 @@ class NotesScreen extends React.Component {
         <Header 
             navigation={this.props.navigation} 
             headerText={'Notes'}
-            // showRightIcon
-            // rightText={'Next'}
-            // onPress={() => this.props.navigation.navigate('selectVehicle')}
+            showRightIcon
+            rightText={'Next'}
+            onPress={() => { 
+                Keyboard.dismiss(); 
+                this.props.navigation.navigate('reviewScreen');
+            }}
             indicatorSource={indicatorThree}
         />
         {/* <Loader loading={isFetching} /> */}
@@ -46,24 +49,6 @@ class NotesScreen extends React.Component {
                 borderBotmWidth={styles.input}
             />
         </View>
-
-        <Button 
-            style={{ 
-                height: 45,
-                borderRadius: 100,
-                borderColor: '#a8a8a8',
-                marginHorizontal: 25, 
-                flex: 0, 
-                backgroundColor: '#8ac10b', 
-                marginTop: 20,
-                borderWidth: 4,
-            }}
-            onPress={() => {
-                Keyboard.dismiss();
-                this.props.navigation.navigate('reviewScreen')
-            }}
-        >Next</Button>
-
       </View>
     );
   }
