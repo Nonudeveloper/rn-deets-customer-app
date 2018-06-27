@@ -138,6 +138,29 @@ const styles = StyleSheet.create({
         fontSize: 23,
         color: '#8ac10b',
         fontWeight: 'bold'
+      },
+      serviceSubCategoryContainer: {
+        flex: 1, 
+        height: 65, 
+        flexDirection: 'row', 
+        alignItems: 'center'
+      },
+      addsOnListContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: 10
+      },
+      addsOnTextContainer: {
+        flex: 9, 
+        flexDirection: 'column'
+      },
+      addsOnNameText: {
+        fontSize: 18, 
+        color: 'black'
+      },
+      addsOnBottomTextContainer: {
+        flexDirection: 'row', 
+        paddingHorizontal: 5
       }
 });
 

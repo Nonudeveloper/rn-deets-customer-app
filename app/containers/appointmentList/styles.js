@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
     },
     locationContainer: {
+        flex: 1,
         height: 35,
         flexDirection: 'row'
     },

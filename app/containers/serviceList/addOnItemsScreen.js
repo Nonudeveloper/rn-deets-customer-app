@@ -13,17 +13,17 @@ export default class AddonItemsScreen extends Component {
  
    render() {
       return (
-        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }} underlayColor='transparent' >
-            <View style={{ flex: 9, flexDirection: 'column' }}>
-                <Text style={{ fontSize: 18, color: 'black' }} > {this.props.item.adds_on_name} </Text>
-                <View style={{ flexDirection: 'row', paddingHorizontal: 5 }}>
+        <TouchableOpacity style={styles.addsOnListContainer} underlayColor='transparent' >
+            <View style={styles.addsOnTextContainer}>
+                <Text numberOfLines={1} style={styles.addsOnNameText} > {this.props.item.adds_on_name} </Text>
+                <View style={styles.addsOnBottomTextContainer}>
                     <Text style={[styles.item, { backgroundColor: 'gray' }]} > {this.props.item.adds_on_type_name} </Text>
                     <Text style={styles.item} > Estimation Time - {this.props.item.estimation_time} Mins</Text>
                 </View>
             </View>
             <View style={{ flex: 1 }}>
                 <Text 
-                    style={{ color: 'black', fontSize: 15 }} 
+                    style={styles.addsOnCostText} 
                 > ${this.props.item.small_vehicle_cost} </Text>
             </View>
         </TouchableOpacity>

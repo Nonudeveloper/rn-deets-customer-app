@@ -53,7 +53,7 @@ export default class AddonItemsScreen extends Component {
     
    render() {
       return (
-        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }} onPress={this.toggleState.bind(this, this.props.keyValue, this.props.label)} underlayColor='transparent' >
+        <TouchableOpacity style={styles.addsOnListContainer} onPress={this.toggleState.bind(this, this.props.keyValue, this.props.label)} underlayColor='transparent' >
             <View style={{ flex: 1 }}>
                 <View style={styles.checkBoxButton}>
                     <View style={styles.checkBoxHolder}>
@@ -73,9 +73,9 @@ export default class AddonItemsScreen extends Component {
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 9, flexDirection: 'column' }}>
-                <Text style={{ fontSize: 18, color: 'black' }} > {this.props.item.adds_on_name} </Text>
-                <View style={{ flexDirection: 'row', paddingHorizontal: 5 }}>
+            <View style={styles.addsOnTextContainer}>
+                <Text numberOfLines={1} style={styles.addsOnNameText} > {this.props.item.adds_on_name} </Text>
+                <View style={styles.addsOnBottomTextContainer}>
                     <Text style={[styles.item, { backgroundColor: 'gray' }]} > {this.props.item.adds_on_type_name} </Text>
                     <Text style={styles.item} > Estimation Time - {this.props.item.estimation_time} Mins</Text>
                 </View>
