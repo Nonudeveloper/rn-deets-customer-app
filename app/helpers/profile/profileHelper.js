@@ -6,19 +6,47 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
-        const data = new FormData();
-        data.append('user_image', userInfo.newImage !== '' ? this.getImage(userInfo.newImage) : '');
-        data.append('first_name', userInfo.userProfileDetails.fname);
-        data.append('last_name', userInfo.userProfileDetails.lname);
-        data.append('mobile', userInfo.userProfileDetails.mobile);
-        data.append('access_token', userInfo.userProfileDetails.access_token);
-        return await fetch(`${apiConfig.url}customer/edit_user_profile`, {
-            method: 'POST',
-            body: data,
-        }).then(response => {
-            return JSON.parse(response._bodyText);
-        })
-        .catch(error => ({ error: JSON.stringify(error) }));
+        const userImage = {
+            name: 'user_image',
+            filename: 'myPhoto.jpg',
+            type: userInfo.newImage.type,
+            data: RNFetchBlob.wrap(userInfo.newImage.uri),
+        };
+
+        return await RNFetchBlob.fetch(
+            'POST',
+            `${apiConfig.url}customer/edit_user_profile`,
+            {
+              Accept: 'application/json',
+              'Content-Type': 'multipart/form-data',
+            },
+            [
+                { name: 'first_name', data: userInfo.userProfileDetails.fname },
+                { name: 'last_name', data: userInfo.userProfileDetails.lname },
+                { name: 'mobile', data: userInfo.userProfileDetails.mobile },
+                { name: 'access_token', data: userInfo.userProfileDetails.access_token },
+                userImage,
+            ],
+        ).then((resp) => {
+            console.log(resp);
+            return JSON.parse(resp.data);
+        }).catch((err) => {
+            console.warn(err);
+        });
+        
+        // const data = new FormData();
+        // data.append('user_image', userInfo.newImage !== '' ? this.getImage(userInfo.newImage) : '');
+        // data.append('first_name', userInfo.userProfileDetails.fname);
+        // data.append('last_name', userInfo.userProfileDetails.lname);
+        // data.append('mobile', userInfo.userProfileDetails.mobile);
+        // data.append('access_token', userInfo.userProfileDetails.access_token);
+        // return await fetch(`${apiConfig.url}customer/edit_user_profile`, {
+        //     method: 'POST',
+        //     body: data,
+        // }).then(response => {
+        //     return JSON.parse(response._bodyText);
+        // })
+        // .catch(error => ({ error: JSON.stringify(error) }));
     }
 
     getImage(image) {
@@ -31,11 +59,12 @@ class ProfileHelper {
         const user = await getItem('user');
         const access_token =  JSON.parse(user).access_token;
         const registration_type = 2;
-    return await SuperFetch.post('customer/change_password_from_access_token', { ...passwordData, access_token, registration_type }).then(response => {
-        return JSON.parse(response._bodyText);
-    })
-    .catch(error => ({ error: JSON.stringify(error) }));
-    }
+
+        return await SuperFetch.post('customer/change_password_from_access_token', { ...passwordData, access_token, registration_type }).then(response => {
+            return JSON.parse(response._bodyText);
+        })
+        .catch(error => ({ error: JSON.stringify(error) }));
+        }
 
     fetchVehiclesMakeModel = async year => {
         return await SuperFetch.post('customer/get_vehicle_data_for_year', { year })
@@ -43,7 +72,7 @@ class ProfileHelper {
           return response;
         })
         .catch(error => ({ error: JSON.stringify(error) }));
-      }
+    }
 
 
     addNewVehicle = async authData => {
@@ -98,10 +127,9 @@ class ProfileHelper {
                   vehicleImage,
                 ],
             ).then((resp) => {
-            console.log(resp);
-            return JSON.parse(resp.data);
+                return JSON.parse(resp.data);
             }).catch((err) => {
-            console.warn(err);
+                console.warn(err);
             });
     };
 
@@ -109,13 +137,16 @@ class ProfileHelper {
         const user = await getItem('user');
         const access_token =  JSON.parse(user).access_token;
         const newDate = new Date();
+
         const current_date_time = newDate.getFullYear() + '-' + ('0' + (newDate.getMonth()+1)).slice(-2) + '-' + ('0' + newDate.getDate()).slice(-2) +
                         ' ' + ('0' + newDate.getHours()).slice(-2) + ':' + ('0' + newDate.getMinutes()).slice(-2) + ':' + ('0' + newDate.getSeconds()).slice(-2);
+
         const vehicle_id = vehicleId;
-    return await SuperFetch.post('customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
-        return response;
-    })
-    .catch(error => ({ error: JSON.stringify(error) }));
+
+        return await SuperFetch.post('customer/delete_user_vehicle', { access_token, current_date_time, vehicle_id }).then(response => {
+            return response;
+        })
+        .catch(error => ({ error: JSON.stringify(error) }));
     }
 }
 export default new ProfileHelper();
