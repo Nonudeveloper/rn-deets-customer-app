@@ -38,6 +38,7 @@ export default class HomeScreen extends Component {
       inputVal: '',
       shouldUpdateAddressString: true,
       zoomLevel: 14,
+      polygonDrawnOnce: false,
       polygonData: {
         "type": "FeatureCollection",
         "features": [
@@ -58,6 +59,8 @@ export default class HomeScreen extends Component {
             'fill-opacity': 0.8
         }
       },
+      turfPolygon: {},
+      
       markerPoint: {
         "type": "Feature",
         "properties": {
@@ -79,21 +82,33 @@ export default class HomeScreen extends Component {
     this.breakIt = 0;
   }
 
-  // async onDidFinishLoadingMap() {
-  //   await this.setState({ loading: false });
-  // }
-
-  // onRegionWillChange = () => {
-  //   this.setState({ loading: true });
-  // }
-
   async onRegionDidChange() {
     const center = await this._map.getCenter();
     const zoom = await this._map.getZoom();
     this.setState({ zoomLevel: zoom });
-    
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
-    await this.setState({ loading: false, center });
+    const centerPoint = {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#f00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [center]
+      }
+    };
+    console.log(centerPoint);
+    console.log(this.state.turfPolygon);
+    if (this.state.polygonDrawnOnce) {
+      const isInside = inside(centerPoint, this.state.turfPolygon);
+      console.log(isInside);
+    } 
+  }
+
+  checkIfInside() {
+    console.log(this.state.turfPolygon);
+    const isInside = inside(this.state.pt1, this.state.turfPolygon);
+    console.log(isInside);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -103,30 +118,43 @@ export default class HomeScreen extends Component {
       this.setState({
         inputVal: nextProps.addressString
       });
-      this.props.fetchPolygonData(nextProps.addressString);
+      if (!this.state.polygonDrawnOnce) this.props.fetchPolygonData(nextProps.addressString);
+      this.setState({
+        polygonDrawnOnce: true
+      });
     }
-    this.setState({
-      polygonData: {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "properties": {
-  
-            },
-            "geometry": {
-              "type": "Polygon",
-              "coordinates": [nextProps.polygonData]
-            },
-  
+    if (nextProps.polygonData.length) {
+      this.setState({
+        polygonData: {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": {
+    
+              },
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [nextProps.polygonData]
+              },
+    
+            }
+          ],
+          'paint': {
+              'fill-color': '#088',
+              'fill-opacity': 0.8
           }
-        ],
-        'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.8
+        },
+        turfPolygon: {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [nextProps.polygonData]
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
@@ -146,9 +174,8 @@ export default class HomeScreen extends Component {
       : 'Not available';
   }
 
-  async setLocation() {
-    const center = await this._map.getCenter();
-    await this.setState({ renderPolygon: true, loading: false });
+  setLocation() {
+    this.checkIfInside();
     this.props.navigation.navigate('SelectVehicleScreen');
   }
 

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { 
     FETCH_NEARBY_SERVICE_PROVIDERS, 
     FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS, 
@@ -6,6 +7,7 @@ import {
     FETCH_POLYGON_DATA_SUCCESS,
     FETCH_POLYGON_DATA_FALIURE
 } from './constants';
+
     
 export function fetchNearByPlaces(payload) {
     return {
@@ -51,6 +53,6 @@ export function fetchPolygonDataFaliure(err) {
 }
 
 function arrangeDataForPolygon(res) {
-    const polygonData = res.data.map((item) => [Number(item.coordinates[1]), Number(item.coordinates[0])]);
+    const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
     return polygonData;
 }
