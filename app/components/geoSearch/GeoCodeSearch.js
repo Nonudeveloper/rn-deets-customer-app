@@ -98,6 +98,7 @@ export default class GeoCodeSearch extends React.Component {
                           placeholderTextColor="grey"
                           ref={input => (this.searchInput = input)}
                           onFocus={this.handleFocus}
+                          selectTextOnFocus
                       />
                     </View>
                   </View>
