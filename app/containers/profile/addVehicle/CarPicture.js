@@ -24,6 +24,7 @@ export default class CarPicture extends React.Component {
             maxWidth: 500,
             maxHeight: 500,
             storageOptions: {
+                cameraRoll: true,
                 skipBackup: true
             }
         };
