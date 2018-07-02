@@ -54,8 +54,9 @@ class VehicleForm extends React.Component {
             this.props.makeModel.data.map((make, i) => {
                 if (make.make_id === makeID) {
                     //dispatch an action here and update props
-                    this.props.updateModels(make.model);
+                    // this.props.updateModels(make.model);
                     this.props.dispatch(change('vehicleForm', 'make', make.make_name));
+                    this.props.dispatch(change('vehicleForm', 'model', ''));
                 }
             });
         });
@@ -144,10 +145,13 @@ class VehicleForm extends React.Component {
             model: modelId
             };
         }, () => {
-            this.props.models.map((models, i) => {
-                if (models.model_id === modelId) {
-                    //dispatch an action here and update props
-                    this.props.dispatch(change('vehicleForm', 'model', models.model_name));
+            this.props.makeModel.data.map((make, i) => {
+                if (make.make_id === this.state.make){
+                    make.model.map((model, j) => {
+                        if (model.model_id === modelId) {
+                            this.props.dispatch(change('vehicleForm', 'model', model.model_name));
+                        }
+                    });
                 }
             });
         });
@@ -217,13 +221,19 @@ class VehicleForm extends React.Component {
                 <Field name="model_id" selectedValue={this.state.model} component={MyPicker} onChange={(model) => this._modelChanged(model)}>
                         <Picker.Item label={'Model'} />
                         { 
-                            this.props.models ? 
-                            this.props.models.map(
-                                (model, i) => <Picker.Item 
-                                    key={i} value={model.model_id} 
-                                    label={model.model_name} 
-                                />) 
-                                : [] 
+                            this.props.makeModel.data ? 
+                            this.props.makeModel.data.map(
+                                (make, i) => 
+                                (make.make_id === this.state.make) ?
+                                    make.model.map((model, j) =>
+                                    <Picker.Item 
+                                     key={j} value={model.model_id} 
+                                        label={model.model_name} 
+                                    />)
+                                :
+                                []
+                            ) 
+                            : [] 
                         }
                     </Field>
                 </View>

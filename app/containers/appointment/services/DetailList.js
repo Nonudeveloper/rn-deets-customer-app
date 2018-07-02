@@ -28,7 +28,7 @@ export default class ServiceDetailHeader extends React.Component {
 
  renderAddOnsList(item) {
   return (  
-        <View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={styles.serviceSubCategoryContainer}>
             <AddonItemsScreen 
                 size={20} 
                 keyValue={item.id} 
@@ -60,8 +60,8 @@ export default class ServiceDetailHeader extends React.Component {
                     {
                       (this.props.showServices === true)
                       ? 
-                      (<View style={{ flex: 1, height: 65, flexDirection: 'row', alignItems: 'center' }}>
-                      <View style={{ flex: 3 }}>
+                      (<View style={styles.serviceSubCategoryContainer}>
+                      <View style={{ flex: 3, paddingHorizontal: 26 }}>
                         <Text 
                           style={styles.item} 
                         //   onPress={this.getItem.bind(this, item.adds_on_name)} 

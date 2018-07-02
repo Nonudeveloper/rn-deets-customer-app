@@ -122,11 +122,32 @@ const styles = StyleSheet.create({
         fontSize: 17,
         paddingLeft: 10
       },
-      addOnsListItem: { 
+      serviceSubCategoryContainer: { 
           flex: 1, 
           height: 65, 
           flexDirection: 'row', 
           alignItems: 'center' 
+      },
+      addsOnListContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        paddingHorizontal: 26
+      },
+      addsOnTextContainer: {
+        flex: 9, 
+        flexDirection: 'column'
+      },
+      addsOnNameText: {
+        fontSize: 18, 
+        color: 'black'
+      },
+      addsOnBottomTextContainer: {
+        flexDirection: 'row', 
+        paddingHorizontal: 5
+      },
+      addsOnCostText: {
+        color: 'black', 
+        fontSize: 15
       }
 });
 
