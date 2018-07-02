@@ -37,6 +37,7 @@ export default class HomeScreen extends Component {
       renderPolygon: true,
       inputVal: '',
       shouldUpdateAddressString: true,
+      zoomLevel: 14,
       polygonData: {
         "type": "FeatureCollection",
         "features": [
@@ -70,43 +71,29 @@ export default class HomeScreen extends Component {
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
-    this.onDidFinishLoadingMap = this.onDidFinishLoadingMap.bind(this);
+    // this.onDidFinishLoadingMap = this.onDidFinishLoadingMap.bind(this);
+    
     this.setLocation = this.setLocation.bind(this);
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
     this.breakIt = 0;
   }
 
-  async onDidFinishLoadingMap() {
-    await this.setState({ loading: false });
-  }
+  // async onDidFinishLoadingMap() {
+  //   await this.setState({ loading: false });
+  // }
 
-  onRegionWillChange = () => {
-    this.setState({ loading: true });
-  }
+  // onRegionWillChange = () => {
+  //   this.setState({ loading: true });
+  // }
 
   async onRegionDidChange() {
     const center = await this._map.getCenter();
-    await this.setState({
-      markerPoint: {
-        "type": "Feature",
-        "properties": {
-          "marker-color": "#f00"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": center
-        }
-      }
-    });
-
+    const zoom = await this._map.getZoom();
+    this.setState({ zoomLevel: zoom });
+    
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
     await this.setState({ loading: false, center });
-    // const isInside = inside(this.state.markerPoint, this.state.polygonData);
-    // console.log(isInside);
-    //all an action to get real polygon data
-    // console.log(this.props.addressString);
-    // this.props.fetchPolygonData(this.props.addressString);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -161,8 +148,6 @@ export default class HomeScreen extends Component {
 
   async setLocation() {
     const center = await this._map.getCenter();
-    //dispatch an action and get data for GeoJSON polygon
-    // this.props.actions.fetchNearByPlaces(center);
     await this.setState({ renderPolygon: true, loading: false });
     this.props.navigation.navigate('SelectVehicleScreen');
   }
@@ -228,23 +213,6 @@ export default class HomeScreen extends Component {
         shouldUpdateAddressString: true
       });
     }
-
-    // navigator.geolocation.getCurrentPosition(
-    //   (position) => {
-    //     this.setState({
-    //       center: [
-    //         position.coords.latitude,
-    //         position.coords.longitude
-    //       ]
-    //     });
-    //       console.log("Lat: " + position.coords.latitude + "\nLon: " + position.coords.longitude);
-    //   },
-    //   (error) => {
-    //        console.log(error.message);
-    //   }, {
-    //        timeout: 5000
-    //   }
-    // );
   }
 
   onChangeSearchText = (val) => {
@@ -259,42 +227,21 @@ export default class HomeScreen extends Component {
 
   render() {
     const { isLoading } = this.props;
-    // const polyGeoJSON = {
-    //   "type": "FeatureCollection",
-    //   "features": [
-    //     {
-    //       "type": "Feature",
-    //       "properties": {
-
-    //       },
-    //       "geometry": {
-    //         "type": "Polygon",
-    //         "coordinates": [this.state.polygonData]
-    //       },
-
-    //     }
-    //   ],
-    //   'paint': {
-    //       'fill-color': '#088',
-    //       'fill-opacity': 0.8
-    //   }
-    // };
     return (
         <View style={styles.container}>
-            {/* <Loader
+            <Loader
                 loading={isLoading}
-            /> */}
+            />
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
               onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
-              // onWillStartLoadingMap={() => {
-              //   console.log('region will change...');
-              // }}
               onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
               onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              zoomLevel={14}
+              onWillStartRenderingMap={this.onWillStartRenderingMap}
+              zoomLevel={this.state.zoomLevel}
+              zoomEnabled
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}

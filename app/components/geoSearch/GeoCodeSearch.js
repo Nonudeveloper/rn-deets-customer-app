@@ -96,6 +96,8 @@ export default class GeoCodeSearch extends React.Component {
                           underlineColorAndroid='rgba(0,0,0,0)'
                           value={this.state.inputVal}
                           placeholderTextColor="grey"
+                          ref={input => (this.searchInput = input)}
+                          onFocus={this.handleFocus}
                       />
                     </View>
                   </View>
