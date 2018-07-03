@@ -54,5 +54,11 @@ export function fetchPolygonDataFaliure(err) {
 
 function arrangeDataForPolygon(res) {
     const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
-    return polygonData;
+    const furtherFlattenArray = _.flattenDeep(polygonData);
+    const len = furtherFlattenArray.length;
+    const finalArray = [];
+    for (var i = 0; i < len; i += 2) {
+        finalArray.push([parseFloat(furtherFlattenArray[i]), parseFloat(furtherFlattenArray[i + 1])]);
+    }
+    return finalArray;
 }

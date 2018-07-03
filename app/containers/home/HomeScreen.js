@@ -19,8 +19,9 @@ const MAPBOX_API_KEY = 'pk.eyJ1Ijoic2hpdmFtMTYwMjkxIiwiYSI6ImNqZWZiN3k3bDJmZGkzM
 const layerStyles = Mapbox.StyleSheet.create({
   smileyFace: {
     fillAntialias: true,
-    fillColor: 'lightgrey',
-    fillOutlineColor: 'grey',
+    fillColor: 'rgba(255, 255, 255, 0.1)',
+    fillOutlineColor: 'rgba(255, 255, 255, 0.84)',
+    fillExtrusionOpacity: 8,
   },
 });
 
@@ -32,31 +33,18 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       coordinates: [11.254, 43.772],
-      center: [-122.44492709999997, 37.787544],
+      center: [-119.645883, 36.678122],
       loading: false,
       renderPolygon: true,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 14,
+      zoomLevel: 11,
       polygonDrawnOnce: false,
       polygonData: {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "properties": {
-  
-            },
-            "geometry": {
-              "type": "Polygon",
-              "coordinates": []
-            },
-  
-          }
-        ],
-        'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.8
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            'coordinates': []
         }
       },
       turfPolygon: {},
@@ -94,7 +82,7 @@ export default class HomeScreen extends Component {
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [center]
+        "coordinates": [-112.074279, 40.853293]
       }
     };
     console.log(centerPoint);
@@ -102,6 +90,9 @@ export default class HomeScreen extends Component {
     if (this.state.polygonDrawnOnce) {
       const isInside = inside(centerPoint, this.state.turfPolygon);
       console.log(isInside);
+      const p1 = { "type": "Feature", "properties": {}, "geometry": { "type": "Polygon", "coordinates": [ [ [ -87.656985, 41.951084 ], [ -87.656858, 41.951086 ], [ -87.656806, 41.951087 ], [ -87.656704, 41.951088 ], [ -87.656661, 41.951088 ], [ -87.656535, 41.951091 ], [ -87.656494, 41.951092 ], [ -87.656325, 41.951094 ], [ -87.656245, 41.951096 ], [ -87.655821, 41.951102 ], [ -87.655653, 41.951105 ], [ -87.655411, 41.951109 ], [ -87.655059, 41.951115 ], [ -87.654685, 41.95112 ], [ -87.654444, 41.951124 ], [ -87.654431, 41.950707 ], [ -87.654395, 41.949459 ], [ -87.654384, 41.949043 ], [ -87.654373, 41.948683 ], [ -87.654344, 41.947698 ], [ -87.654341, 41.947604 ], [ -87.65433, 41.947245 ], [ -87.654576, 41.94724 ], [ -87.654938, 41.947234 ], [ -87.655317, 41.947228 ], [ -87.655565, 41.947225 ], [ -87.655755, 41.947221 ], [ -87.656313, 41.947213 ], [ -87.656325, 41.947212 ], [ -87.656516, 41.947202 ], [ -87.656663, 41.947194 ], [ -87.656849, 41.947184 ], [ -87.657104, 41.94718 ], [ -87.657252, 41.947178 ], [ -87.657382, 41.947176 ], [ -87.657635, 41.947171 ], [ -87.657739, 41.94717 ], [ -87.658784, 41.947154 ], [ -87.659168, 41.947149 ], [ -87.659165, 41.947254 ], [ -87.659167, 41.94733 ], [ -87.659176, 41.947623 ], [ -87.659181, 41.947876 ], [ -87.659186, 41.948059 ], [ -87.65919, 41.94824 ], [ -87.659196, 41.948487 ], [ -87.659204, 41.948785 ], [ -87.65921, 41.948967 ], [ -87.659219, 41.949292 ], [ -87.659229, 41.949598 ], [ -87.659245, 41.950269 ], [ -87.659254, 41.950595 ], [ -87.659257, 41.950685 ], [ -87.659266, 41.950957 ], [ -87.659269, 41.951048 ], [ -87.658928, 41.951052 ], [ -87.657908, 41.951068 ], [ -87.657569, 41.951074 ], [ -87.657468, 41.951075 ], [ -87.657167, 41.951081 ], [ -87.657067, 41.951083 ], [ -87.657014, 41.951083 ], [ -87.656985, 41.951084 ] ] ] } };
+      const p2 = {"type": "Feature", "properties": {}, "geometry": {"type": "Point", "coordinates": [-87.655889, 41.947783]}};
+      console.log(inside(p2, p1));
     } 
   }
 
@@ -124,25 +115,13 @@ export default class HomeScreen extends Component {
       });
     }
     if (nextProps.polygonData.length) {
+      console.log(nextProps.polygonData);
       this.setState({
         polygonData: {
-          "type": "FeatureCollection",
-          "features": [
-            {
-              "type": "Feature",
-              "properties": {
-    
-              },
-              "geometry": {
-                "type": "Polygon",
-                "coordinates": [nextProps.polygonData]
-              },
-    
-            }
-          ],
-          'paint': {
-              'fill-color': '#088',
-              'fill-opacity': 0.8
+          'type': 'Feature',
+          'geometry': {
+              'type': 'Polygon',
+              'coordinates': [nextProps.polygonData]
           }
         },
         turfPolygon: {
@@ -150,7 +129,13 @@ export default class HomeScreen extends Component {
           "properties": {},
           "geometry": {
             "type": "Polygon",
-            "coordinates": [nextProps.polygonData]
+            "coordinates": [[
+              [-112.074279, 40.52215],
+              [-112.074279, 40.853293],
+              [-111.610107, 40.853293],
+              [-111.610107, 40.52215],
+              [-112.074279, 40.52215]
+            ]]
           }
         }
       });

@@ -62,7 +62,7 @@ class HomeHelper {
 
   fetchPolygonData = async addressString => {
     const user = await getItem('user');
-    return await SuperFetch.get(`getPolygonforMapbox?address=${addressString}&access_token=${JSON.parse(user).access_token}`);
+    return await SuperFetch.get(`getPolygonforMapbox?address=california&access_token=${JSON.parse(user).access_token}`);
   }
 
 }
