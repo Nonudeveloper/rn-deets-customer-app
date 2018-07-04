@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 const hamBurger = require('../../assets/icons/5_burger_btn.png');
-const deetsLogo = require('../../assets/icons/4_deets_logo.png');
+const deetsLogo = require('../../assets/icons/4_deets_logo-metal.png');
 
 const backButton = (<Icon name="arrow-left" size={30} color="black" />);
 
@@ -24,7 +24,7 @@ const Header = (props) => {
     };
 
     const title = props.titleType === 'logo' ? (
-        <View style={{ backgroundColor: 'green' }}>
+        <View>
             <Image style={logoImg} source={deetsLogo} />
         </View>
     ) : (
@@ -119,8 +119,8 @@ const styles = {
     },
     logoImg: {
         resizeMode: 'contain',
-        width: 100,
-        height: 30,
+        width: 120,
+        height: 50,
     },
     rightIconContainer: { 
         right: 12,

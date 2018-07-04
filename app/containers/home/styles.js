@@ -59,7 +59,18 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontWeight: 'bold',
       fontSize: 18
+    },
+    gpsIconContainer: {
+      position: 'absolute',
+      bottom: 80,
+      right: 20,
+    },
+    gpsIcon: {
+      resizeMode: 'contain',
+      height: 40,
+      width: 40
     }
+
   });
 
   export default styles;

@@ -30,10 +30,10 @@ export function fetchNearByPlacesFaliure(err) {
     };
 }
 
-export function fetchPolygonData(addressString) {
+export function fetchPolygonData(center) {
     return {
         type: FETCH_POLYGON_DATA,
-        addressString
+        center
     };
 }
 
@@ -53,12 +53,25 @@ export function fetchPolygonDataFaliure(err) {
 }
 
 function arrangeDataForPolygon(res) {
-    const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
-    const furtherFlattenArray = _.flattenDeep(polygonData);
-    const len = furtherFlattenArray.length;
+    // const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
+    // const furtherFlattenArray = _.flattenDeep(polygonData);
+    // const len = res.length;
     const finalArray = [];
-    for (var i = 0; i < len; i += 2) {
-        finalArray.push([parseFloat(furtherFlattenArray[i]), parseFloat(furtherFlattenArray[i + 1])]);
-    }
+        for (var key in res) {
+            finalArray.push(
+                {
+                    "type": "Feature",
+                    "properties": {
+              
+                    },
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        res[key].polygon
+                      ]
+                    }
+                }
+            );
+        }
     return finalArray;
 }
