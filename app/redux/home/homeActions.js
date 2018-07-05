@@ -38,10 +38,10 @@ export function fetchPolygonData(center) {
 }
 
 export function fetchPolygonDataSuccess(res) {
-    const polygonData = arrangeDataForPolygon(res);
+    const data = arrangeDataForPolygon(res);
     return {
         type: FETCH_POLYGON_DATA_SUCCESS,
-        data: polygonData
+        data
     };
 }
 
@@ -56,9 +56,10 @@ function arrangeDataForPolygon(res) {
     // const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
     // const furtherFlattenArray = _.flattenDeep(polygonData);
     // const len = res.length;
-    const finalArray = [];
+    const polygonFeatures = [];
+    const pointFeatures = [];
         for (var key in res) {
-            finalArray.push(
+            polygonFeatures.push(
                 {
                     "type": "Feature",
                     "properties": {
@@ -72,6 +73,19 @@ function arrangeDataForPolygon(res) {
                     }
                 }
             );
+            pointFeatures.push(
+                {
+                    type: 'Feature',
+                    properties: {
+                        title: key,
+                        description: key
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: res[key].marker
+                    }
+                }
+            );
         }
-    return finalArray;
+    return { polygonFeatures, pointFeatures };
 }

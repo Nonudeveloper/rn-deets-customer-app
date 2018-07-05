@@ -24,7 +24,9 @@ const mapStateToProps = (state) => {
     return {
         addressString: state.Geo.addressString,
         isLoading: state.Geo.isFetching,
-        polygonData: state.home.polygonData
+        polygonData: state.home.polygonData,
+        pointFeatures: state.home.pointFeatures,
+
     };
 };
 

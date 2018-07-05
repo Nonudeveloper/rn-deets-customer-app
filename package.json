@@ -43,7 +43,8 @@
     "remote-redux-devtools": "^0.5.12",
     "rn-fetch-blob": "^0.10.11",
     "rn-viewpager": "^1.2.9",
-    "turf-inside": "^3.0.12"
+    "turf-inside": "^3.0.12",
+    "turf-within": "^3.0.12"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",

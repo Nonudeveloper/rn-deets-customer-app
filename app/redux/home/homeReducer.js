@@ -10,7 +10,8 @@ import {
 const initialState = {
       isFetching: false,
       serviceProviders: [],
-      polygonData: []
+      polygonData: [],
+      pointFeatures: []
 };
 
 export default function homeReducer(state = initialState, action) {
@@ -36,7 +37,8 @@ export default function homeReducer(state = initialState, action) {
         case FETCH_POLYGON_DATA_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                polygonData: action.data
+                polygonData: action.data.polygonFeatures,
+                pointFeatures: action.data.pointFeatures
             });
         case FETCH_POLYGON_DATA_FALIURE: 
             return Object.assign({}, state, {
