@@ -38,16 +38,19 @@ export default class HomeScreen extends Component {
       coordinates: [11.254, 43.772],
       center: [-117.867176, 33.855565],
       loading: false,
-      renderPolygon: true,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 11,
+      zoomLevel: 10,
       polygonDrawnOnce: false,
+      calloutStyles: {
+        calloutButtonColor: '#66cc00',
+        borderColor: '#bfff80'
+      },
+      isCenterInsideThePolygonArea: false,
       polygonData: {
         "type": "FeatureCollection",
         "features": []
       },
-      turfPolygon: {},
       pointFeatures: {
         "type": "FeatureCollection",
         "features": []
@@ -59,44 +62,27 @@ export default class HomeScreen extends Component {
     this.setLocation = this.setLocation.bind(this);
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
-    this.breakIt = 0;
+    console.ignoredYellowBox = ['Warning:'];
+  }
+
+  setLocation() {
+    if (this.state.isCenterInsideThePolygonArea) {
+      this.props.navigation.navigate('SelectVehicleScreen');
+    }
+    alert('Location must be inside the polygon');
+    return;
   }
 
   async onRegionDidChange() {
     const center = await this._map.getCenter();
     const zoom = await this._map.getZoom();
     console.log(await this._map.getZoom());
-    await this.setState({ zoomLevel: zoom, center });
+    this.setState({ zoomLevel: zoom, center });
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
-
-    const point = {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "Point",
-            "coordinates": center
-          }
-        }
-      ]
-    };
-      console.log(point);
-      console.log(this.state.polygonData);
-      console.log(within(point, this.state.polygonData));
-      const p1 = { 
-        "type": "Feature", 
-        "properties": {}, 
-        "geometry": { 
-          "type": "Polygon", 
-          "coordinates": [ [ [ -87.656985, 41.951084 ], [ -87.656858, 41.951086 ], [ -87.656806, 41.951087 ], [ -87.656704, 41.951088 ], [ -87.656661, 41.951088 ], [ -87.656535, 41.951091 ], [ -87.656494, 41.951092 ], [ -87.656325, 41.951094 ], [ -87.656245, 41.951096 ], [ -87.655821, 41.951102 ], [ -87.655653, 41.951105 ], [ -87.655411, 41.951109 ], [ -87.655059, 41.951115 ], [ -87.654685, 41.95112 ], [ -87.654444, 41.951124 ], [ -87.654431, 41.950707 ], [ -87.654395, 41.949459 ], [ -87.654384, 41.949043 ], [ -87.654373, 41.948683 ], [ -87.654344, 41.947698 ], [ -87.654341, 41.947604 ], [ -87.65433, 41.947245 ], [ -87.654576, 41.94724 ], [ -87.654938, 41.947234 ], [ -87.655317, 41.947228 ], [ -87.655565, 41.947225 ], [ -87.655755, 41.947221 ], [ -87.656313, 41.947213 ], [ -87.656325, 41.947212 ], [ -87.656516, 41.947202 ], [ -87.656663, 41.947194 ], [ -87.656849, 41.947184 ], [ -87.657104, 41.94718 ], [ -87.657252, 41.947178 ], [ -87.657382, 41.947176 ], [ -87.657635, 41.947171 ], [ -87.657739, 41.94717 ], [ -87.658784, 41.947154 ], [ -87.659168, 41.947149 ], [ -87.659165, 41.947254 ], [ -87.659167, 41.94733 ], [ -87.659176, 41.947623 ], [ -87.659181, 41.947876 ], [ -87.659186, 41.948059 ], [ -87.65919, 41.94824 ], [ -87.659196, 41.948487 ], [ -87.659204, 41.948785 ], [ -87.65921, 41.948967 ], [ -87.659219, 41.949292 ], [ -87.659229, 41.949598 ], [ -87.659245, 41.950269 ], [ -87.659254, 41.950595 ], [ -87.659257, 41.950685 ], [ -87.659266, 41.950957 ], [ -87.659269, 41.951048 ], [ -87.658928, 41.951052 ], [ -87.657908, 41.951068 ], [ -87.657569, 41.951074 ], [ -87.657468, 41.951075 ], [ -87.657167, 41.951081 ], [ -87.657067, 41.951083 ], [ -87.657014, 41.951083 ], [ -87.656985, 41.951084 ] ] ] } };
-      const p2 = {"type": "Feature", "properties": {}, "geometry": {"type": "Point", "coordinates": [-87.655889, 41.947783]}};
-      // console.log(inside(p2, p1));
   }
 
-
-  componentWillReceiveProps(nextProps) {
+  
+  async componentWillReceiveProps(nextProps) {
     if (nextProps.addressString !== '' && 
         this.props.addressString !== nextProps.addressString && 
         this.state.shouldUpdateAddressString === true) {
@@ -106,16 +92,49 @@ export default class HomeScreen extends Component {
       this.props.fetchPolygonData(this.state.center);
     }
     if (nextProps.polygonData.length) {
-      this.setState({
-        polygonData: {
-          "type": "FeatureCollection",
-          "features": nextProps.polygonData
-        },
-        pointFeatures: {
-          "type": "FeatureCollection",
-          "features": nextProps.pointFeatures
-        },
-      });
+      await this.promisedSetState(
+        {
+          polygonData: {
+            "type": "FeatureCollection",
+            "features": nextProps.polygonData
+          },
+          pointFeatures: {
+            "type": "FeatureCollection",
+            "features": nextProps.pointFeatures
+          },
+        }
+      );
+      const point = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Point",
+              "coordinates": this.state.center
+            }
+          }
+        ]
+      };
+      
+      if (within(point, this.state.polygonData).features.length) {
+        this.setState({ 
+          calloutStyles: {
+            calloutButtonColor: '#66cc00',
+            borderColor: '#bfff80'
+          },
+          isCenterInsideThePolygonArea: true
+        });
+      } else {
+        this.setState({ 
+          calloutStyles: {
+            calloutButtonColor: 'red',
+            borderColor: '#ff4d4d'
+          },
+          isCenterInsideThePolygonArea: false
+        });
+      }
     }
   }
 
@@ -136,11 +155,14 @@ export default class HomeScreen extends Component {
       : 'Not available';
   }
 
-  setLocation() {
-    this.checkIfInside();
-    this.props.navigation.navigate('SelectVehicleScreen');
+  
+  promisedSetState = (newState) => {
+    return new Promise((resolve) => {
+        this.setState(newState, () => {
+            resolve();
+        });
+    });
   }
-
 
   addOnMapChangedListener = () => console.log('addOnMapChangedListener!')
 
@@ -266,7 +288,12 @@ export default class HomeScreen extends Component {
               inputVal={this.state.inputVal}
               onChangeSearchText={(val) => this.onChangeSearchText(val)}
             />
-            <View style={styles.calloutWraper}>
+            <View 
+              style={[styles.calloutWraper, {
+                backgroundColor: this.state.calloutStyles.calloutButtonColor,
+                borderColor: this.state.calloutStyles.borderColor 
+              }]}
+            >
               <TouchableOpacity onPress={this.setLocation}>
                 <Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text>
               </TouchableOpacity>
