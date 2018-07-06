@@ -7,13 +7,14 @@ import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';
 // import polyGeoJSON from '../../../../assets/polygon.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import customMarker from '../../assets/icons/icon_location_pin_green.png';
+import customMarkerGreen from '../../assets/icons/icon_location_pin_green.png';
+import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
 import Loader from '../../deetscomponents/Loader';
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
-const marker = require('../../assets/icons/map_green.png');
+const marker = require('../../assets/icons/map_p.png');
 const recentLocationIcon = require('../../assets/icons/map_black.png');
 const gpsIcon = require('../../assets/icons/4_GPS_icon.png');
 
@@ -54,7 +55,8 @@ export default class HomeScreen extends Component {
       pointFeatures: {
         "type": "FeatureCollection",
         "features": []
-      }
+      },
+      customMarker: customMarkerGreen
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -68,8 +70,9 @@ export default class HomeScreen extends Component {
   setLocation() {
     if (this.state.isCenterInsideThePolygonArea) {
       this.props.navigation.navigate('SelectVehicleScreen');
+    } else {
+      alert('Location must be inside the polygon');
     }
-    alert('Location must be inside the polygon');
     return;
   }
 
@@ -124,7 +127,8 @@ export default class HomeScreen extends Component {
             calloutButtonColor: '#66cc00',
             borderColor: '#bfff80'
           },
-          isCenterInsideThePolygonArea: true
+          isCenterInsideThePolygonArea: true,
+          customMarker: customMarkerGreen
         });
       } else {
         this.setState({ 
@@ -132,7 +136,8 @@ export default class HomeScreen extends Component {
             calloutButtonColor: 'red',
             borderColor: '#ff4d4d'
           },
-          isCenterInsideThePolygonArea: false
+          isCenterInsideThePolygonArea: false,
+          customMarker: customMarkerRed
         });
       }
     }
@@ -300,7 +305,7 @@ export default class HomeScreen extends Component {
             </View>
             <View style={styles.customMarker}>
               <Image
-                source={customMarker}
+                source={this.state.customMarker}
                 style={{ width: 32, height: 40 }}
               />
             </View>

@@ -32,14 +32,12 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: (height / 2) - 86,
       left: (width / 2) - 50,
-      // backgroundColor: '#66cc00',
       width: 95,
-      height: 32,
+      height: 34,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 50,
       borderWidth: 2,
-      // borderColor: '#bfff80',
     },
     customMarker: {
       position: 'absolute',
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
     },
     myAppointmentsText: {
       color: '#fff',
-      fontWeight: 'bold',
       fontSize: 18
     },
     gpsIconContainer: {

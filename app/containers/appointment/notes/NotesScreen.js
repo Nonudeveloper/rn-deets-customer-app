@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Keyboard } from 'react-native';
+import { StyleSheet, View, Keyboard, Text } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
@@ -37,17 +37,19 @@ class NotesScreen extends React.Component {
         />
         {/* <Loader loading={isFetching} /> */}
         <View style={styles.inputView}>
-            
             <Field
                 name={'notes'}
                 component={CommonTypeTextInput}
                 props={this.props}
-                placeholder={'Type your notes here!'}
+                placeholder={'Type your notes here!!'}
                 placeholderTextColor='grey'
                 underlineColorAndroid="transparent"
                 type="multilinetext"
                 borderBotmWidth={styles.input}
             />
+            <View style={{ padding: 15, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Enter any note or special instructions for the technician here, i.e where is your vehicle parked? where should we pick up your keys? Gate or garage codes?</Text>
+            </View>
         </View>
       </View>
     );
@@ -73,5 +75,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         color: 'grey',
         textAlignVertical: 'top'
+    },
+    inputView: {
+        paddingHorizontal: 10
     }
 });
