@@ -20,6 +20,7 @@ import DrawerServicesList from '../containers/serviceList/index';
 import PromotionCodeScreen from '../containers/promotionCode/index';
 import AppointmentDetail from '../containers/appointmentList/detail/index';
 import RecentLocations from '../containers/home/recentLocations/index';
+import SummaryScreen from '../containers/summary/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -92,7 +93,8 @@ const appointmentStack = StackNavigator({
   RecentLocations: { screen: RecentLocations },
   PastAppointmentsList: { screen: PastAppointmentsList },
   PastAppointmentsDetail: { screen: AppointmentDetail },
-  PromotionCodeScreen: { screen: PromotionCodeScreen }
+  PromotionCodeScreen: { screen: PromotionCodeScreen },
+  SummaryScreen: { screen: SummaryScreen }
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,
