@@ -14,6 +14,7 @@ export default class SummaryScreen extends Component {
     }
 
     render() {
+        const { user_pending_tip_notifications } = this.props.authUserWholeData;
         return (
             <View style={styles.container}>
                 <Header headerText={'summary'} navigation={this.props.navigation} />
@@ -34,7 +35,7 @@ export default class SummaryScreen extends Component {
                             </View>
                         </View>
                      : 
-                    <ReviewSummary summaryData={this.props.authUserWholeData} />
+                    <ReviewSummary summaryData={ user_pending_tip_notifications } />
                     }
                 </View>
             </View>

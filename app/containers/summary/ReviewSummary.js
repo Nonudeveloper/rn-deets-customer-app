@@ -13,21 +13,35 @@ export default class ReviewSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tipValue: 0
+            tipValue: 0,
+            totalPayment: 0,
+            calculatedTip: 0
         };
     }
 
+    componentDidMount() {
+        this.setState({ totalPayment: Number(this.props.summaryData[0].total_cost) });
+    }
+
     changedTipValue(value) {
-        this.setState({ tipValue: value });
+        const calculatedTip = Number(Number(this.props.summaryData[0].total_cost) * value / 100);
+        const totalPayment = Number(Number(this.props.summaryData[0].total_cost) + calculatedTip);
+        const newTotal = totalPayment.toFixed(2);
+        this.setState({ calculatedTip, totalPayment: newTotal });
     }
 
     render() {
-        console.log(this.state);
-        const { user_pending_tip_notifications } = this.props.summaryData;
         return (
             <View style={styles.container}>
-                <PaymentDetail tipValue={this.state.tipValue} />
-                <ServiceDetail changedTipValue={this.changedTipValue.bind(this)} />
+                <PaymentDetail 
+                    calculatedTip={this.state.calculatedTip} 
+                    totalPayment={this.state.totalPayment}
+                    serviceDate={this.props.summaryData[0].service_start_time}
+                />
+                <ServiceDetail 
+                    changedTipValue={this.changedTipValue.bind(this)} 
+                    serviceSummaryData={this.props.summaryData.length !== 0 ? this.props.summaryData[0] : null}
+                />
                 <View style={styles.container}>
                     <View style={{ flex: 0.5 }}>
                         <Image style={{ width: '100%', height: '100%' }} source={zigzag} />
