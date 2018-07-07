@@ -99,7 +99,7 @@ export default class ServiceList extends React.Component {
   
     myColor = position => {
         if (this.state.active === position) {
-            return '#8ac10b';
+            return '#28A060';
           }
           return 'grey';
       }

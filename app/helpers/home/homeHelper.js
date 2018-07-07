@@ -60,9 +60,8 @@ class HomeHelper {
     return await SuperFetch.post('customer/delete_user_recent_location', data);
   }
 
-  fetchPolygonData = async addressString => {
-    const user = await getItem('user');
-    return await SuperFetch.get(`getPolygonforMapbox?address=${addressString}&access_token=${JSON.parse(user).access_token}`);
+  fetchPolygonData = async center => {
+    return await SuperFetch.get(`getNearByServiceProvideForMapbox?latitude=${center[1]}&longitude=${center[0]}`);
   }
 
 }

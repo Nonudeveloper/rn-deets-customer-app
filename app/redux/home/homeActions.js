@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { 
     FETCH_NEARBY_SERVICE_PROVIDERS, 
     FETCH_NEARBY_SERVICE_PROVIDERS_SUCCESS, 
@@ -6,6 +7,7 @@ import {
     FETCH_POLYGON_DATA_SUCCESS,
     FETCH_POLYGON_DATA_FALIURE
 } from './constants';
+
     
 export function fetchNearByPlaces(payload) {
     return {
@@ -28,18 +30,18 @@ export function fetchNearByPlacesFaliure(err) {
     };
 }
 
-export function fetchPolygonData(addressString) {
+export function fetchPolygonData(center) {
     return {
         type: FETCH_POLYGON_DATA,
-        addressString
+        center
     };
 }
 
 export function fetchPolygonDataSuccess(res) {
-    const polygonData = arrangeDataForPolygon(res);
+    const data = arrangeDataForPolygon(res);
     return {
         type: FETCH_POLYGON_DATA_SUCCESS,
-        data: polygonData
+        data
     };
 }
 
@@ -51,6 +53,39 @@ export function fetchPolygonDataFaliure(err) {
 }
 
 function arrangeDataForPolygon(res) {
-    const polygonData = res.data.map((item) => [Number(item.coordinates[1]), Number(item.coordinates[0])]);
-    return polygonData;
+    // const polygonData = res.data.map((item) => _.flattenDeep(item.coordinates));
+    // const furtherFlattenArray = _.flattenDeep(polygonData);
+    // const len = res.length;
+    const polygonFeatures = [];
+    const pointFeatures = [];
+        for (var key in res) {
+            polygonFeatures.push(
+                {
+                    "type": "Feature",
+                    "properties": {
+              
+                    },
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        res[key].polygon
+                      ]
+                    }
+                }
+            );
+            pointFeatures.push(
+                {
+                    type: 'Feature',
+                    properties: {
+                        title: key,
+                        description: key
+                    },
+                    geometry: {
+                      type: 'Point',
+                      coordinates: res[key].marker
+                    }
+                }
+            );
+        }
+    return { polygonFeatures, pointFeatures };
 }

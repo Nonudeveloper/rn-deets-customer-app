@@ -16,9 +16,9 @@ export default StyleSheet.create({
         marginTop: 15,
         borderRadius: 100,
         height: 60,
-        backgroundColor: StyleConstants.LoginButtonBColor,
+        backgroundColor: '#28A060',
         borderWidth: 4,
-        borderColor: '#d7ecc5',
+        borderColor: '#70db70',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -53,9 +53,9 @@ export default StyleSheet.create({
         paddingBottom: 20,
     },
     vehicleFont: { 
-        fontSize: 16, 
+        fontSize: 12, 
         color: '#586069',
-        marginHorizontal: 3
+        // marginHorizontal: 3
     },
     licenceFont: { 
         fontSize: 19, 
@@ -151,7 +151,8 @@ export default StyleSheet.create({
     },
     ratingContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        top: 7
     },
     availabilityOuterContainer: {
         top: 1, 
@@ -161,32 +162,34 @@ export default StyleSheet.create({
     },
     availabilityInnerContainer: {
         flex: 5, 
-        borderLeftColor: 'grey', 
-        borderLeftWidth: 2, 
+        borderLeftColor: '#fff', 
+        borderLeftWidth: 1, 
         marginHorizontal: 10,
+        marginVertical: 6
     },
     hourContainer: {
         flex: 1,
-        borderLeftColor: 'grey', 
-        borderLeftWidth: 2,
+        borderLeftColor: '#fff', 
+        borderLeftWidth: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginVertical: 6
     },
     hourText: {
         alignItems: 'center',
         fontSize: 18, 
-        color: '#586069'
+        color: '#fff'
     },
     scrollViewText: {
         fontSize: 18, 
-        color: '#586069', 
+        color: '#fff', 
         paddingHorizontal: 10
     },
     scrollViewSelectedText: {
         backgroundColor: StyleConstants.LoginButtonBColor, 
         borderRadius: 10,
         fontSize: 18, 
-        color: '#586069',
+        color: '#fff',
         paddingHorizontal: 10
     },
     notAvailableContainer: {

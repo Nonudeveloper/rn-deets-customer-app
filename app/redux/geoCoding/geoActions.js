@@ -47,7 +47,7 @@ export function getFullAddressReverseGeoSuccess(res) {
     const geoLocationData = res ? getZipCodes(JSON.parse(res._bodyText).features) : {};
     return {
         type: GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
-        addressString: res ? JSON.parse(res._bodyText).features[0].place_name : '',
+        addressString: JSON.parse(res._bodyText).features.length ? JSON.parse(res._bodyText).features[0].place_name : '',
         geoLocationData
     };
 }

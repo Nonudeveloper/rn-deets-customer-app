@@ -12,7 +12,7 @@ import * as geoActions from '../../redux/geoCoding/geoActions';
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(geoActions, dispatch),
-        searchAddress: _.throttle(data => dispatch(geoActions.searchAddress(data)), 1000)
+        searchAddress: _.throttle(data => dispatch(geoActions.searchAddress(data)), 2000)
         // searchAddress: _.debounce(data => dispatch(geoActions.searchAddress(data)), 2000)
         //https://jsbin.com/liwafuvupu/edit?js,output
     };

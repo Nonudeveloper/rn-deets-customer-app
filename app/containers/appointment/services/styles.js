@@ -10,12 +10,13 @@ const styles = StyleSheet.create({
         // height: 44,
     },
     serviceItemContainer: { 
-        flex: 1 
+        flex: 1 ,
     },
     serviceContainer: { 
         flex: 1, 
         flexDirection: 'row', 
-        marginVertical: 3 
+        marginVertical: 3,
+        backgroundColor: '#fff' 
     },
     serviceInfoContainer: { 
         flex: 1, 
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
       },
       paymentText: {
         fontSize: 23,
-        color: '#8ac10b',
+        color: '#28A060',
         fontWeight: 'bold'
       },
       serviceSubCategoryContainer: {
