@@ -99,8 +99,7 @@ const styles = {
     },
     rightTextStyle: {
         fontSize: 20,
-        color: 'grey',
-        fontWeight: 'bold',
+        color: '#000',
     },
     headerDetailStyle: {
         justifyContent: 'center',
@@ -128,7 +127,7 @@ const styles = {
     },
     indicatorStyle: {
         resizeMode: 'contain',
-        width: 100,
+        width: 150,
         height: 20
     }
 };

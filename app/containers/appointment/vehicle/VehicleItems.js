@@ -15,7 +15,7 @@ export default class VehicleItems extends Component {
         
     render() {
         console.log(this.props.button);
-        const imageUrl = this.props.button.vehicle_image.toString();
+        const imageUrl = this.props.button.vehicle_image;
         return (
             <TouchableOpacity onPress={this.props.onClick} activeOpacity={0.8} style={styles.radioButton}>
                 
@@ -36,12 +36,13 @@ export default class VehicleItems extends Component {
                 </View>
                 <View style={styles.vehicleInnerContainer}>
                     <View style={{ flex: 1 }}>
-                        <Image source={imageUrl !== '' ? this.props.button.vehicle_image.toString() : vehicleIcon} style={{ width: 80, height: 80 }} />
+                    {console.log(imageUrl)}
+                        <Image source={imageUrl !== '' ? { uri: imageUrl } : vehicleIcon} style={{ width: 80, height: 80, resizeMode: 'contain' }} />
                     </View>
                     <View style={{ flex: 2 }}>
                         <Text style={styles.vehicleFont}>{this.props.vehicleMake.toUpperCase()} {this.props.button.vehicle_model.toUpperCase()}</Text>
                         <Text style={styles.vehicleFont}>{this.props.vehicleYear.toUpperCase()}, {this.props.vehicleColor.toUpperCase()}</Text>
-                        <Text style={styles.licenceFont}>{this.props.button.license}</Text>
+                        <Text numberOfLines={1} style={styles.licenceFont}>{this.props.button.license}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

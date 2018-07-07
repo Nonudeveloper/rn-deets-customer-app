@@ -83,7 +83,7 @@ export default class DateTimeScreen extends React.Component {
           <Image 
             source={i < stars ? starOn : starOff} 
             key={i} 
-            style={{ width: 20, height: 20, marginHorizontal: 3 }} 
+            style={{ width: 15, height: 15, marginHorizontal: 3 }} 
           />
         );
     }
