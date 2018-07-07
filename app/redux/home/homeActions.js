@@ -5,7 +5,8 @@ import {
     FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE,
     FETCH_POLYGON_DATA,
     FETCH_POLYGON_DATA_SUCCESS,
-    FETCH_POLYGON_DATA_FALIURE
+    FETCH_POLYGON_DATA_FALIURE,
+    EMPTY_POLYGON_DATA
 } from './constants';
 
     
@@ -49,6 +50,12 @@ export function fetchPolygonDataFaliure(err) {
     return {
         type: FETCH_POLYGON_DATA_FALIURE,
         err
+    };
+}
+
+export function emptyPolygonData() {
+    return {
+        type: EMPTY_POLYGON_DATA
     };
 }
 

@@ -15,12 +15,13 @@ const styles = StyleSheet.create({
     serviceContainer: { 
         flex: 1, 
         flexDirection: 'row', 
-        marginVertical: 3 
+        marginVertical: 3,
+        backgroundColor: '#fff'
     },
     serviceInfoContainer: { 
         flex: 1, 
         marginLeft: 10,
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     serviceNameContainer: { 
         // height: 58, 
@@ -69,7 +70,8 @@ const styles = StyleSheet.create({
     detailInfoContainer: { 
         flex: 1,
         flexDirection: 'row', 
-        justifyContent: 'space-around' 
+        justifyContent: 'space-around',
+
     },
     dropItem: { 
         flexDirection: 'row', 
