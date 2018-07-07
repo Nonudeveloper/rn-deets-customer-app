@@ -79,13 +79,51 @@ export default class HomeScreen extends Component {
   async onRegionDidChange() {
     const center = await this._map.getCenter();
     const zoom = await this._map.getZoom();
-    console.log(await this._map.getZoom());
-    this.setState({ zoomLevel: zoom, center });
+    // this.setState({ zoomLevel: zoom, center });
+    this.props.emptyPolygonData();
+    await this.promisedSetState({
+      zoomLevel: zoom, 
+      center,
+      polygonData: [],
+      pointFeatures: []
+    });
+    console.log(this.state.polygonData);
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
   }
 
-  
+  componentDidMount() {
+    const { navigation } = this.props;
+    const location = navigation.getParam('location', {});
+    const isMyObjectEmpty = !Object.keys(location).length;
+    if (!isMyObjectEmpty) {
+      this.setState({
+        center: [
+          Number(location.service_location_longitude),
+          Number(location.service_location_latitude)
+        ],
+        inputVal: location.service_location_string,
+        shouldUpdateAddressString: false
+      }, () => {
+      });
+    } else {
+      // navigator.geolocation.getCurrentPosition((position) => {
+      //     console.log(position);
+      // }, (error) => {
+      //     alert(JSON.stringify(error));
+      // }, {
+      //     enableHighAccuracy: false,
+      //     timeout: 20000,
+      //     maximumAge: 1000
+      // });
+      this.setState({
+        inputVal: this.props.addressString,
+        shouldUpdateAddressString: true
+      });
+    }
+  }
+
   async componentWillReceiveProps(nextProps) {
+    console.log(nextProps.polygonData.length);
     if (nextProps.addressString !== '' && 
         this.props.addressString !== nextProps.addressString && 
         this.state.shouldUpdateAddressString === true) {
@@ -105,6 +143,7 @@ export default class HomeScreen extends Component {
             "type": "FeatureCollection",
             "features": nextProps.pointFeatures
           },
+          shouldUpdateAddressString: true
         }
       );
       const point = {
@@ -128,7 +167,7 @@ export default class HomeScreen extends Component {
             borderColor: '#bfff80'
           },
           isCenterInsideThePolygonArea: true,
-          customMarker: customMarkerGreen
+          customMarker: customMarkerGreen,
         });
       } else {
         this.setState({ 
@@ -137,14 +176,13 @@ export default class HomeScreen extends Component {
             borderColor: '#ff4d4d'
           },
           isCenterInsideThePolygonArea: false,
-          customMarker: customMarkerRed
+          customMarker: customMarkerRed,
         });
       }
     }
   }
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
-
 
   getLng() {
     const { center } = this.state;
@@ -160,7 +198,6 @@ export default class HomeScreen extends Component {
       : 'Not available';
   }
 
-  
   promisedSetState = (newState) => {
     return new Promise((resolve) => {
         this.setState(newState, () => {
@@ -210,37 +247,6 @@ export default class HomeScreen extends Component {
     );
   }
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    const location = navigation.getParam('location', {});
-    const isMyObjectEmpty = !Object.keys(location).length;
-    if (!isMyObjectEmpty) {
-      this.setState({
-        center: [
-          Number(location.service_location_longitude),
-          Number(location.service_location_latitude)
-        ],
-        inputVal: location.service_location_string,
-        shouldUpdateAddressString: false
-      }, () => {
-      });
-    } else {
-      // navigator.geolocation.getCurrentPosition((position) => {
-      //     console.log(position);
-      // }, (error) => {
-      //     alert(JSON.stringify(error));
-      // }, {
-      //     enableHighAccuracy: false,
-      //     timeout: 20000,
-      //     maximumAge: 1000
-      // });
-      this.setState({
-        inputVal: this.props.addressString,
-        shouldUpdateAddressString: true
-      });
-    }
-  }
-
   onChangeSearchText = (val) => {
     this.setState({
       inputVal: val
@@ -261,11 +267,7 @@ export default class HomeScreen extends Component {
             <Mapbox.MapView
               styleURL={Mapbox.StyleURL.Street}
               centerCoordinate={this.state.center}
-              onDidFinishRenderingFrameFully={this.onDidFinishRenderingFrameFully}
-              onRegionWillChange={this.onRegionWillChange}
               onRegionDidChange={this.onRegionDidChange}
-              onDidFinishLoadingMap={this.onDidFinishLoadingMap}
-              onWillStartRenderingMap={this.onWillStartRenderingMap}
               zoomLevel={this.state.zoomLevel}
               zoomEnabled
               ref={(c) => this._map = c}
@@ -276,6 +278,7 @@ export default class HomeScreen extends Component {
               {this.renderMarkers(this.state.pointFeatures)}
               {this.renderLabels(this.state.pointFeatures)}
             </Mapbox.MapView>
+
             <Header
               headerText={'Deets'}
               navigation={this.props.navigation}

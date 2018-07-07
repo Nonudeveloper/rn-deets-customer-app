@@ -152,6 +152,7 @@ class PastAppointmentsList extends Component {
                         buttonType={'back'}
                     />
                     <Loader loading={this.props.isFetching} />
+                    <View style={{ height: 20 }} />
                     <AppoinmentTabs 
                         selectedTab={this.state.selectedTab} 
                         onTabClick={this.changeActiveTab} 

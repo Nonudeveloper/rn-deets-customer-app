@@ -4,7 +4,8 @@ import {
     FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE,
     FETCH_POLYGON_DATA,
     FETCH_POLYGON_DATA_SUCCESS,
-    FETCH_POLYGON_DATA_FALIURE
+    FETCH_POLYGON_DATA_FALIURE,
+    EMPTY_POLYGON_DATA
 } from './constants';
 
 const initialState = {
@@ -43,6 +44,10 @@ export default function homeReducer(state = initialState, action) {
         case FETCH_POLYGON_DATA_FALIURE: 
             return Object.assign({}, state, {
                 isFetching: false,
+            });
+        case EMPTY_POLYGON_DATA:
+            return Object.assign({}, state, {
+                polygonData: []
             });
         default:
             return state;
