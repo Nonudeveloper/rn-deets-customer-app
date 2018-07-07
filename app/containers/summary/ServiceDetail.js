@@ -19,6 +19,7 @@ export default class ServiceDetail extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <View style={styles.container}>
                 <View style={styles.sliderWrapper}>
@@ -52,13 +53,22 @@ export default class ServiceDetail extends Component {
                 </View>
                 <View style={styles.serviceImageContainer}>
                     <View style={styles.mainlyUsedContainer}>
-                        <Image style={{ width: 80, height: 80 }} source={userAvatar} />
+                        <Image 
+                            style={{ width: 80, height: 80 }} 
+                            source={this.props.serviceSummaryData !== null ? { uri: this.props.serviceSummaryData.vehicle_image } : userAvatar}
+                        />
                     </View>
                     <View style={styles.mainlyUsedContainer}>
-                        <Image style={{ width: 80, height: 80 }} source={userAvatar} />
+                        <Image 
+                            style={{ width: 80, height: 80 }} 
+                            source={this.props.serviceSummaryData !== null ? { uri: this.props.serviceSummaryData.technician_image } : userAvatar} 
+                        />
                     </View>
                     <View style={styles.mainlyUsedContainer}>
-                        <Image style={{ width: 80, height: 80 }} source={userAvatar} />
+                        <Image 
+                            style={{ width: 80, height: 80 }} 
+                            source={this.props.serviceSummaryData !== null ? { uri: this.props.serviceSummaryData.service_image } : userAvatar} 
+                        />
                     </View>
                 </View>     
             </View>
