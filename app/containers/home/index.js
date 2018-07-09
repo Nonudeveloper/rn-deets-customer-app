@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         fetchPolygonData: data => {
             dispatch(homeActions.fetchPolygonData(data));
+        },
+        emptyPolygonData: () => {
+            dispatch(homeActions.emptyPolygonData());
         }
    
     };
@@ -24,7 +27,9 @@ const mapStateToProps = (state) => {
     return {
         addressString: state.Geo.addressString,
         isLoading: state.Geo.isFetching,
-        polygonData: state.home.polygonData
+        polygonData: state.home.polygonData,
+        pointFeatures: state.home.pointFeatures,
+
     };
 };
 

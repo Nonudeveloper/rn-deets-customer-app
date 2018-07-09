@@ -51,13 +51,11 @@ export default class SelectVehicleScreen extends React.Component {
           rescheduling={this.props.navigation.state.params !== undefined ? true : false}
           rescheduleAppointment={this.props.selectedAppointment}
         />
-        <View style={styles.nextButtonContainer}>
-            <View style={{ flexDirection: 'row', marginHorizontal: 25, justifyContent: 'flex-end', }}>
+            <View style={{ right: 25, bottom: 25, position: 'absolute'}}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}>
                 <Image source={backButton} style={{ width: 30, height: 30 }} />
               </TouchableOpacity>
             </View>
-        </View>
       </View>
      
     );

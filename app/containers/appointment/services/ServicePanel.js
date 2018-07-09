@@ -118,7 +118,7 @@ export default class ServicesPanel extends React.Component {
         <Header 
             headerText={'Deets'} 
             navigation={this.props.navigation} 
-            headerText={'Services'}
+            headerText={'Service Level'}
             showRightIcon={this.state.showNext}
             rightText={'Next'}
             onPress={() => this.goToNext()}

@@ -4,13 +4,15 @@ import {
     FETCH_NEARBY_SERVICE_PROVIDERS_FALIURE,
     FETCH_POLYGON_DATA,
     FETCH_POLYGON_DATA_SUCCESS,
-    FETCH_POLYGON_DATA_FALIURE
+    FETCH_POLYGON_DATA_FALIURE,
+    EMPTY_POLYGON_DATA
 } from './constants';
 
 const initialState = {
       isFetching: false,
       serviceProviders: [],
-      polygonData: []
+      polygonData: [],
+      pointFeatures: []
 };
 
 export default function homeReducer(state = initialState, action) {
@@ -36,11 +38,16 @@ export default function homeReducer(state = initialState, action) {
         case FETCH_POLYGON_DATA_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                polygonData: action.data
+                polygonData: action.data.polygonFeatures,
+                pointFeatures: action.data.pointFeatures
             });
         case FETCH_POLYGON_DATA_FALIURE: 
             return Object.assign({}, state, {
                 isFetching: false,
+            });
+        case EMPTY_POLYGON_DATA:
+            return Object.assign({}, state, {
+                polygonData: []
             });
         default:
             return state;

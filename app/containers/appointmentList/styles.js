@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     },
     itemContainer: {
         flex: 1,
+        borderBottomColor: '#000'
     },
     avatarContainer: {
         flex: 1.5,
@@ -87,9 +88,11 @@ const styles = StyleSheet.create({
     },
     ratingStart: {
         resizeMode: 'contain',
-        height: 18,
-        width: 18,
-        marginRight: 6
+        height: 14,
+        width: 14,
+        marginRight: 6,
+        bottom: 2,
+        top: 2
     },
     ratingContainer: {
         flexDirection: 'row'
