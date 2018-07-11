@@ -1,0 +1,5 @@
+const FirebaseConstants = {
+	KEY: "AAAAYSrAdhY:APA91bEVUXOsQJCnFzYCcxXkawdcMlK9Sp_1AXuaocwMT3GddfAiuppiHUA4uEJ0nufMtQQ664F0QiJ53vSyrbBt33Ioetkn1-CsZtq1ZX-aNvIG6oF6bmVxjeEvqmGNBgWRgRqVN62U"
+}
+
+export default FirebaseConstants;

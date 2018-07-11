@@ -41,7 +41,7 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 13,
+      zoomLevel: 8,
       polygonDrawnOnce: false,
       calloutStyles: {
         calloutButtonColor: '#66cc00',
@@ -77,10 +77,14 @@ export default class HomeScreen extends Component {
   }
 
   async onRegionDidChange() {
-    const center = await this._map.getCenter();
-    const zoom = await this._map.getZoom();
-    this.setState({ zoomLevel: zoom, center });
-    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
+    if (this.state.shouldUpdateAddressString === false) {
+      this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
+    } else {
+      const center = await this._map.getCenter();
+      const zoom = await this._map.getZoom();
+      this.setState({ zoomLevel: zoom, center });
+      this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
+    }
   }
 
   componentDidMount() {
@@ -100,10 +104,10 @@ export default class HomeScreen extends Component {
       });
       setTimeout(
         function() {
-            this.setState({shouldUpdateAddressString: true});
+            this.setState({ shouldUpdateAddressString: true });
         }
         .bind(this),
-        2000
+        5000
       );
     } else {
       // navigator.geolocation.getCurrentPosition((position) => {
