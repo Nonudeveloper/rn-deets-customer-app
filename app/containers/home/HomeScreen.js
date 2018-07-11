@@ -25,7 +25,7 @@ const layerStyles = Mapbox.StyleSheet.create({
     fillAntialias: true,
     fillColor: 'grey',
     // fillOutlineColor: 'red',
-    fillOpacity: 0.7,
+    fillOpacity: 0.5,
   },
 });
 
@@ -41,7 +41,7 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 10,
+      zoomLevel: 13,
       polygonDrawnOnce: false,
       calloutStyles: {
         calloutButtonColor: '#66cc00',
@@ -79,15 +79,7 @@ export default class HomeScreen extends Component {
   async onRegionDidChange() {
     const center = await this._map.getCenter();
     const zoom = await this._map.getZoom();
-    // this.setState({ zoomLevel: zoom, center });
-    this.props.emptyPolygonData();
-    await this.promisedSetState({
-      zoomLevel: zoom, 
-      center,
-      polygonData: [],
-      pointFeatures: []
-    });
-    console.log(this.state.polygonData);
+    this.setState({ zoomLevel: zoom, center });
     this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
   }
 
@@ -104,7 +96,15 @@ export default class HomeScreen extends Component {
         inputVal: location.service_location_string,
         shouldUpdateAddressString: false
       }, () => {
+
       });
+      setTimeout(
+        function() {
+            this.setState({shouldUpdateAddressString: true});
+        }
+        .bind(this),
+        2000
+      );
     } else {
       // navigator.geolocation.getCurrentPosition((position) => {
       //     console.log(position);
@@ -123,7 +123,6 @@ export default class HomeScreen extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    console.log(nextProps.polygonData.length);
     if (nextProps.addressString !== '' && 
         this.props.addressString !== nextProps.addressString && 
         this.state.shouldUpdateAddressString === true) {
@@ -143,7 +142,6 @@ export default class HomeScreen extends Component {
             "type": "FeatureCollection",
             "features": nextProps.pointFeatures
           },
-          shouldUpdateAddressString: true
         }
       );
       const point = {
