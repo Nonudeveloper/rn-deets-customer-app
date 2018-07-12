@@ -28,6 +28,7 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-picker": "^4.3.5",
     "react-native-splash-screen": "^3.0.9",
+    "react-native-star-rating": "^1.0.9",
     "react-native-step-indicator": "0.0.7",
     "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.5.0",
