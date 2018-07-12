@@ -8,7 +8,8 @@ import {
     PAY_TIP_TO_TECHNICIAN,
     PAY_TIP_TO_TECHNICIAN_SUCCESS,
     PAY_TIP_TO_TECHNICIAN_FALIURE,
-    HIDE_ALERT
+    HIDE_ALERT,
+    EMPTY_POLYGON_DATA
 } from './constants';
 
 const initialState = {
@@ -67,6 +68,10 @@ export default function homeReducer(state = initialState, action) {
         case HIDE_ALERT:
             return Object.assign({}, state, {
                 tipMessage: ''
+            });
+        case EMPTY_POLYGON_DATA:
+            return Object.assign({}, state, {
+                polygonData: []
             });
         default:
             return state;

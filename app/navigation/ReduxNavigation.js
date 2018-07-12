@@ -1,18 +1,16 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
-import DrawerNavigation from './DrawerNavigation';
 import AppNavigation from './AppNavigation';
 import { isSignedIn } from '../helpers/utility';
 import { addListener } from '../helpers/utils/redux';
-//import PushNotification from 'react-native-push-notification';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
-import FCM, { NotificationActionType } from "react-native-fcm";
+import FCM from "react-native-fcm";
 import { Platform } from 'react-native';
+import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
-
-
+registerKilledListener();
 
 class ReduxNavigation extends React.Component {
   constructor(props) {
@@ -59,7 +57,29 @@ class ReduxNavigation extends React.Component {
       .catch(err => console.log(err));
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    registerAppListener(this.props.navigation);
+    FCM.getInitialNotification().then(notif => {
+      this.setState({
+        initNotif: notif
+      });
+      if (notif && notif.targetScreen === "detail") {
+        setTimeout(() => {
+          this.props.navigation.navigate("Detail");
+        }, 500);
+      }
+    });
+
+    try {
+      let result = await FCM.requestPermissions({
+        badge: false,
+        sound: true,
+        alert: true
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
     if (Platform.OS === "android") {
       FCM.getFCMToken().then(token => {
         console.log("TOKEN (getFCMToken)", token);
@@ -72,17 +92,9 @@ class ReduxNavigation extends React.Component {
       });
     }
 
-    // if (Platform.OS === "ios") {
-    //   FCM.getAPNSToken().then(token => {
-    //     console.log("APNS TOKEN (getFCMToken)", token);
-    //     const deviceToken = {
-    //       token,
-    //       os: 'ios'
-    //     };
-    //     this.setState({ deviceToken: token });
-    //     this.props.dispatch(saveDeviceToken(deviceToken));
-    //   });
-    // }
+    // topic example
+    // FCM.subscribeToTopic('sometopic')
+    // FCM.unsubscribeFromTopic('sometopic')
   }
 
   render() {

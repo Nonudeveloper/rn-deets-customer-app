@@ -9,7 +9,8 @@ import {
     PAY_TIP_TO_TECHNICIAN,
     PAY_TIP_TO_TECHNICIAN_SUCCESS,
     PAY_TIP_TO_TECHNICIAN_FALIURE,
-    HIDE_ALERT
+    HIDE_ALERT,
+    EMPTY_POLYGON_DATA
 } from './constants';
 
     
@@ -53,6 +54,12 @@ export function fetchPolygonDataFaliure(err) {
     return {
         type: FETCH_POLYGON_DATA_FALIURE,
         err
+    };
+}
+
+export function emptyPolygonData() {
+    return {
+        type: EMPTY_POLYGON_DATA
     };
 }
 
