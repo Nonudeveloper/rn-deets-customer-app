@@ -25,7 +25,7 @@ const layerStyles = Mapbox.StyleSheet.create({
     fillAntialias: true,
     fillColor: 'grey',
     // fillOutlineColor: 'red',
-    fillOpacity: 0.7,
+    fillOpacity: 0.5,
   },
 });
 
@@ -41,8 +41,9 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 10,
+      zoomLevel: 8,
       polygonDrawnOnce: false,
+      locationFromRecentScreen: {},
       calloutStyles: {
         calloutButtonColor: '#66cc00',
         borderColor: '#bfff80'
@@ -71,40 +72,53 @@ export default class HomeScreen extends Component {
     if (this.state.isCenterInsideThePolygonArea) {
       this.props.navigation.navigate('SelectVehicleScreen');
     } else {
+      //call an api here
       alert('Location must be inside the polygon');
     }
     return;
   }
 
   async onRegionDidChange() {
-    const center = await this._map.getCenter();
-    const zoom = await this._map.getZoom();
-    // this.setState({ zoomLevel: zoom, center });
-    this.props.emptyPolygonData();
-    await this.promisedSetState({
-      zoomLevel: zoom, 
-      center,
-      polygonData: [],
-      pointFeatures: []
-    });
-    console.log(this.state.polygonData);
-    this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
+      const { locationFromRecentScreen } = this.state;
+      // const location = navigation.getParam('location', {});
+      if (Object.keys(locationFromRecentScreen).length === 0) {
+        const center = await this._map.getCenter();
+        const zoom = await this._map.getZoom();
+        this.setState({ zoomLevel: zoom, center });
+        this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
+      } else {
+        //check if location is full
+        this.props.fetchPolygonData(this.state.center);
+        this.setState({
+          locationFromRecentScreen: {}
+        });
+      }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { navigation } = this.props;
-    const location = navigation.getParam('location', {});
-    const isMyObjectEmpty = !Object.keys(location).length;
-    if (!isMyObjectEmpty) {
+    await this.promisedSetState({
+      locationFromRecentScreen: navigation.getParam('location', {})
+    });
+    const { locationFromRecentScreen } = this.state;
+    if (Object.keys(locationFromRecentScreen).length > 0) {
       this.setState({
         center: [
-          Number(location.service_location_longitude),
-          Number(location.service_location_latitude)
+          Number(locationFromRecentScreen.service_location_longitude),
+          Number(locationFromRecentScreen.service_location_latitude)
         ],
-        inputVal: location.service_location_string,
+        inputVal: locationFromRecentScreen.service_location_string,
         shouldUpdateAddressString: false
       }, () => {
+
       });
+      setTimeout(
+        function() {
+            this.setState({ shouldUpdateAddressString: true });
+        }
+        .bind(this),
+        2000
+      );
     } else {
       // navigator.geolocation.getCurrentPosition((position) => {
       //     console.log(position);
@@ -123,14 +137,13 @@ export default class HomeScreen extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    console.log(nextProps.polygonData.length);
     if (nextProps.addressString !== '' && 
         this.props.addressString !== nextProps.addressString && 
         this.state.shouldUpdateAddressString === true) {
-      this.setState({
-        inputVal: nextProps.addressString
-      });
-      this.props.fetchPolygonData(this.state.center);
+        this.setState({
+          inputVal: nextProps.addressString
+        });
+        this.props.fetchPolygonData(this.state.center);
     }
     if (nextProps.polygonData.length) {
       await this.promisedSetState(
@@ -143,7 +156,6 @@ export default class HomeScreen extends Component {
             "type": "FeatureCollection",
             "features": nextProps.pointFeatures
           },
-          shouldUpdateAddressString: true
         }
       );
       const point = {
