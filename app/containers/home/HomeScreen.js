@@ -41,7 +41,7 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 8,
+      zoomLevel: 12,
       polygonDrawnOnce: false,
       locationFromRecentScreen: {},
       calloutStyles: {
