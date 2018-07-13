@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import HomeScreen from './HomeScreen';
 
 import * as homeActions from '../../redux/home/homeActions';
-import { getFullAddressReverseGeo } from '../../redux/geoCoding/geoActions';
+import { getFullAddressReverseGeo, updateLocationData } from '../../redux/geoCoding/geoActions';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         emptyPolygonData: () => {
             dispatch(homeActions.emptyPolygonData());
+        },
+        updateLocationData: (data) => {
+            dispatch(updateLocationData(data));
         }
    
     };

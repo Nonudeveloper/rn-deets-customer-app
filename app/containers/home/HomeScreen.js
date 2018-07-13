@@ -87,7 +87,8 @@ export default class HomeScreen extends Component {
         this.setState({ zoomLevel: zoom, center });
         this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
       } else {
-        //check if location is full
+        //trigger an action to update location in geo reducer
+        this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
         this.props.fetchPolygonData(this.state.center);
         this.setState({
           locationFromRecentScreen: {}
