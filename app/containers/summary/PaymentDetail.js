@@ -20,7 +20,6 @@ export default class PaymentDetail extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <View style={styles.container}>
                  <View style={styles.dateTimeContainer}>

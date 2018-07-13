@@ -6,6 +6,10 @@ import {
     FETCH_POLYGON_DATA,
     FETCH_POLYGON_DATA_SUCCESS,
     FETCH_POLYGON_DATA_FALIURE,
+    PAY_TIP_TO_TECHNICIAN,
+    PAY_TIP_TO_TECHNICIAN_SUCCESS,
+    PAY_TIP_TO_TECHNICIAN_FALIURE,
+    HIDE_ALERT,
     EMPTY_POLYGON_DATA
 } from './constants';
 
@@ -95,4 +99,32 @@ function arrangeDataForPolygon(res) {
             );
         }
     return { polygonFeatures, pointFeatures };
+}
+
+
+export function payTipToTechnician(payload) {
+    return {
+        type: PAY_TIP_TO_TECHNICIAN,
+        payload
+    };
+}
+
+export function payTipToTechnicianSuccess(log) {
+    return {
+        type: PAY_TIP_TO_TECHNICIAN_SUCCESS,
+        log
+    };
+}
+
+export function payTipToTechnicianFaliure(err) {
+    return {
+        type: PAY_TIP_TO_TECHNICIAN_FALIURE,
+        err
+    };
+}
+
+export function hideAlert() {
+    return {
+      type: HIDE_ALERT
+    };
 }

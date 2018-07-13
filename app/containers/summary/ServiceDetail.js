@@ -19,7 +19,6 @@ export default class ServiceDetail extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <View style={styles.container}>
                 <View style={styles.sliderWrapper}>
