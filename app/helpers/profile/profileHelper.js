@@ -6,12 +6,20 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
-        const userImage = {
-            name: 'user_image',
-            filename: 'myPhoto.jpg',
-            type: userInfo.newImage.type,
-            data: RNFetchBlob.wrap(userInfo.newImage.uri),
-        };
+        let userImage;
+        if (userInfo.newImage !== '') {
+            userImage = {
+                name: 'user_image',
+                filename: 'myPhoto.jpg',
+                type: userInfo.newImage.type,
+                data: RNFetchBlob.wrap(userInfo.newImage.uri),
+            };
+        } else {
+            userImage = {
+                name: 'user_image',
+                data: null,
+            };
+        }
 
         return await RNFetchBlob.fetch(
             'POST',
