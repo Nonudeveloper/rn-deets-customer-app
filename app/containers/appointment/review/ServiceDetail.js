@@ -26,7 +26,7 @@ export default class ServiceDetail extends React.Component {
                         <Text style={styles.costTextStyle}>${this.props.selectedServices.totalCost}</Text>
                     </View>
                 </View>
-                <View style={styles.serviceDetailContainer}>
+                <View style={[styles.serviceDetailContainer, { paddingBottom: this.props.selectedServices.selectedaddOns.length === 0 ? 5 : 0, flex: this.props.selectedServices.selectedaddOns.length === 0 ? 0.8 : this.props.selectedServices.selectedaddOns.length < 2 ? 1 : 2 }]}>
                     <View style={styles.serviceDetailInnerConatainer}>
                         <View style={{ flex: 4 }}>
                             <Text style={styles.serviceNameTextStyle}>{this.props.selectedServices.serviceSelected.service_name}</Text>
@@ -35,29 +35,26 @@ export default class ServiceDetail extends React.Component {
                             <Text style={styles.costTextStyle}>${vehicleInfo.vehicle_type === 2 ? this.props.selectedServices.serviceSelected.service_Large_cost : this.props.selectedServices.serviceSelected.cost}</Text>
                         </View>
                     </View>
-                    <View style={styles.serviceAddonConatiner}>
+                    {this.props.selectedServices.selectedaddOns.length !== 0 ?
+                    <View style={[styles.serviceAddonConatiner, { flex: this.props.selectedServices.selectedaddOns.length === 1 ? 1 : 1.5 }]}>
                         <View style={{ width: '40%' }}>
-                        {this.props.selectedServices.selectedaddOns.length !== 0 ?
                             <Text style={styles.addonsTextStyle}>Addon Services - </Text>
-                            : null
-                        }
                         </View>
                         <ScrollView> 
-                            {this.props.selectedServices.selectedaddOns.length !== 0 ?
-                                this.props.selectedServices.selectedaddOns.map((addons, i) => 
-                                    <View key={i} style={styles.addonsInnerConatainer}>
-                                        <View style={{ flex: 4.4 }}>
-                                            <Text numberOfLines={1} style={styles.addonsTextStyle}>{addons.vehicle.adds_on_name} </Text>
-                                        </View>
-                                        <View style={styles.addonsCostConatiner}>
-                                            <Text color={'#1a1a1a'}>${vehicleInfo.vehicle_type === 2 ? addons.vehicle.large_vehicle_cost : addons.vehicle.small_vehicle_cost}</Text>
-                                        </View>
+                            { this.props.selectedServices.selectedaddOns.map((addons, i) => 
+                                <View key={i} style={styles.addonsInnerConatainer}>
+                                    <View style={{ flex: 4.4 }}>
+                                        <Text numberOfLines={1} style={styles.addonsTextStyle}>{addons.vehicle.adds_on_name} </Text>
                                     </View>
-                                ) 
-                                : null
-                            }     
+                                    <View style={styles.addonsCostConatiner}>
+                                        <Text color={'#1a1a1a'}>${vehicleInfo.vehicle_type === 2 ? addons.vehicle.large_vehicle_cost : addons.vehicle.small_vehicle_cost}</Text>
+                                    </View>
+                                </View>
+                            )}     
                         </ScrollView>
-                    </View>      
+                    </View>
+                    : null
+                    }         
                 </View>
                 <View style={styles.notesContainer}>
                     <View style={styles.notesInnerContainer}>
@@ -66,6 +63,9 @@ export default class ServiceDetail extends React.Component {
                     </View>
                 </View>
             </View>
+            {this.props.selectedServices.selectedaddOns.length === 0 &&
+            <View style={{ flex: 0.5 }} />
+            }
         </View>
     );
   }

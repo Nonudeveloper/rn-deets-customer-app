@@ -246,7 +246,6 @@ export default StyleSheet.create({
   },
   serviceDetailContainer: {
     marginHorizontal: 30,
-    flex: 2, 
     flexDirection: 'column', 
     marginVertical: 5, 
     alignItems: 'center', 
@@ -259,7 +258,7 @@ export default StyleSheet.create({
   },
   serviceDetailInnerConatainer: {
     flex: 1, 
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   serviceNameTextStyle: {
     fontSize: 20, 
@@ -268,13 +267,12 @@ export default StyleSheet.create({
   serviceDetailCostContainer: {
     flex: 0.5, 
     alignItems: 'flex-end', 
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     borderLeftWidth: 1, 
     borderLeftColor: 'grey' 
   },
   serviceAddonConatiner: {
-    flex: 2, 
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   addonsTextStyle: {
     fontSize: 16, 
@@ -291,10 +289,10 @@ export default StyleSheet.create({
     borderLeftColor: 'grey'
   },
   notesContainer: {
-    flex: 1, 
+    flex: 0.8, 
     flexDirection: 'row', 
     alignItems: 'center', 
-    marginLeft: 10
+    marginLeft: 10,
   },
   notesInnerContainer: {
     flexDirection: 'row', 
