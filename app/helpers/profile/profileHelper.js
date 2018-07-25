@@ -61,7 +61,7 @@ class ProfileHelper {
         const registration_type = 2;
 
         return await SuperFetch.post('customer/change_password_from_access_token', { ...passwordData, access_token, registration_type }).then(response => {
-            return JSON.parse(response._bodyText);
+            return response;
         })
         .catch(error => ({ error: JSON.stringify(error) }));
         }
