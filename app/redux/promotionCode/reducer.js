@@ -12,7 +12,7 @@ import {
 const initialState = {
     isFetching: false,
     errorMessage: '',
-    promotionCode: ''
+    promotionCode: []
 };
 
 export default function promoCodeReducer(state = initialState, action) {
