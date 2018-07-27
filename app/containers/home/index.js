@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateLocationData: (data) => {
             dispatch(updateLocationData(data));
+        },
+        saveUnservedArea: (data) => {
+            dispatch(homeActions.saveUnservedArea(data));
         }
    
     };
