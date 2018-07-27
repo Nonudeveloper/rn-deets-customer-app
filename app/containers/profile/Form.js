@@ -156,10 +156,10 @@ class FormArea extends React.Component {
 }
 export default reduxForm({ 
     form: 'profileDetails',
-    keepDirtyOnReinitialize: false,
+    keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values, props) => {
-        if (!props.editable) {
+        if (!props.formEditable) {
             return null;
         }
         const errors = {};
