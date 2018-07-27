@@ -10,7 +10,8 @@ import {
     PAY_TIP_TO_TECHNICIAN_SUCCESS,
     PAY_TIP_TO_TECHNICIAN_FALIURE,
     HIDE_ALERT,
-    EMPTY_POLYGON_DATA
+    EMPTY_POLYGON_DATA,
+    SAVE_UNSERVED_AREA
 } from './constants';
 
     
@@ -126,5 +127,12 @@ export function payTipToTechnicianFaliure(err) {
 export function hideAlert() {
     return {
       type: HIDE_ALERT
+    };
+}
+
+export function saveUnservedArea(areaData) {
+    return {
+        type: SAVE_UNSERVED_AREA,
+        areaData
     };
 }
