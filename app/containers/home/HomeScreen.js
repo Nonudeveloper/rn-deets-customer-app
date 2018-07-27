@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import inside from 'turf-inside';
 import within from 'turf-within';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';
 // import polyGeoJSON from '../../../../assets/polygon.json';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import customMarkerGreen from '../../assets/icons/icon_location_pin_green.png';
 import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
