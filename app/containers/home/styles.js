@@ -66,7 +66,20 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
       height: 40,
       width: 40
-    }
+    },
+    timeIntervalWrapper: {
+      height: 30, 
+      position: 'absolute',
+      bottom: 60, 
+      flexDirection: 'row',
+      backgroundColor: '#A0CD61',
+      width: '100%'
+    },
+    timeIntervalStaticTextContainer: {
+      flex: 1.5, 
+      justifyContent: 'center', 
+      alignItems: 'flex-end'
+  },
 
   });
 

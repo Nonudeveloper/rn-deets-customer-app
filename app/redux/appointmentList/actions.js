@@ -31,7 +31,8 @@ export function fetchUpcomingAndPastAppointmentsSuccess(appointments) {
     return {
         type: FETCH_UPCOMING_AND_PAST_APPOINTMENTS_SUCCESS,
         upcomingAppointments: appointments.upcoming_appointments,
-        pastAppointments: appointments.past_appointments
+        pastAppointments: appointments.past_appointments,
+        currentRunningAppointments: appointments.current_running_appointments
     };
 }
 

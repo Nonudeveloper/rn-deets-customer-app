@@ -11,6 +11,7 @@ import customMarkerGreen from '../../assets/icons/icon_location_pin_green.png';
 import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
 import Loader from '../../deetscomponents/Loader';
+import TimeInterval from './TimeInterval';
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
@@ -57,7 +58,8 @@ export default class HomeScreen extends Component {
         "type": "FeatureCollection",
         "features": []
       },
-      customMarker: customMarkerGreen
+      customMarker: customMarkerGreen,
+      timeInterval: 0
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -66,6 +68,10 @@ export default class HomeScreen extends Component {
     this.getLat = this.getLat.bind(this);
     this.getLng = this.getLng.bind(this);
     console.ignoredYellowBox = ['Warning:'];
+  }
+
+  componentWillMount() {
+    this.props.fetchUpcomingAndPastAppointments();
   }
 
   setLocation() {
@@ -270,6 +276,15 @@ export default class HomeScreen extends Component {
     this.props.navigation.navigate('PastAppointmentsList');
   }
 
+  goToRunningAppointments = () => {
+    this.props.navigation.navigate('RunningAppointments', { timeInterval: this.state.timeInterval });
+  }
+
+  updatedInterval = (interval) => {
+    this.setState({ timeInterval: interval });
+  }
+
+
   render() {
     const { isLoading } = this.props;
     return (
@@ -328,6 +343,19 @@ export default class HomeScreen extends Component {
             <TouchableOpacity style={styles.gpsIconContainer}>
               <Image style={styles.gpsIcon} source={gpsIcon} />
             </TouchableOpacity>
+            { this.props.currentRunningAppointments !== undefined && this.props.currentRunningAppointments.length !== 0 &&
+              <TouchableOpacity style={styles.timeIntervalWrapper} onPress={() => this.goToRunningAppointments()}>
+                <View style={styles.timeIntervalStaticTextContainer}>
+                  <Text style={{ fontSize: 18 }}>SERVICE IN PROGRESS :</Text>
+                </View>
+                <TimeInterval 
+                  onRef={ref => (this.timeInterval = ref)}
+                  currentRunningAppointments={this.props.currentRunningAppointments[0]}
+                  updatedInterval={this.updatedInterval}
+                  initialTimeInterval={0}
+                />
+              </TouchableOpacity>
+            }
             <TouchableOpacity style={styles.myAppointments} onPress={this.navigateToAppointmentsList}>
               <Text style={styles.myAppointmentsText}>My Appointments</Text>
             </TouchableOpacity>
