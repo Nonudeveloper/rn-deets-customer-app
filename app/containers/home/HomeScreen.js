@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
@@ -79,7 +79,19 @@ export default class HomeScreen extends Component {
       this.props.navigation.navigate('SelectVehicleScreen');
     } else {
       //call an api here
-      alert('Location must be inside the polygon');
+      // alert('Location must be inside the polygon');
+      Alert.alert(
+    
+        // This is Alert Dialog Title
+        '',
+     
+        // This is Alert Dialog Message. 
+        'Our services are not available in your area, but we are actively recruiting experienced service providers in your area. We will notify you when Deets reaches your town.',
+        [
+          { text: 'Cancel', onPress: () => console.log('Cancel Button Pressed'), style: 'cancel' },
+          { text: 'Send Request', onPress: () => this.props.saveUnservedArea(this.state.center) },
+        ]
+      );
     }
     return;
   }

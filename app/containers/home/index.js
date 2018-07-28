@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         fetchUpcomingAndPastAppointments: () => {
             dispatch(fetchUpcomingAndPastAppointments());
+        },
+        saveUnservedArea: (data) => {
+            dispatch(homeActions.saveUnservedArea(data));
         }
     };
 };
