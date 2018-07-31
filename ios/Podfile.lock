@@ -1,49 +1,49 @@
 PODS:
-  - React (0.56.0):
-    - React/Core (= 0.56.0)
+  - React (0.53.3):
+    - React/Core (= 0.53.3)
   - react-native-mapbox-gl (6.1.1):
     - React
-  - React/Core (0.56.0):
-    - yoga (= 0.56.0.React)
-  - React/DevSupport (0.56.0):
+  - React/Core (0.53.3):
+    - yoga (= 0.53.3.React)
+  - React/DevSupport (0.53.3):
     - React/Core
     - React/RCTWebSocket
-  - React/fishhook (0.56.0)
-  - React/RCTActionSheet (0.56.0):
+  - React/fishhook (0.53.3)
+  - React/RCTActionSheet (0.53.3):
     - React/Core
-  - React/RCTAnimation (0.56.0):
+  - React/RCTAnimation (0.53.3):
     - React/Core
-  - React/RCTBlob (0.56.0):
+  - React/RCTBlob (0.53.3):
     - React/Core
-  - React/RCTCameraRoll (0.56.0):
+  - React/RCTCameraRoll (0.53.3):
     - React/Core
     - React/RCTImage
-  - React/RCTGeolocation (0.56.0):
+  - React/RCTGeolocation (0.53.3):
     - React/Core
-  - React/RCTImage (0.56.0):
+  - React/RCTImage (0.53.3):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.56.0):
+  - React/RCTLinkingIOS (0.53.3):
     - React/Core
-  - React/RCTNetwork (0.56.0):
+  - React/RCTNetwork (0.53.3):
     - React/Core
-  - React/RCTPushNotification (0.56.0):
+  - React/RCTPushNotification (0.53.3):
     - React/Core
-  - React/RCTSettings (0.56.0):
+  - React/RCTSettings (0.53.3):
     - React/Core
-  - React/RCTTest (0.56.0):
+  - React/RCTTest (0.53.3):
     - React/Core
-  - React/RCTText (0.56.0):
+  - React/RCTText (0.53.3):
     - React/Core
-  - React/RCTVibration (0.56.0):
+  - React/RCTVibration (0.53.3):
     - React/Core
-  - React/RCTWebSocket (0.56.0):
+  - React/RCTWebSocket (0.53.3):
     - React/Core
     - React/fishhook
     - React/RCTBlob
   - rn-fetch-blob (0.10.6):
     - React/Core
-  - yoga (0.56.0.React)
+  - yoga (0.53.3.React)
 
 DEPENDENCIES:
   - react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)
@@ -77,10 +77,10 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
-  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  React: af66244a7d630be2aef03b4ddfe3570e4eff39fc
   react-native-mapbox-gl: b42480060cdcc515dfa3d8e403fb4dd32466a1b9
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
-  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+  yoga: 55da126afc384965b96bff46652464373b330add
 
 PODFILE CHECKSUM: a52d252b4a70d212ebaea8aefffe6d3df60557b0
 
