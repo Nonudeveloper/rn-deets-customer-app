@@ -4,13 +4,16 @@ import { take, put, call, fork, select } from 'redux-saga/effects';
 import { 
   fetchVehiclesSuccess, 
   recieveVehiclesData,
+  getBrainTreeClientTokenSuccess,
+  getBrainTreeClientTokenFailure
 } from './startActions';
 import { 
   FETCH_VEHICLES, 
   VERIFY_EMAIL_REQUEST,
   FETCH_VEHICLES_FROM_ASYNC_STORAGE, 
   FETCH_MAKE_MODEL,
-  REGISTER_REQUEST
+  REGISTER_REQUEST,
+  GET_BRAINTREE_CLIENT_TOKEN
 } from './constants';
 import { verifyEmailSuccess, registerSuccess, registerFailure } from './actions';
 import RegisterHelper from '../../helpers/register/registerHelper';
@@ -146,11 +149,39 @@ function* watchRegisterRequest() {
 }
 
 
+function getBrainTreeClientToken() {
+  return new Promise((resolve, reject) => {
+    RegisterHelper.getBrainTreeClientToken()
+      .then(response => {
+        console.log(response);
+          resolve(response);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+
+function* watchGetBrainTreeClientTokenRequest() {
+  while (true) {
+    yield take(GET_BRAINTREE_CLIENT_TOKEN);
+    try {
+      const response = yield call(getBrainTreeClientToken);
+        yield put(getBrainTreeClientTokenSuccess(response.data));
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(getBrainTreeClientTokenFailure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
+  }
+}
+
+
 export default function* root() {
   yield fork(fetchVehiclesRequest);
   yield fork(watchFetchVehiclesFromAsyncStorage);
   yield fork(watchVeriftEmailRequest);
   yield fork(watchFetchMakeModel);
   yield fork(watchRegisterRequest);
+  yield fork(watchGetBrainTreeClientTokenRequest);
 }
 

@@ -6,12 +6,20 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
-        const userImage = {
-            name: 'user_image',
-            filename: 'myPhoto.jpg',
-            type: userInfo.newImage.type,
-            data: RNFetchBlob.wrap(userInfo.newImage.uri),
-        };
+        let userImage;
+        if (userInfo.newImage !== '') {
+            userImage = {
+                name: 'user_image',
+                filename: 'myPhoto.jpg',
+                type: userInfo.newImage.type,
+                data: RNFetchBlob.wrap(userInfo.newImage.uri),
+            };
+        } else {
+            userImage = {
+                name: 'user_image',
+                data: null,
+            };
+        }
 
         return await RNFetchBlob.fetch(
             'POST',
@@ -61,7 +69,7 @@ class ProfileHelper {
         const registration_type = 2;
 
         return await SuperFetch.post('customer/change_password_from_access_token', { ...passwordData, access_token, registration_type }).then(response => {
-            return JSON.parse(response._bodyText);
+            return response;
         })
         .catch(error => ({ error: JSON.stringify(error) }));
         }

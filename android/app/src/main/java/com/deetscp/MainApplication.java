@@ -3,6 +3,7 @@ package com.deetscp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.ocetnik.timer.BackgroundTimerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new BackgroundTimerPackage(),
             new RNFetchBlobPackage(),
             new FIRMessagingPackage(),
             new LinearGradientPackage(),

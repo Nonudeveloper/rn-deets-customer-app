@@ -33,7 +33,7 @@ class PromotionCodeScreen extends React.Component {
         } else {
             Alert.alert(
                 'Error',
-                'Promo Codo field is required',
+                'Promo Code field is required',
                 [
                 { text: 'OK', onPress: () => console.log('OK Pressed') },
                 ],
@@ -124,7 +124,7 @@ class PromotionCodeScreen extends React.Component {
                     </View>
                 </View>
                 <View style={{ flex: 1 }}>
-                    {this.props.promotionCode !== '' ?
+                    {this.props.promotionCode.length !== 0 ?
                     <Text style={styles.textStyle}>
                          Share this Promo Code {this.props.promotionCode.promo_code_name} and on your behalf
                         they will receive a ${this.props.promotionCode.dollar_value} credits

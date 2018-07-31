@@ -120,7 +120,9 @@ const styles = StyleSheet.create({
     },
     starsWrapper: {
         flex: 1, 
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     starImageContainer: {
         flex: 1,

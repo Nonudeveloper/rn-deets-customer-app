@@ -134,7 +134,7 @@ function loginThroughAccessTokenCall(deviceToken) {
          reject({ status: error });
       } 
     })
-    // .catch(err => console.log(err));
+    .catch(err => console.log(err));
   });
 }
 
@@ -153,6 +153,9 @@ function* watchloginThroughAccessTokenRequest() {
       yield setUser(response.user);
       yield setToken(response.access_token);
       yield setCardDetails(response.card);
+      if (response.user_pending_tip_notifications.length) {
+        yield put(NavigationActions.navigate({ routeName: 'SummaryScreen' }));
+      }
       //console.log('SAGA LOGIN SUCCESS: ', response);
     } catch (err) {
       console.log('SAGA LOGIN ERR: ', err);

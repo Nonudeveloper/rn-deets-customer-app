@@ -1,5 +1,5 @@
 import { 
-    SEARCH_ADDRESS, SEARCH_ADDRESS_SUCCESS, SEARCH_ADDRESS_FALIURE, EMPTY_FEATURES, GET_FULL_ADDRESS_REVERSE_GEO, GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS
+    SEARCH_ADDRESS, SEARCH_ADDRESS_SUCCESS, SEARCH_ADDRESS_FALIURE, EMPTY_FEATURES, GET_FULL_ADDRESS_REVERSE_GEO, GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS, UPDATE_LOCATION_DATA
 } from './constants';
 
 const initialState = {
@@ -35,6 +35,10 @@ export default function addressReducer(state = initialState, action) {
                 isFetching: false,
                 addressString: action.addressString,
                 geoLocationData: action.geoLocationData
+            });
+        case UPDATE_LOCATION_DATA:
+            return Object.assign({}, state, {
+                geoLocationData: action.data
             });
         default:
             return state;

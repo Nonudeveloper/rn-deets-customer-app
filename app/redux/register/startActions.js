@@ -4,6 +4,9 @@ import {
     FETCH_VEHICLES_SUCCESS,
     FETCH_VEHICLES_FALIURE,
     RECIEVE_VEHICLES_DATA,
+    GET_BRAINTREE_CLIENT_TOKEN,
+    GET_BRAINTREE_CLIENT_TOKEN_SUCCESS,
+    GET_BRAINTREE_CLIENT_TOKEN_FALIURE
 } from './constants';
   
     const saveVehiclesData = async (vehicles) => {
@@ -48,6 +51,26 @@ import {
     export function fetchVehiclesFromAsyncStorage() {
         return {
             type: FETCH_VEHICLES_FROM_ASYNC_STORAGE,
+        };
+    }
+
+    export function getBrainTreeClientToken() {
+        return {
+            type: GET_BRAINTREE_CLIENT_TOKEN,
+        };
+    }
+
+    export function getBrainTreeClientTokenSuccess(clientToken) {
+        return {
+            type: GET_BRAINTREE_CLIENT_TOKEN_SUCCESS,
+            clientToken
+        };
+    }
+  
+    export function getBrainTreeClientTokenFailure(err) {
+        return {
+            type: GET_BRAINTREE_CLIENT_TOKEN_FALIURE,
+            err,
         };
     }
 

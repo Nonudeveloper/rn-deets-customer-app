@@ -5,7 +5,8 @@ import {
     EMPTY_FEATURES,
     GET_FULL_ADDRESS_REVERSE_GEO,
     GET_FULL_ADDRESS_REVERSE_GEO_FALIURE, 
-    GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS
+    GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
+    UPDATE_LOCATION_DATA
 } from './constants';
 
 export function searchAddress(payload) {
@@ -49,6 +50,13 @@ export function getFullAddressReverseGeoSuccess(res) {
         type: GET_FULL_ADDRESS_REVERSE_GEO_SUCCESS,
         addressString: JSON.parse(res._bodyText).features.length ? JSON.parse(res._bodyText).features[0].place_name : '',
         geoLocationData
+    };
+}
+
+export function updateLocationData(data) {
+    return {
+        type: UPDATE_LOCATION_DATA,
+        data
     };
 }
 

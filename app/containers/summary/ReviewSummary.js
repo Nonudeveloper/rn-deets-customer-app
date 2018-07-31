@@ -4,10 +4,10 @@ import Button from '../../deetscomponents/Button';
 import PaymentDetail from './PaymentDetail';
 import ServiceDetail from './ServiceDetail';
 import styles from './styles';
+import StarRating from 'react-native-star-rating';
 
 
 const zigzag = require('../../assets/icons/zigzag.png');
-const starOff = require('../../assets/icons/starOff.png');
 
 export default class ReviewSummary extends Component {
     constructor(props) {
@@ -15,7 +15,8 @@ export default class ReviewSummary extends Component {
         this.state = {
             tipValue: 0,
             totalPayment: 0,
-            calculatedTip: 0
+            calculatedTip: 0,
+            customStarCount: 0,
         };
     }
 
@@ -23,12 +24,31 @@ export default class ReviewSummary extends Component {
         this.setState({ totalPayment: Number(this.props.summaryData[0].total_cost) });
     }
 
+    onCustomStarRatingPress(rating) {
+        this.setState({
+          customStarCount: rating,
+        });
+      }
+
     changedTipValue(value) {
         const calculatedTip = Number(Number(this.props.summaryData[0].total_cost) * value / 100);
         const totalPayment = Number(Number(this.props.summaryData[0].total_cost) + calculatedTip);
         const newTotal = totalPayment.toFixed(2);
         this.setState({ calculatedTip, totalPayment: newTotal });
     }
+
+    submitData() {
+        const payload = {
+            user_service_appointment_id: this.props.summaryData[0].service_appointment_id,
+            technician_id: this.props.summaryData[0].technician_id,
+            flag: 1,
+            tip_cost: this.state.calculatedTip,
+            rating: this.state.customStarCount,
+            comment: 'tip',
+        };
+            this.props.actions.payTipToTechnician(payload);
+    }
+    
 
     render() {
         return (
@@ -51,33 +71,33 @@ export default class ReviewSummary extends Component {
                             <Text style={styles.rateTechnicianTextStyle}>Rate Technician</Text>
                         </View>
                         <View style={styles.rateTechnicianValueContainer}>
-                            <Text style={styles.rateTechnicianValueText}>5.0</Text>
+                            <Text style={styles.rateTechnicianValueText}>{this.state.customStarCount}</Text>
                         </View>
                     </View>
                     <View style={styles.starsWrapper}>
-                        <TouchableOpacity style={styles.starImageContainer} onPress={()=> console.log('outer')}>
-                            <TouchableOpacity style={{ position:'absolute' }} onPress={()=> console.log('inner')}>
-                                <Image style={styles.starImageStyle} source={starOff} />
-                            </TouchableOpacity>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.starImageContainer}>
-                            <Image style={styles.starImageStyle} source={starOff} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.starImageContainer}>
-                            <Image style={styles.starImageStyle} source={starOff} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.starImageContainer}>
-                            <Image style={styles.starImageStyle} source={starOff} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.starImageContainer}>
-                            <Image style={styles.starImageStyle} source={starOff} />
-                        </TouchableOpacity>
+                    <StarRating
+                        disabled={false}
+                        emptyStar="ios-star-outline"
+                        fullStar="ios-star"
+                        halfStar="ios-star-half"
+                        iconSet="Ionicons"
+                        maxStars={5}
+                        rating={this.state.customStarCount}
+                        selectedStar={rating => this.onCustomStarRatingPress(rating)}
+                        fullStarColor="green"
+                        halfStarColor="green"
+                        emptyStarColor="green"
+                        halfStarEnabled
+                        starPadding={10}
+                        starStyle={{ marginHorizontal: 15 }}
+                        starSize={50}
+                    />
                     </View>
 
                     <View style={styles.buttonContainer}>
                         <Button 
                             style={styles.submitButtonStyle}
-                            // onPress={() => this.setState({ showSummaryReview: true })}
+                            onPress={() => this.submitData()}
                         >
                             Submit
                         </Button>

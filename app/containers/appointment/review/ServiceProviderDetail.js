@@ -59,7 +59,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
     // const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     
     return (
-      <View style={{ flex: 2 }}>
+      <View style={{ flex: 2.5 }}>
         <View style={styles.serviceProviderContainer} >
             <View style={styles.providerInfoContainer}>
                 <View style={{ flex: 1 }}>

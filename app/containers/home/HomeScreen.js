@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
@@ -11,6 +11,7 @@ import customMarkerGreen from '../../assets/icons/icon_location_pin_green.png';
 import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
 import Loader from '../../deetscomponents/Loader';
+import TimeInterval from './TimeInterval';
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
@@ -41,7 +42,7 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 8,
+      zoomLevel: 12,
       polygonDrawnOnce: false,
       locationFromRecentScreen: {},
       calloutStyles: {
@@ -57,7 +58,8 @@ export default class HomeScreen extends Component {
         "type": "FeatureCollection",
         "features": []
       },
-      customMarker: customMarkerGreen
+      customMarker: customMarkerGreen,
+      timeInterval: 0
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -68,12 +70,28 @@ export default class HomeScreen extends Component {
     console.ignoredYellowBox = ['Warning:'];
   }
 
+  componentWillMount() {
+    this.props.fetchUpcomingAndPastAppointments();
+  }
+
   setLocation() {
     if (this.state.isCenterInsideThePolygonArea) {
       this.props.navigation.navigate('SelectVehicleScreen');
     } else {
       //call an api here
-      alert('Location must be inside the polygon');
+      // alert('Location must be inside the polygon');
+      Alert.alert(
+    
+        // This is Alert Dialog Title
+        '',
+     
+        // This is Alert Dialog Message. 
+        'Our services are not available in your area, but we are actively recruiting experienced service providers in your area. We will notify you when Deets reaches your town.',
+        [
+          { text: 'Cancel', onPress: () => console.log('Cancel Button Pressed'), style: 'cancel' },
+          { text: 'Send Request', onPress: () => this.props.saveUnservedArea(this.state.center) },
+        ]
+      );
     }
     return;
   }
@@ -87,7 +105,8 @@ export default class HomeScreen extends Component {
         this.setState({ zoomLevel: zoom, center });
         this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
       } else {
-        //check if location is full
+        //trigger an action to update location in geo reducer
+        this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
         this.props.fetchPolygonData(this.state.center);
         this.setState({
           locationFromRecentScreen: {}
@@ -269,6 +288,15 @@ export default class HomeScreen extends Component {
     this.props.navigation.navigate('PastAppointmentsList');
   }
 
+  goToRunningAppointments = () => {
+    this.props.navigation.navigate('RunningAppointments', { timeInterval: this.state.timeInterval });
+  }
+
+  updatedInterval = (interval) => {
+    this.setState({ timeInterval: interval });
+  }
+
+
   render() {
     const { isLoading } = this.props;
     return (
@@ -327,6 +355,19 @@ export default class HomeScreen extends Component {
             <TouchableOpacity style={styles.gpsIconContainer}>
               <Image style={styles.gpsIcon} source={gpsIcon} />
             </TouchableOpacity>
+            { this.props.currentRunningAppointments !== undefined && this.props.currentRunningAppointments.length !== 0 &&
+              <TouchableOpacity style={styles.timeIntervalWrapper} onPress={() => this.goToRunningAppointments()}>
+                <View style={styles.timeIntervalStaticTextContainer}>
+                  <Text style={{ fontSize: 18 }}>SERVICE IN PROGRESS :</Text>
+                </View>
+                <TimeInterval 
+                  onRef={ref => (this.timeInterval = ref)}
+                  currentRunningAppointments={this.props.currentRunningAppointments[0]}
+                  updatedInterval={this.updatedInterval}
+                  initialTimeInterval={0}
+                />
+              </TouchableOpacity>
+            }
             <TouchableOpacity style={styles.myAppointments} onPress={this.navigateToAppointmentsList}>
               <Text style={styles.myAppointmentsText}>My Appointments</Text>
             </TouchableOpacity>

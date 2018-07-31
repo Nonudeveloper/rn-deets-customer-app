@@ -64,6 +64,23 @@ class HomeHelper {
     return await SuperFetch.get(`getNearByServiceProvideForMapbox?latitude=${center[1]}&longitude=${center[0]}`);
   }
 
+  payTipToTechnician = async tipData => {
+    const user = await getItem('user');
+    const access_token = JSON.parse(user).access_token;
+    return await SuperFetch.post('customer/pay_tip_to_technician', { access_token, ...tipData });
+  }
+
+  saveUnservedArea = async areaData => {
+    const user = await getItem('user');
+    const payload = {
+      access_token: JSON.parse(user).access_token,
+      user_id: JSON.parse(user).user_id,
+      latitude: areaData[1],
+      longitude: areaData[0]
+    };
+    return await SuperFetch.post('customer/save_unserved_area', payload);
+  }
+
 }
 
 export default new HomeHelper();

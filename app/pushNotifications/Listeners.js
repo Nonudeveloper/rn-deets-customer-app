@@ -44,12 +44,38 @@ export function registerKilledListener() {
 }
 
 const handleNotification = notif => {
+  const parsedBody = JSON.parse(notif.fcm.body);
+  
+
   Alert.alert(
-    notif.fcm.title,
-    notif.fcm.body,
+    'Notification',
+    parsedBody.message,
     [
-      { text: 'Ok', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-      { text: 'View', onPress: () => console.log('navigate to required screen') },
+      { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
+      { text: 'View', onPress: () => {
+        switch (parsedBody.type) {
+          case 1:
+            console.log('take me to the appointment');
+            break;
+          case 2:
+            console.log('appointmment has been started');
+            break;
+          case 3:
+            console.log('appointment has been completed');
+            break;
+          case 4:
+            console.log('more services has been suggested');
+            break;
+          case 5:
+            console.log('cancelled with no show flag');
+            break;
+          case 6:
+            console.log('technician has cancelled the sevice');
+            break;
+          default:
+            break;
+        }
+      } },
     ],
     { cancelable: false }
   );

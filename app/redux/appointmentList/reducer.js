@@ -25,6 +25,7 @@ const initialState = {
       selectedAppointment: '',
       editMode: false,
       selectedAppointments: [],
+      currentRunningAppointments: []
 };
 
 
@@ -47,7 +48,8 @@ export default function appointmentListReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isFetching: false,
                 upcomingAppointments: action.upcomingAppointments,
-                pastAppointments: action.pastAppointments
+                pastAppointments: action.pastAppointments,
+                currentRunningAppointments: action.currentRunningAppointments
             });
         case FETCH_UPCOMING_AND_PAST_APPOINTMENTS_FALIURE:
             return Object.assign({}, state, {

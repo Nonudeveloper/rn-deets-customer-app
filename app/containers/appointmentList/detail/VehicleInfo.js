@@ -52,7 +52,7 @@ const VehicleInfo = (props) => (
                             }]
                         }
                     >
-                        <View style={{ flex: 4, marginLeft: 20 }}>
+                        <View style={{ flex: 4, marginLeft: 20, justifyContent: 'center' }}>
                             <Text 
                                 style={{ 
                                     fontSize: 20, 

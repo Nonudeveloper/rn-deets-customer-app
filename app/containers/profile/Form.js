@@ -35,20 +35,6 @@ class FormArea extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.authUser.length !== 0) {
-            const user = nextProps.authUser;
-            const initialFormData = {
-                fname: user.first_name,
-                lname: user.last_name,
-                mobile: user.mobile,
-                email: user.email,
-                access_token: user.access_token
-            };
-            this.props.dispatch(initialize('profileDetails', initialFormData));
-        }
-    }
-
     clear(fieldName) {
         //dispath an action here and clear the respected field
         this.props.dispatch(change('profileDetails', fieldName, ''));
@@ -170,10 +156,10 @@ class FormArea extends React.Component {
 }
 export default reduxForm({ 
     form: 'profileDetails',
-    keepDirtyOnReinitialize: false,
+    keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values, props) => {
-        if (!props.editable) {
+        if (!props.formEditable) {
             return null;
         }
         const errors = {};
