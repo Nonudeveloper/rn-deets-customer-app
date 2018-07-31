@@ -39,9 +39,9 @@ export default class ReviewSummary extends Component {
 
     submitData() {
         const payload = {
-            user_service_appointment_id: this.props.summaryData[0].id,
+            user_service_appointment_id: this.props.summaryData[0].service_appointment_id,
             technician_id: this.props.summaryData[0].technician_id,
-            flag: 2,
+            flag: 1,
             tip_cost: this.state.calculatedTip,
             rating: this.state.customStarCount,
             comment: 'tip',
