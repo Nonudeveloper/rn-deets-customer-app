@@ -29,7 +29,7 @@ class CreditCardForm extends React.Component {
     }
 
     componentDidMount() {
-        // BTClient.setup(this.props.clientToken);
+        BTClient.setup(this.props.clientToken);
     }
 
     
