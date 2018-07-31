@@ -58,6 +58,7 @@ class VehicleForm extends React.Component {
                 items.makeModel.data.map((make, i) => {
                     if (make.make_id === makeID) {
                         this.props.dispatch(change(this.props.form, 'make', make.make_name));
+                        this.props.dispatch(change(this.props.form, 'model', ''));
                     }
                 })
                 : null
@@ -424,7 +425,7 @@ class VehicleForm extends React.Component {
 
 
 export default reduxForm({ 
-    keepDirtyOnReinitialize: false,
+    keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values, props) => {
         if (!props.editable) {
