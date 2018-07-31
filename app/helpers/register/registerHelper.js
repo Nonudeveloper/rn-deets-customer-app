@@ -88,6 +88,66 @@ class RegisterHelper {
         });
 };
 
+// register = async userInfo => {
+//     const data = new FormData();
+//     const type = userInfo.form2.type;
+//     const typeData = type.split(', ');
+
+//     if (Object.keys(userInfo.userImage).length > 0) {
+//       const userBase64String = 'data:image/jpeg;base64,' + userInfo.userImage.data;
+//       const userImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
+//       data.append('user_image', userImageFile);
+//     } else {
+//       data.append('user_image', null);
+//     }
+  
+//     if (Object.keys(userInfo.vehicleImage).length > 0) {
+//         const vehicleBase64String = 'data:image/jpeg;base64,' + userInfo.vehicleImage.data;
+//         const vehicleImageFile = dataURLtoFile(vehicleBase64String, 'my_car.jpg');
+//         data.append('vehicle_image', vehicleImageFile);
+//     } else {
+//       data.append('vehicle_image', null);
+//     }
+
+//     if (userInfo.form1.flag === 1) {
+//         data.append('fb_access_token', userInfo.form1.fb_access_token);
+//         data.append('fb_id', userInfo.form1.fb_id);
+//         data.append('gender', userInfo.form1.gender);
+//     }
+    
+//     data.append('first_name', userInfo.form1.fname);
+//     data.append('last_name', userInfo.form1.lname);
+//     data.append('email', userInfo.form1.email);
+//     data.append('mobile', userInfo.form1.mobile);
+//     data.append('password', userInfo.form1.password);
+//     data.append('user_type', userInfo.form1.device_token.os === 'android' ? 2 : 1);
+//     data.append('device_token', userInfo.form1.device_token.token);
+//     data.append('flag', userInfo.form1.flag);
+//     data.append('vehicle_model_id', userInfo.form2.model_id);
+//     data.append('vehicle_make_id', userInfo.form2.make_id);
+//     data.append('vehicle_color_id', userInfo.form2.color_id);
+//     data.append('vehicle_year_id', userInfo.form2.year);
+//     data.append('license', userInfo.form2.radio_button_type === 0 ? userInfo.form2.license : userInfo.form2.vin);
+//     data.append('vehicle_make', userInfo.form2.make);
+//     data.append('vehicle_model', userInfo.form2.model);
+//     data.append('vehicle_color', userInfo.form2.color);
+//     data.append('vehicle_year', userInfo.form2.year);
+//     data.append('vehicle_type', userInfo.form2.vehicle_type);
+//     data.append('vehicle_type_name', typeData[0]);
+//     data.append('vehicle_type_segment', typeData[1]);
+//     data.append('vehicle_type_segment_id', userInfo.form2.vehicle_type_segment_id);
+//     data.append('notes', userInfo.form2.notes);
+//     data.append('license_type', userInfo.form2.radio_button_type === 0 ? 2 : 1);
+//     data.append('nonce', userInfo.nonce);
+//     return await fetch(`${apiConfig.url}customer/register_new_user`, {
+//       method: 'post',
+//       body: data
+//     }).then(response => {
+//        return JSON.parse(response._bodyText).result;
+//     })
+//     .catch(error => ({ error: JSON.stringify(error) }));
+//   };
+
   customHeader = () => ({
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -132,6 +192,15 @@ class RegisterHelper {
     })
     .catch(error => ({ error }));
   }
+
+  async getBrainTreeClientToken() {
+    return await SuperFetch.get('customer/getClientToken')
+    .then(response => {
+      return response;
+    })
+    .catch(error => ({ error }));
+  }
+
 }
 
 export default new RegisterHelper();
