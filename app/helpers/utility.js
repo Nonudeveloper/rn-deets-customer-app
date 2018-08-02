@@ -155,7 +155,7 @@ export function renderFormatedDate(fullDate) {
 export function renderFormatedTime(date) {
   const dateObj = new Date(date);
   let hour = dateObj.getHours();
-  const minute = dateObj.getMinutes();
+  let minute = dateObj.getMinutes();
   const second = dateObj.getSeconds();
   let prepand = (hour >= 12) ? 'PM' : 'AM';
   hour = (hour >= 12) ? hour - 12 : hour;
@@ -181,5 +181,10 @@ export function renderFormatedTime(date) {
   if (hour < 10) {
       hour = `0${hour}`;
   }
+
+  if (minute < 10) {
+    minute = '0' + minute.toString();
+  }
+
   return `${hour}:${minute} ${prepand}`;
 }

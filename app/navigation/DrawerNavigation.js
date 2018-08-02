@@ -22,6 +22,7 @@ import AppointmentDetail from '../containers/appointmentList/detail/index';
 import RecentLocations from '../containers/home/recentLocations/index';
 import SummaryScreen from '../containers/summary/index';
 import RunningAppointments from '../containers/runningAppointments/index';
+import SuggestedServices from '../containers/runningAppointments/suggestedServices/index';
 
 
 const processOne = require('../assets/icons/4_burger_btn_onclick.png');
@@ -96,7 +97,8 @@ const appointmentStack = StackNavigator({
   PastAppointmentsDetail: { screen: AppointmentDetail },
   PromotionCodeScreen: { screen: PromotionCodeScreen },
   SummaryScreen: { screen: SummaryScreen },
-  RunningAppointments: { screen: RunningAppointments }
+  RunningAppointments: { screen: RunningAppointments },
+  SuggestedServices: { screen: SuggestedServices },
 }, {
   headerMode: 'none',
   transitionConfig: TransitionConfiguration,

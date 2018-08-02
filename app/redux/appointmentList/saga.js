@@ -8,14 +8,17 @@ import {
     makeCallToTechnicianSuccess,
     makeCallToTechnicianFaliure,
     messageToTechnicianSuccess,
-    messageToTechnicianFaliure
+    messageToTechnicianFaliure,
+    acceptOrRejectRequestedServiceSuccess,
+    acceptOrRejectRequestedServiceFaliure
 } from './actions';
 import { 
   FETCH_UPCOMING_AND_PAST_APPOINTMENTS, 
   DELETE_APPOINTMENT, 
   MAKE_CALL_TO_TECHNICIAN, 
   MESSAGE_TO_TECHNICIAN,
-  SELECT_APPOINTMENT
+  SELECT_APPOINTMENT,
+  ACCEPT_OR_REJECT_REQUESTED_SERVICE
 } from './constants';
 import appointmentHelper from '../../helpers/appointment/appointmentHelper';
 
@@ -122,9 +125,42 @@ function* watchMessageToTechnician() {
 }
 
 
+function acceptOrRejectRequestedServiceCall(data) {
+  return new Promise((resolve, reject) => {
+    appointmentHelper.acceptOrRejectRequestedService(data)
+    .then(res => {
+      if (res.flag === 34) {
+        resolve(res.log);
+      } else {
+        const error = JSON.parse(res._bodyText).error;
+        reject({ error });
+      }
+    })
+    .catch(err => reject(err));
+  });
+}
+
+
+//**Generator */
+function* watchAcceptOrRejectRequestedServiceRequest() {
+  while (true) {
+    const { payload } = yield take(ACCEPT_OR_REJECT_REQUESTED_SERVICE);
+    try {
+      const response = yield call(acceptOrRejectRequestedServiceCall, payload);
+      yield put(acceptOrRejectRequestedServiceSuccess(response));
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(acceptOrRejectRequestedServiceFaliure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
+  }
+}
+
+
 export default function* root() {
   yield fork(watchFetchUpcomingAndPastAppointments);
   yield fork(watchDeleteAppointment);
   yield fork(watchMakeCallToTechnician);
   yield fork(watchMessageToTechnician);
+  yield fork(watchAcceptOrRejectRequestedServiceRequest);
 }

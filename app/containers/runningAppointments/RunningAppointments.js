@@ -9,6 +9,8 @@ import styles from './styles';
 const visa = require('../../assets/icons/small_VISA.png');
 const smallPaypalLogo = require('../../assets/icons/papal.png');
 const passwordPoint = require('../../assets/icons/6_uncheck_btn.png');
+const notificationOn = require('../../assets/icons/notification_icon_on.png');
+const notificationOff = require('../../assets/icons/notification_icon_off.png');
 
 export default class RunningAppointments extends React.Component {
     
@@ -17,17 +19,27 @@ export default class RunningAppointments extends React.Component {
         //    console.log(interval);
     }
 
+    goToSuggestionScreen(item) {
+        if (item.suggested_service_adds_on.length !== 0) {
+             this.props.navigation.navigate('SuggestedServices');
+        }  
+    }
+
 
     render() {
         const item = this.props.currentRunningAppointments[0];
         const { timeInterval } = this.props.navigation.state.params;
         return (
-            <View style={{ flex:1 }}>
-                <Header 
-                        navigation={this.props.navigation} 
-                        headerText={'Service Details'}
+            <View style={{ flex: 1 }}>
+                <Header
+                    navigation={this.props.navigation}
+                    headerText={'Service Details'}
+                    showRightIcon
+                    rightIconType={'image'}
+                    rightImageSource={item.suggested_service_adds_on.length !== 0 ? notificationOn : notificationOff}
+                    onPress={() => this.goToSuggestionScreen(item)}
                 />
-                <View style={{ height:250 }}>
+                <View style={{ height: 250 }}>
                     <ItemList 
                         item={item} 
                         makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
@@ -36,8 +48,8 @@ export default class RunningAppointments extends React.Component {
                     />
                     <VehicleInfo item={item} />
                 </View>
-                <View style={{ height: item.service_adds_on.length !== 0 ? (item.service_adds_on.length *18+60) : 50, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
-                    <View style={{ height:item.service_adds_on.length !== 0 ? 40 : 50 }}>
+                <View style={{ height: item.service_adds_on.length !== 0 ? (item.service_adds_on.length * 18 + 60) : 50, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
+                    <View style={{ height: item.service_adds_on.length !== 0 ? 40 : 50 }}>
                         <View style={styles.serviceCostWrapper} >
                             <View style={styles.serviceNameContainer}>
                                 <Text style={styles.serviceNameTextStyle} >
@@ -76,10 +88,10 @@ export default class RunningAppointments extends React.Component {
                         }
                     </View>
                 </View>
-                <View  style={styles.paymentContainer} >
+                <View style={styles.paymentContainer} >
                     <Text style={{ fontSize: 20 }}>Payment</Text>
-                    <Image source={item.payment.length !== 0 && item.payment[0].type === 'PayPal' ? smallPaypalLogo : visa } style={styles.paymentImageStyle} />
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Image source={item.payment.length !== 0 && item.payment[0].type === 'PayPal' ? smallPaypalLogo : visa} style={styles.paymentImageStyle} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
                         <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
                         <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
