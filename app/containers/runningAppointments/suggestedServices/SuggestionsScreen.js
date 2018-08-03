@@ -30,21 +30,21 @@ export default class RunningAppointments extends React.Component {
         if (addOnsList.includes(id)) {
             const selectedAddons = addOnsList.filter(item => item !== id);
             const data = items.suggested_service_adds_on.filter(itm => {
-                return selectedAddons.indexOf(itm.adds_on_id) > -1;
+                return selectedAddons.indexOf(itm.id) > -1;
                 });
             let costSum = 0;
             for (let i = 0; i < data.length; i++) {
-                costSum += parseInt(data[i].cost);
+                costSum += parseInt(items.appointment.vehicle_type === 1 ? data[i].small_vehicle_cost : data[i].large_vehicle_cost);
             }
             this.setState({ selectedAddons, newCost: costSum });
         } else {
             addOnsList.push(id);
             const data = items.suggested_service_adds_on.filter(itm => {
-                return addOnsList.indexOf(itm.adds_on_id) > -1;
+                return addOnsList.indexOf(itm.id) > -1;
                 });
             let costSum = 0;
             for (let i = 0; i < data.length; i++) {
-                costSum += parseInt(data[i].cost);
+                costSum += parseInt(items.appointment.vehicle_type === 1 ? data[i].small_vehicle_cost : data[i].large_vehicle_cost);
             }
             this.setState({ selectedAddons: addOnsList, newCost: costSum });
         } 
@@ -52,12 +52,12 @@ export default class RunningAppointments extends React.Component {
 
     goToSuggetion(item) {
         const addOnsId = this.state.selectedAddons;
-        const data = item.suggested_service_adds_on.filter(itm =>{
-            return addOnsId.indexOf(itm.adds_on_id) > -1;
+        const data = item.suggested_service_adds_on.filter(itm => {
+            return addOnsId.indexOf(itm.id) > -1;
             });
         let costSum = 0;
         for (let i = 0; i < data.length; i++) {
-            costSum += parseInt(data[i].cost);
+            costSum += parseInt(item.appointment.vehicle_type === 1 ? data[i].small_vehicle_cost : data[i].large_vehicle_cost);
         }
         let timeSum = 0;
         for (let i = 0; i < data.length; i++) {
@@ -143,7 +143,7 @@ export default class RunningAppointments extends React.Component {
                                 <Text style={styles.serivceNameTextStyle}>{items.appointment.service_name}</Text>
                             </View>
                             <View style={styles.serviceCostContainer}>
-                                <Text style={styles.serviceCostTextStyle}>${items.appointment.service_cost}</Text>
+                                <Text style={styles.serviceCostTextStyle}>${items.appointment.total_cost === '' ? items.appointment.service_cost : items.appointment.total_cost}</Text>
                             </View>
                         </View>
                     </View>
@@ -158,14 +158,14 @@ export default class RunningAppointments extends React.Component {
                         renderItem={
                             ({ item }) => 
                             <TouchableOpacity 
-                                onPress={() => this.pushOrFilterAddOns(this.state.selectedAddons, item.adds_on_id, items)}
+                                onPress={() => this.pushOrFilterAddOns(this.state.selectedAddons, item.id, items)}
                                 activeOpacity={1}
                             > 
                                 <View style={styles.addOnsWrapper}>
                                     <View style={styles.addOnsContainer}>
                                         <View style={{ justifyContent: 'center' }}>
                                             {
-                                                this.state.selectedAddons.length !== 0 && this.state.selectedAddons.includes(item.adds_on_id) ? (
+                                                this.state.selectedAddons.length !== 0 && this.state.selectedAddons.includes(item.id) ? (
                                                     <Image style={styles.radioImage} source={checkButton} />
                                                 ) : (
                                                     <Image style={styles.radioImage} source={uncheckButton} />
@@ -178,7 +178,7 @@ export default class RunningAppointments extends React.Component {
                                             </View>
                                             <View style={styles.addOnsEstimateTimeContainer}>
                                                 <View style={styles.addOnsStaticTextContainer}>
-                                                    <Text numberOfLines={1} style={styles.addOnsStaticTextStyle} >Interior</Text>
+                                                    <Text numberOfLines={1} style={styles.addOnsStaticTextStyle} >{item.adds_on_type_name}</Text>
                                                 </View>
                                                 <View style={styles.addOnsEstimateTimeInnerContainer}>
                                                     <Text numberOfLines={1} style={styles.radioContainerTimeText} >Estimate Time - {item.estimation_time} Mins</Text>
@@ -186,7 +186,7 @@ export default class RunningAppointments extends React.Component {
                                             </View>
                                         </View>
                                         <View style={styles.addOnsCostContainer}>
-                                            <Text style={styles.radioContainerText} >${item.cost}</Text>
+                                            <Text style={styles.radioContainerText} >${items.appointment.vehicle_type === 1 ? item.small_vehicle_cost : item.large_vehicle_cost}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -206,7 +206,7 @@ export default class RunningAppointments extends React.Component {
                         <Text style={styles.paymentTextStyle}>{items.payment[0].card_number.toString().substr(-4)}</Text>
                     </View>
                     <Text style={styles.paymentCostTextStyle}>
-                        ${parseInt(items.appointment.total_cost) + this.state.newCost}
+                        ${parseInt(items.appointment.total_cost === '' ? items.appointment.service_cost : items.appointment.total_cost) + this.state.newCost}
                     </Text>
                 </View>
             </View>

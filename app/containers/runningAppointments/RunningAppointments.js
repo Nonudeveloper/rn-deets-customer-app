@@ -58,7 +58,7 @@ export default class RunningAppointments extends React.Component {
                             </View>
                             <View style={styles.serviceCostContainer} >
                                 <Text style={styles.serviceCostStyle}>
-                                    ${item.appointment.total_cost}
+                                    ${item.appointment.service_cost}
                                 </Text>
                             </View>
                         </View>

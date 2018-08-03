@@ -110,8 +110,7 @@ export default class DrawerContainer extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
-              // onPress={this.invokeInstabugFeedbackMode}
-              onPress={() => navigation.navigate('SummaryScreen')}
+              onPress={this.invokeInstabugFeedbackMode}
             >
                   <Text style={styles.menuText} type='h5White'>Feedback</Text>
             </TouchableOpacity>
