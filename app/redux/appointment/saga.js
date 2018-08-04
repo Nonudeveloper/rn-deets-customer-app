@@ -46,6 +46,8 @@ function scheduleNewAppointmentCall(payload) {
         .then(res => {
           if (res.log) {
             resolve(res);
+         } else if (JSON.parse(res._bodyText).flag === 61) {
+          reject({ error: JSON.parse(res._bodyText).error });
          } else {
            reject({ error: 'Unable to process' });
          }
