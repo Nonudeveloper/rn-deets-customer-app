@@ -10,7 +10,8 @@ import {
     messageToTechnicianSuccess,
     messageToTechnicianFaliure,
     acceptOrRejectRequestedServiceSuccess,
-    acceptOrRejectRequestedServiceFaliure
+    acceptOrRejectRequestedServiceFaliure,
+    fetchUpcomingAndPastAppointments
 } from './actions';
 import { 
   FETCH_UPCOMING_AND_PAST_APPOINTMENTS, 
@@ -67,10 +68,13 @@ function messageToTechnicianCall(data) {
 //**Generator */
 function* watchFetchUpcomingAndPastAppointments() {
     while (true) {
-      yield take(FETCH_UPCOMING_AND_PAST_APPOINTMENTS);
+     const { payload } = yield take(FETCH_UPCOMING_AND_PAST_APPOINTMENTS);
       try {
         const response = yield call(fetchUpcomingAndPastAppointmentsCall);
         yield put(fetchUpcomingAndPastAppointmentsSuccess(response.data[0]));
+        if (payload !== undefined) {
+          yield put(acceptOrRejectRequestedServiceSuccess(payload));
+        }
         console.log('SAGA FETCH SUCCESS: ', response);
       } catch (err) {
         yield put(fetchUpcomingAndPastAppointmentsFaliure(err));
@@ -147,7 +151,8 @@ function* watchAcceptOrRejectRequestedServiceRequest() {
     const { payload } = yield take(ACCEPT_OR_REJECT_REQUESTED_SERVICE);
     try {
       const response = yield call(acceptOrRejectRequestedServiceCall, payload);
-      yield put(acceptOrRejectRequestedServiceSuccess(response));
+      yield put(fetchUpcomingAndPastAppointments(response));
+      // yield put(acceptOrRejectRequestedServiceSuccess(response));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
       yield put(acceptOrRejectRequestedServiceFaliure(err));

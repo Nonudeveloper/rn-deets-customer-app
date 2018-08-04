@@ -93,7 +93,7 @@ export default class RunningAppointments extends React.Component {
                 //dispath an action to make showAlert false
                     this.props.actions.hideAlert();
                     if (heading === 'Success') {
-                        this.props.navigation.navigate('HomeComponent');
+                        this.props.navigation.goBack();
                     }
                 } 
                 },
