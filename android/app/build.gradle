@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
+
 
 import com.android.build.OutputFile
 
@@ -104,8 +104,8 @@ android {
         applicationId "com.deetscp"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -181,7 +181,6 @@ dependencies {
     compile "com.android.support:support-v13:24.2.1"
     compile project(':react-native-fcm')
     compile 'com.google.firebase:firebase-core:10.0.1' //this decides your firebase SDK version
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile project(':react-native-splash-screen')
     compile project(':rn-fetch-blob')
     compile project(':react-native-background-timer')
@@ -193,3 +192,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+apply plugin: 'com.google.gms.google-services'

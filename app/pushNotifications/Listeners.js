@@ -44,9 +44,8 @@ export function registerKilledListener() {
 }
 
 const handleNotification = notif => {
-  const parsedBody = JSON.parse(notif.fcm.body);
+  const parsedBody = JSON.parse(notif.fcm.body)
   
-
   Alert.alert(
     'Notification',
     parsedBody.message,

@@ -11,6 +11,7 @@ import { Platform } from 'react-native';
 import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
 registerKilledListener();
+const background = require('../containers/start/images/back.png');
 
 class ReduxNavigation extends React.Component {
   constructor(props) {
@@ -21,11 +22,17 @@ class ReduxNavigation extends React.Component {
       loggedInStatus: false,
       checkedSignIn: false,
       showLoadingSplash: true,
-      deviceToken: 'dfdf878500mkhfdvcoiuyrwazx'
+      deviceToken: ''
     };
   }
 
-  componentWillMount() {
+  promisedSetState = (newState) => new Promise(resolve => {
+      this.setState(newState, () => {
+          resolve();
+      });
+  })
+
+  checkForSignedIn() {
     isSignedIn()
       .then(res => {
         if (res !== false) {
@@ -46,7 +53,6 @@ class ReduxNavigation extends React.Component {
             this.props.dispatch(loginThroughAccessToken(this.state.deviceToken));
           });
         } else {
-          console.log('in else');
           this.setState({
             loggedInStatus: false,
             checkedSignIn: false,
@@ -57,7 +63,7 @@ class ReduxNavigation extends React.Component {
       .catch(err => console.log(err));
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     registerAppListener(this.props.navigation);
     FCM.getInitialNotification().then(notif => {
       this.setState({
@@ -81,25 +87,16 @@ class ReduxNavigation extends React.Component {
     }
 
     if (Platform.OS === "android") {
-      FCM.getFCMToken().then(token => {
-        console.log("TOKEN (getFCMToken)", token);
-        const deviceToken = {
-          token,
-          os: 'android'
-        };
-        this.setState({ deviceToken: token });
-        this.props.dispatch(saveDeviceToken(deviceToken));
-      });
+      let token = await FCM.getFCMToken();
+      await this.promisedSetState({ deviceToken: token });
+      this.props.dispatch(saveDeviceToken(token));
+      this.checkForSignedIn();
     }
-
-    // topic example
-    // FCM.subscribeToTopic('sometopic')
-    // FCM.unsubscribeFromTopic('sometopic')
   }
 
   render() {
     const { dispatch, nav } = this.props;
-    const background = require('../containers/start/images/back.png');
+    
     const navigation = ReactNavigation.addNavigationHelpers({
       dispatch,
       state: nav,

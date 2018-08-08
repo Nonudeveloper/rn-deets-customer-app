@@ -8,11 +8,9 @@ export const USER = 'user';
 export const onSignOut = () => AsyncStorage.removeItem(USER);
 
 export const isSignedIn = () => {
-  AsyncStorage.removeItem(AUTH_TOKEN);
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem(USER)
       .then(res => {
-        console.log(res);
         if (res !== null) {
           resolve(true);
         } else {
