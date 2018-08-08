@@ -21,17 +21,6 @@ export default class DrawerContainer extends React.Component {
         modalVisible: false,
       };
   }
-  // logout = () => {
-  //   // This will reset back to loginStack
-  //   // https://github.com/react-community/react-navigation/issues/1127
-  //   const actionToDispatch = NavigationActions.reset({
-  //     index: 0,
-  //     key: null,  // black magic
-  //     actions: [NavigationActions.navigate({ routeName: 'loginStack' })]
-  //   })
-  //   console.log(this.props)
-  //   this.props.navigation.dispatch(actionToDispatch)
-  // }
 
   setModalVisible = (visible) => {
     this.props.navigation.navigate('DrawerClose');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Keyboard, Text } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, initialize } from 'redux-form';
 import Header from '../../header/Header';
 import Button from '../../../deetscomponents/Button';
 import CommonTypeTextInput from '../../../components/form/Input';
@@ -18,6 +18,13 @@ class NotesScreen extends React.Component {
       if (!this.props.userCardDetails.length) {
         this.props.actions.fetchCardDetails();
       }
+  }
+
+  componentDidMount() {
+      const initialFormData = {
+        notes: ''
+    };
+    this.props.dispatch(initialize('notes', initialFormData));
   }
   
   render() {
@@ -59,6 +66,7 @@ class NotesScreen extends React.Component {
 
 export default reduxForm({ 
     form: 'notes',
+    enableReinitialize: true,
 })(NotesScreen);
 
 const styles = StyleSheet.create({

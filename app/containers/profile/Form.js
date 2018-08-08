@@ -5,8 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import CommonTextInput from '../../deetscomponents/form/Input';
 
-
-
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
 
 class FormArea extends React.Component {
@@ -24,20 +22,6 @@ class FormArea extends React.Component {
     componentDidMount() {
         if (this.props.authUser.length !== 0) {
             const user = this.props.authUser;
-            const initialFormData = {
-                fname: user.first_name,
-                lname: user.last_name,
-                mobile: user.mobile,
-                email: user.email,
-                access_token: user.access_token
-            };
-            this.props.dispatch(initialize('profileDetails', initialFormData));
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.authUser.length !== 0) {
-            const user = nextProps.authUser;
             const initialFormData = {
                 fname: user.first_name,
                 lname: user.last_name,

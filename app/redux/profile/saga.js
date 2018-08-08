@@ -87,10 +87,10 @@ function changePasswordCall(payload) {
   return new Promise((resolve, reject) => {
     ProfileHelper.changeUserPassword(payload)
       .then(res => {
-        if (res.log) {
+        if (res.flag === 24) {
           resolve(res);
         } else {
-          const log = res.error;
+          const log = JSON.parse(res._bodyText).error;
            reject({ log });
         }
       })

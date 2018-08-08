@@ -6,47 +6,49 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
-        const userImage = {
-            name: 'user_image',
-            filename: 'myPhoto.jpg',
-            type: userInfo.newImage.type,
-            data: RNFetchBlob.wrap(userInfo.newImage.uri),
-        };
+        let userImage;
+        if (userInfo.newImage !== '') {
+            userImage = {
+                name: 'user_image',
+                filename: 'myPhoto.jpg',
+                type: userInfo.newImage.type,
+                data: RNFetchBlob.wrap(userInfo.newImage.uri),
+            };
+            return await RNFetchBlob.fetch(
+                'POST',
+                `${apiConfig.url}customer/edit_user_profile`,
+                {
+                  Accept: 'application/json',
+                  'Content-Type': 'multipart/form-data',
+                },
+                [
+                    { name: 'first_name', data: userInfo.userProfileDetails.fname },
+                    { name: 'last_name', data: userInfo.userProfileDetails.lname },
+                    { name: 'mobile', data: userInfo.userProfileDetails.mobile },
+                    { name: 'access_token', data: userInfo.userProfileDetails.access_token },
+                    userImage,
+                ],
+            ).then((resp) => {
+                console.log(resp);
+                return JSON.parse(resp.data);
+            }).catch((err) => {
+                console.warn(err);
+            });
+        } else {
+            const data = {
+                user_image: null,
+                first_name: userInfo.userProfileDetails.fname,
+                last_name: userInfo.userProfileDetails.lname,
+                mobile: userInfo.userProfileDetails.mobile,
+                access_token: userInfo.userProfileDetails.access_token
+            };
 
-        return await RNFetchBlob.fetch(
-            'POST',
-            `${apiConfig.url}customer/edit_user_profile`,
-            {
-              Accept: 'application/json',
-              'Content-Type': 'multipart/form-data',
-            },
-            [
-                { name: 'first_name', data: userInfo.userProfileDetails.fname },
-                { name: 'last_name', data: userInfo.userProfileDetails.lname },
-                { name: 'mobile', data: userInfo.userProfileDetails.mobile },
-                { name: 'access_token', data: userInfo.userProfileDetails.access_token },
-                userImage,
-            ],
-        ).then((resp) => {
-            console.log(resp);
-            return JSON.parse(resp.data);
-        }).catch((err) => {
-            console.warn(err);
-        });
-        
-        // const data = new FormData();
-        // data.append('user_image', userInfo.newImage !== '' ? this.getImage(userInfo.newImage) : '');
-        // data.append('first_name', userInfo.userProfileDetails.fname);
-        // data.append('last_name', userInfo.userProfileDetails.lname);
-        // data.append('mobile', userInfo.userProfileDetails.mobile);
-        // data.append('access_token', userInfo.userProfileDetails.access_token);
-        // return await fetch(`${apiConfig.url}customer/edit_user_profile`, {
-        //     method: 'POST',
-        //     body: data,
-        // }).then(response => {
-        //     return JSON.parse(response._bodyText);
-        // })
-        // .catch(error => ({ error: JSON.stringify(error) }));
+            return await SuperFetch.post('customer/edit_user_profile', data)
+            .then(response => {
+                return response;
+            })
+            .catch(error => console.log(error));
+        }
     }
 
     getImage(image) {
@@ -61,7 +63,7 @@ class ProfileHelper {
         const registration_type = 2;
 
         return await SuperFetch.post('customer/change_password_from_access_token', { ...passwordData, access_token, registration_type }).then(response => {
-            return JSON.parse(response._bodyText);
+            return response;
         })
         .catch(error => ({ error: JSON.stringify(error) }));
         }
