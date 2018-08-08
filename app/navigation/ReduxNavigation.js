@@ -26,6 +26,19 @@ class ReduxNavigation extends React.Component {
   }
 
   componentWillMount() {
+
+    if (Platform.OS === "android") {
+      FCM.getFCMToken().then(token => {
+        console.log("TOKEN (getFCMToken)", token);
+        const deviceToken = {
+          token,
+          os: 'android'
+        };
+        this.setState({ deviceToken });
+        this.props.dispatch(saveDeviceToken(deviceToken));
+      });
+    }
+
     isSignedIn()
       .then(res => {
         if (res !== false) {
@@ -58,8 +71,10 @@ class ReduxNavigation extends React.Component {
   }
 
   async componentDidMount() {
-    registerAppListener(this.props.navigation);
+    registerAppListener(ReactNavigation, this.props);
     FCM.getInitialNotification().then(notif => {
+      console.log(notif);
+      console.log('here');
       this.setState({
         initNotif: notif
       });
@@ -80,17 +95,17 @@ class ReduxNavigation extends React.Component {
       console.error(e);
     }
 
-    if (Platform.OS === "android") {
-      FCM.getFCMToken().then(token => {
-        console.log("TOKEN (getFCMToken)", token);
-        const deviceToken = {
-          token,
-          os: 'android'
-        };
-        this.setState({ deviceToken: token });
-        this.props.dispatch(saveDeviceToken(deviceToken));
-      });
-    }
+    // if (Platform.OS === "android") {
+    //   FCM.getFCMToken().then(token => {
+    //     console.log("TOKEN (getFCMToken)", token);
+    //     const deviceToken = {
+    //       token,
+    //       os: 'android'
+    //     };
+    //     this.setState({ deviceToken: token });
+    //     this.props.dispatch(saveDeviceToken(deviceToken));
+    //   });
+    // }
 
     // topic example
     // FCM.subscribeToTopic('sometopic')

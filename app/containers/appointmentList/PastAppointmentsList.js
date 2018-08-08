@@ -49,13 +49,13 @@ class PastAppointmentsList extends Component {
 
     flatListItemSeparator = () => {
         return (
-          <View
-            style={{
-              height: 3,
-              width: '100%',
-              backgroundColor: '#333',
-            }}
-          />
+            <View
+                style={{
+                height: 3,
+                width: '100%',
+                backgroundColor: '#333',
+                }}
+            />
         );
     }
 

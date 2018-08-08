@@ -43,34 +43,31 @@ export function registerKilledListener() {
   });
 }
 
-const handleNotification = notif => {
-  const parsedBody = JSON.parse(notif.fcm.body);
-  
-
+const handleNotification = (notif, navigation, props) => {
   Alert.alert(
     'Notification',
-    parsedBody.message,
+    notif.message,
     [
       { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
       { text: 'View', onPress: () => {
-        switch (parsedBody.type) {
+        switch (parseInt(notif.type)) {
           case 1:
-            console.log('take me to the appointment');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
             break;
           case 2:
-            console.log('appointmment has been started');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
             break;
           case 3:
-            console.log('appointment has been completed');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
             break;
           case 4:
-            console.log('more services has been suggested');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
             break;
           case 5:
-            console.log('cancelled with no show flag');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
             break;
           case 6:
-            console.log('technician has cancelled the sevice');
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
             break;
           default:
             break;
@@ -82,10 +79,10 @@ const handleNotification = notif => {
 };
 
 // these callback will be triggered only when app is foreground or background
-export function registerAppListener(navigation) {
+export function registerAppListener(navigation, props) {
   FCM.on(FCMEvent.Notification, notif => {
     console.log('Notification', notif);
-    handleNotification(notif);
+    // handleNotification(notif);
     if (Platform.OS === 'ios' && notif._notificationType === NotificationType.WillPresent && !notif.local_notification) {
       // this notification is only to decide if you want to show the notification when user if in foreground.
       // usually you can ignore it. just decide to show or not.
@@ -94,14 +91,50 @@ export function registerAppListener(navigation) {
     }
 
     if (notif.opened_from_tray) {
-      if (notif.targetScreen === 'detail') {
-        setTimeout(() => {
-          navigation.navigate('Detail');
-        }, 500);
+      switch (parseInt(notif.type)) {
+        case 1:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+          }, 500);
+          break;
+        case 2:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
+          }, 500);
+          break;
+        case 3:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
+          }, 500);
+          break;
+        case 4:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
+          }, 500);
+          break;
+        case 5:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+          }, 500);
+          break;
+        case 6:
+          setTimeout(() => {
+            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+          }, 500);
+          break;
+        default:
+          break;
       }
-      setTimeout(() => {
-        alert(`User tapped notification\n${JSON.stringify(notif)}`);
-      }, 500);
+      // if (notif.targetScreen === 'detail') {
+      //   setTimeout(() => {
+      //     navigation.NavigationActions.navigate({ routeName: 'drawerStack' });
+      //   }, 500);
+      // }
+      // setTimeout(() => {
+      //   alert(`User tapped notification\n${JSON.stringify(notif)}`);
+      // }, 500);
+    } else {
+      handleNotification(notif, navigation, props);
     }
   });
 
