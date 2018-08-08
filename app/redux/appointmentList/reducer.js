@@ -14,7 +14,11 @@ import {
     MESSAGE_TO_TECHNICIAN_FALIURE,
     TOGGLE_EDIT_MODE,
     SELECT_APPOINTMENT,
-    SELECT_ALL_APPOINTMENTS
+    SELECT_ALL_APPOINTMENTS,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE_SUCCESS,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE_FALIURE,
+    HIDE_ALERT
 } from './constants';
 
 const initialState = {
@@ -25,6 +29,8 @@ const initialState = {
       selectedAppointment: '',
       editMode: false,
       selectedAppointments: [],
+      currentRunningAppointments: [],
+      serviceRequestMessage: ''
 };
 
 
@@ -47,7 +53,8 @@ export default function appointmentListReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 isFetching: false,
                 upcomingAppointments: action.upcomingAppointments,
-                pastAppointments: action.pastAppointments
+                pastAppointments: action.pastAppointments,
+                currentRunningAppointments: action.currentRunningAppointments
             });
         case FETCH_UPCOMING_AND_PAST_APPOINTMENTS_FALIURE:
             return Object.assign({}, state, {
@@ -109,6 +116,25 @@ export default function appointmentListReducer(state = initialState, action) {
         case SELECT_ALL_APPOINTMENTS:
             return Object.assign({}, state, {
                 selectedAppointments: action.IDs
+            });
+        case ACCEPT_OR_REJECT_REQUESTED_SERVICE:
+            return Object.assign({}, state, {
+                isFetching: true,
+                selectedAppointments: action.IDs
+            });
+        case ACCEPT_OR_REJECT_REQUESTED_SERVICE_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                serviceRequestMessage: action.res
+            });
+        case ACCEPT_OR_REJECT_REQUESTED_SERVICE_FALIURE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                serviceRequestMessage: action.err
+            });
+        case HIDE_ALERT:
+            return Object.assign({}, state, {
+                serviceRequestMessage: ''
             });
         default:
             return state;

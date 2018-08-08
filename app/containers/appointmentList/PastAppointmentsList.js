@@ -23,15 +23,20 @@ class PastAppointmentsList extends Component {
     } 
 
     componentWillMount() {
-        getAppointments()
-        .then(res => {
-            this.setState({ appointments: res[0].data[0], loading: false });
-        })
-        .catch(err => alert("An error occurred"));
+        // getAppointments()
+        // .then(res => {
+        //     this.setState({ appointments: res[0].data[0], loading: false });
+        // })
+        // .catch(err => alert("An error occurred"));
+        if (!this.props.upcomingAppointments.length) {
+            this.setState({ selectedTab: 'past' });
+        } else {
+            this.setState({ selectedTab: 'upcoming' });
+        }
     }
 
     componentDidMount() {
-        this.props.actions.fetchUpcomingAndPastAppointments();
+        // this.props.actions.fetchUpcomingAndPastAppointments();
     }
 
     componentWillReceiveProps(nextProps) {

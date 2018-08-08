@@ -1,7 +1,7 @@
 import React from 'react';
 import { take, put, call, fork } from 'redux-saga/effects';
 import { fetchPolygonDataSuccess, fetchPolygonDataFaliure, payTipToTechnicianSuccess, payTipToTechnicianFaliure } from './homeActions';
-import { FETCH_POLYGON_DATA, PAY_TIP_TO_TECHNICIAN } from './constants';
+import { FETCH_POLYGON_DATA, PAY_TIP_TO_TECHNICIAN, SAVE_UNSERVED_AREA } from './constants';
 import HomeHelper from '../../helpers/home/homeHelper';
 
 
@@ -59,8 +59,37 @@ function* watchPayTipToTechnicianRequest() {
   }
 }
 
+function saveUnservedAreaCall(payload) {
+  return new Promise((resolve, reject) => {
+    HomeHelper.saveUnservedArea(payload)
+    .then((res) => {
+      if (res.flag === 39) {
+        resolve(JSON.parse(res._bodyText));
+      } else {
+        const error = JSON.parse(res._bodyText).error;
+        reject({ error });
+      } 
+    });
+  });
+}
+
+function* watchSaveUnservedAreaRequest() {
+  while (true) {
+     const { areaData } = yield take(SAVE_UNSERVED_AREA);
+    try {
+      const response = yield call(saveUnservedAreaCall, areaData);
+      // yield put(payTipToTechnicianSuccess(response));
+      console.log('Recent Location Success: ', response);
+    } catch (err) {
+      console.log('Recent Location ERROR: ', err);
+      // yield put(payTipToTechnicianFaliure(err));
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(watchFetchPolygonData);
   yield fork(watchPayTipToTechnicianRequest);
+  yield fork(watchSaveUnservedAreaRequest);
 }

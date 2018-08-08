@@ -146,6 +146,12 @@ class AppointmetHelper {
         };
         return await SuperFetch.post('send_text_message_to_technician_or_user', data);
     } 
+
+    acceptOrRejectRequestedService = async addOnsData => {
+        const user = await getItem('user');
+        const access_token = JSON.parse(user).access_token;
+        return await SuperFetch.post('customer/accept_or_reject_requested_service_by_technician', { access_token, ...addOnsData });
+    }
   
 }
 

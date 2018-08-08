@@ -6,6 +6,7 @@ import HomeScreen from './HomeScreen';
 
 import * as homeActions from '../../redux/home/homeActions';
 import { getFullAddressReverseGeo, updateLocationData } from '../../redux/geoCoding/geoActions';
+import { fetchUpcomingAndPastAppointments } from '../../redux/appointmentList/actions'
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -21,8 +22,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateLocationData: (data) => {
             dispatch(updateLocationData(data));
+        },
+        fetchUpcomingAndPastAppointments: () => {
+            dispatch(fetchUpcomingAndPastAppointments());
+        },
+        saveUnservedArea: (data) => {
+            dispatch(homeActions.saveUnservedArea(data));
         }
-   
     };
 };
 
@@ -32,7 +38,7 @@ const mapStateToProps = (state) => {
         isLoading: state.Geo.isFetching,
         polygonData: state.home.polygonData,
         pointFeatures: state.home.pointFeatures,
-
+        currentRunningAppointments: state.Auth.authUserWholeData.current_running_appointments
     };
 };
 

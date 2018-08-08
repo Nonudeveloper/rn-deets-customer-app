@@ -13,7 +13,7 @@ class CreditCardForm extends React.Component {
 
     constructor(props) {
         super(props);
-        BTClient.setup('MIIBCgKCAQEAto8NFR7f6BJvtlpTkWG0ISdI6ektkAMBMfVECOMfTr7R6Ujushm/fUGXO/dGsH29XXYir7WsRsv43Ay7LbMtf25C33Ne3+6ds02DDG4b7Ri0H3ddi6+r3QFUn8sJvb6YTRfuYEQ2ZzYXHv2mWOtAYTwlJWAReZssZ/fOJ3QHdurvUstTlZkupur6gGn/tcYKZx49yBj/vJgrPnc+6Wb7N+vnXefwMwUlZfPwy4DoLs4m5U8i1bAtI4snvzCeUQlSPMBJrx5uoQaLK/xS/4JCluFskSl1H6F1z45xA4beHzNjjUC3Z4sd+mXt1hahyfScSgWjqLmC/Wxj4kfdMk/SIwIDAQAB');
+        // BTClient.setup('MIIBCgKCAQEAto8NFR7f6BJvtlpTkWG0ISdI6ektkAMBMfVECOMfTr7R6Ujushm/fUGXO/dGsH29XXYir7WsRsv43Ay7LbMtf25C33Ne3+6ds02DDG4b7Ri0H3ddi6+r3QFUn8sJvb6YTRfuYEQ2ZzYXHv2mWOtAYTwlJWAReZssZ/fOJ3QHdurvUstTlZkupur6gGn/tcYKZx49yBj/vJgrPnc+6Wb7N+vnXefwMwUlZfPwy4DoLs4m5U8i1bAtI4snvzCeUQlSPMBJrx5uoQaLK/xS/4JCluFskSl1H6F1z45xA4beHzNjjUC3Z4sd+mXt1hahyfScSgWjqLmC/Wxj4kfdMk/SIwIDAQAB');
     }
     state = {
         card: {
@@ -27,11 +27,18 @@ class CreditCardForm extends React.Component {
     }
 
     componentWillMount() {
+        this.props.getBrainTreeClientToken();
         getItem('user')
         .then(res => {
             this.setState({ user: JSON.parse(res) });
           })
           .catch(err => alert("An error occurred"));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.clientToken !== this.props.clientToken) {
+          BTClient.setup(nextProps.clientToken);
+        }
     }
 
     getNonceAndSubmit = (card) => {

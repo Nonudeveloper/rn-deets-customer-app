@@ -18,6 +18,10 @@ import {
     SELECT_APPOINTMENT_FALIURE,
     TOGGLE_EDIT_MODE,
     SELECT_ALL_APPOINTMENTS,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE_SUCCESS,
+    ACCEPT_OR_REJECT_REQUESTED_SERVICE_FALIURE,
+    HIDE_ALERT
 } from './constants';
 
 export function fetchUpcomingAndPastAppointments(payload) {
@@ -31,7 +35,8 @@ export function fetchUpcomingAndPastAppointmentsSuccess(appointments) {
     return {
         type: FETCH_UPCOMING_AND_PAST_APPOINTMENTS_SUCCESS,
         upcomingAppointments: appointments.upcoming_appointments,
-        pastAppointments: appointments.past_appointments
+        pastAppointments: appointments.past_appointments,
+        currentRunningAppointments: appointments.current_running_appointments
     };
 }
 
@@ -147,5 +152,32 @@ export function selectAllAppointments(IDs) {
 export function toggleEditMode() {
     return {
         type: TOGGLE_EDIT_MODE,
+    };
+}
+
+export function acceptOrRejectRequestedService(payload) {
+    return {
+        type: ACCEPT_OR_REJECT_REQUESTED_SERVICE,
+        payload
+    };
+}
+
+export function acceptOrRejectRequestedServiceSuccess(res) {
+    return {
+        type: ACCEPT_OR_REJECT_REQUESTED_SERVICE_SUCCESS,
+        res
+    };
+}
+
+export function acceptOrRejectRequestedServiceFaliure(err) {
+    return {
+        type: ACCEPT_OR_REJECT_REQUESTED_SERVICE_FALIURE,
+        err
+    };
+}
+
+export function hideAlert() {
+    return {
+      type: HIDE_ALERT
     };
 }
