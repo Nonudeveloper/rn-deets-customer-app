@@ -43,6 +43,7 @@ export function registerKilledListener() {
   });
 }
 
+
 const handleNotification = (notif, navigation, props) => {
   Alert.alert(
     'Notification',

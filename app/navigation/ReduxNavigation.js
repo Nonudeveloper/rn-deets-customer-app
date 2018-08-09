@@ -11,6 +11,7 @@ import { Platform, Alert } from 'react-native';
 import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
 registerKilledListener();
+const background = require('../containers/start/images/back.png');
 
 class ReduxNavigation extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class ReduxNavigation extends React.Component {
       loggedInStatus: false,
       checkedSignIn: false,
       showLoadingSplash: true,
-      deviceToken: 'dfdf878500mkhfdvcoiuyrwazx'
+      deviceToken: ''
     };
   }
 
@@ -59,7 +60,6 @@ class ReduxNavigation extends React.Component {
             this.props.dispatch(loginThroughAccessToken(this.state.deviceToken));
           });
         } else {
-          console.log('in else');
           this.setState({
             loggedInStatus: false,
             checkedSignIn: false,
@@ -118,7 +118,7 @@ class ReduxNavigation extends React.Component {
     } catch (e) {
       console.error(e);
     }
-
+  
     // if (Platform.OS === "android") {
     //   FCM.getFCMToken().then(token => {
     //     console.log("TOKEN (getFCMToken)", token);
@@ -138,7 +138,7 @@ class ReduxNavigation extends React.Component {
 
   render() {
     const { dispatch, nav } = this.props;
-    const background = require('../containers/start/images/back.png');
+    
     const navigation = ReactNavigation.addNavigationHelpers({
       dispatch,
       state: nav,
