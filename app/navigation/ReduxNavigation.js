@@ -7,7 +7,7 @@ import { addListener } from '../helpers/utils/redux';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
 import FCM from "react-native-fcm";
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
 import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
 registerKilledListener();
@@ -73,16 +73,40 @@ class ReduxNavigation extends React.Component {
   async componentDidMount() {
     registerAppListener(ReactNavigation, this.props);
     FCM.getInitialNotification().then(notif => {
-      console.log(notif);
-      console.log('here');
-      this.setState({
-        initNotif: notif
-      });
-      if (notif && notif.targetScreen === "detail") {
-        setTimeout(() => {
-          this.props.navigation.navigate("Detail");
-        }, 500);
-      }
+      if (notif.fcm.action !== null) {
+      Alert.alert(
+        'Notification',
+        notif.message,
+        [
+          { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
+          { text: 'View', onPress: () => {
+            switch (parseInt(notif.type)) {
+              case 1:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+                break;
+              case 2:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
+                break;
+              case 3:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
+                break;
+              case 4:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
+                break;
+              case 5:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+                break;
+              case 6:
+              this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+                break;
+              default:
+                break;
+            }
+          } },
+        ],
+        { cancelable: false }
+      );
+    }
     });
 
     try {

@@ -15,7 +15,7 @@ export default class TimeInterval extends React.Component {
     
     componentDidMount() {
         this.props.onRef(this);
-        if (this.props.nextScreenTime) {
+        if (this.props.nextScreenTime && this.props.initialTimeInterval !== 0) {
             this.setState({ initialCounter: this.props.initialTimeInterval });
         } else {
             this.setState({ initialCounter: (new Date() - new Date(this.props.currentRunningAppointments.service_start_time_by_technician)) });
