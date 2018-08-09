@@ -76,8 +76,9 @@ class AuthHelper {
     const payload = {
       access_token: JSON.parse(user).access_token,
       registration_type: 2,
-      device_token: deviceToken
-    }
+      device_token: deviceToken.token,
+      user_type: deviceToken.os === 'android' ? 2 : 1
+    };
     return await SuperFetch.post('customer/login_through_accesstoken', payload)
     .then(response => { return response; });
   }
