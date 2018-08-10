@@ -41,8 +41,7 @@ class ProfileHelper {
                 last_name: userInfo.userProfileDetails.lname,
                 mobile: userInfo.userProfileDetails.mobile,
                 access_token: userInfo.userProfileDetails.access_token
-            };
-        } 
+            }; 
 
             return await SuperFetch.post('customer/edit_user_profile', data)
             .then(response => {

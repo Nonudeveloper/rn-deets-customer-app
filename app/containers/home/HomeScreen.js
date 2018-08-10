@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
