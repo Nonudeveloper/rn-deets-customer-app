@@ -7,8 +7,7 @@ export const USER = 'user';
 
 export const onSignOut = () => AsyncStorage.removeItem(USER);
 
-export const isSignedIn = () => {
-  return new Promise((resolve, reject) => {
+export const isSignedIn = () => new Promise((resolve, reject) => {
     AsyncStorage.getItem(USER)
       .then(res => {
         if (res !== null) {
@@ -18,8 +17,7 @@ export const isSignedIn = () => {
         }
       })
       .catch(err => reject(err));
-  });
-};
+});
 
 
 export function clearToken() {

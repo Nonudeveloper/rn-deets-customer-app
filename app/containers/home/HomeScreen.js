@@ -318,7 +318,7 @@ export default class HomeScreen extends Component {
               style={styles.map}
             >
               {this.renderPolygon(this.state.polygonData)}
-              {this.renderMarkers(this.state.pointFeatures)}
+              {/* {this.renderMarkers(this.state.pointFeatures)} */}
               {this.renderLabels(this.state.pointFeatures)}
             </Mapbox.MapView>
 
