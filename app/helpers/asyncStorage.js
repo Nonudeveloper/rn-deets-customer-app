@@ -11,8 +11,7 @@ export const setItem = async (name, data) => {
     }
 };
 
-export const getItem = async (name) => {
-  return new Promise((resolve, reject) => {
+export const getItem = async (name) => new Promise((resolve, reject) => {
     AsyncStorage.getItem(name)
       .then(res => {
         if (res !== null) {
@@ -24,7 +23,6 @@ export const getItem = async (name) => {
       })
       .catch(err => reject(err));
   });
-};
 
 export const removeItem = async (name) => {
     try {
@@ -47,8 +45,7 @@ export const setCardDetails = async (card) => {
     }
   };
 
-  export const getCardDetails = async (name) => {
-    return new Promise((resolve, reject) => {
+  export const getCardDetails = async (name) => new Promise((resolve, reject) => {
       AsyncStorage.getItem(name)
         .then(res => {
             console.log(res)
@@ -59,5 +56,4 @@ export const setCardDetails = async (card) => {
           }
         })
         .catch(err => reject(err));
-    });
-  };
+  });
