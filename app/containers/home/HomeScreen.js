@@ -310,6 +310,9 @@ export default class HomeScreen extends Component {
               onRegionDidChange={this.onRegionDidChange}
               zoomLevel={this.state.zoomLevel}
               zoomEnabled
+              rotateEnabled
+              pitchEnabled
+              scrollEnabled
               ref={(c) => this._map = c}
               onPress={this.onPress}
               style={styles.map}
