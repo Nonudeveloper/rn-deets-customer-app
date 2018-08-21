@@ -1,10 +1,10 @@
 import React from 'react';
-import { 
+import {
     StyleSheet,
     View,
     TouchableOpacity,
     Image,
- } from 'react-native';
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
@@ -13,7 +13,7 @@ const userAvatar = require('../../../assets/icons/3_user_img.png');
 const editBtn = require('../../../assets/icons/edit_btn.png');
 
 export default class ProfilePic extends React.Component {
-    
+
     state = {
         ImageSource: null,
     };
@@ -30,19 +30,19 @@ export default class ProfilePic extends React.Component {
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
             if (response.didCancel) {
-              console.log('User cancelled photo picker');
+                console.log('User cancelled photo picker');
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+                console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
+                console.log('User tapped custom button: ', response.customButton);
             } else {
-            //   const source = { uri: response.uri };
-              // You can also display the image using data:
-              const source = { uri: 'data:image/jpeg;base64,' + response.data };
-              this.setState({
-                ImageSource: source
-              });
-              this.props.getImage(response);
+                //   const source = { uri: response.uri };
+                // You can also display the image using data:
+                const source = { uri: 'data:image/jpeg;base64,' + response.data };
+                this.setState({
+                    ImageSource: source
+                });
+                this.props.getImage(response);
             }
         });
     }
@@ -56,7 +56,17 @@ export default class ProfilePic extends React.Component {
                     }
                 };
             }, () => {
-                // this.props.getImage(this.state.ImageSource);
+                this.props.getImage(this.state.ImageSource);
+            });
+        } else if (this.props.gtmData !== null) {
+            this.setState(() => {
+                return {
+                    ImageSource: {
+                        uri: this.props.gtmData.user.photo
+                    }
+                };
+            }, () => {
+                this.props.getImage(this.state.ImageSource);
             });
         }
     }
@@ -68,13 +78,13 @@ export default class ProfilePic extends React.Component {
                     <Image source={editBtn} style={styles.editIcon} />
                 </View>
                 <TouchableOpacity style={{ position: 'absolute' }} onPress={this.selectPhotoTapped.bind(this)}>
-                    { 
-                        this.state.ImageSource === null ? 
-                        <Image style={styles.proImageStyle} source={userAvatar} /> :
-                        <Image style={styles.proImageStyle} source={this.state.ImageSource} />
+                    {
+                        this.state.ImageSource === null ?
+                            <Image style={styles.proImageStyle} source={userAvatar} /> :
+                            <Image style={styles.proImageStyle} source={this.state.ImageSource} />
                     }
                 </TouchableOpacity>
-                
+
             </View>
         );
     }

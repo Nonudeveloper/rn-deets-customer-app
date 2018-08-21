@@ -6,12 +6,13 @@ import Header from '../header/Header';
 import DeetsFacebook from '../../deetscomponents/facebook';
 import StyleConstants from '../../config/StyleConstants';
 import Button from '../../deetscomponents/Button';
+import GoogleSignInScreen from '../../deetscomponents/google';
 //Make Select Register component
 
 const buttonIcon = require('../../assets/icons/3_email_icon.png');
 
 const SelectRegisteration = (props) => {
-    const { 
+    const {
         container
     } = styles;
 
@@ -22,25 +23,27 @@ const SelectRegisteration = (props) => {
 
     return (
         <View style={container}>
-        
-            <Header headerText={'Registration'} navigation={props.navigation} />
-            
-            <DeetsFacebook title="Register with Facebook" navigation={props.navigation} />
 
-            <Hr color="black" width={2} marginleft={25} marginright={25}>
-                <Text style={styles.textWithDivider}>OR</Text>
-            </Hr>
-            <Button 
-                style={styles.registerWithEmail}
-                buttonTextStyle={styles.buttonStyle}
-                source={buttonIcon}
-                onPress={
-                    () => registerWithEmail()
-                }
-            >
-                Register with Email
-            </Button>
-                
+            <Header headerText={'Registration'} navigation={props.navigation} />
+            <View style={styles.innerContainer}>
+                <View style={styles.buttonArea}>
+                    <DeetsFacebook title="Register with Facebook" navigation={props.navigation} />
+                    <GoogleSignInScreen title="Register with Google" navigation={props.navigation} />
+                </View>
+                <Hr color="black" width={2} marginleft={25} marginright={25}>
+                    <Text style={styles.textWithDivider}>OR</Text>
+                </Hr>
+                <Button
+                    style={styles.registerWithEmail}
+                    buttonTextStyle={styles.buttonStyle}
+                    source={buttonIcon}
+                    onPress={
+                        () => registerWithEmail()
+                    }
+                >
+                    Register with Email
+                </Button>
+            </View>
         </View>
     );
 };
@@ -66,6 +69,16 @@ const styles = {
         color: '#fff',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    buttonArea: {
+        height: 50,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    innerContainer: {
+        flex: 1,
+        top: 50
     }
 };
 

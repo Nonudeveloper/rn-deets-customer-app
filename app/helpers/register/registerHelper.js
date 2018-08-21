@@ -10,7 +10,7 @@ class RegisterHelper {
     const typeData = type.split(', ');
     let vehicleImage;
     let userImage;
-    if (Object.keys(userInfo.userImage).length > 0) {
+    if (Object.keys(userInfo.userImage).length > 0 && userInfo.form1.flag === 3) {
         // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
         // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
         
@@ -27,7 +27,7 @@ class RegisterHelper {
         };
     }
 
-    if (Object.keys(userInfo.vehicleImage).length > 0) {
+    if (Object.keys(userInfo.vehicleImage).length > 0 && userInfo.form1.flag === 3) {
       // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
       // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
       
@@ -78,6 +78,9 @@ class RegisterHelper {
               { name: 'fb_access_token', data: String(userInfo.form1.flag === 1 ? userInfo.form1.fb_access_token : '') },
               { name: 'fb_id', data: String(userInfo.form1.flag === 1 ? userInfo.form1.fb_id : '') },
               { name: 'gender', data: String(userInfo.form1.flag === 1 ? userInfo.form1.gender : '') },
+              { name: 'gtm_access_token', data: String(userInfo.form1.flag === 2 ? userInfo.form1.gtm_access_token : '') },
+              { name: 'gtm_id', data: String(userInfo.form1.flag === 2 ? userInfo.form1.gtm_id : '') },
+              { name: 'image_url', data: String(userInfo.form1.flag !== 3 ? userInfo.userImage.uri : '') },
               vehicleImage,
               userImage,
             ],
