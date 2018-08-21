@@ -5,8 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import CommonTextInput from '../../deetscomponents/form/Input';
 
-
-
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
 
 class FormArea extends React.Component {

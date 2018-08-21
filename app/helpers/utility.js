@@ -7,12 +7,9 @@ export const USER = 'user';
 
 export const onSignOut = () => AsyncStorage.removeItem(USER);
 
-export const isSignedIn = () => {
-  AsyncStorage.removeItem(AUTH_TOKEN);
-  return new Promise((resolve, reject) => {
+export const isSignedIn = () => new Promise((resolve, reject) => {
     AsyncStorage.getItem(USER)
       .then(res => {
-        console.log(res);
         if (res !== null) {
           resolve(true);
         } else {
@@ -20,8 +17,7 @@ export const isSignedIn = () => {
         }
       })
       .catch(err => reject(err));
-  });
-};
+});
 
 
 export function clearToken() {
@@ -155,7 +151,7 @@ export function renderFormatedDate(fullDate) {
 export function renderFormatedTime(date) {
   const dateObj = new Date(date);
   let hour = dateObj.getHours();
-  const minute = dateObj.getMinutes();
+  let minute = dateObj.getMinutes();
   const second = dateObj.getSeconds();
   let prepand = (hour >= 12) ? 'PM' : 'AM';
   hour = (hour >= 12) ? hour - 12 : hour;
@@ -181,5 +177,10 @@ export function renderFormatedTime(date) {
   if (hour < 10) {
       hour = `0${hour}`;
   }
+
+  if (minute < 10) {
+    minute = '0' + minute.toString();
+  }
+
   return `${hour}:${minute} ${prepand}`;
 }
