@@ -7,7 +7,7 @@ import { addListener } from '../helpers/utils/redux';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
 import FCM from "react-native-fcm";
-import { Platform, Alert } from 'react-native';
+import { Platform, Alert, PushNotificationIOS } from 'react-native';
 import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
 registerKilledListener();
@@ -28,7 +28,7 @@ class ReduxNavigation extends React.Component {
 
   componentWillMount() {
 
-    if (Platform.OS === "android") {
+    if ( Platform.OS === "android" ) {
       FCM.getFCMToken().then(token => {
         console.log("TOKEN (getFCMToken)", token);
         const deviceToken = {
@@ -37,6 +37,31 @@ class ReduxNavigation extends React.Component {
         };
         this.setState({ deviceToken });
         this.props.dispatch(saveDeviceToken(deviceToken));
+      });
+    }
+
+    if ( Platform.OS === "ios" ) {
+      PushNotificationIOS.requestPermissions();
+
+      PushNotificationIOS.addEventListener("register", function(token) {
+        console.log("TOKEN", token);
+        
+        const deviceToken = {
+          token,
+          os: 'ios'
+        };
+        this.setState({ deviceToken });
+        this.props.dispatch(saveDeviceToken(deviceToken));
+      });
+
+      PushNotificationIOS.addEventListener("registrationError", function(token) {
+        //console.log(token);
+      });
+
+      PushNotificationIOS.addEventListener("notification", function(notification) {
+        // if (AppState.currentState === "background") {
+        //   //$this.backgroundNotification = notification;
+        // }
       });
     }
 

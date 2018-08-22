@@ -53,6 +53,7 @@
 		AF7561B8204D4DC500E09FC3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7561B5204D4DC200E09FC3 /* FBSDKShareKit.framework */; };
 		AF7561B9204D4DC500E09FC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7561B6204D4DC300E09FC3 /* FBSDKLoginKit.framework */; };
 		AF7561BA204D4DC500E09FC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7561B7204D4DC500E09FC3 /* FBSDKCoreKit.framework */; };
+		AFE49734212DED5D00154BD7 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE49731212DED2C00154BD7 /* libRCTPushNotification.a */; };
 		C306710F066E467B8511242A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 658CDBB793E14DD092BE6B5C /* FontAwesome.ttf */; };
 		C667404AA18642228C347BDB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1747AC2D49A405DB19AF2B9 /* Octicons.ttf */; };
 		CA6EE44D6A8D413F95E14515 /* libRCTFBLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 400DF89BBD794EAFA40D9FB5 /* libRCTFBLogin.a */; };
@@ -395,6 +396,20 @@
 			remoteGlobalIDString = DE4F06CC1D156AA8005F99CD;
 			remoteInfo = RCTBraintree;
 		};
+		AFE49730212DED2C00154BD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		AFE49732212DED2C00154BD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -465,6 +480,8 @@
 		AF7561B5204D4DC200E09FC3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		AF7561B6204D4DC300E09FC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		AF7561B7204D4DC500E09FC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		AFE49735212DEDC000154BD7 /* deetscp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = deetscp.entitlements; path = deetscp/deetscp.entitlements; sourceTree = "<group>"; };
 		B07E61A4CF65AC37822E1C9C /* Pods-deetscp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-deetscp.release.xcconfig"; path = "Pods/Target Support Files/Pods-deetscp/Pods-deetscp.release.xcconfig"; sourceTree = "<group>"; };
 		BD53C7277BB243F7A572379B /* libRCTBraintree.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTBraintree.a; sourceTree = "<group>"; };
 		BD89A11D0AF24A879C58A100 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -487,6 +504,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE49734212DED5D00154BD7 /* libRCTPushNotification.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -632,6 +650,7 @@
 		13B07FAE1A68108700A75B9A /* deetscp */ = {
 			isa = PBXGroup;
 			children = (
+				AFE49735212DEDC000154BD7 /* deetscp.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -701,6 +720,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -841,6 +861,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AFE4972C212DED2800154BD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFE49731212DED2C00154BD7 /* libRCTPushNotification.a */,
+				AFE49733212DED2C00154BD7 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D69F8CE435E84642BA234C48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +984,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6B7E5K97VC;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1022,6 +1056,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = AFE4972C212DED2800154BD7 /* Products */;
+					ProjectRef = AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1382,6 +1420,20 @@
 			remoteRef = AFC639D720C1816D003C1B9C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		AFE49731212DED2C00154BD7 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = AFE49730212DED2C00154BD7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AFE49733212DED2C00154BD7 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = AFE49732212DED2C00154BD7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1672,6 +1724,7 @@
 			baseConfigurationReference = 529E399698D6E19272AD64C8 /* Pods-deetscp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = deetscp/deetscp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6B7E5K97VC;
@@ -1709,6 +1762,7 @@
 			baseConfigurationReference = B07E61A4CF65AC37822E1C9C /* Pods-deetscp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = deetscp/deetscp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6B7E5K97VC;
 				ENABLE_BITCODE = NO;
