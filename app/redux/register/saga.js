@@ -136,7 +136,7 @@ function* watchRegisterRequest() {
         yield put(registerSuccess(response.user.access_token, response));
         yield setUser(response.user);
         const deviceToken = yield select(getDeviceToken);
-        yield put(loginThroughAccessToken(deviceToken.token));
+        yield put(loginThroughAccessToken(deviceToken));
         // yield setItem('authVehicles', response.vehicle);
         // yield setItem('authCardDetails', response.card ? response.card : []);
         yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));

@@ -141,8 +141,8 @@ export default class LoginScreen extends Component {
         <Header headerText={''} navigation={this.props.navigation} />
         <View style={styles.innerContainer}>
           <View style={styles.buttonArea}>
-            <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin} />
-            <GoogleSignInScreen title="Login with Google" gtmLogin={this.gtmLogin} />
+            <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin} showHalfButton />
+            <GoogleSignInScreen title="Login with Google" gtmLogin={this.gtmLogin} showHalfButton />
           </View>
 
           <Hr color="black" width={2} marginleft={25} marginright={25}>
