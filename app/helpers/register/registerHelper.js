@@ -204,6 +204,15 @@ class RegisterHelper {
     .catch(error => ({ error }));
   }
 
+  async createBrainTreeClientToken(customerId) {
+    const customer_id = customerId;
+    return await SuperFetch.post('customer/create_client_token_for_payment_method_nonce', customer_id)
+    .then(response => {
+      return response;
+    })
+    .catch(error => ({ error }));
+  }
+
 }
 
 export default new RegisterHelper();

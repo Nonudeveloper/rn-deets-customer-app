@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   modalContentContainer: {
     backgroundColor: '#e6e6e6',
-    height: 500,
+    // height: 500,
     width: Dimensions.get('window').width - 10,
     borderRadius: 10,
     display: 'flex',

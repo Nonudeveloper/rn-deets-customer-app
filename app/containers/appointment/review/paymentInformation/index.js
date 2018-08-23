@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import CreditCardForm from './CreditCardForm';
 
 import * as appointmentActions from '../../../../redux/appointment/actions';
-import { getBrainTreeClientToken } from '../../../../redux/register/startActions';
+import { getBrainTreeClientToken, createBrainTreeClientToken } from '../../../../redux/register/startActions';
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
         actions: bindActionCreators(appointmentActions, dispatch),
         getBrainTreeClientToken: () => {
             dispatch(getBrainTreeClientToken());
+        },
+        createBrainTreeClientToken: (customerId) => {
+            dispatch(createBrainTreeClientToken(customerId));
         }
     };
 };

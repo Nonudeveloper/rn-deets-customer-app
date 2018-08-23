@@ -12,33 +12,32 @@ export default StyleSheet.create({
         backgroundColor: '#f9f9f9',
     },
     vehicleContainer: {
-      height: 100, 
-      backgroundColor: 'white',
-      borderBottomWidth: 2, 
-      borderBottomColor: '#e0e0e0', 
-      borderTopWidth: 2, 
-      borderTopColor: '#e0e0e0',
-      flexDirection: 'row',
-      alignItems: 'center',
-      // top: 10,
-      paddingHorizontal: 20
+        height: 100,
+        backgroundColor: 'white',
+        borderBottomWidth: 2,
+        borderBottomColor: '#e0e0e0',
+        borderTopWidth: 2,
+        borderTopColor: '#e0e0e0',
+        flexDirection: 'row',
+        alignItems: 'center',
+        // top: 10,
+        paddingHorizontal: 20
     },
     radioButtonContainer: {
         paddingHorizontal: 17
     },
     vehicleInnerContainer: {
-      flex: 1, 
-      width: 300, 
-      flexDirection: 'row',
+        flex: 1,
+        width: 300,
+        flexDirection: 'row',
     },
-    selectedArrayItemsBtn:
-      {
+    selectedArrayItemsBtn: {
         marginTop: 20,
         padding: 10,
         backgroundColor: 'rgba(0,0,0,0.6)',
         alignSelf: 'stretch'
-      },
-      nextButtonContainer: {
+    },
+    nextButtonContainer: {
         paddingBottom: 20,
     },
     nextButtonStyle: {
@@ -50,46 +49,37 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    vehicleFont: { 
-      fontSize: 16, 
-      color: '#586069' 
+    vehicleFont: {
+        fontSize: 16,
+        color: '#586069'
     },
-    licenceFont: { 
-      fontSize: 18, 
-      color: 'black', 
-      fontWeight: 'bold' 
+    licenceFont: {
+        fontSize: 18,
+        color: 'black',
+        fontWeight: 'bold'
     },
-    radioButton:
-    {
+    radioButton: {
         flexDirection: 'row',
         margin: 10,
         alignItems: 'center',
         justifyContent: 'center'
     },
- 
-    radioButtonHolder:
-    {
+    radioButtonHolder: {
         borderRadius: 50,
         borderWidth: 2,
         justifyContent: 'center',
         alignItems: 'center'
     },
- 
-    radioIcon:
-    {
+    radioIcon: {
         // borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
     },
- 
-    label:
-    {
+    label: {
         marginLeft: 10,
         fontSize: 20
     },
- 
-    selectedTextHolder:
-    {
+    selectedTextHolder: {
         position: 'absolute',
         left: 0,
         right: 0,
@@ -99,11 +89,24 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
- 
-    selectedText:
-    {
+    selectedText: {
         fontSize: 18,
         color: 'white'
     },
+    notAvailableContainer: {
+        flex: 1,
+        alignItems: 'center',
+        marginVertical: 20
+    },
+    notAvailableText: {
+        fontSize: 20,
+        color: '#1a1a1a',
+        paddingTop: 20,
+        textAlign: 'center'
+    },
+    notAvailableImage: {
+        width: 72,
+        height: 75
+    }
 });
 

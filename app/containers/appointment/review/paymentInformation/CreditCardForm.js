@@ -27,17 +27,17 @@ class CreditCardForm extends React.Component {
     }
 
     componentWillMount() {
-        this.props.getBrainTreeClientToken();
+        this.props.navigation.state.params !== undefined && this.props.navigation.state.params.selectedCard !== undefined ? this.props.createBrainTreeClientToken(this.props.navigation.state.params.selectedCard.customer_id) : this.props.getBrainTreeClientToken();
         getItem('user')
-        .then(res => {
-            this.setState({ user: JSON.parse(res) });
-          })
-          .catch(err => alert("An error occurred"));
+            .then(res => {
+                this.setState({ user: JSON.parse(res) });
+            })
+            .catch(err => alert("An error occurred"));
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.clientToken !== this.props.clientToken) {
-          BTClient.setup(nextProps.clientToken);
+            BTClient.setup(nextProps.clientToken);
         }
     }
 
@@ -45,13 +45,11 @@ class CreditCardForm extends React.Component {
         if (this.state.nowCanSubmit) {
             BTClient.getCardNonce(card).then((nonce) => {
                 if (this.props.navigation.state.params !== undefined) {
+                    const cardDetails = this.props.navigation.state.params.selectedCard;
                     const options = {
-                        customer_id: this.props.navigation.state.params.selectedCard.customer_id,
-                        // customer_id: '631784283',
-                        id: this.props.navigation.state.params.selectedCard.id,
+                        customer_id: cardDetails !== undefined ? cardDetails.customer_id : 0,
                         is_default: 2,
                         email: this.state.user.email,
-                        type: this.state.card.type,
                         first_name: this.state.user.first_name,
                         last_name: this.state.user.last_name,
                         nonce,
@@ -61,20 +59,20 @@ class CreditCardForm extends React.Component {
                     this.props.actions.addNewCardDetails(options);
                 }
             })
-            .catch((err) => {
-                //error handling
-                console.log(err);
-            });
+                .catch((err) => {
+                    //error handling
+                    console.log(err);
+                });
         } else {
             Alert.alert(
                 'Error',
                 'All Fields are required!',
                 [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
                 ],
                 { cancelable: false }
             );
-        } 
+        }
     }
 
     _onChange = (formData) => {
@@ -99,18 +97,18 @@ class CreditCardForm extends React.Component {
 
     renderAlert(error) {
         Alert.alert(
-        'Error',
-        error,
-        [
-            { 
-            text: 'OK', 
-            onPress: () => {
-                //dispath an action to make showAlert false
-                this.props.actions.hideAlert();
-            } 
-            },
-        ],
-        { cancelable: false }
+            'Error',
+            error,
+            [
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        //dispath an action to make showAlert false
+                        this.props.actions.hideAlert();
+                    }
+                },
+            ],
+            { cancelable: false }
         );
     }
 
@@ -118,8 +116,8 @@ class CreditCardForm extends React.Component {
         const { fetchingCardData } = this.props;
         return (
             <View style={styles.container}>
-                <Header 
-                    navigation={this.props.navigation} 
+                <Header
+                    navigation={this.props.navigation}
                     headerText={'Credit Card'}
                     showRightIcon
                     rightText={'Add'}
@@ -135,7 +133,7 @@ class CreditCardForm extends React.Component {
                         invalidColor={'red'}
                         placeholderColor={'darkgray'}
                         onFocus={this._onFocus}
-                        onChange={this._onChange} 
+                        onChange={this._onChange}
                     />
                 </View>
             </View>
