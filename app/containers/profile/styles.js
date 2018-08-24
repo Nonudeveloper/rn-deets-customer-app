@@ -37,7 +37,7 @@ export default StyleSheet.create({
     proImageStyle: {
         width: 70,
         height: 70,
-        borderRadius: 100
+        borderRadius: 70/2,
     },
     formArea: {
         backgroundColor: '#333333',

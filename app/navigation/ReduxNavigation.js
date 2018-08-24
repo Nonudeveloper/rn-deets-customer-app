@@ -41,11 +41,11 @@ class ReduxNavigation extends React.Component {
     }
 
     if ( Platform.OS === "ios" ) {
+      //console.log(PushNotificationIOS);
       PushNotificationIOS.requestPermissions();
 
       PushNotificationIOS.addEventListener("register", function(token) {
         console.log("TOKEN", token);
-        
         const deviceToken = {
           token,
           os: 'ios'
@@ -53,7 +53,6 @@ class ReduxNavigation extends React.Component {
         this.setState({ deviceToken });
         this.props.dispatch(saveDeviceToken(deviceToken));
       });
-
       PushNotificationIOS.addEventListener("registrationError", function(token) {
         //console.log(token);
       });

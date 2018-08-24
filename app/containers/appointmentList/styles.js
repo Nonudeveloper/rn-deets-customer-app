@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 70/2,
         borderColor: '#fff',
         zIndex: 999
     },
     image: {
         width: 70,
         height: 70,
-        borderRadius: 100
+        borderRadius: 70/2
     },
     locationIcon: {
         resizeMode: 'contain',
