@@ -246,7 +246,6 @@ class VehicleFormIos extends React.Component {
               this._fetchYear();
             }}>
             {this.state.year}
-            {avatar}
           </Text>
         </View>
         <View style={styles.colTwo}>
@@ -259,7 +258,6 @@ class VehicleFormIos extends React.Component {
               this._fetchColor();
             }}>
             {this.state.color}
-            {avatar}
           </Text>
         </View>
       </View>
@@ -274,7 +272,6 @@ class VehicleFormIos extends React.Component {
               this._fetchMake();
             }}>
             {this.state.make}
-            {avatar}
           </Text>
         </View>
 
@@ -288,7 +285,6 @@ class VehicleFormIos extends React.Component {
               this._fetchModel();
             }}>
             {this.state.model}
-            {avatar}
           </Text>
         </View>
 
@@ -302,7 +298,6 @@ class VehicleFormIos extends React.Component {
               this._fetchTypes();
             }}>
             {this.state.type}
-            {avatar}
           </Text>
         </View>
       </View>
