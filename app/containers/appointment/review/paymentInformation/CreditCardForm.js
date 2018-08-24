@@ -27,7 +27,7 @@ class CreditCardForm extends React.Component {
     }
 
     componentWillMount() {
-        this.props.navigation.state.params !== undefined && this.props.navigation.state.params.selectedCard !== undefined ? this.props.createBrainTreeClientToken(this.props.navigation.state.params.selectedCard.customer_id) : this.props.getBrainTreeClientToken();
+        this.props.navigation.state.params !== undefined && this.props.navigation.state.params.selectedCard.length !== 0 ? this.props.createBrainTreeClientToken(this.props.navigation.state.params.selectedCard.customer_id) : this.props.getBrainTreeClientToken();
         getItem('user')
             .then(res => {
                 this.setState({ user: JSON.parse(res) });
@@ -42,19 +42,22 @@ class CreditCardForm extends React.Component {
     }
 
     getNonceAndSubmit = (card) => {
+
         if (this.state.nowCanSubmit) {
             BTClient.getCardNonce(card).then((nonce) => {
                 if (this.props.navigation.state.params !== undefined) {
                     const cardDetails = this.props.navigation.state.params.selectedCard;
                     const options = {
-                        customer_id: cardDetails !== undefined ? cardDetails.customer_id : 0,
+                        customer_id: cardDetails.length !== 0 ? cardDetails.customer_id : 0,
                         is_default: 2,
                         email: this.state.user.email,
                         first_name: this.state.user.first_name,
                         last_name: this.state.user.last_name,
                         nonce,
+                        type: this.state.card.type,
                         access_token: this.state.user.access_token,
-                        process: this.props.navigation.state.params.process
+                        process: this.props.navigation.state.params.process,
+                        id: cardDetails.length !== 0 ? cardDetails.id : '',
                     };
                     this.props.actions.addNewCardDetails(options);
                 }
