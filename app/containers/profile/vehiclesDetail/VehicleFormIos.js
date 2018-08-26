@@ -10,45 +10,46 @@ import ModelPicker from 'react-native-picker';
 
 class VehicleForm extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = { 
-          year: 'Year',
-          color: 'Color',
-          type: 'Type',
-          make: 'Make',
-          model: 'Model',
-          license: '',
-          value: 0,
-          initialValue: 0,
-          makeName: ''
-      };
-  }
-  
-  validateForm = () => {
-    console.log('validating.. vehicle form!');
-}
+          super(props);
+          this.state = { 
+              year: 'Year',
+              color: 'Color',
+              type: 'Type',
+              make: 'Make',
+              model: 'Model',
+              license: '',
+              value: 0,
+              initialValue: 0,
+              makeName: ''
+          };
+          console.log(this.props);
+    }
+    
+    validateForm = () => {
+        console.log('validating.. vehicle form!');
+    }
 
-_fetchMakeModel = (year, itemIndex) => {
+    _fetchMakeModel = (year, itemIndex) => {
         //now dispath an action to fetch make and model
         console.log(year, this.state.year);
         if (parseInt(year) !== parseInt(this.state.year)) {
             this.setState(() => {
-                return {
-                    year,
-                    make: 'Make',
-                    color: 'Color',
-                    model: 'Model',
-                    type: 'Type'
-                };
-            }, () => {
-                const result = this.props.makeModelData.find( makeModel => makeModel.id === year);
-                if (result === undefined) {
-                    this.props.fetchVehiclesMakeModelByYear(year);
-                }
-                this.props.dispatch(change(this.props.form, 'year', year));
-                this.props.dispatch(change(this.props.form, 'make', ''));
-                this.props.dispatch(change(this.props.form, 'model', ''));
-            });  
+            return {
+                year,
+                make: 'Make',
+                color: 'Color',
+                model: 'Model',
+                type: 'Type'
+            };
+        }, () => {
+            const result = this.props.makeModelData.find( makeModel => makeModel.id === year);
+            if (result === undefined) {
+                this.props.fetchVehiclesMakeModelByYear(year);
+            }
+            this.props.dispatch(change(this.props.form, 'year', year));
+            this.props.dispatch(change(this.props.form, 'make', ''));
+            this.props.dispatch(change(this.props.form, 'model', ''));
+        });  
         }
         
     }
@@ -74,7 +75,7 @@ _fetchMakeModel = (year, itemIndex) => {
     handleOnPress(value) {
         this.setState(() => {
             return {
-                value
+            value
             };
         }, () => {
             this.props.dispatch(change(this.props.form, 'radio_button_type', value));     
@@ -93,7 +94,7 @@ _fetchMakeModel = (year, itemIndex) => {
         });
     }
 
-    _modelChanged(modelName) {
+     _modelChanged(modelName) {
         this.setState(() => {
             return {
                 model: modelName
@@ -111,7 +112,7 @@ _fetchMakeModel = (year, itemIndex) => {
     
     componentWillMount() {
         // console.log(this.props);
-        
+       
     }
     
     componentDidMount() {
@@ -136,9 +137,9 @@ _fetchMakeModel = (year, itemIndex) => {
                 vehicle_type: authVehicleData.vehicle_type,
                 vehicle_id: authVehicleData.vehicle_id,
                 radio_button_type: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
-            };
-            this.props.fetchVehiclesMakeModelByYear(parseInt(authVehicleData.vehicle_year_id));
-            console.log(authVehicleData);
+        };
+        this.props.fetchVehiclesMakeModelByYear(parseInt(authVehicleData.vehicle_year_id));
+        console.log(authVehicleData);
             this.setState({
                 year: parseInt(authVehicleData.vehicle_year_id),
                 color: authVehicleData.vehicle_color,
@@ -185,7 +186,7 @@ _fetchMakeModel = (year, itemIndex) => {
         this._loadPicker(colors, selectedColor, 'Color');
     }
 
-    _fetchMake() {
+     _fetchMake() {
         const makes = [];
         const selectedMake = [];
         if (this.props.makeModelData) {
@@ -244,7 +245,8 @@ _fetchMakeModel = (year, itemIndex) => {
         }
     }
 
-    _loadPicker(data, selectedValue, type) {
+     _loadPicker(data, selectedValue, type) {
+        if (!this.props.editable) return;
         ModelPicker.init({
             pickerData: data,
             selectedValue: selectedValue,
@@ -257,20 +259,20 @@ _fetchMakeModel = (year, itemIndex) => {
             onPickerConfirm: data => {
                 switch (type) {
                     case 'Year' : 
-                    this._fetchMakeModel(data[0]);
-                    break;
+                        this._fetchMakeModel(data[0]);
+                        break;
                     case 'Color' : 
-                    this._colorChanged(data[0]);
-                    break;
+                        this._colorChanged(data[0]);
+                        break;
                     case 'Make' :
-                    this._populateModel(data[0]);
-                    break;
+                        this._populateModel(data[0]);
+                        break;
                     case 'Model' :
-                    this._modelChanged(data[0]);
-                    break;
+                        this._modelChanged(data[0]);
+                        break;
                     case 'Type' :
-                    this._updateType(data);
-                    break;           
+                        this._updateType(data);
+                        break;           
                 }
                 console.log(data);
             },
@@ -281,174 +283,174 @@ _fetchMakeModel = (year, itemIndex) => {
                 console.log(data);
             }
         });
-ModelPicker.show();
-}
+        ModelPicker.show();
+    }
 
-_updateType(data) {
-    const initialFormData =  data[0] + ', ' + data[1];
-    this.setState({type: data[0] + ', ' + data[1]});
-    this.props.dispatch(initialize(this.props.form, initialFormData, 'type'));
+    _updateType(data) {
+        const initialFormData =  data[0] + ', ' + data[1];
+        this.setState({type: data[0] + ', ' + data[1]});
+        this.props.dispatch(initialize(this.props.form, initialFormData, 'type'));
 
-    this.props.vehicleData.type.map((type, i) => {
-        if (type.vehicle_type_name === data[0]) {
-            this.props.dispatch(change(this.props.form, 'vehicle_type', type.vehicle_type));
-        }
-        type.segment.map((segment, j) => {
-            if (segment.vehicle_segment === data[1]) {
-                this.props.dispatch(change(this.props.form, 'vehicle_type_segment_id', segment.id));
+        this.props.vehicleData.type.map((type, i) => {
+            if (type.vehicle_type_name === data[0]) {
+                this.props.dispatch(change(this.props.form, 'vehicle_type', type.vehicle_type));
             }
-        });
-    }); 
-}
+            type.segment.map((segment, j) => {
+                if (segment.vehicle_segment === data[1]) {
+                    this.props.dispatch(change(this.props.form, 'vehicle_type_segment_id', segment.id));
+                }
+            });
+        }); 
+    }
 
-render() {
+  render() {
     const { pickerStyle, inputStyle } = styles;
     return (
         <View style={styles.formArea}>
-        <View style={styles.colContainer}>
-        <View style={styles.colOne}>
-        <Text
-        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
-        onPress={() => {
-            this._fetchYear();
-        }}>
-        {this.state.year}
-        </Text>
-        </View>
-        <View style={styles.colTwo}>
-        <Text
-        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
-        onPress={() => {
-            this._fetchColor();
-        }}>
-        {this.state.color}
-        </Text>
-        </View>
-        </View>
+            <View style={styles.colContainer}>
+                <View style={styles.colOne}>
+                    <Text
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
+                        onPress={() => {
+                            this._fetchYear();
+                        }}>
+                       {this.state.year}
+                    </Text>
+                </View>
+                <View style={styles.colTwo}>
+                    <Text
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
+                        onPress={() => {
+                            this._fetchColor();
+                        }}>
+                        {this.state.color}
+                    </Text>
+                </View>
+            </View>
 
-        <View>
-        <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-        <Text
-        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
-        onPress={() => {
-            this._fetchMake();
-        }}>
-        {this.state.make}
-        </Text>
-        </View>
+            <View>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
+                    <Text
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
+                        onPress={() => {
+                            this._fetchMake();
+                        }}>
+                       {this.state.make}
+                    </Text>
+                </View>
 
-        <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-        <Text
-        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
-        onPress={() => {
-            this._fetchModel();
-        }}>
-        {this.state.model}
-        </Text>
-        </View>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
+                    <Text
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
+                        onPress={() => {
+                            this._fetchModel();
+                        }}>
+                       {this.state.model}
+                    </Text>
+                </View>
 
-        <View style={[inputStyle, { borderBottomWidth: 2 }]}>
-        <Text
-        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
-        onPress={()=>{
-            this._fetchTypes();
-        }}>
-        {this.state.type}
-        </Text>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
+                    <Text
+                        style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
+                        onPress={()=>{
+                            this._fetchTypes();
+                        }}>
+                       {this.state.type}
+                    </Text>
+                </View>
+            </View>
+            
+            <View style={styles.licenseStyle}>
+                <View style={styles.licenseInnerContainerStyle}>
+                    <View style={styles.radio1ContainerStyle}>
+                        <View style={{ flex: 1 }}>
+                            <RadioButton
+                                currentValue={this.state.value}
+                                value={0}
+                                onPress={this.handleOnPress.bind(this)}
+                                outerCircleColor={'#50C900'}
+                                outerCircleSize={18}
+                                outerCircleWidth={2}
+                                innerCircleColor={'#50C900'}
+                                innerCircleSize={18}
+                            />
+                        </View>
+                        <View style={{ flex: 10 }}><Text>License #</Text></View>
+                    </View>
+                    <View style={styles.radio2ContainerStyle}>
+                    <View style={{ flex: 2 }}><Text>VIN #</Text></View>
+                        <View style={{ flex: 1 }}>
+                            <RadioButton
+                                currentValue={this.state.value}
+                                value={1}
+                                onPress={this.handleOnPress.bind(this)}
+                                outerCircleColor={'#50C900'}
+                                outerCircleSize={18}
+                                outerCircleWidth={2}
+                                innerCircleColor={'#50C900'}
+                                innerCircleSize={18}
+                            />
+                        </View>
+                       
+                    </View>
+                </View>
+            </View>
+            <View style={styles.licenseTextStyle}>
+                {this.state.value === 0 ?
+                <Field
+                    name={'license'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    placeholder={'License #'}
+                    placeholderTextColor='grey'
+                    underlineColorAndroid="transparent"
+                    type="text"
+                    borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
+                />
+                    : 
+                <Field
+                    name={'vin'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    placeholder={'VIN #'}
+                    placeholderTextColor='grey'
+                    underlineColorAndroid="transparent"
+                    type="text"
+                    borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
+                />
+                }
+                <Field
+                    name={'notes'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    placeholder={'Notes'}
+                    placeholderTextColor='grey'
+                    underlineColorAndroid="transparent"
+                    type="text"
+                />
+                
+                <Field
+                    name={'radio_button_type'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'vehicle_id'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'flag'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+            </View>
         </View>
-        </View>
-        
-        <View style={styles.licenseStyle}>
-        <View style={styles.licenseInnerContainerStyle}>
-        <View style={styles.radio1ContainerStyle}>
-        <View style={{ flex: 1 }}>
-        <RadioButton
-        currentValue={this.state.value}
-        value={0}
-        onPress={this.handleOnPress.bind(this)}
-        outerCircleColor={'#50C900'}
-        outerCircleSize={18}
-        outerCircleWidth={2}
-        innerCircleColor={'#50C900'}
-        innerCircleSize={18}
-        />
-        </View>
-        <View style={{ flex: 10 }}><Text>License #</Text></View>
-        </View>
-        <View style={styles.radio2ContainerStyle}>
-        <View style={{ flex: 2 }}><Text>VIN #</Text></View>
-        <View style={{ flex: 1 }}>
-        <RadioButton
-        currentValue={this.state.value}
-        value={1}
-        onPress={this.handleOnPress.bind(this)}
-        outerCircleColor={'#50C900'}
-        outerCircleSize={18}
-        outerCircleWidth={2}
-        innerCircleColor={'#50C900'}
-        innerCircleSize={18}
-        />
-        </View>
-        
-        </View>
-        </View>
-        </View>
-        <View style={styles.licenseTextStyle}>
-        {this.state.value === 0 ?
-            <Field
-            name={'license'}
-            component={CommonTextInput}
-            props={this.props}
-            placeholder={'License #'}
-            placeholderTextColor='grey'
-            underlineColorAndroid="transparent"
-            type="text"
-            borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
-            />
-            : 
-            <Field
-            name={'vin'}
-            component={CommonTextInput}
-            props={this.props}
-            placeholder={'VIN #'}
-            placeholderTextColor='grey'
-            underlineColorAndroid="transparent"
-            type="text"
-            borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
-            />
-        }
-        <Field
-        name={'notes'}
-        component={CommonTextInput}
-        props={this.props}
-        placeholder={'Notes'}
-        placeholderTextColor='grey'
-        underlineColorAndroid="transparent"
-        type="text"
-        />
-        
-        <Field
-        name={'radio_button_type'}
-        component={CommonTextInput}
-        props={this.props}
-        type="hidden"
-        />
-        <Field
-        name={'vehicle_id'}
-        component={CommonTextInput}
-        props={this.props}
-        type="hidden"
-        />
-        <Field
-        name={'flag'}
-        component={CommonTextInput}
-        props={this.props}
-        type="hidden"
-        />
-        </View>
-        </View>
-        );
-}
+    );
+  }
 }
 
 
@@ -461,38 +463,38 @@ export default reduxForm({
         }
         const errors = {};
         errors.year = !values.year
-        ? 'Year field is required'
-        : undefined;
+          ? 'Year field is required'
+          : undefined;
 
         errors.color = !values.color
-        ? 'Color field is required'
-        : undefined;
+          ? 'Color field is required'
+          : undefined;
 
         errors.make = !values.make
-        ? 'Make field is required'
-        : undefined;
+          ? 'Make field is required'
+          : undefined;
 
         errors.model = !values.model
-        ? 'Model field is required'
-        : undefined;
+          ? 'Model field is required'
+          : undefined;
 
         errors.type = !values.type
-        ? 'Type field is required'
-        : undefined;
+          ? 'Type field is required'
+          : undefined;
         
         if (values.radio_button_type === 1) {
             errors.vin = !values.vin
-            ? 'Vin field is required'
-            : undefined;
+                ? 'Vin field is required'
+                : undefined;
         } else {
             errors.license = !values.license
-            ? 'License field is required'
-            : undefined;
+                ? 'License field is required'
+                : undefined;
         }
         
         errors.notes = !values.notes
-        ? 'Notes field is required'
-        : undefined;
+          ? 'Notes field is required'
+          : undefined;
 
         return errors;
     },
