@@ -8,7 +8,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     circle: {
-        borderRadius: 50,
+        borderRadius: 50/2,
         borderWidth: 3,
         borderColor: '#000',
         height: 50,
@@ -18,9 +18,9 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 100,
-        height: 100,
-        borderRadius: 100
+        width: 70,
+        height: 70,
+        borderRadius: 70/2
     },
     container: {
         flex: 1,

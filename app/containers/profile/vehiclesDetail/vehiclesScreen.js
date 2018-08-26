@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Image, Alert, TouchableHighlight, Text } from 'react-native';
+import { View, Image, Alert, TouchableHighlight, Text, Platform } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { ViewPager } from 'rn-viewpager';
 import CarPicture from './CarPicture';
 import VehicleForm from './VehicleForm';
+import VehicleFormIos from './VehicleFormIos';
 import styles from '../styless';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -126,7 +127,10 @@ export default class VehiclesScreen extends React.Component {
                     
             </View>
             <View style={styles.formContainer}>
-                <VehicleForm 
+                
+              { Platform.OS === 'android' ? ( 
+
+                  <VehicleForm 
                     item={item}
                     style={styles.t2} 
                     vehicleData={this.props.vehicleData} 
@@ -136,7 +140,21 @@ export default class VehiclesScreen extends React.Component {
                     fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
                     makeModelData={this.props.makeModelData}
                     count={this.props.count}
-                /> 
+                />
+                  
+                  ) : (
+                  <VehicleFormIos 
+                    item={item}
+                    style={styles.t2} 
+                    vehicleData={this.props.vehicleData} 
+                    onRef={ref => (this.child = ref)}
+                    editable={this.props.editable}
+                    form={'editVehicleForm' + i}
+                    fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
+                    makeModelData={this.props.makeModelData}
+                    count={this.props.count}
+                />)
+                }
             </View>
           </View>)
         }

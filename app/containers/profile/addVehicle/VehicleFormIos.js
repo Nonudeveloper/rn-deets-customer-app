@@ -253,7 +253,7 @@ class VehicleFormIos extends React.Component {
                         onPress={() => {
                             this._fetchYear();
                         }}>
-                       {this.state.year} {avatar}
+                       {this.state.year}
                     </Text>
                 </View>
                 <View style={styles.colTwo}>
@@ -262,7 +262,7 @@ class VehicleFormIos extends React.Component {
                         onPress={() => {
                             this._fetchColor();
                         }}>
-                        {this.state.color} {avatar}
+                        {this.state.color}
                     </Text>
                 </View>
             </View>
@@ -273,7 +273,7 @@ class VehicleFormIos extends React.Component {
                         onPress={() => {
                             this._fetchMake();
                         }}>
-                       {this.state.make} {avatar}
+                       {this.state.make}
                     </Text>
                 </View>
 
@@ -283,7 +283,7 @@ class VehicleFormIos extends React.Component {
                         onPress={() => {
                             this._fetchModel();
                         }}>
-                       {this.state.model} {avatar}
+                       {this.state.model}
                     </Text>
                 </View>
 
@@ -293,7 +293,7 @@ class VehicleFormIos extends React.Component {
                         onPress={()=>{
                             this._fetchTypes();
                         }}>
-                       {this.state.type} {avatar}
+                       {this.state.type}
                     </Text>
                 </View>
             </View>
