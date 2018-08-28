@@ -24,6 +24,7 @@ export function clearToken() {
   AsyncStorage.removeItem(AUTH_TOKEN);
 }
 export function setToken(token) {
+  console.log(token);
   AsyncStorage.setItem(AUTH_TOKEN, token);
 }
 
