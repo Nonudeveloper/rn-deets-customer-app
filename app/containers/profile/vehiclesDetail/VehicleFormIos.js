@@ -60,12 +60,15 @@ class VehicleForm extends React.Component {
                 make: makeName
             };
         }, () => {
-            this.props.makeModel.data.map((make, i) => {
-                if (make.make_name.toString() === makeName.toString()) {
-                    //dispatch an action here and update props
-                    this.props.updateModels(make.model);
-                    this.props.dispatch(change(this.props.form, 'make', make.make_name));
-                    this.props.dispatch(change(this.props.form, 'make_id', make.make_id));
+            this.props.makeModelData.map((items, i) => {
+                if ( items.id === this.state.year ) {
+                    items.makeModel.data.map((make, i) => {
+                    if (make.make_name.toString() === makeName.toString()) {
+                        //dispatch an action here and update props
+                        this.props.dispatch(change('vehicleForm', 'make', make.make_name));
+                        this.props.dispatch(change('vehicleForm', 'make_id', make.make_id));
+                    }
+                })
                 }
             });
         });
@@ -100,11 +103,19 @@ class VehicleForm extends React.Component {
                 model: modelName
             };
         }, () => {
-            this.props.models.map((model, i) => {
-                if (model.model_name.toString() === modelName.toString()) {
-                    //dispatch an action here and update props
-                    this.props.dispatch(change(this.props.form, 'model', model.model_name));
-                    this.props.dispatch(change(this.props.form, 'model_id', model.model_id));
+            this.props.makeModelData.map((items, i) => {
+                if ( items.id === this.state.year ) {
+                    items.makeModel.data.map((make , i) => {
+                        if ( make.make_id === this.state.make || make.make_id === this.state.makeName ) {
+                            make.model.map((model, j) => {
+                                if (model.model_name.toString() === modelName.toString()) {
+                                    //dispatch an action here and update props
+                                    this.props.dispatch(change(this.props.form, 'model', model.model_name));
+                                    this.props.dispatch(change(this.props.form, 'model_id', model.model_id));
+                                }
+                            });
+                        }
+                    });
                 }
             });
         });
@@ -192,6 +203,7 @@ class VehicleForm extends React.Component {
         if (this.props.makeModelData) {
             this.props.makeModelData.map((items, i) => {
                 if ( items.id === this.state.year ) {
+                    console.log(items);
                     items.makeModel.data.map((make, i) => {
                         makes.push(make.make_name);
                         if (make.make_name === this.state.make) {

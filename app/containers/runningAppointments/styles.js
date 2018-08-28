@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       alignItems: 'flex-end'
     },
     item: {
-      fontSize: 20,
+      fontSize: 16,
       marginBottom: 2,
       color: '#1a1a1a'
     },
@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
       height: 70,
       width: 70,
       borderWidth: 1,
-      borderRadius: 100,
+      borderRadius: 70/2,
       borderColor: '#fff',
       zIndex: 2
     },
     image: {
-      width: '100%',
-      height: '100%',
-      borderRadius: 100
+      width: 70,
+      height: 70,
+      borderRadius: 70/2
     },
     locationIcon: {
       resizeMode: 'contain',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
       
     },
     text: {
-      fontSize: 15,
+      fontSize: 16,
     },
     messageIcon: {
       marginVertical: 15,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
       paddingLeft:10
     },
     serviceNameTextStyle: {
-      fontSize: 20, 
+      fontSize: 16, 
       color: '#000'
     },
     serviceCostContainer: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
       alignItems: 'center' 
     },
     serviceCostStyle: {
-      fontSize: 19, 
+      fontSize: 16, 
       color: '#000'
     },
     addOnsWrapper: {
@@ -200,12 +200,12 @@ const styles = StyleSheet.create({
     },
     paymentTextStyle: {
       left: 5,
-      fontSize: 20, 
+      fontSize: 16, 
       color: 'grey'
     },
     averageRatingTextStyle: {
       paddingLeft: 7, 
-      fontSize: 12, 
+      fontSize: 16, 
       color: '#586069'
     }
   });
