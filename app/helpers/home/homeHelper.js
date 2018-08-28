@@ -1,5 +1,6 @@
 import SuperFetch from '../superFetch';
 import { getItem } from '../asyncStorage';
+import { USER } from '../utility';
 
 class HomeHelper {
 
@@ -44,7 +45,7 @@ class HomeHelper {
   }
 
   getRecentLocations = async () => {
-    const user = await getItem('user');
+    const user = await getItem(USER);
     const data = {
         access_token: JSON.parse(user).access_token,
     };
@@ -52,7 +53,7 @@ class HomeHelper {
   } 
 
   deleteRecentLocation = async (locationId) => {
-    const user = await getItem('user');
+    const user = await getItem(USER);
     const data = {
         access_token: JSON.parse(user).access_token,
         id: locationId
@@ -65,13 +66,13 @@ class HomeHelper {
   }
 
   payTipToTechnician = async tipData => {
-    const user = await getItem('user');
+    const user = await getItem(USER);
     const access_token = JSON.parse(user).access_token;
     return await SuperFetch.post('customer/pay_tip_to_technician', { access_token, ...tipData });
   }
 
   saveUnservedArea = async areaData => {
-    const user = await getItem('user');
+    const user = await getItem(USER);
     const payload = {
       access_token: JSON.parse(user).access_token,
       user_id: JSON.parse(user).user_id,

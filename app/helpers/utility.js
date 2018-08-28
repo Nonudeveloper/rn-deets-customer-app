@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import Instabug from 'instabug-reactnative';
 
 export const AUTH_TOKEN = 'token';
-export const USER = 'user';
+export const USER = 'cpuser';
 
 
 export const onSignOut = () => AsyncStorage.removeItem(USER);

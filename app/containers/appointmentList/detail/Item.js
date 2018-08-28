@@ -30,7 +30,8 @@ class Item extends Component {
     }
 
     deleteItem(item) {
-        this.props.onDelete(item);
+        const type = this.props.activeTab === 'past' ? 'Delete' : 'Cancel';
+        this.props.onDelete(item, type);
     }
 
     callToTechnician(item) {
@@ -50,17 +51,19 @@ class Item extends Component {
         this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
 
-    updateAppointment() {
-        this.props.navigation.navigate('SelectVehicleScreen');
+    updateAppointment(item) {
+        // this.props.navigation.navigate('SelectVehicleScreen');
+        this.props.selectedAppointmentForReschedule(item);
+        this.props.navigation.navigate('SelectVehicleScreen', { schedule: 'resechudle' });  
     }
 
     render() {
         const rightSwipeBtns = [
             {
-              text: 'Delete',
-              backgroundColor: '#ff3300',
-              underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-              onPress: () => { this.deleteItem(this.props.item); }
+                text: this.props.activeTab === 'past' ? 'Delete' : 'Cancel',
+                backgroundColor: '#ff3300',
+                underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                onPress: () => { this.deleteItem(this.props.item); }
            }
         ];
         const leftSwipeBtns = [

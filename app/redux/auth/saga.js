@@ -3,7 +3,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure, logoutSuccess, logoutFailure, loginThroughAccessTokenSuccess, loginThroughAccessTokenFailure } from './actions';
 import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST, LOGOUT, LOGIN_THROUGH_ACCESS_TOKEN } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
-import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
+import { setUser, saveAuthVehiclesData, setToken, USER } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 import { setCardDetails, removeItem } from '../../helpers/asyncStorage';
 import { fetchRecentLocationsSuccess } from '../home/recentLocations/actions';
@@ -110,7 +110,7 @@ function* watchLogOutRequest() {
      yield take(LOGOUT);
     try {
       const response = yield call(logOutCall);
-      yield removeItem('user');
+      yield removeItem(USER);
       yield put(logoutSuccess());
       yield put(NavigationActions.navigate({ routeName: 'loginStack' }));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);

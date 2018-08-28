@@ -1,11 +1,11 @@
 import SuperFetch from '../superFetch';
 import { getItem } from '../asyncStorage';
-import { dataURLtoFile,  } from '../utility';
+import { dataURLtoFile, USER } from '../utility';
 
 class ServicesHelper {
 
     async fetchAllServices() {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         // const token = await getItem('token');
         return await SuperFetch.post('customer/get_default_services_and_adds_on', { access_token: JSON.parse(user).access_token })
         .then(response => response)
@@ -13,7 +13,7 @@ class ServicesHelper {
     }
 
     createNewAppointment = async appointmentInfo => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = new FormData();
 
         if (appointmentInfo.selectedVehicle.vehicle_type === 2) {
@@ -78,7 +78,7 @@ class ServicesHelper {
     }
 
     reschudleAppointment = async reschudleAppointmentInfo => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = new FormData();
         const today = new Date();
         const selectedDate = reschudleAppointmentInfo.serviceDate === '' ? new Date() : new Date(reschudleAppointmentInfo.serviceDate);
