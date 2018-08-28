@@ -16,8 +16,6 @@ const background = require('../containers/start/images/back.png');
 class ReduxNavigation extends React.Component {
   constructor(props) {
     super(props);
-
-
     this.state = {
       loggedInStatus: false,
       checkedSignIn: false,
@@ -37,30 +35,6 @@ class ReduxNavigation extends React.Component {
         };
         this.setState({ deviceToken });
         this.props.dispatch(saveDeviceToken(deviceToken));
-      });
-    }
-
-    if ( Platform.OS === "ios" ) {
-      //console.log(PushNotificationIOS);
-      PushNotificationIOS.requestPermissions();
-
-      PushNotificationIOS.addEventListener("register", function(token) {
-        console.log("TOKEN", token);
-        const deviceToken = {
-          token,
-          os: 'ios'
-        };
-        this.setState({ deviceToken });
-        this.props.dispatch(saveDeviceToken(deviceToken));
-      });
-      PushNotificationIOS.addEventListener("registrationError", function(token) {
-        //console.log(token);
-      });
-
-      PushNotificationIOS.addEventListener("notification", function(notification) {
-        // if (AppState.currentState === "background") {
-        //   //$this.backgroundNotification = notification;
-        // }
       });
     }
 
@@ -143,21 +117,6 @@ class ReduxNavigation extends React.Component {
       console.error(e);
     }
   
-    // if (Platform.OS === "android") {
-    //   FCM.getFCMToken().then(token => {
-    //     console.log("TOKEN (getFCMToken)", token);
-    //     const deviceToken = {
-    //       token,
-    //       os: 'android'
-    //     };
-    //     this.setState({ deviceToken: token });
-    //     this.props.dispatch(saveDeviceToken(deviceToken));
-    //   });
-    // }
-
-    // topic example
-    // FCM.subscribeToTopic('sometopic')
-    // FCM.unsubscribeFromTopic('sometopic')
   }
 
   render() {
