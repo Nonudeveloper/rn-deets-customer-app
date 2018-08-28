@@ -34,8 +34,6 @@ target 'deetscp' do
 
   pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
 
-  pod 'react-native-fcm', :path => '../node_modules/react-native-fcm'
-
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
 end

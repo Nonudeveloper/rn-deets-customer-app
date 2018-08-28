@@ -1,31 +1,7 @@
 PODS:
-  - Firebase/CoreOnly (5.6.0):
-    - FirebaseCore (= 5.1.1)
-  - Firebase/Messaging (5.6.0):
-    - Firebase/CoreOnly
-    - FirebaseMessaging (= 3.1.0)
-  - FirebaseCore (5.1.1):
-    - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.2.1):
-    - FirebaseCore (~> 5.1)
-    - GoogleUtilities/Environment (~> 5.2)
-  - FirebaseMessaging (3.1.0):
-    - FirebaseCore (~> 5.0)
-    - FirebaseInstanceID (~> 3.0)
-    - GoogleUtilities/Reachability (~> 5.2)
-    - Protobuf (~> 3.1)
-  - GoogleUtilities/Environment (5.2.2)
-  - GoogleUtilities/Logger (5.2.2):
-    - GoogleUtilities/Environment
-  - GoogleUtilities/Reachability (5.2.2):
-    - GoogleUtilities/Logger
-  - Protobuf (3.6.1)
   - React (0.53.3):
     - React/Core (= 0.53.3)
   - react-native-background-timer (2.0.1)
-  - react-native-fcm (15.0.2):
-    - Firebase/Messaging
-    - React
   - react-native-mapbox-gl (6.1.1):
     - React
   - react-native-splash-screen (3.1.0):
@@ -74,7 +50,6 @@ PODS:
 
 DEPENDENCIES:
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
-  - react-native-fcm (from `../node_modules/react-native-fcm`)
   - react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/Core (from `../node_modules/react-native`)
@@ -101,8 +76,6 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native
   react-native-background-timer:
     :path: ../node_modules/react-native-background-timer
-  react-native-fcm:
-    :path: ../node_modules/react-native-fcm
   react-native-mapbox-gl:
     :path: ../node_modules/@mapbox/react-native-mapbox-gl
   react-native-splash-screen:
@@ -113,20 +86,13 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
-  Firebase: 75ea9e232eefa158c1049028030b8f661a2ccb62
-  FirebaseCore: cb9ee75e0894def766167c95a4d5a14b1c138269
-  FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
-  FirebaseMessaging: f67b3719f520ee200da0e20ce577fe2bce0c01d0
-  GoogleUtilities: 06b66f9567769a7958db20a92f0128b2843e49d5
-  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   React: af66244a7d630be2aef03b4ddfe3570e4eff39fc
   react-native-background-timer: 8791c4dfed51d12a103b37a9f365117bee6f298f
-  react-native-fcm: 7de3ba1108aba709c3d2b4237594554eb5f6f026
   react-native-mapbox-gl: b42480060cdcc515dfa3d8e403fb4dd32466a1b9
   react-native-splash-screen: 8e3f866dc79bfe533baeffd0a38c33f7a7eae7f8
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 12e1783866ee94806efdeefc60b1a84b10066cf5
+PODFILE CHECKSUM: 0a43e9f31434582b19b39af162d0c9fe0f32beb9
 
 COCOAPODS: 1.4.0
