@@ -1,5 +1,5 @@
 import SuperFetch from '../superFetch';
-import { dataURLtoFile } from '../utility';
+import { dataURLtoFile, USER } from '../utility';
 import { getItem } from '../asyncStorage';
 import { apiConfig } from '../../config';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -9,7 +9,7 @@ class AppointmetHelper {
     addUpdateVehicle = async authData => {
         const type = authData.form.type;
         const typeData = type.split(', ');
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const accessToken = JSON.parse(user).access_token;
         let vehicleImage;
 
@@ -66,7 +66,7 @@ class AppointmetHelper {
 
 
     postNewAppointment = async appointmentData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = {
             access_token: JSON.parse(user).access_token,
             cost: appointmentData.cost,
@@ -104,7 +104,7 @@ class AppointmetHelper {
     };
 
     fetchUpcomingAndPastAppointments = async () => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const dateToday = new Date();
         const data = {
             access_token: JSON.parse(user).access_token,
@@ -114,12 +114,12 @@ class AppointmetHelper {
     }
 
     deleteAppointment = async appointmentData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = {
             access_token: JSON.parse(user).access_token,
             service_appointment_id: appointmentData.payload.appointment.id,
             technician_id: appointmentData.payload.appointment.technician_id,
-            flag: 3,
+            flag: appointmentData.deleteType === 'Delete' ? 4 : 3,
             service_start_time: appointmentData.payload.appointment.service_start_time,
             ReasonId: 3
         };
@@ -127,7 +127,7 @@ class AppointmetHelper {
     }
 
     callToTechnician = async callData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = {
             access_token: JSON.parse(user).access_token,
             phone: '+919882503084',
@@ -137,7 +137,7 @@ class AppointmetHelper {
     }
 
     textMessageToTechnician = async messageData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = {
             access_token: JSON.parse(user).access_token,
             phone: '+919882503084',
@@ -148,7 +148,7 @@ class AppointmetHelper {
     } 
 
     acceptOrRejectRequestedService = async addOnsData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const access_token = JSON.parse(user).access_token;
         return await SuperFetch.post('customer/accept_or_reject_requested_service_by_technician', { access_token, ...addOnsData });
     }

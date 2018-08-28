@@ -5,6 +5,7 @@ import Header from '../../../header/Header';
 import styles from '../styles';
 import { getItem } from '../../../../helpers/asyncStorage';
 import Loader from '../../../../deetscomponents/Loader';
+import { USER } from '../../../../helpers/utility';
 
 
 const BTClient = require('react-native-braintree-xplat');
@@ -28,7 +29,7 @@ class CreditCardForm extends React.Component {
 
     componentWillMount() {
         this.props.getBrainTreeClientToken();
-        getItem('user')
+        getItem(USER)
         .then(res => {
             this.setState({ user: JSON.parse(res) });
           })

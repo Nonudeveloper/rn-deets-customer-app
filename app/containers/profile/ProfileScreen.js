@@ -304,7 +304,7 @@ export default class ProfileScreen extends Component {
                                 </Text>
                             </View>
                             { this.state.showDetailEditButton &&
-                                <TouchableOpacity style={{ flex: 1, right: 10 }} onPress={this.editDetails.bind(this)}>
+                                <TouchableOpacity style={{ flex: 1, right: 10, alignItems: 'flex-end' }} onPress={this.editDetails.bind(this)}>
                                     <Image style={{ width: 30, height: 30 }} source={this.state.profileEditable ? tickButton : editButton} />
                                 </TouchableOpacity>
                             }
@@ -337,7 +337,7 @@ export default class ProfileScreen extends Component {
                             </View>
                             { this.state.showVehicleEditButton &&
                             <TouchableOpacity 
-                                style={{ flex: 1, position: 'absolute', right: 10 }} 
+                                style={{ flex: 1, alignItems: 'flex-end', right: 10 }} 
                                 onPress={this.deleteVehicle.bind(this)}
                             >
                                 <Image 

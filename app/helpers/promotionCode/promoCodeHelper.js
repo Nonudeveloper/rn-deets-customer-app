@@ -1,5 +1,6 @@
 import SuperFetch from '../superFetch';
 import { getItem } from '../asyncStorage';
+import { USER } from '../utility';
 
 class PromoCodeHelper {
 
@@ -8,7 +9,7 @@ class PromoCodeHelper {
     }
 
     usePromoCode = async (promoCode) => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const data = {
             access_token: JSON.parse(user).access_token,
             promo_code: promoCode.promo_code

@@ -34,7 +34,8 @@ export default class VehiclesScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 0
+      currentPage: 0,
+      marginLeft: 312
     };
   }
 
@@ -96,7 +97,7 @@ export default class VehiclesScreen extends React.Component {
           <View style={[styles.logoutButtonContainer, styles.floatingVehicleAddButton, { left: this.state.marginLeft }]}>
                     <TouchableHighlight 
                         underlayColor={'transparent'} 
-                        onPress={this.props.logout} 
+                        // onPress={this.props.logout} 
                         style={[styles.touchableLogoutClosedButtonContainer, { marginLeft: 5 }]}
                         onPress={() => {
                             this.setState({

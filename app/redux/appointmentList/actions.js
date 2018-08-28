@@ -47,10 +47,11 @@ export function fetchUpcomingAndPastAppointmentsFaliure(err) {
     };
 }
 
-export function deleteAppointment(payload) {
+export function deleteAppointment(payload, deleteType) {
     return {
         type: DELETE_APPOINTMENT,
-        payload
+        payload,
+        deleteType
     };
 }
 
