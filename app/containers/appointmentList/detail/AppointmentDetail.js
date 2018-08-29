@@ -15,7 +15,7 @@ export default class AppointmentDetail extends Component {
                 />
                <Item 
                     item={item} 
-                    onDelete={() => this.props.actions.deleteAppointment(item)} 
+                    onDelete={this.props.actions.deleteAppointment} 
                     makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
                     messageToTechnician={() => this.props.actions.messageToTechnician(item)}
                     selectAppointment={id => this.props.actions.selectAppointment(id)}

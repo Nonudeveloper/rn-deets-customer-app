@@ -40,9 +40,9 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 85,
-        height: 85,
-        borderRadius: 100
+        width: 70,
+        height: 70,
+        borderRadius: 70/2
     },
     formArea: {
         marginTop: 20,

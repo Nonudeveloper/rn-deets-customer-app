@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode';
 import SuperFetch from '../superFetch';
 import { getItem } from '../asyncStorage';
 import Instabug from 'instabug-reactnative';
+import { USER } from '../utility';
 
 class AuthHelper {
   login = async userInfo => {
@@ -63,7 +64,7 @@ class AuthHelper {
   };
 
   async logout() {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const access_token = JSON.parse(user).access_token;
         const registration_type = 2;
         Instabug.logOut();
@@ -72,11 +73,11 @@ class AuthHelper {
   }
 
   loginThroughAccessToken = async deviceToken => {
-    const user = await getItem('user');
+    const user = await getItem(USER);
     const payload = {
       access_token: JSON.parse(user).access_token,
       registration_type: 2,
-      device_token: deviceToken.token,
+      device_token: deviceToken.token ? deviceToken.token : 'device_token',
       user_type: deviceToken.os === 'android' ? 2 : 1
     };
     return await SuperFetch.post('customer/login_through_accesstoken', payload)

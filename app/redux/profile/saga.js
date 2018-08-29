@@ -1,7 +1,7 @@
 import { take, put, call, fork, takeEvery } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 import ProfileHelper from '../../helpers/profile/profileHelper';
-import { saveAuthVehiclesData } from '../../helpers/utility';
+import { saveAuthVehiclesData, USER } from '../../helpers/utility';
 import { getItem, setItem } from '../../helpers/asyncStorage';
 import { 
     fetchAuthUserDetailsSuccess, 
@@ -35,7 +35,7 @@ function* watchAuthUserDetails() {
   while (true) {
     yield take(FETCH_AUTH_USER_DETAILS);
     try {
-      const response = yield getItem('user');
+      const response = yield getItem(USER);
       yield put(fetchAuthUserDetailsSuccess(JSON.parse(response)));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
@@ -66,14 +66,14 @@ function* watchEditUserProfile() {
     const { userProfileDetails, newImage } = yield take(EDIT_USER_PROFILE);
     const payload = { userProfileDetails, newImage };
     try {
-      const userInfo = yield getItem('user');
+      const userInfo = yield getItem(USER);
       const userDetails = JSON.parse(userInfo);
       const response = yield call(editUserProfilrCall, payload);
       userDetails['first_name'] = response.first_name;
       userDetails['last_name'] = response.last_name;
       userDetails['mobile'] = response.mobile;
       userDetails['image'] = response.image;
-      yield setItem('user', userDetails);
+      yield setItem(USER, userDetails);
       yield put(editUserProfileSuccess(userDetails));
        console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {

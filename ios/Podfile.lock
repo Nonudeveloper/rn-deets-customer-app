@@ -1,7 +1,10 @@
 PODS:
   - React (0.53.3):
     - React/Core (= 0.53.3)
+  - react-native-background-timer (2.0.1)
   - react-native-mapbox-gl (6.1.1):
+    - React
+  - react-native-splash-screen (3.1.0):
     - React
   - React/Core (0.53.3):
     - yoga (= 0.53.3.React)
@@ -41,10 +44,14 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - rn-fetch-blob (0.10.6):
+    - React/Core
   - yoga (0.53.3.React)
 
 DEPENDENCIES:
+  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
@@ -61,21 +68,31 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
 
 EXTERNAL SOURCES:
   React:
     :path: ../node_modules/react-native
+  react-native-background-timer:
+    :path: ../node_modules/react-native-background-timer
   react-native-mapbox-gl:
     :path: ../node_modules/@mapbox/react-native-mapbox-gl
+  react-native-splash-screen:
+    :path: ../node_modules/react-native-splash-screen
+  rn-fetch-blob:
+    :path: ../node_modules/rn-fetch-blob
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
   React: af66244a7d630be2aef03b4ddfe3570e4eff39fc
+  react-native-background-timer: 8791c4dfed51d12a103b37a9f365117bee6f298f
   react-native-mapbox-gl: b42480060cdcc515dfa3d8e403fb4dd32466a1b9
+  react-native-splash-screen: 8e3f866dc79bfe533baeffd0a38c33f7a7eae7f8
+  rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 6ffc39c423c3203172bd7a8a829572566433e368
+PODFILE CHECKSUM: 0a43e9f31434582b19b39af162d0c9fe0f32beb9
 
 COCOAPODS: 1.4.0

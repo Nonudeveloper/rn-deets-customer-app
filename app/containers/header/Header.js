@@ -95,7 +95,7 @@ const styles = {
         // textShadowColor: 'rgba(0, 0, 0, 0.5)',
         // textShadowOffset: { width: 0, height: 1 },
         // textShadowRadius: 5,
-        letterSpacing: 5,
+        letterSpacing: 2,
     },
     rightTextStyle: {
         fontSize: 20,

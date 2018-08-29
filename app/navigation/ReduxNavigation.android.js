@@ -7,7 +7,7 @@ import { addListener } from '../helpers/utils/redux';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
 import FCM from "react-native-fcm";
-import { Platform, Alert } from 'react-native';
+import { Platform, Alert, PushNotificationIOS } from 'react-native';
 import { registerAppListener, registerKilledListener } from '../pushNotifications/Listeners';
 
 registerKilledListener();
@@ -16,8 +16,6 @@ const background = require('../containers/start/images/back.png');
 class ReduxNavigation extends React.Component {
   constructor(props) {
     super(props);
-
-
     this.state = {
       loggedInStatus: false,
       checkedSignIn: false,
@@ -28,7 +26,7 @@ class ReduxNavigation extends React.Component {
 
   componentWillMount() {
 
-    if (Platform.OS === "android") {
+    if ( Platform.OS === "android" ) {
       FCM.getFCMToken().then(token => {
         console.log("TOKEN (getFCMToken)", token);
         const deviceToken = {
@@ -119,21 +117,6 @@ class ReduxNavigation extends React.Component {
       console.error(e);
     }
   
-    // if (Platform.OS === "android") {
-    //   FCM.getFCMToken().then(token => {
-    //     console.log("TOKEN (getFCMToken)", token);
-    //     const deviceToken = {
-    //       token,
-    //       os: 'android'
-    //     };
-    //     this.setState({ deviceToken: token });
-    //     this.props.dispatch(saveDeviceToken(deviceToken));
-    //   });
-    // }
-
-    // topic example
-    // FCM.subscribeToTopic('sometopic')
-    // FCM.unsubscribeFromTopic('sometopic')
   }
 
   render() {

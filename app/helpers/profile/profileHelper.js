@@ -1,5 +1,5 @@
 import SuperFetch from '../superFetch';
-import { dataURLtoFile } from '../utility';
+import { dataURLtoFile, USER } from '../utility';
 import { getItem } from '../asyncStorage';
 import { apiConfig } from '../../config';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -58,7 +58,7 @@ class ProfileHelper {
     }
 
     changeUserPassword = async passwordData => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const access_token =  JSON.parse(user).access_token;
         const registration_type = 2;
 
@@ -80,7 +80,7 @@ class ProfileHelper {
     addNewVehicle = async authData => {
         const type = authData.form.type;
         const typeData = type.split(', ');
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const accessToken = JSON.parse(user).access_token;
         let vehicleImage;
 
@@ -136,7 +136,7 @@ class ProfileHelper {
     };
 
     deleteVehicle = async vehicleId => {
-        const user = await getItem('user');
+        const user = await getItem(USER);
         const access_token =  JSON.parse(user).access_token;
         const newDate = new Date();
 

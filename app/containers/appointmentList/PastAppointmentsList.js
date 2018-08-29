@@ -87,7 +87,7 @@ class PastAppointmentsList extends Component {
         return (
             <ListItem 
                 item={item} 
-                onDelete={() => this.props.actions.deleteAppointment(item)} 
+                onDelete={this.props.actions.deleteAppointment} 
                 makeCallToTechnician={() => this.props.actions.makeCallToTechnician(item)}
                 messageToTechnician={() => this.props.actions.messageToTechnician(item)}
                 selectAppointment={this.selectAppointment.bind(this)}
@@ -137,7 +137,9 @@ class PastAppointmentsList extends Component {
                         <TouchableHighlight onPress={() => this.selectAll()}>
                             <Text style={{ color: '#fff', marginLeft: 20 }}>Select all</Text>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.selectAll()}>
+                        <TouchableHighlight 
+                            // onPress={() => this.selectAll()}
+                        >
                             <Text style={{ color: '#fff', marginRight: 20 }}>Trash</Text>
                         </TouchableHighlight>
                 </View>

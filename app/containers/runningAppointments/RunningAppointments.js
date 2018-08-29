@@ -98,13 +98,13 @@ export default class RunningAppointments extends React.Component {
                         <Image resizeMode={'contain'} style={styles.passwordImage} source={passwordPoint} />
                         <Text style={styles.paymentTextStyle}>{item.payment[0].card_number.toString().substr(-4)}</Text>
                     </View>
-                    <Text style={{ fontSize: 19, color: '#000' }}>
+                    <Text style={{ fontSize: 20, color: '#000' }}>
                         ${item.appointment.total_cost}
                     </Text>
                 </View>
-                <TouchableOpacity style={styles.timeIntervalWrapper} onPress={() => this.goToRunningAppointments()}>
+                <TouchableOpacity style={styles.timeIntervalWrapper}>
                     <View style={styles.timeIntervalStaticTextContainer}>
-                        <Text style={{ fontSize: 18 }}>SERVICE IN PROGRESS :</Text>
+                        <Text style={{ fontSize: 16 }}>SERVICE IN PROGRESS :</Text>
                     </View>
                     <TimeInterval 
                         onRef={ref => (this.timeInterval = ref)}

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'deetscp' do
 
@@ -35,6 +35,8 @@ target 'deetscp' do
   pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+  
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
 end
 

@@ -89,6 +89,7 @@ function* watchDeleteAppointment() {
     const payload = yield take(DELETE_APPOINTMENT);
     try {
       const response = yield call(deleteAppointmentCall, payload);
+      yield put(fetchUpcomingAndPastAppointments());
       yield put(deleteAppointmentSuccess(response));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {

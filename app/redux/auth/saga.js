@@ -3,7 +3,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { loginSuccess, loginFailure, sendMailSuccess, sendMailFailure, logoutSuccess, logoutFailure, loginThroughAccessTokenSuccess, loginThroughAccessTokenFailure } from './actions';
 import { LOGIN_REQUEST, FORGOT_PASSWORD_REQUEST, LOGOUT, LOGIN_THROUGH_ACCESS_TOKEN } from './constants';
 import AuthHelper from '../../helpers/auth/authHelper';
-import { setUser, saveAuthVehiclesData, setToken } from '../../helpers/utility';
+import { setUser, saveAuthVehiclesData, setToken, USER } from '../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 import { setCardDetails, removeItem } from '../../helpers/asyncStorage';
 import { fetchRecentLocationsSuccess } from '../home/recentLocations/actions';
@@ -52,7 +52,6 @@ function* watchLoginRequest() {
         state
       };
       const response = yield call(loginCall, payload);
-      console.log(response);
       yield put(loginSuccess(response));
       yield put(fetchRecentLocationsSuccess(response.user_recent_locations));
       yield put(fetchAuthUserDetailsSuccess(response.user));
@@ -60,7 +59,7 @@ function* watchLoginRequest() {
       yield put(fetchAuthVehiclesSuccess(response.vehicle));
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
-      yield setToken(response.access_token);
+      yield setToken(response.user.access_token);
       yield setCardDetails(response.card);
       yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       //console.log('SAGA LOGIN SUCCESS: ', response);
@@ -110,7 +109,7 @@ function* watchLogOutRequest() {
      yield take(LOGOUT);
     try {
       const response = yield call(logOutCall);
-      yield removeItem('user');
+      yield removeItem(USER);
       yield put(logoutSuccess());
       yield put(NavigationActions.navigate({ routeName: 'loginStack' }));
       console.log('SAGA RESET PASSWORD Mail SENT: ', response);
@@ -151,7 +150,7 @@ function* watchloginThroughAccessTokenRequest() {
       yield put(fetchAuthVehiclesSuccess(response.vehicle));
       yield saveAuthVehiclesData(response.vehicle);
       yield setUser(response.user);
-      yield setToken(response.access_token);
+      yield setToken(response.user.access_token);
       yield setCardDetails(response.card);
       if (response.user_pending_tip_notifications.length) {
         yield put(NavigationActions.navigate({ routeName: 'SummaryScreen' }));

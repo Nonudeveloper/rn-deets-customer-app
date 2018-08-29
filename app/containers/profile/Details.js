@@ -223,7 +223,7 @@ export default class DetailsScreen extends React.Component {
                             </Text>
                         </View>
                         { this.state.showDetailEditButton &&
-                            <TouchableOpacity style={{ flex: 1, position: 'absolute', right: 10 }} onPress={this.editDetails.bind(this)}>
+                            <TouchableOpacity style={{ flex: 1, right: 10 }} onPress={this.editDetails.bind(this)}>
                                 <Image style={{ width: 30, height: 30 }} source={this.state.profileEditable ? tickButton : editButton} />
                             </TouchableOpacity>
                         }
@@ -236,14 +236,14 @@ export default class DetailsScreen extends React.Component {
                         onPress={this.changeLayout.bind(this, 'vehicle')} 
                     >
                     { this.state.showVehicleEditButton &&
-                        <TouchableOpacity style={{ flex: 1, position: 'absolute', left: 10 }} onPress={this.editVehicles.bind(this)}>
+                        <TouchableOpacity style={{ flex: 1, left: 10 }} onPress={this.editVehicles.bind(this)}>
                             <Image style={{ width: 30, height: 30 }} source={this.state.vehicleEditable ? tickButton : editButton} />
                         </TouchableOpacity>
                     }
                         <View style={styles.detailButtonInnerWraper}>
-                        <Text style={styles.vehicleTextContainer}>
-                            Vehicles
-                        </Text>
+                            <Text style={styles.vehicleTextContainer}>
+                                Vehicles
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>

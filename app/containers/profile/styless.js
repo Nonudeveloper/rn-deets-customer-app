@@ -89,7 +89,7 @@ export default StyleSheet.create({
         // borderColor: '#5eaf71',
     },
     detailButtonInnerWraper: {
-        flex: 1, 
+        flex: 4, 
         justifyContent: 'flex-end'
     },
     detailTextContainer: {
