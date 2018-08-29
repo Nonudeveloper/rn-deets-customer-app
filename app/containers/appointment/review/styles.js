@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-      flex: 1,
+    flex: 1,
   },
   modalBackground: {
     flex: 1,
@@ -157,40 +157,42 @@ export default StyleSheet.create({
   serviceProviderContainer: {
     flex: 1, 
     backgroundColor: '#fff', 
-    marginVertical: 15,
+    marginVertical: 10,
     borderTopColor: '#000',
     borderTopWidth: 1,
     borderBottomColor: '#000',
     borderBottomWidth: 1,
   },
   providerInfoContainer: {
-    flex: 2, 
+    flex: 1, 
     flexDirection: 'row',
-     marginTop: 4, 
-     borderBottomColor: 'grey', 
-     borderBottomWidth: 1, 
-     marginHorizontal: 30
+    marginTop: 10,
+    paddingLeft: 30
   },
   providerInfoImageStyle: {
-    width: '80%', 
-    height: '80%'
+    width: 70, 
+    height: 70,
+    borderRadius: 70/2
   },
   providerNameText: {
     color: '#1a1a1a', 
-    fontSize: 20
+    fontSize: 16
   },
   providerRatingContainer: {
     flexDirection: 'row', 
     marginTop: 5
   },
   providerInfoText: {
-    fontSize: 16, 
+    fontSize: 14, 
     color: '#1a1a1a'
   },
   providerAddressContainer: {
     flex: 1, 
     flexDirection: 'row', 
-    alignItems: 'center'
+    alignItems: 'center',
+    borderTopColor: 'grey', 
+    borderTopWidth: 1,
+    marginTop:40 
   },
   addressImageContainer: {
     flex: 0, 
@@ -201,8 +203,8 @@ export default StyleSheet.create({
     borderRightColor: 'grey'
   },
   ratingImageStyle: {
-    width: 16, 
-    height: 16, 
+    width: 14, 
+    height: 14, 
     marginRight: 4
   },
   serviceContainer: {

@@ -172,8 +172,8 @@ export default class ServiceList extends React.Component {
                           </View>
                           <View style={styles.descContainer}>
                               <View style={{ marginHorizontal: 5 }}>
-                                  <Text style={[styles.descText, { color: '#000' }]}>Estimated Time: {item.estimation_time}</Text>
-                                  <Text numberOfLines={3} style={[styles.descText, { color: 'grey' }]}>{item.details}</Text>
+                                  <Text style={[styles.descText, { color: '#444' , letterSpacing: 1 }]}>Estimated Time: {item.estimation_time}</Text>
+                                  <Text numberOfLines={3} style={[styles.descText, { color: 'grey' , letterSpacing: 1  }]}>{item.details}</Text>
                               </View>
                           </View>
                       </View>

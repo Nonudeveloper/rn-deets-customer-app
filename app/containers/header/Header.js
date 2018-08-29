@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 // const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 const hamBurger = require('../../assets/icons/5_burger_btn.png');
 const deetsLogo = require('../../assets/icons/4_deets_logo-metal.png');
 
-const backButton = (<Icon name="arrow-left" size={30} color="black" />);
+const backButton = (<Icon name="arrow-left" size={30} borderWidth = {2} color="black" />);
 
 const Header = (props) => {
     const { 
@@ -83,9 +83,9 @@ const styles = {
         justifyContent: 'space-between',
     },
     outerViewStyle: {
-        height: 47,
+        height: Platform.OS == "ios" ? 70 : 47,
         justifyContent: 'center',
-        marginTop:Platform.OS == "ios" ? 20 : 0,
+        marginTop:Platform.OS == "ios" ? 10 : 0,
         backgroundColor: 'transparent'
     },
     textStyle: {
@@ -104,7 +104,7 @@ const styles = {
     headerDetailStyle: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:Platform.OS == "ios" ? 40 : 0,
+        marginTop:Platform.OS == "ios" ? 20 : 0,
     },
     backButton: {
         resizeMode: 'contain', 

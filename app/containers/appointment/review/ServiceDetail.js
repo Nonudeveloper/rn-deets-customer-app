@@ -14,7 +14,7 @@ export default class ServiceDetail extends React.Component {
                 <View style={styles.vehicleInfoContainer}>
                     <View style={styles.vehicleImageContainer}>
                         <Image 
-                            resizeMode={'contain'} style={{ width: 80, height: 80 }} 
+                            resizeMode={'contain'} style={styles.providerInfoImageStyle} 
                             source={vehicleInfo.vehicle_image ? { uri: vehicleInfo.vehicle_image } : car} 
                         />
                     </View>

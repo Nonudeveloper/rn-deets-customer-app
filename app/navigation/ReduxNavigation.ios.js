@@ -41,10 +41,11 @@ class ReduxNavigation extends React.Component {
 
 
       PushNotificationIOS.addEventListener("registrationError", function(token) {
-        //console.log(token);
+        console.log(token);
       });
 
       PushNotificationIOS.addEventListener("notification", function(notification) {
+          console.log(notification);
         // if (AppState.currentState === "background") {
         //   //$this.backgroundNotification = notification;
         // }

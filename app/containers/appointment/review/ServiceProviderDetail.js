@@ -5,7 +5,7 @@ import styles from './styles';
 const avatar = require('../../../assets/icons/temp_avatar.png');
 const ratingStartActive = require('../../../assets/icons/rate_star_active.png');
 const ratingStartInactive = require('../../../assets/icons/rate_star_inactive.png');
-const directionOff = require('../../../assets/icons/direction_off.png');
+const directionOn = require('../../../assets/icons/direction_on.png');
 
 export default class ServiceProviderDetailScreen extends React.Component {
 
@@ -59,7 +59,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
     // const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     
     return (
-      <View style={{ flex: 2.5 }}>
+      <View style={{ flex:1.5 }}>
         <View style={styles.serviceProviderContainer} >
             <View style={styles.providerInfoContainer}>
                 <View style={{ flex: 1 }}>
@@ -83,7 +83,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
             </View>
             <View style={styles.providerAddressContainer}>
                 <View style={styles.addressImageContainer}>
-                    <Image source={directionOff} resizeMode={'contain'} style={{ width: 25, height: 25 }} />
+                    <Image source={directionOn} resizeMode={'contain'} style={{ width: 25, height: 25 }} />
                 </View>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.providerInfoText}>9601-9669 Rancho Dr, Escondido, CA...</Text>

@@ -35,11 +35,11 @@ export default class VehicleItems extends Component {
                     </View>
                 </View>
                 <View style={styles.vehicleInnerContainer}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0 }}>
                     {console.log(imageUrl)}
-                        <Image source={imageUrl !== '' ? { uri: imageUrl } : vehicleIcon} style={{ width: 80, height: 80, resizeMode: 'contain' }} />
+                        <Image source={imageUrl !== '' ? { uri: imageUrl } : vehicleIcon} style={{ width: 70, height: 70, borderRadius: 35 }} />
                     </View>
-                    <View style={{ flex: 2 }}>
+                    <View style={{ flex: 1 , paddingLeft: 5 }}>
                         <Text style={styles.vehicleFont}>{this.props.vehicleMake.toUpperCase()} {this.props.button.vehicle_model.toUpperCase()}</Text>
                         <Text style={styles.vehicleFont}>{this.props.vehicleYear.toUpperCase()}, {this.props.vehicleColor.toUpperCase()}</Text>
                         <Text numberOfLines={1} style={styles.licenceFont}>{this.props.button.license}</Text>

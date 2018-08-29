@@ -31,18 +31,18 @@ export default class ReviewScreen extends React.Component {
     const endDateTime = endDate.toISOString();
     const { reSchedule } = this.props;
     const options = {
-              cost: this.props.selectedServices.totalCost,
-              notes: this.props.notes !== undefined ? this.props.notes.values.notes : '',
-              body_payment_card_id: this.props.selectedCardDetails.id,
-              service_end_time: endDateTime,
-              service_start_time: this.props.selectedSchedule.selectedInterval,
-              technician_id: this.props.selectedSchedule.selectedItem.technician.technician_id,
-              user_service_appointment_id: this.props.serviceAppointmentId,
-              service_duration_minutes: this.props.selectedServices.totalEstimationTime,
-              service_location_zipcode: reSchedule === '' ? this.props.geoLocationData[0].zipcode : reSchedule.appointment.service_location_zipcode,
-              service_location_latitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[1] : reSchedule.appointment.service_location_latitude,
-              service_location_longitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[0] : reSchedule.appointment.service_location_longitude,
-              service_location_string: reSchedule === '' ? this.props.addressString : reSchedule.appointment.service_location_string,
+      cost: this.props.selectedServices.totalCost,
+      notes: this.props.notes !== undefined ? this.props.notes.values.notes : '',
+      body_payment_card_id: this.props.selectedCardDetails.id,
+      service_end_time: endDateTime,
+      service_start_time: this.props.selectedSchedule.selectedInterval,
+      technician_id: this.props.selectedSchedule.selectedItem.technician.technician_id,
+      user_service_appointment_id: this.props.serviceAppointmentId,
+      service_duration_minutes: this.props.selectedServices.totalEstimationTime,
+      service_location_zipcode: reSchedule === '' ? this.props.geoLocationData[0].zipcode : reSchedule.appointment.service_location_zipcode,
+      service_location_latitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[1] : reSchedule.appointment.service_location_latitude,
+      service_location_longitude: reSchedule === '' ? this.props.geoLocationData[0].coordinates[0] : reSchedule.appointment.service_location_longitude,
+      service_location_string: reSchedule === '' ? this.props.addressString : reSchedule.appointment.service_location_string,
     };
     this.props.actions.scheduleNewAppointment(options);
   }
@@ -50,10 +50,11 @@ export default class ReviewScreen extends React.Component {
   renderAlert(message) {
     const msg = message.error ? message.error : message.log;
     const heading = message.error ? 'Error' : 'Success';
-    Alert.alert(
-      heading,
-      msg,
-      [
+    setTimeout( () => {
+      Alert.alert(
+        heading,
+        msg,
+        [
         { 
           text: 'OK', 
           onPress: () => {
@@ -62,9 +63,10 @@ export default class ReviewScreen extends React.Component {
             this.props.navigation.navigate('HomeComponent');
           } 
         },
-      ],
-      { cancelable: false }
-    );
+        ],
+        { cancelable: false }
+        )
+    }, 300 );
   }
 
   render() {
@@ -73,12 +75,12 @@ export default class ReviewScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Header 
-            navigation={this.props.navigation} 
-            headerText={'Review'}
-            showRightIcon
-            rightText={'Confirm'}
-            onPress={() => this.goToNext()}
-            indicatorSource={indicatorFour}
+          navigation={this.props.navigation} 
+          headerText={'Review'}
+          showRightIcon
+          rightText={'Confirm'}
+          onPress={() => this.goToNext()}
+          indicatorSource={indicatorFour}
         />
         <Loader loading={isFetching} />
         {this.props.appointmentScheduleMsg !== '' && this.renderAlert(this.props.appointmentScheduleMsg)}
