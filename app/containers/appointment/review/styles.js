@@ -158,9 +158,9 @@ export default StyleSheet.create({
     flex: 1, 
     backgroundColor: '#fff', 
     marginVertical: 10,
-    borderTopColor: '#000',
+    borderTopColor: 'grey',
     borderTopWidth: 1,
-    borderBottomColor: '#000',
+    borderBottomColor: 'grey',
     borderBottomWidth: 1,
   },
   providerInfoContainer: {
@@ -211,18 +211,18 @@ export default StyleSheet.create({
     flex: 1, 
     backgroundColor: '#fff', 
     marginBottom: 15,
-    borderTopColor: '#000',
+    borderTopColor: 'grey',
     borderTopWidth: 1,
-    borderBottomColor: '#000',
+    borderBottomColor: 'grey',
     borderBottomWidth: 1,
   },
   vehicleInfoContainer: {
-    flex: 1.5, 
+    flex: 1, 
     flexDirection: 'row', 
     borderBottomColor: 'grey', 
     borderBottomWidth: 1, 
     alignItems: 'center',
-    marginTop: 4
+    paddingVertical: 5
   },
   vehicleImageContainer: {
     flex: 1, 
@@ -231,40 +231,37 @@ export default StyleSheet.create({
   },
   vehicleNameText: {
     color: '#1a1a1a', 
-    fontSize: 20
+    fontSize: 16
   },
   vehicleColorText: {
     color: '#1a1a1a', 
-    fontSize: 25
+    fontSize: 16
   },
   serviceMainText: {
-    fontSize: 20, 
+    fontSize: 18, 
     color: '#1a1a1a'
   },
   vehicleCostContainer: {
     flex: 1, 
-    alignItems: 'center', 
-    borderLeftWidth: 1, 
-    borderLeftColor: 'grey'
+    alignItems: 'center'
   },
   serviceDetailContainer: {
     marginHorizontal: 30,
     flexDirection: 'column', 
     marginVertical: 5, 
-    alignItems: 'center', 
-    borderBottomColor: 'grey', 
-    borderBottomWidth: 1
+    alignItems: 'center'
   },
   costTextStyle: {
-    fontSize: 17, 
+    fontSize: 18, 
     color: '#1a1a1a'
   },
   serviceDetailInnerConatainer: {
     flex: 1, 
     flexDirection: 'row',
+    alignItems: 'center'
   },
   serviceNameTextStyle: {
-    fontSize: 20, 
+    fontSize: 18, 
     color: '#000'
   },
   serviceDetailCostContainer: {
@@ -292,17 +289,19 @@ export default StyleSheet.create({
     borderLeftColor: 'grey'
   },
   notesContainer: {
-    flex: 0.8, 
+    flex: 0.5, 
     flexDirection: 'row', 
     alignItems: 'center', 
-    marginLeft: 10,
+    paddingLeft: 30,
+    borderTopColor: 'grey', 
+    borderTopWidth: 1
   },
   notesInnerContainer: {
     flexDirection: 'row', 
     alignItems: 'center'
   },
   notesMainTextStyle: {
-    fontSize: 20, 
+    fontSize: 18, 
     color: '#000'
   },
   notesValueTextStyle: {

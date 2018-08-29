@@ -22,7 +22,7 @@ class NotesScreen extends React.Component {
 
   componentDidMount() {
       const initialFormData = {
-        notes: ''
+        notes: 'notes'
     };
     this.props.dispatch(initialize('notes', initialFormData));
   }

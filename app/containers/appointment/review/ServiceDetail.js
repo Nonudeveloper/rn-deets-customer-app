@@ -9,7 +9,7 @@ export default class ServiceDetail extends React.Component {
   render() {
       const vehicleInfo = this.props.selectedServices.vehicleSelected;
     return (
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 2 }}>
             <View style={styles.serviceContainer}>
                 <View style={styles.vehicleInfoContainer}>
                     <View style={styles.vehicleImageContainer}>
@@ -18,7 +18,11 @@ export default class ServiceDetail extends React.Component {
                             source={vehicleInfo.vehicle_image ? { uri: vehicleInfo.vehicle_image } : car} 
                         />
                     </View>
-                    <View style={{ flex: 3 }}>
+                    <View style=
+                        {{ flex: 3,
+                            borderRightWidth: 1,
+                            borderRightColor: 'grey' 
+                        }}>
                         <Text style={styles.vehicleNameText}>{vehicleInfo.vehicle_make}, {vehicleInfo.vehicle_year},</Text>
                         <Text style={styles.vehicleColorText}>{vehicleInfo.vehicle_color}, HSHSB</Text>
                     </View>
