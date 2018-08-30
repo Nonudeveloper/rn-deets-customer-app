@@ -15,7 +15,8 @@ const Header = (props) => {
         menuIconStyle, 
         headerDetailStyle, 
         logoImg,
-        rightTextStyle
+        rightTextStyle,
+        textStyleDeets
     } = styles;
 
     const navigate = () => {
@@ -24,9 +25,8 @@ const Header = (props) => {
     };
 
     const title = props.titleType === 'logo' ? (
-        <View>
-            <Image style={logoImg} source={deetsLogo} />
-        </View>
+       
+        <Text style={textStyleDeets}>DEETS</Text>
     ) : (
         <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
     );
@@ -96,6 +96,16 @@ const styles = {
         // textShadowOffset: { width: 0, height: 1 },
         // textShadowRadius: 5,
         letterSpacing: 2,
+    },
+    textStyleDeets: {
+        fontSize: 25,
+        color: '#00802b',
+        fontWeight: 'bold',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 2,
+        letterSpacing: 5,
+        fontStyle: 'italic'
     },
     rightTextStyle: {
         fontSize: 20,
