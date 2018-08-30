@@ -28,15 +28,17 @@ class ReduxNavigation extends React.Component {
       //console.log(PushNotificationIOS);
       PushNotificationIOS.requestPermissions();
 
-      PushNotificationIOS.addEventListener("register", function(token) {
+      PushNotificationIOS.addEventListener("register", async(token) => {
         console.log("TOKEN", token);
 
         const deviceToken = {
           token,
           os: 'ios'
         };
-        $this.setState( deviceToken );
+
+        await $this.setState( deviceToken );
         $this.props.dispatch(saveDeviceToken(deviceToken));
+        $this.syncToken(deviceToken);
       });
 
 
@@ -51,11 +53,9 @@ class ReduxNavigation extends React.Component {
         // }
       });
 
-
       isSignedIn()
       .then(res => {
         if (res !== false) {
-          console.log('in if');
           this.setState(() => {
             return {
               loggedInStatus: true,
@@ -69,7 +69,6 @@ class ReduxNavigation extends React.Component {
               actions: [ReactNavigation.NavigationActions.navigate({ routeName: 'drawerStack' })]
             });
             this.props.dispatch(actionToDispatch);
-            this.props.dispatch(loginThroughAccessToken(this.state.deviceToken));
           });
         } else {
           this.setState({
@@ -84,6 +83,15 @@ class ReduxNavigation extends React.Component {
 
     async componentDidMount() {
 
+    }
+
+    syncToken(deviceToken) {
+        isSignedIn()
+        .then(res => {
+          if (res !== false) {
+            this.props.dispatch(loginThroughAccessToken(deviceToken));
+          }
+       });     
     }
 
     render() {
