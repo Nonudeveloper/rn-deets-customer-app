@@ -49,7 +49,7 @@ export default class SelectVehicleScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Header 
-            headerText={'Select Vehicle'} 
+            headerText={'Vehicle'} 
             navigation={this.props.navigation} 
             buttonType={'back'} 
             showRightIcon

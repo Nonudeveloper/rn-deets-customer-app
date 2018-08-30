@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     },
     item: {
         // padding: 10,
-        fontSize: 18,
+        fontSize: 16,
         // height: 44,
     },
     serviceItemContainer: { 
@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         flex: 1, 
         flexDirection: 'row', 
         marginVertical: 3,
-        backgroundColor: '#fff' 
+        backgroundColor: '#fff',
+        paddingBottom: 5
     },
     serviceInfoContainer: { 
         flex: 1, 
@@ -28,7 +29,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#8ac10b', 
         flexDirection: 'row', 
-        alignItems: 'center' 
+        alignItems: 'center',
+        height: 60 
     },
     serviceName: { 
         flex: 2, 
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
     },
     descText: {
-        fontSize: 12
+        fontSize: 14
     },
     carImage: {
         resizeMode: 'contain',
@@ -70,7 +72,8 @@ const styles = StyleSheet.create({
     detailInfoContainer: { 
         flex: 1,
         flexDirection: 'row', 
-        justifyContent: 'space-around' 
+        justifyContent: 'space-around',
+        paddingTop: 5
     },
     dropItem: { 
         flexDirection: 'row', 
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
       },
       serviceSubCategoryContainer: {
         flex: 1, 
-        height: 65, 
+        height: 55, 
         flexDirection: 'row', 
         alignItems: 'center'
       },

@@ -60,7 +60,6 @@ export default StyleSheet.create({
     },
     radioButton: {
         flexDirection: 'row',
-        margin: 10,
         alignItems: 'center',
         justifyContent: 'center'
     },

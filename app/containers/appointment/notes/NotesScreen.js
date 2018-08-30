@@ -22,7 +22,7 @@ class NotesScreen extends React.Component {
 
   componentDidMount() {
       const initialFormData = {
-        notes: ''
+        notes: 'notes'
     };
     this.props.dispatch(initialize('notes', initialFormData));
   }
@@ -48,14 +48,14 @@ class NotesScreen extends React.Component {
                 name={'notes'}
                 component={CommonTypeTextInput}
                 props={this.props}
-                placeholder={'Type your notes here!!'}
-                placeholderTextColor='grey'
+                placeholder={'Please enter your instructions here... '}
+                placeholderTextColor='#fff'
                 underlineColorAndroid="transparent"
                 type="multilinetext"
                 borderBotmWidth={styles.input}
             />
-            <View style={{ padding: 15, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Enter any note or special instructions for the technician here, i.e where is your vehicle parked? where should we pick up your keys? Gate or garage codes?</Text>
+            <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 14, color: '#444' , letterSpacing: 1 }}>Enter any note or special instructions for the technician here, i.e where is your vehicle parked? where should we pick up your keys? Gate or garage codes?</Text>
             </View>
         </View>
       </View>
@@ -74,15 +74,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     input: {
-        padding: 10,
-        marginTop: 20,
-        marginLeft: 10,
-        marginRight: 10,
+        padding: 15,
+        margin:10,
         borderRadius: 10,
         borderColor: '#48BBEC',
         backgroundColor: '#000',
-        color: 'grey',
-        textAlignVertical: 'top'
+        color: '#fff',
+        textAlignVertical: 'top',
+        height: 150,
+        fontWeight: 'bold',
+        fontSize: 16
     },
     inputView: {
         paddingHorizontal: 10

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 // const backButton = require('../../assets/icons/2_back_btn_onclick.png');
 const hamBurger = require('../../assets/icons/5_burger_btn.png');
 const deetsLogo = require('../../assets/icons/4_deets_logo-metal.png');
 
-const backButton = (<Icon name="arrow-left" size={30} color="black" />);
+const backButton = (<Icon name="arrow-left" size={30} borderWidth = {2} color="black" />);
 
 const Header = (props) => {
     const { 
@@ -15,7 +15,8 @@ const Header = (props) => {
         menuIconStyle, 
         headerDetailStyle, 
         logoImg,
-        rightTextStyle
+        rightTextStyle,
+        textStyleDeets
     } = styles;
 
     const navigate = () => {
@@ -24,9 +25,12 @@ const Header = (props) => {
     };
 
     const title = props.titleType === 'logo' ? (
-        <View>
-            <Image style={logoImg} source={deetsLogo} />
-        </View>
+       
+        <Text style={textStyleDeets}>DEETS</Text>
+        // <View>        
+        //     <Image style={logoImg} source={deetsLogo} />            
+        // </View>
+
     ) : (
         <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
     );
@@ -83,9 +87,9 @@ const styles = {
         justifyContent: 'space-between',
     },
     outerViewStyle: {
-        height: 47,
+        height: Platform.OS == "ios" ? 70 : 47,
         justifyContent: 'center',
-        marginTop:Platform.OS == "ios" ? 20 : 0,
+        marginTop:Platform.OS == "ios" ? 10 : 0,
         backgroundColor: 'transparent'
     },
     textStyle: {
@@ -97,6 +101,16 @@ const styles = {
         // textShadowRadius: 5,
         letterSpacing: 2,
     },
+    textStyleDeets: {
+        fontSize: 25,
+        color: '#00802b',
+        fontWeight: 'bold',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 2,
+        letterSpacing: 5,
+        fontStyle: 'italic'
+    },
     rightTextStyle: {
         fontSize: 20,
         color: '#000',
@@ -104,7 +118,7 @@ const styles = {
     headerDetailStyle: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:Platform.OS == "ios" ? 40 : 0,
+        marginTop:Platform.OS == "ios" ? 20 : 0,
     },
     backButton: {
         resizeMode: 'contain', 
