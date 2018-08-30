@@ -27,6 +27,10 @@ const Header = (props) => {
     const title = props.titleType === 'logo' ? (
        
         <Text style={textStyleDeets}>DEETS</Text>
+        // <View>        
+        //     <Image style={logoImg} source={deetsLogo} />            
+        // </View>
+
     ) : (
         <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
     );
