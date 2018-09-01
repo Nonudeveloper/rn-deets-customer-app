@@ -96,6 +96,7 @@ class ReduxNavigation extends React.Component {
     }
 
     render() {
+      console.log(this.props);
       const { dispatch, nav } = this.props;    
       const navigation = ReactNavigation.addNavigationHelpers({
         dispatch,

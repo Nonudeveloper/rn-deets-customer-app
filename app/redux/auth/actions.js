@@ -13,7 +13,8 @@ import {
   LOGOUT_FAILURE,
   LOGIN_THROUGH_ACCESS_TOKEN,
   LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS,
-  LOGIN_THROUGH_ACCESS_TOKEN_FAILURE
+  LOGIN_THROUGH_ACCESS_TOKEN_FAILURE,
+  USER_BLOCKED
 } from './constants';
 
 export function loginRequest(state) {
@@ -82,7 +83,6 @@ export function hideResetAlert() {
 }
 
 export function saveDeviceToken(token) {
-  console.log(token);
   return {
     type: SAVE_DEVICE_TOKEN,
     token,
@@ -123,6 +123,12 @@ export function loginThroughAccessTokenFailure(err) {
   return {
     type: LOGIN_THROUGH_ACCESS_TOKEN_FAILURE,
     err
+  };
+}
+
+export function userBlocked() {
+  return {
+    type:USER_BLOCKED
   };
 }
 
