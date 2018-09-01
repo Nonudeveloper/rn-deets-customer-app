@@ -82,6 +82,7 @@ export function hideResetAlert() {
 }
 
 export function saveDeviceToken(token) {
+  console.log(token);
   return {
     type: SAVE_DEVICE_TOKEN,
     token,

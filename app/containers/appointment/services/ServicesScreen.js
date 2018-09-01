@@ -20,6 +20,7 @@ export default class ServiceScreen extends React.Component {
   }
 
   renderAlert(error) {
+  setTimeout( () => {
     Alert.alert(
       'Error',
       error,
@@ -34,6 +35,7 @@ export default class ServiceScreen extends React.Component {
       ],
       { cancelable: false }
     );
+  }, 500 );
   }
 
   render() {

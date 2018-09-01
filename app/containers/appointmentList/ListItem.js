@@ -86,6 +86,7 @@ class ListItem extends React.PureComponent {
                 left={leftSwipeBtns}
                 autoClose
                 backgroundColor='transparent'
+                underlayColor='transparent'
             >
                 <TouchableOpacity
                     onPress={this.appointmentDetail.bind(this, item)} 
