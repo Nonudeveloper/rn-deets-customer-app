@@ -108,7 +108,6 @@ function verifyEmailCall({ email }) {
 }
 
 function fetchMakeModelCall(year) {
-  console.log(year);
   return new Promise((resolve, reject) => {
       RegisterHelper.fetchMakeModel({ year })
         .then(res => {
@@ -122,7 +121,6 @@ function registerCall(payload) {
   return new Promise((resolve, reject) => {
     RegisterHelper.register(payload)
       .then(response => {
-        console.log(response);
           resolve(response);
       })
       .catch(err => reject(err));

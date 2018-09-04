@@ -65,8 +65,18 @@ const SelectRegisteration = (props) => {
             <Loader loading={props.isFetching} />
             <View style={styles.innerContainer}>
                 <View style={styles.buttonArea}>
-                    <DeetsFacebook title="Register with Facebook" navigation={props.navigation} fbRegister={registerWithFacebook} showHalfButton />
-                    <GoogleSignInScreen title="Register with Google" navigation={props.navigation} gtmRegister={registerWithGoogle} showHalfButton />
+                    <DeetsFacebook 
+                        title="Register with Facebook" 
+                        navigation={props.navigation} 
+                        fbRegister={registerWithFacebook} 
+                        showHalfButton 
+                    />
+                    <GoogleSignInScreen 
+                        title="Register with Google" 
+                        navigation={props.navigation} 
+                        gtmRegister={registerWithGoogle} 
+                        showHalfButton 
+                    />
                 </View>
                 <Hr color="black" width={2} marginleft={25} marginright={25}>
                     <Text style={styles.textWithDivider}>OR</Text>
