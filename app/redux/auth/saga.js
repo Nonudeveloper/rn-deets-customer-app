@@ -14,7 +14,6 @@ function loginCall({ state }) {
   return new Promise((resolve, reject) => {
     AuthHelper.login(state)
     .then((data) => {
-      console.log('in AuthHelper.login');
       if (data.user) {
         resolve(data);
       } else if (data.status === 401) {
@@ -51,7 +50,6 @@ function* watchLoginRequest() {
         state
       };
       const response = yield call(loginCall, payload);
-      console.log(response);
       if ( parseInt(response.user.is_blocked) === 1 ) {
         yield put(userBlocked());
       } else {
@@ -96,7 +94,6 @@ function logOutCall() {
   return new Promise((resolve, reject) => {
     AuthHelper.logout()
     .then((data) => {
-      console.log(data);
       if (typeof data.status === 'undefined') {
         resolve(data);
       } else {

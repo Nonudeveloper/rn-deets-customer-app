@@ -6,39 +6,31 @@ PODS:
     - React
   - react-native-splash-screen (3.1.0):
     - React
+  - React/BatchedBridge (0.53.3):
+    - React/Core
+    - React/cxxreact_legacy
   - React/Core (0.53.3):
     - yoga (= 0.53.3.React)
+  - React/cxxreact_legacy (0.53.3):
+    - React/jschelpers_legacy
+    - React/jsinspector_legacy
   - React/DevSupport (0.53.3):
     - React/Core
     - React/RCTWebSocket
   - React/fishhook (0.53.3)
-  - React/RCTActionSheet (0.53.3):
-    - React/Core
-  - React/RCTAnimation (0.53.3):
-    - React/Core
+  - React/jschelpers_legacy (0.53.3)
+  - React/jsinspector_legacy (0.53.3)
   - React/RCTBlob (0.53.3):
     - React/Core
   - React/RCTCameraRoll (0.53.3):
     - React/Core
     - React/RCTImage
-  - React/RCTGeolocation (0.53.3):
-    - React/Core
   - React/RCTImage (0.53.3):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.53.3):
-    - React/Core
   - React/RCTNetwork (0.53.3):
     - React/Core
-  - React/RCTPushNotification (0.53.3):
-    - React/Core
-  - React/RCTSettings (0.53.3):
-    - React/Core
   - React/RCTTest (0.53.3):
-    - React/Core
-  - React/RCTText (0.53.3):
-    - React/Core
-  - React/RCTVibration (0.53.3):
     - React/Core
   - React/RCTWebSocket (0.53.3):
     - React/Core
@@ -52,22 +44,11 @@ DEPENDENCIES:
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-mapbox-gl (from `../node_modules/@mapbox/react-native-mapbox-gl`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
-  - React/RCTActionSheet (from `../node_modules/react-native`)
-  - React/RCTAnimation (from `../node_modules/react-native`)
-  - React/RCTBlob (from `../node_modules/react-native`)
   - React/RCTCameraRoll (from `../node_modules/react-native`)
-  - React/RCTGeolocation (from `../node_modules/react-native`)
-  - React/RCTImage (from `../node_modules/react-native`)
-  - React/RCTLinkingIOS (from `../node_modules/react-native`)
-  - React/RCTNetwork (from `../node_modules/react-native`)
-  - React/RCTPushNotification (from `../node_modules/react-native`)
-  - React/RCTSettings (from `../node_modules/react-native`)
   - React/RCTTest (from `../node_modules/react-native`)
-  - React/RCTText (from `../node_modules/react-native`)
-  - React/RCTVibration (from `../node_modules/react-native`)
-  - React/RCTWebSocket (from `../node_modules/react-native`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
 
@@ -93,6 +74,6 @@ SPEC CHECKSUMS:
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 0a43e9f31434582b19b39af162d0c9fe0f32beb9
+PODFILE CHECKSUM: f2dc0da3949e9f7cbddc11beb92d4659879300f4
 
 COCOAPODS: 1.4.0
