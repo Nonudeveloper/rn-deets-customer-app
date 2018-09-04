@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
         isLoading: state.Auth.isLoading,
         isAuthenticated: state.Auth.isAuthenticated,
         deviceToken: state.Auth.deviceToken,
+        isBlocked: state.Auth.isBlocked
     };
 };
 

@@ -11,20 +11,9 @@ target 'deetscp' do
     # Comment out any unneeded subspecs to reduce bundle size.
     'Core',
     'DevSupport',
-    'RCTActionSheet',
-    'RCTAnimation',
-    'RCTBlob',
     'RCTCameraRoll',
-    'RCTGeolocation',
-    'RCTImage',
-    'RCTNetwork',
-    'RCTPushNotification',
-    'RCTSettings',
     'RCTTest',
-    'RCTText',
-    'RCTVibration',
-    'RCTWebSocket',
-    'RCTLinkingIOS'
+    'BatchedBridge'
   ]
 
   # Mapbox
@@ -38,6 +27,14 @@ target 'deetscp' do
   
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 end
 
 

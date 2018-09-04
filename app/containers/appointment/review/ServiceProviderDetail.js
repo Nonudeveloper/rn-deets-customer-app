@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking, Platform, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
 const avatar = require('../../../assets/icons/temp_avatar.png');
@@ -11,6 +11,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props);
     // this.props.actions.fetchServices();
   }
 
@@ -47,8 +48,24 @@ export default class ServiceProviderDetailScreen extends React.Component {
     return fullTime;
   }
 
+  openMap() {
+    const scheme = Platform.select({ ios: 'http://maps.apple.com/?ll=', android: 'geo:' });
+    const latLng = `${this.props.geoData[0].coordinates[1]},${this.props.geoData[0].coordinates[0]}`;
+    const url = Platform.select({
+      ios: `${scheme}${latLng}`,
+      android: `${scheme}${latLng}`
+    });
+    console.log(url);
+    Linking.canOpenURL(url).then(supported => {
+      if (!supported) {
+        console.log('Can\'t handle url: ' + url);
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+  }
+
   render() {
-      console.log(this.props);
     const selectedDate = new Date(this.props.selectedSchedule.selectedDate);
     const appointmentDate = selectedDate.toDateString();
     // const newDate = new Date(this.props.selectedSchedule.selectedInterval);
@@ -82,11 +99,14 @@ export default class ServiceProviderDetailScreen extends React.Component {
                 </View>
             </View>
             <View style={styles.providerAddressContainer}>
-                <View style={styles.addressImageContainer}>
-                    <Image source={directionOn} resizeMode={'contain'} style={{ width: 25, height: 25 }} />
-                </View>
+                
+                <TouchableOpacity onPress={() => this.openMap()}>
+                    <View style={styles.addressImageContainer}>
+                        <Image source={directionOn} resizeMode={'contain'} style={{ width: 25, height: 25 }}/>
+                    </View>                    
+                </TouchableOpacity>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.providerInfoText}>9601-9669 Rancho Dr, Escondido, CA...</Text>
+                    <Text style={styles.providerInfoText}>{this.props.addressString}</Text>
                 </View>
             </View>
         </View>

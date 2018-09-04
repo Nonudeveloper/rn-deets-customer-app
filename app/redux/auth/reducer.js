@@ -13,7 +13,8 @@ import {
     LOGOUT_FAILURE,
     LOGIN_THROUGH_ACCESS_TOKEN,
     LOGIN_THROUGH_ACCESS_TOKEN_SUCCESS,
-    LOGIN_THROUGH_ACCESS_TOKEN_FAILURE
+    LOGIN_THROUGH_ACCESS_TOKEN_FAILURE,
+    USER_BLOCKED
 } from './constants';
 import { LOAD } from 'redux-storage';
 
@@ -30,6 +31,7 @@ const initialState = {
     resetSuccessLog: false,
     showResetAlert: false,
     resetErrorLog: false,
+    isBlocked: false,
     deviceToken: {},
     authUserWholeData: [],
     userVehicledata: [],
@@ -58,6 +60,7 @@ export default function user(state = initialState, action) {
           failure: false,
           user: action.user,
           isLoading: false,
+          isBlocked: false,
           authUserWholeData: action.authUserData,
           userVehicledata: action.vehicle,
         });
@@ -68,7 +71,18 @@ export default function user(state = initialState, action) {
           failure: true,
           errorMessage: action.err,
           showAlert: true,
-          isLoading: false
+          isLoading: false,
+          isBlocked: false
+        });
+      case USER_BLOCKED:
+        return Object.assign({}, state, {
+          isFetching: false,
+          isAuthenticated: false,
+          failure: true,
+          errorMessage: 'blocked',
+          showAlert: true,
+          isLoading: false,
+          isBlocked: true
         });
       case HIDE_ALERT:
         return Object.assign({}, state, {

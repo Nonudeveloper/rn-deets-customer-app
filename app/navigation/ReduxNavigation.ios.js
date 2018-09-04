@@ -69,6 +69,7 @@ class ReduxNavigation extends React.Component {
               actions: [ReactNavigation.NavigationActions.navigate({ routeName: 'drawerStack' })]
             });
             this.props.dispatch(actionToDispatch);
+            this.syncToken("deviceToken");
           });
         } else {
           this.setState({
@@ -95,6 +96,7 @@ class ReduxNavigation extends React.Component {
     }
 
     render() {
+      console.log(this.props);
       const { dispatch, nav } = this.props;    
       const navigation = ReactNavigation.addNavigationHelpers({
         dispatch,

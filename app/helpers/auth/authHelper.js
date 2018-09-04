@@ -74,14 +74,12 @@ class AuthHelper {
 
   loginThroughAccessToken = async deviceToken => {
     const user = await getItem(USER);
-    console.log(deviceToken);
     const payload = {
       access_token: JSON.parse(user).access_token,
       registration_type: 2,
       device_token: deviceToken.token ? deviceToken.token : 'device_token',
       user_type: deviceToken.os === 'android' ? 2 : 1
     };
-    console.log(payload);
     return await SuperFetch.post('customer/login_through_accesstoken', payload)
     .then(response => { return response; });
   }

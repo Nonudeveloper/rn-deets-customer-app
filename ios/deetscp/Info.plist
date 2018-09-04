@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>FacebookAppID</key>
 	<string>144138349734119</string>
 	<key>FacebookDisplayName</key>
@@ -46,17 +46,13 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access for uploading Images</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app will use your location to show cool stuffs near you.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Need location access for updating nearby friends</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

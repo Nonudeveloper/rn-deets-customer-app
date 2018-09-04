@@ -13,6 +13,7 @@ import Hr from '../../deetscomponents/hr';
 import Loader from '../../deetscomponents/Loader';
 import Button from '../../deetscomponents/Button';
 import GoogleSignInScreen from '../../deetscomponents/google';
+import Instabug from 'instabug-reactnative';
 
 export default class LoginScreen extends Component {
 
@@ -52,15 +53,17 @@ export default class LoginScreen extends Component {
     let errorCount = 0;
     for (const error in errors) {
       if (errors[error] !== undefined && errorCount === 0) {
-        Alert.alert(
-          'Error',
-          errors[error],
-          [
-            // { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            { text: 'OK', onPress: () => console.log('OK Pressed') },
-          ],
-          { cancelable: false }
-        );
+        setTimeout( () => {
+          Alert.alert(
+            'Error',
+            errors[error],
+            [
+              // { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+              { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+          );
+        }, 500);
         errorCount++;
       }
     }
@@ -114,20 +117,54 @@ export default class LoginScreen extends Component {
   };
 
   renderAlert(error) {
-    Alert.alert(
-      'Error',
-      error,
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
-          }
-        },
-      ],
-      { cancelable: false }
-    );
+    if (this.props.isBlocked) {
+      this.renderBlockAlert();
+      return;
+    }
+
+    setTimeout( () => {
+      Alert.alert(
+        'Error',
+        error,
+        [
+          { 
+            text: 'OK', 
+            onPress: () => {
+              //dispath an action to make showAlert false
+              this.props.actions.hideAlert();
+            } 
+          },
+        ],
+        { cancelable: false }
+      );
+      }, 500 );
+  }
+
+  renderBlockAlert(error) {
+    setTimeout( () => {
+      Alert.alert(
+        'Alert',
+        'Your profile has been blocked , Please contact Admin',
+        [
+          { 
+            text: 'Contact Us', 
+            onPress: () => {
+              //dispath an action to make showAlert false
+              this.props.actions.hideAlert();
+              Instabug.invoke();
+            } 
+          },
+          { 
+            text: 'OK', 
+            onPress: () => {
+              //dispath an action to make showAlert false
+              this.props.actions.hideAlert();
+            } 
+          },
+        ],
+        { cancelable: false }
+      );
+      }, 500 );
   }
 
   render() {

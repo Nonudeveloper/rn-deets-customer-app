@@ -164,9 +164,9 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
   },
   providerInfoContainer: {
-    flex: 1, 
+    flex: 2, 
     flexDirection: 'row',
-    marginTop: 10,
+    paddingVertical: 10,
     paddingLeft: 30
   },
   providerInfoImageStyle: {
@@ -191,8 +191,7 @@ export default StyleSheet.create({
     flexDirection: 'row', 
     alignItems: 'center',
     borderTopColor: 'grey', 
-    borderTopWidth: 1,
-    marginTop:40 
+    borderTopWidth: 1
   },
   addressImageContainer: {
     flex: 0, 

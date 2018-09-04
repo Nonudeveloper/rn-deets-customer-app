@@ -81,7 +81,6 @@ export default class ReviewScreen extends React.Component {
 
   render() {
     const { isFetching } = this.props;
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Header 
@@ -97,7 +96,7 @@ export default class ReviewScreen extends React.Component {
         {/* //sp details component */}
         {/* //appointment details component */}
         {/* //credit card details component */}
-        <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} />
+        <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} addressString={this.props.addressString} geoData={this.props.geoLocationData}/>
         <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.values.notes : ''} />
         <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} getSelectedCard={this.getSelectedCard} selectedServices={this.props.selectedServices} />
       </View>
