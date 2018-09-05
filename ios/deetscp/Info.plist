@@ -23,18 +23,22 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb144138349734119</string>
-			</array>
-		</dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>Facebook</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb390328031142851</string>
+            </array>
+        </dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>3</string>
 	<key>FacebookAppID</key>
-	<string>144138349734119</string>
+	<string>390328031142851</string>
 	<key>FacebookDisplayName</key>
-	<string>deetscp</string>
+	<string>deets</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -46,8 +50,14 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+	    <key>NSExceptionDomains</key>
+	    <dict>
+	        <key>localhost</key>
+	        <dict>
+	            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+	            <true/>
+	        </dict>
+	    </dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access for uploading Images</string>

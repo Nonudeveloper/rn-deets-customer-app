@@ -13,7 +13,6 @@ import Loader from '../../deetscomponents/Loader';
 const { width, height } = Dimensions.get('window');
 
 const background = require('./images/back.png');
-const mark = require('../../assets/icons/4_deets_logo.png');
 
 export default class StartScreen extends Component {
 
@@ -35,12 +34,7 @@ export default class StartScreen extends Component {
             loading={isFetching} 
         />
         <ImageBackground source={background} style={styles.background} resizeMode="cover">
-          <View style={styles.markWrap}>
-            {/* <Image source={mark} style={styles.mark} resizeMode="contain" />
-            <Text style={styles.title}>The Experts in Enhancing & Maintaining your Vehicle's Appearance!</Text> */}
-          </View>
-          
-        </ImageBackground>
+       </ImageBackground>
         <View style={styles.buttonArea}>
               <TouchableOpacity style={styles.login} onPress={() => this.props.navigation.navigate('loginScreen')} >
                 <Text style={{ color: '#cccccc', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
@@ -57,27 +51,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  markWrap: {
-    flex: 4,
-    alignItems: 'center',
-  },
-  mark: {
-    width: 200,
-    height: 200,
-    marginTop: 50
-  },
   background: {
-    flex: 5,
+    flex: 1,
     width,
     height,
   },
   buttonArea: {
-    flex: 1,
     backgroundColor: '#a8a8a8',
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    
+    position: 'absolute',
+    bottom: 0,
+    paddingVertical: 20
   },
   login: {
     height: 50,
