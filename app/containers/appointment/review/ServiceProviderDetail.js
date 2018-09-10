@@ -76,8 +76,8 @@ export default class ServiceProviderDetailScreen extends React.Component {
     // const endTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     
     return (
-      <View style={{ flex:1 }}>
-        <View style={styles.serviceProviderContainer} >
+      <View style={{ flex: 1 }}>
+        {/* <View style={styles.serviceProviderContainer} > */}
             <View style={styles.providerInfoContainer}>
                 <View style={{ flex: 1 }}>
                     <Image 
@@ -92,10 +92,11 @@ export default class ServiceProviderDetailScreen extends React.Component {
                     <View style={styles.providerRatingContainer}>
                     {this.getAverageRating(this.props.selectedSchedule.selectedItem.technician.average_rating)}
                     </View>
-                    <View style={{ marginTop: 5 }}>
+                    <View style={{ }}>
                         <Text style={styles.providerInfoText}>{appointmentDate}</Text>
                         <Text style={styles.providerInfoText}>{this.props.selectedSchedule.selectedTime} to {endTime}</Text>
                     </View>
+                    
                 </View>
             </View>
             <View style={styles.providerAddressContainer}>
@@ -109,7 +110,7 @@ export default class ServiceProviderDetailScreen extends React.Component {
                     <Text style={styles.providerInfoText}>{this.props.addressString}</Text>
                 </View>
             </View>
-        </View>
+        {/* </View> */}
       </View>
     );
   }

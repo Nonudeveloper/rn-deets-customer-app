@@ -166,8 +166,8 @@ export default StyleSheet.create({
   providerInfoContainer: {
     flex: 2, 
     flexDirection: 'row',
-    paddingVertical: 10,
-    paddingLeft: 30
+    paddingLeft: 30,
+    top: 5
   },
   providerInfoImageStyle: {
     width: 70, 
@@ -187,7 +187,6 @@ export default StyleSheet.create({
     color: '#1a1a1a'
   },
   providerAddressContainer: {
-    flex: 1, 
     flexDirection: 'row', 
     alignItems: 'center',
     borderTopColor: 'grey', 
@@ -199,7 +198,8 @@ export default StyleSheet.create({
     marginLeft: 30, 
     marginRight: 10, 
     borderRightWidth: 1, 
-    borderRightColor: 'grey'
+    borderRightColor: 'grey',
+    backgroundColor: 'blue'
   },
   ratingImageStyle: {
     width: 14, 
