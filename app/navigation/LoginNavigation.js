@@ -5,7 +5,7 @@ import VehicleInformation from '../containers/register/vehicleInformation/index'
 import LoginScreen from '../containers/login/index';
 import ForgotPasswordScreen from '../containers/login/forgotPassword/index';
 import StartScreen from '../containers/start/index';
-import SelectRegisteration from '../containers/start/SelectRegisteration';
+import SelectRegisteration from '../containers/start/selectRegistration/index';
 import PaymentInformation from '../containers/register/paymentInformation/index';
 import CreditCardForm from '../containers/register/paymentInformation/creditCardContainer';
 

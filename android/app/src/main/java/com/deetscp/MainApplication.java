@@ -3,6 +3,7 @@ package com.deetscp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNGoogleSigninPackage(),
             new BackgroundTimerPackage(),
             new RNFetchBlobPackage(),
             new FIRMessagingPackage(),

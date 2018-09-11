@@ -4,6 +4,7 @@ import { reduxForm, Field, formValues, change, untouch, initialize } from 'redux
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import CommonTextInput from '../../deetscomponents/form/Input';
+import { connect } from 'react-redux';
 
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
 
@@ -152,7 +153,7 @@ class FormArea extends React.Component {
         );
     }
 }
-export default reduxForm({ 
+FormArea = reduxForm({ 
     form: 'profileDetails',
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
@@ -189,3 +190,14 @@ export default reduxForm({
         return errors;
     }
 })(FormArea);
+
+export default connect(state => ({
+    initialValues: {
+        fname: state.Profile.authUser.first_name,
+        lname: state.Profile.authUser.last_name,
+        mobile: state.Profile.authUser.mobile,
+        email: state.Profile.authUser.email,
+        access_token: state.Profile.authUser.access_token
+    },
+    enableReinitialize: true,
+}))(FormArea);

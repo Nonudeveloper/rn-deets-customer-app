@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Alert } from 'react-native';
 import Header from '../../header/Header';
 import VehicleFlatList from './VehicleFlatList';
 import Loader from '../../../deetscomponents/Loader';
@@ -11,6 +11,9 @@ const backButton = require('../../../assets/icons/add_car_icon_onclick.png');
 export default class SelectVehicleScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedVehicle: ''
+    };
   }
 
   componentWillMount() {
@@ -24,10 +27,20 @@ export default class SelectVehicleScreen extends React.Component {
   }
 
   getSelectedItems = () => {
-    this.props.navigation.navigate('serviceScreen');  
+    this.state.selectedVehicle !== '' ?
+    this.props.navigation.navigate('serviceScreen')
+    :
+    Alert.alert(
+      'Error',
+      'Add Vehicle First ...',
+      [
+        { text: 'Ok', onPress: () => console.log('Cancel Button Pressed'), style: 'cancel' },
+      ]
+    );
   }
   
   _selectedVehicle = (vehicle) => {
+    this.setState({ selectedVehicle: vehicle });
     this.props.selectedVehicle(vehicle);
   }
 
@@ -51,11 +64,11 @@ export default class SelectVehicleScreen extends React.Component {
           rescheduling={this.props.navigation.state.params !== undefined ? true : false}
           rescheduleAppointment={this.props.selectedAppointment}
         />
-            <View style={{ right: 25, bottom: 25, position: 'absolute'}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}>
-                <Image source={backButton} style={{ width: 30, height: 30 }} />
-              </TouchableOpacity>
-            </View>
+        <View style={{ right: 25, bottom: 25, position: 'absolute' }}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })}>
+            <Image source={backButton} style={{ width: 30, height: 30 }} />
+          </TouchableOpacity>
+        </View>
       </View>
      
     );

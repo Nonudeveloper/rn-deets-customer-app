@@ -32,6 +32,16 @@ export default class ChangePasswordScreen extends React.Component {
        this.props.actions.changeUserPassword(this.props.form.changePassword.values);
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { passwordConfirmation } = nextProps;
+    passwordConfirmation &&
+    passwordConfirmation.log !== this.props.passwordConfirmation.log &&
+    (() => {
+      const { passwordConfirmation: { log } } = nextProps;
+      this.renderAlert(log);
+    })();
+  }
   
   renderAlert(error) {
     Alert.alert(
@@ -58,7 +68,6 @@ export default class ChangePasswordScreen extends React.Component {
                 navigation={this.props.navigation} 
                 buttonType={'back'}
             />
-            {this.props.passwordConfirmation !== '' && this.renderAlert(this.props.passwordConfirmation.log)}
             <FormArea />
             <View style={styles.nextButtonContainer}>
                 <Button 
