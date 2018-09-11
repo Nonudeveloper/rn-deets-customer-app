@@ -55,6 +55,7 @@
 		AF7561B9204D4DC500E09FC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7561B6204D4DC300E09FC3 /* FBSDKLoginKit.framework */; };
 		AF7561BA204D4DC500E09FC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7561B7204D4DC500E09FC3 /* FBSDKCoreKit.framework */; };
 		AFCAF63F21480410004799B6 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCAF63E214803F9004799B6 /* libLRDRCTSimpleToast.a */; };
+		AFCAF6DD214839F6004799B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFCAF6AC214839F5004799B6 /* GoogleService-Info.plist */; };
 		AFE49734212DED5D00154BD7 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE49731212DED2C00154BD7 /* libRCTPushNotification.a */; };
 		C306710F066E467B8511242A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 658CDBB793E14DD092BE6B5C /* FontAwesome.ttf */; };
 		C667404AA18642228C347BDB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1747AC2D49A405DB19AF2B9 /* Octicons.ttf */; };
@@ -492,6 +493,7 @@
 		AF7561B6204D4DC300E09FC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		AF7561B7204D4DC500E09FC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		AFCAF639214803F7004799B6 /* LRDRCTSimpleToast.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LRDRCTSimpleToast.xcodeproj; path = "../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast.xcodeproj"; sourceTree = "<group>"; };
+		AFCAF6AC214839F5004799B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "deetscp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AFE4972B212DED2800154BD7 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		AFE49735212DEDC000154BD7 /* deetscp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = deetscp.entitlements; path = deetscp/deetscp.entitlements; sourceTree = "<group>"; };
 		B07E61A4CF65AC37822E1C9C /* Pods-deetscp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-deetscp.release.xcconfig"; path = "Pods/Target Support Files/Pods-deetscp/Pods-deetscp.release.xcconfig"; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 		D69F8CE435E84642BA234C48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AFCAF6AC214839F5004799B6 /* GoogleService-Info.plist */,
 				AF0F2D2D21395C640039BC68 /* splash_bg.png */,
 				AF0F2D2B2137F5C70039BC68 /* Monospace.ttf */,
 				7FA7F25E311D4A7F9EF7771E /* Entypo.ttf */,
@@ -1492,6 +1495,7 @@
 				D3C53001BF94452A8A2168A2 /* Feather.ttf in Resources */,
 				C306710F066E467B8511242A /* FontAwesome.ttf in Resources */,
 				82785DB84DA7423E9AD053D8 /* Foundation.ttf in Resources */,
+				AFCAF6DD214839F6004799B6 /* GoogleService-Info.plist in Resources */,
 				FE43B63F249D46EF91C5980F /* Ionicons.ttf in Resources */,
 				7EEC3D01E8C34B6BAA703D04 /* MaterialCommunityIcons.ttf in Resources */,
 				49B08FA82BEB4DA38ED37973 /* MaterialIcons.ttf in Resources */,
