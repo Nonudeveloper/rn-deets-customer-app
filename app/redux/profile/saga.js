@@ -3,7 +3,6 @@ import { NavigationActions } from 'react-navigation';
 import ProfileHelper from '../../helpers/profile/profileHelper';
 import { saveAuthVehiclesData, USER } from '../../helpers/utility';
 import { getItem, setItem } from '../../helpers/asyncStorage';
-import { ToastAndroid } from 'react-native';
 import { 
     fetchAuthUserDetailsSuccess, 
     fetchAuthUserDetailsFailure, 
@@ -30,6 +29,7 @@ import {
     DELETE_VEHICLE
 } from './constants';
 import { fetchAuthVehiclesSuccess } from '../appointment/vehicle/vehicleActions';
+import withToast from '../../hoc/withToast';
 
 //**Generator */
 function* watchAuthUserDetails() {
@@ -76,8 +76,8 @@ function* watchEditUserProfile() {
       userDetails['image'] = response.image;
       yield setItem(USER, userDetails);
       yield put(editUserProfileSuccess(userDetails));
-       console.log('SAGA FETCH SUCCESS: ', response);
-       ToastAndroid.showWithGravityAndOffset('Profile Updated successfully !', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+      console.log('SAGA FETCH SUCCESS: ', response);
+      withToast('Profile Updated successfully !');
     } catch (err) {
       yield put(editUserProfileFailure(err));
        console.log('SAGA FETCH ERR: ', err);
@@ -178,7 +178,7 @@ function* watchAddNewVehicleRequest() {
           yield put(NavigationActions.back());
         }
         console.log('SAGA RESET PASSWORD Mail SENT: ', response);
-        ToastAndroid.showWithGravityAndOffset('Vehicle Updated successfully !', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        withToast('Vehicle Updated successfully!');
       } catch (err) {
         console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
         yield put(fetchAddNewVehicleFailure(err));

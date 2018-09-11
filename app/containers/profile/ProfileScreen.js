@@ -10,7 +10,6 @@ import {
     Platform, 
     Animated,
     Easing,
-    ToastAndroid,
     TouchableHighlight
 } from 'react-native';
 import Header from '../header/Header';
@@ -20,6 +19,7 @@ import Button from '../../deetscomponents/Button';
 import VehiclesScreen from './vehiclesDetail/index';
 import Loader from '../../deetscomponents/Loader';
 import styles from './styless';
+import withToast from '../../hoc/withToast';
 
 const window = Dimensions.get('window');
 
@@ -287,7 +287,7 @@ export default class ProfileScreen extends Component {
                 
                 {(this.props.errorMessage !== undefined && this.props.errorMessage !== '') && this.renderAlert(this.props.errorMessage.error)}
                 {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
-                {this.props.logoutMessage !== '' && ToastAndroid.showWithGravityAndOffset(this.props.logoutMessage.error, ToastAndroid.LONG, ToastAndroid.TOP, 25, 50)}
+                {this.props.logoutMessage !== '' && withToast(this.props.logoutMessage.error)}
                 
                 <View style={styles.toggleButtonContainer}>
                     <Animated.View style={[detailFlex, { marginRight: 10, height: 60, top: 25 }]} >

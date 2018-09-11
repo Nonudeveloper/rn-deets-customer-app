@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, ToastAndroid } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { take, put, call, fork, select } from 'redux-saga/effects';
 import { 
   fetchVehiclesSuccess, 
@@ -25,6 +25,7 @@ import { setUser } from '../../helpers/utility';
 import { setItem } from '../../helpers/asyncStorage';
 import { NavigationActions } from 'react-navigation';
 import { loginThroughAccessToken } from '../auth/actions';
+import withToast from '../../hoc/withToast';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -147,7 +148,7 @@ function* watchRegisterRequest() {
         yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
-      ToastAndroid.showWithGravityAndOffset(err, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+      withToast(err);
       yield put(registerFailure(err));
       console.log('SAGA FETCH ERR: ', err);
     }
