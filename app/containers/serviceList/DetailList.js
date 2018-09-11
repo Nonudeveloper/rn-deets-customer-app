@@ -58,7 +58,7 @@ export default class ServiceDetailHeader extends React.Component {
                       (this.props.showServices === true)
                       ? 
                       (<View style={styles.serviceSubCategoryContainer}>
-                      <View style={{ flex: 3, paddingHorizontal: 26 }}>
+                      <View style={{ flex: 3, paddingHorizontal: 25 }}>
                         <Text 
                           style={styles.item} 
                         //   onPress={this.getItem.bind(this, item.adds_on_name)} 
