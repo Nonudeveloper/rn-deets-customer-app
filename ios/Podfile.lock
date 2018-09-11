@@ -1,4 +1,24 @@
 PODS:
+  - GoogleSignIn (4.2.0):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.4)
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.4)
+  - GTMOAuth2 (1.1.6):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.2.0):
+    - GTMSessionFetcher/Full (= 1.2.0)
+  - GTMSessionFetcher/Core (1.2.0)
+  - GTMSessionFetcher/Full (1.2.0):
+    - GTMSessionFetcher/Core (= 1.2.0)
   - React (0.53.3):
     - React/Core (= 0.53.3)
   - react-native-background-timer (2.0.1)
@@ -38,6 +58,9 @@ PODS:
     - React/RCTBlob
   - rn-fetch-blob (0.10.6):
     - React/Core
+  - RNGoogleSignin (1.0.0-rc5):
+    - GoogleSignIn
+    - React
   - yoga (0.53.3.React)
 
 DEPENDENCIES:
@@ -50,6 +73,7 @@ DEPENDENCIES:
   - React/RCTCameraRoll (from `../node_modules/react-native`)
   - React/RCTTest (from `../node_modules/react-native`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
+  - RNGoogleSignin (from `../node_modules/react-native-google-signin`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -63,17 +87,24 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-splash-screen
   rn-fetch-blob:
     :path: ../node_modules/rn-fetch-blob
+  RNGoogleSignin:
+    :path: ../node_modules/react-native-google-signin
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
+  GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   React: af66244a7d630be2aef03b4ddfe3570e4eff39fc
   react-native-background-timer: 8791c4dfed51d12a103b37a9f365117bee6f298f
   react-native-mapbox-gl: b42480060cdcc515dfa3d8e403fb4dd32466a1b9
   react-native-splash-screen: 8e3f866dc79bfe533baeffd0a38c33f7a7eae7f8
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
+  RNGoogleSignin: 44debd8c359a662c0e2d585952e88b985bf78008
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: f2dc0da3949e9f7cbddc11beb92d4659879300f4
+PODFILE CHECKSUM: 62ee2b4178b747a16bc41a305bd3f85cc21c6609
 
 COCOAPODS: 1.4.0

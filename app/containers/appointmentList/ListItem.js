@@ -63,7 +63,7 @@ class ListItem extends React.PureComponent {
             {
               text: this.props.activeTab === 'past' ? 'Delete' : 'Cancel',
               backgroundColor: '#ff3300',
-              underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+              underlayColor: 'rgba(0, 0, 1, 0.6)',
               onPress: () => { this.deleteItem(this.props.item); }
            }
         ];
@@ -71,7 +71,7 @@ class ListItem extends React.PureComponent {
             {
                 text: this.props.activeTab === 'past' ? 'Schedule' : 'Update',
                 backgroundColor: '#009933',
-                underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                underlayColor: 'rgba(0, 0, 1, 0.6)',
                 onPress: () => { this.props.activeTab === 'past' ? 
                     this.scheduleItem(this.props.item) :
                     this.updateAppointment(this.props.item)
