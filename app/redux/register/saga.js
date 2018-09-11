@@ -1,11 +1,13 @@
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, ToastAndroid } from 'react-native';
 import { take, put, call, fork, select } from 'redux-saga/effects';
 import { 
   fetchVehiclesSuccess, 
   recieveVehiclesData,
   getBrainTreeClientTokenSuccess,
-  getBrainTreeClientTokenFailure
+  getBrainTreeClientTokenFailure,
+  createBrainTreeClientTokenSuccess,
+  createBrainTreeClientTokenFailure
 } from './startActions';
 import { 
   FETCH_VEHICLES, 
@@ -13,7 +15,8 @@ import {
   FETCH_VEHICLES_FROM_ASYNC_STORAGE, 
   FETCH_MAKE_MODEL,
   REGISTER_REQUEST,
-  GET_BRAINTREE_CLIENT_TOKEN
+  GET_BRAINTREE_CLIENT_TOKEN,
+  CREATE_BRAINTREE_CLIENT_TOKEN
 } from './constants';
 import { verifyEmailSuccess, registerSuccess, registerFailure } from './actions';
 import RegisterHelper from '../../helpers/register/registerHelper';
@@ -105,7 +108,6 @@ function verifyEmailCall({ email }) {
 }
 
 function fetchMakeModelCall(year) {
-  console.log(year);
   return new Promise((resolve, reject) => {
       RegisterHelper.fetchMakeModel({ year })
         .then(res => {
@@ -119,8 +121,11 @@ function registerCall(payload) {
   return new Promise((resolve, reject) => {
     RegisterHelper.register(payload)
       .then(response => {
-        console.log(response);
-          resolve(response);
+          if (response.flag && response.flag === 5) {
+            reject(response.error);
+          } else {
+            resolve(response);
+          }
       })
       .catch(err => reject(err));
   });
@@ -136,12 +141,13 @@ function* watchRegisterRequest() {
         yield put(registerSuccess(response.user.access_token, response));
         yield setUser(response.user);
         const deviceToken = yield select(getDeviceToken);
-        yield put(loginThroughAccessToken(deviceToken.token));
+        yield put(loginThroughAccessToken(deviceToken));
         // yield setItem('authVehicles', response.vehicle);
         // yield setItem('authCardDetails', response.card ? response.card : []);
         yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
+      ToastAndroid.showWithGravityAndOffset(err, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
       yield put(registerFailure(err));
       console.log('SAGA FETCH ERR: ', err);
     }
@@ -175,6 +181,32 @@ function* watchGetBrainTreeClientTokenRequest() {
   }
 }
 
+function createBrainTreeClientToken(customerId) {
+  return new Promise((resolve, reject) => {
+    RegisterHelper.createBrainTreeClientToken(customerId)
+      .then(response => {
+        console.log(response);
+          resolve(response);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+
+function* watchCreateBrainTreeClientTokenRequest() {
+  while (true) {
+    const { customerId } = yield take(CREATE_BRAINTREE_CLIENT_TOKEN);
+    try {
+      const response = yield call(createBrainTreeClientToken, customerId);
+        yield put(createBrainTreeClientTokenSuccess(response));
+      console.log('SAGA FETCH SUCCESS: ', response);
+    } catch (err) {
+      yield put(createBrainTreeClientTokenFailure(err));
+      console.log('SAGA FETCH ERR: ', err);
+    }
+  }
+}
+
 
 export default function* root() {
   yield fork(fetchVehiclesRequest);
@@ -183,5 +215,6 @@ export default function* root() {
   yield fork(watchFetchMakeModel);
   yield fork(watchRegisterRequest);
   yield fork(watchGetBrainTreeClientTokenRequest);
+  yield fork(watchCreateBrainTreeClientTokenRequest);
 }
 

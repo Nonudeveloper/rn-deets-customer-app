@@ -6,7 +6,10 @@ import {
     RECIEVE_VEHICLES_DATA,
     GET_BRAINTREE_CLIENT_TOKEN,
     GET_BRAINTREE_CLIENT_TOKEN_SUCCESS,
-    GET_BRAINTREE_CLIENT_TOKEN_FALIURE
+    GET_BRAINTREE_CLIENT_TOKEN_FALIURE,
+    CREATE_BRAINTREE_CLIENT_TOKEN,
+    CREATE_BRAINTREE_CLIENT_TOKEN_SUCCESS,
+    CREATE_BRAINTREE_CLIENT_TOKEN_FALIURE
 } from './constants';
   
     const saveVehiclesData = async (vehicles) => {
@@ -70,6 +73,27 @@ import {
     export function getBrainTreeClientTokenFailure(err) {
         return {
             type: GET_BRAINTREE_CLIENT_TOKEN_FALIURE,
+            err,
+        };
+    }
+
+    export function createBrainTreeClientToken(customerId) {
+        return {
+            type: CREATE_BRAINTREE_CLIENT_TOKEN,
+            customerId
+        };
+    }
+
+    export function createBrainTreeClientTokenSuccess(clientToken) {
+        return {
+            type: CREATE_BRAINTREE_CLIENT_TOKEN_SUCCESS,
+            clientToken
+        };
+    }
+  
+    export function createBrainTreeClientTokenFailure(err) {
+        return {
+            type: CREATE_BRAINTREE_CLIENT_TOKEN_FALIURE,
             err,
         };
     }

@@ -5,7 +5,10 @@ import {
     RECIEVE_VEHICLES_DATA,
     GET_BRAINTREE_CLIENT_TOKEN,
     GET_BRAINTREE_CLIENT_TOKEN_SUCCESS,
-    GET_BRAINTREE_CLIENT_TOKEN_FALIURE
+    GET_BRAINTREE_CLIENT_TOKEN_FALIURE,
+    CREATE_BRAINTREE_CLIENT_TOKEN,
+    CREATE_BRAINTREE_CLIENT_TOKEN_SUCCESS,
+    CREATE_BRAINTREE_CLIENT_TOKEN_FALIURE
 } from './constants';
 
 
@@ -44,6 +47,18 @@ export default function startReducer(state = initialState, action) {
           clientToken: action.clientToken.clientToken
         });
       case GET_BRAINTREE_CLIENT_TOKEN_FALIURE:
+        return Object.assign({}, state, {
+          // vehicles: JSON.parse(action.vehicles),
+          // isFetching: false
+        });
+      case CREATE_BRAINTREE_CLIENT_TOKEN:
+        return Object.assign({}, state, {
+        });
+      case CREATE_BRAINTREE_CLIENT_TOKEN_SUCCESS:
+        return Object.assign({}, state, {
+          clientToken: action.clientToken.clientToken
+        });
+      case CREATE_BRAINTREE_CLIENT_TOKEN_FALIURE:
         return Object.assign({}, state, {
           // vehicles: JSON.parse(action.vehicles),
           // isFetching: false
