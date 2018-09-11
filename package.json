@@ -29,6 +29,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.4.4",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-picker": "^4.3.5",
+    "react-native-simple-toast": "^0.0.8",
     "react-native-splash-screen": "^3.0.9",
     "react-native-star-rating": "^1.0.9",
     "react-native-step-indicator": "0.0.7",
