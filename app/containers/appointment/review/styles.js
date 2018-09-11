@@ -199,7 +199,6 @@ export default StyleSheet.create({
     marginRight: 10, 
     borderRightWidth: 1, 
     borderRightColor: 'grey',
-    backgroundColor: 'blue'
   },
   ratingImageStyle: {
     width: 14, 
