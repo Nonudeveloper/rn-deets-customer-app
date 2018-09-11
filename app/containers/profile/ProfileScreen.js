@@ -268,6 +268,7 @@ export default class ProfileScreen extends Component {
     }
 
     render() {
+        console.log(this.props);
         const detailFlex = {
             flex: this._detailBarFlex
         };
@@ -319,7 +320,7 @@ export default class ProfileScreen extends Component {
                                 this.setStates('vehicle');
                             }} 
                         >
-                        { this.state.showVehicleEditButton &&
+                        { this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
                             <TouchableOpacity 
                                 style={{ flex: 1, left: 10 }} 
                                 onPress={this.editVehicles.bind(this)}
@@ -335,7 +336,7 @@ export default class ProfileScreen extends Component {
                                     Vehicles
                                 </Text>
                             </View>
-                            { this.state.showVehicleEditButton &&
+                            { this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
                             <TouchableOpacity 
                                 style={{ flex: 1, alignItems: 'flex-end', right: 10 }} 
                                 onPress={this.deleteVehicle.bind(this)}

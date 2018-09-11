@@ -31,14 +31,24 @@ export default StyleSheet.create({
     fontSize: 13,
   },
   forgotPasswordView: {
-      flexDirection: 'row',
-      padding: 20,
-      justifyContent: 'center' 
+    flexDirection: 'row',
+    padding: 20,
+    justifyContent: 'center'
   },
   buttonStyle: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  buttonArea: {
+    height: 50,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  innerContainer: {
+    flex: 1,
+    top: 30
   }
 });
 

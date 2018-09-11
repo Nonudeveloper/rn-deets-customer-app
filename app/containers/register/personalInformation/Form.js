@@ -31,13 +31,13 @@ class FormArea extends React.Component {
         if (fieldName === 'email') {
             this.setState({ clearemailfield: false });
         } else if (fieldName === 'mobile') {
-             this.setState({ clearmobilefield: false });
+            this.setState({ clearmobilefield: false });
         }
     }
 
     emailClear(value) {
         if (value) {
-             this.setState({ clearemailfield: true });
+            this.setState({ clearemailfield: true });
         } else {
             this.setState({ clearemailfield: false });
         }
@@ -59,9 +59,25 @@ class FormArea extends React.Component {
                 email: fbUserData.email,
                 gender: fbUserData.gender,
                 device_token: this.props.deviceToken
-        };
-    
-        this.props.dispatch(initialize('signUp', initialFormData));
+            };
+
+            this.props.dispatch(initialize('signUp', initialFormData));
+        } else if (this.props.gtmData !== null) {
+            const gtmUserData = this.props.gtmData;
+            var userEmail = '';
+            if (gtmUserData.user.email) {
+                var userEmail = gtmUserData.user.email;
+            }
+            const initialFormData = {
+                fname: gtmUserData.user.givenName,
+                lname: gtmUserData.user.familyName,
+                flag: 2,
+                gtm_access_token: gtmUserData.accessToken,
+                gtm_id: gtmUserData.user.id,
+                email: userEmail,
+                device_token: this.props.deviceToken
+            };
+            this.props.dispatch(initialize('signUp', initialFormData));
         } else {
             const initialFormData = {
                 flag: 3,
@@ -74,22 +90,22 @@ class FormArea extends React.Component {
 
     render() {
         const normalizePhone = value => {
-                if (!value) {
-                    this.setState({ clearmobilefield: false });
-                    return value;
-                }
-                this.setState({ clearmobilefield: true });
-                const onlyNums = value.replace(/[^\d]/g, '');
-                if (onlyNums.length <= 3) {
-                    return `(${onlyNums.slice(0, 3)}`;
-                }
-                if (onlyNums.length <= 6) {
-                    return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
-                }
-                return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
+            if (!value) {
+                this.setState({ clearmobilefield: false });
+                return value;
+            }
+            this.setState({ clearmobilefield: true });
+            const onlyNums = value.replace(/[^\d]/g, '');
+            if (onlyNums.length <= 3) {
+                return `(${onlyNums.slice(0, 3)}`;
+            }
+            if (onlyNums.length <= 6) {
+                return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
+            }
+            return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
         };
         const phoneParser = (number) => number ? number.replace(/[^\d]/g, '') : '';
-        
+
         return (
             <View style={styles.formArea}>
                 {/* <Text style={styles.textStyle}>form component</Text> */}
@@ -109,6 +125,18 @@ class FormArea extends React.Component {
                 />
                 <Field
                     name={'fb_access_token'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'gtm_id'}
+                    component={CommonTextInput}
+                    props={this.props}
+                    type="hidden"
+                />
+                <Field
+                    name={'gtm_access_token'}
                     component={CommonTextInput}
                     props={this.props}
                     type="hidden"
@@ -157,17 +185,17 @@ class FormArea extends React.Component {
                             type="email"
                             onChange={(value) => this.emailClear(value)}
                             borderBotmWidth={{ borderBottomWidth: 2 }}
-                        /> 
+                        />
                     </View>
                     <View style={styles.crossButtonContainer}>
                         <View style={{ flex: 1 }}>
-                            {this.props.isFetching && <ActivityIndicator size="small" color="#00ff00" /> }
+                            {this.props.isFetching && <ActivityIndicator size="small" color="#00ff00" />}
                         </View>
-                         <View style={{ flex: 1 }}>
-                             {this.state.clearemailfield && <TouchableOpacity onPress={() => this.clear('email')} >{clear}</TouchableOpacity> }
-                        
+                        <View style={{ flex: 1 }}>
+                            {this.state.clearemailfield && <TouchableOpacity onPress={() => this.clear('email')} >{clear}</TouchableOpacity>}
+
                         </View>
-                       
+
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -187,11 +215,11 @@ class FormArea extends React.Component {
                     </View>
                     <View style={styles.crossButtonContainer}>
                         <View style={{ flex: 4 }}>
-                            {this.state.clearmobilefield && <TouchableOpacity onPress={() => this.clear('mobile')} >{clear}</TouchableOpacity> }
+                            {this.state.clearmobilefield && <TouchableOpacity onPress={() => this.clear('mobile')} >{clear}</TouchableOpacity>}
                         </View>
                     </View>
                 </View>
-                
+
                 <Field
                     name={'password'}
                     component={CommonTextInput}
@@ -215,7 +243,7 @@ class FormArea extends React.Component {
         );
     }
 }
-export default reduxForm({ 
+export default reduxForm({
     form: 'signUp',
     destroyOnUnmount: false,
     keepDirtyOnReinitialize: true,
@@ -227,39 +255,39 @@ export default reduxForm({
         if (reg.test(values.email) !== false) {
             isValidEmail = true;
         }
-          
+
         errors.fname = !values.fname
-          ? 'First Name field is required'
-          : undefined;
+            ? 'First Name field is required'
+            : undefined;
 
         errors.lname = !values.lname
-          ? 'Last Name field is required'
-          : undefined;
+            ? 'Last Name field is required'
+            : undefined;
 
         errors.email = !values.email
-          ? 'Email field is required'
-          : !isValidEmail
-          ? 'Email is not valid'
-          : undefined;
+            ? 'Email field is required'
+            : !isValidEmail
+                ? 'Email is not valid'
+                : undefined;
 
         errors.mobile = !values.mobile
-          ? 'Mobile field is required'
-          : undefined;
+            ? 'Mobile field is required'
+            : undefined;
 
         errors.password = !values.password
-          ? 'Password field is required'
-          : values.password.length < 8
-          ? 'Password must be at least 8 characters long'
-          : undefined;
-          
+            ? 'Password field is required'
+            : values.password.length < 8
+                ? 'Password must be at least 8 characters long'
+                : undefined;
+
         errors.confirmPassword = !values.confirmPassword
-          ? 'Confirm Password field is required'
-          : values.confirmPassword !== values.password
-          ? 'Password and Confirmation Password do not match'
-          : undefined;
-          
+            ? 'Confirm Password field is required'
+            : values.confirmPassword !== values.password
+                ? 'Password and Confirmation Password do not match'
+                : undefined;
+
         return errors;
     },
-     asyncValidate,
-     asyncBlurFields: ['email']
+    asyncValidate,
+    asyncBlurFields: ['email']
 })(FormArea);

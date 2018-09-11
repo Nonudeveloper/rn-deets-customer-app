@@ -6,11 +6,11 @@ import RNFetchBlob from 'rn-fetch-blob';
 class RegisterHelper {
   
   register = async userInfo => {
-    const type = userInfo.form2.type;
-    const typeData = type.split(', ');
+    const type = userInfo.form1.flag === 3 ? userInfo.form2.type : '';
+    const typeData = userInfo.form1.flag === 3 ? type.split(', ') : '';
     let vehicleImage;
     let userImage;
-    if (Object.keys(userInfo.userImage).length > 0) {
+    if (Object.keys(userInfo.userImage).length > 0 && userInfo.form1.flag === 3) {
         // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
         // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
         
@@ -27,7 +27,7 @@ class RegisterHelper {
         };
     }
 
-    if (Object.keys(userInfo.vehicleImage).length > 0) {
+    if (Object.keys(userInfo.vehicleImage).length > 0 && userInfo.form1.flag === 3) {
       // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
       // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
       
@@ -54,30 +54,33 @@ class RegisterHelper {
               { name: 'first_name', data: String(userInfo.form1.fname) },
               { name: 'last_name', data: String(userInfo.form1.lname) },
               { name: 'email', data: String(userInfo.form1.email) },
-              { name: 'mobile', data: String(userInfo.form1.mobile) },
-              { name: 'password', data: String(userInfo.form1.password) },
+              { name: 'mobile', data: String(userInfo.form1.flag === 3 ? userInfo.form1.mobile : '') },
+              { name: 'password', data: String(userInfo.form1.flag === 3 ? userInfo.form1.password : '') },
               { name: 'device_token', data: String(userInfo.form1.device_token.token) },
               { name: 'flag', data: String(userInfo.form1.flag) },
-              { name: 'vehicle_model_id', data: String(userInfo.form2.model_id) },
-              { name: 'vehicle_make_id', data: String(userInfo.form2.make_id) },
-              { name: 'vehicle_color_id', data: String(userInfo.form2.color_id) },
-              { name: 'vehicle_year_id', data: String(userInfo.form2.year) },
-              { name: 'license', data: String(userInfo.form2.radio_button_type === 0 ? userInfo.form2.license : userInfo.form2.vin) },
-              { name: 'vehicle_make', data: String(userInfo.form2.make) },
-              { name: 'vehicle_model', data: String(userInfo.form2.model) },
-              { name: 'vehicle_color', data: String(userInfo.form2.color) },
-              { name: 'vehicle_year', data: String(userInfo.form2.year) },
-              { name: 'vehicle_type', data: String(userInfo.form2.vehicle_type) },
-              { name: 'vehicle_type_name', data: String(typeData[0]) }, 
-              { name: 'vehicle_type_segment', data: String(typeData[1]) },
-              { name: 'vehicle_type_segment_id', data: String(userInfo.form2.vehicle_type_segment_id) },  
-              { name: 'notes', data: String(userInfo.form2.notes) },
-              { name: 'license_type', data: String(userInfo.form2.radio_button_type === 0 ? 2 : 1) },
-              { name: 'nonce', data: String(userInfo.nonce) },
+              { name: 'vehicle_model_id', data: String(userInfo.form1.flag === 3 ? userInfo.form2.model_id : '') },
+              { name: 'vehicle_make_id', data: String(userInfo.form1.flag === 3 ? userInfo.form2.make_id : '') },
+              { name: 'vehicle_color_id', data: String(userInfo.form1.flag === 3 ? userInfo.form2.color_id : '') },
+              { name: 'vehicle_year_id', data: String(userInfo.form1.flag === 3 ? userInfo.form2.year : '') },
+              { name: 'license', data: String(userInfo.form1.flag === 3 ? (userInfo.form2.radio_button_type === 0 ? userInfo.form2.license : userInfo.form2.vin) : '') },
+              { name: 'vehicle_make', data: String(userInfo.form1.flag === 3 ? userInfo.form2.make : '') },
+              { name: 'vehicle_model', data: String(userInfo.form1.flag === 3 ? userInfo.form2.model : '') },
+              { name: 'vehicle_color', data: String(userInfo.form1.flag === 3 ? userInfo.form2.color : '') },
+              { name: 'vehicle_year', data: String(userInfo.form1.flag === 3 ? userInfo.form2.year : '') },
+              { name: 'vehicle_type', data: String(userInfo.form1.flag === 3 ? userInfo.form2.vehicle_type : '') },
+              { name: 'vehicle_type_name', data: String(userInfo.form1.flag === 3 ? typeData[0] : '') }, 
+              { name: 'vehicle_type_segment', data: String(userInfo.form1.flag === 3 ? typeData[1] : '') },
+              { name: 'vehicle_type_segment_id', data: String(userInfo.form1.flag === 3 ? userInfo.form2.vehicle_type_segment_id : '') },  
+              { name: 'notes', data: String(userInfo.form1.flag === 3 ? userInfo.form2.notes : '') },
+              { name: 'license_type', data: String(userInfo.form1.flag === 3 ? (userInfo.form2.radio_button_type === 0 ? 2 : 1) : '') },
+              { name: 'nonce', data: String(userInfo.form1.flag === 3 ? userInfo.nonce : '') },
               { name: 'user_type', data: String(userInfo.form1.device_token.os === 'android' ? 2 : 1) },
               { name: 'fb_access_token', data: String(userInfo.form1.flag === 1 ? userInfo.form1.fb_access_token : '') },
               { name: 'fb_id', data: String(userInfo.form1.flag === 1 ? userInfo.form1.fb_id : '') },
               { name: 'gender', data: String(userInfo.form1.flag === 1 ? userInfo.form1.gender : '') },
+              { name: 'gtm_access_token', data: String(userInfo.form1.flag === 2 ? userInfo.form1.gtm_access_token : '') },
+              { name: 'gtm_id', data: String(userInfo.form1.flag === 2 ? userInfo.form1.gtm_id : '') },
+              { name: 'image_url', data: String(userInfo.form1.flag !== 3 ? userInfo.userImage : '') },
               vehicleImage,
               userImage,
             ],
@@ -195,6 +198,15 @@ class RegisterHelper {
 
   async getBrainTreeClientToken() {
     return await SuperFetch.get('customer/getClientToken')
+    .then(response => {
+      return response;
+    })
+    .catch(error => ({ error }));
+  }
+
+  async createBrainTreeClientToken(customerId) {
+    const customer_id = customerId;
+    return await SuperFetch.post('customer/create_client_token_for_payment_method_nonce', customer_id)
     .then(response => {
       return response;
     })

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "417329083926-nvl18tac5bq252jn8q4fdvgff5e40pik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deetscp",
+            "certificate_hash": "219e5959a226e25e2007e96205746faf6e1186b2"
+          }
+        },
+        {
           "client_id": "417329083926-isb90m224i077s594tnk2ct2pe3bvb39.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417329083926-isb90m224i077s594tnk2ct2pe3bvb39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

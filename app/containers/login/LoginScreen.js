@@ -12,24 +12,25 @@ import DeetsFacebook from '../../deetscomponents/facebook';
 import Hr from '../../deetscomponents/hr';
 import Loader from '../../deetscomponents/Loader';
 import Button from '../../deetscomponents/Button';
+import GoogleSignInScreen from '../../deetscomponents/google';
 import Instabug from 'instabug-reactnative';
 
 export default class LoginScreen extends Component {
 
   constructor(props) {
-          super(props);
-          this.state = {
-            email: '',
-            password: '',
-            flag: null,
-            fb_id: null,
-            access_token: null,
-            device_token: 'erwerwegdfgdfgdfg' //need to replace this with real device token
-          };
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      flag: null,
+      fb_id: null,
+      access_token: null,
+      device_token: 'erwerwegdfgdfgdfg' //need to replace this with real device token
+    };
   }
 
   forgotPassword = () => {
-      this.props.navigation.navigate('forgotPasswordScreen');
+    this.props.navigation.navigate('forgotPasswordScreen');
   }
 
 
@@ -44,7 +45,7 @@ export default class LoginScreen extends Component {
         'Error',
         'Invalid Credentials',
         [
-         { text: 'OK', onPress: () => console.log('OK Pressed') },
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
         ],
       );
     }
@@ -70,15 +71,15 @@ export default class LoginScreen extends Component {
       const device_token = this.props.deviceToken.token ? this.props.deviceToken.token : 'devicetoken';
       const user_type = this.props.deviceToken.token ? this.props.deviceToken.os === 'android' ? 2 : 1 : '';
       this.setState(() => {
-          return {
-            email: this.props.form.signIn.values.email,
-            password: this.props.form.signIn.values.password,
-            flag: 3,
-            device_token,
-            user_type
-          };
+        return {
+          email: this.props.form.signIn.values.email,
+          password: this.props.form.signIn.values.password,
+          flag: 3,
+          device_token,
+          user_type
+        };
       }, () => {
-          this.props.actions.loginRequest(this.state);
+        this.props.actions.loginRequest(this.state);
       });
     }
   }
@@ -99,8 +100,23 @@ export default class LoginScreen extends Component {
     });
   };
 
+  gtmLogin = (e) => {
+    const device_token = this.props.deviceToken.token ? this.props.deviceToken.token : 'devicetoken';
+    const user_type = this.props.deviceToken.token ? this.props.deviceToken.os === 'android' ? 2 : 1 : '';
+    this.setState(() => {
+      return {
+        flag: 2,
+        gtm_id: e.user.id,
+        access_token: e.accessToken,
+        device_token,
+        user_type
+      };
+    }, () => {
+      this.props.actions.loginRequest(this.state);
+    });
+  };
+
   renderAlert(error) {
-    
     if (this.props.isBlocked) {
       this.renderBlockAlert();
       return;
@@ -156,42 +172,45 @@ export default class LoginScreen extends Component {
     return (
       <View style={styles.container}>
         <Loader
-            loading={isLoading} 
+          loading={isLoading}
         />
         {this.props.showAlert && this.renderAlert(this.props.errorMessage)}
         <Header headerText={''} navigation={this.props.navigation} />
-        
-        <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin} />
-       
-        <Hr color="black" width={2} marginleft={25} marginright={25}>
-          <Text style={styles.textWithDivider}>OR{this.props.isAuthenticated}</Text>
-        </Hr>
+        <View style={styles.innerContainer}>
+          <View style={styles.buttonArea}>
+            <DeetsFacebook title="Login with Facebook" fbLogin={this.fbLogin} showHalfButton />
+            <GoogleSignInScreen title="Login with Google" gtmLogin={this.gtmLogin} showHalfButton />
+          </View>
 
-        <Form />
-        
-        <View style={styles.nextButtonContainer}>
+          <Hr color="black" width={2} marginleft={25} marginright={25}>
+            <Text style={styles.textWithDivider}>OR{this.props.isAuthenticated}</Text>
+          </Hr>
+
+          <Form />
+
+          <View style={styles.nextButtonContainer}>
             <View style={{ marginHorizontal: 25 }}>
-            <Button 
+              <Button
                 style={styles.nextButtonStyle}
                 buttonTextStyle={styles.buttonStyle}
                 onPress={this._loginEmail}
-            >
+              >
                 Login
             </Button>
             </View>
             <View
-                style={styles.forgotPasswordView}
+              style={styles.forgotPasswordView}
             >
-            <TouchableOpacity
+              <TouchableOpacity
                 onPress={this.forgotPassword}
-            >
-            <Text 
-                style={styles.forgotPasswordText}
-            >Forgot Password?</Text>
-            </TouchableOpacity>
+              >
+                <Text
+                  style={styles.forgotPasswordText}
+                >Forgot Password?</Text>
+              </TouchableOpacity>
             </View>
+          </View>
         </View>
-        
       </View>
     );
   }
