@@ -70,9 +70,6 @@ export default class ReviewSummary extends Component {
                         <View style={styles.rateTechnicianTextContainer}>
                             <Text style={styles.rateTechnicianTextStyle}>Rate Technician</Text>
                         </View>
-                        <View style={styles.rateTechnicianValueContainer}>
-                            <Text style={styles.rateTechnicianValueText}>{this.state.customStarCount}</Text>
-                        </View>
                     </View>
                     <View style={styles.starsWrapper}>
                     <StarRating

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     defaultWrapper: {
-        height: Dimensions.get('window').height - 200
+        height: Dimensions.get('window').height - 300
     },
     defaultContainer: {
         flex: 1,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     rateTechnicianTextContainer: {
         flex: 2, 
         justifyContent: 'center', 
-        alignItems: 'flex-end'
+        alignItems: 'center'
     },
     rateTechnicianTextStyle: {
         fontSize: 22, 

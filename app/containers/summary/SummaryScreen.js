@@ -17,21 +17,23 @@ export default class SummaryScreen extends Component {
     renderAlert(message) {
         const msg = message.error ? message.error : message.log;
         const heading = message.error ? 'Error' : 'Success';
-        Alert.alert(
-            heading,
-            msg,
-            [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                    this.props.actions.hideAlert();
-                    this.props.navigation.navigate('HomeComponent');
-                } 
-                },
-            ],
-            { cancelable: false }
-        );
+        setTimeout(() => {
+            Alert.alert(
+                heading,
+                msg,
+                [
+                    { 
+                    text: 'OK', 
+                    onPress: () => {
+                    //dispath an action to make showAlert false
+                        this.props.actions.hideAlert();
+                        this.props.navigation.navigate('HomeComponent');
+                    } 
+                    },
+                ],
+                { cancelable: false }
+            );
+        }, 500);
     }
 
     render() {
