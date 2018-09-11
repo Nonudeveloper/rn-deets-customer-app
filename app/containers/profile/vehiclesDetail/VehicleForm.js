@@ -7,6 +7,7 @@ import RadioButton from 'radio-button-react-native';
 import CommonTextInput from '../../../deetscomponents/form/Input';
 import CommonTypeTextInput from '../../../components/form/Input';
 import ModelPicker from 'react-native-picker';
+import { connect } from 'react-redux';
 
 class VehicleForm extends React.Component {
     constructor(props) {
@@ -182,13 +183,13 @@ class VehicleForm extends React.Component {
                 color_id: authVehicleData.vehicle_color_id,
                 model_id: authVehicleData.vehicle_model_id,
                 model: authVehicleData.vehicle_model,
+                make: authVehicleData.vehicle_make,
                 type: vehicleType,
                 flag: 2,
                 license: parseInt(authVehicleData.license_type) === 2 ? authVehicleData.license : '',
                 vin: parseInt(authVehicleData.license_type) === 1 ? authVehicleData.license : '',
                 notes: authVehicleData.notes,
                 make_id: authVehicleData.vehicle_make_id,
-                make: authVehicleData.vehicle_make,
                 vehicle_type_segment_id: authVehicleData.vehicle_type_segment_id,
                 vehicle_type: authVehicleData.vehicle_type,
                 vehicle_id: authVehicleData.vehicle_id,
@@ -424,7 +425,7 @@ class VehicleForm extends React.Component {
 }
 
 
-export default reduxForm({ 
+VehicleForm = reduxForm({ 
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values, props) => {
@@ -469,3 +470,21 @@ export default reduxForm({
         return errors;
     },
 })(VehicleForm);
+
+export default connect((state, ownProps) => ({
+    initialValues: {
+        license: ownProps.item && parseInt(ownProps.item.license_type) === 2 ? ownProps.item.license : '',
+        vin: ownProps.item && parseInt(ownProps.item.license_type) === 1 ? ownProps.item.license : '',
+        notes: ownProps.item && ownProps.item.notes,
+        color: ownProps.item && ownProps.item.vehicle_color,
+        model: ownProps.item && ownProps.item.vehicle_model,
+        make: ownProps.item && ownProps.item.vehicle_make,
+        type: ownProps.item && `${ownProps.item.vehicle_type_name}, ${ownProps.item.vehicle_type_segment}`,
+        vehicle_type_segment_id: ownProps.item && ownProps.item.vehicle_type_segment_id,
+        vehicle_type: ownProps.item && ownProps.item.vehicle_type,
+        flag: 2,
+        vehicle_id: ownProps.item && ownProps.item.vehicle_id,
+        radio_button_type: ownProps.item && parseInt(ownProps.item.license_type) !== 2 ? 1 : 0
+    },
+    enableReinitialize: true,
+}))(VehicleForm);

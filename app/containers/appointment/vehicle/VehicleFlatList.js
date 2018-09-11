@@ -82,7 +82,7 @@ export default class VehicleFlatList extends React.Component {
               vehicleYear={item.vehicle_year}
               vehicleColor={item.vehicle_color}
             />
-            <View style={{ right: 45 }}>
+            <View style={{ right: 30 }}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: item })} >
                 <Image
                   source={editButton}

@@ -13,7 +13,7 @@ export default StyleSheet.create({
     },
     vehicleContainer: {
         height: 100,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         borderBottomWidth: 2,
         borderBottomColor: '#e0e0e0',
         borderTopWidth: 2,
@@ -21,10 +21,10 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         // top: 10,
-        paddingHorizontal: 20
+        paddingHorizontal: 12,
     },
     radioButtonContainer: {
-        paddingHorizontal: 17
+        marginRight: 10
     },
     vehicleInnerContainer: {
         flex: 1,
@@ -50,7 +50,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     vehicleFont: {
-        fontSize: 16,
+        fontSize: 15,
         color: '#586069'
     },
     licenceFont: {

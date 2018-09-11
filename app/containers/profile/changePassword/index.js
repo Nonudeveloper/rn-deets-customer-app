@@ -7,19 +7,15 @@ import ChangePasswordScreen from './ChangePasswordScreen';
 import * as profileActions from '../../../redux/profile/actions';
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
+const mapDispatchToProps = (dispatch) => ({
         actions: bindActionCreators(profileActions, dispatch),
-    };
-};
+    });
 
-const mapStateToProps = (state) => {
-    return {
+const mapStateToProps = (state) => ({
         isFetching: state.Profile.isFetching,
         form: state.form,
         passwordConfirmation: state.Profile.passwordConfirmation
-    };
-};
+    });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePasswordScreen);
 
