@@ -17,9 +17,9 @@ export default StyleSheet.create({
 
     },
     proImageStyle: {
-        width: 60,
-        height: 60,
-        borderRadius: 60/2
+        width: 90,
+        height: 90,
+        borderRadius: 90/2
     },
     container: {
         flex: 1,

@@ -17,8 +17,8 @@ export default class AddonItemsScreen extends Component {
             <View style={styles.addsOnTextContainer}>
                 <Text numberOfLines={1} style={styles.addsOnNameText} > {this.props.item.adds_on_name} </Text>
                 <View style={styles.addsOnBottomTextContainer}>
-                    <Text style={[styles.item, { backgroundColor: 'gray' }]} > {this.props.item.adds_on_type_name} </Text>
-                    <Text style={styles.item} > Estimation Time - {this.props.item.estimation_time} Mins</Text>
+                    <Text style={{ backgroundColor: 'gray', color: '#fff', fontSize: 14 }}> {this.props.item.adds_on_type_name} </Text>
+                    <Text style={{ fontSize: 14 }} > Estimated Time - {this.props.item.estimation_time} Mins</Text>
                 </View>
             </View>
             <View style={{ flex: 1 }}>

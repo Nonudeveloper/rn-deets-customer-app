@@ -31,34 +31,40 @@ class PromotionCodeScreen extends React.Component {
         if (this.props.forms.promotion !== undefined) {
             this.props.actions.usePromoCodeByUser(this.props.forms.promotion.values);
         } else {
-            Alert.alert(
-                'Error',
-                'Promo Code field is required',
-                [
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ],
-                { cancelable: false }
-            );
+            setTimeout(() => {
+                Alert.alert(
+                    'Error',
+                    'Promo Code field is required',
+                    [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: false }
+                );
+            }, 500);
+            
         }
     }
 
     renderAlert(message) {
         const msg = message.error ? message.error : message;
         const heading = message.error ? 'Error' : 'Success';
-        Alert.alert(
-            heading,
-            msg,
-            [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                    this.props.actions.hideAlert();
-                } 
-                },
-            ],
-            { cancelable: false }
-        );
+        setTimeout(() => {
+             Alert.alert(
+                heading,
+                msg,
+                [
+                    { 
+                    text: 'OK', 
+                    onPress: () => {
+                    //dispath an action to make showAlert false
+                        this.props.actions.hideAlert();
+                    } 
+                    },
+                ],
+                { cancelable: false }
+            );
+        }, 500);
+       
     }
   
     render() {
@@ -107,19 +113,15 @@ class PromotionCodeScreen extends React.Component {
                 </View>
                 <View style={styles.iconContainer}>
                     <View style={styles.iconInnerContainer}>
-                        {/* <Image style={styles.iconImageStyle} source={buttonIcon} /> */}
                         {twitterIcon}
                     </View>
                     <View style={styles.iconInnerContainer}>
-                        {/* <Image style={styles.iconImageStyle} source={buttonIcon} /> */}
                         {facebookIcon}
                     </View>
                     <View style={styles.iconInnerContainer}>
-                        {/* <Image style={styles.iconImageStyle} source={buttonIcon} /> */}
                         {envelopeIcon}
                     </View>
                     <View style={styles.iconInnerContainer}>
-                        {/* <Image style={styles.iconImageStyle} source={buttonIcon} /> */}
                         {info}
                     </View>
                 </View>

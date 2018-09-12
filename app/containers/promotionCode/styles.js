@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#333333',
     },
     applyButton: {
-        height: 45,
+        height: 50,
         borderRadius: 100,
-        borderColor: '#a8a8a8',
+        borderColor: '#2ea549',
         marginHorizontal: 25, 
         flex: 0, 
-        backgroundColor: '#8ac10b', 
+        backgroundColor: 'green', 
         marginTop: 20,
         borderWidth: 4,
     },
@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 3, 
-        marginVertical: 20, 
+        marginVertical: 60, 
         marginHorizontal: 50 
     },
     textStyle: {
         color: 'black', 
-        fontSize: 22, 
+        fontSize: 18, 
         textAlign: 'center'
     },
     iconContainer: {
@@ -42,17 +42,13 @@ const styles = StyleSheet.create({
     iconInnerContainer: {
         flex: 1, 
         alignItems: 'center',
-        //if icon used
         justifyContent: 'center',
         borderColor: 'black',
         borderWidth: 2,
-        borderRadius: 50,
-        marginHorizontal: 20,
-        height: 37
-    },
-    iconImageStyle: {
-        height: '25%', 
-        width: '46%'
+        borderRadius: 20,
+        marginHorizontal: 15,
+        height: 40,
+        width: 40
     }
 });
 

@@ -40,6 +40,7 @@ const SelectRegisteration = (props) => {
     };
 
     const registerWithFacebook = (fbData) => {
+        console.log(fbData);
         const fbUserData = JSON.parse(fbData.profile);
         const userImage = fbUserData.picture.data.url;
         const vehicleImage = '';

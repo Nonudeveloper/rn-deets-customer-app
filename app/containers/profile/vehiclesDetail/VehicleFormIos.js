@@ -361,7 +361,7 @@ class VehicleForm extends React.Component {
                     </Text>
                 </View>
 
-                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
+                <View style={[inputStyle]}>
                     <Text
                         style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={()=>{

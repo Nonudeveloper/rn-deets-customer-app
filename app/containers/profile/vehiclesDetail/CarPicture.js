@@ -66,7 +66,7 @@ export default class CarPicture extends React.Component {
         return (
             <View style={styles.carPic}>
                 <View style={styles.editButtonWrapper}>
-                    <Image source={editBtn} style={styles.editIcon} />
+                    { this.props.editable ? ( <Image source={editBtn} style={styles.editIcon} /> ) : (null) }
                 </View>
                 <TouchableOpacity 
                     style={{ position: 'absolute' }} 

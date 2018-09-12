@@ -65,7 +65,7 @@ export default class ProfilePic extends React.Component {
         return (
             <View style={styles.profilePic}>
                 <View style={styles.editButtonWrapper}>
-                    <Image source={editBtn} style={styles.editIcon} />
+                    { this.props.editable ? ( <Image source={editBtn} style={styles.editIcon} /> ) : (null) }
                 </View>
                 <TouchableOpacity style={{ position: 'absolute' }} onPress={this.props.editable ? this.selectPhotoTapped.bind(this) : null}>
                     { 

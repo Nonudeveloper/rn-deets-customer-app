@@ -25,7 +25,7 @@ import { setUser } from '../../helpers/utility';
 import { setItem } from '../../helpers/asyncStorage';
 import { NavigationActions } from 'react-navigation';
 import { loginThroughAccessToken } from '../auth/actions';
-import withToast from '../../hoc/withToast';
+import { withToast, withToastLong } from '../../hoc/withToast';
 
 function fetchVehiclesCall() {
   return new Promise((resolve, reject) => {
@@ -148,7 +148,7 @@ function* watchRegisterRequest() {
         yield put(NavigationActions.navigate({ routeName: 'drawerStack' }));
       console.log('SAGA FETCH SUCCESS: ', response);
     } catch (err) {
-      withToast(err);
+      withToastLong(err);
       yield put(registerFailure(err));
       console.log('SAGA FETCH ERR: ', err);
     }

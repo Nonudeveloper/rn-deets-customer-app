@@ -76,13 +76,13 @@ export default class AddonItemsScreen extends Component {
             <View style={styles.addsOnTextContainer}>
                 <Text numberOfLines={1} style={styles.addsOnNameText} > {this.props.item.adds_on_name} </Text>
                 <View style={styles.addsOnBottomTextContainer}>
-                    <Text style={[styles.item, { backgroundColor: 'gray' }]} > {this.props.item.adds_on_type_name} </Text>
-                    <Text style={styles.item} > Estimation Time - {this.props.item.estimation_time} Mins</Text>
+                    <Text style={{ backgroundColor: 'gray', color: '#fff', fontSize: 14 }} > {this.props.item.adds_on_type_name} </Text>
+                    <Text style={{ fontSize: 14 }} > Estimated Time - {this.props.item.estimation_time} Mins</Text>
                 </View>
             </View>
             <View style={{ flex: 1 }}>
                 <Text 
-                    style={this.state.checked ? { color: '#8ac10b', fontSize: 15 } : { color: 'black', fontSize: 15 }} 
+                    style={this.state.checked ? { color: '#8ac10b', fontSize: 15 } : { color: 'black', fontSize: 16 }} 
                 > ${this.props.selectedVehicle.vehicle_type === 2 ? this.props.item.large_vehicle_cost : this.props.item.small_vehicle_cost} </Text>
             </View>
         </TouchableOpacity>

@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   addsOnCostText: {
     color: 'black', 
-    fontSize: 15
+    fontSize: 16
   }
 });
 
