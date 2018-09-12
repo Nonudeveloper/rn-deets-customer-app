@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
       flex: 9
+    },
+    crossButtonContiner: {
+      flex: 0.5, 
+      alignItems: 'flex-start', 
+      justifyContent: 'center'
     }
 
   });

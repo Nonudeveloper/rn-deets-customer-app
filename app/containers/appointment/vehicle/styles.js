@@ -5,10 +5,6 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        shadowColor: '#000000',
-        shadowOpacity: 0.4,
-        shadowOffset: { height: -5, width: -5 },
-        shadowRadius: 10,
         backgroundColor: '#f9f9f9',
     },
     vehicleContainer: {

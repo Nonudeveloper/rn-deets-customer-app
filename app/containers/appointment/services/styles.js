@@ -81,46 +81,39 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.6)',
     alignSelf: 'stretch'
   },
-
   btnText: {
     color: 'white',
     textAlign: 'center',
     alignSelf: 'stretch',
     fontSize: 18
   },
-
   checkBoxButton: {
     marginVertical: 10
   },
-
   checkBoxHolder: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-
   checkedView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-
   checkedImage: {
     height: '100%',
     width: '100%',
   },
-
   uncheckedView: {
     flex: 1,
     backgroundColor: 'white',
   },
-
   checkBoxLabel: {
     fontSize: 17,
     paddingLeft: 10
   },
   buttonContainer: { 
     justifyContent: 'center',
-    height: 55
+    height: 65
   },
   totalPaymentContainer: { 
     flex: 1, 

@@ -7,7 +7,8 @@ const car = require('../../../assets/icons/car_place_holder.png');
 export default class ServiceDetail extends React.Component {
 
   render() {
-      const vehicleInfo = this.props.selectedServices.vehicleSelected;
+    const vehicleInfo = this.props.selectedServices.vehicleSelected;
+    console.log(vehicleInfo);    
     return (
         <View style={{ flex: 2 }}>
             <View style={styles.serviceContainer}>
@@ -23,8 +24,8 @@ export default class ServiceDetail extends React.Component {
                             borderRightWidth: 1,
                             borderRightColor: 'grey' 
                         }}>
-                        <Text style={styles.vehicleNameText}>{vehicleInfo.vehicle_make}, {vehicleInfo.vehicle_year},</Text>
-                        <Text style={styles.vehicleColorText}>{vehicleInfo.vehicle_color}, HSHSB</Text>
+                        <Text style={styles.vehicleNameText}>{vehicleInfo.vehicle_make.toUpperCase()}, {vehicleInfo.vehicle_year},</Text>
+                        <Text style={styles.vehicleColorText}>{vehicleInfo.vehicle_color.toUpperCase()}, {vehicleInfo.license.toUpperCase()}</Text>
                     </View>
                     <View style={styles.vehicleCostContainer}>
                         <Text style={styles.costTextStyle}>${this.props.selectedServices.totalCost}</Text>

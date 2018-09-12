@@ -190,7 +190,8 @@ export default StyleSheet.create({
     flexDirection: 'row', 
     alignItems: 'center',
     borderTopColor: 'grey', 
-    borderTopWidth: 1
+    borderTopWidth: 1,
+    paddingVertical:5
   },
   addressImageContainer: {
     flex: 0, 
@@ -207,7 +208,6 @@ export default StyleSheet.create({
   },
   serviceContainer: {
     flex: 1, 
-    backgroundColor: '#fff', 
     marginBottom: 15,
     borderTopColor: 'grey',
     borderTopWidth: 1,

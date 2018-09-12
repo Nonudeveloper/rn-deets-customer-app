@@ -6,9 +6,12 @@ import {
   TextInput,
   TouchableHighlight,
   View,
-  Keyboard
+  Keyboard,
+  TouchableOpacity
 } from 'react-native';
 import styles from './styles';
+
+const info = (<Icon name="times-circle" size={18} color="grey" />);
 
 const mapMarkerIcon = (<Icon name="map-marker" size={30} color="grey" />);
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -100,6 +103,9 @@ export default class GeoCodeSearch extends React.Component {
                           onFocus={this.handleFocus}
                           selectTextOnFocus
                       />
+                    </View>
+                    <View style={styles.crossButtonContiner}>
+                        <TouchableOpacity onPress={() => this.searchInput.clear()}>{info}</TouchableOpacity>
                     </View>
                   </View>
                   <View style={styles.listViewContainer}>

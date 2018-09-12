@@ -10,7 +10,7 @@ const visa = require('../../../assets/icons/small_VISA.png');
 const VehicleInfo = (props) => (
         <View style={{ height: 180 }}>
                     
-                    <View style={styles.itemDetailContainer}>
+                    <View style={[styles.itemDetailContainer, {paddingVertical: 10}]}>
                        
                         <View style={styles.avatarContainer}>
                             <View style={styles.avatar}>
@@ -23,12 +23,12 @@ const VehicleInfo = (props) => (
                         <View style={styles.appointmentDetails}>
                             <View style={{ flexWrap: 'wrap' }}>
                                 <Text 
-                                    style={[styles.item, { fontSize: 20 }]} 
+                                    style={[styles.item, { fontSize: 16 }]} 
                                 > 
                                     {props.item.service_vehicle[0].vehicle_make.toUpperCase()} {props.item.service_vehicle[0].vehicle_model.toUpperCase()}, 
                                 </Text>
                                 <Text 
-                                    style={[styles.item, { fontSize: 20 }]} 
+                                    style={[styles.item, { fontSize: 16 }]} 
                                 > 
                                     {props.item.service_vehicle[0].vehicle_year.toUpperCase()}, {props.item.service_vehicle[0].vehicle_color.toUpperCase()}
                                 </Text>
@@ -37,7 +37,7 @@ const VehicleInfo = (props) => (
                         </View>
                         <View style={styles.options}>
                             <TouchableHighlight onPress={() => this.callToTechnician(props.item)}>
-                                <Text style={{ fontSize: 25, color: '#000' }}>${props.item.appointment.total_cost}</Text>
+                                <Text style={{ fontSize: 20, color: '#000' }}>${props.item.appointment.total_cost}</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
@@ -67,7 +67,7 @@ const VehicleInfo = (props) => (
                                 alignItems: 'center' 
                             }}
                         >
-                            <Text style={{ fontSize: 19, color: '#000' }}>
+                            <Text style={{ fontSize: 20, color: '#000' }}>
                                 ${props.item.appointment.total_cost}
                             </Text>
                         </View>
@@ -95,7 +95,7 @@ const VehicleInfo = (props) => (
                         />
                         <Text style={{ fontSize: 30, color: 'grey' }}>....</Text>
                         <Text style={{ fontSize: 20, color: 'grey' }}>1111</Text>
-                        <Text style={{ fontSize: 19, color: '#000' }}>
+                        <Text style={{ fontSize: 20, color: '#000' }}>
                                 ${props.item.appointment.total_cost}
                         </Text>
                     </View>

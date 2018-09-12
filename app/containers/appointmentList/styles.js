@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
      
     item: {
-        fontSize: 17,
+        fontSize: 16,
         marginBottom: 2,
         color: '#1a1a1a'
     },
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
         flex: 4,
         justifyContent: 'center',
         left: 10
-        
     },
     text: {
         fontSize: 15,
