@@ -61,14 +61,15 @@ class HomeHelper {
     return await SuperFetch.post('customer/delete_user_recent_location', data);
   }
 
-  fetchPolygonData = async center => {
-    return await SuperFetch.get(`getNearByServiceProvideForMapbox?latitude=${center[1]}&longitude=${center[0]}`);
-  }
+  fetchPolygonData = async center => 
+  await SuperFetch.get('technician/getOverallTechnicianCoverageArea')
+    .catch(err => console.log(err))
 
   payTipToTechnician = async tipData => {
     const user = await getItem(USER);
     const access_token = JSON.parse(user).access_token;
-    return await SuperFetch.post('customer/pay_tip_to_technician', { access_token, ...tipData });
+    return await SuperFetch.post('customer/pay_tip_to_technician', { access_token, ...tipData })
+    .catch(err => console.log(err));
   }
 
   saveUnservedArea = async areaData => {

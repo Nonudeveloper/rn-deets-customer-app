@@ -44,7 +44,9 @@ export function fetchPolygonData(center) {
 }
 
 export function fetchPolygonDataSuccess(res) {
-    const data = arrangeDataForPolygon(res);
+    const data = 'status' in res && res.status === 500 ? 
+    { polygonFeatures: [], pointFeatures: [] } : 
+    arrangeDataForPolygon(res);
     return {
         type: FETCH_POLYGON_DATA_SUCCESS,
         data

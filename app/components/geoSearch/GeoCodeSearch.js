@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-const info = (<Icon name="times-circle" size={18} color="grey" />);
+const cross = (<Icon name="times-circle" size={18} color="grey" />);
 
 const mapMarkerIcon = (<Icon name="map-marker" size={30} color="grey" />);
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -22,17 +22,25 @@ export default class GeoCodeSearch extends React.Component {
         super(props);
 
         this.state = {
-            searchedAdresses: this.props.features,
-            inputVal: ''
+            searchedAdresses: [],
+            inputVal: '',
+            showList: true
         };
 
         this.searchLocation = this.searchLocation.bind(this);
     }
 
+    componentDidMount() {
+      this.setState({
+        searchAddress: this.props.features
+      });
+    }
+
     componentWillReceiveProps(nextProps) {
       const { inputVal } = nextProps;
       this.setState({
-        inputVal
+        inputVal,
+        searchAddress: this.props.features
       });
     }
 
@@ -42,6 +50,7 @@ export default class GeoCodeSearch extends React.Component {
         this.props.actions.emptyFeatures();
         this.setState({
           searchedAdresses: [],
+          showList: false
         });
         this.props.onChangeSearchText(address.place_name);
     }
@@ -62,7 +71,7 @@ export default class GeoCodeSearch extends React.Component {
         });
       } else {
         //dispath an action here to empty features
-        this.props.actions.emptyFeatures();
+        // this.props.actions.emptyFeatures();
         this.setState({
           // isLoading: false,
           inputVal: query
@@ -70,18 +79,20 @@ export default class GeoCodeSearch extends React.Component {
       }
     }
 
-    renderAdress = (address) => {
-        return (
+    renderAdress = (address) => (
             <TouchableHighlight onPress={() => this.onListItemClicked(address)} style={styles.listItem}>
                 <View>
                     <Text>{address.place_name}</Text>
                 </View>
             </TouchableHighlight>
         );
-    };
 
     renderSeparator() {
       return <View style={styles.listItemSeparator} />;
+    }
+
+    handleFocus = () => {
+      this.setState({ showList: true });
     }
 
     render() {
@@ -105,18 +116,21 @@ export default class GeoCodeSearch extends React.Component {
                       />
                     </View>
                     <View style={styles.crossButtonContiner}>
-                        <TouchableOpacity onPress={() => this.searchInput.clear()}>{info}</TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.searchInput.clear()}>{cross}</TouchableOpacity>
                     </View>
                   </View>
                   <View style={styles.listViewContainer}>
-                    <ListView
-                        dataSource={ds.cloneWithRows(this.props.features)}
-                        renderRow={this.renderAdress}
-                        style={styles.listView}
-                        renderSeparator={this.renderSeparator}
-                        enableEmptySections
-                        keyboardShouldPersistTaps='always'
-                    />
+                    {this.state.showList && 
+                      <ListView
+                          dataSource={ds.cloneWithRows(this.props.features)}
+                          renderRow={this.renderAdress}
+                          style={styles.listView}
+                          renderSeparator={this.renderSeparator}
+                          enableEmptySections
+                          keyboardShouldPersistTaps='always'
+                      />
+                    }
+                    
                   </View>
                 </View>
         );

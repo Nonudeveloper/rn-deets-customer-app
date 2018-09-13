@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
       flex: 9
     },
     crossButtonContiner: {
-      flex: 0.5, 
       alignItems: 'flex-start', 
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginRight: 5
     }
 
   });
