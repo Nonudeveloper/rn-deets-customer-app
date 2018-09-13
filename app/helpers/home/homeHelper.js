@@ -62,7 +62,7 @@ class HomeHelper {
   }
 
   fetchPolygonData = async center => 
-  await SuperFetch.get(`getNearByServiceProvideForMapbox?latitude=${center[1]}&longitude=${center[0]}`)
+  await SuperFetch.get('technician/getOverallTechnicianCoverageArea')
     .catch(err => console.log(err))
 
   payTipToTechnician = async tipData => {

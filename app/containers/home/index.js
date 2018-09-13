@@ -6,10 +6,9 @@ import HomeScreen from './HomeScreen';
 
 import * as homeActions from '../../redux/home/homeActions';
 import { getFullAddressReverseGeo, updateLocationData } from '../../redux/geoCoding/geoActions';
-import { fetchUpcomingAndPastAppointments } from '../../redux/appointmentList/actions'
+import { fetchUpcomingAndPastAppointments } from '../../redux/appointmentList/actions';
 
-const mapDispatchToProps = (dispatch) => {
-    return {
+const mapDispatchToProps = (dispatch) => ({
         actions: bindActionCreators(homeActions, dispatch),
         getFullAddressReverseGeo: (data) => {
             dispatch(getFullAddressReverseGeo(data));
@@ -29,18 +28,15 @@ const mapDispatchToProps = (dispatch) => {
         saveUnservedArea: (data) => {
             dispatch(homeActions.saveUnservedArea(data));
         }
-    };
-};
+    });
 
-const mapStateToProps = (state) => {
-    return {
+const mapStateToProps = (state) => ({
         addressString: state.Geo.addressString,
-        isLoading: state.Geo.isFetching,
+        isLoading: state.home.isFetching,
         polygonData: state.home.polygonData,
         pointFeatures: state.home.pointFeatures,
         currentRunningAppointments: state.Auth.authUserWholeData.current_running_appointments
-    };
-};
+    });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
