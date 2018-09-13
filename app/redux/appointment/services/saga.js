@@ -51,7 +51,6 @@ function* watchFetchServices() {
 function* watchcreateNewServiceAppointment() {
   while (true) {
     const payload = yield take(CREATE_NEW_USER_SERVICE_APPOINTMENT);
-    console.log(payload);
     try {
       const response = yield call(createAppointmentCall, payload);
       yield put(serviceAppointmentSuccess(response));
