@@ -1,43 +1,35 @@
 {
   "project_info": {
-    "project_number": "896029473801",
-    "firebase_url": "https://deets-22032.firebaseio.com",
-    "project_id": "deets-22032",
-    "storage_bucket": "deets-22032.appspot.com"
+    "project_number": "417329083926",
+    "firebase_url": "https://deets-a0fe4.firebaseio.com",
+    "project_id": "deets-a0fe4",
+    "storage_bucket": "deets-a0fe4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:896029473801:android:f569321e2b4de30d",
+        "mobilesdk_app_id": "1:417329083926:android:83e9624b885f0218",
         "android_client_info": {
-          "package_name": "com.deets.cp"
+          "package_name": "com.deetscp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "896029473801-q3gg6tu0n30ijcf561i47i5h4p5becvi.apps.googleusercontent.com",
+          "client_id": "417329083926-nvl18tac5bq252jn8q4fdvgff5e40pik.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.deets.cp",
-            "certificate_hash": "7a47d7438e507b7cb35b14bd97975ec11e914d23"
-          }
-        },
-        {
-          "client_id": "896029473801-ikp7ma0gp8a8p832om2co1sp4i6tem38.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.deets.cp",
+            "package_name": "com.deetscp",
             "certificate_hash": "219e5959a226e25e2007e96205746faf6e1186b2"
           }
         },
         {
-          "client_id": "896029473801-sg0bo1d5kdfu3lbacgmjmfg73i9pdkhg.apps.googleusercontent.com",
+          "client_id": "417329083926-isb90m224i077s594tnk2ct2pe3bvb39.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB5Y_e7HxHnCY8JZuGGI_5QCDtyjZi7TvI"
+          "current_key": "AIzaSyBCKQLbEABdvaFGaDIslYqDFVdkkTxG8xg"
         }
       ],
       "services": {
@@ -48,17 +40,41 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "896029473801-sg0bo1d5kdfu3lbacgmjmfg73i9pdkhg.apps.googleusercontent.com",
+              "client_id": "417329083926-isb90m224i077s594tnk2ct2pe3bvb39.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "896029473801-a2qatqe6845k9372bn3188p9u27l5sg6.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.deets.cp"
-              }
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417329083926:android:2ed1fbaf3aae6671",
+        "android_client_info": {
+          "package_name": "com.deetssp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417329083926-isb90m224i077s594tnk2ct2pe3bvb39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCKQLbEABdvaFGaDIslYqDFVdkkTxG8xg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

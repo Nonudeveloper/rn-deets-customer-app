@@ -70,10 +70,6 @@ export default class HomeScreen extends Component {
     console.ignoredYellowBox = ['Warning:'];
   }
 
-  componentWillMount() {
-    this.props.fetchUpcomingAndPastAppointments();
-  }
-
   setLocation() {
     if (this.state.isCenterInsideThePolygonArea) {
       this.props.navigation.navigate('SelectVehicleScreen');
@@ -107,7 +103,7 @@ export default class HomeScreen extends Component {
       } else {
         //trigger an action to update location in geo reducer
         this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
-        this.props.fetchPolygonData(this.state.center);
+        // this.props.fetchPolygonData(this.state.center);
         this.setState({
           locationFromRecentScreen: {}
         });
@@ -115,6 +111,8 @@ export default class HomeScreen extends Component {
   }
 
   async componentDidMount() {
+    this.props.fetchPolygonData(this.state.center); //this parameter is of no use now need to change it
+    this.props.fetchUpcomingAndPastAppointments();
     const { navigation } = this.props;
     await this.promisedSetState({
       locationFromRecentScreen: navigation.getParam('location', {})
@@ -139,15 +137,13 @@ export default class HomeScreen extends Component {
         2000
       );
     } else {
-      // navigator.geolocation.getCurrentPosition((position) => {
-      //     console.log(position);
-      // }, (error) => {
-      //     alert(JSON.stringify(error));
-      // }, {
-      //     enableHighAccuracy: false,
-      //     timeout: 20000,
-      //     maximumAge: 1000
-      // });
+      navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position);
+      }, (error) => {
+          alert(JSON.stringify(error));
+      }, {
+          timeout: 2000,
+      });
       this.setState({
         inputVal: this.props.addressString,
         shouldUpdateAddressString: true
@@ -162,7 +158,7 @@ export default class HomeScreen extends Component {
         this.setState({
           inputVal: nextProps.addressString
         });
-        this.props.fetchPolygonData(this.state.center);
+        // this.props.fetchPolygonData(this.state.center);
     }
     if (nextProps.polygonData.length) {
       await this.promisedSetState(
@@ -212,6 +208,7 @@ export default class HomeScreen extends Component {
       }
     }
   }
+  
 
   onRegionIsChanging = () => console.log('onRegionIsChanging!')
 
@@ -229,12 +226,14 @@ export default class HomeScreen extends Component {
       : 'Not available';
   }
 
-  promisedSetState = (newState) => {
-    return new Promise((resolve) => {
+  promisedSetState = (newState) => new Promise((resolve) => {
         this.setState(newState, () => {
             resolve();
         });
-    });
+    })
+
+  async flyTo(coordinates) {
+    await this._map.flyTo(coordinates, 1000);
   }
 
   addOnMapChangedListener = () => console.log('addOnMapChangedListener!')
@@ -334,7 +333,8 @@ export default class HomeScreen extends Component {
             />
             <GeoCodeSearch
               onAddressGet={(address) => {
-                this.setState({ center: address.geometry.coordinates });
+                this.flyTo(address.geometry.coordinates);
+                // this.setState({ center: address.geometry.coordinates });
               }}
               inputVal={this.state.inputVal}
               onChangeSearchText={(val) => this.onChangeSearchText(val)}
