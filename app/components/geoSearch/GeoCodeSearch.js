@@ -98,10 +98,14 @@ export default class GeoCodeSearch extends React.Component {
     render() {
         return (
                 <View style={styles.container}>
+                  <View style={styles.titleContainer}>
+                    <Text style={{color: 'green', fontWeight: 'normal',
+                    paddingTop: 5}}>Service Location</Text>
+                  </View>
                   <View style={styles.searchContainer}>
-                    <View style={styles.mapMarkerContainer}>
+                     {/* <View style={styles.mapMarkerContainer}>
                       {mapMarkerIcon}
-                    </View>
+                    </View> */}
                     <View style={styles.inputContainer}>
                       <TextInput
                           style={styles.textinput}
