@@ -49,7 +49,7 @@ export default class ServiceDetailHeader extends React.Component {
   render() {
     
     return (
-        <View style={{ backgroundColor: '#fff' }}>
+        <View style={{ backgroundColor: '#fff', top: 5 }}>
             <FlatList
                 data={this.props.showServices ? this.props.servicesList : this.props.addonsList}
                 ItemSeparatorComponent={this.flatListItemSeparator}
