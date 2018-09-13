@@ -7,9 +7,9 @@ import CommonTextInput from '../../deetscomponents/form/Input';
 import { connect } from 'react-redux';
 
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
+let textInput = null;
 
 class FormArea extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +21,7 @@ class FormArea extends React.Component {
 
 
     componentDidMount() {
-        if (this.props.authUser.length !== 0) {
+        if (Object.keys(this.props.authUser).length !== 0) {
             const user = this.props.authUser;
             const initialFormData = {
                 fname: user.first_name,
@@ -32,6 +32,7 @@ class FormArea extends React.Component {
             };
             this.props.dispatch(initialize('profileDetails', initialFormData));
         }
+        
     }
 
     clear(fieldName) {
@@ -69,8 +70,8 @@ class FormArea extends React.Component {
                     return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
                 }
                 return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
-        };
-        const phoneParser = (number) => number ? number.replace(/[^\d]/g, '') : '';
+        };  
+        const phoneParser = n => n ? n.replace(/[^\d]/g, '') : '';
         
         return (
             <View style={styles.formArea}>
@@ -88,8 +89,11 @@ class FormArea extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
+                    refField="fname"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
                     editable={this.props.formEditable}
+                    ref={ref => textInput = ref} 
+                    withRef
                 />
                 <Field
                     name={'lname'}
@@ -148,12 +152,26 @@ class FormArea extends React.Component {
                             {this.state.clearmobilefield && <TouchableOpacity onPress={() => this.clear('mobile')} >{clear}</TouchableOpacity> }
                         </View>
                     </View>
+                    <TouchableOpacity onPress={() => textInput.getRenderedComponent().refs.fname.blur()}><Text>blur fname</Text></TouchableOpacity>
                 </View>
             </View>
         );
     }
 }
-FormArea = reduxForm({ 
+
+FormArea = connect(state => ({
+    initialValues: {
+        fname: state.Profile.authUser.first_name,
+        lname: state.Profile.authUser.last_name,
+        mobile: state.Profile.authUser.mobile,
+        email: state.Profile.authUser.email,
+        access_token: state.Profile.authUser.access_token
+    },
+    enableReinitialize: true,
+}))(FormArea);
+
+
+export default reduxForm({ 
     form: 'profileDetails',
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
@@ -190,14 +208,3 @@ FormArea = reduxForm({
         return errors;
     }
 })(FormArea);
-
-export default connect(state => ({
-    initialValues: {
-        fname: state.Profile.authUser.first_name,
-        lname: state.Profile.authUser.last_name,
-        mobile: state.Profile.authUser.mobile,
-        email: state.Profile.authUser.email,
-        access_token: state.Profile.authUser.access_token
-    },
-    enableReinitialize: true,
-}))(FormArea);
