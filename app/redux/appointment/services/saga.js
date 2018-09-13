@@ -62,6 +62,7 @@ function* watchcreateNewServiceAppointment() {
     } catch (err) {
       const error = payload.serviceDate !== '' ? '' : err;
       yield put(serviceAppointmentFaliure(error));
+      yield put(NavigationActions.navigate({ routeName: 'DateTimeScreen' }));
       console.log('SAGA FETCH ERR: ', err);
     }
   }
