@@ -8,7 +8,7 @@ const downArrow = require('../../assets/icons/down_arrow.png');
 const upArrow = require('../../assets/icons/down_arrow_onclick.png');
 
 const SUBCATEGORY_FADE_TIME = 100;
-const SUBCATEGORY_HEIGHT = 67;
+const SUBCATEGORY_HEIGHT = 56.5;
 
 export default class ServiceList extends React.Component { 
     constructor(props) {
@@ -143,7 +143,7 @@ export default class ServiceList extends React.Component {
       const { item } = this.props;
       return (
         <View
-          style={this.props.servicePanelIndex === 0 ? { marginTop: 0 } : { marginTop: 5 }}
+          style={this.props.servicePanelIndex === 0 ? { marginTop: 0 } : { marginTop: 1 }}
           onLayout={!this.measurements.pageY ? this.measureCollapsePanelRef : () => null}
         >
             <View style={styles.serviceItemContainer}>
