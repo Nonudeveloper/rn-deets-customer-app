@@ -50,7 +50,7 @@ export default function servicesReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 technicianFetching: false,
                 technician: [],
-                errorMessage: action.err
+                // errorMessage: action.err
             });
         case HIDE_ALERT:
             return Object.assign({}, state, {
