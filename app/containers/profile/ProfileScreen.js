@@ -215,37 +215,43 @@ export default class ProfileScreen extends Component {
     }
 
     renderAlert(error) {
-        Alert.alert(
-            'Error',
-            error,
-            [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                    this.props.actions.hideAlert();
-                } 
-                },
-            ],
-            { cancelable: false }
-        );
+        setTimeout(()=> {
+             Alert.alert(
+                'Error',
+                error,
+                [
+                    { 
+                    text: 'OK', 
+                    onPress: () => {
+                    //dispath an action to make showAlert false
+                        this.props.actions.hideAlert();
+                    } 
+                    },
+                ],
+                { cancelable: false }
+            );
+        }, 500);
+       
     }
 
     renderDeleteAlert(error) {
-        Alert.alert(
-            'Success',
-            error.log,
-            [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                this.props.actions.hideAlert();
-                } 
-                },
-            ],
-            { cancelable: false }
-        );
+        setTimeout(()=>{
+            Alert.alert(
+                'Success',
+                error.log,
+                [
+                    { 
+                    text: 'OK', 
+                    onPress: () => {
+                    //dispath an action to make showAlert false
+                    this.props.actions.hideAlert();
+                    } 
+                    },
+                ],
+                { cancelable: false }
+            );
+        }, 500);
+        
     }
 
     deleteVehicle() {
@@ -355,7 +361,6 @@ export default class ProfileScreen extends Component {
                     <DetailsItem
                         getImage={this.getImage.bind(this)} 
                         editable={this.state.profileEditable} 
-                        getImage={this.getImage.bind(this)} 
                         profilePic={this.props.authUser.image}
                         navigation={this.props.navigation} 
                         formEditable={this.state.profileEditable} 
@@ -381,7 +386,7 @@ export default class ProfileScreen extends Component {
                 { this.state.showPasswordButton &&
                     <View style={styles.nextButtonContainer}>
                         <Button 
-                            style={[styles.nextButtonStyle, { backgroundColor: '#28a745' }]}
+                            style={[styles.nextButtonStyle, { backgroundColor: 'green' }]}
                             onPress={this.goToNext.bind(this)}
                         >
                             Change Password

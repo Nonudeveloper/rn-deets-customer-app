@@ -17,6 +17,7 @@ export default class ChangePasswordScreen extends React.Component {
     let errorCount = 0;
     for (const error in errors) {
       if (errors[error] !== undefined && errorCount === 0) {
+      setTimeout(() => {  
         Alert.alert(
           'Error',
           errors[error],
@@ -25,6 +26,7 @@ export default class ChangePasswordScreen extends React.Component {
           ],
           { cancelable: false }
         );
+      }, 500);
         errorCount++;
       }
     }
@@ -44,20 +46,22 @@ export default class ChangePasswordScreen extends React.Component {
   }
   
   renderAlert(error) {
-    Alert.alert(
-      'Error',
-      error,
-      [
-        { 
-          text: 'OK', 
-          onPress: () => {
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
-          } 
-        },
-      ],
-      { cancelable: false }
-    );
+    setTimeout(() => {
+        Alert.alert(
+          'Deets',
+          error,
+          [
+            { 
+              text: 'OK', 
+              onPress: () => {
+                //dispath an action to make showAlert false
+                this.props.actions.hideAlert();
+              } 
+            },
+          ],
+          { cancelable: false }
+        );
+    }, 500);
   }
 
   render() {

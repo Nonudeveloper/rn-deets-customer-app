@@ -25,10 +25,14 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     buttonStyle: {
-        height: 60, 
-        marginHorizontal: 30, 
-        borderRadius: 50,
-        backgroundColor: '#00961C'
+        borderRadius: 100,
+        height: 55,
+        borderWidth: 4,
+        borderColor: '#2ea549',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'green',
+        marginHorizontal: 40, 
     },
     dateTimeContainer: {
         flex: 1, 

@@ -31,17 +31,15 @@ export default class DetailsItem extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
-        <View style={{ flex: this.props.flex, opacity: this.props.opacity }}>
-            <View style={styles.pictureWraper}>
-                <View style={styles.picContainer}>
-                    <ProfilePic 
+        <View style={{ flex: this.props.flex, display: this.props.opacity === 0 ? 'none': 'flex' }}>
+            <View style={[styles.pictureWraper, { justifyContent: 'center' }]}>
+                <ProfilePic 
                         getImage={this.props.getImage} 
                         editable={this.props.editable} 
-                        getImage={this.props.getImage} 
                         profilePic={this.props.profilePic} 
-                    />
-                </View>
+                />
                 <View style={[styles.logoutButtonContainer, { left: this.state.marginLeft }]}>
                     <TouchableHighlight 
                         underlayColor={'transparent'} 
