@@ -7,6 +7,8 @@ import { addListener } from '../helpers/utils/redux';
 import { saveDeviceToken, loginThroughAccessToken } from '../redux/auth/actions';
 import LoadingSplash from './LoadingSplash';
 import { Platform, Alert, PushNotificationIOS } from 'react-native';
+import Instabug from 'instabug-reactnative';
+ 
 
 const background = require('../containers/start/images/back.png');
 
@@ -47,7 +49,8 @@ class ReduxNavigation extends React.Component {
       });
 
       PushNotificationIOS.addEventListener("notification", function(notification) {
-          console.log(notification);
+          console.log('PUSH data: ', notification);
+          Instabug.logInfo(notification);
           if (notification.message) {
           setTimeout(() => {
             Alert.alert(

@@ -71,7 +71,7 @@ function* watchFetchUpcomingAndPastAppointments() {
      const { payload } = yield take(FETCH_UPCOMING_AND_PAST_APPOINTMENTS);
       try {
         const response = yield call(fetchUpcomingAndPastAppointmentsCall);
-        yield put(fetchUpcomingAndPastAppointmentsSuccess(response.data[0]));
+        yield put(fetchUpcomingAndPastAppointmentsSuccess(response));
         if (payload !== undefined) {
           yield put(acceptOrRejectRequestedServiceSuccess(payload));
         }
