@@ -5,6 +5,7 @@ import {
   Text,
   Alert
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../header/Header';
 import Form from '../login/Form';
 import styles from './loginScreen.style';
@@ -170,7 +171,13 @@ export default class LoginScreen extends Component {
   render() {
     const { isLoading } = this.props;
     return (
-      <View style={styles.container}>
+      <KeyboardAwareScrollView
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                contentContainerStyle={styles.container}
+                automaticallyAdjustContentInsets={false}
+                bounces={true}
+                keyboardShouldPersistTaps='handled'
+            >
         <Loader
           loading={isLoading}
         />
@@ -211,7 +218,7 @@ export default class LoginScreen extends Component {
             </View>
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Keyboard, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Field, reduxForm } from 'redux-form';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../header/Header';
 import Button from '../../deetscomponents/Button';
 import CommonTextInput from '../../deetscomponents/form/Input';
@@ -28,20 +29,20 @@ class PromotionCodeScreen extends React.Component {
     }
 
     saveData() {
-        if (this.props.forms.promotion !== undefined) {
-            this.props.actions.usePromoCodeByUser(this.props.forms.promotion.values);
+        if (this.props.forms.promotion !== undefined && this.props.forms.promotion.values) {
+            // this.props.actions.usePromoCodeByUser(this.props.forms.promotion.values);
         } else {
             setTimeout(() => {
                 Alert.alert(
                     'Error',
                     'Promo Code field is required',
                     [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
                     ],
                     { cancelable: false }
                 );
             }, 500);
-            
+
         }
     }
 
@@ -49,101 +50,107 @@ class PromotionCodeScreen extends React.Component {
         const msg = message.error ? message.error : message;
         const heading = message.error ? 'Error' : 'Success';
         setTimeout(() => {
-             Alert.alert(
+            Alert.alert(
                 heading,
                 msg,
                 [
-                    { 
-                    text: 'OK', 
-                    onPress: () => {
-                    //dispath an action to make showAlert false
-                        this.props.actions.hideAlert();
-                    } 
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            //dispath an action to make showAlert false
+                            this.props.actions.hideAlert();
+                        }
                     },
                 ],
                 { cancelable: false }
             );
         }, 500);
-       
+
     }
-  
+
     render() {
         return (
-        <View style={styles.container}>
-            <Header 
-                navigation={this.props.navigation} 
-                headerText={'PROMOTION CODE'}
-            />
-            <Loader loading={this.props.isFetching} />
-            {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage)}
-            <View style={{ flex: 1 }}>
-                <View style={styles.inputView}>
-                    <View style={styles.inputViewInnerContainer}>
-                        <Image style={{ height: '50%', width: '10%' }} source={promoIcon} />
-                        <Field
-                            name={'promo_code'}
-                            component={CommonTextInput}
-                            props={this.props}
-                            placeholder={'Enter Promotional Code'}
-                            placeholderTextColor='grey'
-                            underlineColorAndroid="transparent"
-                            type="text"
-                            borderBotmWidth={{ width: 500 }}
-                        />
+            <KeyboardAwareScrollView
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                contentContainerStyle={styles.container}
+                automaticallyAdjustContentInsets={false}
+                bounces={true}
+                keyboardShouldPersistTaps='handled'
+            >
+                <Header
+                    navigation={this.props.navigation}
+                    headerText={'PROMOTION CODE'}
+                />
+                <Loader loading={this.props.isFetching} />
+                {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage)}
+                <View style={{ flex: 1 }}>
+                    <View style={styles.inputView}>
+                        <View style={styles.inputViewInnerContainer}>
+                            <Image style={{ height: '50%', width: '10%' }} source={promoIcon} />
+                            <Field
+                                name={'promo_code'}
+                                component={CommonTextInput}
+                                props={this.props}
+                                placeholder={'Enter Promotional Code'}
+                                placeholderTextColor='grey'
+                                underlineColorAndroid="transparent"
+                                type="text"
+                                borderBotmWidth={{ width: 500 }}
+                            />
+                        </View>
                     </View>
-                </View>
-                <Button 
-                    style={styles.applyButton}
-                    onPress={() => {
-                        Keyboard.dismiss();
-                        this.saveData();
-                    }}
-                >
-                    Apply
+                    <Button
+                        style={styles.applyButton}
+                        onPress={() => {
+                            Keyboard.dismiss();
+                            this.saveData();
+                        }}
+                    >
+                        Apply
                 </Button>
-            </View>
-            <View style={styles.textContainer}>
-                <View style={{ flex: 1 }}>
-                    <Text style={styles.textStyle}>
-                        Invite friends and relatives to join
-                        and expeience how deets is
-                        revolutionizing the car wash
-                        and detailing industry.
+                </View>
+                <View style={styles.textContainer}>
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.textStyle}>
+                            Invite friends and relatives to join
+                            and expeience how deets is
+                            revolutionizing the car wash
+                            and detailing industry.
                     </Text>
-                </View>
-                <View style={styles.iconContainer}>
-                    <View style={styles.iconInnerContainer}>
-                        {twitterIcon}
                     </View>
-                    <View style={styles.iconInnerContainer}>
-                        {facebookIcon}
+                    <View style={styles.iconContainer}>
+                        <View style={styles.iconInnerContainer}>
+                            {twitterIcon}
+                        </View>
+                        <View style={styles.iconInnerContainer}>
+                            {facebookIcon}
+                        </View>
+                        <View style={styles.iconInnerContainer}>
+                            {envelopeIcon}
+                        </View>
+                        <View style={styles.iconInnerContainer}>
+                            {info}
+                        </View>
                     </View>
-                    <View style={styles.iconInnerContainer}>
-                        {envelopeIcon}
-                    </View>
-                    <View style={styles.iconInnerContainer}>
-                        {info}
-                    </View>
-                </View>
-                <View style={{ flex: 1 }}>
-                    {this.props.promotionCode.length !== 0 ?
-                    <Text style={styles.textStyle}>
-                         Share this Promo Code {this.props.promotionCode.promo_code_name} and on your behalf
+                    <View style={{ flex: 1 }}>
+                        {this.props.promotionCode.length !== 0 ?
+                            <Text style={styles.textStyle}>
+                                Share this Promo Code {this.props.promotionCode.promo_code_name} and on your behalf
                         they will receive a ${this.props.promotionCode.dollar_value} credits
-                         towards one of our services.
+                                 towards one of our services.
                     </Text>
-                    :
-                    <Text style={styles.textStyle}>
-                        No Promo Code Available
+                            :
+                            <Text style={styles.textStyle}>
+                                No Promo Code Available
                     </Text>}
+                    </View>
                 </View>
-            </View>
-        </View>
+            </KeyboardAwareScrollView>
         );
     }
 }
 
 
-export default reduxForm({ 
+export default reduxForm({
     form: 'promotion'
 })(PromotionCodeScreen);

@@ -18,8 +18,15 @@ export default class DrawerContainer extends React.Component {
     super(props);
 
     this.state = {
-        modalVisible: false,
-      };
+      modalVisible: false,
+      activeItemKey: 'HomeComponent'
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items[0].routes.length) {
+      this.findActiveItem();
+    }
   }
 
   setModalVisible = (visible) => {
@@ -27,14 +34,20 @@ export default class DrawerContainer extends React.Component {
     this.setState({ modalVisible: visible });
   }
 
+  findActiveItem() {
+    const route = this.props.items[0].routes;
+    const activeItem = route[route.length - 1];
+    this.setState({ activeItemKey: activeItem.routeName });
+  }
+
   invokeInstabugFeedbackMode = () => {
     this.props.navigation.navigate('DrawerClose');
     Instabug.invokeWithInvocationMode(Instabug.invocationMode.newFeedback);
   }
 
-  invokeInstabug =() => {
-     this.props.navigation.navigate('DrawerClose');
-     Instabug.invoke();
+  invokeInstabug = () => {
+    this.props.navigation.navigate('DrawerClose');
+    Instabug.invoke();
   }
 
   renderModal = () => {
@@ -45,8 +58,8 @@ export default class DrawerContainer extends React.Component {
         animationType={'none'}
         onRequestClose={() => console.log('hjk')}
       >
-    <PaymentDetails setModalVisible={this.setModalVisible} navigation={this.props.navigation} />
-    </Modal>
+        <PaymentDetails setModalVisible={this.setModalVisible} navigation={this.props.navigation} />
+      </Modal>
     );
   }
 
@@ -62,60 +75,64 @@ export default class DrawerContainer extends React.Component {
       >
         <View style={styles.sideMenu}>
           <View style={{ backgroundColor: '#4CAF50', alignItems: 'center', marginBottom: 30 }}>
-              <Image source={deetsLogo} style={{ resizeMode: 'contain', height: 40, width: 100 }} />
+            <Image source={deetsLogo} style={{ resizeMode: 'contain', height: 40, width: 100 }} />
           </View>
           <View style={{}}>
             <TouchableOpacity
-              style={styles.menu}
+              style={[styles.menu, this.state.activeItemKey === 'detailsScreen' || this.state.activeItemKey === 'addVehicleScreen'
+                ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('detailsScreen')}
             >
-                  <Text style={styles.menuText} type='h5White'>Profile</Text>
+              <Text style={styles.menuText} type='h5White'>Profile</Text>
             </TouchableOpacity>
 
 
             <TouchableOpacity
-              style={styles.menu}
+              style={[styles.menu, this.state.activeItemKey === 'PastAppointmentsList' || this.state.activeItemKey === 'PastAppointmentsDetail'
+                ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('PastAppointmentsList')}
             >
-                  <Text style={styles.menuText} type='h5White'>Appointments</Text>
+              <Text style={styles.menuText} type='h5White'>Appointments</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.menu}
+              style={[styles.menu, this.state.activeItemKey === 'PromotionCodeScreen'
+                ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('PromotionCodeScreen')}
             >
-                  <Text style={styles.menuText} type='h5White'>Promotion Code</Text>
+              <Text style={styles.menuText} type='h5White'>Promotion Code</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.menu}
+              style={[styles.menu, this.state.activeItemKey === 'DrawerServicesList'
+                ? { backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: 5 } : { backgroundColor: 'transparent' }]}
               onPress={() => navigation.navigate('DrawerServicesList')}
             >
-                  <Text style={styles.menuText} type='h5White'>Services</Text>
+              <Text style={styles.menuText} type='h5White'>Services</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
               onPress={() => this.setModalVisible(true)}
             >
-                  <Text style={styles.menuText} type='h5White'>Payment</Text>
+              <Text style={styles.menuText} type='h5White'>Payment</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
               onPress={this.invokeInstabugFeedbackMode}
             >
-                  <Text style={styles.menuText} type='h5White'>Feedback</Text>
+              <Text style={styles.menuText} type='h5White'>Feedback</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
               onPress={this.invokeInstabug}
             >
-                  <Text style={styles.menuText} type='h5White'>Contact us</Text>
+              <Text style={styles.menuText} type='h5White'>Contact us</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.menu}
             >
-                  <Text style={styles.menuText} type='h5White'>Legal</Text>
+              <Text style={styles.menuText} type='h5White'>Legal</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menu} onPress={() => onSignOut().then(() => navigation.navigate('loginStack'))} >
-                  <Text style={styles.menuText} type='h5White'>Log Out</Text>
+              <Text style={styles.menuText} type='h5White'>Log Out</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -10,7 +10,8 @@ import {
     Platform, 
     Animated,
     Easing,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView
 } from 'react-native';
 import Header from '../header/Header';
 import StyleConstants from '../../config/StyleConstants';
@@ -283,7 +284,7 @@ export default class ProfileScreen extends Component {
             flex: this._vehicleBarFlex
         };
         return (
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
                 <Header 
                     headerText={'PROFILE'} 
                     navigation={this.props.navigation} 
@@ -394,7 +395,7 @@ export default class ProfileScreen extends Component {
                     
                     </View>
                 }
-            </View>
+            </ScrollView>
         );
     }
 }
