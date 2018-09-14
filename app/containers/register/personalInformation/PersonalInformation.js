@@ -68,7 +68,7 @@ export default class PersonalInformation extends Component {
         contentContainerStyle={styles.container}
         automaticallyAdjustContentInsets={false}
         bounces={true}
-        keyboardShouldPersistTaps='always'
+        keyboardShouldPersistTaps='handled'
       >
         {this.props.emailAvailability.flag === 6 && this.renderAlert(this.props.emailAvailability.error)}
         <Header

@@ -84,7 +84,7 @@ export default class TestComponent extends React.Component {
           }}
           automaticallyAdjustContentInsets={false}
           bounces={false}
-          keyboardShouldPersistTaps='always'
+          keyboardShouldPersistTaps='handled'
       >
           <View style={{ flex: 1 }}>
             <Loader

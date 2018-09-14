@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
+import { Keyboard } from 'react-native';
 import Auth from './auth/reducer';
 import Register from './register/reducer';
 import Start from './register/startReducer';
@@ -18,6 +19,7 @@ import AppNavigation from '../navigation/AppNavigation';
 
 const navReducer = (state, action) => {
   const newState = AppNavigation.router.getStateForAction(action, state);
+  if (action.routeName && action.routeName === 'DrawerOpen') { Keyboard.dismiss(); }
   return newState || state;
 };
 

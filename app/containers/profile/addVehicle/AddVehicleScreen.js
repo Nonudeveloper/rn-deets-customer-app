@@ -80,7 +80,7 @@ export default class VehicleInformation extends React.Component {
           }}
           automaticallyAdjustContentInsets={false}
           bounces={false}
-          keyboardShouldPersistTaps='always'
+          keyboardShouldPersistTaps='handled'
       >
        <View style={{ flex: 1 }}>
        {this.props.errorMessageForVehicle !== '' && this.renderAlert(this.props.errorMessageForVehicle.error)}

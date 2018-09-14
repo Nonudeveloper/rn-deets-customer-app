@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
@@ -71,6 +71,7 @@ export default class HomeScreen extends Component {
   }
 
   setLocation() {
+    Keyboard.dismiss();
     if (this.state.isCenterInsideThePolygonArea) {
       this.props.navigation.navigate('SelectVehicleScreen');
     } else {
@@ -295,11 +296,15 @@ export default class HomeScreen extends Component {
     this.setState({ timeInterval: interval });
   }
 
+  onPress() {
+    Keyboard.dismiss();
+  }
+
 
   render() {
     const { isLoading } = this.props;
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
             <Loader
                 loading={isLoading}
             />
@@ -374,7 +379,7 @@ export default class HomeScreen extends Component {
             <TouchableOpacity style={styles.myAppointments} onPress={this.navigateToAppointmentsList}>
               <Text style={styles.myAppointmentsText}>My Appointments</Text>
             </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
   }
 }
