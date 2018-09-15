@@ -58,7 +58,8 @@ export default class GeoCodeSearch extends React.Component {
     searchLocation(query) {
       const data = {
           query,
-          MAPBOX_API_KEY
+          MAPBOX_API_KEY,
+          coordinates: this.props.currentLocationCoordinates
       };
       //call parent function to update props
       this.props.onChangeSearchText(query);

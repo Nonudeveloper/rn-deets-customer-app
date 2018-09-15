@@ -20,8 +20,8 @@ class HomeHelper {
     // .then(response => {
     //   return response;
     // })
-    // .catch(error => ({ error }));
-    const path = `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.query}.json?access_token=${
+    // .catch(error => ({ error }));[-117.867176, 33.855565],
+    const path = `https://api.mapbox.com/geocoding/v5/mapbox.places/${data.query}.json?proximity=${data.coordinates[0]},${data.coordinates[1]}?country=us&type=postcode,district,place,locality,neighborhood,address&access_token=${
       data.MAPBOX_API_KEY
     }&autocomplete=true`;
 

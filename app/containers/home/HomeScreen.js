@@ -313,6 +313,7 @@ export default class HomeScreen extends Component {
 
 
   render() {
+    console.log(this.state);
     const { isLoading } = this.props;
     return (
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
@@ -354,6 +355,7 @@ export default class HomeScreen extends Component {
               }}
               inputVal={this.state.inputVal}
               onChangeSearchText={(val) => this.onChangeSearchText(val)}
+              currentLocationCoordinates={this.state.currentLocationCoordinates}
             />
             <View 
               style={[styles.calloutWraper, {
