@@ -99,7 +99,6 @@ export function registerAppListener(navigation, props) {
     }
 
     if (notif.opened_from_tray) {
-      console.log('here');
       switch (parseInt(notif.type)) {
         case 1:
           setTimeout(() => {

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { 
-    View, 
-    TouchableOpacity, 
-    Dimensions, 
-    Image, 
-    Text, 
-    Alert, 
-    UIManager, 
-    Platform, 
+import {
+    View,
+    TouchableOpacity,
+    Dimensions,
+    Image,
+    Text,
+    Alert,
+    UIManager,
+    Platform,
     Animated,
     Easing,
     TouchableHighlight
@@ -38,7 +38,7 @@ export default class ProfileScreen extends Component {
 
         this._detailBarFlex = new Animated.Value(2);
         this._vehicleBarFlex = new Animated.Value(1);
-        
+
         this.state = {
             profileEditable: false,
             vehicleEditable: false,
@@ -56,8 +56,8 @@ export default class ProfileScreen extends Component {
     }
 
     componentWillMount() {
-        
-        
+
+
     }
 
     componentDidMount() {
@@ -74,11 +74,11 @@ export default class ProfileScreen extends Component {
     generateData = () => {
         const data = [];
         for (let i = 0; i < 10; i++) {
-          data.push(Math.floor(Math.random() * window.width));
+            data.push(Math.floor(Math.random() * window.width));
         }
-    
+
         this.setState({
-          data,
+            data,
         });
     }
 
@@ -87,7 +87,7 @@ export default class ProfileScreen extends Component {
     }
 
     setStates = val => {
-        this.setState({ 
+        this.setState({
             detailsOpacity: val === 'detail' ? 100 : 0,
             showDetailEditButton: val === 'detail',
             showVehicleEditButton: val !== 'detail',
@@ -121,21 +121,21 @@ export default class ProfileScreen extends Component {
 
 
     editDetails() {
-        this.state.profileEditable ? 
-        this.setState(() => {
-            return {
-                profileEditable: false,
-                showPasswordButton: true
-            };
-        }, () => {
-            this.saveData();
-        })
-        :
-        this.setState({
-            profileEditable: true,
-            showPasswordButton: false,
-        });
-    } 
+        this.state.profileEditable ?
+            this.setState(() => {
+                return {
+                    profileEditable: false,
+                    showPasswordButton: true
+                };
+            }, () => {
+                this.saveData();
+            })
+            :
+            this.setState({
+                profileEditable: true,
+                showPasswordButton: false,
+            });
+    }
 
     saveData() {
         const errors = this.props.form.profileDetails.syncErrors;
@@ -161,18 +161,18 @@ export default class ProfileScreen extends Component {
     }
 
     editVehicles() {
-        this.state.vehicleEditable ? 
-        this.setState(() => {
-            return {
-                vehicleEditable: false,
-            };
-        }, () => {
-            this.saveEditVehicleData();
-        })
-        :
-        this.setState({
-            vehicleEditable: true,
-        });
+        this.state.vehicleEditable ?
+            this.setState(() => {
+                return {
+                    vehicleEditable: false,
+                };
+            }, () => {
+                this.saveEditVehicleData();
+            })
+            :
+            this.setState({
+                vehicleEditable: true,
+            });
     }
 
     getVehicleImage(image) {
@@ -216,43 +216,43 @@ export default class ProfileScreen extends Component {
     }
 
     renderAlert(error) {
-        setTimeout(()=> {
-             Alert.alert(
+        setTimeout(() => {
+            Alert.alert(
                 'Error',
                 error,
                 [
-                    { 
-                    text: 'OK', 
-                    onPress: () => {
-                    //dispath an action to make showAlert false
-                        this.props.actions.hideAlert();
-                    } 
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            //dispath an action to make showAlert false
+                            this.props.actions.hideAlert();
+                        }
                     },
                 ],
                 { cancelable: false }
             );
         }, 500);
-       
+
     }
 
     renderDeleteAlert(error) {
-        setTimeout(()=>{
+        setTimeout(() => {
             Alert.alert(
                 'Success',
                 error.log,
                 [
-                    { 
-                    text: 'OK', 
-                    onPress: () => {
-                    //dispath an action to make showAlert false
-                    this.props.actions.hideAlert();
-                    } 
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            //dispath an action to make showAlert false
+                            this.props.actions.hideAlert();
+                        }
                     },
                 ],
                 { cancelable: false }
             );
         }, 500);
-        
+
     }
 
     deleteVehicle() {
@@ -260,13 +260,13 @@ export default class ProfileScreen extends Component {
             'Delete',
             'Are you sure you want to delete this vehicle?',
             [
-                { 
-                text: 'OK', 
-                onPress: () => {
-                //dispath an action to make showAlert false
-                const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
-                this.props.actions.deleteVehicle(vehicleId);
-                } 
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        //dispath an action to make showAlert false
+                        const vehicleId = this.props.form['editVehicleForm' + this.state.selectedPage].values.vehicle_id;
+                        this.props.actions.deleteVehicle(vehicleId);
+                    }
                 },
                 { text: 'Cancel' },
             ],
@@ -285,39 +285,39 @@ export default class ProfileScreen extends Component {
         };
         return (
             <KeyboardAwareScrollView
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={styles.container}
-          automaticallyAdjustContentInsets={false}
-          bounces={false}
-          keyboardShouldPersistTaps='handled'
-      >
-                <Header 
-                    headerText={'PROFILE'} 
-                    navigation={this.props.navigation} 
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                contentContainerStyle={styles.container}
+                automaticallyAdjustContentInsets={false}
+                bounces={false}
+                keyboardShouldPersistTaps='handled'
+            >
+                <Header
+                    headerText={'PROFILE'}
+                    navigation={this.props.navigation}
                     buttonType={'back'}
                 />
                 <Loader loading={this.props.isFetching} />
-                
+
                 {(this.props.errorMessage !== undefined && this.props.errorMessage !== '') && this.renderAlert(this.props.errorMessage.error)}
                 {this.props.vehicleDeleteMessage !== '' && this.renderDeleteAlert(this.props.vehicleDeleteMessage)}
                 {this.props.logoutMessage !== '' && withToast(this.props.logoutMessage.error)}
-                
+
                 <View style={styles.toggleButtonContainer}>
                     <Animated.View style={[detailFlex, { marginRight: 10, height: 60, top: 25 }]} >
-                        <TouchableOpacity 
-                            activeOpacity={1} 
-                            style={[styles.detailButtonInnerContainer, this.state.detailFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[styles.detailButtonInnerContainer, this.state.detailFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]}
                             onPress={() => {
                                 this.animateBars('detail');
                                 this.setStates('detail');
-                            }} 
+                            }}
                         >
                             <View style={styles.detailButtonInnerWraper}>
                                 <Text style={styles.detailTextContainer}>
                                     Details
                                 </Text>
                             </View>
-                            { this.state.showDetailEditButton &&
+                            {this.state.showDetailEditButton &&
                                 <TouchableOpacity style={{ flex: 1, right: 10, alignItems: 'flex-end' }} onPress={this.editDetails.bind(this)}>
                                     <Image style={{ width: 30, height: 30 }} source={this.state.profileEditable ? tickButton : editButton} />
                                 </TouchableOpacity>
@@ -325,80 +325,80 @@ export default class ProfileScreen extends Component {
                         </TouchableOpacity>
                     </Animated.View>
                     <Animated.View style={[vehicleFlex, { marginLeft: 10, height: 60, top: 25 }]} >
-                        <TouchableOpacity 
-                            activeOpacity={1} 
-                            style={[styles.vehicleButtonInnerContainer, this.state.vehicleFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]} 
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={[styles.vehicleButtonInnerContainer, this.state.vehicleFlexValue === 2 ? styles.activeButtonStyle : styles.unactioveButtonStyle]}
                             onPress={() => {
                                 this.animateBars('vehicle');
                                 this.setStates('vehicle');
-                            }} 
+                            }}
                         >
-                        { this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
-                            <TouchableOpacity 
-                                style={{ flex: 1, left: 10 }} 
-                                onPress={this.editVehicles.bind(this)}
-                            >
-                                <Image 
-                                    style={{ width: 30, height: 30 }} 
-                                    source={this.state.vehicleEditable ? tickButton : editButton} 
-                                />
-                            </TouchableOpacity>
-                        }
+                            {this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
+                                <TouchableOpacity
+                                    style={{ flex: 1, left: 10 }}
+                                    onPress={this.editVehicles.bind(this)}
+                                >
+                                    <Image
+                                        style={{ width: 30, height: 30 }}
+                                        source={this.state.vehicleEditable ? tickButton : editButton}
+                                    />
+                                </TouchableOpacity>
+                            }
                             <View style={styles.detailButtonInnerWraper}>
                                 <Text style={styles.vehicleTextContainer}>
                                     Vehicles
                                 </Text>
                             </View>
-                            { this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
-                            <TouchableOpacity 
-                                style={{ flex: 1, alignItems: 'flex-end', right: 10 }} 
-                                onPress={this.deleteVehicle.bind(this)}
-                            >
-                                <Image 
-                                    style={{ width: 30, height: 30 }} 
-                                    source={crossButton} 
-                                />
-                            </TouchableOpacity>
-                        }
+                            {this.state.showVehicleEditButton && this.props.authVehiclesData.length !== 0 &&
+                                <TouchableOpacity
+                                    style={{ flex: 1, alignItems: 'flex-end', right: 10 }}
+                                    onPress={this.deleteVehicle.bind(this)}
+                                >
+                                    <Image
+                                        style={{ width: 30, height: 30 }}
+                                        source={crossButton}
+                                    />
+                                </TouchableOpacity>
+                            }
                         </TouchableOpacity>
                     </Animated.View>
                 </View>
-          
+
                 <View style={{ flex: 4 }}>
                     <DetailsItem
-                        getImage={this.getImage.bind(this)} 
-                        editable={this.state.profileEditable} 
+                        getImage={this.getImage.bind(this)}
+                        editable={this.state.profileEditable}
                         profilePic={this.props.authUser.image}
-                        navigation={this.props.navigation} 
-                        formEditable={this.state.profileEditable} 
+                        navigation={this.props.navigation}
+                        formEditable={this.state.profileEditable}
                         authUser={this.props.authUser}
                         logout={this.props.logout}
                         opacity={this.state.detailsOpacity}
                         flex={this.state.detailsOpacity ? 5 : 0}
                     />
-                        {this.state.showVehicleComponent &&
-                    <VehiclesScreen 
-                        editable={this.state.vehicleEditable} 
-                        navigation={this.props.navigation}
-                        getVehicleImage={this.getVehicleImage.bind(this)}
-                        getSelectedPage={this.getSelectedPage.bind(this)}
-                        opacity={this.state.detailsOpacity ? 0 : 100}
-                        flex={this.state.detailsOpacity ? 0 : 5}
-                        authVehiclesData={this.props.authVehiclesData}
-                    /> 
-                        }
+                    {this.state.showVehicleComponent &&
+                        <VehiclesScreen
+                            editable={this.state.vehicleEditable}
+                            navigation={this.props.navigation}
+                            getVehicleImage={this.getVehicleImage.bind(this)}
+                            getSelectedPage={this.getSelectedPage.bind(this)}
+                            opacity={this.state.detailsOpacity ? 0 : 100}
+                            flex={this.state.detailsOpacity ? 0 : 5}
+                            authVehiclesData={this.props.authVehiclesData}
+                        />
+                    }
                 </View>
-         
 
-                { this.state.showPasswordButton &&
+
+                {this.state.showPasswordButton &&
                     <View style={styles.nextButtonContainer}>
-                        <Button 
+                        <Button
                             style={[styles.nextButtonStyle, { backgroundColor: 'green' }]}
                             onPress={this.goToNext.bind(this)}
                         >
                             Change Password
                         </Button>
-                    
+
                     </View>
                 }
             </KeyboardAwareScrollView>
