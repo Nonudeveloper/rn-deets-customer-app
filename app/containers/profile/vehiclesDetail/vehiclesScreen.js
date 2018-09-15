@@ -37,12 +37,11 @@ export default class VehiclesScreen extends React.Component {
       currentPage: 0,
       marginLeft: 312
     };
+    this.vehicleForm = null;
   }
 
-
-  componentWillMount() {
-    // this.props.getVehicles();
-    // this.props.actions.getAuthUserVehicleDetails();
+  componentDidMount() {
+    this.props.onRef(this);
   }
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -51,6 +50,10 @@ export default class VehiclesScreen extends React.Component {
         this.viewPager.setPage(nextState.currentPage);
       }
     }
+  }
+
+  blurAll = () => {
+    this.vehicleForm.blurAll();
   }
 
   saveData() {
@@ -138,12 +141,12 @@ export default class VehiclesScreen extends React.Component {
                       item={item}
                       style={styles.t2} 
                       vehicleData={this.props.vehicleData} 
-                      onRef={ref => (this.child = ref)}
                       editable={this.props.editable}
-                      form={'editVehicleForm' + i}
+                      form={`editVehicleForm${i}`}
                       fetchVehiclesMakeModelByYear={this.props.actions.fetchVehiclesMakeModelByYear}
                       makeModelData={this.props.makeModelData}
                       count={this.props.count}
+                      onRef={ref => this.vehicleForm = ref}
                     />
 
                     ) : (

@@ -1,13 +1,12 @@
 import React from 'react';
 import { reduxForm, Field, initialize, change } from 'redux-form';
-import { View, Text, Picker, TextInput } from 'react-native';
+import { View, Text, Picker, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import MyPicker from '../../../deetscomponents/form/AndroidPicker';
 import RadioButton from 'radio-button-react-native';
 import CommonTextInput from '../../../deetscomponents/form/Input';
 import CommonTypeTextInput from '../../../components/form/Input';
 import ModelPicker from 'react-native-picker';
-import { connect } from 'react-redux';
 
 class VehicleForm extends React.Component {
     constructor(props) {
@@ -23,6 +22,10 @@ class VehicleForm extends React.Component {
               initialValue: 0,
               makeName: ''
           };
+          this.license = null;
+          this.vin = null;
+          this.notes = null;
+          this.type = null;
     }
     
     validateForm = () => {
@@ -126,16 +129,13 @@ class VehicleForm extends React.Component {
             console.log(data);
         }
     });
-    if (this.props.editable)
-    ModelPicker.show();
+    if (this.props.editable) ModelPicker.show();
     }
 
     _colorChanged(colorId) {
-        this.setState(() => {
-            return {
+        this.setState(() => ({
             color: colorId
-            };
-        }, () => {
+        }), () => {
             this.props.vehicleData.color.map((color, i) => {
                 if (color.id === colorId) {
                     this.props.dispatch(change(this.props.form, 'color', color.color));
@@ -145,11 +145,9 @@ class VehicleForm extends React.Component {
     }
 
     _modelChanged(modelId) {
-        this.setState(() => {
-            return {
+        this.setState(() => ({
             model: modelId
-            };
-        }, () => {
+        }), () => {
             this.props.makeModelData.map((items) => 
                 (items.id === this.state.year) ?
                 items.makeModel.data.map((make, i) => 
@@ -167,13 +165,9 @@ class VehicleForm extends React.Component {
         });
     }
     
-    componentWillMount() {
-        // console.log(this.props);
-       
-    }
-    
     componentDidMount() {
         this.props.onRef(this);
+
         if (this.props.item !== null) {
             const authVehicleData = this.props.item;
             const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
@@ -212,8 +206,15 @@ class VehicleForm extends React.Component {
         this.props.onRef(undefined);
     }
 
+    blurAll = () => {
+        // this.license.getRenderedComponent().refs.license.blur();
+        this.vin.getRenderedComponent().refs.vin.blur();
+        this.notes.getRenderedComponent().refs.notes.blur();
+        this.type.getRenderedComponent().refs.type.blur();
+    }
+
   render() {
-    const { pickerStyle, inputStyle } = styles;
+    const { inputStyle } = styles;
     return (
         <View style={styles.formArea}>
             <View style={styles.colContainer}>
@@ -300,6 +301,9 @@ class VehicleForm extends React.Component {
                     borderBotmWidth={{ borderBottomWidth: 0 }}
                     onPress={this._showPicker.bind(this)}
                     type="modaltype"
+                    refField="type"
+                    ref={ref => this.type = ref}
+                    withRef
                 />
                 </View>
             <View style={styles.licenseStyle}>
@@ -338,7 +342,7 @@ class VehicleForm extends React.Component {
                 </View>
             </View>
             <View style={styles.licenseTextStyle}>
-                {this.state.value === 0 ?
+                {/* {this.state.value === 0 &&
                 <Field
                     name={'license'}
                     component={CommonTextInput}
@@ -348,8 +352,25 @@ class VehicleForm extends React.Component {
                     underlineColorAndroid="transparent"
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
+                    refField="license"
+                    ref={ref => this.license = ref}
+                    withRef
                 />
-                    : 
+                //     : 
+                // <Field
+                //     name={'vin'}
+                //     component={CommonTextInput}
+                //     props={this.props}
+                //     placeholder={'VIN #'}
+                //     placeholderTextColor='grey'
+                //     underlineColorAndroid="transparent"
+                //     type="text"
+                //     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
+                //     refField="vin"
+                //     ref={ref => this.vin = ref}
+                //     withRef
+                // />
+                } */}
                 <Field
                     name={'vin'}
                     component={CommonTextInput}
@@ -359,8 +380,10 @@ class VehicleForm extends React.Component {
                     underlineColorAndroid="transparent"
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2, borderBottomColor: 'grey' }}
+                    refField="vin"
+                    ref={ref => this.vin = ref}
+                    withRef
                 />
-                }
                 <Field
                     name={'notes'}
                     component={CommonTextInput}
@@ -369,7 +392,11 @@ class VehicleForm extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
+                    refField="notes"
+                    ref={ref => this.notes = ref}
+                    withRef
                 />
+                <TouchableOpacity onPress={() => this.blurAll()}><Text>Blurr All</Text></TouchableOpacity>
                 <Field
                     name={'color'}
                     component={CommonTextInput}
@@ -425,7 +452,7 @@ class VehicleForm extends React.Component {
 }
 
 
-VehicleForm = reduxForm({ 
+export default reduxForm({ 
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
     validate: (values, props) => {
@@ -471,20 +498,3 @@ VehicleForm = reduxForm({
     },
 })(VehicleForm);
 
-export default connect((state, ownProps) => ({
-    initialValues: {
-        license: ownProps.item && parseInt(ownProps.item.license_type) === 2 ? ownProps.item.license : '',
-        vin: ownProps.item && parseInt(ownProps.item.license_type) === 1 ? ownProps.item.license : '',
-        notes: ownProps.item && ownProps.item.notes,
-        color: ownProps.item && ownProps.item.vehicle_color,
-        model: ownProps.item && ownProps.item.vehicle_model,
-        make: ownProps.item && ownProps.item.vehicle_make,
-        type: ownProps.item && `${ownProps.item.vehicle_type_name}, ${ownProps.item.vehicle_type_segment}`,
-        vehicle_type_segment_id: ownProps.item && ownProps.item.vehicle_type_segment_id,
-        vehicle_type: ownProps.item && ownProps.item.vehicle_type,
-        flag: 2,
-        vehicle_id: ownProps.item && ownProps.item.vehicle_id,
-        radio_button_type: ownProps.item && parseInt(ownProps.item.license_type) !== 2 ? 1 : 0
-    },
-    enableReinitialize: true,
-}))(VehicleForm);
