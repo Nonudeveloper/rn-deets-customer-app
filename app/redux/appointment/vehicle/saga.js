@@ -6,6 +6,7 @@ import AppointmetHelper from '../../../helpers/appointment/appointmentHelper';
 import { saveAuthVehiclesData } from '../../../helpers/utility';
 import { NavigationActions } from 'react-navigation';
 import { getAuthUserVehicleDetailsSuccess } from '../../profile/actions';
+import withToast from '../../../hoc/withToast';
 
 function* watchAuthVehicleFromAsyncStorage() {
     while (true) {
@@ -30,6 +31,7 @@ function* watchAuthVehicleFromAsyncStorage() {
           yield put(addUpdateVehicleSuccess(response));
           yield put(getAuthUserVehicleDetailsSuccess(response));
           yield put(NavigationActions.back());
+          withToast('Vehicle Added successfully!');
           console.log('SAGA RESET PASSWORD Mail SENT: ', response);
         } catch (err) {
           console.log('SAGA RESET PASSWORD Mail ERROR: ', err);

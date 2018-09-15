@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { Platform, View, Alert } from 'react-native';
 import Header from '../../../header/Header';
 import Loader from '../../../../deetscomponents/Loader';
 import CarPicture from './CarPicture';
@@ -8,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './styles';
 import Button from '../../../../deetscomponents/Button';
 import StyleConstants from '../../../../config/StyleConstants';
+import VehicleFormIos from './VehicleFormIos';
 
 const backButton = require('../../../../assets/icons/add_car_icon_onclick.png');
 
@@ -21,6 +22,7 @@ export default class TestComponent extends React.Component {
 
   componentWillMount() {
     // this.props.getVehicles();
+    console.log(this.props);
     this.props.vehicleData.length === 0 ? this.props.getVehicles() : null;
     this.props.setBackToInitialState();
     if (this.props.navigation.state.params.items !== '') {
@@ -61,12 +63,12 @@ export default class TestComponent extends React.Component {
       'Error',
       error,
       [
-        { 
-          text: 'OK', 
+        {
+          text: 'OK',
           onPress: () => {
             //dispath an action to make showAlert false
             this.props.actions.hideAlert();
-          } 
+          }
         },
       ],
       { cancelable: false }
@@ -77,46 +79,67 @@ export default class TestComponent extends React.Component {
     const { isFetching } = this.props;
     return (
       <KeyboardAwareScrollView
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={ {
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-          automaticallyAdjustContentInsets={false}
-          bounces={false}
-          keyboardShouldPersistTaps='handled'
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+        automaticallyAdjustContentInsets={false}
+        bounces={false}
+        keyboardShouldPersistTaps='handled'
       >
-          <View style={{ flex: 1 }}>
-            <Loader
-              loading={isFetching} 
-            />
-            <Header 
-                headerText={this.state.title} 
-                navigation={this.props.navigation} 
-                buttonType={'back'}
-                showRightIcon
-                rightText={'Save'}
-                onPress={this.saveData.bind(this)}
-            />
-             {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
-            <View style={styles.container}>
-              <View style={styles.t1}>
-                <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} vehicleImage={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null} />
-              </View>
-              <VehicleForm 
-                style={styles.t2} 
-                vehicleData={this.props.vehicleData} 
-                fetchMakeModel={this.props.fetchMakeModel} 
-                isFetching={this.props.isFetching} 
-                makeModel={this.props.makeModel}
-                models={this.props.models}
-                updateModels={this.props.updateModels}
-                onRef={ref => (this.child = ref)}
-                authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
-                authUser={this.props.authUser}
-              /> 
+        <View style={{ flex: 1 }}>
+          <Loader
+            loading={isFetching}
+          />
+          <Header
+            headerText={this.state.title}
+            navigation={this.props.navigation}
+            buttonType={'back'}
+            showRightIcon
+            rightText={this.state.title === 'Add Vehicle' ? 'Save' : 'Update'}
+            onPress={this.saveData.bind(this)}
+          />
+          {this.props.errorMessage !== '' && this.renderAlert(this.props.errorMessage.error)}
+          <View style={styles.container}>
+            <View style={styles.t1}>
+              <CarPicture getVehicleImage={this.getVehicleImage.bind(this)} vehicleImage={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null} />
+            </View>
+            <View style={{ flex: 3, justifyContent: 'center' }} >
+              {Platform.OS === 'android' ? (
+                <VehicleForm
+                  style={styles.t2}
+                  vehicleData={this.props.vehicleData}
+                  fetchMakeModel={this.props.fetchMakeModel}
+                  isFetching={this.props.isFetching}
+                  makeModel={this.props.makeModel}
+                  models={this.props.models}
+                  updateModels={this.props.updateModels}
+                  onRef={ref => (this.child = ref)}
+                  authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
+                  authUser={this.props.authUser}
+                />
+
+              ) : (
+
+                  // <VehicleFormIos
+                  //   style={styles.t2}
+                  //   vehicleData={this.props.vehicleData}
+                  //   fetchMakeModel={this.props.fetchMakeModel}
+                  //   isFetching={this.props.isFetching}
+                  //   makeModel={this.props.makeModel}
+                  //   models={this.props.models}
+                  //   updateModels={this.props.updateModels}
+                  //   onRef={ref => (this.child = ref)}
+                  //   authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
+                  //   authUser={this.props.authUser}
+                  // />
+                  null
+                )
+              }
             </View>
           </View>
+        </View>
       </KeyboardAwareScrollView>
     );
   }

@@ -71,6 +71,7 @@ class ReduxNavigation extends React.Component {
   async componentDidMount() {
     registerAppListener(ReactNavigation, this.props);
     FCM.getInitialNotification().then(notif => {
+      console.log('here');
       if (notif.fcm.action !== null && notif.message) {
       Alert.alert(
         'Notification',

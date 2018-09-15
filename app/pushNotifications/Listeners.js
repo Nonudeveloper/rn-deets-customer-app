@@ -1,6 +1,8 @@
 import { Platform, AsyncStorage, AppState, Alert } from 'react-native';
 
 import FCM, { FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType, NotificationActionType, NotificationActionOption, NotificationCategoryOption } from 'react-native-fcm';
+import { fetchUpcomingAndPastAppointments } from '../redux/appointmentList/actions';
+
 
 AsyncStorage.getItem('lastNotification').then(data => {
   if (data) {
@@ -32,10 +34,10 @@ export function registerKilledListener() {
             AsyncStorage.setItem('lastMessage', JSON.stringify(notif._userText));
           }
         }
-        if (notif._actionIdentifier === 'view'){
+        if (notif._actionIdentifier === 'view') {
           alert('User clicked View in App');
         }
-        if (notif._actionIdentifier === 'dismiss'){
+        if (notif._actionIdentifier === 'dismiss') {
           alert('User clicked Dismiss');
         }
       }, 1000);
@@ -50,30 +52,36 @@ const handleNotification = (notif, navigation, props) => {
     notif.message,
     [
       { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
-      { text: 'View', onPress: () => {
-        switch (parseInt(notif.type)) {
-          case 1:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-            break;
-          case 2:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
-            break;
-          case 3:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
-            break;
-          case 4:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
-            break;
-          case 5:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-            break;
-          case 6:
-            props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-            break;
-          default:
-            break;
+      {
+        text: 'View', onPress: () => {
+          switch (parseInt(notif.type)) {
+            case 1:
+              props.dispatch(fetchUpcomingAndPastAppointments());
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+              break;
+            case 2:
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
+              break;
+            case 3:
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
+              break;
+            case 4:
+              props.dispatch(fetchUpcomingAndPastAppointments());
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
+              break;
+            case 5:
+              props.dispatch(fetchUpcomingAndPastAppointments());
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+              break;
+            case 6:
+              props.dispatch(fetchUpcomingAndPastAppointments());
+              props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+              break;
+            default:
+              break;
+          }
         }
-      } },
+      },
     ],
     { cancelable: false }
   );
@@ -82,7 +90,6 @@ const handleNotification = (notif, navigation, props) => {
 // these callback will be triggered only when app is foreground or background
 export function registerAppListener(navigation, props) {
   FCM.on(FCMEvent.Notification, notif => {
-    console.log('Notification', notif);
     // handleNotification(notif);
     if (Platform.OS === 'ios' && notif._notificationType === NotificationType.WillPresent && !notif.local_notification) {
       // this notification is only to decide if you want to show the notification when user if in foreground.
