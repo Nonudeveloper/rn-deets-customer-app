@@ -12,6 +12,11 @@ export default class DetailsItem extends React.Component {
     this.state = {
         marginLeft: 312
     };
+    this.formArea = null;
+  }
+
+  componentDidMount() {
+      this.props.onRef(this);
   }
 
   expandLogoutButton() {
@@ -28,6 +33,10 @@ export default class DetailsItem extends React.Component {
 
   _logout = () => {
     this.props.logout();
+  }
+
+  blurAll = () => {
+    this.formArea.blurAll();
   }
 
   render() {
@@ -59,7 +68,13 @@ export default class DetailsItem extends React.Component {
                 </View>
             </View>
             <View style={styles.formContainer}>
-                <FormArea navigation={this.props.navigation} formEditable={this.props.formEditable} authUser={this.props.authUser} />
+                <FormArea 
+                    navigation={this.props.navigation}
+                    formEditable={this.props.formEditable} 
+                    authUser={this.props.authUser} 
+                    onRef={ref => this.formArea = ref}
+                />
+                {/* <TouchableHighlight onPress={() => this.blurAll()}><Text>Blurr All</Text></TouchableHighlight> */}
             </View>
         </View>
     );

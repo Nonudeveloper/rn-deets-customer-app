@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 
 const clear = (<Icon name="times-circle" size={18} color="grey" />);
 
-class FormArea extends React.Component {
 
+class FormArea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,11 +17,17 @@ class FormArea extends React.Component {
             clearemailfield: false,
             clearmobilefield: false,
         };
+        this.fname = null;
+        this.lname = null;
+        this.email = null;
+        this.mobile = null;
     }
 
 
     componentDidMount() {
-        if (this.props.authUser.length !== 0) {
+        this.props.onRef(this);
+        
+        if (Object.keys(this.props.authUser).length !== 0) {
             const user = this.props.authUser;
             const initialFormData = {
                 fname: user.first_name,
@@ -53,6 +59,12 @@ class FormArea extends React.Component {
         }
     }
 
+    blurAll = () => {
+        this.fname.getRenderedComponent().refs.fname.blur();
+        this.lname.getRenderedComponent().refs.lname.blur();
+        this.email.getRenderedComponent().refs.email.blur();
+        this.mobile.getRenderedComponent().refs.mobile.blur();
+    }
 
     render() {
         const normalizePhone = value => {
@@ -69,8 +81,8 @@ class FormArea extends React.Component {
                     return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
                 }
                 return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
-        };
-        const phoneParser = (number) => number ? number.replace(/[^\d]/g, '') : '';
+        };  
+        const phoneParser = n => n ? n.replace(/[^\d]/g, '') : '';
         
         return (
             <View style={styles.formArea}>
@@ -88,8 +100,11 @@ class FormArea extends React.Component {
                     placeholderTextColor='grey'
                     underlineColorAndroid="transparent"
                     type="text"
+                    refField="fname"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
                     editable={this.props.formEditable}
+                    ref={ref => this.fname = ref} 
+                    withRef
                 />
                 <Field
                     name={'lname'}
@@ -101,6 +116,9 @@ class FormArea extends React.Component {
                     type="text"
                     borderBotmWidth={{ borderBottomWidth: 2 }}
                     editable={this.props.formEditable}
+                    refField="lname"
+                    ref={ref => this.lname = ref}
+                    withRef
                 />
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ flex: 6 }}>
@@ -115,6 +133,9 @@ class FormArea extends React.Component {
                             onChange={(value) => this.emailClear(value)}
                             borderBotmWidth={{ borderBottomWidth: 2 }}
                             editable={false}
+                            refField="email"
+                            ref={ref => this.email = ref}
+                            withRef
                         /> 
                     </View>
                     <View style={styles.crossButtonContainer}>
@@ -141,6 +162,9 @@ class FormArea extends React.Component {
                             normalize={normalizePhone}
                             parse={phoneParser}
                             editable={this.props.formEditable}
+                            refField="mobile"
+                            ref={ref => this.mobile = ref}
+                            withRef
                         />
                     </View>
                     <View style={styles.crossButtonContainerMobile}>
@@ -153,7 +177,8 @@ class FormArea extends React.Component {
         );
     }
 }
-FormArea = reduxForm({ 
+
+export default reduxForm({ 
     form: 'profileDetails',
     keepDirtyOnReinitialize: true,
     enableReinitialize: true,
@@ -190,14 +215,3 @@ FormArea = reduxForm({
         return errors;
     }
 })(FormArea);
-
-export default connect(state => ({
-    initialValues: {
-        fname: state.Profile.authUser.first_name,
-        lname: state.Profile.authUser.last_name,
-        mobile: state.Profile.authUser.mobile,
-        email: state.Profile.authUser.email,
-        access_token: state.Profile.authUser.access_token
-    },
-    enableReinitialize: true,
-}))(FormArea);

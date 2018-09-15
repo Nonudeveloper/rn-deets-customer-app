@@ -42,7 +42,7 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 14,
+      zoomLevel: 9,
       polygonDrawnOnce: false,
       locationFromRecentScreen: {},
       calloutStyles: {
@@ -59,7 +59,8 @@ export default class HomeScreen extends Component {
         "features": []
       },
       customMarker: customMarkerGreen,
-      timeInterval: 0
+      timeInterval: 0,
+      currentLocationCoordinates: []
     };
 
     this.onRegionDidChange = this.onRegionDidChange.bind(this);
@@ -103,7 +104,7 @@ export default class HomeScreen extends Component {
         this.props.getFullAddressReverseGeo({ center, mapboxApiKey: MAPBOX_API_KEY });
       } else {
         //trigger an action to update location in geo reducer
-        this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
+        // this.props.getFullAddressReverseGeo({ center: this.state.center, mapboxApiKey: MAPBOX_API_KEY });
         // this.props.fetchPolygonData(this.state.center);
         this.setState({
           locationFromRecentScreen: {}
@@ -138,18 +139,28 @@ export default class HomeScreen extends Component {
         2000
       );
     } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position);
-      }, (error) => {
-          alert(JSON.stringify(error));
-      }, {
-          timeout: 2000,
-      });
+      this.getCurrentLocation();
+      
       this.setState({
         inputVal: this.props.addressString,
         shouldUpdateAddressString: true
       });
     }
+  }
+
+  getCurrentLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+        const { longitude, latitude } = position.coords;
+        console.log('success', longitude, latitude);
+        this.flyTo([longitude, latitude]);
+        this.setState({
+          currentLocationCoordinates: [longitude, latitude],
+        });
+    }, (error) => {
+        alert(JSON.stringify(error));
+    }, {
+        timeout: 2000,
+    });
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -360,7 +371,7 @@ export default class HomeScreen extends Component {
                 style={{ width: 32, height: 40 }}
               />
             </View>
-            <TouchableOpacity style={styles.gpsIconContainer}>
+            <TouchableOpacity style={styles.gpsIconContainer} onPress={() => this.getCurrentLocation()}>
               <Image style={styles.gpsIcon} source={gpsIcon} />
             </TouchableOpacity>
             { this.props.currentRunningAppointments !== undefined && this.props.currentRunningAppointments.length !== 0 &&
