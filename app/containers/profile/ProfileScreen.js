@@ -53,6 +53,8 @@ export default class ProfileScreen extends Component {
             vehicleFlexValue: 1,
             showVehicleComponent: false
         };
+        this.detailsItem = null;
+        this.vehicleScreen = null;
     }
 
     componentWillMount() {
@@ -122,15 +124,13 @@ export default class ProfileScreen extends Component {
 
     editDetails() {
         this.state.profileEditable ? 
-        this.setState(() => {
-            return {
-                profileEditable: false,
-                showPasswordButton: true
-            };
-        }, () => {
+        this.setState(() => ({
+            profileEditable: false,
+            showPasswordButton: true
+        }), () => {
+            this.detailsItem.blurAll();
             this.saveData();
-        })
-        :
+        }) :
         this.setState({
             profileEditable: true,
             showPasswordButton: false,
@@ -161,12 +161,11 @@ export default class ProfileScreen extends Component {
     }
 
     editVehicles() {
+        this.vehicleScreen.blurAll();
         this.state.vehicleEditable ? 
-        this.setState(() => {
-            return {
-                vehicleEditable: false,
-            };
-        }, () => {
+        this.setState(() => ({
+            vehicleEditable: false,
+        }), () => {
             this.saveEditVehicleData();
         })
         :
@@ -216,7 +215,7 @@ export default class ProfileScreen extends Component {
     }
 
     renderAlert(error) {
-        setTimeout(()=> {
+        setTimeout(() => {
              Alert.alert(
                 'Error',
                 error,
@@ -232,11 +231,10 @@ export default class ProfileScreen extends Component {
                 { cancelable: false }
             );
         }, 500);
-       
     }
 
     renderDeleteAlert(error) {
-        setTimeout(()=>{
+        setTimeout(() => {
             Alert.alert(
                 'Success',
                 error.log,
@@ -252,7 +250,6 @@ export default class ProfileScreen extends Component {
                 { cancelable: false }
             );
         }, 500);
-        
     }
 
     deleteVehicle() {
@@ -369,6 +366,7 @@ export default class ProfileScreen extends Component {
                         logout={this.props.logout}
                         opacity={this.state.detailsOpacity}
                         flex={this.state.detailsOpacity ? 5 : 0}
+                        onRef={ref => this.detailsItem = ref}
                     />
                         {this.state.showVehicleComponent &&
                     <VehiclesScreen 
@@ -379,6 +377,7 @@ export default class ProfileScreen extends Component {
                         opacity={this.state.detailsOpacity ? 0 : 100}
                         flex={this.state.detailsOpacity ? 0 : 5}
                         authVehiclesData={this.props.authVehiclesData}
+                        onRef={ref => this.vehicleScreen = ref}
                     /> 
                         }
                 </View>
