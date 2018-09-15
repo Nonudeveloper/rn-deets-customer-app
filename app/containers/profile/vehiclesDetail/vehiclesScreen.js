@@ -107,7 +107,7 @@ export default class VehiclesScreen extends React.Component {
           >
             {info}
           </TouchableHighlight>
-          <TouchableHighlight underlayColor={'transparent'} style={{ width: 60 }} onPress={() => this.props.navigation.navigate('addVehicleScreen')} >
+          <TouchableHighlight underlayColor={'transparent'} style={{ width: 60 }} onPress={() => this.props.navigation.navigate('AddEditVehicle', { items: '' })} >
             <Text style={{ color: '#28a745', left: 7 }}>Add</Text>
           </TouchableHighlight>
         </View>

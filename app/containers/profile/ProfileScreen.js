@@ -10,9 +10,9 @@ import {
     Platform, 
     Animated,
     Easing,
-    TouchableHighlight,
-    ScrollView
+    TouchableHighlight
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../header/Header';
 import StyleConstants from '../../config/StyleConstants';
 import DetailsItem from './DetailsItem';
@@ -284,7 +284,13 @@ export default class ProfileScreen extends Component {
             flex: this._vehicleBarFlex
         };
         return (
-            <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
+            <KeyboardAwareScrollView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={styles.container}
+          automaticallyAdjustContentInsets={false}
+          bounces={false}
+          keyboardShouldPersistTaps='handled'
+      >
                 <Header 
                     headerText={'PROFILE'} 
                     navigation={this.props.navigation} 
@@ -395,7 +401,7 @@ export default class ProfileScreen extends Component {
                     
                     </View>
                 }
-            </ScrollView>
+            </KeyboardAwareScrollView>
         );
     }
 }
