@@ -12,6 +12,7 @@ import { POST_NEW_APPOINTMENT, SCHEDULE_NEW_APPOINTMENT, USER_CARD_DETAILS, ADD_
 import AppointmentHelper from '../../helpers/appointment/appointmentHelper';
 import { getCardDetails, setCardDetails } from '../../helpers/asyncStorage';
 import { NavigationActions } from 'react-navigation';
+import withToast from '../../hoc/withToast';
 
 
 function postNewAppointmentCall(payload) {
@@ -110,7 +111,11 @@ function* watchAddNewCardDetails() {
         const response = yield call(addNewCardDetailsCall, payload);
         existingCards.push(response);
         yield setCardDetails(existingCards);
-        yield put(NavigationActions.navigate({ routeName: payload.cardDetails.process === 'review' ? 'reviewScreen' : 'HomeComponent' }));
+        if (payload.cardDetails.process === 'home') {
+          withToast('Payment Detail Added Successfully!');
+        } else {
+          yield put(NavigationActions.navigate({ routeName: payload.cardDetails.process === 'review' ? 'reviewScreen' : 'HomeComponent' }));
+        }
         yield put(addNewCardDetailsSuccess(existingCards));
         console.log('SAGA FETCH SUCCESS: ', response);
       } catch (err) {

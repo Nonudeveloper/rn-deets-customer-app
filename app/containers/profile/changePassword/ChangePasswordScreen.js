@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
+import { initialize } from 'redux-form';
 import Header from '../../header/Header';
 import styles from './styles';
 import Button from '../../../deetscomponents/Button';
@@ -56,6 +57,12 @@ export default class ChangePasswordScreen extends React.Component {
               onPress: () => {
                 //dispath an action to make showAlert false
                 this.props.actions.hideAlert();
+                const initialFormData = {
+                  current_password: '',
+                  confirmPassword: '',
+                  new_password: ''
+              };
+              this.props.navigation.dispatch(initialize('changePassword', initialFormData));
               } 
             },
           ],
