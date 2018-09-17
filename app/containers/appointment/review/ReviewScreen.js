@@ -53,38 +53,42 @@ export default class ReviewScreen extends React.Component {
         [
           { text: 'Ok', onPress: () => console.log('Cancel Button Pressed'), style: 'cancel' },
         ],
-        );
+      );
     }
   }
 
   renderAlert(message) {
     const msg = message.error ? message.error : message.log;
     const heading = message.error ? 'Error' : 'Success';
-    setTimeout( () => {
+    setTimeout(() => {
       Alert.alert(
         heading,
         msg,
         [
-        { 
-          text: 'OK', 
-          onPress: () => {
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
-            this.props.navigation.navigate('HomeComponent');
-          } 
-        },
+          {
+            text: 'OK',
+            onPress: () => {
+              //dispath an action to make showAlert false
+              this.props.actions.hideAlert();
+              // this.props.navigation.navigate('HomeComponent');
+              if (heading === 'Success') {
+                this.props.fetchUpcomingAndPastAppointments();
+                this.props.navigation.navigate('PastAppointmentsList');
+              }
+            }
+          },
         ],
         { cancelable: false }
-        )
-    }, 300 );
+      )
+    }, 300);
   }
 
   render() {
     const { isFetching } = this.props;
     return (
       <View style={styles.container}>
-        <Header 
-          navigation={this.props.navigation} 
+        <Header
+          navigation={this.props.navigation}
           headerText={'Review'}
           showRightIcon
           rightText={'Confirm'}
@@ -96,9 +100,19 @@ export default class ReviewScreen extends React.Component {
         {/* //sp details component */}
         {/* //appointment details component */}
         {/* //credit card details component */}
-        <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} addressString={this.props.addressString} geoData={this.props.geoLocationData}/>
+        <ServiveProviderDetail selectedSchedule={this.props.selectedSchedule} endTime={this.props.selectedServices.totalEstimationTime} addressString={this.props.addressString} geoData={this.props.geoLocationData} />
         <ServiceDetail selectedServices={this.props.selectedServices} notes={this.props.notes !== undefined ? this.props.notes.values.notes : ''} />
-        <CardDetail navigation={this.props.navigation} userCardDetails={this.props.userCardDetails} getSelectedCard={this.getSelectedCard} selectedServices={this.props.selectedServices} />
+        <CardDetail
+          navigation={this.props.navigation}
+          userCardDetails={this.props.userCardDetails}
+          getSelectedCard={this.getSelectedCard}
+          selectedServices={this.props.selectedServices}
+          clientToken={this.props.clientToken}
+          actions={this.props.actions}
+          createBrainTreeClientToken={this.props.createBrainTreeClientToken}
+          userDeatail={this.props.userDeatail}
+          fetchingCardData={this.props.fetchingCardData}
+        />
       </View>
     );
   }

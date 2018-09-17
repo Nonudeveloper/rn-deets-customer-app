@@ -5,11 +5,19 @@ import { bindActionCreators } from 'redux';
 import ReviewScreen from './ReviewScreen';
 
 import * as appointmentActions from '../../../redux/appointment/actions';
+import { fetchUpcomingAndPastAppointments } from '../../../redux/appointmentList/actions';
+import { createBrainTreeClientToken } from '../../../redux/register/startActions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(appointmentActions, dispatch),
+        fetchUpcomingAndPastAppointments: () => {
+            dispatch(fetchUpcomingAndPastAppointments());
+        },
+        createBrainTreeClientToken: (customerId) => {
+            dispatch(createBrainTreeClientToken(customerId));
+        }
     };
 };
 
@@ -25,7 +33,10 @@ const mapStateToProps = (state) => {
         appointmentScheduleMsg: state.Appointment.appointmentScheduleMsg,
         reSchedule: state.appointmentLists.selectedAppointment,
         addressString: state.Geo.addressString,
-        geoLocationData: state.Geo.geoLocationData
+        geoLocationData: state.Geo.geoLocationData,
+        clientToken: state.Start.clientToken,
+        userDeatail: state.Profile.authUser,
+        fetchingCardData: state.Appointment.fetchingCardData,
     };
 };
 

@@ -23,7 +23,9 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         userCardDetails: state.Appointment.userCardDetails,
-        clientToken: state.Start.clientToken
+        clientToken: state.Start.clientToken,
+        userDeatail: state.Profile.authUser,
+        fetchingCardData: state.Appointment.fetchingCardData,
     };
 };
 
