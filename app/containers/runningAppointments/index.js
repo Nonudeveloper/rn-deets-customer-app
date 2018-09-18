@@ -15,7 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentRunningAppointments: state.appointmentLists.currentRunningAppointments
+        currentRunningAppointments: state.appointmentLists.currentRunningAppointments,
+        isFetching: state.appointmentLists.isFetching,
     };
 };
 

@@ -5,6 +5,7 @@ import TimeInterval from '../home/TimeInterval';
 import ItemList from './ItemList';
 import VehicleInfo from './VehicleInfo';
 import styles from './styles';
+import Loader from '../../deetscomponents/Loader';
 
 const visa = require('../../assets/icons/small_VISA.png');
 const smallPaypalLogo = require('../../assets/icons/papal.png');
@@ -27,6 +28,7 @@ export default class RunningAppointments extends React.Component {
 
 
     render() {
+        if (this.props.currentRunningAppointments.length === 0) return <Loader loading={this.props.isFetching} />;
         const item = this.props.currentRunningAppointments[0];
         const { timeInterval } = this.props.navigation.state.params;
         return (

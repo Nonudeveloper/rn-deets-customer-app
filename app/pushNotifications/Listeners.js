@@ -60,6 +60,7 @@ const handleNotification = (notif, navigation, props) => {
               props.dispatch(navigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
               break;
             case 2:
+              props.dispatch(fetchUpcomingAndPastAppointments());
               props.dispatch(navigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
               break;
             case 3:
@@ -99,6 +100,7 @@ export function registerAppListener(navigation, props) {
     }
 
     if (notif.opened_from_tray) {
+      console.log(notif);
       switch (parseInt(notif.type)) {
         case 1:
           setTimeout(() => {
