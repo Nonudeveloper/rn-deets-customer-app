@@ -73,7 +73,7 @@ export default class ReviewScreen extends React.Component {
               // this.props.navigation.navigate('HomeComponent');
               if (heading === 'Success') {
                 this.props.fetchUpcomingAndPastAppointments();
-                this.props.navigation.navigate('PastAppointmentsList');
+                this.props.navigation.navigate('HomeComponent');
               }
             }
           },

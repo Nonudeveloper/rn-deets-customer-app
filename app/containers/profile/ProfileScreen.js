@@ -181,7 +181,6 @@ export default class ProfileScreen extends Component {
     }
 
     saveEditVehicleData() {
-        
         const errors = this.props.form['editVehicleForm' + this.state.selectedPage].syncErrors;
         let errorCount = 0;
         for (const error in errors) {
