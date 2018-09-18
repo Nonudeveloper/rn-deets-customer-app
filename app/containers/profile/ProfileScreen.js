@@ -10,11 +10,10 @@ import {
     Platform,
     Animated,
     Easing,
-    TouchableHighlight
+    Keyboard
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../header/Header';
-import StyleConstants from '../../config/StyleConstants';
 import DetailsItem from './DetailsItem';
 import Button from '../../deetscomponents/Button';
 import VehiclesScreen from './vehiclesDetail/index';
@@ -35,7 +34,7 @@ export default class ProfileScreen extends Component {
         if (Platform.OS === 'android') {
             UIManager.setLayoutAnimationEnabledExperimental(true);
         }
-
+        
         this._detailBarFlex = new Animated.Value(2);
         this._vehicleBarFlex = new Animated.Value(1);
 
@@ -55,11 +54,6 @@ export default class ProfileScreen extends Component {
         };
         this.detailsItem = null;
         this.vehicleScreen = null;
-    }
-
-    componentWillMount() {
-
-
     }
 
     componentDidMount() {
@@ -162,14 +156,12 @@ export default class ProfileScreen extends Component {
     }
 
     editVehicles() {
-        this.vehicleScreen.blurAll();
         this.state.vehicleEditable ? 
         this.setState(() => ({
             vehicleEditable: false,
         }), () => {
             this.saveEditVehicleData();
-        })
-        :
+        }) :
         this.setState({
             vehicleEditable: true,
         });
@@ -189,6 +181,7 @@ export default class ProfileScreen extends Component {
     }
 
     saveEditVehicleData() {
+        
         const errors = this.props.form['editVehicleForm' + this.state.selectedPage].syncErrors;
         let errorCount = 0;
         for (const error in errors) {

@@ -114,7 +114,7 @@ class ProfileHelper {
                   { name: 'vehicle_make_id', data: String(authData.form.make_id) },
                   { name: 'vehicle_color_id', data: String(authData.form.color_id) },
                   { name: 'vehicle_year_id', data: String(authData.form.year) },
-                  { name: 'license', data: String(authData.form.radio_button_type === 0 ? authData.form.license : authData.form.vin) },
+                  { name: 'license', data: String(authData.form.license) },
                   { name: 'vehicle_make', data: String(authData.form.make_id) },
                   { name: 'vehicle_model', data: String(authData.form.model) },
                   { name: 'vehicle_color', data: authData.form.color },
@@ -128,9 +128,7 @@ class ProfileHelper {
                   { name: 'vehicle_id', data: String(authData.form.vehicle_id) },
                   vehicleImage,
                 ],
-            ).then((resp) => {
-                return JSON.parse(resp.data);
-            }).catch((err) => {
+            ).then((resp) => JSON.parse(resp.data)).catch((err) => {
                 console.warn(err);
             });
     };
