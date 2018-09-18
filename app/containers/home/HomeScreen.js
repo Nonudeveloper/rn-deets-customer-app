@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard, PermissionsAndroid } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
+import Geolocation from 'react-native-geolocation-service';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';
@@ -12,6 +13,7 @@ import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
 import Loader from '../../deetscomponents/Loader';
 import TimeInterval from './TimeInterval';
+
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
@@ -148,19 +150,58 @@ export default class HomeScreen extends Component {
     }
   }
 
-  getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-        const { longitude, latitude } = position.coords;
-        console.log('success', longitude, latitude);
-        this.flyTo([longitude, latitude]);
-        this.setState({
-          currentLocationCoordinates: [longitude, latitude],
-        });
-    }, (error) => {
-        alert(JSON.stringify(error));
-    }, {
-        timeout: 2000,
-    });
+  getCurrentLocation = async () => {
+    let hasLocationPermission;
+    try {
+      hasLocationPermission = await PermissionsAndroid.check('ACCESS_FINE_LOCATION');
+      hasLocationPermission && (async () => {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            'title': 'Deets App Camera Permission',
+            'message': 'Deets App needs access to your Location'
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          hasLocationPermission = true;
+        } else {
+          hasLocationPermission = false;
+        }
+      })();
+    } catch (err) {
+      console.warn(err);
+    }
+    // Instead of navigator.geolocation, just use Geolocation.
+    if (hasLocationPermission) {
+        Geolocation.getCurrentPosition(
+            (position) => {
+                console.log(position);
+                const { longitude, latitude } = position.coords;
+                console.log('success', longitude, latitude);
+                this.flyTo([longitude, latitude]);
+                this.setState({
+                  currentLocationCoordinates: [longitude, latitude],
+                });
+            },
+            (error) => {
+                // See error code charts below.
+                console.log(error.code, error.message);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //     const { longitude, latitude } = position.coords;
+    //     console.log('success', longitude, latitude);
+    //     this.flyTo([longitude, latitude]);
+    //     this.setState({
+    //       currentLocationCoordinates: [longitude, latitude],
+    //     });
+    // }, (error) => {
+    //     alert(JSON.stringify(error));
+    // }, {
+    //     timeout: 2000,
+    // });
   }
 
   async componentWillReceiveProps(nextProps) {
