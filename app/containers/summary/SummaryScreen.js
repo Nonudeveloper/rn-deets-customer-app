@@ -10,8 +10,22 @@ export default class SummaryScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showSummaryReview: false
+            showSummaryReview: false,
+            isFetching: false
         };
+    }
+
+    componentDidMount() {
+        if (this.props.authUserWholeData.user_pending_tip_notifications.length === 0) {
+            this.props.loginThroughAccessToken(this.props.deviceToken);
+            this.setState({ isFetching: true });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.authUserWholeData.user_pending_tip_notifications.length !== 0) {
+            this.setState({ isFetching: false });
+        }
     }
 
     renderAlert(message) {
@@ -42,7 +56,7 @@ export default class SummaryScreen extends Component {
             <View style={styles.container}>
                 <Header headerText={'summary'} navigation={this.props.navigation} />
                 {this.props.tipMessage !== '' && this.renderAlert(this.props.tipMessage)}
-                <Loader loading={this.props.isFatching} />
+                <Loader loading={this.props.isFetching || this.state.isFetching} />
                 <View style={styles.container}>
                     { !this.state.showSummaryReview ?
                         <View style={styles.defaultWrapper}>

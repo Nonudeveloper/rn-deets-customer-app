@@ -103,6 +103,7 @@ export default class RunningAppointments extends React.Component {
     }
 
     render() {
+        if (this.props.currentRunningAppointments.length === 0) return <Loader loading={this.props.isFetching} />;
         const items = this.props.currentRunningAppointments[0];
         return (
             <View style={styles.container}>
