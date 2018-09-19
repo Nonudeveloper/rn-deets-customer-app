@@ -14,6 +14,9 @@ import profileReducer from '../redux/profile/reducer';
 import appointmentLists from '../redux/appointmentList/reducer';
 import promoCodeReducer from '../redux/promotionCode/reducer';
 import recentLocationsReducer from '../redux/home/recentLocations/reducer';
+import messages from '../redux/chat/messages';
+import user from '../redux/chat/user';
+import users from '../redux/chat/users';
 
 import AppNavigation from '../navigation/AppNavigation';
 
@@ -38,7 +41,12 @@ const rootReducer = combineReducers({
   Profile: profileReducer,
   appointmentLists,
   PromotionCode: promoCodeReducer,
-  RecentLocations: recentLocationsReducer
+  RecentLocations: recentLocationsReducer,
+  messages,
+  user,
+  users
 });
 
 export default rootReducer;
+export * from '../redux/chat/users';
+export * from '../redux/chat/messages';

@@ -8,7 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-native';
 import withConnectivity from './app/hoc/withConnectivity';
 
-const store = configureStore();
+export const store = configureStore();
 
 class App extends React.Component {
     constructor() {
