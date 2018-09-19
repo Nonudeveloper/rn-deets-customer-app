@@ -27,14 +27,15 @@ function* watchAuthVehicleFromAsyncStorage() {
         const payload = yield take(ADD_UPDATE_AUTH_VEHICLE);
         try {
           const response = yield call(addUpdateVehicleCall, payload);
+          console.log('Vehicle addupdate response:', response);
           yield saveAuthVehiclesData(response);
           yield put(addUpdateVehicleSuccess(response));
           yield put(getAuthUserVehicleDetailsSuccess(response));
           yield put(NavigationActions.back());
           withToast('Vehicle Added successfully!');
-          console.log('SAGA RESET PASSWORD Mail SENT: ', response);
+          console.log('SAGA ADD EDIT VEHICLE SENT: ', response);
         } catch (err) {
-          console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
+          console.log('SAGA ADD EDIT VEHICLE ERROR: ', err);
           yield put(addUpdateVehicleFailure(err));
         }
       }

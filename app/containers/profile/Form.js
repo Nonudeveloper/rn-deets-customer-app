@@ -26,7 +26,7 @@ class FormArea extends React.Component {
 
     componentDidMount() {
         this.props.onRef(this);
-        
+        console.log(this.props);
         if (Object.keys(this.props.authUser).length !== 0) {
             const user = this.props.authUser;
             const initialFormData = {
@@ -53,34 +53,34 @@ class FormArea extends React.Component {
 
     emailClear(value) {
         if (value) {
-             this.setState({ clearemailfield: true });
+            this.setState({ clearemailfield: true });
         } else {
             this.setState({ clearemailfield: false });
         }
     }
 
     blurAll = () => {
-        this.fname.getRenderedComponent().refs.fname.blur();
-        this.lname.getRenderedComponent().refs.lname.blur();
-        this.email.getRenderedComponent().refs.email.blur();
-        this.mobile.getRenderedComponent().refs.mobile.blur();
+        if (this.fname.getRenderedComponent().refs.fname) this.fname.getRenderedComponent().refs.fname.blur();
+        if (this.lname.getRenderedComponent().refs.lname) this.lname.getRenderedComponent().refs.lname.blur();
+        if (this.email.getRenderedComponent().refs.email) this.email.getRenderedComponent().refs.email.blur();
+        if (this.mobile.getRenderedComponent().refs.mobile) this.mobile.getRenderedComponent().refs.mobile.blur();
     }
 
     render() {
         const normalizePhone = value => {
-                if (!value) {
-                    this.setState({ clearmobilefield: false });
-                    return value;
-                }
-                this.setState({ clearmobilefield: true });
-                const onlyNums = value.replace(/[^\d]/g, '');
-                if (onlyNums.length <= 3) {
-                    return `(${onlyNums.slice(0, 3)}`;
-                }
-                if (onlyNums.length <= 6) {
-                    return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
-                }
-                return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
+            if (!value) {
+                this.setState({ clearmobilefield: false });
+                return value;
+            }
+            this.setState({ clearmobilefield: true });
+            const onlyNums = value.replace(/[^\d]/g, '');
+            if (onlyNums.length <= 3) {
+                return `(${onlyNums.slice(0, 3)}`;
+            }
+            if (onlyNums.length <= 6) {
+                return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3)}`;
+            }
+            return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)} ${onlyNums.slice(6, 10)}`;
         };  
         const phoneParser = n => n ? n.replace(/[^\d]/g, '') : '';
         

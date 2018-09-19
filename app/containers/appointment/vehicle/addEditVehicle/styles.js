@@ -20,7 +20,7 @@ export default StyleSheet.create({
     proImageStyle: {
         width: 65,
         height: 65,
-        borderRadius: 100
+        borderRadius: 65/2
     },
     container: {
         flex: 1,
@@ -61,7 +61,7 @@ export default StyleSheet.create({
         color: '#fff'
     },
     licenseStyle: {
-        height: 45,
+        height: 50,
         backgroundColor: '#fff',
         justifyContent: 'center',
         paddingLeft: 23,
@@ -93,7 +93,7 @@ export default StyleSheet.create({
     licenseInnerContainerStyle: {
         flex: 1,
         flexDirection: 'row',
-        paddingTop: 10
+        paddingTop: 15
     },
     radio1ContainerStyle: {
         flex: 4,

@@ -51,42 +51,44 @@ class ReduxNavigation extends React.Component {
       PushNotificationIOS.addEventListener("notification", function(notification) {
           console.log('PUSH data: ', notification);
           Instabug.logInfo(notification);
-          if (notification.message) {
-          setTimeout(() => {
-            Alert.alert(
-              'Deets',
-              notification.message,
-              [
-                { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
-                { text: 'View', onPress: () => {
-                  switch (parseInt(notification.type)) {
-                    case 1:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-                      break;
-                    case 2:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
-                      break;
-                    case 3:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
-                      break;
-                    case 4:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
-                      break;
-                    case 5:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-                      break;
-                    case 6:
-                     $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
-                      break;
-                    default:
-                      break;
-                  }
-                } },
-              ],
-              { cancelable: false }
-            );
-          }, 500);
-        }
+          Instabug.logInfo(JSON.stringify(notification));
+          alert(notification);
+        //   if (notification.message) {
+        //   setTimeout(() => {
+        //     Alert.alert(
+        //       'Deets',
+        //       notification.message,
+        //       [
+        //         { text: 'Ok', onPress: () => console.log('ok pressed'), style: 'cancel' },
+        //         { text: 'View', onPress: () => {
+        //           switch (parseInt(notification.type)) {
+        //             case 1:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+        //               break;
+        //             case 2:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'RunningAppointments', params: { timeInterval: 0 } }));
+        //               break;
+        //             case 3:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SummaryScreen' }));
+        //               break;
+        //             case 4:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'SuggestedServices' }));
+        //               break;
+        //             case 5:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+        //               break;
+        //             case 6:
+        //              $this.props.dispatch(ReactNavigation.NavigationActions.navigate({ routeName: 'PastAppointmentsList' }));
+        //               break;
+        //             default:
+        //               break;
+        //           }
+        //         } },
+        //       ],
+        //       { cancelable: false }
+        //     );
+        //   }, 500);
+        // }
       });
 
       isSignedIn()
@@ -131,7 +133,6 @@ class ReduxNavigation extends React.Component {
     }
 
     render() {
-      console.log(this.props);
       const { dispatch, nav } = this.props;    
       const navigation = ReactNavigation.addNavigationHelpers({
         dispatch,

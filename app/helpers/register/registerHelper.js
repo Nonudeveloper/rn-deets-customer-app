@@ -2,6 +2,7 @@ import SuperFetch from '../superFetch';
 import { dataURLtoFile } from '../utility';
 import { apiConfig } from '../../config';
 import RNFetchBlob from 'rn-fetch-blob';
+import { Platform }  from 'react-native';
 
 class RegisterHelper {
   
@@ -13,12 +14,13 @@ class RegisterHelper {
     if (Object.keys(userInfo.userImage).length > 0 && userInfo.form1.flag === 3) {
         // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
         // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-        
+        const cleanFilePath = userInfo.userImage.uri.replace('file://', '');
+
         userImage = {
             name: 'user_image',
             filename: 'myPhoto.jpg',
-            type: userInfo.userImage.type,
-            data: RNFetchBlob.wrap(userInfo.userImage.uri),
+            type: userInfo.userImage.type || 'PNG',
+            data: RNFetchBlob.wrap(Platform.OS === 'ios' ? cleanFilePath : userInfo.userImage.uri),
         };
     } else {
       userImage = {
@@ -30,12 +32,13 @@ class RegisterHelper {
     if (Object.keys(userInfo.vehicleImage).length > 0 && userInfo.form1.flag === 3) {
       // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
       // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-      
+      const cleanFilePath = userInfo.vehicleImage.uri.replace('file://', '');
+
       vehicleImage = {
           name: 'vehicle_image',
           filename: 'myPhoto.jpg',
-          type: userInfo.vehicleImage.type,
-          data: RNFetchBlob.wrap(userInfo.vehicleImage.uri),
+          type: userInfo.vehicleImage.type || 'PNG',
+          data: RNFetchBlob.wrap(Platform.OS === 'ios' ? cleanFilePath : userInfo.vehicleImage.uri),
       };
     } else {
         vehicleImage = {
