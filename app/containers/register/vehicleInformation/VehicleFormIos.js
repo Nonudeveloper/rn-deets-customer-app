@@ -288,7 +288,7 @@ class VehicleFormIos extends React.Component {
           </Text>
         </View>
 
-        <View style={[inputStyle]}>
+        <View style={[inputStyle, { borderBottomWidth: 0 }]}>
           <Text style={{
               color: 'white',
               fontSize: 16,

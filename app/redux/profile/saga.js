@@ -50,6 +50,7 @@ function editUserProfilrCall(payload) {
   return new Promise((resolve, reject) => {
     ProfileHelper.editUserProfile(payload)
       .then(res => {
+        console.log(res);
         if (res.data) {
           resolve(res.data);
         } else {
@@ -177,10 +178,10 @@ function* watchAddNewVehicleRequest() {
         if (payload.formType === 'addVehicle') {
           yield put(NavigationActions.back());
         }
-        console.log('SAGA RESET PASSWORD Mail SENT: ', response);
+        console.log('SAGA AddNewVehicleRequest SENT: ', response);
         withToast('Vehicle Updated successfully!');
       } catch (err) {
-        console.log('SAGA RESET PASSWORD Mail ERROR: ', err);
+        console.log('SAGA AddNewVehicleRequest ERROR: ', err);
         yield put(fetchAddNewVehicleFailure(err));
       }
     }
@@ -196,7 +197,7 @@ function addNewVehicleCall(payload) {
          const error = data.error;
          reject({ error: error });
       } 
-    });
+    }).catch((error) => reject(error));
   });
 }
 

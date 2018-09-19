@@ -3,6 +3,7 @@ import { dataURLtoFile, USER } from '../utility';
 import { getItem } from '../asyncStorage';
 import { apiConfig } from '../../config';
 import RNFetchBlob from 'rn-fetch-blob';
+import { Platform } from 'react-native';
 
 class AppointmetHelper {
 
@@ -16,12 +17,13 @@ class AppointmetHelper {
         if (Object.keys(authData.vehicleImage).length > 0) {
             // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
             // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-            
+            const cleanFilePath = authData.vehicleImage.uri.replace('file://', '');
+
             vehicleImage = {
                 name: 'vehicle_image',
                 filename: 'myPhoto.jpg',
-                type: authData.vehicleImage.type,
-                data: RNFetchBlob.wrap(authData.vehicleImage.uri),
+                type: authData.vehicleImage.type || 'PNG',
+                data: RNFetchBlob.wrap( Platform.OS === 'ios' ? cleanFilePath : authData.vehicleImage.uri ),
             };
         } else {
             vehicleImage = {
@@ -29,6 +31,8 @@ class AppointmetHelper {
                 data: null,
             };
         }
+
+            console.log(vehicleImage);
             return await RNFetchBlob.fetch(
                 'POST',
                 `${apiConfig.url}customer/add_or_edit_user_vehicle_information`,
@@ -58,6 +62,7 @@ class AppointmetHelper {
                   vehicleImage,
                 ],
             ).then((resp) => {
+                console.log(resp);
                 return JSON.parse(resp.data);
             }).catch((err) => {
                 console.warn(err);

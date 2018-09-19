@@ -59,20 +59,23 @@ export default class TestComponent extends React.Component {
   }
 
   renderAlert(error) {
-    Alert.alert(
-      'Error',
-      error,
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            //dispath an action to make showAlert false
-            this.props.actions.hideAlert();
-          }
-        },
-      ],
-      { cancelable: false }
-    );
+    console.log(error);
+    setTimeout(() => {
+      Alert.alert(
+        'Info',
+        error,
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              //dispath an action to make showAlert false
+              this.props.actions.hideAlert();
+            }
+          },
+        ],
+        { cancelable: false }
+      );
+    }, 500);
   }
 
   render() {
@@ -122,19 +125,18 @@ export default class TestComponent extends React.Component {
 
               ) : (
 
-                  // <VehicleFormIos
-                  //   style={styles.t2}
-                  //   vehicleData={this.props.vehicleData}
-                  //   fetchMakeModel={this.props.fetchMakeModel}
-                  //   isFetching={this.props.isFetching}
-                  //   makeModel={this.props.makeModel}
-                  //   models={this.props.models}
-                  //   updateModels={this.props.updateModels}
-                  //   onRef={ref => (this.child = ref)}
-                  //   authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
-                  //   authUser={this.props.authUser}
-                  // />
-                  null
+                  <VehicleFormIos
+                    style={styles.t2}
+                    vehicleData={this.props.vehicleData}
+                    fetchMakeModel={this.props.fetchMakeModel}
+                    isFetching={this.props.isFetching}
+                    makeModel={this.props.makeModel}
+                    models={this.props.models}
+                    updateModels={this.props.updateModels}
+                    onRef={ref => (this.child = ref)}
+                    authVehicleData={this.props.navigation.state.params.items !== '' ? this.props.navigation.state.params.items : null}
+                    authUser={this.props.authUser}
+                  />
                 )
               }
             </View>

@@ -82,7 +82,7 @@ export default class VehiclesScreen extends React.Component {
   render() {
     const totalPages = this.props.authVehiclesData.length;
     return (
-      <View style={[{ opacity: this.props.opacity, flex: this.props.flex }]}>
+      <View style={[{ display: this.props.opacity === 0 ? 'none': 'flex', flex: this.props.flex }]}>
         <View style={{ marginHorizontal: 100 }}>
           <StepIndicator
             customStyles={firstIndicatorStyles}

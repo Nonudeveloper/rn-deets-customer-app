@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: (height / 2) - 86,
       left: (width / 2) - 50,
-      width: 95,
+      width: 100,
       height: 34,
       alignItems: 'center',
       justifyContent: 'center',

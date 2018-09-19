@@ -23,9 +23,58 @@ class VehicleFormIos extends React.Component {
           };
     }
 
+    componentWillMount() {
+        console.log(this.props);
+        if (this.props.authVehicleData !== null) {
+            const authVehicleData = this.props.authVehicleData;
+            const vehicleType = authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment;
+            const initialFormData = {
+                access_token: this.props.authUser.access_token,
+                year: authVehicleData.vehicle_year,
+                color: authVehicleData.vehicle_color,
+                flag: 2,
+                color_id: authVehicleData.vehicle_color_id,
+                model_id: authVehicleData.vehicle_model_id,
+                model: authVehicleData.vehicle_model,
+                type: vehicleType,
+                license: parseInt(authVehicleData.license_type) === 2 ? authVehicleData.license : '',
+                vin: parseInt(authVehicleData.license_type) === 1 ? authVehicleData.license : '',
+                notes: authVehicleData.notes,
+                make_id: authVehicleData.vehicle_make_id,
+                make: authVehicleData.vehicle_make,
+                vehicle_type_segment_id: authVehicleData.vehicle_type_segment_id,
+                vehicle_type: authVehicleData.vehicle_type,
+                vehicle_id: authVehicleData.vehicle_id,
+                radio_button_type: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0
+                
+        };
+            this._fetchMakeModel(initialFormData.year);
+
+            this.setState({
+                year: parseInt(authVehicleData.vehicle_year_id),
+                color: authVehicleData.vehicle_color,
+                make: authVehicleData.vehicle_make,
+                model: authVehicleData.vehicle_model,
+                makeName: authVehicleData.vehicle_make,
+                value: parseInt(authVehicleData.license_type) !== 2 ? 1 : 0,
+                type: authVehicleData.vehicle_type_name + ', ' + authVehicleData.vehicle_type_segment 
+            });
+            this.props.dispatch(initialize('addEditVehicleForm', initialFormData));
+        } else {
+            const initialFormData = {
+                flag: 1,
+                // access_token: this.props.accessToken
+            };
+            this.props.dispatch(initialize('addEditVehicleForm', initialFormData));
+            this.props.dispatch(change('addEditVehicleForm', 'access_token', this.props.authUser.access_token));
+            this.props.dispatch(change('addEditVehicleForm', 'radio_button_type', 0));
+        }
+    }
+
     componentDidMount() {
         this.props.onRef(this);
     }
+
     componentWillUnmount() {
         this.props.onRef(undefined);
     }
@@ -119,10 +168,6 @@ class VehicleFormIos extends React.Component {
         }, () => {
             this.props.dispatch(change('addEditVehicleForm', 'radio_button_type', value));     
         });
-    }
-
-    componentDidUpdate() {
-        console.log(this.state);
     }
 
     _fetchYear() {
@@ -238,9 +283,6 @@ class VehicleFormIos extends React.Component {
         ModelPicker.show();
     }
 
-    componentWillMount() {
-        this.props.dispatch(change('addEditVehicleForm', 'flag', 1));
-    }
     
     render() {
         const { pickerStyle, inputStyle } = styles;
@@ -267,7 +309,7 @@ class VehicleFormIos extends React.Component {
                 </View>
             </View>
             <View>
-                <View style={[inputStyle]}>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
                     <Text
                         style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {
@@ -277,7 +319,7 @@ class VehicleFormIos extends React.Component {
                     </Text>
                 </View>
 
-                <View style={[inputStyle]}>
+                <View style={[inputStyle, { borderBottomWidth: 2 }]}>
                     <Text
                         style={{color:'white', fontSize: 16, paddingTop:15, paddingBottom: 15}}
                         onPress={() => {

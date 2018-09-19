@@ -44,11 +44,11 @@ export default class HomeScreen extends Component {
       loading: false,
       inputVal: '',
       shouldUpdateAddressString: true,
-      zoomLevel: 9,
+      zoomLevel: 12,
       polygonDrawnOnce: false,
       locationFromRecentScreen: {},
       calloutStyles: {
-        calloutButtonColor: '#66cc00',
+        calloutButtonColor: '#76d418',
         borderColor: '#bfff80'
       },
       isCenterInsideThePolygonArea: false,
@@ -229,7 +229,7 @@ export default class HomeScreen extends Component {
       if (within(point, this.state.polygonData).features.length) {
         this.setState({ 
           calloutStyles: {
-            calloutButtonColor: '#66cc00',
+            calloutButtonColor: '#76d418',
             borderColor: '#bfff80'
           },
           isCenterInsideThePolygonArea: true,
@@ -390,7 +390,7 @@ export default class HomeScreen extends Component {
               }]}
             >
               <TouchableOpacity onPress={this.setLocation}>
-                <Text style={{ color: '#fff', fontSize: 12 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text>
+                <Text style={{ color: '#fff', fontSize: 13 }}>{this.state.loading === false ? 'Set Location' : 'Loading...'}</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.customMarker}>

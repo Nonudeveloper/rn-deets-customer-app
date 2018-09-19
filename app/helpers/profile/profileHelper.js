@@ -3,17 +3,28 @@ import { dataURLtoFile, USER } from '../utility';
 import { getItem } from '../asyncStorage';
 import { apiConfig } from '../../config';
 import RNFetchBlob from 'rn-fetch-blob';
+import { Platform } from 'react-native';
 
 class ProfileHelper {
     editUserProfile = async userInfo => {   
         let userImage;
+        console.log(userInfo);
         if (userInfo.newImage !== '') {
+            const cleanFilePath = userInfo.newImage.uri.replace('file://', '');
             userImage = {
                 name: 'user_image',
                 filename: 'myPhoto.jpg',
-                type: userInfo.newImage.type,
-                data: RNFetchBlob.wrap(userInfo.newImage.uri),
+                type: userInfo.newImage.type || 'PNG',
+                data: RNFetchBlob.wrap(Platform.OS === 'ios' ? cleanFilePath : userInfo.newImage.uri),
             };
+            const payload = [
+                    { name: 'first_name', data: userInfo.userProfileDetails.fname },
+                    { name: 'last_name', data: userInfo.userProfileDetails.lname },
+                    { name: 'mobile', data: userInfo.userProfileDetails.mobile },
+                    { name: 'access_token', data: userInfo.userProfileDetails.access_token },
+                    userImage,
+            ];
+            console.log(payload);
             return await RNFetchBlob.fetch(
                 'POST',
                 `${apiConfig.url}customer/edit_user_profile`,
@@ -21,13 +32,7 @@ class ProfileHelper {
                   Accept: 'application/json',
                   'Content-Type': 'multipart/form-data',
                 },
-                [
-                    { name: 'first_name', data: userInfo.userProfileDetails.fname },
-                    { name: 'last_name', data: userInfo.userProfileDetails.lname },
-                    { name: 'mobile', data: userInfo.userProfileDetails.mobile },
-                    { name: 'access_token', data: userInfo.userProfileDetails.access_token },
-                    userImage,
-                ],
+                payload
             ).then((resp) => {
                 console.log(resp);
                 return JSON.parse(resp.data);
@@ -87,12 +92,12 @@ class ProfileHelper {
         if (Object.keys(authData.vehicleImage).length > 0) {
             // const userBase64String = `data:image/jpeg;base64,${authData.vehicleImage.data}`;
             // const userVehicleImageFile = dataURLtoFile(userBase64String, 'my_photo.jpg');
-            
+            const cleanFilePath = authData.vehicleImage.uri.replace('file://', '');
             vehicleImage = {
                 name: 'vehicle_image',
                 filename: 'myPhoto.jpg',
-                type: authData.vehicleImage.type,
-                data: RNFetchBlob.wrap(authData.vehicleImage.uri),
+                type: authData.vehicleImage.type || 'PNG',
+                data: RNFetchBlob.wrap(Platform.OS === 'ios' ? cleanFilePath : authData.vehicleImage.uri),
             };
         } else {
             vehicleImage = {
@@ -100,6 +105,7 @@ class ProfileHelper {
                 data: null,
             };
         }
+        console.log(vehicleImage);
             return await RNFetchBlob.fetch(
                 'POST',
                 `${apiConfig.url}customer/add_or_edit_user_vehicle_information`,
