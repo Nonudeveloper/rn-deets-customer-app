@@ -70,7 +70,14 @@ export default class ReviewScreen extends React.Component {
             onPress: () => {
               this.props.actions.hideAlert();
               if (heading === 'Success') {
-                this.props.navigation.navigate('HomeComponent');
+                const locationData = {
+                  location: {
+                    service_location_longitude: this.props.geoLocationData[0].coordinates[0],
+                    service_location_latitude: this.props.geoLocationData[0].coordinates[1],
+                    service_location_string: this.props.addressString
+                  }
+                }
+                this.props.navigation.navigate('HomeComponent', locationData);
               }
             }
           },
