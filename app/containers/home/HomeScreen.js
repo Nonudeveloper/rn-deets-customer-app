@@ -150,62 +150,44 @@ export default class HomeScreen extends Component {
     }
   }
 
+  getCurrentPosition = () => {
+      Geolocation.getCurrentPosition(
+          (position) => {
+              const { longitude, latitude } = position.coords;
+              this.flyTo([longitude, latitude]);
+              this.setState({
+                currentLocationCoordinates: [longitude, latitude],
+              });
+          },
+          (error) => {
+              console.log(error.code, error.message);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      );
+  };
+
   getCurrentLocation = async () => {
     let hasLocationPermission;
     try {
-      if (Platform.OS === "android") {
-      hasLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-      !hasLocationPermission && (async () => {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            'title': 'Deets App Location Permission',
-            'message': 'Deets App needs access to your Location'
-          }
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          hasLocationPermission = true;
-        } else {
-          hasLocationPermission = false;
-        }
-      })();
-    }
+      if (Platform.OS === 'android') {
+        hasLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+        console.log(hasLocationPermission);
+        if (!hasLocationPermission) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              'title': 'Deets App Location Permission',
+              'message': 'Deets App needs access to your Location'
+            }
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            this.getCurrentPosition();
+          } 
+        } else this.getCurrentPosition();
+      } 
     } catch (err) {
       console.warn(err);
     }
-    // Instead of navigator.geolocation, just use Geolocation.
-    setTimeout(() => {
-    if (hasLocationPermission) {
-        Geolocation.getCurrentPosition(
-            (position) => {
-                console.log(position);
-                const { longitude, latitude } = position.coords;
-                console.log('success', longitude, latitude);
-                this.flyTo([longitude, latitude]);
-                this.setState({
-                  currentLocationCoordinates: [longitude, latitude],
-                });
-            },
-            (error) => {
-                // See error code charts below.
-                console.log(error.code, error.message);
-            },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        );
-    }
-  }, 300);
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //     const { longitude, latitude } = position.coords;
-    //     console.log('success', longitude, latitude);
-    //     this.flyTo([longitude, latitude]);
-    //     this.setState({
-    //       currentLocationCoordinates: [longitude, latitude],
-    //     });
-    // }, (error) => {
-    //     alert(JSON.stringify(error));
-    // }, {
-    //     timeout: 2000,
-    // });
   }
 
   async componentWillReceiveProps(nextProps) {
