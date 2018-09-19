@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard, PermissionsAndroid } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
 import Geolocation from 'react-native-geolocation-service';
@@ -153,12 +153,13 @@ export default class HomeScreen extends Component {
   getCurrentLocation = async () => {
     let hasLocationPermission;
     try {
-      hasLocationPermission = await PermissionsAndroid.check('ACCESS_FINE_LOCATION');
-      hasLocationPermission && (async () => {
+      if (Platform.OS === "android") {
+      hasLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+      !hasLocationPermission && (async () => {
         const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
-            'title': 'Deets App Camera Permission',
+            'title': 'Deets App Location Permission',
             'message': 'Deets App needs access to your Location'
           }
         );
@@ -168,10 +169,12 @@ export default class HomeScreen extends Component {
           hasLocationPermission = false;
         }
       })();
+    }
     } catch (err) {
       console.warn(err);
     }
     // Instead of navigator.geolocation, just use Geolocation.
+    setTimeout(() => {
     if (hasLocationPermission) {
         Geolocation.getCurrentPosition(
             (position) => {
@@ -190,6 +193,7 @@ export default class HomeScreen extends Component {
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
     }
+  }, 300);
     // navigator.geolocation.getCurrentPosition((position) => {
     //     const { longitude, latitude } = position.coords;
     //     console.log('success', longitude, latitude);
@@ -354,6 +358,7 @@ export default class HomeScreen extends Component {
 
 
   render() {
+    console.log(this.state)
     const { isLoading } = this.props;
     return (
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>

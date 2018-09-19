@@ -8,7 +8,7 @@ import HomeScreen from './HomeScreen';
 import * as homeActions from '../../redux/home/homeActions';
 import { getFullAddressReverseGeo, updateLocationData } from '../../redux/geoCoding/geoActions';
 import { fetchUpcomingAndPastAppointments } from '../../redux/appointmentList/actions';
-import withConnectivity from '../../hoc/withConnectivity';
+// import withConnectivity from '../../hoc/withConnectivity';
 
 const mapDispatchToProps = (dispatch) => ({
         actions: bindActionCreators(homeActions, dispatch),
@@ -42,7 +42,9 @@ const mapStateToProps = (state) => ({
 
 // export default connect(mapStateToProps, mapDispatchToProps)(withConnectivity(HomeScreen));
 
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withConnectivity
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+
+// export default compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     withConnectivity
+// )(HomeScreen);
