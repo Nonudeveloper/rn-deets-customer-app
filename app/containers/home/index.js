@@ -1,12 +1,14 @@
 // @flow
 // Container for Login Component
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
+import { bindActionCreators, compose } from 'redux';
 import HomeScreen from './HomeScreen';
 
 import * as homeActions from '../../redux/home/homeActions';
 import { getFullAddressReverseGeo, updateLocationData } from '../../redux/geoCoding/geoActions';
 import { fetchUpcomingAndPastAppointments } from '../../redux/appointmentList/actions';
+// import withConnectivity from '../../hoc/withConnectivity';
 
 const mapDispatchToProps = (dispatch) => ({
         actions: bindActionCreators(homeActions, dispatch),
@@ -38,5 +40,11 @@ const mapStateToProps = (state) => ({
         currentRunningAppointments: state.Auth.authUserWholeData.current_running_appointments
     });
 
+// export default connect(mapStateToProps, mapDispatchToProps)(withConnectivity(HomeScreen));
+
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
+// export default compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     withConnectivity
+// )(HomeScreen);

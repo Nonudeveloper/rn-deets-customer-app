@@ -22,6 +22,7 @@ import android.content.Intent;
 import com.mapbox.rctmgl.RCTMGLPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +56,8 @@ public class MainApplication extends Application implements ReactApplication {
 							.build(),
             new BraintreePackage(),
             new RCTMGLPackage(),
-            new SplashScreenReactPackage()
+            new SplashScreenReactPackage(),
+            new RNFusedLocationPackage()
       );
     }
 

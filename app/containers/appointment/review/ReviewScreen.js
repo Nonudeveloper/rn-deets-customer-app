@@ -68,18 +68,22 @@ export default class ReviewScreen extends React.Component {
           {
             text: 'OK',
             onPress: () => {
-              //dispath an action to make showAlert false
               this.props.actions.hideAlert();
-              // this.props.navigation.navigate('HomeComponent');
               if (heading === 'Success') {
-                this.props.fetchUpcomingAndPastAppointments();
-                this.props.navigation.navigate('HomeComponent');
+                const locationData = {
+                  location: {
+                    service_location_longitude: this.props.geoLocationData[0].coordinates[0],
+                    service_location_latitude: this.props.geoLocationData[0].coordinates[1],
+                    service_location_string: this.props.addressString
+                  }
+                }
+                this.props.navigation.navigate('HomeComponent', locationData);
               }
             }
           },
         ],
         { cancelable: false }
-      )
+      );
     }, 300);
   }
 

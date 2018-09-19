@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert, ScrollView, Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import inside from 'turf-inside';
 import within from 'turf-within';
+import Geolocation from 'react-native-geolocation-service';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import styles from './styles';
 import GeoCodeSearch from '../../components/geoSearch/index';
@@ -12,6 +13,7 @@ import customMarkerRed from '../../assets/icons/icon_location_pin_red.png';
 import Header from '../header/Header';
 import Loader from '../../deetscomponents/Loader';
 import TimeInterval from './TimeInterval';
+
 
 //difine constants
 // const mapMarkerIcon = (<Icon name="map-marker" size={50} color="purple" />);
@@ -148,17 +150,44 @@ export default class HomeScreen extends Component {
     }
   }
 
-  getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-        const { longitude, latitude } = position.coords;
-        console.log('success', longitude, latitude);
-        this.flyTo([longitude, latitude]);
-        this.setState({
-          currentLocationCoordinates: [longitude, latitude],
-        });
-    }, (error) => {
-        console.log(JSON.stringify(error));
-    });
+  getCurrentPosition = () => {
+      Geolocation.getCurrentPosition(
+          (position) => {
+              const { longitude, latitude } = position.coords;
+              this.flyTo([longitude, latitude]);
+              this.setState({
+                currentLocationCoordinates: [longitude, latitude],
+              });
+          },
+          (error) => {
+              console.log(error.code, error.message);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      );
+  };
+
+  getCurrentLocation = async () => {
+    let hasLocationPermission;
+    try {
+      if (Platform.OS === 'android') {
+        hasLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+        console.log(hasLocationPermission);
+        if (!hasLocationPermission) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              'title': 'Deets App Location Permission',
+              'message': 'Deets App needs access to your Location'
+            }
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            this.getCurrentPosition();
+          } 
+        } else this.getCurrentPosition();
+      } 
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -311,6 +340,7 @@ export default class HomeScreen extends Component {
 
 
   render() {
+    console.log(this.state)
     const { isLoading } = this.props;
     return (
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
