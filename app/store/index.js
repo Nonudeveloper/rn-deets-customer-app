@@ -42,7 +42,7 @@ export default function configureStore(onComplete) {
     const { user, users } = response;
     store.dispatch(gotUser(user));
     store.dispatch(gotUsers(users));
-    navigate('Users');
+    navigate('users');
     console.log('navigate');
   });
   socket.on('newUser', user => {

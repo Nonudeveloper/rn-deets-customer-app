@@ -9,7 +9,7 @@ class Users extends React.Component {
   }
 
   openChat(receivingUser) {
-    this.props.navigation.navigate('Chat', { receivingUser });
+    this.props.navigation.navigate('chat', { receivingUser });
   }
 
   render() {
@@ -21,7 +21,7 @@ class Users extends React.Component {
               <Text style={ styles.name }>{ user.name }</Text>
               <TouchableOpacity
                 style={ styles.buttonContainer }
-                onPress={ () => this.openChat(user) }
+                onPress={() => this.openChat(user)}
               >
                 <Text style={ styles.buttonText }>Chat</Text>
               </TouchableOpacity>
